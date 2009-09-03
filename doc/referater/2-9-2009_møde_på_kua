@@ -1,0 +1,47 @@
+Lave en crouler som henter billder
+Start med kand detection
+blob detection
+Ridge detection
+Kan man finde de orginale mål
+	kan finde i et kunst katalo
+Fejl kilder
+	bildet kan blive strukket, men det kommer nok ikke til at blive et problem
+	dog skal vi under helle projektet tænke over fejl kilder, da vi skal finde, 
+	ud af hvor lang væk fra det gyldene snit vi tolerere
+	
+Ting vi skal i gang med lige nu (inden næste møde)
+	tænk over overordnet struktur(find nogle faser)
+	sat gid hop op#Tormorden#
+		doc
+		sorce
+	valdt sprog
+		phyton
+	jacobs defination af opgaven
+		byg vidre på han defination, så den kan blive lavet om til en synopsis
+	se på kant detection
+	
+kunst lingo
+tur til statens museom for kunst
+Diku tilbyder cvs
+	
+møde kl 13.15 samme sted
+
+Lav nogle test bilder
+
+
+abejdsopvaver
+	skære billet til
+	find gyldne i en reangel
+	
+boozword bingo
+	
+ting til raporten
+	kan man lave et billet hvor siderne ikke har gyldene snit om til det gyldene snit, man kan lave det i 1 dimintion
+	hvad skal ligge i det gyldene snit for at det kaldet interasant
+		Det skal være simpel
+		Det skal enden være småt
+		Midden af en objekt skal ligge i det gyldene snit
+		Enterasante ting skal være i propotion med billet størelsen
+		Det gyldene snit kan indgranse noget intresant
+
+
