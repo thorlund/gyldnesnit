@@ -1,0 +1,7 @@
+Faa en lokal kopi:
+git clone git://github.com/thorlund/gyldnesnit/gyldnesnit.git[lokaltbibloteksnavn]
+
+Opdatere serveren:
+git commit *
+git merge *
+
