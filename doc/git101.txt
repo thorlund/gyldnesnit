@@ -1,9 +1,16 @@
 Faa en lokal kopi:
-git clone git://github.com/thorlund/gyldnesnit/gyldnesnit.git[lokaltbibloteksnavn]
+git clone git://github.com/thorlund/gyldnesnit/gyldnesnit.git [lokaltbibloteksnavn]
+
+Tilfoje et repo:
+git remote add [navn] git@github.com
 
 Opdatere serveren:
-git commit *
-git merge *
+git commit -a
+git push [navn] master
+
+Opdatere fra serveren:
+git pull [navn] master
+
 
 Får man slettet en fil lokalt, men gerne vil have den igen kan dette gøres med
 git checkout <file>
