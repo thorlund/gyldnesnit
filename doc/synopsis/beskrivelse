@@ -1,0 +1,7 @@
+Project 2: Application of feature detection to (digital images of) paintings
+
+Summary: Use methods from computer vision (edge- and interest-point/region detection) to 
+determine the use of geometric methods in a large number of works of art from online databases.
+In short: Find any use of the Golden mean or the Golden section if it's there.
+
+Project offered at all levels. Basic experience with image analysis or computer vision is an advantage.
