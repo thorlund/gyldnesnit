@@ -5,3 +5,5 @@ Opdatere serveren:
 git commit *
 git merge *
 
+Får man slettet en fil lokalt, men gerne vil have den igen kan dette gøres med
+git checkout <file>
