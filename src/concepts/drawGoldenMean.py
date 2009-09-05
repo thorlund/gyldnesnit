@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Ulrik Bonde
-# Most recent update: Fri 04 Sep 17:44:35 CEST 2009
+# Most recent update: Fri 04 Sep 18:20:24 CEST 2009
 
 print "Draw the golden mean on a picture"
 
@@ -51,7 +51,7 @@ def drawLines(lines, outimage):
 
 if not (len(sys.argv) == 2):
 	print "Input err!"
-	print "Usage: drawGoldenMean"
+	print "Usage: drawGoldenMean filename"
 
 filename = sys.argv[1]
 
