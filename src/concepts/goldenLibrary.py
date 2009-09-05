@@ -1,7 +1,6 @@
 # Collection of methods for image manipulation 
 #
 # Ulrik Bonde
-# Most recent update: Sat 05 Sep 20:38:05 CEST 2009
 
 from math import sqrt
 
@@ -29,29 +28,29 @@ where the marking the golden mean
 def findMeans(size):
 	lines = []
 	# First vertical lines (along x-axis)
-	x = int(size.width/PHI)
+	dx = int(size.width/PHI)
 
 	# The rightmost
-	p1 = cv.cvPoint(x, 0)
-	p2 = cv.cvPoint(x, size.height)
+	p1 = cv.cvPoint(dx, 0)
+	p2 = cv.cvPoint(dx, size.height)
 	lines.append(line(p1, p2))
 	
 	# The leftmost
-	p1 = cv.cvPoint((size.width - x), 0)
-	p2 = cv.cvPoint((size.width - x), size.height)
+	p1 = cv.cvPoint((size.width - dx), 0)
+	p2 = cv.cvPoint((size.width - dx), size.height)
 	lines.append(line(p1, p2))
 
 	# Then the horizontal lines (along y-axis)
-	y = int(size.height/PHI)
+	dy = int(size.height/PHI)
 
 	# The bottommost
-	p1 = cv.cvPoint(0, y)
-	p2 = cv.cvPoint(size.width, y)
+	p1 = cv.cvPoint(0, dy)
+	p2 = cv.cvPoint(size.width, dy)
 	lines.append(line(p1, p2))
 
 	# The topmost
-	p1 = cv.cvPoint(0, (size.height - y))
-	p2 = cv.cvPoint(size.width, (size.height - y))
+	p1 = cv.cvPoint(0, (size.height - dy))
+	p2 = cv.cvPoint(size.width, (size.height - dy))
 	lines.append(line(p1, p2))
 	return lines
 
