@@ -9,7 +9,7 @@ import goldenLibrary as lib
 from opencv import cv
 from opencv import highgui
 
-print "Testing library"
+print "Testing library "
 
 if len(sys.argv) < 2:
 	print "Damn you"
