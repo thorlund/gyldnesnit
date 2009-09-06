@@ -14,3 +14,13 @@ git pull [navn] master
 
 Får man slettet en fil lokalt, men gerne vil have den igen kan dette gøres med
 git checkout <file>
+
+Er man irriteret over meddelelsen "Your branch is ahead... origin/master blaba
+bla" gør da følgende:
+
+	Sørg for at origin er sat til git@github.com:thorlund/gyldnesnit.git
+	git remote rm origin
+	git remote add origin git@github.com:thorlund/gyldnesnit.git
+
+	Nu skal man bare pushe til origin, så slipper man for denne meddelelse
+ 
