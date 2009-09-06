@@ -33,6 +33,8 @@ lines = lib.findMeans(cv.cvSize(image.width, image.height))
 print "Drawing the means"
 lib.drawLines(lines, image)
 
+print lines[0].intersection(lines[2])
+
 highgui.cvShowImage (winname, image)
 
 highgui.cvWaitKey(0)
