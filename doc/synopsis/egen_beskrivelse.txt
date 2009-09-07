@@ -1,8 +1,19 @@
 Application of feature detection to paintings
 
 Ved hjælp af metoder fra computer vision vil vi undersøge et stort antal
-digitale malerier for brug af Det Gyldne Snit. For at afgøre tilstedeværelsen
-af snittet vil vi bruge edge-detection og blob-detection. 
+digitale malerier for brug af Det Gyldne Snit. Givet en digitalt gengivelse af
+et maleri i høj kvalitet, ønsker vi at afgøre tilstedeværelsen af snittet ved at
+bruge edge- og blob-detection.
+
+Definitionen på om et maleri viser 'Det Gyldne Snit' er meget flydende. Vi
+ønsker derfor at inddele features, der kunne være kandidater til fremvisning
+af 'Det Gyldne Snit', i grader eller kategorier, alt efter hvor langt væk fra
+det ideelle snit denne feature ligger.
+
+Resultater fra vores analyse af billeder skal sættes i system, så dataen efter
+analyse er let tilgængelig.
+
+--
 
 Kerne:
 	Vi vil gerne lave et program, vi kan smide ind over en kæmpe samling
