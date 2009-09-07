@@ -9,7 +9,8 @@ Kerne:
 	billeder og finde brug af 'Det Gyldne Snit', hvis det er tilstede.
 
 Spørgsmål 1:
-	Kan man lave et program der afgør om et maleri gør "kunstnerisk brug"
+	Kan man lave et program der afgør om et maleri gør "kuns
+	nerisk brug"
 	af 'Det Gyldne Snit'? (er dette et godt spørgsmål?)
 
 Spørgsmål 2:
@@ -18,6 +19,14 @@ Spørgsmål 2:
 
 Overvejelse:
 	Hvornår ligger en feauture i 'Det Gyldne Snit'?
+
+Overvejelse:
+	Kategorisering af 'Gyldne Snit'
+	Hvor tæt på snittet ligger en feature
+	En justérbar margen
+
+Overvejelse:
+	Database til opbevaring af resultater
 
 Stort antal:
 	Kan udspecificeres
