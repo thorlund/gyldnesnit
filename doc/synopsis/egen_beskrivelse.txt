@@ -13,6 +13,22 @@ det ideelle snit denne feature ligger.
 Resultater fra vores analyse af billeder skal sættes i system, så dataen efter
 analyse er let tilgængelig.
 
+Begrundelse:
+Det Gyldne Snit et et usædvanligt fænomen der kan opleves i naturen og
+matematiken[1]. Det Gyldne Snit er endvidere blevet brugt som et æstetisk
+virkemiddel i især grafisk kunst. Den faktiske brug af Det Gyldne Snit i
+kunsten er dog kun vagt dokumenteret og lider under en meget svag definition
+(hvis nogen overhovedet). Kompositionen af mange billeder[2] følger en
+opdeling der tager udgangspunkt i Det Gyldne Snit, men der er ikke blevet
+lavet en præcis analyse af disse billeder der kunne bevise en egentlig
+sammenhæng. Den gyldne ratio[3], eller \Phi, ligger meget tæt op ad 5/3. Det
+er derfor nærliggende at forestille sig, at inddellingen i kunsten er tættere
+på 5/3 end \Phi.
+
+[1]: Find eksempler (gode). Fibonacci.
+[2]: Citation needed
+[3]: ratio/snit, kartoffel/vindmølle, bestem Jer
+
 --
 
 Titel:
@@ -20,7 +36,7 @@ Titel:
 	Skal vi have en mere sigende titel?
 
 Kerne:
-	Vi vil gerne lave et program, vi kan smide ind over en kæmpe samling
+	Vi vil gerne lave et program, som vi kan smide ind over en kæmpe samling
 	billeder og finde brug af 'Det Gyldne Snit', hvis det er tilstede.
 
 Spørgsmål 1:
@@ -35,7 +51,7 @@ Overvejelse:
 	Hvornår ligger en feauture i 'Det Gyldne Snit'?
 
 Overvejelse:
-	Kategorisering af 'Gyldne Snit'
+	Kategorisering af 'Gyldne Snit'/"positive hits"
 	Hvor tæt på snittet ligger en feature
 	En justérbar margen
 
@@ -45,7 +61,7 @@ Overvejelse:
 Stort antal:
 	Kan udspecificeres
 
-Sprog:
+Programmeringssprog:
 	Python
 	Bruger biblioteker til billedmanipulation
 
@@ -53,3 +69,8 @@ Definition af typer af Gyldne Snit:
 	Undersøg selv malerier
 	Hvordan kan 'Det Gyldne Snit' findes?
 	Tal evt. med kunstkyndig
+
+Sprog:
+	Dansk
+	Vi skal have styr på de danske termer
+	Vi skal have styr på kunst-termer
