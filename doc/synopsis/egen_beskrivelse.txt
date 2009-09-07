@@ -15,6 +15,10 @@ analyse er let tilgængelig.
 
 --
 
+Titel:
+	Rigtig titel?
+	Skal vi have en mere sigende titel?
+
 Kerne:
 	Vi vil gerne lave et program, vi kan smide ind over en kæmpe samling
 	billeder og finde brug af 'Det Gyldne Snit', hvis det er tilstede.
