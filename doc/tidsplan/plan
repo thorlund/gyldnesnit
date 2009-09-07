@@ -10,13 +10,27 @@ Synopsis
 
 Program
 	Opdele et billede efter "Det gyldne snit"
+	Blob detection
+	Egde detection
+	Intern representation af data
+	Database til statestik
+	evt. Wrapper til opencv, intern dokumentation
 	Finde kanter i området omkring det gyldne snit
 	Hvor stor er den "blob" tilknyttet en eventuel kant?
-	
+		
 
 Rapport
 	Hvad er det gyldne snit?
+	Teori
 
 Afprøvning
+	Testbilleder
 	
 
+Researchhhhh
+	Blobdetection
+	Egdedetection
+	Katagori-system
+	Statestik
+	python til database
+	Design/æstetik
