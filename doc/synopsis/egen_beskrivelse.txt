@@ -1,0 +1,32 @@
+Application of feature detection to paintings
+
+Ved hjælp af metoder fra computer vision vil vi undersøge et stort antal
+digitale malerier for brug af Det Gyldne Snit. For at afgøre tilstedeværelsen
+af snittet vil vi bruge edge-detection og blob-detection. 
+
+Kerne:
+	Vi vil gerne lave et program, vi kan smide ind over en kæmpe samling
+	billeder og finde brug af 'Det Gyldne Snit', hvis det er tilstede.
+
+Spørgsmål 1:
+	Kan man lave et program der afgør om et maleri gør "kunstnerisk brug"
+	af 'Det Gyldne Snit'? (er dette et godt spørgsmål?)
+
+Spørgsmål 2:
+	Findes der i malerier flere interessante features ved 5/3 end ved 'Det
+	Gyldne Snit'?
+
+Overvejelse:
+	Hvornår ligger en feauture i 'Det Gyldne Snit'?
+
+Stort antal:
+	Kan udspecificeres
+
+Sprog:
+	Python
+	Bruger biblioteker til billedmanipulation
+
+Definition af typer af Gyldne Snit:
+	Undersøg selv malerier
+	Hvordan kan 'Det Gyldne Snit' findes?
+	Tal evt. med kunstkyndig
