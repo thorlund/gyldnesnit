@@ -9,8 +9,7 @@ Kerne:
 	billeder og finde brug af 'Det Gyldne Snit', hvis det er tilstede.
 
 Spørgsmål 1:
-	Kan man lave et program der afgør om et maleri gør "kuns
-	nerisk brug"
+	Kan man lave et program der afgør om et maleri gør "kunstnerisk brug"
 	af 'Det Gyldne Snit'? (er dette et godt spørgsmål?)
 
 Spørgsmål 2:
