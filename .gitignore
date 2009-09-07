@@ -5,4 +5,5 @@ res/*
 *.out
 *.aux
 *.pdf
+!doc/synopsis/*.pdf
 *~
