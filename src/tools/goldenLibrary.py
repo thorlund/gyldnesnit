@@ -1,8 +1,3 @@
-# Collection of methods for image manipulation 
-#
-# Ulrik Bonde
-# 06/09/09 19:09:59
-
 """
 Provides a collection of tools for image manipulation
 """
