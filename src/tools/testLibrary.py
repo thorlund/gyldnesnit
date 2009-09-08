@@ -9,13 +9,18 @@ import goldenLibrary as lib
 from opencv import cv
 from opencv import highgui
 
-print "Testing library"
-print "Press 'q' to exit"
 print ""
 
 if len(sys.argv) < 2:
-	print "Damn you"
+	print "Input error!"
+	print "Usage: ./testLibrary.py <filename>"
+	print "The above means that you have to supply a path to an image"
+	print ""
 	exit(-1)
+
+print "Testing library"
+print "Press 'q' to exit"
+print ""
 
 filename = sys.argv[1]
 
@@ -24,6 +29,7 @@ out = lib.findEdges(image)
 
 if not image:
 	print "Error loading image '%s'" % filename
+	print ""
 	sys.exit(-1)
 
 winname = "Test golden mean"
@@ -45,4 +51,5 @@ while True:
 	
 	if c == 'q':
 		print "Exiting ..."
+		print ""
 		sys.exit(0)
