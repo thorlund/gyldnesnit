@@ -1,10 +1,10 @@
 # The following file patterns will be ignored by git
-src/*.pyc
 res/*
 *.swp
 *.log
 *.out
 *.aux
 *.pdf
+*.pyc
 !doc/synopsis/*.pdf
 *~
