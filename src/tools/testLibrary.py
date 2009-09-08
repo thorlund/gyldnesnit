@@ -9,7 +9,9 @@ import goldenLibrary as lib
 from opencv import cv
 from opencv import highgui
 
-print "Testing library "
+print "Testing library"
+print "Press 'q' to exit"
+print ""
 
 if len(sys.argv) < 2:
 	print "Damn you"
@@ -35,6 +37,11 @@ lib.drawLines(lines, image)
 
 print lines[0].intersection(lines[2])
 
-highgui.cvShowImage (winname, image)
+while True:
+	highgui.cvShowImage (winname, image)
 
-highgui.cvWaitKey(0)
+	c = highgui.cvWaitKey(0)
+	
+	if c == 'q':
+		print "Exiting ..."
+		sys.exit(0)
