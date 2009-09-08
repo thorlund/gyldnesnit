@@ -125,7 +125,7 @@ def findEdges(original, threshold = 100):
 	# to the out-image
 	cv.cvCopy(original, out, edge)
 
-	# Et voilà! The skin comes right off!
+	# Et voila! The skin comes right off!
 	# http://www.youtube.com/watch?v=rUbWjIKxrrs
 	return out
 
