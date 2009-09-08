@@ -20,6 +20,7 @@ if len(sys.argv) < 2:
 filename = sys.argv[1]
 
 image = highgui.cvLoadImage (filename)
+out = lib.findEdges(image)
 
 if not image:
 	print "Error loading image '%s'" % filename
@@ -30,15 +31,15 @@ winname = "Test golden mean"
 highgui.cvNamedWindow (winname, highgui.CV_WINDOW_AUTOSIZE)
 
 print "Finding the golden means in the picture"
-lines = lib.findMeans(cv.cvSize(image.width, image.height))
+lines = lib.findMeans(cv.cvGetSize(image))
 
 print "Drawing the means"
-lib.drawLines(lines, image)
+lib.drawLines(lines, out)
 
 print lines[0].intersection(lines[2])
 
 while True:
-	highgui.cvShowImage (winname, image)
+	highgui.cvShowImage (winname, out)
 
 	c = highgui.cvWaitKey(0)
 	
