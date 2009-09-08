@@ -1,0 +1,9 @@
+# The following file patterns will be ignored by git
+res/*
+*.swp
+*.log
+*.out
+*.aux
+*.pdf
+!doc/synopsis/*.pdf
+*~

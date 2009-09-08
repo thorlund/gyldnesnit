@@ -1,0 +1,76 @@
+Application of feature detection to paintings
+
+Ved hjælp af metoder fra computer vision vil vi undersøge et stort antal
+digitale malerier for brug af Det Gyldne Snit. Givet en digitalt gengivelse af
+et maleri i høj kvalitet, ønsker vi at afgøre tilstedeværelsen af snittet ved at
+bruge edge- og blob-detection.
+
+Definitionen på om et maleri viser 'Det Gyldne Snit' er meget flydende. Vi
+ønsker derfor at inddele features, der kunne være kandidater til fremvisning
+af 'Det Gyldne Snit', i grader eller kategorier, alt efter hvor langt væk fra
+det ideelle snit denne feature ligger.
+
+Resultater fra vores analyse af billeder skal sættes i system, så dataen efter
+analyse er let tilgængelig.
+
+Begrundelse:
+Det Gyldne Snit et et usædvanligt fænomen der kan opleves i naturen og
+matematiken[1]. Det Gyldne Snit er endvidere blevet brugt som et æstetisk
+virkemiddel i især grafisk kunst. Den faktiske brug af Det Gyldne Snit i
+kunsten er dog kun vagt dokumenteret og lider under en meget svag definition
+(hvis nogen overhovedet). Kompositionen af mange billeder[2] følger en
+opdeling der tager udgangspunkt i Det Gyldne Snit, men der er ikke blevet
+lavet en præcis analyse af disse billeder der kunne bevise en egentlig
+sammenhæng. Den gyldne ratio[3], eller \Phi, ligger meget tæt op ad 5/3. Det
+er derfor nærliggende at forestille sig, at inddellingen i kunsten er tættere
+på 5/3 end \Phi.
+
+[1]: Find eksempler (gode). Fibonacci.
+[2]: Citation needed
+[3]: ratio/snit, kartoffel/vindmølle, bestem Jer
+
+--
+
+Titel:
+	Rigtig titel?
+	Skal vi have en mere sigende titel?
+
+Kerne:
+	Vi vil gerne lave et program, som vi kan smide ind over en kæmpe samling
+	billeder og finde brug af 'Det Gyldne Snit', hvis det er tilstede.
+
+Spørgsmål 1:
+	Kan man lave et program der afgør om et maleri gør "kunstnerisk brug"
+	af 'Det Gyldne Snit'? (er dette et godt spørgsmål?)
+
+Spørgsmål 2:
+	Findes der i malerier flere interessante features ved 5/3 end ved 'Det
+	Gyldne Snit'?
+
+Overvejelse:
+	Hvornår ligger en feauture i 'Det Gyldne Snit'?
+
+Overvejelse:
+	Kategorisering af 'Gyldne Snit'/"positive hits"
+	Hvor tæt på snittet ligger en feature
+	En justérbar margen
+
+Overvejelse:
+	Database til opbevaring af resultater
+
+Stort antal:
+	Kan udspecificeres
+
+Programmeringssprog:
+	Python
+	Bruger biblioteker til billedmanipulation
+
+Definition af typer af Gyldne Snit:
+	Undersøg selv malerier
+	Hvordan kan 'Det Gyldne Snit' findes?
+	Tal evt. med kunstkyndig
+
+Sprog:
+	Dansk
+	Vi skal have styr på de danske termer
+	Vi skal have styr på kunst-termer
