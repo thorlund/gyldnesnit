@@ -1,4 +1,5 @@
 # The following file patterns will be ignored by git
+src/*.pyc
 res/*
 *.swp
 *.log
