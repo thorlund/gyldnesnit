@@ -9,6 +9,9 @@ Synopsis
 	Riskovurdering
 
 Program
+	To dele:
+		Den simple algoritme er implementeret
+		Videregående
 	Opdele et billede efter "Det gyldne snit"
 	Blob detection
 	Egde detection
