@@ -6,12 +6,19 @@ et maleri i høj kvalitet, ønsker vi at afgøre tilstedeværelsen af snittet ve
 bruge edge- og blob-detection.
 
 Definitionen på om et maleri viser 'Det Gyldne Snit' er meget flydende. Vi
+
+	-- Her skal vi stramme op på sætningen. Det er ikke nok at sige at den er
+	flydende. Vi skal have definitionen ind her.
+	Dette skal være den meget simple.
+
 ønsker derfor at inddele features, der kunne være kandidater til fremvisning
 af 'Det Gyldne Snit', i grader eller kategorier, alt efter hvor langt væk fra
 det ideelle snit denne feature ligger.
 
 Resultater fra vores analyse af billeder skal sættes i system, så dataen efter
 analyse er let tilgængelig.
+
+	Det skal stå som et spørgsmål
 
 Begrundelse:
 Det Gyldne Snit et et usædvanligt fænomen der kan opleves i naturen og
@@ -28,6 +35,7 @@ på 5/3 end \Phi.
 [1]: Find eksempler (gode). Fibonacci.
 [2]: Citation needed
 [3]: ratio/snit, kartoffel/vindmølle, bestem Jer
+	
 
 --
 
@@ -35,17 +43,25 @@ Titel:
 	Rigtig titel?
 	Skal vi have en mere sigende titel?
 
+	Skrive "Det Gyldne Snit" ind i titlen
+
 Kerne:
 	Vi vil gerne lave et program, som vi kan smide ind over en kæmpe samling
 	billeder og finde brug af 'Det Gyldne Snit', hvis det er tilstede.
+
+	Definere "brug af"
 
 Spørgsmål 1:
 	Kan man lave et program der afgør om et maleri gør "kunstnerisk brug"
 	af 'Det Gyldne Snit'? (er dette et godt spørgsmål?)
 
+	Igen lidt for vagt...
+
 Spørgsmål 2:
 	Findes der i malerier flere interessante features ved 5/3 end ved 'Det
 	Gyldne Snit'?
+
+	-- Mener nok 2/3
 
 Overvejelse:
 	Hvornår ligger en feauture i 'Det Gyldne Snit'?
@@ -55,11 +71,21 @@ Overvejelse:
 	Hvor tæt på snittet ligger en feature
 	En justérbar margen
 
+	Denne funktion kan være meget afgørende
+
 Overvejelse:
 	Database til opbevaring af resultater
+	Send diku-konti for mere plads
+
+	Analyse af database:
+		Metadata
+		Clustering
+		Se efter nation, peirode, årstal
+
 
 Stort antal:
 	Kan udspecificeres
+	10.000 
 
 Programmeringssprog:
 	Python
@@ -74,3 +100,10 @@ Sprog:
 	Dansk
 	Vi skal have styr på de danske termer
 	Vi skal have styr på kunst-termer
+
+To dele:
+	1: Meget, meget simpelt
+	2: Lidt mere avanceret
+
+Sørg for at vores versionering er i orden:
+	Hold en clean master

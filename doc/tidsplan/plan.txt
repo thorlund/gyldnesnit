@@ -13,7 +13,9 @@ Program
 	Blob detection
 	Egde detection
 	Intern representation af data
-	Database til statestik
+		-- Metadata om originaler
+		-- Metadata om behandlede billeder
+	Database til statistik
 	evt. Wrapper til opencv, intern dokumentation
 	Finde kanter i området omkring det gyldne snit
 	Hvor stor er den "blob" tilknyttet en eventuel kant?
@@ -21,6 +23,7 @@ Program
 Rapport
 	Hvad er det gyldne snit?
 	Teori
+		-- Skriv forventninger til læseren
 
 Afprøvning
 	Testbilleder
@@ -33,3 +36,6 @@ Research
 	Statestik
 	python til database
 	Design/æstetik
+
+
+Tidsestimater skal ganges med en faktor, da vi skal indregne rapportskrivning.
