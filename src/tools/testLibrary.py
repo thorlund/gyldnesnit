@@ -13,7 +13,7 @@ print ""
 
 if len(sys.argv) < 2:
 	print "Input error!"
-	print "Usage: ./testLibrary.py <filename>"
+	print "Usage: ./testLibrary.py <filename> [threshold]"
 	print "The above means that you have to supply a path to an image"
 	print ""
 	exit(-1)
@@ -24,8 +24,13 @@ print ""
 
 filename = sys.argv[1]
 
+if len(sys.argv) == 3:
+	threshold = int(sys.argv[2])
+else:
+	threshold = 100
+
 image = highgui.cvLoadImage (filename)
-out = lib.findEdges(image)
+out = lib.findEdges(image, threshold)
 
 if not image:
 	print "Error loading image '%s'" % filename
