@@ -1,0 +1,97 @@
+\documentclass[a4paper, 10pt, danish, final]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pakker
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{a4wide}
+\usepackage[danish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{charter}
+\usepackage{verbatim}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%\usepackage{mathrsfs}
+%\usepackage[mathcal]{euscript}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Indstillinger
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\parindent=5pt
+\parskip=8pt plus 2pt minus 4pt
+\lstset{language=TeX, basicstyle=\scriptsize, showstringspaces=false,
+numbers=none, stepnumber=1, numberstyle=\tiny}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Kommandoer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcommand{\old}[1]{\oldstylenums{#1}}
+%\newcommand{\old}[1]{{#1}}
+\newcommand{\mailto}[1]{\href{mailto:#1}{#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Titel, forfatter og dato
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Bachelorprojekt\\Synopsis\\\emph{Title}}
+
+\author{Ulrik Bonde - \mailto{bonde@diku.dk}\\
+Kasper Steenstrup - \mailto{khsj@diku.dk}\\
+Morten Thorlund - \mailto{thorlund@diku.dk}}
+\date{\today}
+
+\hypersetup{
+bookmarksopen=false,
+colorlinks=true,
+pdftitle={Bachelorprojekt Synopsis},
+pdfauthor={Ulrik Bonde, Kasper Steenstrup og Morten Thorlund}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Indhold
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\pagestyle{headings}
+
+%\input{introduction.tex}
+
+%\tableofcontents
+%\newpage
+
+\section*{Forslag til titel}
+Detektering af ``Det Gyldne Snit'' i digitaliserede malerier
+
+\section*{Problemformulering}
+\input{problemformulering.tex}
+
+\section*{Begrundelse}
+\input{begrundelse.tex}
+
+\section*{Arbejdsopgaver}
+\input{arbejdsopgaver.tex}
+
+\section*{Tidsplan}
+\input{tidsplan.tex}
+
+\section*{Metoder/Programmel}
+% Tilføj input når overskrift er klar
+% \input{?.tex}
+
+%\newpage
+%\section*{Bilag} 
+%\appendix
+
+%\section{Source code}
+%\input{materialer.tex}
+%\newpage
+
+\section*{Disposition til rapport}
+%\input{disposition.tex}
+\end{document}

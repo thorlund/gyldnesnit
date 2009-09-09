@@ -62,6 +62,7 @@ Spørgsmål 2:
 	Gyldne Snit'?
 
 	-- Mener nok 2/3
+	Det er et mere "brugervenligt" begreb
 
 Overvejelse:
 	Hvornår ligger en feauture i 'Det Gyldne Snit'?
