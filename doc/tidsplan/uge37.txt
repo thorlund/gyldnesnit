@@ -1,0 +1,31 @@
+Synopsis {SKAL være klar om en uge!!}
+	[Alle]	Titel
+	[Ulrik] Problemformulering
+			Simpel algoritme/definition
+			Kan vi finde noget spændende i statistik?
+	[Ulrik]	Begrundelse
+	[ThorT]	Arbejdsopgaver
+	[Steen]	Tidsplan
+	[Alle]	Afgrænsning
+	[Alle]	Tech-snak (Programmeringssprog osv.)
+	[Ulrik]	Disposition til rapport
+
+Kontakt til kunst-folk
+	[Steenstrup]	Kontakt til kursus/gyldent-snit-mand
+	[Ulrik]		Kontakt til Institut for Kunst og Kultur
+
+Udviddelser til library
+	[?]	Valg af kant-detektion
+		Læse om	Sobel
+			Laplace
+			Canny
+	[?]	Udforske blob-detection
+	[?]	Frivillig udviddelse af bibliotek
+			Logger
+			Wrapper til tegning af cirkler (Plotter)
+			Wrapper til tegning af rektangler
+			Søger (lang snittet, med margin)
+
+Rapport
+	Skrive om Det Gyldne Snit (afhænger lidt af kunst-folk)
+	Definition af det "simple" gyldne snit
