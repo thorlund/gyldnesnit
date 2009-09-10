@@ -4,11 +4,11 @@ Synopsis {SKAL være klar om en uge!!}
 			Simpel algoritme/definition			x
 			Kan vi finde noget spændende i statistik?	x
 	[Ulrik]	Begrundelse						Påbegyndt
-	[ThorT]	Arbejdsopgaver
+	[ThorT]	Arbejdsopgaver	
 	[Steen]	Tidsplan
 	[Alle]	Afgrænsning
 	[Alle]	Tech-snak (Programmeringssprog osv.)
-	[Ulrik]	Disposition til rapport					Ikke begyndt
+	[Ulrik]	Disposition til rapport					Påbegyndt, godt igang
 
 Kontakt til kunst-folk
 	[Steenstrup]	Kontakt til kursus/gyldent-snit-mand
