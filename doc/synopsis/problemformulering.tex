@@ -1,14 +1,30 @@
-Ved hjælp af metoder fra computer vision, vil vi undersøge et stort antal
-digitale malerier for opfyldelse af Det Gyldne Snit. Kan vi, givet en
-høj-kvalitets digitalt gengivelse af et maleri, afgøre om et maleri
-opfylder det gyldne snit ved at bruge edge- og blob-detection?
+Ved brug af metoder fra computer vision, vil vi undersøge et stort antal
+digitale malerier for opfyldelse af det gyldne snit. Kan vi, givet en
+høj-kvalitets digital gengivelse af et maleri, udvikle et stykke software som
+kan afgøre om et maleri opfylder det gyldne snit(, ved at bruge kant- og
+blobdetektion)\footnote{Skal det i parentes med eller begrænser det for
+meget?}?
 
-Vi siger, at et maleri opfylder Det Gyldne Snit, hvis en feature tangerer
-en linie som opdeler billedet efter Det Gyldne Snits definition. Vi
-ønsker at inddele features, der kunne være kandidater til opfyldelse af
-'Det Gyldne Snit', i kategorier, alt efter hvor langt væk fra det snittet
-denne feature ligger.
+Vi siger, at et maleri opfylder det gyldne snit, hvis en interessant region
+tangerer\footnote{Vi leder egentlig ikke efter en reel tangent, men noget der
+ligner. Der vil blive produceret illustrationer til at vise hvad vi leder
+efter.} en linie som opdeler billedet efter det gyldne snit. Vi må som
+udgangspunkt antage, at vi ikke kan måle helt præcist, da det gyldne snit
+defineres ved det irrationelle tal $\varphi$. Vi må da indregne en lille margen
+når vi leder efter træk omkring et gyldent snit.  Derfor ønsker vi at inddele
+træk i billedet, der kunne være kandidater til opfyldelse af det gyldne snit, i
+kategorier, alt efter hvor langt væk fra snittet dette træk ligger. Vi kan da
+komme frem til en vægtning af \emph{hvor meget} et billede opfylder det gyldne
+snit.
 
-Resultater fra vores analyse af billeder skal sættes i system, så dataen efter
-analyse er let tilgængelig.
+Billederne hentes fra et online-reposistory, hvor vi har adgang til metadata om
+malerierne. Et interessant spørgsmål er da, givet en intern klassificerering af
+et billedes regioner, om man kan finde sammenhænge mellem et maleris
+komposition og eksterne faktorer, såsom nationalitet, periode eller
+kunstner\footnote{Er dette et godt spørgsmål? Er det for ambitiøst?}?  Til
+dette formål skal vi lagre resultater fra billedeanalysen i en database,
+hvilket gør videre bearbejdning af dataen ligetil.
 
+En inddeling af et billedes interessante regioner giver lejlighed til en
+vægtning af \emph{hvor meget} et maleri opfylder det gyldne
+snit\footnote{Jeg har glemt hvor denne sætning skulle hen}.
