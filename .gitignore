@@ -1,5 +1,5 @@
 # The following file patterns will be ignored by git
-res/*
+res/local*
 *.swp
 *.log
 *.out
