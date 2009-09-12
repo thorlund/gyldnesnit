@@ -3,7 +3,7 @@ Synopsis {SKAL være klar om en uge!!}
 	[Ulrik] Problemformulering					1/2 færdig
 			Simpel algoritme/definition			x
 			Kan vi finde noget spændende i statistik?	x
-	[Ulrik]	Begrundelse						Påbegyndt
+	[Ulrik]	Begrundelse						Stort set færdig
 	[ThorT]	Arbejdsopgaver	
 	[Steen]	Tidsplan
 	[Alle]	Afgrænsning
