@@ -94,8 +94,13 @@ def drawLines(lines, outimage):
 	for line in lines:
 		cv.cvLine(outimage, line.p1, line.p2, COL_RED)
 
-def findEdges(original, threshold = 100):
+def findEdges(original, threshold1 = 100, threshold2 = None):
 	"""Return a new edge detected image with a specified threshold"""
+
+	#Define threshold2
+	if threshold2 == None:
+		threshold2 = threshold1 * 3
+
 	# First create the out picture, the one the method will return
 	out = cv.cvCreateImage(cv.cvGetSize(original), 8, 3)
 
@@ -119,7 +124,7 @@ def findEdges(original, threshold = 100):
 	# Run an edge-finding algorithm called 'Canny'
 	# It will analyse the first argument and store the
 	# resulting picture in the second argument
-	cv.cvCanny(gray, edge, threshold, threshold * 3, 3)
+	cv.cvCanny(gray, edge, threshold1, threshold2)
 
 	# We initialize our out-image to black
 	cv.cvSetZero(out)
