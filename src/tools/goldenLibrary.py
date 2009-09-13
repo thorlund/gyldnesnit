@@ -10,6 +10,13 @@ from opencv import highgui
 global PHI
 PHI = (sqrt(5) + 1)/2
 
+# Define basic colors
+COL_BLACK = cv.CV_RGB(0, 0, 0)
+COL_WHITE = cv.CV_RGB(255, 255, 255)
+COL_RED = cv.CV_RGB(255, 0, 0)
+COL_GREEN = cv.CV_RGB(0, 255, 0)
+COL_BLUE = cv.CV_RGB(0, 0, 255)
+
 def __getintersection__(x1, x2, x3, x4, y1, y2, y3, y4):
 	"""Helper method for calculating the intersection of two line segments"""
 	px = (((x1*y2 - y1*x2)*(x3 - x4) - (x1 - x2)*(x3*y4 - y3*x4))/((x1 - x2)*(y3 - y4) - (y1 - y2)*(x3 - x4)))
@@ -20,14 +27,17 @@ def __getintersection__(x1, x2, x3, x4, y1, y2, y3, y4):
 class line():
 	"""A container for a line segment."""
 	def __init__(self, p1, p2):
-		"""Create a line segement.
-		p1 and p1 must be of type cvPoint"""
+		"""Create a line segement of two cvPoint types"""
 		self.p1 = p1
 		self.p2 = p2
 
 	def intersection(self, line):
-		"""Returns the intersection of this line and another"""
+		"""Returns the intersection of this line and another as a cvPoint"""
 		return intersection(self, line)
+
+def plot(image, point, radius=3, color=COL_GREEN):
+	"""Plot a point on an image"""
+	cv.cvCircle(image, point, radius, color, -1)
 
 def intersection(line1, line2):
 	"""Get the intersection of two lines as a cvPoint"""
@@ -81,9 +91,8 @@ def findMeans(size):
 
 def drawLines(lines, outimage):
 	"""Draw a list of lines on an image"""
-	col = cv.CV_RGB(255, 0, 0)
 	for line in lines:
-		cv.cvLine(outimage, line.p1, line.p2, col, 1, 8, 0)
+		cv.cvLine(outimage, line.p1, line.p2, COL_RED)
 
 def findEdges(original, threshold = 100):
 	"""Return a new edge detected image with a specified threshold"""
