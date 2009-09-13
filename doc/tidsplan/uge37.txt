@@ -1,14 +1,14 @@
 Synopsis {SKAL være klar om en uge!!}
 	[Alle]	Titel
-	[Ulrik] Problemformulering
-			Simpel algoritme/definition
-			Kan vi finde noget spændende i statistik?
-	[Ulrik]	Begrundelse
-	[ThorT]	Arbejdsopgaver
+	[Ulrik] Problemformulering					1/2 færdig
+			Simpel algoritme/definition			x
+			Kan vi finde noget spændende i statistik?	x
+	[Ulrik]	Begrundelse						Stort set færdig
+	[ThorT]	Arbejdsopgaver	
 	[Steen]	Tidsplan
 	[Alle]	Afgrænsning
 	[Alle]	Tech-snak (Programmeringssprog osv.)
-	[Ulrik]	Disposition til rapport
+	[Ulrik]	Disposition til rapport					Påbegyndt, godt igang
 
 Kontakt til kunst-folk
 	[Steenstrup]	Kontakt til kursus/gyldent-snit-mand
