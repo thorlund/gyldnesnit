@@ -7,8 +7,9 @@ from opencv import cv
 from opencv import highgui
 
 # Define globals
-global PHI
-PHI = (sqrt(5) + 1)/2
+global phi, PHI
+phi = (sqrt(5) + 1)/2
+PHI = phi - 1
 
 # Define basic colors
 COL_BLACK = cv.CV_RGB(0, 0, 0)
@@ -23,6 +24,10 @@ def __getintersection__(x1, x2, x3, x4, y1, y2, y3, y4):
 	py = (((x1*y2 - y1*x2)*(y3 - y4) - (y1 - y2)*(x3*y4 - y3*x4))/((x1 - x2)*(y3 - y4) - (y1 - y2)*(x3 - x4)))
 
 	return cv.cvPoint(px, py)
+
+def getGoldenSection(length):
+	"""Get the golden section for a line segment from 0 to the argument"""
+	return int(length * PHI)
 	
 class line():
 	"""A container for a line segment."""
@@ -62,7 +67,7 @@ def findMeans(size):
 	lines = []
 
 	# First vertical lines (along x-axis)
-	dx = int(size.width/PHI)
+	dx = getGoldenSection(size.width)
 
 	# The rightmost
 	p1 = cv.cvPoint(dx, 0)
@@ -75,7 +80,7 @@ def findMeans(size):
 	lines.append(line(p1, p2))
 
 	# Then the horizontal lines (along y-axis)
-	dy = int(size.height/PHI)
+	dy = getGoldenSection(size.height)
 
 	# The bottommost
 	p1 = cv.cvPoint(0, dy)
