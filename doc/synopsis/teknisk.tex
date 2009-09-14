@@ -1,0 +1,27 @@
+Vi har valgt at udvikle vores implementation i Python. Valget begrunder
+sig hovedsageligt i at Python er et godt værktøj til at lave prototyper
+i. Vi undgår herved at bruge alt for meget tid på at definere diverse
+datastrukturer, fremfor at koncentrere os om kernen i projektet. Det der
+kan argumentere imod valget af Python er at det kan være langsomt. Vores
+vurdering er dog at dette ikke vil blive et problem, samt at vi i første
+omgang ikke går efter at lave en hurtigt implementation, blot en
+implementation der virker.
+
+Til at udføre billedmanipulation benytter vi os af et bibliotek skrevet i C der
+hedder OpenCV. Biblioteket er udviklet af Intel og tilbyder, udover et solidt
+udvalg af algoritmer, bindinger til Python. Endelig er det meget
+veldokumenteret og giver referencer til publikationer om bibliotektets
+algoritmer. Biblioteket er udviklet med specielt henblik på real-tids
+behandling af billeder, f.eks. med et videokamera som kilde, men egner sig også
+til brug på enkelte billeder.
+
+Vi ønsker at opbevare resultater fra kørsler i en database. Et endeligt
+valg er ikke taget endnu, men vi vælger en let tilgængelig Open
+Source-applikation, som let kan integreres med Pyhton, såsom MySQL eller
+PostgreSQL.
+
+Vores kode opbevares hos en gratis tjeneste i et git-repository. Koden
+vil da til enhver tid kunne ses og hentes fra
+\href{http://github.com/thorlund/gyldnesnit}{http://github.com/thorlund/gyldnesnit}.
+Synopsis og rapport skrives i \LaTeX{} og kildekoden hertil vil også være
+at finde i vores git-repository.
