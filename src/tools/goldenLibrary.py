@@ -18,6 +18,7 @@ COL_RED = cv.CV_RGB(255, 0, 0)
 COL_GREEN = cv.CV_RGB(0, 255, 0)
 COL_BLUE = cv.CV_RGB(0, 0, 255)
 
+# TODO: Rename this, remove underscores, they are not needed, update reference
 def __getintersection__(x1, x2, x3, x4, y1, y2, y3, y4):
 	"""Helper method for calculating the intersection of two line segments"""
 	px = (((x1*y2 - y1*x2)*(x3 - x4) - (x1 - x2)*(x3*y4 - y3*x4))/((x1 - x2)*(y3 - y4) - (y1 - y2)*(x3 - x4)))
