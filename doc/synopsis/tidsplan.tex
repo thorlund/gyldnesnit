@@ -1,14 +1,17 @@
 \newcommand{\opgave}[5]{
-\emph{#1}
+\makebox[\textwidth]{#1}\par
+%\makebox[\textwidth]{
+
+%\framebox[0.8\width][r]{Bummer,
+%I am too wide} \par
+%\framebox[1cm][l]{never
+%mind, so a
+%\emph{#1}
 \begin{itemize}
-\item{produkt}\\
-#2
-\item{ressourcekrav}\\
-#3
-\item{afhængigheder}\\
-#4
-\item{belastning}\\
-#5
+\item{Produkt: #2}
+\item{Ressourcekrav:#3}
+\item{Afhængigheder:#4}
+\item{Belastning: #5}
 \end{itemize}
 }
 
@@ -25,7 +28,7 @@ Naiv implementation
 		Udtænke og producere testbilleder\\
 		Definer og implementere algorithme for at finde regioner ved et gyldent snit\\
 	}{
-		280 mandetimer
+		100 mandetimer
 	 }
 
 \opgave{
@@ -38,74 +41,108 @@ Færdig implementation
 		Naiv implementation
 		Definere og implementere katagorier af interessante regioner
 	}{
-		280 mandetimer
+		100 mandetimer
 	 }
 
 
 \opgave{
-Definationen af en interessant region
+		Definationen af en interessant region
 	}{
-		list over ragioner som vi mender er interasante\\
-		evt. ilostrene bilder om de forskelige former for interasante regioner
-	}{
+		list over ragioner som vi mender er interasante. evt. ilostrene bilder om de forskelige former for interasante regioner(humanistisk synsvinkel)
 	}{
 	}{
-		40 mandetimer
+	}{
+		80 mandetimer
 	 }
 
 \opgave{
-Afstand fra snit til interessant region
+		Afstand fra snit til interessant region
 	}{
-		program som kan finde afstandet til regionernes center og tætteste kant, 
+		Program som kan finde afstandet til regionernes center og den ydre kanter, 
 		inklusiv finde ragionens center 
 	}{
+Ingen
 	}{
 	}{
-		25 mandetimer
+		35 mandetimer
 	}
 
 \opgave{
-Udtænke og producere testbilleder
+		Udtænke testbilleder.
 	}{
+		Testbill til at afprøve vores algoritmer.
 	}{
-	}{
-	}{
-		30 mandetimer
-	}
-
-\opgave{
-Bruge kant- og blobdetektion til at produktion af en region detector
-	}{
-	}{
-	}{
-	}{
-		100 mandetimer
-	}
-
-\opgave{
-Skrive rapport}{}{}{}{400 mandetimer}
-
-\opgave{
-Definere og implementere katagorier af interessante regioner
+		ingen
 	}{
 		
 	}{
-	}{
-	}{
-		60 mandetimer
+		50 mandetimer
 	}
 
 \opgave{
-Konfigurere en database med henblik på statestik}{}{}{}{20 mandetimer}
+		Sammeføj kant- og blobdetektion.
+	}{
+		Implementere algoritme som finder interasante ragioner i billet, hved hjælp af kant- og blobdetektion.
+	}{
+		choko lade
+	}{
+	
+	}{
+		200 mandetimer
+	}
 
 \opgave{
-Data behandling og statestik på gemmenkørte billeder}{}{}{
-Konfigurere en database med henblik på statestik}{
-400 mandetimer}
+		Færdig gøre raport rapport
+	}{
+		Færdig raport.
+	}{
+		Ingen
+	}{
+
+	}{
+		150 mandetimer
+}
 
 \opgave{
-Definer og implementere algorithme for at finde regioner ved et gyldent snit}{}{}{
+Definere katagorier af interessante regioner
+	}{
+Implementer en algoritme som kan katagorisere regioner efter hvor de ligger i forhold til det gyldenesnit.
+	}{
+Ingen
+	}{
+
+	}{
+		150 mandetimer
+	}
+
+\opgave{
+		Konfigurere en database med henblik på statestik
+	}{
+		
+	}{}{}{100 mandetimer}
+
+\opgave{
+Evaluering af statistik af behandlet bilder
+}{
+Raport om de konklutioner Evalueringe gav(dette er meget løst, nogle idere?)
+Konklution om hvad vi kan gøre bedre i næste kørsel.
+}{
+Ingen
+}{
+Behandling af bilder
+}{
+300 mandetimer
+}
+
+\opgave{
+Definnition af region finder i gyldent snit.
+}{
+Algoritme hvis formål er at detektere regioner, der befinder sig i et interval rundt om det gyldne snit.
+}{
+Ingen.
+}{
 Definationen af en interessant region\\
 Bruge kant- og blobdetektion til at produktion af en region detector\\
 }{
-20 mandetimer}
+60 mandetimer
+}
