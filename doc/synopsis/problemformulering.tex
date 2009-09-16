@@ -1,21 +1,20 @@
 Ved brug af metoder fra computer vision, vil vi undersøge et stort antal
 digitale malerier for opfyldelse af det gyldne snit. Kan vi, givet en
 høj-kvalitets digital gengivelse af et maleri, udvikle et stykke software som
-kan afgøre om et maleri opfylder det gyldne snit(, ved at bruge kant- og
-blobdetektion)\footnote{Skal det i parentes med eller begrænser det for
-meget?}?
+kan afgøre om et maleri opfylder det gyldne snit?
 
-Vi siger, at et maleri opfylder det gyldne snit, hvis en interessant region
-tangerer\footnote{Vi leder egentlig ikke efter en reel tangent, men noget der
-ligner. Der vil blive produceret illustrationer til at vise hvad vi leder
-efter.} en linie som opdeler billedet efter det gyldne snit. Vi må som
-udgangspunkt antage, at vi ikke kan måle helt præcist, da det gyldne snit
-defineres ved det irrationelle tal $\varphi$. Vi må da indregne en lille margen
-når vi leder efter træk omkring et gyldent snit.  Derfor ønsker vi at inddele
-træk i billedet, der kunne være kandidater til opfyldelse af det gyldne snit, i
-kategorier, alt efter hvor langt væk fra snittet dette træk ligger. Vi kan da
-komme frem til en vægtning af \emph{hvor meget} et billede opfylder det gyldne
-snit.
+Vi siger, at et maleri opfylder det gyldne snit, hvis vi kan finde en
+interessant region, hvor en delmængde af denne optræder i nærheden af
+eller på den linie, som opdeler billedet efter det gyldne snit.
+
+Vi siger \emph{i nærheden af}, da vi som udgangspunkt må antage, at
+vi ikke kan måle helt præcist når det gyldne snit er defineret ved det
+irrationelle tal $\varphi$. Vi må da indregne en lille margen når vi
+leder efter træk omkring et gyldent snit.  Derfor ønsker vi at inddele
+træk i billedet, der kunne være kandidater til opfyldelse af det gyldne
+snit, i kategorier, alt efter hvor langt væk fra snittet dette træk
+ligger. Vi kan da komme frem til en vægtning af \emph{hvor meget} et
+billede opfylder det gyldne snit.
 
 Billederne hentes fra et online-repository, hvor vi har adgang til metadata om
 malerierne. Et interessant spørgsmål er da, givet en intern klassificering af
