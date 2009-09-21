@@ -49,12 +49,14 @@ highgui.cvNamedWindow (winname, highgui.CV_WINDOW_AUTOSIZE)
 print "Finding the golden means in the picture"
 lines = lib.findMeans(cv.cvGetSize(image))
 
+
 print "Drawing the means"
-lib.drawLines(lines, out)
+#lib.drawLines(lines, out)
 
 print "Test plot function and intersection function"
 lib.plot(out, lines[0].intersection(lines[2]))
-lib.plot(out, lib.intersection(lines[1], lines[3]), color=lib.COL_BLUE)
+lib.scanLine(out, image, lines[0], 1)
+#lib.plot(out, lib.intersection(lines[1], lines[3]), color=lib.COL_BLUE)
 
 while True:
 	highgui.cvShowImage (winname, out)
