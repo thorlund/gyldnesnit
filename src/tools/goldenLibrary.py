@@ -18,8 +18,14 @@ COL_RED = cv.CV_RGB(255, 0, 0)
 COL_GREEN = cv.CV_RGB(0, 255, 0)
 COL_BLUE = cv.CV_RGB(0, 0, 255)
 
-# TODO: Rename this, remove underscores, they are not needed, update reference
-def __getintersection__(x1, x2, x3, x4, y1, y2, y3, y4):
+class OrientationException(Exception):
+	def __init__(self, value):
+		self.value = value
+
+	def __str__(self):
+		return repr(self.value)
+
+def getIntersection(x1, x2, x3, x4, y1, y2, y3, y4):
 	"""Helper method for calculating the intersection of two line segments"""
 	px = (((x1*y2 - y1*x2)*(x3 - x4) - (x1 - x2)*(x3*y4 - y3*x4))/((x1 - x2)*(y3 - y4) - (y1 - y2)*(x3 - x4)))
 	py = (((x1*y2 - y1*x2)*(y3 - y4) - (y1 - y2)*(x3*y4 - y3*x4))/((x1 - x2)*(y3 - y4) - (y1 - y2)*(x3 - x4)))
@@ -41,6 +47,10 @@ class line():
 		"""Returns the intersection of this line and another as a cvPoint"""
 		return intersection(self, line)
 
+	def getPoints(self):
+		"""Returns a two-tuple with the end points of the line"""
+		return (self.p1, self.p2)
+
 def plot(image, point, radius=3, color=COL_GREEN):
 	"""Plot a point on an image"""
 	cv.cvCircle(image, point, radius, color, -1)
@@ -59,7 +69,7 @@ def intersection(line1, line2):
 	x4 = line2.p2.x
 	y4 = line2.p2.y
 
-	return __getintersection__(x1, x2, x3, x4, y1, y2, y3, y4)
+	return getIntersection(x1, x2, x3, x4, y1, y2, y3, y4)
 
 def findMeans(size):
 	"""Return (four) line segments marking the golden mean"""
@@ -144,3 +154,64 @@ def findEdges(original, threshold1 = 100, threshold2 = None):
 	# http://www.youtube.com/watch?v=rUbWjIKxrrs
 	return out
 
+def isSamePoint(p1, p2):
+	"""Checks whether two points have the same coordinates"""
+	return (p1.x == p2.x) and (p1.y == p2.y)
+
+def isSameColor(c1, c2):
+	"""Checks whether two colors are the same"""
+	return (c1[0] == c2[0]) and (c1[1] == c2[1]) and (c1[2] == c2[2])
+
+def scanLine(edgeImage, origImage, line, margin):
+	"""Scan for edges along a line in a edge-detected image
+
+This is _very_ naive
+Traverse a line, put a dot if the pixel is white
+The margin is a padding on each side of the input line
+
+Example:
+In an array [1 2 3 4 5]
+            [1. ......]
+	    ..........
+
+we want the column at 3 with margin 1.
+This will get the columns at 2 3 and 4.
+"""
+	# Get the points from the line
+	(p1, p2) = line.getPoints()
+
+	# We check the direction of the line and pull out
+	# the appropriate row or column
+	if p1.y == p2.y:
+		# Get the row, defined by y
+		# We then want y - margin and y + margin
+		print "horizontal"
+		if margin > 0:
+			slice = edgeImage[p1.y - margin:p1.y + margin]
+		else:
+			slice = edgeImage[p1.y]
+	elif p1.x == p2.x:
+		# Get the column, defined by x
+		# We want x - margin and x + margin
+		print "vertical"
+		if margin > 0:
+			slice = edgeImage[:,p1.x - margin:p1.x + margin]
+		else:
+			slice = edgeImage[:,p1.x:p1.x]
+	else:
+		raise OrientationException("The orientation is fucked up")
+
+	# Now we can traverse every point in the row/column
+	# We have to check for the margin again
+	if margin > 0:
+		for x in range(slice.width + 1):		# adjust for something
+			for y in range(slice.height + 1):	# adjust again
+				# Do something
+				print "%s, %s" % (x, y)
+			
+	else:
+		for point in slice:
+			thisColor = cv.CV_RGB(int(point[0]), int(point[1]), int(point[2])) 
+			if not isSameColor(COL_BLACK, thisColor):
+				# Do something a bit more sophisticated
+				print point
