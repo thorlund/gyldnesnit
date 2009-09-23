@@ -194,7 +194,7 @@ Traverse a line, put the coordinate in a list if the pixel is white
 	points = []
 	# Now we can traverse every point in the row/column
 	for point in slice:
-		thisColor = cv.CV_RGB(int(point[0]), int(point[1]), int(point[2])) 
+		thisColor = cv.CV_RGB(int(point[0]), int(point[1]), int(point[2]))
 		if not isSameColor(COL_BLACK, thisColor):
 			# Save this point
 			points.append(p)
