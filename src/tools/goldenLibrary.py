@@ -154,6 +154,7 @@ def findEdges(original, threshold1 = 100, threshold2 = None):
 	# http://www.youtube.com/watch?v=rUbWjIKxrrs
 	return out
 
+# TODO: Check if there are any methods in OpenCV the two following
 def isSamePoint(p1, p2):
 	"""Checks whether two points have the same coordinates"""
 	return (p1.x == p2.x) and (p1.y == p2.y)
@@ -162,56 +163,42 @@ def isSameColor(c1, c2):
 	"""Checks whether two colors are the same"""
 	return (c1[0] == c2[0]) and (c1[1] == c2[1]) and (c1[2] == c2[2])
 
-def scanLine(edgeImage, origImage, line, margin):
+def naiveLineScanner(edgeImage, origImage, line):
 	"""Scan for edges along a line in a edge-detected image
 
 This is _very_ naive
-Traverse a line, put a dot if the pixel is white
-The margin is a padding on each side of the input line
-
-Example:
-In an array [1 2 3 4 5]
-            [1. ......]
-	    ..........
-
-we want the column at 3 with margin 1.
-This will get the columns at 2 3 and 4.
+Traverse a line, put the coordinate in a list if the pixel is white
 """
 	# Get the points from the line
 	(p1, p2) = line.getPoints()
 
-	# We check the direction of the line and pull out
-	# the appropriate row or column
+	# We check the direction of the line then
+	# get the appropriate row or column.
+	# XXX: Any smarter way around this problem??
 	if p1.y == p2.y:
 		# Get the row, defined by y
-		# We then want y - margin and y + margin
 		print "horizontal"
-		if margin > 0:
-			slice = edgeImage[p1.y - margin:p1.y + margin]
-		else:
-			slice = edgeImage[p1.y]
+		dx = 1
+		dy = 0
+		slice = edgeImage[p1.y]
 	elif p1.x == p2.x:
 		# Get the column, defined by x
-		# We want x - margin and x + margin
 		print "vertical"
-		if margin > 0:
-			slice = edgeImage[:,p1.x - margin:p1.x + margin]
-		else:
-			slice = edgeImage[:,p1.x:p1.x]
+		dx = 0
+		dy = 1
+		slice = edgeImage[:,p1.x]
 	else:
 		raise OrientationException("The orientation is fucked up")
 
+	p = p1
+	points = []
 	# Now we can traverse every point in the row/column
-	# We have to check for the margin again
-	if margin > 0:
-		for x in range(slice.width + 1):		# adjust for something
-			for y in range(slice.height + 1):	# adjust again
-				# Do something
-				print "%s, %s" % (x, y)
-			
-	else:
-		for point in slice:
-			thisColor = cv.CV_RGB(int(point[0]), int(point[1]), int(point[2])) 
-			if not isSameColor(COL_BLACK, thisColor):
-				# Do something a bit more sophisticated
-				print point
+	for point in slice:
+		thisColor = cv.CV_RGB(int(point[0]), int(point[1]), int(point[2])) 
+		if not isSameColor(COL_BLACK, thisColor):
+			# Save this point
+			points.append(p)
+		# Update the coordinate
+		p = (cv.cvPoint(p.x + dx, p.y + dy))
+
+	return points
