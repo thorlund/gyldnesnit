@@ -3,9 +3,9 @@
 # Ulrik Bonde
 
 import sys
-import goldenLibrary as lib
-import edgeDetector
-import lineScanner
+import lib.goldenLibrary as lib
+import lib.edgeDetector as edgeDetector
+import lib.lineScanner as lineScanner
 
 # import the necessary things for OpenCV
 from opencv import cv
