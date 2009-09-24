@@ -1,10 +1,13 @@
 """
-Provides a method for scanning a line for crossing edges
+Provides (a) method(s) for scanning a line for crossing edges
 """
 
-from math import sqrt
+# Import basic functionality
+import goldenLibrary as lib
+
+# Import what we need from OpenCV
 from opencv import cv
-from opencv import highgui
+
 def naiveLineScanner(edgeImage, origImage, line):
 	"""Scan for edges along a line in a edge-detected image
 
@@ -30,18 +33,17 @@ Traverse a line, put the coordinate in a list if the pixel is white
 		dy = 1
 		slice = edgeImage[:,p1.x]
 	else:
-		raise OrientationException("The orientation is fucked up")
+		raise lib.OrientationException("The orientation is fucked up")
 
 	p = p1
 	points = []
 	# Now we can traverse every point in the row/column
 	for point in slice:
 		thisColor = cv.CV_RGB(int(point[0]), int(point[1]), int(point[2]))
-		if not isSameColor(COL_BLACK, thisColor):
+		if not lib.isSameColor(lib.COL_BLACK, thisColor):
 			# Save this point
 			points.append(p)
 		# Update the coordinate
 		p = (cv.cvPoint(p.x + dx, p.y + dy))
 
 	return points
-

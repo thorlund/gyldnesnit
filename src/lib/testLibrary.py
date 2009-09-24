@@ -4,6 +4,8 @@
 
 import sys
 import goldenLibrary as lib
+import edgeDetector
+import lineScanner
 
 # import the necessary things for OpenCV
 from opencv import cv
@@ -35,7 +37,7 @@ else:
 	threshold1 = 100
 
 image = highgui.cvLoadImage (filename)
-out = lib.findEdges(image, threshold1, threshold2)
+out = edgeDetector.findEdges(image, threshold1, threshold2)
 
 if not image:
 	print "Error loading image '%s'" % filename
@@ -55,7 +57,7 @@ print "Drawing the means"
 
 print "Test plot function and intersection function"
 #lib.plot(out, lines[0].intersection(lines[2]))
-points = lib.naiveLineScanner(out, image, lines[0])
+points = lineScanner.naiveLineScanner(out, image, lines[0])
 
 for point in points:
 	lib.plot(out, point, 2)
