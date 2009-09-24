@@ -6,10 +6,14 @@ import sys
 import lib.goldenLibrary as lib
 import lib.edgeDetector as edgeDetector
 import lib.lineScanner as lineScanner
+import initTests
 
 # import the necessary things for OpenCV
 from opencv import cv
 from opencv import highgui
+
+# INIT THE TEST
+initTests.init()
 
 print ""
 

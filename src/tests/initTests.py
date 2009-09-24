@@ -1,4 +1,6 @@
-"""Compile and move libraries for testing"""
+"""
+Compile and move libraries for testing
+"""
 
 import compileall
 import glob, os, shutil

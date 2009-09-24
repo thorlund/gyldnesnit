@@ -11,6 +11,9 @@ import lib.lineScanner as lineScanner
 from opencv import cv
 from opencv import highgui
 
+# INIT THE TEST
+initTests.init()
+
 print ""
 
 if len(sys.argv) < 2:

@@ -1,4 +1,6 @@
-"""Provides functionality for running edge detection on images"""
+"""
+Provides functionality for running edge detection on images
+"""
 
 # Import basic functionality
 import goldenLibrary
