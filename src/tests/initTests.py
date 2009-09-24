@@ -8,6 +8,14 @@ def init():
 	src_dir = '../lib/'
 	dst_dir = './lib/'
 
+	# Before anything, check if the destination exsist
+	# If not, create it
+	dir = os.path.join(dst_dir)
+	if not os.path.isdir(dir):
+		print "Destination folder does not exsist"
+		print "Creating ./lib/"
+		os.mkdir(dir)
+
 	# First remove old compilations
 	print "Cleaning destination"
 	files = glob.iglob(os.path.join(dst_dir, "*.pyc"))
