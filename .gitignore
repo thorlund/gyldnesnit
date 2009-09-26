@@ -6,5 +6,7 @@ res/local*
 *.aux
 *.pdf
 *.pyc
+*.bbl
+*.blg
 !doc/synopsis/*.pdf
 *~
