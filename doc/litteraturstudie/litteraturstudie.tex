@@ -19,6 +19,7 @@
 \usepackage{graphicx}
 \usepackage{multirow}
 \usepackage{hyperref}
+\usepackage{cite}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Indstillinger
@@ -46,8 +47,12 @@ Morten Thorlund - \mailto{thorlund@diku.dk}}
 \date{\today}
 
 \hypersetup{
+colorlinks,%
+citecolor=black,%
+filecolor=black,%
+linkcolor=black,%
+urlcolor=black, % 
 bookmarksopen=false,
-colorlinks=true,
 pdftitle={Litteraturstudie - Detektion af Det Gyldne Snit i digitaliserede malerier},
 pdfauthor={Ulrik Bonde, Kasper Steenstrup og Morten Thorlund}
 }
@@ -61,7 +66,7 @@ pdfauthor={Ulrik Bonde, Kasper Steenstrup og Morten Thorlund}
 %\pagestyle{headings}
 
 \input{indledning.tex}
-
+\cite{McManus1995}\cite{Boselie1984}\cite{Markowsky1992}
 \section*{Litteratur omhandlende ``Det Gyldne Snit''}
 \input{gyldnesnitlitteratur.tex}
 
@@ -71,28 +76,8 @@ pdfauthor={Ulrik Bonde, Kasper Steenstrup og Morten Thorlund}
 %\tableofcontents
 %\newpage
 
-\begin{thebibliography}{99}
-%\addcontentsline{toc}{section}{Litteratur}
-
-% Bog
-%\bibitem[1]{AB0X} efternavn, fornavn, fornavn efternavn på andre forfattere: bogens titel, forlag, årstal
-%\bibitem[1]{TMBC} Ægidius Mogensen, Torben: Basics of Compiler Design, - , 2007
-
-% Artikel i tidsskrift
-%\bibitem[2]{CD0X} efternavn, fornavn, fornavn efternavn på andre forfattere: titel, tidsskriftets navn, nr:sidetal, årstal
-%\bibitem[2]{CD0X} efternavn, fornavn, fornavn efternavn på andre forfattere: titel, tidsskriftets navn, nr:sidetal, årstal
-\bibitem[Dou]{Bib:Dou} S. Douady, Y. Couder: \href{http://www.math.ntnu.no/~jarlet/Douady96.pdf}{``Phyllotaxis as a Dynamical Self Organizing Process''}(PDF), Journal of Theoretical Biology, 178: 255–274, 1996,  doi:\href{http://dx.doi.org/10.1006\%2Fjtbi.1996.0026}{10.1006/jtbi.1996.0026}
-\bibitem[WpC1]{Bib:WGold} Wikipedia contributors: ``Golden ratio'', Wikipedia, The Free Encyclopedia,\\
-	\href{http://en.wikipedia.org/w/index.php?title=Golden\_ratio\&oldid=313121558}{http://en.wikipedia.org/w/index.php?title=Golden\_ratio\&oldid=313121558} (accessed September 11, 2009)
-\bibitem[Wei]{Bib:MWGold} Weisstein, Eric W.: ``Golden Ratio.'', MathWorld -- A Wolfram Web Resource. \href{http://mathworld.wolfram.com/GoldenRatio.html}{http://mathworld.wolfram.com/GoldenRatio.html}
-\bibitem[Knott]{Bib:Knott} Knott, Ron: ``Fibonacci Numbers and the Golden Section'', \href{http://www.mcs.surrey.ac.uk/Personal/R.Knott/Fibonacci/}{http://www.mcs.surrey.ac.uk/Personal/R.Knott/Fibonacci/}
-\bibitem[Mark]{Bib:Mark} Markowsky, George: \href{http://www.umcs.maine.edu/~markov/GoldenRatio.pdf}{``Misconceptions about the Golden Ratio''}(PDF), College Mathematics Journal 23 (1): 2-19, 1992, doi:\href{http://dx.doi.org/10.2307\%2F2686193}{10.2307/2686193}
-\bibitem[Ola]{Bib:Painting} Olariu, Agata: \href{http://arxiv.org/abs/physics/9908036/}{``Golden Section and the Art of Painting''}, 1999, \href{http://arxiv.org/pdf/physics/9908036v1}{http://arxiv.org/pdf/physics/9908036v1}(PDF)
-
-% Konference
-%\bibitem[3]{EF0X} efternavn, fornavn, fornavn efternavn på andre forfattere: titel, navn på konference, redaktører, forlag, land årstal
-
-\end{thebibliography}
+\bibliographystyle{plain}
+\bibliography{litteraturliste}
 
 %\newpage
 %\section*{Bilag} 
