@@ -1,0 +1,98 @@
+% vim: set tw=72 spell spelllang=da:
+\documentclass[a4paper, 10pt, danish, final]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pakker
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{a4wide}
+\usepackage[danish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{charter}
+\usepackage{verbatim}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%\usepackage{mathrsfs}
+%\usepackage[mathcal]{euscript}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{cite}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Indstillinger
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\parindent=5pt
+\parskip=8pt plus 2pt minus 4pt
+\lstset{language=Python, basicstyle=\scriptsize, showstringspaces=false,
+numbers=none, stepnumber=1, numberstyle=\tiny}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Kommandoer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcommand{\old}[1]{\oldstylenums{#1}}
+%\newcommand{\old}[1]{{#1}}
+\newcommand{\mailto}[1]{\href{mailto:#1}{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Titel, forfatter og dato
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Detektion af ``Det Gyldne Snit'' i digitaliserede malerier}
+
+\author{Ulrik Bonde - \mailto{bonde@diku.dk}\\
+Kasper Steenstrup - \mailto{khsj@diku.dk}\\
+Morten Thorlund - \mailto{thorlund@diku.dk}}
+\date{\today}
+
+\hypersetup{
+colorlinks,%
+citecolor=black,%
+filecolor=black,%
+linkcolor=black,%
+urlcolor=black,%
+bookmarksopen=false,
+pdftitle={Detektion af Det Gyldne Snit i digitaliserede malerier},
+pdfauthor={Ulrik Bonde, Kasper Steenstrup og Morten Thorlund}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Indhold
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+%\pagestyle{headings}
+
+\input{afsnit/indledning/bogus.tex}
+
+\tableofcontents
+
+\section{Indledning}
+%\input{afsnit/indledning/indledning.tex}
+
+\section{Baggrund}
+
+\section{Vores implementering}
+
+\section{Afprøvning}
+
+\section{Videnskabelige resultater}
+
+\newpage
+
+% sort in citation order
+\bibliographystyle{unsrt}
+\bibliography{litteraturliste}
+\addcontentsline{toc}{section}{Litteratur}
+
+\newpage
+%\section{Bilag}
+\appendix
+
+\section{Kildekode}
+%\input{materialer.tex}
+%\newpage
+
+\end{document}
