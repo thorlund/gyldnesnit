@@ -10,7 +10,6 @@ initTests.init()
 
 import sys
 import lib.goldenLibrary as lib
-import lib.floofill as floofill
 import lib.edgeDetector as edgeDetector
 import lib.lineScanner as lineScanner
 import lib.featureDetector as featureDetector
