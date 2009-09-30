@@ -48,7 +48,10 @@ Hvis et afsnit har underafsnit bør disse også ligge separat.
 
 		Eksempel (uddrag fra vores_implementering.tex):
 			\subsection{Kantdetektion}
-			\input{kantdetektion.tex}
+			\input{afsnit/vores_implementering/kantdetektion.tex}
+		
+		BEMÆRK! I input-kommandoen skal underafsnittene refereres til
+			som stod man ved hoveddokumentet.
 		
 
 * Billeder/Illustrationer
@@ -58,5 +61,5 @@ afsnits mappe tilføjes en ny mappe der hedder "billeder" til disse.
 
 	Eksempel:
 
-		Eventuelle billeder i afsnittet "Vores implementation" lægges
-		i mappen /afsnit/vores_implementation/billeder/
+		Eventuelle billeder i afsnittet "Vores implementering" lægges
+		i mappen /afsnit/vores_implementering/billeder/
