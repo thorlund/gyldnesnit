@@ -1,6 +1,6 @@
-all: rapport.pdf
+all: pdf
 
-rapport.pdf: rapport.tex litteraturliste.bib
+pdf: rapport.tex litteraturliste.bib afsnit/*
 	pdflatex rapport.tex
 	bibtex rapport
 	pdflatex rapport.tex
