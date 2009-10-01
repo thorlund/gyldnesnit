@@ -9,5 +9,6 @@ res/local*
 *.bbl
 *.blg
 *.toc
+*.lof
 !doc/synopsis/*.pdf
 *~
