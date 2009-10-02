@@ -44,7 +44,6 @@ Start and stop point is the point that the def runs from to"""
 	g = random.randint(0,255)
 	r = random.randint(0,255)
 	color = cv.CV_RGB(r,g,b);
-	
 	#Sets the flag
 	flags = 4 + (255 << 8) + cv.CV_FLOODFILL_FIXED_RANGE
 
@@ -52,25 +51,38 @@ Start and stop point is the point that the def runs from to"""
 	comp = cv.CvConnectedComp()
 	
 	(p1, p2) = line.getPoints()
+	#print cv.cvPoint(p1.x,start_point.y+2)
+	
 	if p1.x == p2.x:
 		#Set the seed to the start of the golden ratio 
 		seed = cv.cvPoint(start_point.x,start_point.y+1)
 		
 		#Color betwine start_point+1 and point-1  
 		for i in range(start_point.y+1, stop_point.y-1):
-			cv.cvFloodFill(image, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
-			seed = cv.cvPoint(seed.x,seed.y+1)
+			if not(lib.isSameColor(image[start_point.x][i],color)):
+				cv.cvFloodFill(image, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
+				#lib.plot(image, seed, 1, lib.COL_RED)
+				seed = cv.cvPoint(seed.x,seed.y+1)
+			else:
+				print i
 	else:
 		#Set the seed to the start of the golden ratio 
 		seed = cv.cvPoint(start_point.x+1,start_point.y)
 		
 		#Color betwine start_point+1 and point-1  
 		for i in range(start_point.x+1, stop_point.x-1):
-			cv.cvFloodFill(image, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
-			seed = cv.cvPoint(seed.x+1,seed.y)
+			if not(lib.isSameColor(image[p1.x][start_point.y+2],color)):
+				cv.cvFloodFill(image, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
+				seed = cv.cvPoint(seed.x+1,seed.y)
 	
 	#Diffrent forms of comp print
-	#print "%g pixels were repainted" % comp.area;
+	if (comp.rect.height> 2000):
+		print 'next blob'
+		print type(comp.contour)
+		print comp.rect.height
+		print comp.rect.width
+		print comp.rect.x
+		print comp.rect.y
 	#print "%rect" % comp.rect;
 	return image 
 	
@@ -79,7 +91,7 @@ def getGoodFeatures(image):
 	# TODO: Clean up!! Comments properly
 	# This is mostly copy/paster from /usr/share/opencv/samples/python/lkdemo.py
 	"""Find features using OpenCV's cvFindGoodFeatures"""
-	win_size = 10
+	win_size = 10 
 	MAX_COUNT = 500
 
 	# create the images we need
