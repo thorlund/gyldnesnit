@@ -5,6 +5,7 @@ Provides basic operations for image manipulation
 from math import sqrt
 from opencv import cv
 from opencv import highgui
+import random
 
 # Define globals
 global phi, PHI
@@ -109,6 +110,15 @@ def drawLines(lines, outimage):
 	"""Draw a list of lines on an image"""
 	for line in lines:
 		cv.cvLine(outimage, line.p1, line.p2, COL_RED)
+
+def getRandomColor():
+	b = random.randint(0,255)
+	g = random.randint(0,255)
+	r = random.randint(0,255)
+	return cv.CV_RGB(r,g,b)
+
+def getDistance(p1, p2):
+	return sqrt(pow((p2.x - p1.x), 2) + pow((p2.y - p1.y), 2))
 
 # TODO: Check if there are any methods in OpenCV the two following
 def isSamePoint(p1, p2):
