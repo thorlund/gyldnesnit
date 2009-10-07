@@ -16,8 +16,9 @@ f.  Kr. som følger:
 	\label{line_segment}
 \end{figure}
 
-Givet et linjestykke $A\ B$, som vist i figur \ref{euclid}, og ud fra
-Euklids beskrivelse kan $\varphi$ defineres som
+Givet et linjestykke $A\ B$, hvor $A\ B$ definerer linjen mellem
+punkterne $A$ og $B$, som vist i figur \ref{euclid}, og ud fra Euklids
+beskrivelse kan $\varphi$ defineres som
 \begin{equation}
 	\varphi	= \frac{A\ C}{C\ B} = \frac{A\ B}{A\ C}
 	\label{euclid}
@@ -27,12 +28,12 @@ Ved at indsætte variable i ligning \ref{euclid} får vi
 	\varphi = \frac{\varphi + 1}{\varphi}
 	\label{expand_euclid}
 \end{equation}
-hvilket giver os andengradspolynomiet
+hvilket giver os andengradsligningen
 \begin{equation}
 	\varphi^{2} - \varphi - 1 = 0.
 	\label{poly_phi}
 \end{equation}
-Hvis vi nu løser andengradspolynomiet i ligning \ref{poly_phi}, med
+Hvis vi nu løser andengradsligningen i \ref{poly_phi}, med
 $\varphi > 0$, får vi
 \begin{eqnarray*}
 	\varphi	& =	& \frac{\sqrt{5} + 1}{2} \\
@@ -62,12 +63,43 @@ hvilket kun er gældende for $\varPhi$.
 
 Det gyldne snit fremviser endvidere en interessant forbindelse til
 Fibonaccis talrække, da forholdet mellem to fibonaccital $F(n)$ og $F(n
-- 1)$ konvergerer mod $\varphi$ når $n$ nærmer sig uendelig. Mere
-formelt har vi at
+- 1)$ konvergerer mod $\varphi$ når $n$ nærmer sig uendelig. Formelt har
+vi at
 \begin{eqnarray*}
 	\varphi & =     & \lim_{n \rightarrow
 	\infty}{\frac{F(n)}{F(n - 1)}}
 \end{eqnarray*}
+
+I tabel \ref{fibonacci_sequence} kan ses hvordan ratioen mellem
+fibonaccital konvergerer mod $\varphi$, hvor vi også viser den
+procentvise afvigelse fra $\varphi$.
+
+\begin{figure}[h!]
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			$n$ & $F(n)$ & $F(n - 1)$ & $ \frac{F(n)}{F(n - 1)}$ & $\%$ fra $\varphi$ \\
+			\hline
+			0	 & 0 	 & $n/a$ & $n/a$ 		& $n/a$ 		\\
+			1	 & 1	 & 1	 & 1.0		 	& 38.196601125 		\\
+			2	 & 1	 & 1	 & 1.0		 	& 38.196601125 		\\
+			3	 & 2	 & 1	 & 2.0		 	& -23.60679775 		\\
+			4	 & 3	 & 2	 & 1.5			& 7.29490168752 	\\
+			5	 & 5	 & 3	 & 1.66666666667	& -3.00566479165 	\\
+			6	 & 8	 & 5	 & 1.6			& 1.11456180002 	\\
+			7	 & 13	 & 8	 & 1.625	 	& -0.430523171858 	\\
+			8	 & 21	 & 13	 & 1.61538461538	& 0.163740278863 	\\
+			9	 & 34	 & 21	 & 1.61904761905	& -0.062645797602 	\\
+			10	 & 55	 & 34	 & 1.61764705882	& 0.0239135845758 	\\
+			11	 & 89	 & 55	 & 1.61818181818	& -0.00913636134662 	\\
+			12	 & 144	 & 89	 & 1.61797752809	& 0.00348946069118 	\\
+			13	 & 233	 & 144	 & 1.61805555556	& -0.00133290189271 	\\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Fibonaccisekvens}
+	\label{fibonacci_sequence}
+\end{figure}
 
 \subsubsection{Et gyldent rektangel}
 På samme måde som vi kan opdele en linjestykke efter det gyldne snit,
