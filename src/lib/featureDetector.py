@@ -18,12 +18,12 @@ points are the points on the given line"""
 	
 	# Set the end point at the end of the line
 	points.append(stop_point)
-	
+	areaOfBlobs = []
 	for point in points:
-		out = floodFillBetweenPoints(out, lo, up, start_point, point, line)
+		(out,area) = floodFillBetweenPoints(out, lo, up, start_point, point, line)
+		areaOfBlobs.append(area)
 		start_point = point
-	
-	return out
+	return (out,areaOfBlobs)
 
 # Floodfill the image at point x,y whit are lower and upper thres hold namt lo and up
 # Start and stop point is the point that the def runs from to
@@ -70,7 +70,7 @@ Start and stop point is the point that the def runs from to"""
 		print comp.rect.x
 		print comp.rect.y
 	#print "%rect" % comp.rect;
-	return image 
+	return (image,comp.area) 
 	
 def getGoodFeatures(image):
 	# XXX: BETA but working

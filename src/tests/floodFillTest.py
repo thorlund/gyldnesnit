@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+git #!/usr/bin/env python
 #
 # Kasper steenstrup
 
@@ -60,7 +60,7 @@ points = lineScanner.naiveLineScanner(out, image, lines[0])
 
 out = highgui.cvLoadImage (filename)
 
-out = featureDetector.floodFillLine(out, points, lines[0], lo, up)
+(out,areaOfBlobs) = featureDetector.floodFillLine(out, points, lines[0], lo, up)
 
 #startpoint = lines[0].getPoints()[0]
 #points.append(lines[0].getPoints()[1])

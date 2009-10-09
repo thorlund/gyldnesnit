@@ -62,7 +62,7 @@ points = lineScanner.naiveLineScanner(out, image, lines[0])
 out = highgui.cvLoadImage (filename)
 outcopy = highgui.cvLoadImage (filename)
 
-out = featureDetector.floodFillLine(out, points, lines[0], lo, up)
+(out,areaOfBlobs) = featureDetector.floodFillLine(out, points, lines[0], lo, up)
 copy = cv.cvCopy(out,outcopy)
 #print "Finding the golden means in the picture"
 #lines = lib.findMeans(cv.cvGetSize(out))
@@ -72,8 +72,8 @@ copy = cv.cvCopy(out,outcopy)
 
 #out = out[:,points[0].x :]
 
-statestik.splitOpBlob(out,outcopy,points,lines[0])
-
+listOverSizeOfBlobs = statestik.splitOpBlob(out,outcopy,points,lines[0])
+#print listOverSizeOfBlobs
 #startpoint = lines[0].getPoints()[0]
 #points.append(lines[0].getPoints()[1])
 #for point in points:
