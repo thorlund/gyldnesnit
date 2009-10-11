@@ -21,7 +21,7 @@
 \usepackage{hyperref}
 \usepackage{cite}
 \usepackage{float}
-\usepackage[small,bf]{caption2}
+\usepackage[small,bf]{caption}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Indstillinger
@@ -38,6 +38,8 @@ numbers=none, stepnumber=1, numberstyle=\tiny}
 %\newcommand{\old}[1]{{#1}}
 \newcommand{\mailto}[1]{\href{mailto:#1}{#1}}
 \newcommand{\resume}[1]{\begin{abstract}{\sffamily #1}\end{abstract}}
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+\renewcommand{\thetable}{\thesection.\arabic{figure}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Titel, forfatter og dato
@@ -59,7 +61,9 @@ linkcolor=black,%
 urlcolor=black,%
 bookmarksopen=false,
 pdftitle={Detektion af Det Gyldne Snit i digitaliserede malerier},
-pdfauthor={Ulrik Bonde, Kasper Steenstrup og Morten Thorlund}
+pdfauthor={Ulrik Bonde, Kasper Steenstrup og Morten Thorlund},
+pdfsubject={Computer Vision},
+pdfkeywords={Det gyldne snit, computer vision}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -71,6 +75,7 @@ pdfauthor={Ulrik Bonde, Kasper Steenstrup og Morten Thorlund}
 %\pagestyle{headings}
 
 \input{afsnit/indledning/resume.tex}
+\newpage
 
 \tableofcontents
 \listoftables
