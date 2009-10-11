@@ -50,14 +50,18 @@ if not image:
 	sys.exit(-1)
 
 print "Finding edges using Canny"
-out = edgeDetector.findEdges(image, threshold1, threshold2)
+out = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
+edgeDetector.findEdges(image, out, threshold1, threshold2)
 
-winname = "edgeDetectorTest"
+outname = "edgeDetectorTest"
+orgname = "Original"
 
-highgui.cvNamedWindow (winname, highgui.CV_WINDOW_AUTOSIZE)
+highgui.cvNamedWindow (outname, highgui.CV_WINDOW_AUTOSIZE)
+highgui.cvNamedWindow (orgname, highgui.CV_WINDOW_AUTOSIZE)
 
 while True:
-	highgui.cvShowImage (winname, out)
+	highgui.cvShowImage (outname, out)
+	highgui.cvShowImage (orgname, image)
 
 	c = highgui.cvWaitKey(0)
 	

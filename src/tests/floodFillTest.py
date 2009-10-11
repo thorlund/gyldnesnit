@@ -1,4 +1,4 @@
-git #!/usr/bin/env python
+#!/usr/bin/env python
 #
 # Kasper steenstrup
 
@@ -49,7 +49,8 @@ if not image:
 
 threshold1 = 70;
 threshold2 = 70;
-out = edgeDetector.findEdges(image, threshold1, threshold2)
+out = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
+edgeDetector.findEdges(image, out, threshold1, threshold2)
 
 print "Finding the golden means in the picture"
 

@@ -43,12 +43,14 @@ else:
 	threshold1 = 100
 
 image = highgui.cvLoadImage (filename)
-out = edgeDetector.findEdges(image, threshold1, threshold2)
 
 if not image:
 	print "Error loading image '%s'" % filename
 	print ""
 	sys.exit(-1)
+
+out = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
+edgeDetector.findEdges(image, out, threshold1, threshold2)
 
 winname = "lineScannerTest"
 

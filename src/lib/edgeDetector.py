@@ -8,15 +8,12 @@ import goldenLibrary
 # Import what we need from OpenCV
 from opencv import cv
 
-def findEdges(original, threshold1 = 100, threshold2 = None):
+def findEdges(original, out, threshold1 = 100, threshold2 = None):
 	"""Return a new edge detected image with a specified threshold"""
 
 	#Define threshold2
 	if threshold2 == None:
 		threshold2 = threshold1 * 3
-
-	# First create the out picture, the one the method will return
-	out = cv.cvCreateImage(cv.cvGetSize(original), 8, 3)
 
 	# Create two pictures with only one channel for a b/w copy
 	# and one for storring the edges found in the b/w picture
@@ -48,6 +45,4 @@ def findEdges(original, threshold1 = 100, threshold2 = None):
 	# to the out-image
 	cv.cvCopy(original, out, edge)
 
-	# Et voila! The skin comes right off!
-	# http://www.youtube.com/watch?v=rUbWjIKxrrs
-	return out
+	# The edge-detected image is now in out
