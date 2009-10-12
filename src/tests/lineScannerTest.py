@@ -57,8 +57,7 @@ winname = "lineScannerTest"
 highgui.cvNamedWindow (winname, highgui.CV_WINDOW_AUTOSIZE)
 
 print "Finding the golden means in the picture"
-lines = lib.findMeans(cv.cvGetSize(image))
-
+lines = lib.findGoldenMeans(cv.cvGetSize(image))
 
 print "Test plot and line scanner methods"
 points = lineScanner.naiveLineScanner(out, image, lines[0])

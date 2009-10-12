@@ -42,10 +42,10 @@ winname = "basicFunctionalityTest"
 highgui.cvNamedWindow (winname, highgui.CV_WINDOW_AUTOSIZE)
 
 print "Finding the golden means in the picture"
-lines = lib.findMeans(cv.cvGetSize(image))
+lines = lib.findGoldenMeans(cv.cvGetSize(image))
 
 print "Drawing the means"
-lib.drawLines(lines, image)
+lib.drawLines(image)
 
 print "Test plot function and intersection function"
 lib.plot(image, lines[0].intersection(lines[2]))

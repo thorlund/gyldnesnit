@@ -60,8 +60,8 @@ highgui.cvNamedWindow (outname, highgui.CV_WINDOW_AUTOSIZE)
 highgui.cvNamedWindow (orgname, highgui.CV_WINDOW_AUTOSIZE)
 
 while True:
-	highgui.cvShowImage (outname, out)
 	highgui.cvShowImage (orgname, image)
+	highgui.cvShowImage (outname, out)
 
 	c = highgui.cvWaitKey(0)
 	

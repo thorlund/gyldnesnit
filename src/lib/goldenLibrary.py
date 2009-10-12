@@ -73,6 +73,10 @@ def intersection(line1, line2):
 	return getIntersection(x1, x2, x3, x4, y1, y2, y3, y4)
 
 def findMeans(size):
+	"""Renamed to findGoldenLibrary"""
+	raise StandardError("\n\nThe method findMeans have been renamed to findGoldenMeans\nUse that instead\n")
+
+def findGoldenMeans(size):
 	"""Return (four) line segments marking the golden mean"""
 	
 	# Array holding the line segments
@@ -106,10 +110,19 @@ def findMeans(size):
 
 	return lines
 
-def drawLines(lines, outimage):
-	"""Draw a list of lines on an image"""
+def drawLines(original, outimage=None, lines=None, color=COL_RED):
+	"""Draw a list of lines on an image.
+	If no outimage is supplied, the original is used.
+	If no lines are supplied, dafault to drawing the golden section.
+	If no color is supplied, use red"""
+	if not outimage:
+		outimage = original
+
+	if not lines:
+		lines = findGoldenMeans(cv.cvGetSize(original))
+
 	for line in lines:
-		cv.cvLine(outimage, line.p1, line.p2, COL_RED)
+		cv.cvLine(outimage, line.p1, line.p2, color)
 
 def getRandomColor():
 	b = random.randint(0,255)
