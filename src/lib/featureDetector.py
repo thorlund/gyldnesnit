@@ -10,27 +10,30 @@ import lib.goldenLibrary as lib
 
 
 
-def floodFillLine(out, points, line, lo, up):
+def floodFillLine(original, out, points, line, lo, up):
 	"""take are golden ratio and make floot fill betvine alle of the points
 points are the points on the given line"""
+	if not out:
+		out = original
 	# Get start and stop points
 	(start_point, stop_point) = line.getPoints()
 	
 	# Set the end point at the end of the line
 	points.append(stop_point)
-	areaOfBlobs = []
+	components = []
 	for point in points:
-		(out,area) = floodFillBetweenPoints(out, lo, up, start_point, point, line)
-		areaOfBlobs.append(area)
+		line = lib.line(start_point, point)
+		(out, component) = floodFillBetweenPoints(out, lo, up, line)
+		components.append(component)
 		start_point = point
-	return (out,areaOfBlobs)
+	return (out, components)
 
 # Floodfill the image at point x,y whit are lower and upper thres hold namt lo and up
 # Start and stop point is the point that the def runs from to
 # golden_ratio is are indekater of whot of the 4 golden ratio we are working in
 # 0 and 1 is from the top to the bottom.
 # 2 and 3 is from the left to til rigth
-def floodFillBetweenPoints(image, lo, up, start_point, stop_point, line):
+def floodFillBetweenPoints(image, lo, up, line):
 	"""Floofill the image at point x,y whit are lower and upper thres hold namt lo and up
 Start and stop point is the point that the def runs from to"""
 	# Get new random color
@@ -49,17 +52,20 @@ Start and stop point is the point that the def runs from to"""
 		# Initialize the seed and set deltas for increasing the seed
 		dx = 0
 		dy = 1
-		seed = cv.cvPoint(start_point.x, start_point.y)
-		
-		#Color betwine start_point+1 and point-1
-		for i in range(start_point.y+1, stop_point.y-1):
-			if not(lib.isSameColor(image[i][start_point.x],color)):
-				seed = cv.cvPoint(seed.x + dx, seed.y + dy)
-				cv.cvFloodFill(image, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
-			#else:
-			#	print i
+		max = range(p1.y, p2.y-1)
 	else:
-		print "Not implemented"
+		# Initialize the seed and set deltas for increasing the seed
+		dx = 1
+		dy = 0
+		max = range(p1.x, p2.x-1)
+
+	seed = cv.cvPoint(p1.x, p1.y)
+
+	#Color betwine start_point+1 and point-1
+	for i in max:
+		seed = cv.cvPoint(seed.x + dx, seed.y + dy)
+		if not(lib.isSameColor(image[seed.y][seed.x], color)):
+			cv.cvFloodFill(image, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
 	
 	#Diffrent forms of comp print
 	if (comp.rect.height> 2000):
@@ -70,7 +76,7 @@ Start and stop point is the point that the def runs from to"""
 		print comp.rect.x
 		print comp.rect.y
 	#print "%rect" % comp.rect;
-	return (image,comp.area) 
+	return (image, comp)
 	
 def getGoodFeatures(image):
 	# XXX: BETA but working
