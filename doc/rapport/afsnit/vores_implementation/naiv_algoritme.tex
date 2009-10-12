@@ -75,6 +75,13 @@ følgende illustrationer, er stærkt overdrevet.
 	\label{pos_naiv_margin_1}
 \end{figure}
 
+\textbf{Hvorfor må en region ikke krydse snittet?} \hspace{0.4cm}Vi siger at en region
+ikke må krydse snittet, men når vi nu har indført en margen, burde dette
+ikke være noget problem. Det er det måske heller ikke. Vi skal blot
+kræve at en regions bounding box holder sig inden for margin, uanset om
+denne så skærer det gyldne snit\dots? Ups, det hele kræver lige en
+omformulering.
+
 \subsubsection{Regionens størrelse}
 Med vores nuværende definition på hvornår en region kan betegnes som
 interessant, skal vi blot have en sammenhængende region indenfor en
@@ -139,6 +146,11 @@ illustrerer to forskellige regioner med forskellig masse.
 \end{figure}
 
 \subsubsection{Sammenfatning}
+\textsf{Der er gået kraftigt rod i argumenterne i dette afsnit. Dette
+skyldes en åbenbaring der siger, at vi blot skal have en kant af det
+afgrænsende rektangel indenfor vores margen, for at vide at den ikke
+krydser vores snit.}
+
 Vi samler nu op på de ovenstående krav for bestemmelse af en interessant
 region liggende i det gyldne snit.
 
@@ -162,9 +174,33 @@ Vi har da at en region skal opfylde
 \begin{equation}
 	(a \vee b) \wedge \neg (c \vee d \vee e \vee f)
 \end{equation}
-før at den kan betegnes som liggende i det gyldne snit. Vi vil senere
-komme ind på hvordan vi for en given region afgør om den opfylder
-ovenstående betingelser.
+før at den kan betegnes som liggende i det gyldne snit.
+
+Faktisk kan vi kraftigt reducere ovenstående betingelser ved at fokusere
+på en regions afgrænsende rektangel. Vi kan nu sige at en region skal
+have en kant inden i -- eller på kanten -- af det rektangel der udgør
+vores margin. Hvis vi har en sådan kant, ved vi at
+\begin{enumerate}
+	\renewcommand{\labelenumi}{(\Roman{enumi})}
+	\item regionen tangerer eller er tæt nok på det gyldne snit
+		(implicerer $(a \vee b)$)
+\end{enumerate}
+og
+\begin{enumerate}
+	\renewcommand{\labelenumi}{(\Roman{enumi})}
+	\setcounter{enumi}{1}
+	\item regionen spreder sig ikke udover vores margen (implicit
+		$\neg(c \vee d)$).
+\end{enumerate}
+Vi mangler dog stadig at tage højde for kravene $e$ og $f$. Det formelle
+krav kan nu omskrives til
+\begin{equation}
+	\mathrm{I} \wedge \mathrm{II} \wedge \neg(e \vee f)
+\end{equation}
+som er ækvivalent med den forrige ligning.
+
+Vi vil senere komme ind på hvordan vi for en given region afgør om den
+opfylder ovenstående betingelser.
 
 }
 
