@@ -4,7 +4,7 @@
 
 \textsf{Vi vil i det følgende forklare vores tanker bag en meget simpelt
 fremgangsmåde som skal afgøre om et billede fremviser brug af det gyldne
-snit. For at afgøre dette, trækker vi sammenhængende regioner ud af
+snit. For at afgøre dette, trækker vi regioner ud af
 billedet og vurderer dem efter deres placering, størrelse og form. I
 denne sammenhæng bør en regions \emph{kant} forstås som en side af det
 rektangel, der afgrænser en given region.}
@@ -21,17 +21,23 @@ det følgende.
 	\begin{center}
 		\includegraphics[scale=\imgscale,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/naiv_positiv_blob_1}
 	\end{center}
-	\caption[En positiv region]{En sammenhængende region som tangerer det gyldne snit.
+	\caption[En positiv region]{En region som tangerer det gyldne snit.
 	Denne region er positiv.}
 	\label{pos_naiv_1}
 \end{figure}
 
-I figur \ref{pos_naiv_1} er vi dog heldige, idet regionen virkelig
-\emph{kan} klassificeres som interessant fordi billedet er meget simpelt. I
-praksis vil vi have mange regioner, hvor vi gerne vil fjerne de regioner
-der ikke kan klassificeres som interessante. Figur
-\ref{realworld_example} viser hvordan et rigtigt maleri kunne se ud, når
-vi gerne vil bestemme interessante regioner.
+Det kan let testes hvorvidt en region tangerer snittet, ved at kigge på
+regionens kanter. Husk at en kant er en side af det rektangel der
+afgrænser en region. Hvis blot én af kanterne ligger på et snit, siger
+vi at regionen tangerer dette snit. Det er derfor ikke en tangent i
+den traditionelle matematiske forstand, hvor kun ét punkt rører snittet,
+men vi har at \emph{mindst} ét punkt rører snittet.  I figur
+\ref{pos_naiv_1} er vi heldige, idet regionen virkelig \emph{kan}
+klassificeres som interessant, fordi billedet er meget simpelt.  I praksis
+vil vi have mange regioner, hvor vi gerne vil fjerne de regioner der
+ikke kan klassificeres som interessante.  Figur \ref{realworld_example}
+viser hvordan et rigtigt maleri kunne se ud, når vi gerne vil bestemme
+interessante regioner.
 \begin{figure}[p]
 	\begin{center}
 		\includegraphics[scale=0.42,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/bathers_mockup_blob}
@@ -43,52 +49,66 @@ vi gerne vil bestemme interessante regioner.
 
 Billedet i figur \ref{realworld_example} viser nogle komplekse regioner,
 men ingen er interessante set i forhold til vores meget simple
-definition, da ingen af disse regioner tangerer snittet som vist i figur
-\ref{pos_naiv_1}.  Generelt kan vi sige, at hvis en region krydser
-snittet kan denne ikke siges at ligge i det gyldne snit. En simpel
-illustration på dette vises i figur \ref{neg_naiv_1}.
+definition, da ingen af disse regioner tangerer snittet.  Generelt kan
+vi sige, at hvis en region krydser snittet, kan denne ikke siges at ligge
+i det gyldne snit. En simpel illustration på dette vises i figur
+\ref{neg_naiv_1}.
 \begin{figure}[p]
 	\begin{center}
 		\includegraphics[scale=\imgscale,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/naiv_negativ_blob_2}
 	\end{center}
-	\caption[En negativt region]{En sammenhængende region som krydser snittet kan ikke
+	\caption[En negativt region]{En region som krydser snittet kan ikke
 	betragtes som at den opfylder det gyldne snit. Denne region en
 	negativ.}
 	\label{neg_naiv_1}
 \end{figure}
 
-Da vi ikke kan regne os helt nøjagtigt frem til $\varPhi$ når vi
-kun har heltal at arbejde med, indfører vi nu en margen hvor vil vil
-acceptere regioner. I praksis betyder dette at vi ikke \emph{kun} kigger
-på den linje der deler billedet ved det gyldne snit, men også ved siden
-af den. Derved behøver en region ikke at tangere det gyldne snit helt
-nøjagtig for at kunne betragtes som en interessant region. F.eks. vil
-regionen i figur \ref{pos_naiv_margin_1} anses som værende placeret i
-det gyldne snit. Vær opmærksom på at vores margen, rent visuelt i de
-følgende illustrationer, er stærkt overdrevet.
+Vi ikke kan regne os helt nøjagtigt frem til $\varPhi$, da vi
+kun har heltal at arbejde med, så vi indfører nu en margen hvor vil vil
+acceptere regioner. I praksis betyder dette, at vi ikke \emph{kun} kigger
+på den linje der deler billedet ved det gyldne snit, men faktisk tager
+vi et bånd, sammensat af en række snit, og bruger dette bånd som et
+bredere gyldent snit.  Derved behøver en region ikke at tangere det
+gyldne snit helt nøjagtig for at kunne betragtes som en interessant
+region. F.eks. vil regionen i figur \ref{pos_naiv_margin_1} anses som
+værende placeret i det gyldne snit. Vær opmærksom på at vores bånd,
+rent visuelt i de følgende illustrationer, er stærkt overdrevet.
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[scale=\imgscale,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/naiv_positiv_blob_margin_1}
 	\end{center}
-	\caption[Positiv region i margen]{En sammenhængende region som ligger indenfor en margen
-	af det gyldne snit betragtes som positiv.}
+	\caption[Positiv region i margen]{En region som
+	ligger indenfor en margen af det gyldne snit betragtes som
+	positiv. De blå stiplede linjer angiver vores bånd.}
 	\label{pos_naiv_margin_1}
 \end{figure}
 
-\textbf{Hvorfor må en region ikke krydse snittet?} \hspace{0.4cm}Vi siger at en region
-ikke må krydse snittet, men når vi nu har indført en margen, burde dette
-ikke være noget problem. Det er det måske heller ikke. Vi skal blot
-kræve at en regions bounding box holder sig inden for margin, uanset om
-denne så skærer det gyldne snit\dots? Ups, det hele kræver lige en
-omformulering.
+Vi fastholder at en region ikke må krydse snittet. Vi har nu et bredere
+snit, da vi nu vil kigge indenfor det bånd der tillader en margen på det
+gyldne snit. Vi kan nu redefinere kravet for hvornår en region bliver
+accepteret som liggende i det gyldne snit. Vi bemærker, at hvis en
+region krydser vores bånd vil den have en kant udenfor båndet. Et
+eksempel på dette vises i figur \ref{bbox_section}. Vi kan derfor sige,
+at hvis en region har en kant indenfor vores bånd, så kan den
+karakteriseres som liggende i det gyldne snit.
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=\imgscale,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/bbox_section}
+	\end{center}
+	\caption[Afgrænsende rektangler]{Den øverste region kan ikke
+	siges at ligge i det gyldne snit, da den ikke har nogen kanter
+	indenfor båndet. Den nederste region derimod, har én kant
+	indenfor båndet og ligger derfor i det gyldne snit.}
+	\label{bbox_section}
+\end{figure}
 
 \subsubsection{Regionens størrelse}
 Med vores nuværende definition på hvornår en region kan betegnes som
-interessant, skal vi blot have en sammenhængende region indenfor en
-margen af det gyldne snit. Hvis vi kaster et blik tilbage på figur
-\ref{realworld_example} ses det at der i dette tilfælde vil blive
+liggende i det gyldne snit, skal vi blot have en region med en kant
+indenfor vores bånd. Hvis vi kaster et blik tilbage på figur
+\ref{realworld_example} ses det, at der i dette tilfælde vil blive
 udvalgt mange små regioner som egentlig ikke kan tillægges nogen
-betydning. Vi siger derfor at en sammenhængende region skal have en vis
+betydning. Vi siger derfor at en region skal have en vis
 størrelse før den kan tages i betragtning. I praksis vil regionens areal
 afspejle dens størrelse, hvor arealet er det antal pixels regionen
 optager i billedet. Grænsen for et acceptabelt areal skal sættes i
@@ -99,40 +119,41 @@ betragtningerne. F.eks. vil en himmel i et maleri give en ret stor
 sammehængende region. De fleste af sådanne regioner vil dog ikke blive
 taget i betragtning fordi de krydser snittet. Hvis vi kigger på det
 meget simple billede i figur \ref{pos_naiv_1} skal man også huske på at
-der faktisk vises to regioner. Den sorte skikkelse er en sammenhængende
-region ligesom den hvide baggrund er en sammenhængende region.
-Baggrunden kan ikke siges at være en interessant region, hvorfor det er
-vigtigt at sortere disse regioner fra.
+der faktisk vises to regioner. Den sorte skikkelse er en region ligesom
+den hvide baggrund er en region.  Baggrunden kan ikke siges at være en
+interessant region, hvorfor det er vigtigt at sortere disse regioner
+fra.
 
 Indtil videre har vi kun illustreret ét snit i billedet. Der er
 imidlertid tre andre snit hvor vi også kan dele et billede efter det
-gyldne snit. Hvor vi nu har kigget på et vertikalt snit, vender vi nu
-opmærksomheden mod et horisontalt snit. Det generelle tilfælde vil
-være\footnote{Total påstand} at en region kun er interessant i forhold
-til enten et vertikalt eller et horisontalt snit. Et eksempel på dette
-ses i figur \ref{pos_horiz_naiv_margin_1}.
+gyldne snit. Hvor vi har kigget på et vertikalt snit, vender vi nu
+opmærksomheden mod et horisontalt snit. Det generelle tilfælde vil være
+at en region kun er interessant i forhold til enten et vertikalt eller
+et horisontalt snit. Et eksempel på dette ses i figur
+\ref{pos_horiz_naiv_margin_1}. Der kan dog forekomme specialtilfælde,
+hvor en region vil være positiv i flere snit, hvilket vi vil komme ind
+på i et senere kapitel.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale=\imgscale,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/naiv_horiz_positiv_blob_1}
 	\end{center}
-	\caption[Positiv horisontal region]{En positiv sammenhængende region som findes indenfor
-	margen uden at krydse snittet.}
+	\caption[Positiv horisontal region]{En positiv region med en
+	kant i et horisontalt bånd.}
 	\label{pos_horiz_naiv_margin_1}
 \end{figure}
 Det ses tydeligt at regionen i figur \ref{pos_horiz_naiv_margin_1} ikke
 kan tages i betragtning i forhold til et vertikalt snit, da regionen,
-uanset snittets placering, vil krydse dette. Det ses dog at regionen
-holder sig indenfor margen i forhold til et horisontalt snit og derfor
-kan klassificeres som en interessant region der opfylder det gyldne
-snit.
+uanset snittets placering, vil krydse dette. Det ses dog at regionen har
+en kant indeni et horisontalt bånd og derfor kan klassificeres som en
+region der ligger i det gyldne snit.
 
 \subsubsection{Regionens form}
-Regionens form kan også give informationer om hvorvidt vi har med en
+Regionens form kan give informationer om hvorvidt vi har med en
 interessant region at gøre. I praksis er det dog meget svært at sige
 noget om selve den fysiske form af en region, men vi kan sige noget om
-dens masse. En regions masse skal forstås som forholdet mellem regionens areal og
-arealet af det rektangel der afgrænser regionen. Dette forhold giver
-information om ``hvor massiv'' en region er. En massiv region vil være
+dens masse. En regions masse skal forstås som forholdet mellem regionens
+areal og arealet af det rektangel der afgrænser regionen. Dette forhold
+giver information om hvor massiv en region er. En massiv region vil være
 mere interessant end en meget spinkel region. Figur \ref{region_mass}
 illustrerer to forskellige regioner med forskellig masse.
 \begin{figure}[h]
@@ -144,63 +165,48 @@ illustrerer to forskellige regioner med forskellig masse.
 	afgrænser regionen.}
 	\label{region_mass}
 \end{figure}
+I praksis vil der blive udregnet et tærskel i forhold til et billedes
+størrelse for hvor massiv en region skal være for at kunne
+karakteriseres som interessant.
 
-\subsubsection{Sammenfatning}
-\textsf{Der er gået kraftigt rod i argumenterne i dette afsnit. Dette
-skyldes en åbenbaring der siger, at vi blot skal have en kant af det
-afgrænsende rektangel indenfor vores margen, for at vide at den ikke
-krydser vores snit.}
-
+\subsubsection{Sammenfatning af betingelser}
 Vi samler nu op på de ovenstående krav for bestemmelse af en interessant
 region liggende i det gyldne snit.
 
-For at en region kan betegnes som liggende i det gyldne snit skal den
-\begin{enumerate}
-	\renewcommand{\labelenumi}{(\alph{enumi})}
-	\item tangere den linje der deler billedet efter det gyldne snit
-	\item eller have en kant indenfor en margin af det gyldne snit
-\end{enumerate}
-og regionen må \textbf{ikke}
-\begin{enumerate}
-	\renewcommand{\labelenumi}{(\alph{enumi})}
-	\setcounter{enumi}{2}
-	\item krydse linjen der deler billedet efter det gyldne snit;
-	\item have en bounding box der ligger udenfor margen;
-	\item have et areal mindre end en variabel tærskel der sættes i
-		forhold til billedets størrelse
-	\item eller have en masse mindre end variabel tærskel.
-\end{enumerate}
-Vi har da at en region skal opfylde
-\begin{equation}
-	(a \vee b) \wedge \neg (c \vee d \vee e \vee f)
-\end{equation}
-før at den kan betegnes som liggende i det gyldne snit.
+\ %
 
-Faktisk kan vi kraftigt reducere ovenstående betingelser ved at fokusere
-på en regions afgrænsende rektangel. Vi kan nu sige at en region skal
-have en kant inden i -- eller på kanten -- af det rektangel der udgør
-vores margin. Hvis vi har en sådan kant, ved vi at
+\noindent For at en region kan betegnes som liggende i det gyldne snit skal den
 \begin{enumerate}
-	\renewcommand{\labelenumi}{(\Roman{enumi})}
-	\item regionen tangerer eller er tæt nok på det gyldne snit
-		(implicerer $(a \vee b)$)
+	\renewcommand{\labelenumi}{(\alph{enumi})}
+	\item have en kant i båndet om det gyldne snit
 \end{enumerate}
-og
+og regionen må
 \begin{enumerate}
-	\renewcommand{\labelenumi}{(\Roman{enumi})}
+	\renewcommand{\labelenumi}{(\alph{enumi})}
 	\setcounter{enumi}{1}
-	\item regionen spreder sig ikke udover vores margen (implicit
-		$\neg(c \vee d)$).
+	\item \textbf{ikke} krydse båndet der deler billedet ved det gyldne snit;
+	\item \textbf{ikke} have et afgrænsende rektangel der ligger udenfor båndet;
+	\item \textbf{ikke} have et areal mindre end en variabel tærskel der sættes i
+		forhold til billedets størrelse
+	\item \textbf{ikke} have en masse mindre end variabel tærskel.
 \end{enumerate}
-Vi mangler dog stadig at tage højde for kravene $e$ og $f$. Det formelle
-krav kan nu omskrives til
-\begin{equation}
-	\mathrm{I} \wedge \mathrm{II} \wedge \neg(e \vee f)
-\end{equation}
-som er ækvivalent med den forrige ligning.
+Vi har allerede argumenteret for at hvis betingelse $(a)$ er opfyldt
+følger det trivielt at betingelse $(b)$ også er opfyldt. På grund af
+måden vi trækker regioner ud af billedet vil betingelse $(c)$ også altid
+være opfyldt. Vi kan da udlede, at hvis $(a)$ er opfyldt skal vi blot
+kontrollere $(d)$ og $(e)$. Når regionerne i nærheden af det gyldne snit
+er trukket ud af billedet er det ligetil at kontrollere
+betingelserne$(a)$, $(d)$ og $(e)$.
 
-Vi vil senere komme ind på hvordan vi for en given region afgør om den
-opfylder ovenstående betingelser.
+\subsubsection{Begrænsninger}
+Denne naive tilgang har nogle begrænsninger. Den mest åbenlyse er,
+at regioner med symmetriakse i det gyldne snit, men med kanter udenfor
+båndet ikke vil blive karakterisseret som liggende i det gyldne snit.
+Regioner hvor et segment af denne faktisk ligger i båndet, som den
+øverste region i figur \ref{bbox_section} hvor den vertikale del faktisk
+ligger i snitter, vil ikke blive udvalgt. Dette kræver en videre
+segmentering af de fundne regioner før at sådanne regioner vil blive
+udvalgt.
 
 }
 
