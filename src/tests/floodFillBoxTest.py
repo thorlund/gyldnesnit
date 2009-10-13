@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 #
-# Kasper steenstrup
+# Ulrik Bonde
+# 
+# Attention! No *real* checks on the argument vector!
 
 print "" # Just for good meassure
 # INIT THE TEST
@@ -14,10 +16,17 @@ import lib.edgeDetector as edgeDetector
 import lib.lineScanner as lineScanner
 import lib.featureDetector as featureDetector
 
+def drawBoundingBoxes(components, threshold):
+	for comp in components:
+		if comp.area > threshold:
+			rect = comp.rect
+			p1 = cv.cvPoint(rect.x, rect.y)
+			p2 = cv.cvPoint(rect.x + rect.width, rect.y + rect.height)
+			cv.cvRectangle(out, p1, p2, lib.COL_RED)
+
 # import the necessary things for OpenCV
 from opencv import cv
 from opencv import highgui
-#from opencv.cv import *
 
 print "Testing library"
 print "Press 'q' to exit"
@@ -27,18 +36,9 @@ filename = sys.argv[1]
 if len(sys.argv) == 4:
 	lo = int(sys.argv[2])
 	up = int(sys.argv[3])
-	x = 200
-	y = 200
-elif len(sys.argv) == 6:
-	lo = int(sys.argv[2])
-	up = int(sys.argv[3])
-	x = int(sys.argv[4])
-	y = int(sys.argv[5])
 else:
 	lo = 7
 	up = 7
-	x = 200
-	y = 200
 
 image = highgui.cvLoadImage (filename)
 
@@ -61,18 +61,13 @@ points = lineScanner.naiveLineScanner(out, image, lines[0])
 
 out = highgui.cvLoadImage (filename)
 
-(out, components) = featureDetector.floodFillLine(out, None, points, lines[0], lo, up)
+(out, components) = featureDetector.floodFillLine(image, out, points, lines[0], lo, up)
 
-#startpoint = lines[0].getPoints()[0]
-#points.append(lines[0].getPoints()[1])
-#for point in points:
-#	out = floofill.floofill(out, lowerThres, upperThres, startpoint, point, 1)
-#	startpoint = point
-#for point in points:
-#	lib.plot(out, point, 2)
-#out = edgeDetector.findEdges(out, 70, 70)
+drawBoundingBoxes(components, 600)
 
-winname = "floot"
+lib.drawLines(out)
+
+winname = "Find regions"
 
 highgui.cvNamedWindow (winname, highgui.CV_WINDOW_AUTOSIZE)
 

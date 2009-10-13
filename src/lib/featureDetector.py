@@ -26,6 +26,7 @@ points are the points on the given line"""
 		start_point = point
 	return (out, components)
 
+# XXX: Description does not apply
 # Floodfill the image at point x,y whit are lower and upper thres hold namt lo and up
 # Start and stop point is the point that the def runs from to
 # golden_ratio is are indekater of whot of the 4 golden ratio we are working in

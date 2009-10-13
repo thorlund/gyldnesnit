@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+#
+# Ulrik Bonde
+
 """
 Compile and move libraries for testing
 """
@@ -10,7 +14,14 @@ def init():
 	src_dir = '../lib/'
 	dst_dir = './lib/'
 
-	# Before anything, check if the destination exsist
+	# Initially, check if we are in the tests-directory
+	# Monster ugly hack
+	dir = os.getcwd()
+	cwd = dir.split('/')[-1:][0]
+	if not cwd == "tests":
+		raise RuntimeError("Tests must be run from inside the tests directory. Sorry...")
+
+	# Then, check if the destination exsist
 	# If not, create it
 	dir = os.path.join(dst_dir)
 	if not os.path.isdir(dir):
@@ -34,3 +45,6 @@ def init():
 	for file in files:
 		if os.path.isfile(file):
 			shutil.move(file, dst_dir)
+
+if __name__ == "__main__":
+	init()
