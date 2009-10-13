@@ -142,31 +142,28 @@ def drawBoundingBoxes(out, components, threshold):
 			p2 = cv.cvPoint(rect.x + rect.width, rect.y + rect.height)
 			cv.cvRectangle(out, p1, p2, COL_RED)
 
-## Various common checks
+def drawMargin(out, cut, margin):
+	lines = []
+	if cut.p1.x == cut.p2.x:
+		dx = margin
+		dy = 0
+	elif cut.p1.y == cut.p2.y:
+		dx = 0
+		dy = margin
+	else:
+		raise lib.OrientationError("The cut is not straight")
+	
+	lower_p1 = cv.cvPoint(cut.p1.x - dx, cut.p1.y - dy)
+	lower_p2 = cv.cvPoint(cut.p2.x - dx, cut.p2.y - dy)
+	
+	upper_p1 = cv.cvPoint(cut.p1.x + dx, cut.p1.y + dy)
+	upper_p2 = cv.cvPoint(cut.p2.x + dx, cut.p2.y + dy)
 
-def drawBoundingBoxes(out, components, threshold):
-	"""Given a set of components, draw its red bounding box on the outimage"""
-	# XXX: The threshold really does not belong here.
-	#      The regions should be pruned somewhere else
-	for comp in components:
-		if comp.area > threshold:
-			rect = comp.rect
-			p1 = cv.cvPoint(rect.x, rect.y)
-			p2 = cv.cvPoint(rect.x + rect.width, rect.y + rect.height)
-			cv.cvRectangle(out, p1, p2, COL_RED)
+	lines.append(line(lower_p1, lower_p2))
+	lines.append(line(upper_p1, upper_p2))
 
-## Various common checks
+	drawLines(out, None, lines, COL_BLUE)
 
-def drawBoundingBoxes(out, components, threshold):
-	"""Given a set of components, draw its red bounding box on the outimage"""
-	# XXX: The threshold really does not belong here.
-	#      The regions should be pruned somewhere else
-	for comp in components:
-		if comp.area > threshold:
-			rect = comp.rect
-			p1 = cv.cvPoint(rect.x, rect.y)
-			p2 = cv.cvPoint(rect.x + rect.width, rect.y + rect.height)
-			cv.cvRectangle(out, p1, p2, COL_RED)
 
 ## Various common checks
 
