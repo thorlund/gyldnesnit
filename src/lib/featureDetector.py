@@ -8,8 +8,6 @@ from opencv import cv
 # import goldenLibrary
 import lib.goldenLibrary as lib
 
-
-
 def floodFillLine(original, out, points, line, lo, up):
 	"""take are golden ratio and make floot fill betvine alle of the points
 points are the points on the given line"""
@@ -46,36 +44,30 @@ Start and stop point is the point that the def runs from to"""
 	comp = cv.CvConnectedComp()
 	
 	(p1, p2) = line.getPoints()
-	#print cv.cvPoint(p1.x,start_point.y+2)
 	
 	if p1.x == p2.x:
 		# Initialize the seed and set deltas for increasing the seed
 		dx = 0
 		dy = 1
-		max = range(p1.y, p2.y-1)
+		min = p1.y
+		max = p2.y - 1
 	else:
 		# Initialize the seed and set deltas for increasing the seed
 		dx = 1
 		dy = 0
-		max = range(p1.x, p2.x-1)
+		min = p1.x
+		max = p2.x - 1
 
-	seed = cv.cvPoint(p1.x, p1.y)
+	seed = p1
 
-	#Color betwine start_point+1 and point-1
-	for i in max:
+	#Color between start_point+1 and point-1
+	for i in range(min, max):
 		seed = cv.cvPoint(seed.x + dx, seed.y + dy)
 		if not(lib.isSameColor(image[seed.y][seed.x], color)):
 			cv.cvFloodFill(image, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
 	
-	#Diffrent forms of comp print
-	if (comp.rect.height> 2000):
-		print 'next blob'
-		print type(comp.contour)
-		print comp.rect.height
-		print comp.rect.width
-		print comp.rect.x
-		print comp.rect.y
-	#print "%rect" % comp.rect;
+	# Color the last pixel again to make sure that the returned component is the entire region
+	cv.cvFloodFill(image, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
 	return (image, comp)
 	
 def getGoodFeatures(image):
