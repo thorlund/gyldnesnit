@@ -151,7 +151,7 @@ def drawMargin(out, cut, margin):
 		dx = 0
 		dy = margin
 	else:
-		raise lib.OrientationError("The cut is not straight")
+		raise OrientationException("The cut is not straight")
 	
 	lower_p1 = cv.cvPoint(cut.p1.x - dx, cut.p1.y - dy)
 	lower_p2 = cv.cvPoint(cut.p2.x - dx, cut.p2.y - dy)

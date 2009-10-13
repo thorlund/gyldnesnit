@@ -48,7 +48,7 @@ class Constraints:
 			self.lower_bound = cut.p1.y - margin
 			self.upper_bound = cut.p1.y + margin
 		else:
-			raise lib.OrientationError("The cut is not straight")
+			raise lib.OrientationException("The cut is not straight")
 
 
 def checkPosition(component, constraints):
