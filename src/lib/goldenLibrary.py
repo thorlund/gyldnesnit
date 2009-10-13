@@ -144,6 +144,19 @@ def drawBoundingBoxes(out, components, threshold):
 
 ## Various common checks
 
+def drawBoundingBoxes(out, components, threshold):
+	"""Given a set of components, draw its red bounding box on the outimage"""
+	# XXX: The threshold really does not belong here.
+	#      The regions should be pruned somewhere else
+	for comp in components:
+		if comp.area > threshold:
+			rect = comp.rect
+			p1 = cv.cvPoint(rect.x, rect.y)
+			p2 = cv.cvPoint(rect.x + rect.width, rect.y + rect.height)
+			cv.cvRectangle(out, p1, p2, COL_RED)
+
+## Various common checks
+
 def getRandomColor():
 	b = random.randint(0,255)
 	g = random.randint(0,255)
