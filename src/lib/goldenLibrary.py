@@ -187,3 +187,4 @@ def isSamePoint(p1, p2):
 def isSameColor(c1, c2):
 	"""Checks whether two colors are the same"""
 	return (c1[0] == c2[0]) and (c1[1] == c2[1]) and (c1[2] == c2[2])
+
