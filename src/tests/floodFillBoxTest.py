@@ -49,15 +49,24 @@ print "Finding the golden means in the picture"
 
 lines = lib.findGoldenMeans(cv.cvGetSize(image))
 
+# Define cut
+cut = lines[0]
+
 print "Test plot and line scanner methods"
-points = lineScanner.naiveLineScanner(out, image, lines[0])
+points = lineScanner.naiveLineScanner(out, image, cut)
 
 out = highgui.cvLoadImage (filename)
 
-(out, components) = featureDetector.floodFillLine(image, out, points, lines[0], lo, up)
+(out, components) = featureDetector.floodFillLine(image, out, points, cut, lo, up)
+
+# Set margin
+margin = 4
+
+# Draw margin
+lib.drawMargin(out, cut, margin)
 
 # Set up constraints
-constraints = regionSelector.Constraints(cv.cvGetSize(image), lines[0], 0, 0.002, 0.25)
+constraints = regionSelector.Constraints(cv.cvGetSize(image), cut, margin, 0.002, 0.25)
 
 # Prune components
 newComponents = regionSelector.pruneRegions(components, constraints)

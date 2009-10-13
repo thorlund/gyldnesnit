@@ -2,8 +2,13 @@
 Provides methods for pruning a set of regions
 """
 
+import goldenLibrary as lib
+
 class Constraints:
 	"""Holds a set of constraints for an image when finding regions at a cut"""
+	coordinate = None
+	lower_bound = None
+	upper_bound = None
 	rect = None
 	size = None
 	mass = None
@@ -27,15 +32,37 @@ class Constraints:
 		if not (0 <= massPercentage and massPercentage <= 1):
 			raise ValueError("sizePercentage must be a number between 0 and 1")
 
+		if not margin >= 0:
+			raise ValueError("margin must be >= 0")
+
 		totalPixels = imagesize.height * imagesize.width
 		self.size = sizePercentage * totalPixels
 		self.mass = massPercentage
+
+		if cut.p1.x == cut.p2.x:
+			self.coordinate = 0
+			self.lower_bound = cut.p1.x - margin
+			self.upper_bound = cut.p1.x + margin
+		elif cut.p1.y == cut.p2.y:
+			self.coordinate = 1
+			self.lower_bound = cut.p1.y - margin
+			self.upper_bound = cut.p1.y + margin
+		else:
+			raise lib.OrientationError("The cut is not straight")
 
 
 def checkPosition(component, constraints):
 	"""Test if the component have a bounding box inside the accepting
 	rectangle defined in the constraints."""
-	raise NotImplementedError()
+	#if component.rect.width == component.rect.height:
+	#	print "UUUUpppps"
+	d = component.rect.width
+	p = component.rect.x
+	if constraints.coordinate:
+		d = component.rect.height
+		p = component.rect.y
+
+	return (constraints.lower_bound <= p) or (p + d <= constraints.upper_bound)
 
 def checkSize(component, constraints):
 	"""Test if the component have size greater than the minumum size
@@ -54,7 +81,6 @@ def pruneRegions(components, contraints):
 	of contraints."""
 	acceptedRegions = []
 	for component in components:
-		#if checkPosition(component, contraints) and checkSize(component, contraints) and checkMass(component, contraints):
-		if checkSize(component, contraints) and checkMass(component, contraints):
+		if checkPosition(component, contraints) and checkSize(component, contraints) and checkMass(component, contraints):
 			acceptedRegions.append(component)
 	return acceptedRegions
