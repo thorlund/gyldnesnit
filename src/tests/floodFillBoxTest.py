@@ -16,14 +16,6 @@ import lib.edgeDetector as edgeDetector
 import lib.lineScanner as lineScanner
 import lib.featureDetector as featureDetector
 
-def drawBoundingBoxes(components, threshold):
-	for comp in components:
-		if comp.area > threshold:
-			rect = comp.rect
-			p1 = cv.cvPoint(rect.x, rect.y)
-			p2 = cv.cvPoint(rect.x + rect.width, rect.y + rect.height)
-			cv.cvRectangle(out, p1, p2, lib.COL_RED)
-
 # import the necessary things for OpenCV
 from opencv import cv
 from opencv import highgui
@@ -63,9 +55,9 @@ out = highgui.cvLoadImage (filename)
 
 (out, components) = featureDetector.floodFillLine(image, out, points, lines[0], lo, up)
 
-drawBoundingBoxes(components, 600)
+lib.drawBoundingBoxes(out, components, 600)
 
-lib.drawLines(out)
+#lib.drawLines(out)
 
 winname = "Find regions"
 

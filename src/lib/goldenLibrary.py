@@ -53,9 +53,6 @@ class line():
 		"""Returns a two-tuple with the end points of the line"""
 		return (self.p1, self.p2)
 
-def plot(image, point, radius=3, color=COL_GREEN):
-	"""Plot a point on an image"""
-	cv.cvCircle(image, point, radius, color, -1)
 
 def intersection(line1, line2):
 	"""Get the intersection of two lines as a cvPoint"""
@@ -111,6 +108,12 @@ def findGoldenMeans(size):
 
 	return lines
 
+## Various drawing functions
+
+def plot(image, point, radius=3, color=COL_GREEN):
+	"""Plot a point on an image"""
+	cv.cvCircle(image, point, radius, color, -1)
+
 def drawLines(original, outimage=None, lines=None, color=COL_RED):
 	"""Draw a list of lines on an image.
 	If no outimage is supplied, the original is used.
@@ -124,6 +127,19 @@ def drawLines(original, outimage=None, lines=None, color=COL_RED):
 
 	for line in lines:
 		cv.cvLine(outimage, line.p1, line.p2, color)
+
+def drawBoundingBoxes(out, components, threshold):
+	"""Given a set of components, draw its red bounding box on the outimage"""
+	# XXX: The threshold really does not belong here.
+	#      The regions should be pruned somewhere else
+	for comp in components:
+		if comp.area > threshold:
+			rect = comp.rect
+			p1 = cv.cvPoint(rect.x, rect.y)
+			p2 = cv.cvPoint(rect.x + rect.width, rect.y + rect.height)
+			cv.cvRectangle(out, p1, p2, COL_RED)
+
+## Various common checks
 
 def getRandomColor():
 	b = random.randint(0,255)
