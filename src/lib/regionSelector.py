@@ -22,7 +22,7 @@ class Constraints:
 		Arguments:
 			imagesize = size of image as cvSize
 			cut = the section we are inspecting as Line
-			margin = Not yet defined :/
+			margin = floor(width of margin/2) as int
 			sizePercentage = min % of pixels required for size of region as decimal
 			massPercentage = min % of pixels required for mass of region as decimal
 		"""
@@ -54,8 +54,6 @@ class Constraints:
 def checkPosition(component, constraints):
 	"""Test if the component have a bounding box inside the accepting
 	rectangle defined in the constraints."""
-	#if component.rect.width == component.rect.height:
-	#	print "UUUUpppps"
 	d = component.rect.width
 	p = component.rect.x
 	if constraints.coordinate:
