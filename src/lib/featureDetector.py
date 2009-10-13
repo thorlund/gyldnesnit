@@ -52,12 +52,14 @@ Start and stop point is the point that the def runs from to"""
 		dy = 1
 		min = p1.y
 		max = p2.y - 1
-	else:
+	elif p1.y == p2.y:
 		# Initialize the seed and set deltas for increasing the seed
 		dx = 1
 		dy = 0
 		min = p1.x
 		max = p2.x - 1
+	else:
+		raise lib.OrientationException("Unknown orientation")
 
 	seed = p1
 

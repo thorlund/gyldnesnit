@@ -20,6 +20,7 @@ COL_GREEN = cv.CV_RGB(0, 255, 0)
 COL_BLUE = cv.CV_RGB(0, 0, 255)
 
 class OrientationException(Exception):
+	"""This exception is thrown if we do not have a straight line"""
 	def __init__(self, value):
 		self.value = value
 
