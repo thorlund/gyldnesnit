@@ -54,14 +54,21 @@ edgeDetector.findEdges(image, out, threshold1, threshold2)
 
 print "Finding the golden means in the picture"
 
-lines = lib.findMeans(cv.cvGetSize(image))
+lines = lib.findGoldenMeans(cv.cvGetSize(image))
 
 print "Test plot and line scanner methods"
 points = lineScanner.naiveLineScanner(out, image, lines[0])
 
 out = highgui.cvLoadImage (filename)
 
-(out,areaOfBlobs) = featureDetector.floodFillLine(out, None, points, lines[0], lo, up)
+(out, components) = featureDetector.floodFillLine(out, None, points, lines[0], lo, up)
+
+for comp in components:
+	if comp.area > 600:
+		rect = comp.rect
+		p1 = cv.cvPoint(rect.x, rect.y)
+		p2 = cv.cvPoint(rect.x + rect.width, rect.y + rect.height)
+		cv.cvRectangle(out, p1, p2, lib.COL_RED)
 
 #startpoint = lines[0].getPoints()[0]
 #points.append(lines[0].getPoints()[1])
@@ -71,6 +78,7 @@ out = highgui.cvLoadImage (filename)
 #for point in points:
 #	lib.plot(out, point, 2)
 #out = edgeDetector.findEdges(out, 70, 70)
+lib.drawLines(out)
 
 winname = "floot"
 
