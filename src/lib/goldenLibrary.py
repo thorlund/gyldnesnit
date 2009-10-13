@@ -51,6 +51,9 @@ class line():
 	def getPoints(self):
 		"""Returns a two-tuple with the end points of the line"""
 		return (self.p1, self.p2)
+	
+	def getLength(self):
+		return getDistance(self.p1, self.p2)
 
 
 def intersection(line1, line2):
