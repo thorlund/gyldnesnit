@@ -56,9 +56,13 @@ out = highgui.cvLoadImage (filename)
 
 (out, components) = featureDetector.floodFillLine(image, out, points, lines[0], lo, up)
 
-constraints = regionSelector.Constraints(cv.cvGetSize(image), lines[0], 0, 0.015)
+# Set up constraints
+constraints = regionSelector.Constraints(cv.cvGetSize(image), lines[0], 0, 0.002, 0.25)
+
+# Prune components
 newComponents = regionSelector.pruneRegions(components, constraints)
 
+# Draw boxes of selected components
 lib.drawBoundingBoxes(out, newComponents, 0)
 
 #lib.drawLines(out)

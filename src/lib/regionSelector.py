@@ -21,9 +21,15 @@ class Constraints:
 			sizePercentage = min % of pixels required for size of region as decimal
 			massPercentage = min % of pixels required for mass of region as decimal
 		"""
-		# Insert tedious calculations
+		if not (0 <= sizePercentage and sizePercentage <= 1):
+			raise ValueError("sizePercentage must be a number between 0 and 1")
+
+		if not (0 <= massPercentage and massPercentage <= 1):
+			raise ValueError("sizePercentage must be a number between 0 and 1")
+
 		totalPixels = imagesize.height * imagesize.width
 		self.size = sizePercentage * totalPixels
+		self.mass = massPercentage
 
 
 def checkPosition(component, constraints):
@@ -39,7 +45,9 @@ def checkSize(component, constraints):
 def checkMass(component, constraints):
 	"""Check if the component have mass greater than the minimum mass
 	defined by the contraints."""
-	raise NotImplementedError()
+	rect = component.rect
+	mass = component.area/(rect.width * rect.height)
+	return mass >= constraints.mass
 
 def pruneRegions(components, contraints):
 	"""Run all required test on a set of regions with the given set
@@ -47,6 +55,6 @@ def pruneRegions(components, contraints):
 	acceptedRegions = []
 	for component in components:
 		#if checkPosition(component, contraints) and checkSize(component, contraints) and checkMass(component, contraints):
-		if checkSize(component, contraints):
+		if checkSize(component, contraints) and checkMass(component, contraints):
 			acceptedRegions.append(component)
 	return acceptedRegions
