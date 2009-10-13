@@ -73,7 +73,7 @@ seed = cv.cvPoint(200, 20)
 cv.cvFloodFill(image, seed, lib.COL_RED, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
 print comp.area
 
-lib.drawBoundingBoxes(out, components, 600)
+lib.drawBoundingBoxes(out, components)
 
 #lib.drawLines(out)
 

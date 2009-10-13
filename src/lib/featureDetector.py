@@ -20,7 +20,7 @@ points are the points on the given line"""
 	points.append(stop_point)
 	components = []
 	for point in points:
-		line = lib.line(start_point, point)
+		line = lib.Line(start_point, point)
 		(out, component) = floodFillBetweenPoints(out, lo, up, line)
 		components.append(component)
 		start_point = point

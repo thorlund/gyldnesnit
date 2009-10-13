@@ -72,7 +72,7 @@ constraints = regionSelector.Constraints(cv.cvGetSize(image), cut, margin, 0.002
 newComponents = regionSelector.pruneRegions(components, constraints)
 
 # Draw boxes of selected components
-lib.drawBoundingBoxes(out, newComponents, 0)
+lib.drawBoundingBoxes(out, newComponents)
 
 #lib.drawLines(out)
 

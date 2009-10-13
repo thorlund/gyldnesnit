@@ -38,7 +38,7 @@ def getGoldenSection(length):
 	"""Get the golden section for a line segment from 0 to the argument"""
 	return int(length * PHI)
 	
-class line():
+class Line():
 	"""A container for a line segment."""
 	def __init__(self, p1, p2):
 		"""Create a line segement of two cvPoint types"""
@@ -89,12 +89,12 @@ def findGoldenMeans(size):
 	# The rightmost
 	p1 = cv.cvPoint(dx, 0)
 	p2 = cv.cvPoint(dx, size.height)
-	lines.append(line(p1, p2))
+	lines.append(Line(p1, p2))
 	
 	# The leftmost
 	p1 = cv.cvPoint((size.width - dx), 0)
 	p2 = cv.cvPoint((size.width - dx), size.height)
-	lines.append(line(p1, p2))
+	lines.append(Line(p1, p2))
 
 	# Then the horizontal lines (along y-axis)
 	dy = getGoldenSection(size.height)
@@ -102,12 +102,12 @@ def findGoldenMeans(size):
 	# The bottommost
 	p1 = cv.cvPoint(0, dy)
 	p2 = cv.cvPoint(size.width, dy)
-	lines.append(line(p1, p2))
+	lines.append(Line(p1, p2))
 
 	# The topmost
 	p1 = cv.cvPoint(0, (size.height - dy))
 	p2 = cv.cvPoint(size.width, (size.height - dy))
-	lines.append(line(p1, p2))
+	lines.append(Line(p1, p2))
 
 	return lines
 
@@ -131,16 +131,13 @@ def drawLines(original, outimage=None, lines=None, color=COL_RED):
 	for line in lines:
 		cv.cvLine(outimage, line.p1, line.p2, color)
 	
-def drawBoundingBoxes(out, components, threshold):
+def drawBoundingBoxes(out, components):
 	"""Given a set of components, draw its red bounding box on the outimage"""
-	# XXX: The threshold really does not belong here.
-	# The regions should be pruned somewhere else
 	for comp in components:
-		if comp.area > threshold:
-			rect = comp.rect
-			p1 = cv.cvPoint(rect.x, rect.y)
-			p2 = cv.cvPoint(rect.x + rect.width, rect.y + rect.height)
-			cv.cvRectangle(out, p1, p2, COL_RED)
+		rect = comp.rect
+		p1 = cv.cvPoint(rect.x, rect.y)
+		p2 = cv.cvPoint(rect.x + rect.width, rect.y + rect.height)
+		cv.cvRectangle(out, p1, p2, COL_RED)
 
 def drawMargin(out, cut, margin):
 	lines = []
@@ -159,8 +156,8 @@ def drawMargin(out, cut, margin):
 	upper_p1 = cv.cvPoint(cut.p1.x + dx, cut.p1.y + dy)
 	upper_p2 = cv.cvPoint(cut.p2.x + dx, cut.p2.y + dy)
 
-	lines.append(line(lower_p1, lower_p2))
-	lines.append(line(upper_p1, upper_p2))
+	lines.append(Line(lower_p1, lower_p2))
+	lines.append(Line(upper_p1, upper_p2))
 
 	drawLines(out, None, lines, COL_BLUE)
 
