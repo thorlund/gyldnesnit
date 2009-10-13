@@ -15,6 +15,7 @@ import lib.goldenLibrary as lib
 import lib.edgeDetector as edgeDetector
 import lib.lineScanner as lineScanner
 import lib.featureDetector as featureDetector
+import lib.regionSelector as regionSelector
 
 # import the necessary things for OpenCV
 from opencv import cv
@@ -55,7 +56,10 @@ out = highgui.cvLoadImage (filename)
 
 (out, components) = featureDetector.floodFillLine(image, out, points, lines[0], lo, up)
 
-lib.drawBoundingBoxes(out, components, 600)
+constraints = regionSelector.Constraints(cv.cvGetSize(image), lines[0], 0, 0.015)
+newComponents = regionSelector.pruneRegions(components, constraints)
+
+lib.drawBoundingBoxes(out, newComponents, 0)
 
 #lib.drawLines(out)
 
