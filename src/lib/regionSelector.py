@@ -74,11 +74,12 @@ def checkMass(component, constraints):
 	mass = component.area/(rect.width * rect.height)
 	return mass >= constraints.mass
 
-def pruneRegions(components, contraints):
-	"""Run all required test on a set of regions with the given set
+def pruneRegions(component_dictionary, contraints):
+	"""Run all required test on a dictionary of regions with the given set
 	of contraints."""
 	acceptedRegions = []
-	for component in components:
+	for entry in component_dictionary:
+		component = component_dictionary[entry][1]
 		if checkPosition(component, contraints) and checkSize(component, contraints) and checkMass(component, contraints):
 			acceptedRegions.append(component)
 	return acceptedRegions
