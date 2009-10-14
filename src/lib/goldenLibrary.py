@@ -186,11 +186,25 @@ def drawMargin(out, cut, margin):
 
 ## Various common checks
 
-def getRandomColor():
+def getRandomColor(color=None):
+	"""Get a random color. Is a color is supplied,
+	the returned color will be different from that"""
 	b = random.randint(0,255)
 	g = random.randint(0,255)
 	r = random.randint(0,255)
-	return cv.CV_RGB(r,g,b)
+
+	newColor = cv.CV_RGB(r, g, b)
+	
+	if color:
+		print "Get different color"
+		flag = isSameColor(newColor, color)
+		while flag:
+			b = random.randint(0,255)
+			g = random.randint(0,255)
+			r = random.randint(0,255)
+			newColor = cv.CV_RGB(r, g, b)
+			flag = isSameColor(newColor, color)
+	return newColor
 
 def getDistance(p1, p2):
 	return sqrt(pow((p2.x - p1.x), 2) + pow((p2.y - p1.y), 2))

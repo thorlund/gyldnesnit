@@ -2,11 +2,6 @@
 Provides a method for finding features
 """
 
-# Vi skal have gemt farve og component i en dict
-# En compinent vil altid have sig egen farve
-# Der skal vælges en ny farve
-# Ja, det skal der
-
 # Import what we need from OpenCV
 from opencv import cv
 import lineScanner
@@ -15,7 +10,10 @@ import edgeDetector
 # import goldenLibrary
 import lib.goldenLibrary as lib
 
-def floodFillLine(original, out, points, line, lo, up, colors=(None, None)):
+def colorString(color):
+	return "%s%s%s" % (int(color[0]), int(color[1]), int(color[2]))
+
+def floodFillLine(original, out, points, line, lo, up, component_dict):
 	"""take are golden ratio and make floot fill betvine alle of the points
 points are the points on the given line"""
 	if not out:
@@ -25,13 +23,13 @@ points are the points on the given line"""
 	
 	# Set the end point at the end of the line
 	points.append(stop_point)
-	components = []
+	#components = []
 	for point in points:
 		line = lib.Line(start_point, point)
-		component = floodFillBetweenPoints(out, lo, up, line, colors=(None, None))
-		components.append(component)
+		floodFillBetweenPoints(out, lo, up, line, component_dict)
+		# append in floodfill
+		#components.append(component)
 		start_point = point
-	return components
 
 # XXX: Description does not apply
 # Floodfill the image at point x,y whit are lower and upper thres hold namt lo and up
@@ -39,13 +37,13 @@ points are the points on the given line"""
 # golden_ratio is are indekater of whot of the 4 golden ratio we are working in
 # 0 and 1 is from the top to the bottom.
 # 2 and 3 is from the left to til rigth
-def floodFillBetweenPoints(out, lo, up, line, colors=(None, None)):
+def floodFillBetweenPoints(out, lo, up, line, component_dict):
 	"""Floofill the image at point x,y whit are lower and upper thres hold namt lo and up
 Start and stop point is the point that the def runs from to"""
 	# Get new random color
-	if not colors:
-		color = lib.getRandomColor()
-	color = lib.getRandomColor()
+	#if not colors:
+	#	color = lib.getRandomColor()
+	#color = lib.getRandomColor()
 
 	#Sets the flag
 	flags = 4 + (255 << 8) + cv.CV_FLOODFILL_FIXED_RANGE
@@ -72,15 +70,24 @@ Start and stop point is the point that the def runs from to"""
 
 	seed = p1
 
+	# Get a new color that is not in the component dictionary
+	color = lib.getRandomColor()
+	inDict = colorString(color) in component_dict
+	while inDict:
+		color = lib.getRandomColor(color)
+		inDict = colorString(color) in component_dict
+
 	#Color between start_point+1 and point-1
 	for i in range(min, max):
 		seed = cv.cvPoint(seed.x + dx, seed.y + dy)
-		if not(lib.isSameColor(out[seed.y][seed.x], color)):
+		if not (lib.isSameColor(out[seed.y][seed.x], color)):
 			cv.cvFloodFill(out, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
 	
 	# Color the last pixel again to make sure that the returned component is the entire region
 	cv.cvFloodFill(out, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
-	return comp
+
+	# Put the results in the component dictionary
+	component_dict[colorString(color)] = (color, comp)
 
 def ribbonFloodFill(original, out, cut, margin, lo, up):
 	threshold1 = 70;
@@ -88,8 +95,6 @@ def ribbonFloodFill(original, out, cut, margin, lo, up):
 	edges = cv.cvCreateImage(cv.cvGetSize(original), 8, 3)
 	edgeDetector.findEdges(original, edges, threshold1, threshold2)
 	
-	colors = []
-
 	(p1, p2) = cut.getPoints()
 
 	if p1.x == p2.x:
@@ -107,16 +112,22 @@ def ribbonFloodFill(original, out, cut, margin, lo, up):
 	else:
 		raise lib.OrientationException("Unknown orientation")
 	
+	component_dict = {}
+
 	for i in range(margin, 0, -1):
 		(lower_bound, upper_bound) = lib.getMargins(cut, i)
 		lower_points = lineScanner.naiveLineScanner(edges, lower_bound)
 		upper_points = lineScanner.naiveLineScanner(edges, upper_bound)
 
-		floodFillLine(original, out, lower_points, lower_bound, lo, up)
-		floodFillLine(original, out, upper_points, upper_bound, lo, up)
+		floodFillLine(original, out, lower_points, lower_bound, lo, up, component_dict)
+		floodFillLine(original, out, upper_points, upper_bound, lo, up, component_dict)
 	
 	points = lineScanner.naiveLineScanner(edges, cut)
-	floodFillLine(original, out, points, cut, lo, up)
+	floodFillLine(original, out, points, cut, lo, up, component_dict)
+	
+	# Here's the result
+	#print component_dict
+	return component_dict
 
 	
 def getGoodFeatures(image):

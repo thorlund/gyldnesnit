@@ -53,7 +53,7 @@ lines = lib.findGoldenMeans(cv.cvGetSize(image))
 cut = lines[0]
 
 # Set margin
-margin = 0
+margin = 3
 
 
 out = highgui.cvLoadImage (filename)
