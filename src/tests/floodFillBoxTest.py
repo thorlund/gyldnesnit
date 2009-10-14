@@ -57,7 +57,8 @@ points = lineScanner.naiveLineScanner(out, cut)
 
 out = highgui.cvLoadImage (filename)
 
-(out, components) = featureDetector.floodFillLine(image, out, points, cut, lo, up)
+comp_dict = {}
+featureDetector.floodFillLine(image, out, points, cut, lo, up, comp_dict)
 
 # Set margin
 margin = 4
@@ -69,7 +70,7 @@ lib.drawMargin(out, cut, margin)
 constraints = regionSelector.Constraints(cv.cvGetSize(image), cut, margin, 0.002, 0.25)
 
 # Prune components
-newComponents = regionSelector.pruneRegions(components, constraints)
+newComponents = regionSelector.pruneRegions(comp_dict, constraints)
 
 # Draw boxes of selected components
 lib.drawBoundingBoxes(out, newComponents)

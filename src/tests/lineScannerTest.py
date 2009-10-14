@@ -60,7 +60,7 @@ print "Finding the golden means in the picture"
 lines = lib.findGoldenMeans(cv.cvGetSize(image))
 
 print "Test plot and line scanner methods"
-points = lineScanner.naiveLineScanner(out, image, lines[0])
+points = lineScanner.naiveLineScanner(out, lines[0])
 
 for point in points:
 	lib.plot(out, point, 2)
