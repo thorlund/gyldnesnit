@@ -111,6 +111,28 @@ def findGoldenMeans(size):
 
 	return lines
 
+def getMargins(cut, margin):
+	lines = []
+	if cut.p1.x == cut.p2.x:
+		dx = margin
+		dy = 0
+	elif cut.p1.y == cut.p2.y:
+		dx = 0
+		dy = margin
+	else:
+		raise OrientationException("The cut is not straight")
+	
+	lower_p1 = cv.cvPoint(cut.p1.x - dx, cut.p1.y - dy)
+	lower_p2 = cv.cvPoint(cut.p2.x - dx, cut.p2.y - dy)
+	
+	upper_p1 = cv.cvPoint(cut.p1.x + dx, cut.p1.y + dy)
+	upper_p2 = cv.cvPoint(cut.p2.x + dx, cut.p2.y + dy)
+
+	lines.append(Line(lower_p1, lower_p2))
+	lines.append(Line(upper_p1, upper_p2))
+
+	return lines
+
 ## Various drawing functions
 
 def plot(image, point, radius=3, color=COL_GREEN):

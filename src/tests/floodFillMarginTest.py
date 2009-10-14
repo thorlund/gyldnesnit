@@ -43,7 +43,7 @@ if not image:
 threshold1 = 70;
 threshold2 = 70;
 out = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
-edgeDetector.findEdges(image, out, threshold1, threshold2)
+#edgeDetector.findEdges(image, out, threshold1, threshold2)
 
 print "Finding the golden means in the picture"
 
@@ -52,29 +52,25 @@ lines = lib.findGoldenMeans(cv.cvGetSize(image))
 # Define cut
 cut = lines[0]
 
-print "Test plot and line scanner methods"
-points = lineScanner.naiveLineScanner(out, cut)
+# Set margin
+margin = 0
+
 
 out = highgui.cvLoadImage (filename)
 
-(out, components) = featureDetector.floodFillLine(image, out, points, cut, lo, up)
+featureDetector.ribbonFloodFill(image, out, cut, margin, lo, up)
 
-# Set margin
-margin = 4
+# Set up constraints
+#constraints = regionSelector.Constraints(cv.cvGetSize(image), cut, margin, 0.002, 0.25)
+
+# Prune components
+#newComponents = regionSelector.pruneRegions(components, constraints)
+
+# Draw boxes of selected components
+#lib.drawBoundingBoxes(out, newComponents)
 
 # Draw margin
 lib.drawMargin(out, cut, margin)
-
-# Set up constraints
-constraints = regionSelector.Constraints(cv.cvGetSize(image), cut, margin, 0.002, 0.25)
-
-# Prune components
-newComponents = regionSelector.pruneRegions(components, constraints)
-
-# Draw boxes of selected components
-lib.drawBoundingBoxes(out, newComponents)
-
-#lib.drawLines(out)
 
 winname = "Find regions"
 

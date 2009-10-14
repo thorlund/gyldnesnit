@@ -8,7 +8,7 @@ import goldenLibrary as lib
 # Import what we need from OpenCV
 from opencv import cv
 
-def naiveLineScanner(edgeImage, origImage, line):
+def naiveLineScanner(edgeImage, line):
 	"""Scan for edges along a line in a edge-detected image
 
 This is _very_ naive
@@ -22,13 +22,11 @@ Traverse a line, put the coordinate in a list if the pixel is white
 	# XXX: Any smarter way around this problem??
 	if p1.y == p2.y:
 		# Get the row, defined by y
-		print "horizontal"
 		dx = 1
 		dy = 0
 		slice = edgeImage[p1.y]
 	elif p1.x == p2.x:
 		# Get the column, defined by x
-		print "vertical"
 		dx = 0
 		dy = 1
 		slice = edgeImage[:,p1.x]

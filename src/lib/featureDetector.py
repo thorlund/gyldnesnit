@@ -2,13 +2,20 @@
 Provides a method for finding features
 """
 
+# Vi skal have gemt farve og component i en dict
+# En compinent vil altid have sig egen farve
+# Der skal vælges en ny farve
+# Ja, det skal der
+
 # Import what we need from OpenCV
 from opencv import cv
+import lineScanner
+import edgeDetector
 
 # import goldenLibrary
 import lib.goldenLibrary as lib
 
-def floodFillLine(original, out, points, line, lo, up):
+def floodFillLine(original, out, points, line, lo, up, colors=(None, None)):
 	"""take are golden ratio and make floot fill betvine alle of the points
 points are the points on the given line"""
 	if not out:
@@ -21,10 +28,10 @@ points are the points on the given line"""
 	components = []
 	for point in points:
 		line = lib.Line(start_point, point)
-		(out, component) = floodFillBetweenPoints(out, lo, up, line)
+		component = floodFillBetweenPoints(out, lo, up, line, colors=(None, None))
 		components.append(component)
 		start_point = point
-	return (out, components)
+	return components
 
 # XXX: Description does not apply
 # Floodfill the image at point x,y whit are lower and upper thres hold namt lo and up
@@ -32,10 +39,12 @@ points are the points on the given line"""
 # golden_ratio is are indekater of whot of the 4 golden ratio we are working in
 # 0 and 1 is from the top to the bottom.
 # 2 and 3 is from the left to til rigth
-def floodFillBetweenPoints(image, lo, up, line):
+def floodFillBetweenPoints(out, lo, up, line, colors=(None, None)):
 	"""Floofill the image at point x,y whit are lower and upper thres hold namt lo and up
 Start and stop point is the point that the def runs from to"""
 	# Get new random color
+	if not colors:
+		color = lib.getRandomColor()
 	color = lib.getRandomColor()
 
 	#Sets the flag
@@ -66,12 +75,49 @@ Start and stop point is the point that the def runs from to"""
 	#Color between start_point+1 and point-1
 	for i in range(min, max):
 		seed = cv.cvPoint(seed.x + dx, seed.y + dy)
-		if not(lib.isSameColor(image[seed.y][seed.x], color)):
-			cv.cvFloodFill(image, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
+		if not(lib.isSameColor(out[seed.y][seed.x], color)):
+			cv.cvFloodFill(out, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
 	
 	# Color the last pixel again to make sure that the returned component is the entire region
-	cv.cvFloodFill(image, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
-	return (image, comp)
+	cv.cvFloodFill(out, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
+	return comp
+
+def ribbonFloodFill(original, out, cut, margin, lo, up):
+	threshold1 = 70;
+	threshold2 = 70;
+	edges = cv.cvCreateImage(cv.cvGetSize(original), 8, 3)
+	edgeDetector.findEdges(original, edges, threshold1, threshold2)
+	
+	colors = []
+
+	(p1, p2) = cut.getPoints()
+
+	if p1.x == p2.x:
+		# Initialize the seed and set deltas for increasing the seed
+		dx = 0
+		dy = 1
+		min = p1.y - margin
+		max = p2.y + margin
+	elif p1.y == p2.y:
+		# Initialize the seed and set deltas for increasing the seed
+		dx = 1
+		dy = 0
+		min = p1.x - margin
+		max = p2.x + margin
+	else:
+		raise lib.OrientationException("Unknown orientation")
+	
+	for i in range(margin, 0, -1):
+		(lower_bound, upper_bound) = lib.getMargins(cut, i)
+		lower_points = lineScanner.naiveLineScanner(edges, lower_bound)
+		upper_points = lineScanner.naiveLineScanner(edges, upper_bound)
+
+		floodFillLine(original, out, lower_points, lower_bound, lo, up)
+		floodFillLine(original, out, upper_points, upper_bound, lo, up)
+	
+	points = lineScanner.naiveLineScanner(edges, cut)
+	floodFillLine(original, out, points, cut, lo, up)
+
 	
 def getGoodFeatures(image):
 	# XXX: BETA but working
