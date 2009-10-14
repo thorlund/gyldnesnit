@@ -77,12 +77,19 @@ Start and stop point is the point that the def runs from to"""
 		color = lib.getRandomColor(color)
 		inDict = colorString(color) in component_dict
 
+	tmp = 0;
 	#Color between start_point+1 and point-1
 	for i in range(min, max):
 		seed = cv.cvPoint(seed.x + dx, seed.y + dy)
 		if not (lib.isSameColor(out[seed.y][seed.x], color)):
-			cv.cvFloodFill(out, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
+			tmp = tmp + 1;
+			if not (colorString(out[seed.y][seed.x]) in component_dict):
+				tmp = tmp - 1;
+				cv.cvFloodFill(out, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
 	
+	#print if you need to se have meny pixels that are lept over
+	#if not (tmp == 0):
+	#	print tmp
 	# Color the last pixel again to make sure that the returned component is the entire region
 	cv.cvFloodFill(out, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
 
@@ -114,13 +121,13 @@ def ribbonFloodFill(original, out, cut, margin, lo, up):
 	
 	component_dict = {}
 
-	for i in range(margin, 0, -1):
-		(lower_bound, upper_bound) = lib.getMargins(cut, i)
-		lower_points = lineScanner.naiveLineScanner(edges, lower_bound)
-		upper_points = lineScanner.naiveLineScanner(edges, upper_bound)
+	#for i in range(margin, 0, -1):
+	#	(lower_bound, upper_bound) = lib.getMargins(cut, i)
+	#	lower_points = lineScanner.naiveLineScanner(edges, lower_bound)
+	#	upper_points = lineScanner.naiveLineScanner(edges, upper_bound)
 
-		floodFillLine(original, out, lower_points, lower_bound, lo, up, component_dict)
-		floodFillLine(original, out, upper_points, upper_bound, lo, up, component_dict)
+	#	floodFillLine(original, out, lower_points, lower_bound, lo, up, component_dict)
+	#	floodFillLine(original, out, upper_points, upper_bound, lo, up, component_dict)
 	
 	points = lineScanner.naiveLineScanner(edges, cut)
 	floodFillLine(original, out, points, cut, lo, up, component_dict)
