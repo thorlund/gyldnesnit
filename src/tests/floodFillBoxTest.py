@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 #
-# Kasper steenstrup
+# Ulrik Bonde
+# 
+# Attention! No *real* checks on the argument vector!
 
 print "" # Just for good meassure
 # INIT THE TEST
@@ -13,11 +15,11 @@ import lib.goldenLibrary as lib
 import lib.edgeDetector as edgeDetector
 import lib.lineScanner as lineScanner
 import lib.featureDetector as featureDetector
+import lib.regionSelector as regionSelector
 
 # import the necessary things for OpenCV
 from opencv import cv
 from opencv import highgui
-#from opencv.cv import *
 
 print "Testing library"
 print "Press 'q' to exit"
@@ -27,18 +29,9 @@ filename = sys.argv[1]
 if len(sys.argv) == 4:
 	lo = int(sys.argv[2])
 	up = int(sys.argv[3])
-	x = 200
-	y = 200
-elif len(sys.argv) == 6:
-	lo = int(sys.argv[2])
-	up = int(sys.argv[3])
-	x = int(sys.argv[4])
-	y = int(sys.argv[5])
 else:
 	lo = 7
 	up = 7
-	x = 200
-	y = 200
 
 image = highgui.cvLoadImage (filename)
 
@@ -56,23 +49,34 @@ print "Finding the golden means in the picture"
 
 lines = lib.findGoldenMeans(cv.cvGetSize(image))
 
+# Define cut
+cut = lines[0]
+
 print "Test plot and line scanner methods"
-points = lineScanner.naiveLineScanner(out, image, lines[0])
+points = lineScanner.naiveLineScanner(out, image, cut)
 
 out = highgui.cvLoadImage (filename)
 
-(out, components) = featureDetector.floodFillLine(out, None, points, lines[0], lo, up)
+(out, components) = featureDetector.floodFillLine(image, out, points, cut, lo, up)
 
-#startpoint = lines[0].getPoints()[0]
-#points.append(lines[0].getPoints()[1])
-#for point in points:
-#	out = floofill.floofill(out, lowerThres, upperThres, startpoint, point, 1)
-#	startpoint = point
-#for point in points:
-#	lib.plot(out, point, 2)
-#out = edgeDetector.findEdges(out, 70, 70)
+# Set margin
+margin = 4
 
-winname = "floot"
+# Draw margin
+lib.drawMargin(out, cut, margin)
+
+# Set up constraints
+constraints = regionSelector.Constraints(cv.cvGetSize(image), cut, margin, 0.002, 0.25)
+
+# Prune components
+newComponents = regionSelector.pruneRegions(components, constraints)
+
+# Draw boxes of selected components
+lib.drawBoundingBoxes(out, newComponents)
+
+#lib.drawLines(out)
+
+winname = "Find regions"
 
 highgui.cvNamedWindow (winname, highgui.CV_WINDOW_AUTOSIZE)
 

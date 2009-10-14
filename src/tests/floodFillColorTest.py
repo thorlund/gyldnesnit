@@ -1,6 +1,16 @@
 #!/usr/bin/env python
 #
-# Kasper steenstrup
+# Ulrik Bonde
+# 
+# Attention! No *real* checks on the argument vector!
+#
+#
+# Purpose of test:
+#	Does the region findind function do a lot of unescessary work?
+#	It seems like floodfill will always color the same amount of pixels
+#	no matter what.
+#
+#
 
 print "" # Just for good meassure
 # INIT THE TEST
@@ -17,7 +27,6 @@ import lib.featureDetector as featureDetector
 # import the necessary things for OpenCV
 from opencv import cv
 from opencv import highgui
-#from opencv.cv import *
 
 print "Testing library"
 print "Press 'q' to exit"
@@ -27,18 +36,9 @@ filename = sys.argv[1]
 if len(sys.argv) == 4:
 	lo = int(sys.argv[2])
 	up = int(sys.argv[3])
-	x = 200
-	y = 200
-elif len(sys.argv) == 6:
-	lo = int(sys.argv[2])
-	up = int(sys.argv[3])
-	x = int(sys.argv[4])
-	y = int(sys.argv[5])
 else:
 	lo = 7
 	up = 7
-	x = 200
-	y = 200
 
 image = highgui.cvLoadImage (filename)
 
@@ -56,28 +56,36 @@ print "Finding the golden means in the picture"
 
 lines = lib.findGoldenMeans(cv.cvGetSize(image))
 
+cut = lines[0]
+
 print "Test plot and line scanner methods"
-points = lineScanner.naiveLineScanner(out, image, lines[0])
+points = lineScanner.naiveLineScanner(out, image, cut)
 
 out = highgui.cvLoadImage (filename)
 
-(out, components) = featureDetector.floodFillLine(out, None, points, lines[0], lo, up)
+(out, components) = featureDetector.floodFillLine(image, out, points, cut, lo, up)
 
-#startpoint = lines[0].getPoints()[0]
-#points.append(lines[0].getPoints()[1])
-#for point in points:
-#	out = floofill.floofill(out, lowerThres, upperThres, startpoint, point, 1)
-#	startpoint = point
-#for point in points:
-#	lib.plot(out, point, 2)
-#out = edgeDetector.findEdges(out, 70, 70)
+print components[0].area
 
-winname = "floot"
+# Test
+comp = cv.CvConnectedComp()
+seed = cv.cvPoint(200, 20)
+cv.cvFloodFill(image, seed, lib.COL_RED, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
+print comp.area
 
-highgui.cvNamedWindow (winname, highgui.CV_WINDOW_AUTOSIZE)
+lib.drawBoundingBoxes(out, components)
+
+#lib.drawLines(out)
+
+winname1 = "Find regions"
+winname2 = "original"
+
+highgui.cvNamedWindow (winname1, highgui.CV_WINDOW_AUTOSIZE)
+highgui.cvNamedWindow (winname2, highgui.CV_WINDOW_AUTOSIZE)
 
 while True:
-	highgui.cvShowImage (winname, out)
+	highgui.cvShowImage (winname1, out)
+	highgui.cvShowImage (winname2, image)
 
 	c = highgui.cvWaitKey(0)
 	
