@@ -8,24 +8,29 @@ from opencv import cv
 # import goldenLibrary
 import lib.goldenLibrary as lib
 
-def gridIt(image,blobs,distance=2):
-	for blob in blobs:
-		color = blob[1]
-		blob = blob[0]
-		points=0
-		gridcordinates = []
-		mostx = blob.rect.x
-		x = mostx
-		leastx = mostx-blob.rect.height
-		mosty = blob.rect.y
-		y = mosty
-		leasty = mosty - blob.rect.height
-		while(x >= leastx):
-			while(y >= leasty):
-				if color == image[x][y]:
-					points = points +1
-					gridcordinates.add((x,y))
-				y = y-distance
-			x = x-distance
+# Missing functions for differentiating grid points
 
+def gridIt(image, component_dictionary, step=2):
+	print len(component_dictionary)
+	gridcordinates = []
+	for entry in component_dictionary:
+		color = component_dictionary[entry][0]
+		print color
+		print entry
+		component = component_dictionary[entry][1]
+		points = 0
+
+		rect = component.rect
+		lower_x = rect.x
+		lower_y = rect.y
+		upper_x = lower_x + rect.width
+		upper_y = lower_y + rect.height
+
+		for i in range(lower_x, upper_x, step):
+			for j in range(lower_y, upper_y, step):
+				if lib.isSameColor(color, image[j][i]):
+					points = points + 1
+					gridcordinates.append(cv.cvPoint(i, j))
 		print points
+
+	return gridcordinates
