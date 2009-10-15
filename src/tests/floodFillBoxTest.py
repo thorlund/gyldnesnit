@@ -61,7 +61,7 @@ comp_dict = {}
 featureDetector.floodFillLine(image, out, points, cut, lo, up, comp_dict)
 
 # Set margin
-margin = 4
+margin = 15
 
 # Draw margin
 lib.drawMargin(out, cut, margin)

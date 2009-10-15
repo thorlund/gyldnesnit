@@ -77,7 +77,9 @@ def checkMass(component, constraints):
 def pruneRegions(component_dictionary, contraints):
 	"""Run all required test on a dictionary of regions with the given set
 	of contraints. The output is a pruned components_dictionary."""
+	acceptedRegions = {}
 	for entry in component_dictionary:
 		component = component_dictionary[entry][1]
-		if not checkPosition(component, contraints) and checkSize(component, contraints) and checkMass(component, contraints):
-			del component_dictionary[entry]
+		if checkPosition(component, contraints) and checkSize(component, contraints) and checkMass(component, contraints):
+			acceptedRegions[entry] = component_dictionary[entry]
+	return acceptedRegions
