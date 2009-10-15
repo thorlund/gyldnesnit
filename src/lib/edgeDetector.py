@@ -8,7 +8,7 @@ import goldenLibrary
 # Import what we need from OpenCV
 from opencv import cv
 
-def mergeEdges(original, merge, out, threshold1 = 100, threshold2 = None):
+def enhanceEdges(original, merge, out, threshold1 = 100, threshold2 = None):
 	"""Same as below, except that the edges will be drawn onto
 	the original in the output"""
 	findEdges(original, out, threshold1, threshold2, merge)

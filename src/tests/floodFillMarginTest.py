@@ -30,13 +30,10 @@ if len(sys.argv) == 4:
 	lo = int(sys.argv[2])
 	up = int(sys.argv[3])
 else:
-	lo = 4
-	up = 4
+	lo = 5
+	up = 5
 
 image = highgui.cvLoadImage (filename)
-out = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
-
-octave = highgui.cvLoadImage ("../../res/local/test.png")
 
 if not image:
 	print "Error loading image '%s'" % filename
@@ -45,7 +42,11 @@ if not image:
 
 threshold1 = 70;
 threshold2 = 70;
-edgeDetector.mergeEdges(image, octave, out, threshold1, threshold2)
+out = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
+blur = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
+
+cv.cvSmooth(image, blur, cv.CV_BLUR, 3, 3, 0)
+edgeDetector.enhanceEdges(image, blur, out, threshold1, threshold2)
 
 print "Finding the golden means in the picture"
 
@@ -55,7 +56,7 @@ lines = lib.findGoldenMeans(cv.cvGetSize(image))
 cut = lines[0]
 
 # Set margin
-margin = 3
+margin = 6
 
 featureDetector.ribbonFloodFill(image, out, cut, margin, lo, up)
 

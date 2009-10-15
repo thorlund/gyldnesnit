@@ -52,7 +52,7 @@ if not image:
 print "Finding edges using Canny"
 out = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
 #edgeDetector.findEdges(image, out, threshold1, threshold2)
-edgeDetector.enhanceEdges(image, out, threshold1, threshold2)
+edgeDetector.enhanceEdges(image, image, out, threshold1, threshold2)
 
 outname = "edgeDetectorTest"
 orgname = "Original"
