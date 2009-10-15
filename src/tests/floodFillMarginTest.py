@@ -34,7 +34,9 @@ else:
 	up = 4
 
 image = highgui.cvLoadImage (filename)
-out = highgui.cvLoadImage ("../../res/local/test.png")
+out = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
+
+octave = highgui.cvLoadImage ("../../res/local/test.png")
 
 if not image:
 	print "Error loading image '%s'" % filename
@@ -43,7 +45,7 @@ if not image:
 
 threshold1 = 70;
 threshold2 = 70;
-#edgeDetector.findEdges(image, out, threshold1, threshold2)
+edgeDetector.mergeEdges(image, octave, out, threshold1, threshold2)
 
 print "Finding the golden means in the picture"
 

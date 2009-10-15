@@ -8,12 +8,12 @@ import goldenLibrary
 # Import what we need from OpenCV
 from opencv import cv
 
-def enhanceEdges(original, out, threshold1 = 100, threshold2 = None):
+def mergeEdges(original, merge, out, threshold1 = 100, threshold2 = None):
 	"""Same as below, except that the edges will be drawn onto
 	the original in the output"""
-	findEdges(original, out, threshold1, threshold2, True)
+	findEdges(original, out, threshold1, threshold2, merge)
 
-def findEdges(original, out, threshold1 = 100, threshold2 = None, merge=False):
+def findEdges(original, out, threshold1 = 100, threshold2 = None, merge=None):
 	"""Return a new edge detected image with a specified threshold"""
 
 	#Define threshold2
@@ -50,6 +50,6 @@ def findEdges(original, out, threshold1 = 100, threshold2 = None, merge=False):
 		cv.cvCopy(original, out, edge)
 	else:
 		cv.cvNot(edge, edge)
-		cv.cvCopy(original, out, edge)
+		cv.cvCopy(merge, out, edge)
 
 	# The edge-detected image is now in out

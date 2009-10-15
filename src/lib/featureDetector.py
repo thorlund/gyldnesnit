@@ -99,6 +99,7 @@ Start and stop point is the point that the def runs from to"""
 def ribbonFloodFill(original, out, cut, margin, lo, up):
 	threshold1 = 70;
 	threshold2 = 70;
+
 	edges = cv.cvCreateImage(cv.cvGetSize(original), 8, 3)
 	edgeDetector.findEdges(original, edges, threshold1, threshold2)
 	
