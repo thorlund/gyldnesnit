@@ -121,13 +121,13 @@ def ribbonFloodFill(original, out, cut, margin, lo, up):
 	
 	component_dict = {}
 
-	#for i in range(margin, 0, -1):
-	#	(lower_bound, upper_bound) = lib.getMargins(cut, i)
-	#	lower_points = lineScanner.naiveLineScanner(edges, lower_bound)
-	#	upper_points = lineScanner.naiveLineScanner(edges, upper_bound)
+	for i in range(margin, margin - 1, -1):
+		(lower_bound, upper_bound) = lib.getMargins(cut, i)
+		lower_points = lineScanner.naiveLineScanner(edges, lower_bound)
+		upper_points = lineScanner.naiveLineScanner(edges, upper_bound)
 
-	#	floodFillLine(original, out, lower_points, lower_bound, lo, up, component_dict)
-	#	floodFillLine(original, out, upper_points, upper_bound, lo, up, component_dict)
+		floodFillLine(original, out, lower_points, lower_bound, lo, up, component_dict)
+		floodFillLine(original, out, upper_points, upper_bound, lo, up, component_dict)
 	
 	points = lineScanner.naiveLineScanner(edges, cut)
 	floodFillLine(original, out, points, cut, lo, up, component_dict)
