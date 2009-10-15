@@ -8,7 +8,12 @@ import goldenLibrary
 # Import what we need from OpenCV
 from opencv import cv
 
-def findEdges(original, out, threshold1 = 100, threshold2 = None):
+def enhanceEdges(original, out, threshold1 = 100, threshold2 = None):
+	"""Same as below, except that the edges will be drawn onto
+	the original in the output"""
+	findEdges(original, out, threshold1, threshold2, True)
+
+def findEdges(original, out, threshold1 = 100, threshold2 = None, merge=False):
 	"""Return a new edge detected image with a specified threshold"""
 
 	#Define threshold2
@@ -28,8 +33,6 @@ def findEdges(original, out, threshold1 = 100, threshold2 = None):
 
 	# Negate the b/w copy of original with newly blurred
 	# b/w copy. This will make egdes stand out
-	# NOTE:	Both images are "not'ed" against each other
-	#	meaning that the b/w copy will now be blurred!
 	cv.cvNot(gray, edge)
 
 	# Run an edge-finding algorithm called 'Canny'
@@ -43,6 +46,10 @@ def findEdges(original, out, threshold1 = 100, threshold2 = None):
 	# Finally, we use the found edges, which are b/w, as
 	# a mask for copying the colored edges from the original
 	# to the out-image
-	cv.cvCopy(original, out, edge)
+	if not merge:
+		cv.cvCopy(original, out, edge)
+	else:
+		cv.cvNot(edge, edge)
+		cv.cvCopy(original, out, edge)
 
 	# The edge-detected image is now in out
