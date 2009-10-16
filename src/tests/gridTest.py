@@ -43,6 +43,7 @@ if not image:
 
 threshold1 = 70;
 threshold2 = 70;
+<<<<<<< HEAD
 out = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
 edgeDetector.findEdges(image, out, threshold1, threshold2)
 
@@ -83,11 +84,33 @@ for point in grid:
 #lib.drawLines(out)
 
 winname = "Find regions"
+=======
+out = edgeDetector.findEdges(image, threshold1, threshold2)
+
+print "Finding the golden means in the picture"
+
+lines = lib.findMeans(cv.cvGetSize(image))
+
+print "Test plot and line scanner methods"
+points = lineScanner.naiveLineScanner(out, image, lines[0])
+
+out = highgui.cvLoadImage (filename)
+
+out = featureDetector.floodFillLine(out, points, lines[0], lo, up)
+
+grid.gridIt(out[0],out[1])
+
+winname = "floot"
+>>>>>>> Mit grid
 
 highgui.cvNamedWindow (winname, highgui.CV_WINDOW_AUTOSIZE)
 
 while True:
+<<<<<<< HEAD
 	highgui.cvShowImage (winname, image)
+=======
+	highgui.cvShowImage (winname, out[0])
+>>>>>>> Mit grid
 
 	c = highgui.cvWaitKey(0)
 	
