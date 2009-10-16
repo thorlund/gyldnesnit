@@ -4,17 +4,33 @@ Provides functionality for running edge detection on images
 
 # Import basic functionality
 import goldenLibrary
+import warnings
 
 # Import what we need from OpenCV
 from opencv import cv
 
-def enhanceEdges(original, merge, out, threshold1 = 100, threshold2 = None):
-	"""Same as below, except that the edges will be drawn onto
-	the original in the output"""
-	findEdges(original, out, threshold1, threshold2, merge)
+def findBWEdges(original, out, threshold1, threshold2):
+	"""Identical with findEdges except that this returns white edges
+	on a black background. We really don't need colored edges any longer.
+	This also makes it easy to to a manual merge of edge and blur picture."""
+	if threshold2 == None:
+		threshold2 = threshold1 * 3
 
-def findEdges(original, out, threshold1 = 100, threshold2 = None, merge=None):
+	gray = cv.cvCreateImage(cv.cvGetSize(original), 8, 1)
+
+	cv.cvCvtColor(original, gray, cv.CV_BGR2GRAY)
+
+	cv.cvSmooth(gray, out, cv.CV_BLUR, 3, 3, 0)
+
+	cv.cvNot(gray, out)
+
+	cv.cvCanny(gray, out, threshold1, threshold2)
+
+	return out
+
+def findEdges(original, out, threshold1 = 100, threshold2 = None):
 	"""Return a new edge detected image with a specified threshold"""
+	warnings.warn("Use findBWEdges instead unless you really need colored edges.", DeprecationWarning)
 
 	#Define threshold2
 	if threshold2 == None:
@@ -46,10 +62,6 @@ def findEdges(original, out, threshold1 = 100, threshold2 = None, merge=None):
 	# Finally, we use the found edges, which are b/w, as
 	# a mask for copying the colored edges from the original
 	# to the out-image
-	if not merge:
-		cv.cvCopy(original, out, edge)
-	else:
-		cv.cvNot(edge, edge)
-		cv.cvCopy(merge, out, edge)
+	cv.cvCopy(original, out, edge)
 
 	# The edge-detected image is now in out
