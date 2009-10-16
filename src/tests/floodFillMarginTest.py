@@ -30,8 +30,8 @@ if len(sys.argv) == 4:
 	lo = int(sys.argv[2])
 	up = int(sys.argv[3])
 else:
-	lo = 5
-	up = 5
+	lo = 4
+	up = 4
 
 image = highgui.cvLoadImage (filename)
 
@@ -40,13 +40,26 @@ if not image:
 	print ""
 	sys.exit(-1)
 
-threshold1 = 70;
-threshold2 = 70;
+threshold1 = 80;
+threshold2 = 2.6 * 70;
+
+# Set up the needed images
 out = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
 blur = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
+edges = cv.cvCreateImage(cv.cvGetSize(image), 8, 1)
 
+# Blur the image
 cv.cvSmooth(image, blur, cv.CV_BLUR, 3, 3, 0)
-edgeDetector.enhanceEdges(image, blur, out, threshold1, threshold2)
+
+# Find edges in the original image
+edgeDetector.findBWEdges(image, edges, threshold1, threshold2)
+
+# Superimpose the edges onto the blured image
+cv.cvNot(edges, edges)
+cv.cvCopy(blur, out, edges)
+
+# Get the edges back to white
+cv.cvNot(edges, edges)
 
 print "Finding the golden means in the picture"
 
@@ -56,18 +69,18 @@ lines = lib.findGoldenMeans(cv.cvGetSize(image))
 cut = lines[0]
 
 # Set margin
-margin = 6
+margin = 15
 
-featureDetector.ribbonFloodFill(image, out, cut, margin, lo, up)
+components = featureDetector.ribbonFloodFill(image, edges, out, cut, margin, lo, up)
 
 # Set up constraints
-#constraints = regionSelector.Constraints(cv.cvGetSize(image), cut, margin, 0.002, 0.25)
+constraints = regionSelector.Constraints(cv.cvGetSize(image), cut, margin, 0.002, 0.25)
 
 # Prune components
-#newComponents = regionSelector.pruneRegions(components, constraints)
+newComponents = regionSelector.pruneRegions(components, constraints)
 
 # Draw boxes of selected components
-#lib.drawBoundingBoxes(out, newComponents)
+lib.drawBoundingBoxes(out, newComponents)
 
 # Draw margin
 lib.drawMargin(out, cut, margin)

@@ -18,17 +18,15 @@ def floodFillLine(original, out, points, line, lo, up, component_dict):
 points are the points on the given line"""
 	if not out:
 		out = original
+
 	# Get start and stop points
 	(start_point, stop_point) = line.getPoints()
 	
 	# Set the end point at the end of the line
 	points.append(stop_point)
-	#components = []
 	for point in points:
 		line = lib.Line(start_point, point)
 		floodFillBetweenPoints(out, lo, up, line, component_dict)
-		# append in floodfill
-		#components.append(component)
 		start_point = point
 
 # XXX: Description does not apply
@@ -40,11 +38,6 @@ points are the points on the given line"""
 def floodFillBetweenPoints(out, lo, up, line, component_dict):
 	"""Floofill the image at point x,y whit are lower and upper thres hold namt lo and up
 Start and stop point is the point that the def runs from to"""
-	# Get new random color
-	#if not colors:
-	#	color = lib.getRandomColor()
-	#color = lib.getRandomColor()
-
 	#Sets the flag
 	flags = 4 + (255 << 8) + cv.CV_FLOODFILL_FIXED_RANGE
 
@@ -96,45 +89,25 @@ Start and stop point is the point that the def runs from to"""
 	# Put the results in the component dictionary
 	component_dict[colorString(color)] = (color, comp)
 
-def ribbonFloodFill(original, out, cut, margin, lo, up):
-	threshold1 = 70;
-	threshold2 = 70;
-
-	edges = cv.cvCreateImage(cv.cvGetSize(original), 8, 3)
-	edgeDetector.findEdges(original, edges, threshold1, threshold2)
+def ribbonFloodFill(original, edges, out, cut, margin, lo, up):
+	"""This method will run call the method floodFillLine three times.
+	To minimize the number of calls to the edge detector it needs and
+	edge detected image as input."""
 	
 	(p1, p2) = cut.getPoints()
 
-	if p1.x == p2.x:
-		# Initialize the seed and set deltas for increasing the seed
-		dx = 0
-		dy = 1
-		min = p1.y - margin
-		max = p2.y + margin
-	elif p1.y == p2.y:
-		# Initialize the seed and set deltas for increasing the seed
-		dx = 1
-		dy = 0
-		min = p1.x - margin
-		max = p2.x + margin
-	else:
-		raise lib.OrientationException("Unknown orientation")
-	
 	component_dict = {}
 
-	for i in range(margin, margin - 1, -1):
-		(lower_bound, upper_bound) = lib.getMargins(cut, i)
-		lower_points = lineScanner.naiveLineScanner(edges, lower_bound)
-		upper_points = lineScanner.naiveLineScanner(edges, upper_bound)
+	(lower_bound, upper_bound) = lib.getMargins(cut, margin)
+	lower_points = lineScanner.naiveBWLineScanner(edges, lower_bound)
+	upper_points = lineScanner.naiveBWLineScanner(edges, upper_bound)
 
-		floodFillLine(original, out, lower_points, lower_bound, lo, up, component_dict)
-		floodFillLine(original, out, upper_points, upper_bound, lo, up, component_dict)
+	floodFillLine(original, out, lower_points, lower_bound, lo, up, component_dict)
+	floodFillLine(original, out, upper_points, upper_bound, lo, up, component_dict)
 	
-	points = lineScanner.naiveLineScanner(edges, cut)
+	points = lineScanner.naiveBWLineScanner(edges, cut)
 	floodFillLine(original, out, points, cut, lo, up, component_dict)
 	
-	# Here's the result
-	#print component_dict
 	return component_dict
 
 	
