@@ -80,6 +80,6 @@ def pruneRegions(component_dictionary, contraints):
 	acceptedRegions = {}
 	for entry in component_dictionary:
 		component = component_dictionary[entry][1]
-		if checkPosition(component, contraints) and checkSize(component, contraints) and checkMass(component, contraints):
+		if checkSize(component, contraints) and checkPosition(component, contraints) and checkMass(component, contraints):
 			acceptedRegions[entry] = component_dictionary[entry]
 	return acceptedRegions
