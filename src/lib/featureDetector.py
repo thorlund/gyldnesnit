@@ -72,10 +72,14 @@ Start and stop point is the point that the def runs from to"""
 
 	tmp = 0;
 	#Color between start_point+1 and point-1
+	#Tmp is the tims we find new color that lie in component_dict. 
+	#This giv are indekeder that telle os have mots time we save whit the check
 	for i in range(min, max):
 		seed = cv.cvPoint(seed.x + dx, seed.y + dy)
+		#Check if the color of the next pixel equals color 
 		if not (lib.isSameColor(out[seed.y][seed.x], color)):
 			tmp = tmp + 1;
+			#Check if the color of the next pixel are in component_dict
 			if not (colorString(out[seed.y][seed.x]) in component_dict):
 				tmp = tmp - 1;
 				cv.cvFloodFill(out, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
