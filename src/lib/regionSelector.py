@@ -59,8 +59,9 @@ def checkPosition(component, constraints):
 	if constraints.coordinate:
 		d = component.rect.height
 		p = component.rect.y
-
-	return (constraints.lower_bound <= p) or (p + d <= constraints.upper_bound)
+	
+	acceptRange = range(constraints.lower_bound, constraints.upper_bound + 1, 1)
+	return (p in acceptRange) or ( (p + d) in acceptRange)
 
 def checkSize(component, constraints):
 	"""Test if the component have size greater than the minumum size
