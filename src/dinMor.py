@@ -33,7 +33,7 @@ lo = 5
 up = 5
 
 # The margin
-margin = 7
+margin = 4
 
 # Scale
 scale = 0.25
@@ -84,8 +84,6 @@ def analyzeImage(original):
 
 	# Create 1-channel image for the egdes
 	edgeImage = cv.cvCreateImage(cv.cvGetSize(scaleImage), 8, 1)
-	print "%s" % cv.cvGetSize(edgeImage)
-	print "%s" % cv.cvGetSize(scaleImage)
 
 	# Retrieve edges
 	edgeDetector.findBWEdges(scaleImage, edgeImage, edgeThreshold1, edgeThreshold2)
@@ -104,8 +102,8 @@ def analyzeImage(original):
 		lib.drawBoundingBoxes(original, dict, scale)
 
 	# Draw the margins
-	for cut in cuts:
-		lib.drawMargin(original, cut, margin)
+	#for cut in cuts:
+	#	lib.drawMargin(original, cut, margin, scale)
 
 	return (original, allComponents)
 
@@ -121,6 +119,10 @@ if __name__ == '__main__':
 	winname = "Failure"
 
 	highgui.cvNamedWindow (winname, highgui.CV_WINDOW_AUTOSIZE)
+
+	cuts = lib.findGoldenMeans(cv.cvGetSize(image))
+	for cut in cuts:
+		lib.drawMargin(image, cut, margin)
 
 	while True:
 		highgui.cvShowImage (winname, image)

@@ -111,7 +111,7 @@ def findGoldenMeans(size):
 
 	return lines
 
-def getMargins(cut, margin):
+def getMargins(cut, margin, factor=1):
 	lines = []
 	if cut.p1.x == cut.p2.x:
 		dx = margin
@@ -122,11 +122,11 @@ def getMargins(cut, margin):
 	else:
 		raise OrientationException("The cut is not straight")
 	
-	lower_p1 = cv.cvPoint(cut.p1.x - dx, cut.p1.y - dy)
-	lower_p2 = cv.cvPoint(cut.p2.x - dx, cut.p2.y - dy)
+	lower_p1 = cv.cvPoint(int((cut.p1.x - dx)/factor), int((cut.p1.y - dy)/factor))
+	lower_p2 = cv.cvPoint(int((cut.p2.x - dx)/factor), int((cut.p2.y - dy)/factor))
 	
-	upper_p1 = cv.cvPoint(cut.p1.x + dx, cut.p1.y + dy)
-	upper_p2 = cv.cvPoint(cut.p2.x + dx, cut.p2.y + dy)
+	upper_p1 = cv.cvPoint(int((cut.p1.x + dx)/factor), int((cut.p1.y + dy)/factor))
+	upper_p2 = cv.cvPoint(int((cut.p2.x + dx)/factor), int((cut.p2.y + dy)/factor))
 
 	lines.append(Line(lower_p1, lower_p2))
 	lines.append(Line(upper_p1, upper_p2))
@@ -168,8 +168,8 @@ def drawBoundingBoxes(out, component_dictionary, factor):
 		#p2 = cv.cvPoint(rect.x + rect.width, rect.y + rect.height)
 		cv.cvRectangle(out, p1, p2, COL_RED)
 
-def drawMargin(out, cut, margin):
-	lines = getMargins(cut, margin)
+def drawMargin(out, cut, margin, factor=1):
+	lines = getMargins(cut, margin, factor)
 	drawLines(out, None, lines, COL_BLUE)
 
 
