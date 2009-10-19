@@ -8,10 +8,11 @@ class Constraints:
 	"""Holds a set of constraints for an image when finding regions at a cut"""
 	coordinate = None
 	acceptRange = None
+	superAcceptRange = None
 	rect = None
 	size = None
 	mass = None
-	def __init__(self, imagesize, cut, margin, sizePercentage=0.002, massPercentage=0.15):
+	def __init__(self, imagesize, cut, margin,supermargin, sizePercentage=0.002, massPercentage=0.15):
 		"""Calculate all the constraints, i.e. the accepting
 		rectangle (margin), the minimum size relative to the
 		image and the minimum mass relative to the image.
@@ -43,11 +44,17 @@ class Constraints:
 			lower_bound = cut.p1.x - margin
 			upper_bound = cut.p1.x + margin
 			self.acceptRange = range(lower_bound, upper_bound + 1, 1)
+			superlower_bound = cut.p1.x - supermargin
+			superupper_bound = cut.p1.x + supermargin
+			self.superAcceptRange = range(superlower_bound, superupper_bound + 1, 1)			
 		elif cut.p1.y == cut.p2.y:
 			self.coordinate = 1
 			lower_bound = cut.p1.y - margin
 			upper_bound = cut.p1.y + margin
 			self.acceptRange = range(lower_bound, upper_bound + 1, 1)
+			superlower_bound = cut.p1.y - supermargin
+			superupper_bound = cut.p1.y + supermargin
+			self.superAcceptRange = range(superlower_bound, superupper_bound + 1, 1)
 		else:
 			raise lib.OrientationException("The cut is not straight")
 
@@ -62,6 +69,19 @@ def checkPosition(component, constraints):
 		p = component.rect.y
 	
 	return (p in constraints.acceptRange) or ( (p + d) in constraints.acceptRange)
+
+def checkSuperPosition(component, constraints):
+	"""Test if the component have a bounding box inside the SuperAccepting
+	rectangle defined in the constraints. this def i mebnt to confine the box whit ind are
+	large margin"""
+	d = component.rect.width
+	p = component.rect.x
+	if constraints.coordinate:
+		d = component.rect.height
+		p = component.rect.y
+	
+	return (p in constraints.superAcceptRange) and ( (p + d) in constraints.superAcceptRange)
+
 
 def checkSize(component, constraints):
 	"""Test if the component have size greater than the minumum size

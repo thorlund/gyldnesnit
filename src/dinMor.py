@@ -35,6 +35,9 @@ up = 5
 # The margin
 margin = 2
 
+# the super margin
+superMargin = 100
+
 # Scale
 scale = 0.25
 
@@ -45,7 +48,7 @@ def analyzeCut(scaleImage, edgeImage, cut):
 	"""Extract the interesting features respecting the cut"""
 
 	# Set up constraints
-	constraints = regionSelector.Constraints(cv.cvGetSize(scaleImage), cut, margin, 0.002, 0.25)
+	constraints = regionSelector.Constraints(cv.cvGetSize(scaleImage), cut, margin, superMargin, 0.002, 0.25)
 
 	# Create temporary images
 	blurImage = cv.cvCreateImage(cv.cvGetSize(scaleImage), 8, 3)
@@ -104,6 +107,8 @@ def analyzeImage(original):
 	# Draw the margins
 	for cut in cuts:
 		lib.drawMargin(original, cut, margin, scale)
+		#include if super margen is need to drawn
+		#lib.drawMargin(original, cut, superMargin, scale)
 
 	return (original, allComponents)
 
