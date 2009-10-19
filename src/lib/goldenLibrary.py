@@ -123,11 +123,15 @@ def getMargins(cut, margin, factor=1):
 	else:
 		raise OrientationException("The cut is not straight")
 	
-	lower_p1 = transformer.translatePoint(cv.cvPoint(cut.p1.x - dx, cut.p1.y - dy), factor)
-	lower_p2 = transformer.translatePoint(cv.cvPoint(cut.p2.x - dx, cut.p2.y - dy), factor)
+	lower_p1 = cv.cvPoint(cut.p1.x - dx, cut.p1.y - dy)
+	lower_p2 = cv.cvPoint(cut.p2.x - dx, cut.p2.y - dy)
+	lower_p1 = transformer.translatePoint(lower_p1, factor)
+	lower_p2 = transformer.translatePoint(lower_p2, factor)
 	
-	upper_p1 = transformer.translatePoint(cv.cvPoint(cut.p1.x + dx, cut.p1.y + dy), factor)
-	upper_p2 = transformer.translatePoint(cv.cvPoint(cut.p2.x + dx, cut.p2.y + dy), factor)
+	upper_p1 = cv.cvPoint(cut.p1.x + dx, cut.p1.y + dy)
+	upper_p2 = cv.cvPoint(cut.p2.x + dx, cut.p2.y + dy)
+	upper_p1 = transformer.translatePoint(upper_p1, factor)
+	upper_p2 = transformer.translatePoint(upper_p2, factor)
 
 	lines.append(Line(lower_p1, lower_p2))
 	lines.append(Line(upper_p1, upper_p2))
@@ -160,8 +164,10 @@ def drawBoundingBoxes(out, component_dictionary, factor=1):
 		component = component_dictionary[entry][1]
 		color = component_dictionary[entry][0]
 		rect = component.rect
-		p1 = transformer.translatePoint(cv.cvPoint(rect.x, rect.y), factor)
-		p2 = transformer.translatePoint(cv.cvPoint(rect.x + rect.width, rect.y + rect.height), factor)
+		p1 = cv.cvPoint(rect.x, rect.y)
+		p2 = cv.cvPoint(rect.x + rect.width, rect.y + rect.height)
+		p1 = transformer.translatePoint(p1, factor)
+		p2 = transformer.translatePoint(p2, factor)
 		cv.cvRectangle(out, p1, p2, color)
 
 def drawMargin(out, cut, margin, factor=1):
