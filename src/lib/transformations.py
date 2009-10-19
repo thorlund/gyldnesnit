@@ -7,6 +7,10 @@ Helps perfom matrix multiplications without too much hassle.
 from opencv import cv
 import numpy
 
+def translatePoint(point, scale):
+	"""Translate a cvPoint according to scale"""
+	return cv.cvPoint(int(point.x/scale), int(point.y/scale))
+
 def pointToHomogeneousVector(point):
 	"""cvPoint to vector representation"""
 	a = numpy.array([point.x, point.y, 1])

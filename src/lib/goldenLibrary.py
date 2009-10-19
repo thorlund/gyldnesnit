@@ -5,6 +5,7 @@ Provides basic operations for image manipulation
 from math import sqrt
 from opencv import cv
 from opencv import highgui
+import transformations as transformer
 import random
 
 # Define globals
@@ -122,11 +123,11 @@ def getMargins(cut, margin, factor=1):
 	else:
 		raise OrientationException("The cut is not straight")
 	
-	lower_p1 = cv.cvPoint(int((cut.p1.x - dx)/factor), int((cut.p1.y - dy)/factor))
-	lower_p2 = cv.cvPoint(int((cut.p2.x - dx)/factor), int((cut.p2.y - dy)/factor))
+	lower_p1 = transformer.translatePoint(cv.cvPoint(cut.p1.x - dx, cut.p1.y - dy), factor)
+	lower_p2 = transformer.translatePoint(cv.cvPoint(cut.p2.x - dx, cut.p2.y - dy), factor)
 	
-	upper_p1 = cv.cvPoint(int((cut.p1.x + dx)/factor), int((cut.p1.y + dy)/factor))
-	upper_p2 = cv.cvPoint(int((cut.p2.x + dx)/factor), int((cut.p2.y + dy)/factor))
+	upper_p1 = transformer.translatePoint(cv.cvPoint(cut.p1.x + dx, cut.p1.y + dy), factor)
+	upper_p2 = transformer.translatePoint(cv.cvPoint(cut.p2.x + dx, cut.p2.y + dy), factor)
 
 	lines.append(Line(lower_p1, lower_p2))
 	lines.append(Line(upper_p1, upper_p2))
@@ -153,20 +154,15 @@ def drawLines(original, outimage=None, lines=None, color=COL_RED):
 	for line in lines:
 		cv.cvLine(outimage, line.p1, line.p2, color)
 	
-def drawBoundingBoxes(out, component_dictionary, factor):
+def drawBoundingBoxes(out, component_dictionary, factor=1):
 	"""Given a dictionary of components, draw its red bounding box on the outimage"""
 	for entry in component_dictionary:
 		component = component_dictionary[entry][1]
+		color = component_dictionary[entry][0]
 		rect = component.rect
-		x1 = int(rect.x/factor)
-		y1 = int(rect.y/factor)
-		w = int(rect.width/factor)
-		h = int(rect.height/factor)
-		p1 = cv.cvPoint(x1, y1)
-		p2 = cv.cvPoint(x1 + w, y1 + h)
-		#p1 = cv.cvPoint(rect.x, rect.y)
-		#p2 = cv.cvPoint(rect.x + rect.width, rect.y + rect.height)
-		cv.cvRectangle(out, p1, p2, COL_RED)
+		p1 = transformer.translatePoint(cv.cvPoint(rect.x, rect.y), factor)
+		p2 = transformer.translatePoint(cv.cvPoint(rect.x + rect.width, rect.y + rect.height), factor)
+		cv.cvRectangle(out, p1, p2, color)
 
 def drawMargin(out, cut, margin, factor=1):
 	lines = getMargins(cut, margin, factor)

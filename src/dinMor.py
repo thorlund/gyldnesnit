@@ -33,7 +33,7 @@ lo = 5
 up = 5
 
 # The margin
-margin = 4
+margin = 2
 
 # Scale
 scale = 0.25
@@ -102,8 +102,8 @@ def analyzeImage(original):
 		lib.drawBoundingBoxes(original, dict, scale)
 
 	# Draw the margins
-	#for cut in cuts:
-	#	lib.drawMargin(original, cut, margin, scale)
+	for cut in cuts:
+		lib.drawMargin(original, cut, margin, scale)
 
 	return (original, allComponents)
 
@@ -120,9 +120,9 @@ if __name__ == '__main__':
 
 	highgui.cvNamedWindow (winname, highgui.CV_WINDOW_AUTOSIZE)
 
-	cuts = lib.findGoldenMeans(cv.cvGetSize(image))
-	for cut in cuts:
-		lib.drawMargin(image, cut, margin)
+	#cuts = lib.findGoldenMeans(cv.cvGetSize(image))
+	#for cut in cuts:
+	#	lib.drawMargin(image, cut, margin)
 
 	while True:
 		highgui.cvShowImage (winname, image)
