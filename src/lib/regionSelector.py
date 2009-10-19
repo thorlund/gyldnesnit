@@ -7,8 +7,7 @@ import goldenLibrary as lib
 class Constraints:
 	"""Holds a set of constraints for an image when finding regions at a cut"""
 	coordinate = None
-	lower_bound = None
-	upper_bound = None
+	acceptRange = None
 	rect = None
 	size = None
 	mass = None
@@ -41,12 +40,14 @@ class Constraints:
 
 		if cut.p1.x == cut.p2.x:
 			self.coordinate = 0
-			self.lower_bound = cut.p1.x - margin
-			self.upper_bound = cut.p1.x + margin
+			lower_bound = cut.p1.x - margin
+			upper_bound = cut.p1.x + margin
+			self.acceptRange = range(lower_bound, upper_bound + 1, 1)
 		elif cut.p1.y == cut.p2.y:
 			self.coordinate = 1
-			self.lower_bound = cut.p1.y - margin
-			self.upper_bound = cut.p1.y + margin
+			lower_bound = cut.p1.y - margin
+			upper_bound = cut.p1.y + margin
+			self.acceptRange = range(lower_bound, upper_bound + 1, 1)
 		else:
 			raise lib.OrientationException("The cut is not straight")
 
@@ -60,8 +61,7 @@ def checkPosition(component, constraints):
 		d = component.rect.height
 		p = component.rect.y
 	
-	acceptRange = range(constraints.lower_bound, constraints.upper_bound + 1, 1)
-	return (p in acceptRange) or ( (p + d) in acceptRange)
+	return (p in constraints.acceptRange) or ( (p + d) in constraints.acceptRange)
 
 def checkSize(component, constraints):
 	"""Test if the component have size greater than the minumum size
