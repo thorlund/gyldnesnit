@@ -153,13 +153,19 @@ def drawLines(original, outimage=None, lines=None, color=COL_RED):
 	for line in lines:
 		cv.cvLine(outimage, line.p1, line.p2, color)
 	
-def drawBoundingBoxes(out, component_dictionary):
+def drawBoundingBoxes(out, component_dictionary, factor):
 	"""Given a dictionary of components, draw its red bounding box on the outimage"""
 	for entry in component_dictionary:
 		component = component_dictionary[entry][1]
 		rect = component.rect
-		p1 = cv.cvPoint(rect.x, rect.y)
-		p2 = cv.cvPoint(rect.x + rect.width, rect.y + rect.height)
+		x1 = int(rect.x/factor)
+		y1 = int(rect.y/factor)
+		w = int(rect.width/factor)
+		h = int(rect.height/factor)
+		p1 = cv.cvPoint(x1, y1)
+		p2 = cv.cvPoint(x1 + w, y1 + h)
+		#p1 = cv.cvPoint(rect.x, rect.y)
+		#p2 = cv.cvPoint(rect.x + rect.width, rect.y + rect.height)
 		cv.cvRectangle(out, p1, p2, COL_RED)
 
 def drawMargin(out, cut, margin):

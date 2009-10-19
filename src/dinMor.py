@@ -12,6 +12,7 @@ import lib.edgeDetector as edgeDetector
 import lib.featureDetector as featureDetector
 import lib.regionSelector as regionSelector
 import lib.lineScanner as lineScanner
+import lib.transformations as transformer
 
 # import the necessary things for OpenCV
 from opencv import cv
@@ -32,23 +33,26 @@ lo = 5
 up = 5
 
 # The margin
-margin = 18
+margin = 7
+
+# Scale
+scale = 0.25
 
 ## End Thresholds ##
 
 # All of this might even go in the feature detector...?
-def analyzeCut(original, edgeImage, cut):
+def analyzeCut(scaleImage, edgeImage, cut):
 	"""Extract the interesting features respecting the cut"""
 
 	# Set up constraints
-	constraints = regionSelector.Constraints(cv.cvGetSize(original), cut, margin, 0.002, 0.25)
+	constraints = regionSelector.Constraints(cv.cvGetSize(scaleImage), cut, margin, 0.002, 0.25)
 
 	# Create temporary images
-	blurImage = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
-	workImage = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
+	blurImage = cv.cvCreateImage(cv.cvGetSize(scaleImage), 8, 3)
+	workImage = cv.cvCreateImage(cv.cvGetSize(scaleImage), 8, 3)
 
 	# Create a blurred copy of the original
-	cv.cvSmooth(original, blurImage, cv.CV_BLUR, 3, 3, 0)
+	cv.cvSmooth(scaleImage, blurImage, cv.CV_BLUR, 3, 3, 0)
 
 	# Superimpose the edges onto the blured image
 	cv.cvNot(edgeImage, edgeImage)
@@ -61,7 +65,7 @@ def analyzeCut(original, edgeImage, cut):
 	cv.cvReleaseImage(blurImage)
 
 	# Retrive the regions touching the cut
-	component_dictionary = featureDetector.ribbonFloodFill(original, edgeImage, workImage, cut, margin, lo, up)
+	component_dictionary = featureDetector.ribbonFloodFill(scaleImage, edgeImage, workImage, cut, margin, lo, up)
 
 	# Clean up
 	cv.cvReleaseImage(workImage)
@@ -70,28 +74,34 @@ def analyzeCut(original, edgeImage, cut):
 	newComponents = regionSelector.pruneRegions(component_dictionary, constraints)
 
 	# Return the dictionary of accepted components
+	#transformer.translateBoundingBoxes(newComponents, 1)
 	return newComponents
 
 
 def analyzeImage(original):
+	scaleImage = cv.cvCreateImage(cv.cvSize(int(original.width*scale), int(original.height*scale)), 8, 3)
+	cv.cvResize(original, scaleImage)
+
 	# Create 1-channel image for the egdes
-	edgeImage = cv.cvCreateImage(cv.cvGetSize(image), 8, 1)
+	edgeImage = cv.cvCreateImage(cv.cvGetSize(scaleImage), 8, 1)
+	print "%s" % cv.cvGetSize(edgeImage)
+	print "%s" % cv.cvGetSize(scaleImage)
 
 	# Retrieve edges
-	edgeDetector.findBWEdges(original, edgeImage, edgeThreshold1, edgeThreshold2)
+	edgeDetector.findBWEdges(scaleImage, edgeImage, edgeThreshold1, edgeThreshold2)
 
 	# Get cuts
-	cuts = lib.findGoldenMeans(cv.cvGetSize(original))
+	cuts = lib.findGoldenMeans(cv.cvGetSize(scaleImage))
 
 	# Run along
 	allComponents = []
 	for cut in cuts:
-		cutComponents = analyzeCut(original, edgeImage, cut)
+		cutComponents = analyzeCut(scaleImage, edgeImage, cut)
 		allComponents.append(cutComponents)
 
 	# Get the collected component_dictionaries
 	for dict in allComponents:
-		lib.drawBoundingBoxes(original, dict)
+		lib.drawBoundingBoxes(original, dict, scale)
 
 	# Draw the margins
 	for cut in cuts:

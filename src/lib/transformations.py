@@ -44,6 +44,23 @@ def scalingMatrix(p, sx, sy):
 	p_pling = numpy.mat(sM)*numpy.mat(p)
 	return p_pling
 
+def translateBoundingBoxes(component_dictionary, factor):
+	"""Translate all bounding boxes in a components
+	dictionary according to a factor > 0 and <= 1"""
+	if not (0 < factor and factor <= 1):
+		raise ValueError("factor must be a number between 0 and 1")
+	for component in component_dictionary:
+		rect = component.rect
+		x = int(rect.x/factor)
+		y = int(rect.y/factor)
+		w = int(rect.width/factor)
+		h = int(rect.height/factor)
+		component.rect.x = x
+		component.rect.y = y
+		component.rect.width = w
+		component.rect.height = h
+
+
 if __name__ == "__main__":
 	p1 = cv.cvPoint(2, 2)
 	hp = pointToHomogeneousVector(p1)
