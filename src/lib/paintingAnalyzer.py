@@ -25,6 +25,7 @@ def analyzeCut(original, edgeImage, cut, settings):
 	up = settings.up
 	edgeThreshold1 = settings.edgeThreshold1
 	edgeThreshold2 = settings.edgeThreshold2
+	# XXX: Watch out! Margin should not be defined this way
 	margin = settings.margin
 
 	# XXX TODO: Remove this and put it somewhere else!!
