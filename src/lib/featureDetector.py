@@ -8,7 +8,7 @@ import lineScanner
 import edgeDetector
 
 # import goldenLibrary
-import lib.goldenLibrary as lib
+import goldenLibrary as lib
 
 def colorString(color):
 	return "%s%s%s" % (int(color[0]), int(color[1]), int(color[2]))

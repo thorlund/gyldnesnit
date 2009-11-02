@@ -74,18 +74,21 @@ def intersection(line1, line2):
 
 	return getIntersection(x1, x2, x3, x4, y1, y2, y3, y4)
 
-def findMeans(size):
-	"""Renamed to findGoldenLibrary"""
-	raise StandardError("\n\nThe method findMeans have been renamed to findGoldenMeans\nUse that instead\n")
+def findMeans(size, ratio):
+	"""Return four cuts with respect to the ratio.
+	Normally the ration was 0.618.
+	Now it's a variable."""
 
-def findGoldenMeans(size):
-	"""Return (four) line segments marking the golden mean"""
-	
+	# Check if the 0 < ratio < 1
+	# TODO: Find a minimum size for ratio
+	if not (0.5 < ratio and ratio < 1.0):
+		raise ValueError("ratio must be a number between 0.5 and 1.0")
+
 	# Array holding the line segments
 	lines = []
 
 	# First vertical lines (along x-axis)
-	dx = getGoldenSection(size.width)
+	dx = int(ratio * size.width)
 
 	# The rightmost
 	p1 = cv.cvPoint(dx, 0)
@@ -99,6 +102,7 @@ def findGoldenMeans(size):
 
 	# Then the horizontal lines (along y-axis)
 	dy = getGoldenSection(size.height)
+	dy = int(ratio * size.height)
 
 	# The bottommost
 	p1 = cv.cvPoint(0, dy)
@@ -111,6 +115,10 @@ def findGoldenMeans(size):
 	lines.append(Line(p1, p2))
 
 	return lines
+
+def findGoldenMeans(size):
+	"""Return (four) line segments marking the golden mean"""
+	return findMeans(size, PHI)
 
 def getMargins(cut, margin, factor=1):
 	lines = []
