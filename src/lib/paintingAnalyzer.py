@@ -91,7 +91,7 @@ def analyzeImage(original, settings):
 	comps = {}
 	for ratio in cuts:
 		cutDict = {}
-		for cutNo in range(len(cuts)):
+		for cutNo in range(len(cuts[ratio])):
 			cutComponents = analyzeCut(original, edgeImage, cuts[ratio][cutNo], settings)
 			cutDict[cutNo] = cutComponents
 		comps[ratio] = cutDict
