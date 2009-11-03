@@ -5,6 +5,7 @@ A framework to interact with a painting, and handling the database interaction
 from opencv import cv
 from opencv import highgui
 
+<<<<<<< HEAD
 class Painting:
 	#All the values we sohuld fill.
 	image = None
