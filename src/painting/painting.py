@@ -5,32 +5,38 @@ A framework to interact with a painting, and handling the database interaction
 from opencv import cv
 from opencv import highgui
 
-#All the values we sohuld fill.
-image = None
-width = None
-height = None
+class Painting:
+	#All the values we sohuld fill.
+	image = None
+	width = None
+	height = None
 
-#setters and getters
-def setImage( filename):
-	image = highgui.cvLoadImage(filename)
-	if not image:
-		raise SystemError('This picture is not parsable by opencv :'+filename)
+	def __init__(self, filename):
+		image = highgui.cvLoadImage(filename)
+		if not image:
+			raise SystemError('This picture is not parsable by opencv :'+filename)
 
-def setSize(width,height):
-	self.width = width
-	self.height = height
+	#setters and getters
+	def setImage( filename):
+		image = highgui.cvLoadImage(filename)
+		if not image:
+			raise SystemError('This picture is not parsable by opencv :'+filename)
 
-def getImage():
-	if not image:
-		raise SystemError('This picture is not parsable by opencv :'+filename)
-	else:
-		return image
+	def setSize(width,height):
+		self.width = width
+		self.height = height
 
-def getWidth():
-	return width
+	def getImage():
+		if not image:
+			raise SystemError('This picture is not parsable by opencv :'+filename)
+		else:
+			return image
 
-def getHeight():
-	return height
+	def getWidth():
+		return width
 
-def getWidthHeight():
-	return (width,height)
+	def getHeight():
+		return height
+
+	def getWidthHeight():
+		return (width,height)
