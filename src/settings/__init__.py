@@ -11,7 +11,7 @@ class Settings:
 	lo = 5
 	up = 5
 	cutRatios = None
-	marginPercentage = 0.9
+	marginPercentage = 0.009
 
 	def __init__(self, cutRatios):
 		# This check should be moved to the set-method
