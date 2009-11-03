@@ -12,7 +12,7 @@ class Constraints:
 	rect = None
 	size = None
 	mass = None
-	def __init__(self, imagesize, cut, margin,supermargin, sizePercentage=0.002, massPercentage=0.15):
+	def __init__(self, imagesize, cut, margin, supermargin, sizePercentage=0.002, massPercentage=0.15):
 		"""Calculate all the constraints, i.e. the accepting
 		rectangle (margin), the minimum size relative to the
 		image and the minimum mass relative to the image.
@@ -22,7 +22,7 @@ class Constraints:
 		Arguments:
 			imagesize = size of image as cvSize
 			cut = the section we are inspecting as Line
-			margin = floor(width of margin/2) as int
+			margin = floor(marginWidth/2) as int
 			sizePercentage = min % of pixels required for size of region as decimal
 			massPercentage = min % of pixels required for mass of region as decimal
 		"""
@@ -32,29 +32,31 @@ class Constraints:
 		if not (0 <= massPercentage and massPercentage <= 1):
 			raise ValueError("sizePercentage must be a number between 0 and 1")
 
-		if not margin >= 0:
-			raise ValueError("margin must be >= 0")
+		if not (0 < margin):
+			raise ValueError("margin must be greater than 0")
 
 		totalPixels = imagesize.height * imagesize.width
 		self.size = sizePercentage * totalPixels
 		self.mass = massPercentage
 
 		if cut.p1.x == cut.p2.x:
+			# Vertical
 			self.coordinate = 0
 			lower_bound = cut.p1.x - margin
 			upper_bound = cut.p1.x + margin
 			self.acceptRange = range(lower_bound, upper_bound + 1, 1)
-			superlower_bound = cut.p1.x - supermargin
-			superupper_bound = cut.p1.x + supermargin
-			self.superAcceptRange = range(superlower_bound, superupper_bound + 1, 1)			
+			#superlower_bound = cut.p1.x - supermargin
+			#superupper_bound = cut.p1.x + supermargin
+			#self.superAcceptRange = range(superlower_bound, superupper_bound + 1, 1)
 		elif cut.p1.y == cut.p2.y:
+			# Horizontal
 			self.coordinate = 1
 			lower_bound = cut.p1.y - margin
 			upper_bound = cut.p1.y + margin
 			self.acceptRange = range(lower_bound, upper_bound + 1, 1)
-			superlower_bound = cut.p1.y - supermargin
-			superupper_bound = cut.p1.y + supermargin
-			self.superAcceptRange = range(superlower_bound, superupper_bound + 1, 1)
+			#superlower_bound = cut.p1.y - supermargin
+			#superupper_bound = cut.p1.y + supermargin
+			#self.superAcceptRange = range(superlower_bound, superupper_bound + 1, 1)
 		else:
 			raise lib.OrientationException("The cut is not straight")
 
