@@ -17,26 +17,26 @@ class Painting:
 			raise SystemError('This picture is not parsable by opencv :'+filename)
 
 	#setters and getters
-	def setImage( filename):
+	def setImage(self, filename):
 		image = highgui.cvLoadImage(filename)
 		if not image:
 			raise SystemError('This picture is not parsable by opencv :'+filename)
 
-	def setSize(width,height):
+	def setSize(self,width,height):
 		self.width = width
 		self.height = height
 
-	def getImage():
+	def getImage(self):
 		if not image:
 			raise SystemError('This picture is not parsable by opencv :'+filename)
 		else:
 			return image
 
-	def getWidth():
+	def getWidth(self):
 		return width
 
-	def getHeight():
+	def getHeight(self):
 		return height
 
-	def getWidthHeight():
+	def getWidthHeight(self):
 		return (width,height)
