@@ -15,6 +15,7 @@ import edgeDetector
 import featureDetector
 import regionSelector
 import lineScanner
+import marginCalculator
 import transformations as transformer
 
 
@@ -23,14 +24,11 @@ def analyzeCut(original, edgeImage, cut, settings):
 	# Get all data from the settings
 	lo = settings.lo
 	up = settings.up
-	edgeThreshold1 = settings.edgeThreshold1
-	edgeThreshold2 = settings.edgeThreshold2
-	# XXX: Watch out! Margin should not be defined this way
-	margin = settings.margin
 
-	# XXX TODO: Remove this and put it somewhere else!!
-	# XXX: Can this be done in the regionSelector?
-	superMargin = margin * 3
+	# Set up the margin with respect to the cut
+	margin = marginCalculator.getPixels(cv.cvGetSize(original), cut, settings.marginPercentage)
+	superMargin = 0
+	# ^^ We don't use superMargin
 
 	# Set up constraints
 	constraints = regionSelector.Constraints(cv.cvGetSize(original), cut, margin, superMargin, 0.002, 0.25)
@@ -139,12 +137,12 @@ def main():
 	# All of this should be in a separate settings class
 	cutRatios = [0.6667, lib.PHI, 0.6]
 	settings = Sets()
-	setattr(settings, "margin", 7)
 	setattr(settings, "lo", 5)
 	setattr(settings, "up", 5)
 	setattr(settings, "edgeThreshold1", 78)
 	setattr(settings, "edgeThreshold2", 2.5 * 78)
 	setattr(settings, "cutRatios", cutRatios)
+	setattr(settings, "marginPercentage", 0.009)
 
 	# Run the analysis with the above settings
 	comps = analyzeImage(image, settings)
