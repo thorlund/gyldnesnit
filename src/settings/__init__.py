@@ -17,37 +17,37 @@ class Settings:
 		# This check should be moved to the set-method
 		if cutRatios is None:
 			raise StandardError()
-		setCutRatios(cutRatios)
+		self.setCutRatios(cutRatios)
 
-	def setThreshold1(trsh):
+	def setThreshold1(self, trsh):
 		"""Set threshold1
 		Will auto-set threshold2 to 2.5 * trsh"""
 		self.edgeThreshold1 = trsh
 		self.edgeThreshold2 = thrsh * 2.5
 
-	def setThreshold2(trsh):
+	def setThreshold2(self, trsh):
 		"""Set threshold2"""
 		self.edgeThreshold2 = trsh
 
-	def setThresholds(trsh1, trsh2):
+	def setThresholds(self, trsh1, trsh2):
 		"""Set thresholds"""
 		self.edgeThreshold1 = trsh1
 		self.edgeThreshold2 = trsh2
 
-	def setLo(lo):
+	def setLo(self, lo):
 		"""Set the lower bound for flood fill"""
 		self.lo = lo
 
-	def setUp(up):
+	def setUp(self, up):
 		"""Set the upper bound for flood fill"""
 		self.up = up
 
-	def setCutRatios(cutRatios):
+	def setCutRatios(self, cutRatios):
 		"""Set the list of ratios for cuts"""
 		# TODO: Check if this is an array
 		self.cutRatios = cutRatios
 
-	def setMarginPercentage(perc):
+	def setMarginPercentage(self, perc):
 		"""Set the percent for margin"""
 		self.marginPercentage = perc
 
