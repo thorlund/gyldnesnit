@@ -11,7 +11,7 @@ class Settings:
 	lo = 5
 	up = 5
 	cutRatios = None
-	marginPercent = 0.9
+	marginPercentage = 0.9
 
 	def __init__(self, cutRatios):
 		# This check should be moved to the set-method
@@ -47,9 +47,9 @@ class Settings:
 		# TODO: Check if this is an array
 		self.cutRatios = cutRatios
 
-	def setMarginPercent(perc):
+	def setMarginPercentage(perc):
 		"""Set the percent for margin"""
-		self.marginPercent = perc
+		self.marginPercentage = perc
 
 
 ### Test ###
