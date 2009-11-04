@@ -10,18 +10,36 @@ git %{
 %\end{itemize}
 
 
-\subsection*{Hvordan deles billedet efter det gyldne snit}
+\subsection{Hvordan deles billedet efter det gyldne snit}
+(intro)
+
+\subsubsection{akseptabel afvigelse}
+(her skal der noget ind med at vi egenlide gerne vil have nogle konkrede
+tal påm hvor mange $%$ der er aksepeltabel)
 I et billedet befinder der sig 4 gyldne snit. 2 i det vertikale plan og
 2 i det horisontale plan. placeringen af de 4 snit udregnes i forhold
 til udledningen i afsnittet om det gyldne snit, hvor konstanten $\varPhi
-= 1.618$ bliver fundet. Den horisontale brede og vertikale højte bliver
-divideret med $\varPhi$. Det giver to tal som betegner, hvor mange
-pixels fra begge kanter, det gyldne snit befinder sig f.eks ved et
-billedet som er 4000 pixel bred, vil punktet ligge ved.
+= 0.618$ bliver fundet. Den horisontale brede B og vertikale højte H
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.42,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/path2407}
+	\end{center}
+	\caption[]{Billedet opbygning}
+	\label{lenasnit}
+\end{figure}
+
+bliver divideret med $\varPhi$. Det giver to tal som betegner, hvor
+mange pixels fra begge kanter, det gyldne snit befinder sig f.eks ved et
+billedet som har B = 4000 pixel, vil punktet ligge ved.
 
 \begin{equation}
-	4000/\varPhi = 4000*2/(\sqrt{5}+1) = 2472.13595 \approx 2472
+	4000/\varPhi = 4000(\sqrt{5}-1)/2 = 2472.13595 \approx 2472
 \end{equation}
+
+Som man kan se approsimere vi antal pixel, dette gør at vi har en
+usikkerhed på max 0.5 pixels, dette giver selve i de miste billedet en
+$%$ usiker som ligger under 1(dette er godt nok men hvorfor). 
 
 \begin{figure}[h]
 	\begin{center}
@@ -30,6 +48,9 @@ billedet som er 4000 pixel bred, vil punktet ligge ved.
 	\caption[]{Billedet som har indtegnet de fire gyldne snit}
 	\label{lenasnit}
 \end{figure}
+
+Som man kan se på billedet ser snitne stadig symetriske ud, selv om de
+er udregnet ud fra en approsimation.
 
 \subsection*{Problematikken med heltal}
 Mange af de metoder som vi bruger til at udregne, position af det gyldne
@@ -59,29 +80,29 @@ meget lavt, konklutionen er at selv om vi regner med en
 approksimation af det gyldne snit få vi stadig et resultat som kan bruges.
 
 \subsubsection{Heltal ved udregning af Margin}
-En af vores mål ved denne opgave er at se om kunstner har tegnet
-interessante regioner ved opdelingen af billedet, hvor 5/3 er som snit, og
+En af vores mål ved denne opgave er at se om kunstnern har tegnet
+interessante regioner ved opdelingen af billedet, hvor 2/3 er som snit, og
 samme line det med det gyldne snit. Da de 2 snit ligger meget tæt på
 hinanden og vi gerne vil lave en sammenligning, er det vigtigt at margin
-for snittet ikke krydser hinanden. Dette vil indebære at de samme
+for snittet ikke krydser hinanden(hvorfor er det vigtigt, og dette en god nok forklaring). Dette vil indebære at de samme
 region vil blive fundet af begge snit, og vil give et skævt billedet
 af forskellen på de to snit.
-hvis x betegner antal pixels i enden bredden eller højden, og vi vil se
-forskellen mellem 5/3 og $\Phi$, dividere vi x med snittet for at finde
+hvis x betegner antal pixels i B eller H, og vi vil se
+forskellen mellem 2/3 og $\varphi$, multiplisere vi x med snittet for at finde
 dens placering og subtrahere dem fra hinanden.
 
-\begin{equation}
-	|\frac{x3}{5} - \frac{x2}{\sqrt{5}+1}| 
-\end{equation}
+\begin{eqnarray}
+	\frac{x3}{2}-\frac{x2}{\sqrt{5}-1} &=& x(\frac{2}{3}-\frac{2}{\sqrt{5}-1}) \\ \nonumber
+	&=& x(0.666667-0.618034) \\ \nonumber
+	&=& x(0.048633) \\
+\end{eqnarray}
 
-Vi har taget den euklidiske norm af formlen, da vi gerne ser at det
-bliver et positivt antal pixels som skiller de 2 snit. Vi har nu
-fundet antal pixels mellem de to snit, og da vi gerne vil undgå at de 2
+Vi har nu fundet antal pixels mellem de to snit. Da vi gerne vil undgå at de to
 marginens ikke krydser hinanden, dividere vi med 2 og tager en floor på
 helle funktionen.
 
 \begin{equation}
-	floor(\frac{|\frac{x3}{5} - \frac{x2}{\sqrt{5}+1}| }{2})
+	\lfloor(\frac{\frac{x3}{5} - \frac{x2}{\sqrt{5}+1} }{2})\rfloor
 \end{equation}
 
 Dette giver os et antal pixels som skildre de to snit. For at vise
@@ -91,15 +112,15 @@ som svare til vores største billedet, 4000 pixels. Ved 500 pixels
 bliver resultatet
 
 \begin{equation}
-	floor(\frac{|\frac{500*3}{5} - \frac{500*2}{\sqrt{5}+1}| }{2}) = 4
+	 \lfloor 500(0.048633)\rfloor = 4
 \end{equation}
 
-Dette er en ok margin, lidt småt, men vores test viser at det er
-rigelige, til at finde godt regioner i billedet.
+Det er en ok margin ud fra de udtagelser som vi lavet for to afsnit siden
 Ved 4000 pixels giver det.
 
 \begin{equation}
-	floor(\frac{|\frac{4000*3}{5} - \frac{4000*2}{\sqrt{5}+1}| }{2}) = 36
+	 \lfloor 4000(0.048633)\rfloor = 36
 \end{equation}
-Som må siges at være mere end nok.
+(skal lige rengne det igemmen igen  4000(0.048633) ikke = 36)
+Som må siges at være mere end nok. nok er nok.
 % vim: set tw=72 spell spelllang=da:
