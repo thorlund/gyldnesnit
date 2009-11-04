@@ -19,7 +19,22 @@ import marginCalculator
 import transformations as transformer
 
 
-def analyzeCut(original, edgeImage, cut, settings):
+def getEdgeImage(original, settings):
+	"""Helper method for calculating the edge detected image"""
+	# Get the thresholds
+	edgeThreshold1 = settings.edgeThreshold1
+	edgeThreshold2 = settings.edgeThreshold2
+
+	# Create 1-channel image for the egdes
+	edgeImage = cv.cvCreateImage(cv.cvGetSize(original), 8, 1)
+
+	# Retrieve BW edges from the original
+	# Put the edges in edgeImage
+	edgeDetector.findBWEdges(original, edgeImage, edgeThreshold1, edgeThreshold2)
+	return edgeImage
+
+
+def analyzeCut(original, edgeImage, cut, settings, showBlobs=False):
 	"""Extract the interesting features in the vicinity of a given cut"""
 	# Get all data from the settings
 	lo = settings.lo
@@ -53,28 +68,24 @@ def analyzeCut(original, edgeImage, cut, settings):
 	# Retrive the regions touching the cut
 	component_dictionary = featureDetector.ribbonFloodFill(original, edgeImage, workImage, cut, margin, lo, up)
 
-	# Clean up
-	cv.cvReleaseImage(workImage)
+	# Clean up only if we do not return the image
+	if not showBlobs:
+		cv.cvReleaseImage(workImage)
 
 	# Prune components
 	newComponents = regionSelector.pruneRegions(component_dictionary, constraints)
 
-	# Return the dictionary of accepted components
-	return newComponents
+	# Return the dictionary of accepted components or both
+	if not showBlobs:
+		return newComponents
+	else:
+		return (workImage, newComponents)
 
 
 def analyzeImage(original, settings):
 	"""Runs the analysis on all cuts on an image"""
-	# Get the thresholds
-	edgeThreshold1 = settings.edgeThreshold1
-	edgeThreshold2 = settings.edgeThreshold2
-
-	# Create 1-channel image for the egdes
-	edgeImage = cv.cvCreateImage(cv.cvGetSize(original), 8, 1)
-
-	# Retrieve BW edges from the original
-	# Put the edges in edgeImage
-	edgeDetector.findBWEdges(original, edgeImage, edgeThreshold1, edgeThreshold2)
+	# Get the BW edge image
+	edgeImage = getEdgeImage(original, settings)
 
 	# Get cuts and place then in a dictionary by cut ratio
 	# XXX: Notice the ugly string conversion because python has an issue when
@@ -103,11 +114,14 @@ def analyzeImage(original, settings):
 	return comps
 
 
-def analyze(painting, settings):
+def analyze(painting, settings, method):
 	"""Given a picture, of class painting, commence the analysis"""
 	original = painting.getImage()
-	components = analyzeImage(original, settings)
-	return components
+
+	if method == "naive":
+		return analyzeImage(original, settings)
+	else:
+		raise StandardError("No method named %s" % method)
 
 
 #########################################
