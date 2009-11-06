@@ -69,6 +69,7 @@ class Region(s.SQLObject):
 
 def main():
 	# Stupid test for nothing
+	print "Test"
 	# Create an in-memory sqlite database just for test
 	connection_string = 'sqlite:/:memory:'
 	connection = s.connectionForURI(connection_string)
@@ -82,6 +83,13 @@ def main():
 
 	res = Result(runId=Run.get(1).id, paintingId=2, cutRatio=0.618, cutNo=0, numberOfRegions=2)
 	print Result.get(1)
+	Artist.createTable()
+	Painting.createTable()
+	vangogh = Artist(name="Van Gogh",born="1234-4321",school="klatmalerier",timeline="1600ish")
+	print vangogh
+	solsikker = Painting(artist=Artist.selectBy(name="Van Gogh")[0].id,title="Solsikker",date="24 dec",technique="Fingermaling", location="/dev/null",url="www.bogus.com/help",form="pas",type="klatmaling")
+	print solsikker
+
 
 if __name__ == "__main__":
 	main()
