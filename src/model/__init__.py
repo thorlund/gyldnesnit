@@ -122,7 +122,6 @@ class Result(s.SQLObject):
 		val = float(value)
 		self._SO_set_cutRatio(val)
 
-
 def createNewRegion(resultId, component):
 	"""Create a new region in the database from
 	a connected component

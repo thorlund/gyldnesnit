@@ -63,7 +63,17 @@ def main():
 	print m.getCutRatioForRegionId(2)
 	print m.getRegionsForResultId(2)
 	m.showPictureInResultId(4)
+		result = paintingAnalyzer.analyze(painting, settings, "naive")
+		painting.setResults(result)
+		m.saveResults(runId, painting)
 
+	print list(m.Result.select())
+
+	#painting = Painting(filename)
+	#cutRatios = [2.0/3, goldenLibrary.PHI]
+	#settings = Settings(cutRatios)
+	#res = paintingAnalyzer.analyze(painting, settings, "naive")
+	#painting.setResults(result)
 	#img = graphicHelper.boundingBoxResult(painting.getImage(), settings, 2)
 	#img = graphicHelper.blobResult(painting.getImage(), settings, 2)
 	#graphicHelper.showImage(img, "Test")
