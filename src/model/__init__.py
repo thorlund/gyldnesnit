@@ -56,6 +56,30 @@ class Run(s.SQLObject):
 	up = s.IntCol()
 	marginPercentage = s.FloatCol()
 
+def saveResults(runId, painting):
+	"""Given a class painting with results and the runId
+	store the results in the database"""
+	# Get id and results
+	paintingId = painting.getId()
+	paintingResults = painting.getResults()
+
+	if paintingResults is None:
+		"""Return if we have no results"""
+		return -1
+
+	for cutRatio in paintingResults:
+		for cutNo in paintingResults[cutRatio]:
+			numberOfRegions = len(paintingResults[cutRatio][cutNo])
+
+			# Create a new result
+			result = Result(runId=runId, paintingId=paintingId, cutRatio=cutRatio, cutNo=cutNo, numberOfRegions=numberOfRegions)
+			resultId = result.id
+			print "\t%s objects in cut no. %s" % (numberOfRegions, cutNo)
+			for region in paintingResults[cutRatio][cutNo]:
+				component = paintingResults[cutRatio][cutNo][regio][1]
+				createNewRegion(resultId, component)
+
+
 class Result(s.SQLObject):
 	"""
 	_id_, ^runId, ^paintingId, cutRatio, cutNo, numberOfRegions
@@ -109,6 +133,7 @@ def main():
 	t = createNewRun(settings)
 	
 	print Run.get(1)
+	print t.id
 
 	res = Result(runId=Run.get(1).id, paintingId=2, cutRatio=0.618, cutNo=0, numberOfRegions=2)
 	print Result.get(1)
