@@ -114,9 +114,10 @@ def analyzeImage(original, settings):
 	return comps
 
 
-def analyze(painting, settings, method):
+def analyze(painting, settings):
 	"""Given a picture, of class painting, commence the analysis"""
 	original = painting.getImage()
+	method = settings.method
 
 	if method == "naive":
 		return analyzeImage(original, settings)

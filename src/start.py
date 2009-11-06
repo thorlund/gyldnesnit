@@ -6,6 +6,7 @@ Quick n dirrrty test
 import sys
 from lib import paintingAnalyzer
 from lib import goldenLibrary
+from lib import graphicHelper
 from settings import Settings
 from painting import Painting
 import model as m
@@ -39,7 +40,7 @@ def main():
 
 	for entry in list(m.Painting.select()):
 		painting = Painting(entry)
-		result = paintingAnalyzer.analyze(painting, settings, "naive")
+		result = paintingAnalyzer.analyze(painting, settings)
 		painting.setResults(result)
 		m.saveResults(runId, painting)
 
@@ -52,6 +53,11 @@ def main():
 			print "\t%s" % r
 
 	settings = m.getSettingsForRunId(1)
+	print settings
+
+	#img = graphicHelper.boundingBoxResult(painting.getImage(), settings, 2)
+	img = graphicHelper.blobResult(painting.getImage(), settings, 2)
+	graphicHelper.showImage(img, "Test")
 
 	#painting = Painting(filename)
 	#cutRatios = [2.0/3, goldenLibrary.PHI]

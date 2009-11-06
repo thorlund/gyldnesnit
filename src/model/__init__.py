@@ -46,7 +46,8 @@ def createNewRun(settings):
 	lo = settings.lo
 	up = settings.up
 	marginPercentage = settings.marginPercentage
-	return Run(trsh1=trsh1, trsh2=trsh2, lo=lo, up=up, marginPercentage=marginPercentage)
+	method = settings.method
+	return Run(trsh1=trsh1, trsh2=trsh2, lo=lo, up=up, marginPercentage=marginPercentage, method=method)
 
 
 class Run(s.SQLObject):
@@ -59,6 +60,7 @@ class Run(s.SQLObject):
 	lo = s.IntCol()
 	up = s.IntCol()
 	marginPercentage = s.FloatCol()
+	method = s.StringCol()
 
 
 def saveResults(runId, painting):
