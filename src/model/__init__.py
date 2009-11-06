@@ -9,17 +9,27 @@ Keys marked with a ^ are foreign keys
 
 import sqlobject as s
 
-class Artist(object):
+class Artist(s.SQLObject):
 	"""
 	_id_, the rest
 	"""
-	pass
+	name = s.StringCol()
+	born = s.StringCol()
+	school = s.StringCol()
+	timeline = s.StringCol()
 
 class Painting(s.SQLObject):
 	"""
 	_id_, ^artistId, the rest
 	"""
-	pass
+	artist = s.ForeignKey('Artist')
+	title = s.StringCol()
+	date = s.StringCol()
+	technique = s.StringCol()
+	location = s.StringCol()
+	url = s.StringCol()
+	form = s.StringCol()
+	type = s.StringCol()
 
 class Run(s.SQLObject):
 	"""
