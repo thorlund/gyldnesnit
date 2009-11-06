@@ -18,6 +18,7 @@ from src import painting as p
 from opencv import cv
 
 
+
 class Artist(s.SQLObject):
 	"""
 	_id_, the rest
@@ -59,6 +60,7 @@ class Painting(s.SQLObject):
 		self._set_width(size.width)
 
 
+
 def createNewRun(settings):
 	"""Create a new run using a settings class"""
 
@@ -69,6 +71,7 @@ def createNewRun(settings):
 	marginPercentage = settings.marginPercentage
 	method = settings.method
 	return Run(trsh1=trsh1, trsh2=trsh2, lo=lo, up=up, marginPercentage=marginPercentage, method=method)
+
 
 
 class Run(s.SQLObject):
@@ -82,6 +85,7 @@ class Run(s.SQLObject):
 	up = s.IntCol()
 	marginPercentage = s.FloatCol()
 	method = s.StringCol()
+
 
 
 def saveResults(runId, painting):
@@ -121,6 +125,7 @@ class Result(s.SQLObject):
 	def _set_cutRatio(self, value):
 		val = float(value)
 		self._SO_set_cutRatio(val)
+
 
 def createNewRegion(resultId, component):
 	"""Create a new region in the database from
