@@ -51,6 +51,14 @@ class Settings:
 		"""Set the percent for margin"""
 		self.marginPercentage = perc
 
+	def __repr__(self):
+		str =  "Settings\n"
+		str +="Margin ratios: \t\t%s\n" % self.cutRatios
+		str += "Thresholds: \t\t%s, %s\n" % (self.edgeThreshold1, self.edgeThreshold2)
+		str += "Bounds: \t\t%s, %s\n" % (self.lo, self.up)
+		str += "Margin percentage: \t%s" % self.marginPercentage
+		return str
+
 
 ### Test ###
 
@@ -60,6 +68,9 @@ def main():
 	cutRatios = [0.618]
 	test = Settings(cutRatios)
 	print test.edgeThreshold1
+	print test
 
 if __name__ == "__main__":
 	main()
+
+# vim: set noexpandtab tabstop=4 softtabstop=4 shiftwidth=4 :
