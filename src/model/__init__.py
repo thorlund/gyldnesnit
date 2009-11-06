@@ -7,7 +7,12 @@ Keys marked with underscores are primary keys
 Keys marked with a ^ are foreign keys
 """
 
+# Access to other libraries
+import sys
+sys.path.append('../')
+
 import sqlobject as s
+from src.settings import Settings
 
 class Artist(s.SQLObject):
 	"""
@@ -98,8 +103,12 @@ def main():
 	Run.createTable()
 	Result.createTable()
 
-	t = Run(trsh1=2, trsh2=2, lo=3, up=2, marginPercentage=0.0009)
-	print Run.get(1).id
+	cuts = [0.618]
+
+	settings = Settings(cuts)
+	t = createNewRun(settings)
+	
+	print Run.get(1)
 
 	res = Result(runId=Run.get(1).id, paintingId=2, cutRatio=0.618, cutNo=0, numberOfRegions=2)
 	print Result.get(1)
