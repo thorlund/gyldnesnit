@@ -56,8 +56,8 @@ def main():
 	print settings
 
 	#img = graphicHelper.boundingBoxResult(painting.getImage(), settings, 2)
-	img = graphicHelper.blobResult(painting.getImage(), settings, 2)
-	graphicHelper.showImage(img, "Test")
+	#img = graphicHelper.blobResult(painting.getImage(), settings, 2)
+	#graphicHelper.showImage(img, "Test")
 
 	#painting = Painting(filename)
 	#cutRatios = [2.0/3, goldenLibrary.PHI]
