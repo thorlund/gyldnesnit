@@ -11,6 +11,8 @@ import goldenLibrary as lib
 import paintingAnalyzer
 import marginCalculator
 
+import sys
+
 
 def showImage(image, name):
 	"""Helper method for displaying an image"""
