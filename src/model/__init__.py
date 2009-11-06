@@ -7,6 +7,8 @@ Keys marked with underscores are primary keys
 Keys marked with a ^ are foreign keys
 """
 
+import sqlobject as s
+
 class Artist(object):
 	"""
 	_id_, the rest
