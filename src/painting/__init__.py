@@ -9,17 +9,30 @@ import sys
 
 class Painting:
 	#All the values we sohuld fill.
+	id = None
 	image = None
 	width = None
 	height = None
+	results = None
 
-	def __init__(self, filename):
+	def __init__(self, entry):
+		self.id = entry.id
+		filename = entry.location
 		self.image = highgui.cvLoadImage(filename)
 		if not self.image:
 			raise SystemError('This picture is not parsable by opencv :'+filename)
 		self.setSize(self.image.width,self.image.height)
 
 	#setters and getters
+	def setResults(self, results):
+		self.results = results
+
+	def getResults(self):
+		return self.results
+
+	def getId(self):
+		return self.id
+
 	def setImage(self, filename):
 		self.image = highgui.cvLoadImage(filename)
 		if not self.image:

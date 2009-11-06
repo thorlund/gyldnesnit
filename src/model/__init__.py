@@ -74,9 +74,8 @@ def saveResults(runId, painting):
 			# Create a new result
 			result = Result(runId=runId, paintingId=paintingId, cutRatio=cutRatio, cutNo=cutNo, numberOfRegions=numberOfRegions)
 			resultId = result.id
-			print "\t%s objects in cut no. %s" % (numberOfRegions, cutNo)
 			for region in paintingResults[cutRatio][cutNo]:
-				component = paintingResults[cutRatio][cutNo][regio][1]
+				component = paintingResults[cutRatio][cutNo][region][1]
 				createNewRegion(resultId, component)
 
 
@@ -91,13 +90,17 @@ class Result(s.SQLObject):
 	cutNo = s.IntCol()
 	numberOfRegions = s.IntCol()
 
+	def _set_cutRatio(self, value):
+		val = float(value)
+		self._SO_set_cutRatio(val)
+
 def createNewRegion(resultId, component):
 	"""Create a new region in the database from
 	a connected component"""
 	rect = component.rect
 	x = int(rect.x)
 	y = int(rect.y)
-	heigth = int(rect.height)
+	height = int(rect.height)
 	width = int(rect.width)
 	blobArea = int(component.area)
 	return Region(resultId=resultId, x=x, y=y, height=height, width=width, blobArea=blobArea)

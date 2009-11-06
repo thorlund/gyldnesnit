@@ -30,23 +30,37 @@ def main():
 	vangogh = m.Artist(name="Van Gogh",born="1234-4321",school="klatmalerier",timeline="1600ish")
 	solsikker = m.Painting(artist=m.Artist.selectBy(name="Van Gogh")[0].id,title="Solsikker",date="24 dec",technique="Fingermaling", location=filename,url="www.bogus.com/help",form="pas",type="klatmaling")
 
-	for entry in list(m.Painting.select()):
-		print entry.location
-
-	painting = Painting(filename)
+	# Initialize settings and a new run
 	cutRatios = [2.0/3, goldenLibrary.PHI]
 	settings = Settings(cutRatios)
-	res = paintingAnalyzer.analyze(painting, settings, "naive")
+	run = m.createNewRun(settings)
+	runId = run.id
+	print "RunId %s" % runId
+
+	for entry in list(m.Painting.select()):
+		painting = Painting(entry)
+		result = paintingAnalyzer.analyze(painting, settings, "naive")
+		painting.setResults(result)
+		m.saveResults(runId, painting)
+
+	print list(m.Result.select())
+
+	#painting = Painting(filename)
+	#cutRatios = [2.0/3, goldenLibrary.PHI]
+	#settings = Settings(cutRatios)
+	#res = paintingAnalyzer.analyze(painting, settings, "naive")
 	#painting.setResults(result)
 
 	#res = painting.getResults()
 
+	"""
 	for ratio in res:
 		print ratio
 		for cut in res[ratio]:
 			print "\t%s objects in cut no. %s" % (len(res[ratio][cut]), cut)
 			for result in res[ratio][cut]:
 				print "\t\t%s" % res[ratio][cut][result][1].area
+	"""
 
 if __name__ == '__main__':
 	main()
