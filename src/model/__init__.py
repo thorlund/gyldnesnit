@@ -31,13 +31,22 @@ class Painting(s.SQLObject):
 	form = s.StringCol()
 	type = s.StringCol()
 
+def createNewRun(settings):
+	"""Create a new run using a settings class"""
+	trsh1 = settings.edgeThreshold1
+	trsh2 = settings.edgeThreshold2
+	lo = settings.lo
+	up = settings.up
+	marginPercentage = settings.marginPercentage
+	return Run(trsh1=trsh1, trsh2=trsh2, lo=lo, up=up, marginPercentage=marginPercentage)
+
 class Run(s.SQLObject):
 	"""
 	_id_, trsh1, trsh2, lo, up, marginPercentage
 	"""
 
-	trsh1 = s.IntCol()
-	trsh2 = s.IntCol()
+	trsh1 = s.FloatCol()
+	trsh2 = s.FloatCol()
 	lo = s.IntCol()
 	up = s.IntCol()
 	marginPercentage = s.FloatCol()
