@@ -62,6 +62,17 @@ class Result(s.SQLObject):
 	cutNo = s.IntCol()
 	numberOfRegions = s.IntCol()
 
+def createNewRegion(resultId, component):
+	"""Create a new region in the database from
+	a connected component"""
+	rect = component.rect
+	x = int(rect.x)
+	y = int(rect.y)
+	heigth = int(rect.height)
+	width = int(rect.width)
+	blobArea = int(component.area)
+	return Region(resultId=resultId, x=x, y=y, height=height, width=width, blobArea=blobArea)
+
 class Region(s.SQLObject):
 	"""
 	_id_, ^resultId, x, y, height, width, blobArea
