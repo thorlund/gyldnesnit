@@ -63,7 +63,15 @@ def main():
 		sys.exit(-1)
 	
 	print "Im testing"
-	test = Painting(sys.argv[1])
+
+	class Phony():
+		pass
+
+	tmp = Phony()
+	setattr(tmp, 'id', 1)
+	setattr(tmp, 'location', sys.argv[1])
+	
+	test = Painting(tmp)
 	print test.getWidth()
 	print test.getHeight()
 	winname ="Test"
