@@ -43,7 +43,15 @@ def main():
 		painting.setResults(result)
 		m.saveResults(runId, painting)
 
-	print list(m.Result.select())
+	results = list(m.Result.select())
+
+	for result in results:
+		res = list(m.Region.select(m.Region.q.result==result.id))
+		print result
+		for r in res:
+			print "\t%s" % r
+
+	settings = m.getSettingsForRunId(1)
 
 	#painting = Painting(filename)
 	#cutRatios = [2.0/3, goldenLibrary.PHI]
