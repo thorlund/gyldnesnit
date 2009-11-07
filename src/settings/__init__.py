@@ -21,8 +21,8 @@ class Settings:
 	"""These are the default settings for the analysis"""
 	edgeThreshold1 = 78
 	edgeThreshold2 = 2.5 * edgeThreshold1
-	lo = 5
-	up = 5
+	lo = 4
+	up = 4
 	cutRatios = None
 	marginPercentage = 0.009
 	method = 'naive'
@@ -59,6 +59,10 @@ class Settings:
 	def setCutRatios(self, cutRatios):
 		"""Set the list of ratios for cuts"""
 		# TODO: Check if this is an array
+		# Adjust the ratio according to specifications
+		for i in len(cutRatios):
+			if cutRatios[i] < 0.5:
+				cutRatios[i] = 1 - cutRatios[i]
 		self.cutRatios = cutRatios
 
 	def setMarginPercentage(self, perc):
