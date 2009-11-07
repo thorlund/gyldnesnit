@@ -4,6 +4,19 @@ Settings
 The settings are global constants for a run
 """
 
+import os
+
+### Global Settings ###
+
+class GlobalSettings:
+	"""Here global settings for the entire program can be placed"""
+	relativeDatabaseLocation = "database.db"
+	absoluteDatabaseLocation = os.path.abspath(relativeDatabaseLocation)
+
+
+### Settings For an Analysis ###
+
+
 class Settings:
 	"""These are the default settings for the analysis"""
 	edgeThreshold1 = 78
@@ -75,6 +88,9 @@ def main():
 	test = Settings(cutRatios)
 	print test.edgeThreshold1
 	print test
+
+	globals = GlobalSettings()
+	print globals.absoluteDatabaseLocation
 
 if __name__ == "__main__":
 	main()
