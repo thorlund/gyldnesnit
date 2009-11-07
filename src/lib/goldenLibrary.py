@@ -38,7 +38,7 @@ def getIntersection(x1, x2, x3, x4, y1, y2, y3, y4):
 def getGoldenSection(length):
 	"""Get the golden section for a line segment from 0 to the argument"""
 	return int(length * PHI)
-	
+
 class Line():
 	"""A container for a line segment."""
 	def __init__(self, p1, p2):
@@ -75,13 +75,16 @@ def intersection(line1, line2):
 	return getIntersection(x1, x2, x3, x4, y1, y2, y3, y4)
 
 def findMeans(size, ratio):
-	"""Return four cuts with respect to the ratio.
-	Normally the ration was 0.618.
-	Now it's a variable."""
+	"""Return four cuts with respect to the ratio."""
+
+	if ratio < 0.5:
+		ratio = 1 - ratio
+		print "Ratio was %s, now its %s" % (1 - ratio, ratio)
 
 	# Check if the 0 < ratio < 1
 	# TODO: Find a minimum size for ratio
-	if not (0.5 < ratio and ratio < 1.0):
+	# XXX: Obsolete check
+	if not (0.5 <= ratio and ratio < 1.0):
 		raise ValueError("ratio must be a number between 0.5 and 1.0")
 
 	# Array holding the line segments
@@ -96,9 +99,10 @@ def findMeans(size, ratio):
 	lines.append(Line(p1, p2))
 	
 	# The leftmost
-	p1 = cv.cvPoint((size.width - dx), 0)
-	p2 = cv.cvPoint((size.width - dx), size.height)
-	lines.append(Line(p1, p2))
+	if not ratio == 0.5:
+		p1 = cv.cvPoint((size.width - dx), 0)
+		p2 = cv.cvPoint((size.width - dx), size.height)
+		lines.append(Line(p1, p2))
 
 	# Then the horizontal lines (along y-axis)
 	dy = getGoldenSection(size.height)
@@ -110,9 +114,10 @@ def findMeans(size, ratio):
 	lines.append(Line(p1, p2))
 
 	# The topmost
-	p1 = cv.cvPoint(0, (size.height - dy))
-	p2 = cv.cvPoint(size.width, (size.height - dy))
-	lines.append(Line(p1, p2))
+	if not ratio == 0.5:
+		p1 = cv.cvPoint(0, (size.height - dy))
+		p2 = cv.cvPoint(size.width, (size.height - dy))
+		lines.append(Line(p1, p2))
 
 	return lines
 
