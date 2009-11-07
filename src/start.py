@@ -12,10 +12,13 @@ from painting import Painting
 import model as m
 
 def main():
+	print "There's a picture hardcoded here... If the test fails, that's probably why"
+	print "Supply a path to a picture you have on your local machine instead"
+	print ""
 	try:
 		filename = sys.argv[1]
 	except IndexError:
-		filename = "../res/local/small_seurat_bathers.png"
+		filename = "../res/local/medium_seurat_bathers.png"
 
 	# Setup test database
 	connection_string = 'sqlite:/:memory:'
@@ -54,18 +57,16 @@ def main():
 
 	settings = m.getSettingsForRunId(1)
 	print settings
+	print m.getSettingsForResultId(3)
+	print m.getSettingsForRegionId(2)
+	print m.getCutNoForRegionId(2)
+	print m.getCutRatioForRegionId(2)
+	print m.getRegionsForResultId(2)
+	m.showPictureInResultId(4)
 
 	#img = graphicHelper.boundingBoxResult(painting.getImage(), settings, 2)
 	#img = graphicHelper.blobResult(painting.getImage(), settings, 2)
 	#graphicHelper.showImage(img, "Test")
-
-	#painting = Painting(filename)
-	#cutRatios = [2.0/3, goldenLibrary.PHI]
-	#settings = Settings(cutRatios)
-	#res = paintingAnalyzer.analyze(painting, settings, "naive")
-	#painting.setResults(result)
-
-	#res = painting.getResults()
 
 	"""
 	for ratio in res:
