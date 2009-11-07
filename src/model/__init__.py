@@ -13,6 +13,8 @@ sys.path.append('../')
 
 import sqlobject as s
 from src.settings import Settings
+from src.lib import graphicHelper as g
+import src.painting as p
 
 
 class Artist(s.SQLObject):
@@ -164,25 +166,34 @@ def getCutRatiosForRunId(runId):
 	return cutRatios
 
 
-def getSettingsForResult(resultId):
+def getSettingsForResultId(resultId):
 	# Get runId
+	runId = Result.select(Result.q.id==resultId)[0].run.id
+
 	# Get settings for runId
-	pass
+	return getSettingsForRunId(runId)
 
 
-def getSettingsForRegion(regionId):
-	# Get resultId
-	# Get runId for resultId
-	# Get settings for runId
-	pass
+def getSettingsForRegionId(regionId):
+	resultId = Region.select(Region.q.id==regionId)[0].result.id
+	return getSettingsForResultId(resultId)
 
 
-def getCutNoForRegion(regionId):
-	pass
+def getCutRatioForRegionId(regionId):
+	return Region.select(Region.q.id==regionId)[0].result.cutRatio
+
+
+def getCutNoForRegionId(regionId):
+	return Region.select(Region.q.id==regionId)[0].result.cutNo
 
 
 def getRegionsForResultId(resultId):
-	pass
+	return Region.select(Region.q.result==resultId)
+
+
+def showPictureInResultId(resultId):
+	painting = p.Painting(Result.select(Result.q.id==resultId)[0].painting)
+	g.showImage(painting.getImage(), "Wee")
 
 
 ### Test ###
