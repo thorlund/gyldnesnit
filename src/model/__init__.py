@@ -15,6 +15,7 @@ import sqlobject as s
 from src.settings import Settings
 from src.lib import graphicHelper as g
 import src.painting as p
+from opencv import cv
 
 
 class Artist(s.SQLObject):
@@ -39,6 +40,19 @@ class Painting(s.SQLObject):
 	url = s.StringCol()
 	form = s.StringCol()
 	type = s.StringCol()
+	width = s.IntCol()
+	height = s.IntCol()
+
+	def getSize(self):
+		"""Return cv.cvSize"""
+		if (self.width is None) or (self.height is None):
+			return None
+		return cv.cvSize(self.width, self.height)
+
+	def setSize(self, size):
+		"""Input cv.cvSize"""
+		self._set_width(size.width)
+		self._set_height(size.height)
 
 
 def createNewRun(settings):
@@ -201,6 +215,9 @@ def showPictureInResultId(resultId):
 def main():
 	# Stupid test for nothing
 	print "Test"
+	print ""
+	print "A lot of crap-output"
+	print ""
 	# Create an in-memory sqlite database just for test
 	connection_string = 'sqlite:/:memory:'
 	connection = s.connectionForURI(connection_string)
@@ -223,8 +240,25 @@ def main():
 	Painting.createTable()
 	vangogh = Artist(name="Van Gogh",born="1234-4321",school="klatmalerier",timeline="1600ish")
 	print vangogh
-	solsikker = Painting(artist=Artist.selectBy(name="Van Gogh")[0].id,title="Solsikker",date="24 dec",technique="Fingermaling", location="/dev/null",url="www.bogus.com/help",form="pas",type="klatmaling")
+	solsikker = Painting(artist=Artist.selectBy(name="Van Gogh")[0].id,title="Solsikker",date="24 dec",technique="Fingermaling", location="../res/local/small_seurat_bathers.png",url="www.bogus.com/help",form="pas",type="klatmaling", width=None, height=None)
 	print solsikker
+
+	# Test that getSize returns None
+	print "getSize == None is %s" % (solsikker.getSize() is None)
+
+	# Make an instance painting (to load the image)
+	painting = p.Painting(solsikker)
+
+	# Get the size (maybe put a shorthand for this in Painting?)
+	size = cv.cvGetSize(painting.getImage())
+
+	# Test the setSize method
+	solsikker.setSize(size)
+	print solsikker
+
+	# Test that we actually get the size now
+	newSize = solsikker.getSize()
+	print newSize.width, newSize.height
 
 
 if __name__ == "__main__":
