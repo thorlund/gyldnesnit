@@ -60,7 +60,7 @@ class Settings:
 		"""Set the list of ratios for cuts"""
 		# TODO: Check if this is an array
 		# Adjust the ratio according to specifications
-		for i in len(cutRatios):
+		for i in range(len(cutRatios)):
 			if cutRatios[i] < 0.5:
 				cutRatios[i] = 1 - cutRatios[i]
 		self.cutRatios = cutRatios
