@@ -38,6 +38,8 @@ def compareImages(img1, img2, name1, name2):
 	highgui.cvNamedWindow (winname1, highgui.CV_WINDOW_AUTOSIZE)
 	highgui.cvNamedWindow (winname2, highgui.CV_WINDOW_AUTOSIZE)
 
+	highgui.cvSaveImage('floodfillbilledet.png',img1)
+	highgui.cvSaveImage('boindingboxbilledet.png',img2)
 	while True:
 		highgui.cvShowImage (winname1, img1)
 		highgui.cvShowImage (winname2, img2)
@@ -59,22 +61,17 @@ def blobResult(original, settings, cutNo):
 	cutNo as int"""
 	# Get the cut defined by cutNo from the cuts from the first cut ratio in settings
 	cut = lib.findMeans(cv.cvGetSize(original), settings.cutRatios[0])[cutNo]
-
 	# Get the BW edge image
 	edgeImage = paintingAnalyzer.getEdgeImage(original, settings)
-
 	# Find the margin
 	margin = marginCalculator.getPixels(original, cut, settings.marginPercentage)
-
 	# Clever hack for putting the cut in an array
 	tmp = []
 	tmp.append(cut)
-
 	# Get results
 	(blobImage, components) = paintingAnalyzer.analyzeCut(original, edgeImage, cut, settings, True)
 	lib.drawLines(blobImage, blobImage, tmp)
 	lib.drawMargin(blobImage, cut, margin)
-
 	# Return result, what a surprise
 	return blobImage
 
@@ -84,6 +81,7 @@ def boundingBoxResult(original, settings, cutNo):
 	painting should be of class Painting
 	settings should be of class Settings
 	cutNo as int"""
+	
 	# Get the cut defined by cutNo from the cuts from the first cut ratio in settings
 	cut = lib.findMeans(cv.cvGetSize(original), settings.cutRatios[0])[cutNo]
 
@@ -119,7 +117,7 @@ def main():
 	This method is a god resource on how to handle the results
 	"""
 
-	filename = "../res/local/small_seurat_bathers.png"
+	filename = "../../res/local/nicolai.jpg"
 	image = highgui.cvLoadImage (filename)
 
 	# XXX: King of hacks
