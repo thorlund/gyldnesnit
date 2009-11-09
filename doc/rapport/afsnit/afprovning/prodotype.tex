@@ -1,63 +1,84 @@
-\subsection{kort intro til produtype}
-Ud fra de kraterier som er beskravet i raporten ind tilvidre, få vi
-produseret nogle data om der ligger ragioner i et snit og hvor mange. I
-dette afsnit vil vi vise hvad vores prodotype kommer frem til, ved at se
-på et vis række billeder som ilustrera hvad der sker i programmet i
-grove trak. Der efter vil vi konkludere om denne metode er god nok, og
-om der kan gøres noget for at forbedre på framgangsmåden.
+\subsection{kort introduktion til prototype}
+Ud fra de karakteriseringer som er beskravet i rapporten. få vi
+produceret noget data, som omhandler tilblivelsen af region i et snit og
+hvor mange der regioner der befinder sig. I dette afsnit vil vi vise
+hvad vores prototype er kommet frem til. Ved at se på et vis række billeder
+som illustrer hvad der sker i programmet, i grove trak. Der efter vil vi
+konkludere, metode god og dårlige eneskaber, og om der kan gøres noget for at
+forbedre på fremgangsmåden.
 
 
-\subsection{noget smart, kan bare ikke komme på det}
-Nå et billedet beabejdes, i vores program, er der 2 naturlige steder
-hvor det vil være fornuftige at se på, det første er efter vi har
-iteraret hen over et af de 4 cuts og fundet alle de ragioner som ligger
+\subsection{Noget smart, kan bare ikke komme på det}
+Nå et billedet bearbejdes, i vores program, er der 2 naturlige steder
+hvor det vil være fornuftige at se om hvad der sker. Det første er efter vi har
+iteraret hen over et af de 4 cut og fundet alle de regioner som ligger
 på eller lige omkring snittet.
 
-\begin{figure}[h]
+\begin{figure}[h!!]
 	\begin{center}
 		\includegraphics[scale=0.42,angle=0]{afsnit/afprovning/billeder/floodfillbilledet.png}
 	\end{center}
-	\caption[]{Billedet hvor vores algoritme har fundet x antal ragioner}
+	\caption[]{Billedet hvor vores algoritme har fundet x antal regioner}
 	\label{ff}
 \end{figure}
 
-I dette billedet er vær ragion, indtegnet med vær sin farve, og snittet
-som er beregnet ud fra er det højensontale gyldne snit som ligger mest
-til højre. Som man kan se finder algoritmen en masse ragioner, hvor
-nogle af dem er ret spændne at se på, som f.eks. drengen som er farvet
-helt lyserød. Der bliver også fundet en masse ragioner som ikke er
-særlige spændne, f.eks. helle bagrunden som er malet mørke lilla i
-billedet. Som man kan af billedet, er der ikke serlige mange ragioner, i
+I dette billedet er vær region, indtegnet med vær sin farve, og snittet
+som er beregnet ud fra er det horisontale gyldne snit som ligger mest
+til højre. Som man kan se finder algoritmen en masse regioner, hvor
+nogle af dem er ret spændene at se på, som f.eks. drengen som er farvet
+helt lyserød. Der bliver også fundet en masse regioner som ikke er
+særlige spændene, f.eks. helle baggrunden som er malet mørkelilla i
+billedet. Som man kan af billedet, er der ikke særlige mange regioner, i
 selve snittet som bliver tværet ud og kommer til at falde i et med et af
-de andre ragioner i billedet, det er et godt tegn, da samelsmældingen af
-ragioner vil give en forkert fortolkning af billedet.
+de andre regioner i billedet, det er et godt tegn, da sammensmeltningen af
+regioner vil give en forkert fortolkning af billedet.
 
-Det andet naturlige sted at se på, er nå vi tager alle de fundenet ragioner om sotere dem fra, som ikke passer overens med vores defination af at ligge i snittet., ragioner som er taget med fra billedet \ref{ff}. 
+Det andet naturlige sted at se på, er nå vi tager alle de regioner som
+blev fundet og sortere, dem fra, som ikke passer overens med vores
+definition, af om regionen ligger i snittet. De regionerne som er taget
+med, bliver inremmet i en bos og kan ses på billedet \ref{ff}. 
 
-\begin{figure}[h]
+\begin{figure}[h!!]
 	\begin{center}
 		\includegraphics[scale=0.42,angle=0]{afsnit/afprovning/billeder/boindingboxbilledet.png}
 	\end{center}
-	\caption[]{Billedet de ragioner som vi har tilbage, er i en box}
+	\caption[]{Billedet de regioner som vi har tilbage, er i en box}
 	\label{blob}
 \end{figure}
 
-Som man kan se er der kun 1 ragion tilbage, som omkraser en sko i
-billedet. Men tilgendgel er alle de store ragioner som bagrunden og
-græset ikke blevet taget med. Det kan både siges at være godt og skidt.
+Som man kan se er der kun 1 region tilbage, som omkredser en sko i
+billedet. Men tilgængel er alle de store regioner så som baggrunden og
+græsset ikke blevet taget med. Det kan både siges at være godt og skidt.
 det gode er at vi nu har en god ide om, hvad der bliver fundet. hvis vi
 samme liner vores beskrivelse af vores fremgangsmåde, og hvordan
-boilledet ser ud. Stemmer det over ens, så vores algoritme virker. Det
+billedet ser ud. Stemmer det over ens, så vores algoritme virker skulle virke. Det
 dårlige er, at vi fjerner ret meget. F.eks. kunne drengen være en
-ragione som man gerne vil have med.
+region som man gerne vil have med.
 
-For at give lidt paspiktic, vil jeg også vise et andet billedet, hvor vores metode opføre sig en kænde anderledes.
+For at give lidt parspiktic, vil jeg også vise et andet billedet, hvor
+vores metode opføre sig en kende anderledes.
 	
- 
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.20,angle=0]{afsnit/afprovning/billeder/nicofloodfillbilledet.png}
+	\end{center}
+	\caption[]{Billedet hvor en stor region er fundet}
+	\label{nicofill}
+\end{figure}
+
+Som man kan se på billedet, er der kun en stor region. Grunden til dette
+er at billedet er af en anden kunstner og er blevet lidt gråligt, efter
+alle de år på muserum, så farverne ligger ikke særlige lang for
+hinanden. Dette få vores metode til at fejle en kende.
+
 \subsection{hvad kan vi gøre bedre}
+I det første billedet \ref{ff}, mener vi at den ting som virkelige kan
+forbedre måde vores metode arbejder på. Er ved at ændre på den
+definition som sortere regioner fra. Så en region kan krydse begge
+marginer. Den anden ting man kunne se på, omhandler det andet billedet
+\ref{nicofill}, hvor vi få for meget med, dette kunne løses ved at se på
+individuelde billeder og regne ud hvor meget algoritmerne må tage med.
+Begge disse to forslag vil blive diskuteret yderligt i den udvidet
+løsning af problemet, hvor vi vil gå ind på hvad vi gør for at kommer
+over nogle at de problemer som vi har.
 
-
-\subsection{hvad er næste skrit}
-
-% er der noget om at hvis man tegner et billedet, og der er noget i baggrunden, at de ting som er i bagrunden kommer til at få et skær af selve bagrunden
-%problemstiullingen med thresholds
