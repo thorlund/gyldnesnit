@@ -9,7 +9,7 @@ Keys marked with a ^ are foreign keys
 
 # Access to other libraries
 import sys
-sys.path.append('../')
+sys.path.append('../../')
 
 import sqlobject as s
 from src.settings import Settings
@@ -57,6 +57,7 @@ class Painting(s.SQLObject):
 
 def createNewRun(settings):
 	"""Create a new run using a settings class"""
+
 	trsh1 = settings.edgeThreshold1
 	trsh2 = settings.edgeThreshold2
 	lo = settings.lo
@@ -120,7 +121,8 @@ class Result(s.SQLObject):
 
 def createNewRegion(resultId, component):
 	"""Create a new region in the database from
-	a connected component"""
+	a connected component
+	"""
 	rect = component.rect
 	x = int(rect.x)
 	y = int(rect.y)
