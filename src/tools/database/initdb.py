@@ -1,12 +1,16 @@
 #!/usr/bin/python
+
+# Get basedir
+import sys, os
+sys.path.append(os.getcwd()[:os.getcwd().find('src')])
+
 import os # For opening files
 import sqlite3 # this is for python > 2.4
-import sys
 import re
 # from pysqlite2 import dbapi2 as sqlite # uncomment for python <= 2.4
-sys.path.append('../../../')
 import src.model as m
 import sqlobject as s
+
 
 #TODO:
 #
@@ -38,8 +42,7 @@ databasename = "pictureresource.db"
 if len(sys.argv) ==3:
 	databasename = sys.argv[2]
 
-connectionString = 'sqlite:'
-connectionString = connectionString + os.getcwd() + databasename
+connectionString = 'sqlite:%s/%s' % (os.getcwd(), databasename)
 connection = s.connectionForURI(connectionString)
 s.sqlhub.processConnection = connection
 m.Artist.createTable()
@@ -107,7 +110,7 @@ for line in csvfilelines:
 	if not line[0]==currentArtist[0]:
 		artist = m.Artist(name=line[0], born=line[1],school=line[9],timeline=line[10])
 		currentArtist=(line[0],artist.id)
-	painting = m.Painting(artist=currentArtist[1],title=line[2],date=line[3], technique=line[4],location=line[5],url=line[6],form=line[7],type=line[8]) 
+	painting = m.Painting(artist=currentArtist[1],title=line[2],date=line[3], technique=line[4],location=line[5],url=line[6],form=line[7],type=line[8], width=None, height=None)
 #		cursor.execute('INSERT INTO artist VALUES (null,?,?,?,?);',(line[0],line[1],line[9],line[10]))
 #		connection.commit()
 #		artistSearchString = 'SELECT id FROM artist WHERE '+categories[0]+'=?'
