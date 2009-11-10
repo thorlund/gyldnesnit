@@ -8,13 +8,13 @@ Keys marked with a ^ are foreign keys
 """
 
 # Access to other libraries
-import sys
-sys.path.append('../../')
+import sys, os
+sys.path.append(os.getcwd()[:os.getcwd().find('src')])
 
 import sqlobject as s
 from src.settings import Settings
 from src.lib import graphicHelper as g
-import src.painting as p
+from src import painting as p
 from opencv import cv
 
 
