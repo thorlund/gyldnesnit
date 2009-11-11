@@ -5,19 +5,19 @@ Methods for parsing the csv-file from the repository
 
 def parseTechnique(str):
 	"""
-	Should return this: (technique, realHeight, realWidth) = parser.parseTechnique(line[4])
+	Should return this: (paint, material, realHeight, realWidth) = parser.parseTechnique(line[4])
 	"""
 	tokens = str.split(',')
 	if(len(tokens[0].split('on')) == 2):
 		paint = tokens[0].split('on')[0].strip(' ')
 		material = tokens[0].split('on')[1].strip(' ')
 	else:
-		paint = 'Non'
+		paint = None
 		material = tokens[0].strip(' ')
 		
 	if len(tokens) == 1:
-		height = 'Non'
-		width = 'Non'
+		height = None
+		width = None
 	elif len(tokens) == 2 and tokens[1].split(' '):
 		height = float((tokens[1].split('x')[0]).strip(' '))
 		width = float((tokens[1].split('x')[1]).strip(' ').strip(' cm'))
@@ -28,15 +28,9 @@ def parseTechnique(str):
 		height = float((tokens[1]+'.'+tokens[2]+'.'+tokens[3]).split('x')[0])
 		width = float((tokens[1]+'.'+tokens[2]+'.'+tokens[3]).split('x')[1].strip(' cm'))
 	else:
-		height = 'Non'
-		width = 'Non'
+		height = None
+		width = None
 	return (paint.lower(), material.lower(), height, width)
-
-def yearParser(line):
-	"""
-	Dont't touch me!
-	"""
-	pass
 
 
 def dateParser(str):
