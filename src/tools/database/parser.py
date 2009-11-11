@@ -23,7 +23,7 @@ def dateParser(str):
 	"""
 	if str == '-':
 		return None
-	str = str.rstrip('s').split('-')[0]
+	str = str.strip(' ca. ').rstrip('s').split('-')[0]
 	return int(str)
 
 
@@ -98,11 +98,12 @@ def main():
 #	line = "ALBANI, Francesco;(b. 1578, Bologna, d. ca. 1660, Bologna);The Annunciation;-;Oil on copper, 62 x 47 cm;The Hermitage, St. Petersburg;http://www.wga.hu/html/a/albani/annuncia.html;painting;religious;Italian;1601-1650"
 #	line = "BRUGMAN, Willem Claesz.;(active 1641-1665);Candlestick;1652;Silver, height 32 cm, diameter 22 cm;Rijksmuseum, Amsterdam;http://www.wga.hu/html/b/brugman/candlest.html;metalwork;other;Dutch;1651-1700"
 #	line = "CHRISTUS, Petrus;(active 1444-1475/76 in Bruges);Isabel of Portugal with St Elizabeth;1457-60;Oak panel, 59 x 33 cm;Groeninge Museum, Bruges;http://www.wga.hu/html/c/christus/2/isabel.html;painting;religious;Flemish;1451-1500"
-	line = "COESERMANS, Johannes;(active 1660s in Delft);Interior of the Nieuwe Kerk, Delft;1663;Pen painting in grisaille on wood, 52 x 45 cm;Private collection;http://www.wga.hu/html/c/coeserma/interior.html;painting;interior;Dutch;1651-1700"
+	line = "COESERMANS, Johannes;(active 1660s in Delft);Interior of the Nieuwe Kerk, Delft;c. 1663;Pen painting in grisaille on wood, 52 x 45 cm;Private collection;http://www.wga.hu/html/c/coeserma/interior.html;painting;interior;Dutch;1651-1700"
 
 	tokens = line.split(';')
 
 	print bornDied(tokens[1])
+	print dateParser(tokens[3])
 
 if __name__ == '__main__':
 	main()
