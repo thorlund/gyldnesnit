@@ -9,11 +9,11 @@ def parseTechnique(str):
 	"""
 	tokens = str.split(',')
 	if(len(tokens[0].split('on')) == 2):
-		paint = tokens[0].split('on')[0].strip(' ')
-		material = tokens[0].split('on')[1].strip(' ')
+		paint = tokens[0].split('on')[0].strip(' ').lower()
+		material = tokens[0].split('on')[1].strip(' ').lower()
 	else:
 		paint = None
-		material = tokens[0].strip(' ')
+		material = tokens[0].strip(' ').lower()
 		
 	if len(tokens) == 1:
 		height = None
@@ -30,7 +30,7 @@ def parseTechnique(str):
 	else:
 		height = None
 		width = None
-	return (paint.lower(), material.lower(), height, width)
+	return (paint, material, height, width)
 
 
 def dateParser(str):

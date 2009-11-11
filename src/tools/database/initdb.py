@@ -10,6 +10,7 @@ import re
 # from pysqlite2 import dbapi2 as sqlite # uncomment for python <= 2.4
 import src.model as m
 import sqlobject as s
+import parser
 
 
 #TODO:
@@ -108,9 +109,12 @@ for line in csvfilelines:
 	line = line.split(';')
 #	#The artist has changed we need to make an artist in the database
 	if not line[0]==currentArtist[0]:
-		artist = m.Artist(name=line[0], born=line[1],school=line[9],timeline=line[10])
+		(born, died) = parser.bornDied(line[1])
+		artist = m.Artist(name=line[0], born=born, died=died ,school=line[9],timeline=line[10])
+		
 		currentArtist=(line[0],artist.id)
-	painting = m.Painting(artist=currentArtist[1],title=line[2],date=line[3], technique=line[4],location=line[5],url=line[6],form=line[7],type=line[8], width=None, height=None)
+	(paint,material,realHeight,realWidth) = parser.parseTechnique(line[4])
+	painting = m.Painting(artist=currentArtist[1],title=line[2],date = parser.dateParser(line[3]), paint = paint, material = material, realHeight = realHeight, realWidth = realWidth, location=line[5],url=line[6],form=line[7],type=line[8], width=None, height=None)
 #		cursor.execute('INSERT INTO artist VALUES (null,?,?,?,?);',(line[0],line[1],line[9],line[10]))
 #		connection.commit()
 #		artistSearchString = 'SELECT id FROM artist WHERE '+categories[0]+'=?'
@@ -123,4 +127,4 @@ for line in csvfilelines:
 ##Send a close flag to the database
 #connection.commit()
 ##closing the cursor again
-#cursor.close()
+#cursor.close()died
