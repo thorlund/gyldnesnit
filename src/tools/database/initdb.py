@@ -128,3 +128,5 @@ for line in csvfilelines:
 #connection.commit()
 ##closing the cursor again
 #cursor.close()died
+
+# vim: set noexpandtab tabstop=4 softtabstop=4 shiftwidth=4 :

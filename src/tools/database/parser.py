@@ -9,7 +9,6 @@ def parseTechnique(str):
 	"""
 	tokens = str.split(',')
 	if(len(tokens[0].split('on')) > 1):
-		print range(len(tokens[0].split('on')))
 		paint = tokens[0].split('on')[0].strip(' ').lower()
 		material = tokens[0].split('on')[1].strip(' ').lower()
 		for i in range(len(tokens[0].split('on'))-2):
@@ -17,26 +16,22 @@ def parseTechnique(str):
 	else:
 		paint = None
 		material = tokens[0].strip(' ').lower()
-		
 	if len(tokens) == 1:
 		height = None
 		width = None
-		
-	elif len(tokens) == 2 and len(tokens[1].split('x')) == 2:
-		tmp = (tokens[1].split('x')[0]).strip(' ')
-		height = float(tmp.split(' ')[len(tmp.strip(' ').split(' '))-1])
-		width = float((tokens[1].split('x')[1]).strip(' ').split(' ')[0])
+	elif len(tokens) == 2 and len(tokens[1].split(' x ')) == 2:
+		tmp = (tokens[1].split(' x ')[0]).strip(' ')
+		height = float(tmp.split(' ')[len(tmp.strip(' ').split(' '))-1].strip('cm').strip(' '))
+		width = float((tokens[1].split(' x ')[1]).strip(' ').split(' ')[0].strip('cm'))
 
-	elif len(tokens) == 3 and len(str.split('x')) == 2:
-		tmp = (tokens[1]+'.'+tokens[2]).split('x')[0].strip(' ')
-		height = float(tmp.split(' ')[len(tmp.strip(' ').split(' '))-1])
-		width = float((tokens[1]+'.'+tokens[2]).split('x')[1].strip(' ').split(' ')[0])
-				
-	elif len(tokens) == 4 and len(str.split('x')) == 2:
-		tmp =  (tokens[1]+'.'+tokens[2]+'.'+tokens[3]).split('x')[0].strip(' ')
-		height = float(tmp.split(' ')[len(tmp.strip(' ').split(' '))-1])
-		width = float((tokens[1]+'.'+tokens[2]+'.'+tokens[3]).split('x')[1].strip(' ').split(' ')[0])
-		
+	elif len(tokens) == 3 and len(str.split(' x ')) == 2:
+		tmp = (tokens[1]+'.'+tokens[2]).split(' x ')[0].strip(' ')
+		height = float(tmp.split(' ')[len(tmp.strip(' ').split(' '))-1].strip('cm').strip(' '))
+		width = float((tokens[1]+'.'+tokens[2]).split(' x ')[1].strip(' ').split(' ')[0].strip('cm'))
+	elif len(tokens) == 4 and len(str.split(' x ')) == 2:
+		tmp =  (tokens[1]+'.'+tokens[2]+'.'+tokens[3]).split(' x ')[0].strip(' ')
+		height = float(tmp.split(' ')[len(tmp.strip(' ').split(' '))-1].strip('cm').strip(' '))
+		width = float((tokens[1]+'.'+tokens[2]+'.'+tokens[3]).split(' x ')[1].strip(' ').split(' ')[0].strip('cm'))
 	else:
 		height = None
 		width = None
@@ -48,13 +43,19 @@ def dateParser(str):
 	Agressive parser.
 	dates on the form yyyy-xx will be represented as yyyy. Punktum.
 	"""
-	if str == '-':
+	year = ''
+	for c in str:
+		if c.isspace():
+			year = ''
+		elif c.isdigit():
+			year = year + c
+			if len(year) == 4:
+				break
+		else:
+			year = ''
+	if len(year) < 4:
 		return None
-	str = str.strip('after')
-	str = str.lstrip('c. ')
-	str = str.lstrip(' ').split(' ')[0]
-	str = str.rstrip('s').split('-')[0]
-	return int(str)
+	return int(year)
 
 
 def bornDied(str):
@@ -82,44 +83,24 @@ def bornDied(str):
 	* Years on the form yyyy/yy we use only the first year (str.split('/')[0])
 	* 1460s is parsed as [yyyy, yyyy + 10], i.e. 1460 - 1470
 
-	return an (int, int)-tuple
-	"""
+	return an (int, int)-tuple"""
 
 	bornDied = []
-	if str.startswith('(b.'):
-		str = str.strip('()')
-		str = str.split(',')
-		for i in range(0, len(str), 2):
-			tmp = str[i].strip('b. ca. d. after').split('/')[0]
-			bornDied.append(tmp)
-	elif str.startswith('(active'):
-		str = str.split('-')
-		if len(str) == 1:
-			# Says 1890s ish or other crap
-			# Hohohohoh this is really ugly
-			# Damn damn damn don't know why I am doing this
-			# We could just throw a regular expression in
+
+	year = ''
+	for c in str:
+		if c == 's' and len(year) == 4:
+			return (int(year), int(year) + 10)
+		if c.isspace():
 			year = ''
-			tmp = str[0].split()
-			tmpstr = []
-			for token in tmp:
-				if token.isalnum():
-					tmpstr.append(token)
-			str = " ".join(tmpstr)
-			str = str.rstrip("s in ")
-			year = int(str)
-			str = [year, year+10]
+		elif c.isdigit():
+			year = year + c
+			if len(year) == 4:
+				bornDied.append(year)
 		else:
-			for i in range(len(str)):
-				tmpstr = ''
-				for c in str[i]:
-					if not (c.isalpha() or c.isspace()):
-						tmpstr += c
-				# Evil removal of stupid years
-				# Again, sorry
-				str[i] = tmpstr.split('/')[0].strip('(,)')
-		bornDied = str
-	else:
+			year = ''
+	if len(bornDied) <= 1:
+		print str
 		return (None, None)
 	return (int(bornDied[0]), int(bornDied[1]))
 
