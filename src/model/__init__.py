@@ -23,7 +23,8 @@ class Artist(s.SQLObject):
 	_id_, the rest
 	"""
 	name = s.StringCol()
-	born = s.StringCol()
+	born = s.IntCol()
+	died = s.IntCol()
 	school = s.StringCol()
 	timeline = s.StringCol()
 
@@ -35,13 +36,16 @@ class Painting(s.SQLObject):
 	artist = s.ForeignKey('Artist')
 	title = s.StringCol()
 	date = s.StringCol()
-	technique = s.StringCol()
+	paint = s.StringCol()
+	material = s.StringCol()
 	location = s.StringCol()
 	url = s.StringCol()
 	form = s.StringCol()
 	type = s.StringCol()
-	width = s.IntCol()
+	realHeight = s.FloatCol()
+	realWidth = s.FloatCol()
 	height = s.IntCol()
+	width = s.IntCol()
 
 	def getSize(self):
 		"""Return cv.cvSize"""
@@ -51,8 +55,8 @@ class Painting(s.SQLObject):
 
 	def setSize(self, size):
 		"""Input cv.cvSize"""
-		self._set_width(size.width)
 		self._set_height(size.height)
+		self._set_width(size.width)
 
 
 def createNewRun(settings):
@@ -240,9 +244,9 @@ def main():
 	print Result.get(1)
 	Artist.createTable()
 	Painting.createTable()
-	vangogh = Artist(name="Van Gogh",born="1234-4321",school="klatmalerier",timeline="1600ish")
+	vangogh = Artist(name="Van Gogh", born=1234, died=4321, school="klatmalerier", timeline="1600ish")
 	print vangogh
-	solsikker = Painting(artist=Artist.selectBy(name="Van Gogh")[0].id,title="Solsikker",date="24 dec",technique="Fingermaling", location="../res/local/small_seurat_bathers.png",url="www.bogus.com/help",form="pas",type="klatmaling", width=None, height=None)
+	solsikker = Painting(artist=Artist.selectBy(name="Van Gogh")[0].id,title="Solsikker",date="24 dec",paint="maling", material='lort', location="../res/local/small_seurat_bathers.png",url="www.bogus.com/help",form="pas",type="klatmaling", realHeight=2, realWidth=3, height=None, width=None)
 	print solsikker
 
 	# Test that getSize returns None
