@@ -18,15 +18,15 @@ def parseTechnique(str):
 	if len(tokens) == 1:
 		height = None
 		width = None
-	elif len(tokens) == 2 and tokens[1].split(' '):
+	elif len(tokens) == 2 and len(tokens[1].split('x')) == 2:
 		height = float((tokens[1].split('x')[0]).strip(' '))
-		width = float((tokens[1].split('x')[1]).strip(' ').strip(' cm'))
+		width = float((tokens[1].split('x')[1]).strip(' ').split('m')[0].rstrip(' c'))
 	elif len(tokens) == 3 and len(str.split('x')) == 2:
 		height = float((tokens[1]+'.'+tokens[2]).split('x')[0])
-		width = float((tokens[1]+'.'+tokens[2]).split('x')[1].strip(' cm'))
+		width = float((tokens[1]+'.'+tokens[2]).split('x')[1].split('m')[0].rstrip(' c'))
 	elif len(tokens) == 4 and len(str.split('x')) == 2:
 		height = float((tokens[1]+'.'+tokens[2]+'.'+tokens[3]).split('x')[0])
-		width = float((tokens[1]+'.'+tokens[2]+'.'+tokens[3]).split('x')[1].strip(' cm'))
+		width = float((tokens[1]+'.'+tokens[2]+'.'+tokens[3]).split('x')[1].split('m')[0].rstrip(' c'))
 	else:
 		height = None
 		width = None
@@ -40,7 +40,10 @@ def dateParser(str):
 	"""
 	if str == '-':
 		return None
-	str = str.strip(' ca. ').rstrip('s').split('-')[0]
+	str = str.strip('after')
+	str = str.lstrip('c. ')
+	str = str.lstrip(' ').split(' ')[0]
+	str = str.rstrip('s').split('-')[0]
 	return int(str)
 
 
@@ -77,7 +80,7 @@ def bornDied(str):
 		str = str.strip('()')
 		str = str.split(',')
 		for i in range(0, len(str), 2):
-			tmp = str[i].strip('b. ca. d. after')
+			tmp = str[i].strip('b. ca. d. after').split('/')[0]
 			bornDied.append(tmp)
 	elif str.startswith('(active'):
 		str = str.split('-')
@@ -104,7 +107,7 @@ def bornDied(str):
 						tmpstr += c
 				# Evil removal of stupid years
 				# Again, sorry
-				str[i] = tmpstr.split('/')[0].strip('()')
+				str[i] = tmpstr.split('/')[0].strip('(,)')
 		bornDied = str
 	else:
 		return (None, None)
@@ -116,7 +119,7 @@ def main():
 #	line = "BRUGMAN, Willem Claesz.;(active 1641-1665);Candlestick;1652;Silver, height 32 cm, diameter 22 cm;Rijksmuseum, Amsterdam;http://www.wga.hu/html/b/brugman/candlest.html;metalwork;other;Dutch;1651-1700"
 #	line = "CHRISTUS, Petrus;(active 1444-1475/76 in Bruges);Isabel of Portugal with St Elizabeth;1457-60;Oak panel, 59 x 33 cm;Groeninge Museum, Bruges;http://www.wga.hu/html/c/christus/2/isabel.html;painting;religious;Flemish;1451-1500"
 	line = "COESERMANS, Johannes;(active 1660s in Delft);Interior of the Nieuwe Kerk, Delft;c. 1663;Pen painting in grisaille on wood, 52 x 45 cm;Private collection;http://www.wga.hu/html/c/coeserma/interior.html;painting;interior;Dutch;1651-1700"
-
+	line = "ANDREA DEL CASTAGNO;(b. 1423, Castagno, d. 1457, Firenze);The Youthful David;c. 1450;Tempera on leather on wood, width at bottom 115,6 x 41 cm;National Gallery of Art, Washington;http://www.wga.hu/html/a/andrea/castagno/3_1450s/03david.html;painting;religious;Italian;1401-1450"
 	tokens = line.split(';')
 
 	print bornDied(tokens[1])
