@@ -8,9 +8,12 @@ def parseTechnique(str):
 	Should return this: (paint, material, realHeight, realWidth) = parser.parseTechnique(line[4])
 	"""
 	tokens = str.split(',')
-	if(len(tokens[0].split('on')) == 2):
+	if(len(tokens[0].split('on')) > 1):
+		print range(len(tokens[0].split('on')))
 		paint = tokens[0].split('on')[0].strip(' ').lower()
 		material = tokens[0].split('on')[1].strip(' ').lower()
+		for i in range(len(tokens[0].split('on'))-2):
+			material = material+ ' on ' + tokens[0].split('on')[i+2].strip(' ').lower()
 	else:
 		paint = None
 		material = tokens[0].strip(' ').lower()
@@ -18,15 +21,22 @@ def parseTechnique(str):
 	if len(tokens) == 1:
 		height = None
 		width = None
+		
 	elif len(tokens) == 2 and len(tokens[1].split('x')) == 2:
-		height = float((tokens[1].split('x')[0]).strip(' '))
-		width = float((tokens[1].split('x')[1]).strip(' ').split('m')[0].rstrip(' c'))
+		tmp = (tokens[1].split('x')[0]).strip(' ')
+		height = float(tmp.split(' ')[len(tmp.strip(' ').split(' '))-1])
+		width = float((tokens[1].split('x')[1]).strip(' ').split(' ')[0])
+
 	elif len(tokens) == 3 and len(str.split('x')) == 2:
-		height = float((tokens[1]+'.'+tokens[2]).split('x')[0])
-		width = float((tokens[1]+'.'+tokens[2]).split('x')[1].split('m')[0].rstrip(' c'))
+		tmp = (tokens[1]+'.'+tokens[2]).split('x')[0].strip(' ')
+		height = float(tmp.split(' ')[len(tmp.strip(' ').split(' '))-1])
+		width = float((tokens[1]+'.'+tokens[2]).split('x')[1].strip(' ').split(' ')[0])
+				
 	elif len(tokens) == 4 and len(str.split('x')) == 2:
-		height = float((tokens[1]+'.'+tokens[2]+'.'+tokens[3]).split('x')[0])
-		width = float((tokens[1]+'.'+tokens[2]+'.'+tokens[3]).split('x')[1].split('m')[0].rstrip(' c'))
+		tmp =  (tokens[1]+'.'+tokens[2]+'.'+tokens[3]).split('x')[0].strip(' ')
+		height = float(tmp.split(' ')[len(tmp.strip(' ').split(' '))-1])
+		width = float((tokens[1]+'.'+tokens[2]+'.'+tokens[3]).split('x')[1].strip(' ').split(' ')[0])
+		
 	else:
 		height = None
 		width = None
@@ -118,8 +128,8 @@ def main():
 #	line = "ALBANI, Francesco;(b. 1578, Bologna, d. ca. 1660, Bologna);The Annunciation;-;Oil on copper, 62 x 47 cm;The Hermitage, St. Petersburg;http://www.wga.hu/html/a/albani/annuncia.html;painting;religious;Italian;1601-1650"
 #	line = "BRUGMAN, Willem Claesz.;(active 1641-1665);Candlestick;1652;Silver, height 32 cm, diameter 22 cm;Rijksmuseum, Amsterdam;http://www.wga.hu/html/b/brugman/candlest.html;metalwork;other;Dutch;1651-1700"
 #	line = "CHRISTUS, Petrus;(active 1444-1475/76 in Bruges);Isabel of Portugal with St Elizabeth;1457-60;Oak panel, 59 x 33 cm;Groeninge Museum, Bruges;http://www.wga.hu/html/c/christus/2/isabel.html;painting;religious;Flemish;1451-1500"
-	line = "COESERMANS, Johannes;(active 1660s in Delft);Interior of the Nieuwe Kerk, Delft;c. 1663;Pen painting in grisaille on wood, 52 x 45 cm;Private collection;http://www.wga.hu/html/c/coeserma/interior.html;painting;interior;Dutch;1651-1700"
-	line = "ANDREA DEL CASTAGNO;(b. 1423, Castagno, d. 1457, Firenze);The Youthful David;c. 1450;Tempera on leather on wood, width at bottom 115,6 x 41 cm;National Gallery of Art, Washington;http://www.wga.hu/html/a/andrea/castagno/3_1450s/03david.html;painting;religious;Italian;1401-1450"
+#	line = "COESERMANS, Johannes;(active 1660s in Delft);Interior of the Nieuwe Kerk, Delft;c. 1663;Pen painting in grisaille on wood, 52 x 45 cm;Private collection;http://www.wga.hu/html/c/coeserma/interior.html;painting;interior;Dutch;1651-1700"
+#	line = "ANDREA DEL CASTAGNO;(b. 1423, Castagno, d. 1457, Firenze);The Youthful David;c. 1450;Tempera on leather on wood, width at bottom 115,5 x 41,2 cm width at bottom ;National Gallery of Art, Washington;http://www.wga.hu/html/a/andrea/castagno/3_1450s/03david.html;painting;religious;Italian;1401-1450"
 	tokens = line.split(';')
 
 	print bornDied(tokens[1])
