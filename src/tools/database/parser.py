@@ -16,8 +16,45 @@ def yearParser(line):
 	pass
 
 
+def dateParser(str):
+	"""
+	Agressive parser.
+	dates on the form yyyy-xx will be represented as yyyy. Punktum.
+	"""
+	if str == '-':
+		return None
+	str = str.rstrip('s').split('-')[0]
+	return int(str)
+
+
 def bornDied(str):
-	"""A really really ugly parser for artist birth/death"""
+	"""
+	A really really ugly parser for artist birth/death.
+	I'm a really really deeply sorry for this piece of shit-code :(
+	
+	We have a finite number of variants (yyyy is year, ex. 1780):
+
+	1. '(b. yyyy, Glostrup, d. yyyy, Haslev)'
+	2. '(b. ca. yyyy, Glostrup, d. yyyy, Haslev)'
+	3. '(b. yyyy, Glostrup, d. ca. yyyy, Haslev)'
+	4. '(b. ca. yyyy, Glostrup, d. ca. yyyy, Haslev)'
+	5. '(active yyyy-yyyy)'
+	6. '(active yyyy-yyyy in Taastrup)'
+	7. '(active yyyy-yyyy/yy)'
+	8. '(active yyyy-yyyy/yy in Taastrup)'
+	9. '(active yyyys in Vietnam)' dvs. '(active 1210s in Nam)'
+
+	Parsing:
+
+	* Everything 'ca.' will be ignored.
+	* Places are ignored.
+	* Active replaces born/died.
+	* Years on the form yyyy/yy we use only the first year (str.split('/')[0])
+	* 1460s is parsed as [yyyy, yyyy + 10], i.e. 1460 - 1470
+
+	return an (int, int)-tuple
+	"""
+
 	bornDied = []
 	if str.startswith('(b.'):
 		str = str.strip('()')
@@ -28,7 +65,6 @@ def bornDied(str):
 	elif str.startswith('(active'):
 		str = str.split('-')
 		if len(str) == 1:
-			print str
 			# Says 1890s ish or other crap
 			# Hohohohoh this is really ugly
 			# Damn damn damn don't know why I am doing this
@@ -50,18 +86,19 @@ def bornDied(str):
 					if not (c.isalpha() or c.isspace()):
 						tmpstr += c
 				# Evil removal of stupid years
-				str[i] = tmpstr.split('/')[0]
+				# Again, sorry
+				str[i] = tmpstr.split('/')[0].strip('()')
 		bornDied = str
 	else:
-		bornDied = "lort"
-	return (bornDied[0], bornDied[1])
+		return (None, None)
+	return (int(bornDied[0]), int(bornDied[1]))
 
 
 def main():
-	line = "ALBANI, Francesco;(b. 1578, Bologna, d. ca. 1660, Bologna);The Annunciation;-;Oil on copper, 62 x 47 cm;The Hermitage, St. Petersburg;http://www.wga.hu/html/a/albani/annuncia.html;painting;religious;Italian;1601-1650"
+#	line = "ALBANI, Francesco;(b. 1578, Bologna, d. ca. 1660, Bologna);The Annunciation;-;Oil on copper, 62 x 47 cm;The Hermitage, St. Petersburg;http://www.wga.hu/html/a/albani/annuncia.html;painting;religious;Italian;1601-1650"
 #	line = "BRUGMAN, Willem Claesz.;(active 1641-1665);Candlestick;1652;Silver, height 32 cm, diameter 22 cm;Rijksmuseum, Amsterdam;http://www.wga.hu/html/b/brugman/candlest.html;metalwork;other;Dutch;1651-1700"
 #	line = "CHRISTUS, Petrus;(active 1444-1475/76 in Bruges);Isabel of Portugal with St Elizabeth;1457-60;Oak panel, 59 x 33 cm;Groeninge Museum, Bruges;http://www.wga.hu/html/c/christus/2/isabel.html;painting;religious;Flemish;1451-1500"
-#	line = "COESERMANS, Johannes;(active 1660s in Delft);Interior of the Nieuwe Kerk, Delft;1663;Pen painting in grisaille on wood, 52 x 45 cm;Private collection;http://www.wga.hu/html/c/coeserma/interior.html;painting;interior;Dutch;1651-1700"
+	line = "COESERMANS, Johannes;(active 1660s in Delft);Interior of the Nieuwe Kerk, Delft;1663;Pen painting in grisaille on wood, 52 x 45 cm;Private collection;http://www.wga.hu/html/c/coeserma/interior.html;painting;interior;Dutch;1651-1700"
 
 	tokens = line.split(';')
 
