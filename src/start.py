@@ -31,8 +31,8 @@ def main():
 	m.Result.createTable()
 	m.Region.createTable()
 
-	vangogh = m.Artist(name="Van Gogh",born="1234-4321",school="klatmalerier",timeline="1600ish")
-	solsikker = m.Painting(artist=m.Artist.selectBy(name="Van Gogh")[0].id,title="Solsikker",date="24 dec",technique="Fingermaling", location=filename,url="www.bogus.com/help",form="pas",type="klatmaling")
+	vangogh = m.Artist(name="Van Gogh", born=1234, died=4321, school="klatmalerier", timeline="1600ish")
+	solsikker = m.Painting(artist=m.Artist.selectBy(name="Van Gogh")[0].id,title="Solsikker", date=1900, paint="maling", material='lort', location="../res/local/small_seurat_bathers.png",url="www.bogus.com/help",form="pas",type="klatmaling", realHeight=2, realWidth=3, height=None, width=None)
 
 	# Initialize settings and a new run
 	cutRatios = [2.0/3, goldenLibrary.PHI]
