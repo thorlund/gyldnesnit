@@ -7,7 +7,30 @@ def parseTechnique(str):
 	"""
 	Should return this: (technique, realHeight, realWidth) = parser.parseTechnique(line[4])
 	"""
-	return str
+	tokens = str.split(',')
+	if(len(tokens[0].split('on')) == 2):
+		paint = tokens[0].split('on')[0].strip(' ')
+		material = tokens[0].split('on')[1].strip(' ')
+	else:
+		paint = 'Non'
+		material = tokens[0].strip(' ')
+		
+	if len(tokens) == 1:
+		height = 'Non'
+		width = 'Non'
+	elif len(tokens) == 2 and tokens[1].split(' '):
+		height = float((tokens[1].split('x')[0]).strip(' '))
+		width = float((tokens[1].split('x')[1]).strip(' ').strip(' cm'))
+	elif len(tokens) == 3 and len(str.split('x')) == 2:
+		height = float((tokens[1]+'.'+tokens[2]).split('x')[0])
+		width = float((tokens[1]+'.'+tokens[2]).split('x')[1].strip(' cm'))
+	elif len(tokens) == 4 and len(str.split('x')) == 2:
+		height = float((tokens[1]+'.'+tokens[2]+'.'+tokens[3]).split('x')[0])
+		width = float((tokens[1]+'.'+tokens[2]+'.'+tokens[3]).split('x')[1].strip(' cm'))
+	else:
+		height = 'Non'
+		width = 'Non'
+	return (paint.lower(), material.lower(), height, width)
 
 def yearParser(line):
 	"""
@@ -104,6 +127,7 @@ def main():
 
 	print bornDied(tokens[1])
 	print dateParser(tokens[3])
+	print parseTechnique(tokens[4])
 
 if __name__ == '__main__':
 	main()
