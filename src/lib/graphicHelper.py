@@ -1,18 +1,25 @@
 #!/usr/bin/env python
 """
-Provides methods for showing graphic results
+Provides methods for showing graphic results.
+Functions as an abtraction layer for different methods.
 """
 
 # Import what we need from OpenCV
 from opencv import cv
 from opencv import highgui
 
+# Access to other libraries
+import sys, os
+sys.path.append(os.getcwd()[:os.getcwd().find('src')])
+
 import goldenLibrary as lib
-import paintingAnalyzer
-import marginCalculator
+from src.settings import Settings
 
-import sys
+# Import available methods
+import naiveMethod
 
+
+### Methods for showing images
 
 def showImage(image, name):
 	"""Helper method for displaying an image"""
@@ -52,54 +59,34 @@ def compareImages(img1, img2, name1, name2):
 			sys.exit(0)
 
 
+### Methods for retreiving image results
+
 def blobResult(original, settings, cutNo):
 	"""Show the colored blobs in an image at the cut specified
 	by cutNo as int. The cut ratio are placed in the settings and only
 	the first cut in this ratio-list will be analyzed.
-	painting should be of class Painting
+	original should be the image data
 	settings should be of class Settings
 	cutNo as int"""
-	# Get the cut defined by cutNo from the cuts from the first cut ratio in settings
-	cut = lib.findMeans(cv.cvGetSize(original), settings.cutRatios[0])[cutNo]
-	# Get the BW edge image
-	edgeImage = paintingAnalyzer.getEdgeImage(original, settings)
-	# Find the margin
-	margin = marginCalculator.getPixels(original, cut, settings.marginPercentage)
-	# Clever hack for putting the cut in an array
-	tmp = []
-	tmp.append(cut)
-	# Get results
-	(blobImage, components) = paintingAnalyzer.analyzeCut(original, edgeImage, cut, settings, True)
-	lib.drawLines(blobImage, blobImage, tmp)
-	lib.drawMargin(blobImage, cut, margin)
-	# Return result, what a surprise
-	return blobImage
+
+	method = settings.method
+	if method == 'naive':
+		return naiveMethod.getBlobImage(original, settings, cutNo)
+	else:
+		raise StandardError("No method named %s" % method)
 
 
 def boundingBoxResult(original, settings, cutNo):
 	"""Same as above but will paint the bounding boxes
-	painting should be of class Painting
+	original should be the image data
 	settings should be of class Settings
 	cutNo as int"""
-	
-	# Get the cut defined by cutNo from the cuts from the first cut ratio in settings
-	cut = lib.findMeans(cv.cvGetSize(original), settings.cutRatios[0])[cutNo]
 
-	# Get the BW edge image
-	edgeImage = paintingAnalyzer.getEdgeImage(original, settings)
-
-	# Find the margin
-	margin = marginCalculator.getPixels(original, cut, settings.marginPercentage)
-
-	tmp = []
-	tmp.append(cut)
-	components = paintingAnalyzer.analyzeCut(original, edgeImage, cut, settings)
-	lib.drawMargin(original, cut, margin)
-
-	# Draw the components
-	lib.drawBoundingBoxes(original, components)
-
-	return original
+	method = settings.method
+	if method == 'naive':
+		return naiveMethod.getBoundingBoxImage(original, settings, cutNo)
+	else:
+		raise StandardError("No method named %s" % method)
 
 
 #########################################
@@ -117,20 +104,11 @@ def main():
 	This method is a god resource on how to handle the results
 	"""
 
-	filename = "../../res/local/nicolai.jpg"
+	filename = "../res/local/small_seurat_bathers.png"
 	image = highgui.cvLoadImage (filename)
 
-	# XXX: King of hacks
-	# We need a class for holding the settings
-	# All of this should be in a separate settings class
 	cutRatios = [lib.PHI]
-	settings = Sets()
-	setattr(settings, "lo", 5)
-	setattr(settings, "up", 5)
-	setattr(settings, "edgeThreshold1", 78)
-	setattr(settings, "edgeThreshold2", 2.5 * 78)
-	setattr(settings, "cutRatios", cutRatios)
-	setattr(settings, "marginPercentage", 0.010)
+	settings = Settings(cutRatios)
 	image = highgui.cvLoadImage (filename)
 
 	#showBoundingBoxResult(image, settings, 0)
@@ -138,3 +116,5 @@ def main():
 
 if __name__ == "__main__":
 	main()
+
+# vim: set noexpandtab tabstop=4 softtabstop=4 shiftwidth=4 :
