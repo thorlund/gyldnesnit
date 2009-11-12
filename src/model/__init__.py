@@ -47,6 +47,7 @@ class Painting(s.SQLObject):
 	realWidth = s.FloatCol()
 	height = s.IntCol()
 	width = s.IntCol()
+	filepath=s.StringCol()
 
 	def getSize(self):
 		"""Return cv.cvSize"""
