@@ -6,7 +6,7 @@ koncentrere os om maleriernes metadata og først i afsnit
 Dette gøres fordi vi endnu ikke har været inde over hvilke resultater
 der kunne være interessante at gemme.
 
-Vi bruger SQLite til selve databasen hovedsageligt fordi der ikke kræves
+Vi bruger SQLite til selve databasen, hovedsageligt fordi der ikke kræves
 nogen videre konfiguration af en sådan database. Den underliggende
 database er dog underordnet, da vi bruger Python-pakken \emph{SQLObject}
 som giver et abstraktionslag til en bred vifte af databaser. Vi opretter
@@ -16,7 +16,7 @@ forespørgsler til databasen. Da \emph{SQLObject} klarer al kommunikation
 med databasen er det derfor muligt at skifte den underliggende database
 ud hvis man ønsker det. Vi ser dog ikke nogen grund til at bruge en
 anden foreløbig, da SQLite opfylder vores behov. Endvidere har SQLite
-den umiddelbare forden at selve databasen lægges i en fil i filsystemet.
+den umiddelbare fordel at selve databasen lægges i en fil i filsystemet.
 Det er derfor en let sag at tage sikkerhedskopier af databasen uden alt
 for meget besvær.
 
