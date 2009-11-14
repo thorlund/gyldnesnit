@@ -1,0 +1,119 @@
+{
+En central del af den automatiserede analyse af malerier er den database
+hvor vi opbevarer metadata og resultater. Vi vil til at starte med kun
+koncentrere os om maleriernes metadata og først i afsnit
+\ref{section_results} se på hvordan vi i databasen opbevarer resultater.
+Dette gøres fordi vi endnu ikke har været inde over hvilke resultater
+der kunne være interessante at gemme.
+
+Vi bruger SQLite til selve databasen hovedsageligt fordi der ikke kræves
+nogen videre konfiguration af en sådan database. Den underliggende
+database er dog underordnet, da vi bruger Python-pakken \emph{SQLObject}
+som giver et abstraktionslag til en bred vifte af databaser. Vi opretter
+blot de tabeller vi ønsker at have i databasen som klasser gennem
+Python. Ligeledes får vi en sådan klasse tilbage når der laves
+forespørgsler til databasen. Da \emph{SQLObject} klarer al kommunikation
+med databasen er det derfor muligt at skifte den underliggende database
+ud hvis man ønsker det. Vi ser dog ikke nogen grund til at bruge en
+anden foreløbig, da SQLite opfylder vores behov. Endvidere har SQLite
+den umiddelbare forden at selve databasen lægges i en fil i filsystemet.
+Det er derfor en let sag at tage sikkerhedskopier af databasen uden alt
+for meget besvær.
+
+Vores korpus består af billeder hentet fra hjemmesiden \cite{wgahu} som
+indeholder europæiske kunstartikler fra år 1001 -- 1900. I
+kunstartiklerne, hvor det samlede antal er omkring 23.000, indgår
+møbler, skulpturer, mosaikker og malerier, hvor sidstnævnte vil være
+vores fokus. Fra \cite{wgahu} tilbydes en kommasepareret fil over hele
+deres database som vi har brugt til at populere vores egen database med.
+Der gives mange oplysninger om den enkelte artikel samt dennes kunstner.
+Vi har konstrueret en parser som trækker disse informationer ud fra
+filen og lægger dem ind i tabellerne \ref{artistTable0} og
+\ref{paintingTable0} i databasen. Da vi primært vil beskæftige os med
+malerier vil vi nu blot omtale kunstartikler som malerier.
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|l||c|c|c|c|c|c|}
+        \hline
+        \bf{artist} \hspace{0.5cm} & \underline{artistId} & name & born & died & school & timeline \\\hline
+    \end{tabular}
+    \caption{Databasetabel for kunstner}
+    \label{artistTable0}
+\end{table}
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|l||c|c|c|c|c|c}
+        \hline
+        \bf{painting} \hspace{0.5cm} & \underline{paintingId} & artistId & title & date & paint & $\cdots$ \\\hline
+    \end{tabular}\\ \vspace{0.2cm}\hspace{1.2cm}
+    \begin{tabular}{c|c|c|c|c|c|c}
+        \hline
+        $\cdots$ & material & location & url & form & type & $\cdots$ \\\hline
+    \end{tabular}\\ \vspace{0.2cm}\hspace{1.4cm}
+    \begin{tabular}{c|c|c|c|c|c|}
+        \hline
+        $\cdots$ & realHeight & realWidth & height & width & filepath \\\hline
+    \end{tabular}
+    \caption{Databasetabel for malerier}
+    \label{paintingTable0}
+\end{table}
+
+Ovenstående databaseskema lægger vægt på at vi let kan forespørge
+databasen ved en lang række parametre, såsom et maleris fysiske
+størrelse eller kunstneres fødselsår. Vi har, at en der til en kunstner
+kan være tilknyttet en række malerier og at der til et givet maleri kun
+kan være én kunstner. I den kommaseparerede fil fra \cite{wgahu} er
+malerier opstillet efter kunstneren, hvilket gør det let først at
+oprette denne i databasen og derefter oprette de efterfølgende malerier
+tilknyttet denne kunstner.
+
+Den konstruerede parser til den kommaseparerede fil er dog ret grov, da
+folkene bag \cite{wgahu} ikke har lagt meget vægt på at være konsistente
+i deres formulering af en kunstners fødsels- og dødsår eller en
+genstands dimensioner. En følge deraf er, at nogle kunstnere, hvor
+\cite{wgahu} ikke har en klar indikation af dennes levealder, ikke bliver
+registreret i databasen. Vi kan dog stadig slå kunstneren op ved at
+bruge feltet ``timeline'' i tabel \ref{artistTable0} som angiver hvilken
+periode kunstneren tilhører. Vi har i enkelte tilfælde set os nødsaget
+til at rette i den kommaseparerede fil i tilfælde hvor der er blevet
+indsat tegn der helt umuliggør korrekt parsing, såsom ekstra komma
+eller semikolon.
+
+Givet den kommaseparerede fil fra \cite{wgahu} er det en smal sag at
+konstruere en crawler som henter alle billederne fra hjemmesiden ned. I
+filen gives nemlig en henvisning til hvor man kan finde et billede af
+genstanden på deres side. Billederne hentes ned og gemmes på filsystemet
+i samme mappestruktur som der bruges på \cite{wgahu}. Her indeles
+filerne i mapper navngivet efter deres kunstner. Kunstnerenes mapper
+inddeles efter forbogstav. På denne måde undgås problemet at to billeder
+kan have det samme filnavn. Filstrukturen er grafisk illustreret i figur
+\ref{mappestruktur}. Vi gemmer da blot stien til en fil på filsystemet i
+databasen.
+
+% Mappestruktur
+\begin{figure}[!h]
+    \centering
+$
+\xymatrix{
+ &  &   & \ar @{-} [d] \textrm{/res}  &                                                     \\
+ &  &   & \ar @{-} [d] \textrm{/wga.hu}  &                                                  \\
+ &  &   & \ar @{-} [dl] \ar @{-} [d] \ar @{--} [dr] \textrm{/art} &                         \\
+ &  & \ar @{-} [dl] \ar @{-} [d] \ar @{--} [dr] \textrm{/a} & \textrm{/b} & \cdots          \\
+ & \ar @{-} [dl] \ar @{--} [d] \textrm{/aachen} & \ar @{--} [d] \textrm{/abadia} & \cdots   \\
+\textrm{allegory.jpg} & \textrm{bacchus.jpg} & \cdots &   &
+}
+$
+    \caption{Mappestruktur til filer fra
+        \href{http://www.wga.hu}{http://www.wga.hu}}
+    \label{mappestruktur}
+\end{figure}
+
+Som tidligere nævnt så vil vi i afsnit \ref{section_results} bygge
+videre på databasen når vi skal gemme resultater fra en automatiseret
+analyse. Indtil videre vil den beskrevne database blot bruges til at
+trække filnavne på malerier ud til videre analyse.
+
+}
+% vim: set tw=72 spell spelllang=da:
