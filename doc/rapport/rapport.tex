@@ -1,5 +1,5 @@
 % vim: set tw=72 spell spelllang=da:
-\documentclass[a4paper, 10pt, danish, final]{article}
+\documentclass[a4paper, 10pt, danish, final]{report}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Pakker
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -38,8 +38,8 @@ numbers=none, stepnumber=1, numberstyle=\tiny}
 %\newcommand{\old}[1]{{#1}}
 \newcommand{\mailto}[1]{\href{mailto:#1}{#1}}
 \newcommand{\resume}[1]{\begin{abstract}{\sffamily #1}\end{abstract}}
-\renewcommand{\thefigure}{\thesection.\arabic{figure}}
-\renewcommand{\thetable}{\thesection.\arabic{table}}
+%\renewcommand{\thefigure}{\thechapter.\thesection.\arabic{figure}}
+%\renewcommand{\thetable}{\thechapter.\thesection.\arabic{table}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Titel, forfatter og dato
@@ -75,45 +75,36 @@ pdfkeywords={Det gyldne snit, computer vision}
 %\pagestyle{headings}
 
 \input{afsnit/indledning/resume.tex}
-\newpage
 
 \tableofcontents
 \listoftables
 \listoffigures
 
-\newpage
-
 \parskip=8pt plus 2pt minus 4pt
 
-\section{Forord}
+\chapter{Forord}
 \input{afsnit/indledning/indledning.tex}
-\newpage
 
-\section{Indledning}
+\chapter{Indledning}
 \input{afsnit/baggrund/baggrund.tex}
-\newpage
 
-\section{Detektion af det gyldne snit}
+\chapter{Detektion af det gyldne snit}
 \input{afsnit/vores_implementation/vores_implementation.tex}
-\newpage
 
-\section{Afprøvning}
+\chapter{Afprøvning}
 \input{afsnit/afprovning/prodotype.tex}
-\newpage
 
-\section{Videnskabelige resultater}
-\newpage
+\chapter{Videnskabelige resultater}
 
 % sort in citation order
 \bibliographystyle{unsrt}
 \bibliography{litteraturliste}
-\addcontentsline{toc}{section}{Litteratur}
+\addcontentsline{toc}{chapter}{Litteratur}
 
-\newpage
-%\section{Bilag}
+\chapter{Bilag}
 \appendix
 
-\section{Kildekode}
+%\section{Kildekode}
 %\input{materialer.tex}
 %\newpage
 
