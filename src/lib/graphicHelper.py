@@ -45,8 +45,6 @@ def compareImages(img1, img2, name1, name2):
 	highgui.cvNamedWindow (winname1, highgui.CV_WINDOW_AUTOSIZE)
 	highgui.cvNamedWindow (winname2, highgui.CV_WINDOW_AUTOSIZE)
 
-	highgui.cvSaveImage('floodfillbilledet.png',img1)
-	highgui.cvSaveImage('boindingboxbilledet.png',img2)
 	while True:
 		highgui.cvShowImage (winname1, img1)
 		highgui.cvShowImage (winname2, img2)
@@ -92,11 +90,6 @@ def boundingBoxResult(original, settings, cutNo):
 #########################################
 # The code below are tests and ugly hacks
 
-class Sets():
-	"""Bogus settings class
-	Use setattr for setting attributes at will"""
-	pass
-
 
 def main():
 	"""
@@ -112,7 +105,11 @@ def main():
 	image = highgui.cvLoadImage (filename)
 
 	#showBoundingBoxResult(image, settings, 0)
-	compareImages(blobResult(image, settings, 0), boundingBoxResult(image, settings, 0), "blob", "bounding box")
+	blobImg = blobResult(image, settings, 0)
+	boxxImg = boundingBoxResult(image, settings, 0)
+	compareImages(blobImg, boxxImg, "blob", "bounding box")
+	#highgui.cvSaveImage('floodfillbilledet.png', blobImg)
+	#highgui.cvSaveImage('boindingboxbilledet.png', boxxImg)
 
 if __name__ == "__main__":
 	main()
