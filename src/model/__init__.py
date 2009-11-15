@@ -18,10 +18,9 @@ from src import painting as p
 from opencv import cv
 
 
-
 class Artist(s.SQLObject):
 	"""
-	_id_, the rest
+	_id_, name, born, died, school, timeline
 	"""
 	name = s.StringCol()
 	born = s.IntCol()
@@ -32,7 +31,8 @@ class Artist(s.SQLObject):
 
 class Painting(s.SQLObject):
 	"""
-	_id_, ^artistId, the rest
+	_id_, ^artistId, title, date, paint, material, location, url, form,
+	type, realHeight, realWidth, height, width, filepath
 	"""
 	artist = s.ForeignKey('Artist')
 	title = s.StringCol()
@@ -47,7 +47,7 @@ class Painting(s.SQLObject):
 	realWidth = s.FloatCol()
 	height = s.IntCol()
 	width = s.IntCol()
-	filepath=s.StringCol()
+	filepath = s.StringCol()
 
 	def getSize(self):
 		"""Return cv.cvSize"""
@@ -59,7 +59,6 @@ class Painting(s.SQLObject):
 		"""Input cv.cvSize"""
 		self._set_height(size.height)
 		self._set_width(size.width)
-
 
 
 def createNewRun(settings):
@@ -74,10 +73,9 @@ def createNewRun(settings):
 	return Run(trsh1=trsh1, trsh2=trsh2, lo=lo, up=up, marginPercentage=marginPercentage, method=method)
 
 
-
 class Run(s.SQLObject):
 	"""
-	_id_, trsh1, trsh2, lo, up, marginPercentage
+	_id_, trsh1, trsh2, lo, up, marginPercentage, method
 	"""
 
 	trsh1 = s.FloatCol()
@@ -86,7 +84,6 @@ class Run(s.SQLObject):
 	up = s.IntCol()
 	marginPercentage = s.FloatCol()
 	method = s.StringCol()
-
 
 
 def saveResults(runId, painting):
@@ -152,6 +149,9 @@ class Region(s.SQLObject):
 	height = s.IntCol()
 	width = s.IntCol()
 	blobArea = s.IntCol()
+
+	def getBoundingBox(self):
+		return cv.cvRect(self.x, self.y, self.width, self.height)
 
 
 ### Methods for reconstructing runs
