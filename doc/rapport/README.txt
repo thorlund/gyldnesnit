@@ -21,7 +21,7 @@ Litteratur
 	/litteraturliste.bib
 
 Hvert afsnit i rapporten skal have sin egen mappe i /afsnit/
-	
+
 	Eksempel:
 
 		Afsnittet "Indledning" har sine filer liggende i
@@ -47,12 +47,12 @@ Hvis et afsnit har underafsnit bør disse også ligge separat.
 		\input{}-kommandoen i latex.
 
 		Eksempel (uddrag fra vores_implementering.tex):
-			\subsection{Kantdetektion}
+			\section{Kantdetektion}
 			\input{afsnit/vores_implementering/kantdetektion.tex}
 		
 		BEMÆRK! I input-kommandoen skal underafsnittene refereres til
 			som stod man ved hoveddokumentet.
-		
+
 
 * Billeder/Illustrationer
 
