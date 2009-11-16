@@ -12,20 +12,55 @@
 \subsection*{Problematikken med heltal}
 Mange af de metoder som vi bruger til at udregne, position af det gyldne
 snit eller størrelsen af en margin, udregnes ved hjælp af brøker.
-Tilgængel, er et billedet opbygget af pixels, Dette gør at vi må nød
+Til gengæld, er et billedet opbygget af pixels, Dette gør at vi må nød
 til at tage approksimationer af udregningerne for at få dem tilbage til et
 helt tal, men hvor meget af dataenden er tabt, og hvor maget af
 resultaterne kan man stole på.
 
-\subsubsection{akseptabel afvigelse}
-(her skal der noget ind med at vi egenlide gerne vil have nogle konkrede
-tal påm hvor mange $\%$ der er aksepeltabel)
+\subsubsection{acceptabel afvigelse}
+Det gyldne snit er et meget fast defineret matematisk begreb, som kan
+udregnes med mange decimaler. En kunstner, selv hvor god han er, har
+ingen chance for at male så præcist at man kan sige at strøet ligge
+nøjagtigt oven på snittet. Men hvor stor afvigelse fra snittet er
+acceptabelt 0.1 \%, 1 \% eller mere. hvis vi starter med at se på alle
+de ting som kan skabe en usikkerhed for hvad kunstarnen maler. De
+billeder som vi arbejder med, er fra en alder hvor præcisionen var i
+højsædet og den figurative maler kuns blomstret, så man kan gå ud fra at
+den \% afvigelse ikke er særlig stor, dog har vi sat den til en 0.5 \%
+afvigelse. Det vil sige at en maller med et lærred på 100 cm, kan male
+maksimalt 0.5 cm forkert.
+
+Nå maleren vælger en ramme og et lærred, har vi igen problemtikken, hvor
+præcis er maleren i sit valg og hvor godt passer rammen til billedet,
+Dette giver vi en afvigelse på 1 \%. Da vi igen mener at dette er den
+maksimalle afvigelse der kan opstå.
+
+Nå en maller, maller en figur eller en ting, forekommerer der normalt en
+lille kant rundt og objektet, som en omrids. Dette omrids kan vores
+algoritmer ikke tage højte for, og vi må derfor modregne omridset. Nå vi
+er sikre at vi ser på objektet og ikke den omrids, Da et omrids ikke er
+særligt stor, har vi sat denne procent sats til 0.5\%. Alt i alt giver
+det en afvigelse på vores aktuelde data på 2\% det vil sige at nå vi
+finder en region i en billedet som ligger på pixel 200, i et billedet
+som er 500 bredt, befinder den sig faktisk i intervallet mellem 190 og
+210. Måden vi tager højte for den forskel, er ved hjælp af marginer, som
+er beskravet i opgave. Der befinder sig også nogle afrunding fejl i
+vores metoder, som beskravet neden for.
+
+Som man nok kan se, regner vi med procenter, som måske kan være lidt
+misvisende, da det afhænger af billedet strøelse, så et billedet som er
+meget stort kan have en maller som kan malle meget dårlige.
+
+(er disse \% tal helt hen i været, har sat dem lidt højt, for at der
+ikke komme nogle tvivl om at vi ikke laver noget forkert)
+
 
 \subsection{Hvordan deles billedet efter det gyldne snit}
 I et billedet befinder der sig 4 gyldne snit. 2 i det vertikale plan med
-brede B og 2 i det horisontale plan med højte H. placeringen af de 4
-snit udregnes i forhold til udledningen i afsnittet om det gyldne snit,
-hvor konstanten $\varPhi = 0.618$ bliver fundet.
+brede B, se figur \ref{lenasnit} og 2 i det horisontale plan med højte
+H. placeringen af de 4 snit udregnes i forhold til udledningen i
+afsnittet om det gyldne snit, se figur \ref{lenasnit2}, hvor konstanten
+$\varPhi = 0.618$ bliver fundet.
 
 \begin{figure}[h]
 	\begin{center}
@@ -67,10 +102,9 @@ misvisninger i forhold til udregningen. For at gøre det lidt mere
 generat, sætter vi den mistet nøjagtighed til 0.5, det er den maximale
 afrundings factor som kan forekommer. Sætter billedet størrelse til 500
 pixels, som er det miste billedet vi har, dette giver en fejl margen på
-0.1 $\%$, dette tal befinder sig undet den akseptable granse som
-beskravet ovenfor. Det kan konklutionen, at selv om vi regner med en
-approksimation af det gyldne snit, få vi stadig et resultat som kan
-bruges.
+0.1 $\%$, Dette tal bliver adderet til fejl satsen ovenfor og vi kommer
+til at at se at det er en ok afrundning af snittet, som ikke kommmer til
+at give nogle problemer. 
 
 \subsubsection{Heltal ved udregning af Margin}
 En af vores mål ved denne opgave er at se om kunstnern har tegnet
@@ -95,7 +129,7 @@ marginens ikke krydser hinanden, dividere vi med 2 og tager en floor på
 helle funktionen.
 
 \begin{equation}
-	\lfloor(\frac{\frac{x3}{5} - \frac{x2}{\sqrt{5}+1} }{2})\rfloor
+	\lfloor(0.048633x/2)\rfloor = 0.024316x
 \end{equation}
 
 Dette giver os et antal pixels som skildre de to snit. For at vise
@@ -105,16 +139,18 @@ som svare til vores største billedet, 4000 pixels. Ved 500 pixels
 bliver resultatet
 
 \begin{equation}
-	 \lfloor 500(0.048633)\rfloor = 24
+	 \lfloor 500(0.024316)\rfloor = 12
 \end{equation}
 
-Det er en ok margin ud fra de udtagelser som vi lavet for to afsnit siden
-(lidt bedre forklaring)
+Dette er en ok margin, da vores fejl på udregningerne ligger på 2.1 \%,
+som svare til $500*0.021 = 10.5$ pixels, som er 1.5 pixels fra vores
+margin
+
 Ved 4000 pixels giver det.
 
 \begin{equation}
-	 \lfloor 4000(0.048633)\rfloor = 194
+	 \lfloor 4000(0.024316)\rfloor = 97
 \end{equation}
 
-Som må siges at være mere end nok.
+som også er god nok da 4000*0.021 = 84 pixels
 % vim: set tw=72 spell spelllang=da:
