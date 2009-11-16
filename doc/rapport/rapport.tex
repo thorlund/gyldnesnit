@@ -71,10 +71,14 @@ pdfkeywords={Det gyldne snit, computer vision}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \maketitle
+\pagenumbering{roman}
 \thispagestyle{empty}
 %\pagestyle{headings}
-
 \input{afsnit/indledning/resume.tex}
+
+\chapter*{Forord}
+\addcontentsline{toc}{chapter}{Forord}
+\input{afsnit/indledning/indledning.tex}
 
 \tableofcontents
 %\listoftables
@@ -82,10 +86,8 @@ pdfkeywords={Det gyldne snit, computer vision}
 
 \parskip=8pt plus 2pt minus 4pt
 
-\chapter{Forord}
-\input{afsnit/indledning/indledning.tex}
-
 \chapter{Indledning}
+\pagenumbering{arabic}
 \input{afsnit/baggrund/baggrund.tex}
 
 \chapter{Detektion af det gyldne snit}
