@@ -50,10 +50,10 @@ billede.
     \caption[]{Pixels efter andet skridt i algoritmen. De pixels som har
     en farve der ligger indenfor afvigelsen bliver markeret med et grønt
     flag og tildelt et tal som angiver rækkefølgen. I denne illustration
-    er den nederste pixel ikke blevet farvet grøn. XXX: Den var før blå,
-    men da den ikke ligger indenfor afvigelsen mister den sit flag og
-    vil ikke nok ikke blive taget i betragtning igen\dots? Eller hvad?
-    Den kan ikke forblive blå, så kontrolleres den hele tiden.}
+    er den nederste pixel ikke blevet farvet grøn. Den var før blå, men
+    da den ikke ligger indenfor afvigelsen mister den sit flag, og kan
+    komme i betraktning igen, næste gang motoden arbejder ud fra en af
+    de pixels som befinder sig op af den}
     \label{floodfill3}
 \end{figure}
 
@@ -74,9 +74,7 @@ måder; Enten kan man regne afvigelsen ud fra farven som vores startpixel
 har eller man kan regne den fra den nye pixel som bliver fundet i tredje
 skridt.
 
-XXX: Hvad gør vi?
-
-\subsubsection{Overvejelser}
+\subsubsection{Hvilken metode passer best}
 Som nævnt ovenfor er der to måder vi kan bruge floodfill på. Hvis man
 vælger at regne varianten ud fra den første startpixel vil metoden
 indskrænke sig meget og ikke komme ind i alle hjørner af en region. Til
@@ -90,11 +88,14 @@ interessant især med hensyn til digitale billeder af malerier, da solen
 eller blitzens refleksion kan påvirke billedet farver. Af samme grund er
 den fremgangsmåde heller ikke særlig følsom overfor kanter, hvilket
 resulterer i at man let kommer til at gå ind i andre regioner.
+Vi har valt at bruge metode nr 2, da i vores mening, giver den
+et bedre resultat, da vi menner, at tage højte for sol og smp farve
+skift, vægter højer en at være sikker på at den ikke fejler ved at gå ud
+over kanterne.
 
 For at få denne metode til at virke på 25000 billeder, hvor en del af
 billederne ikke har samme farvetone eller er blevet falmet, må der
 for hvert billede udregnes hvad for en varians i farve der skal bruges.
-
 XXX: Stadig intet svar på hvad vi gør!
 
 }
