@@ -51,9 +51,7 @@ billede.
     en farve der ligger indenfor afvigelsen bliver markeret med et grønt
     flag og tildelt et tal som angiver rækkefølgen. I denne illustration
     er den nederste pixel ikke blevet farvet grøn. Den var før blå, men
-    da den ikke ligger indenfor afvigelsen mister den sit flag, og kan
-    komme i betraktning igen, næste gang motoden arbejder ud fra en af
-    de pixels som befinder sig op af den}
+    da den ikke ligger indenfor afvigelsen mister den sit flag.}
     \label{floodfill3}
 \end{figure}
 
@@ -72,9 +70,12 @@ På denne måde itererer metoden sig igennem alle de pixels som ligger
 inde for en vis afgivelse fra startfarven. Denne metode kan gøres på to
 måder; Enten kan man regne afvigelsen ud fra farven som vores startpixel
 har eller man kan regne den fra den nye pixel som bliver fundet i tredje
-skridt.
+skridt. Det skal bemærkes at den pixel, som i figur \ref{floodfill3}
+mister sit blå flag, godt kan blive taget i betragtning igen senere når
+vi vælger en ny startpixel. En pixel kan dog højst blive taget i
+betragtning i alt fire gange fordi den har fire tilstødende pixels.
 
-\subsubsection{Hvilken metode passer best}
+\subsubsection{Hvilken metode passer bedst?}
 Som nævnt ovenfor er der to måder vi kan bruge floodfill på. Hvis man
 vælger at regne varianten ud fra den første startpixel vil metoden
 indskrænke sig meget og ikke komme ind i alle hjørner af en region. Til
@@ -88,15 +89,16 @@ interessant især med hensyn til digitale billeder af malerier, da solen
 eller blitzens refleksion kan påvirke billedets farver. Af samme grund er
 den fremgangsmåde heller ikke særlig følsom overfor kanter, hvilket
 resulterer i at man let kommer til at gå ind i andre regioner.
-Vi har valt at bruge metode nr 2, da i vores mening, giver den
-et bedre resultat, da vi menner, at tage højte for sol og smp farve
-skift, vægter højer en at være sikker på at den ikke fejler ved at gå ud
-over kanterne.
+
+Vi har valgt at benytte os af den sidstnævnte metode, da den efter vores
+mening giver det bedste resultat. Vi vurderer, at det at tage højde for sol og
+små farveskift, vægter højere end at være sikker på at vi ikke går ud
+over kanterne. Vi vil senere beskrive hvordan vi på anden vis sikrer at
+vi beholder kanterne.
 
 For at få denne metode til at virke på 25000 billeder, hvor en del af
 billederne ikke har samme farvetone eller er blevet falmet, må der
 for hvert billede udregnes hvad for en varians i farve der skal bruges.
-XXX: Stadig intet svar på hvad vi gør!
 
 }
 
