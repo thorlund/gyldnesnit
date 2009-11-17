@@ -97,7 +97,7 @@ def main():
 	This method is a god resource on how to handle the results
 	"""
 
-	filename = "../res/local/small_seurat_bathers.png"
+	filename = sys.argv[1]
 	image = highgui.cvLoadImage (filename)
 
 	cutRatios = [lib.PHI]
