@@ -1,9 +1,11 @@
 {
 {\sffamily Dette afsnit har til formål at beskrive hvordan vi trækker
 regioner ud af billedet. Kort sagt forsøger vi at segmentere billedet
-ved primært ved at bruge flood fill. Vi præparerer dog først billedet
-ved at finde kanter, sløre billedet og derefter fremhæve kanterne igen.
-Vi vil også komme ind på hvilke andre metoder vi har forsøgt os med.
+ved primært ved at bruge en metode kaldet floodfill. Vi præparerer dog
+først billedet ved at finde kanter og sløre billedet. Vi vil også komme
+ind på hvilke andre metoder vi har forsøgt os med. Først vil vi dog se
+på hvilke tanker vi har gjort os om valg af programmeringssprog og
+implementationen generelt.
 %navnligt den funktion i OpenCV der er buggy, GoodFeaturesToTrack og
 %Perona and Malik fra Octave. Det følgende afsnit om Floodfill bør være
 %en del af dette afsnit, ligesom vi skal have lignende beskrivelser af
@@ -26,7 +28,19 @@ umiddelbart på en lang række pakker relevant for problemstillingen.
 (Skal man skrive noget om Pythons udbredelse, anerkendelse og brug?)
 
 \subsubsection{Andre muligheder}
+Der er to helt oplagte mugligheder med hensyn til programmeringssprog
+når man taler om billedbehandling, nemlig Matlab og dets Open
+Source-alternativ Octave. Matlab/Octave blev valgt fra, da vores samlede
+erfaring med udvikling i disse sprog ikke var stor nok. Endvidere, selv
+om de især egner sig til de beregninger vi skal lave, så er disse sprog
+besværlige at lave større programmer med.
+
 Octave, Matlab, C, C++, Ruby. Fordele/ulemper.
+
+\subsubsection*{OpenCV}
+
+\subsubsection*{SQLite}
+
 
 Hvad bruger vi, hvorfor og hvordan? Indsæt eventuelt et diagram over
 programmet.
