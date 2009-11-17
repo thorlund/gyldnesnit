@@ -74,15 +74,16 @@ def blobResult(original, settings, cutNo):
 		raise StandardError("No method named %s" % method)
 
 
-def boundingBoxResult(original, settings, cutNo):
+def boundingBoxResult(original, settings, cutNo, color=None):
 	"""Same as above but will paint the bounding boxes
 	original should be the image data
 	settings should be of class Settings
-	cutNo as int"""
+	cutNo as int
+	color as CV_RGB"""
 
 	method = settings.method
 	if method == 'naive':
-		return naiveMethod.getBoundingBoxImage(original, settings, cutNo)
+		return naiveMethod.getBoundingBoxImage(original, settings, cutNo, color)
 	else:
 		raise StandardError("No method named %s" % method)
 
@@ -104,9 +105,15 @@ def main():
 	settings = Settings(cutRatios)
 	image = highgui.cvLoadImage (filename)
 
-	#showBoundingBoxResult(image, settings, 0)
+	# Set the color for the boxes
+	color = lib.COL_BLACK
+	#color = lib.COL_WHITE
+	#color = lib.COL_RED
+	#color = lib.COL_GREEN
+	#color = lib.COL_BLUE
+
 	blobImg = blobResult(image, settings, 0)
-	boxxImg = boundingBoxResult(image, settings, 0)
+	boxxImg = boundingBoxResult(image, settings, 0, color)
 	compareImages(blobImg, boxxImg, "blob", "bounding box")
 	#highgui.cvSaveImage('floodfillbilledet.png', blobImg)
 	#highgui.cvSaveImage('boindingboxbilledet.png', boxxImg)

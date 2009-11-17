@@ -171,12 +171,20 @@ def drawLines(original, outimage=None, lines=None, color=COL_RED):
 	for line in lines:
 		cv.cvLine(outimage, line.p1, line.p2, color)
 	
-def drawBoundingBoxes(out, component_dictionary, factor=1):
-	"""Given a dictionary of components, draw its red bounding box on the outimage"""
+def drawBoundingBoxes(out, component_dictionary, color=None, factor=1):
+	"""Given a dictionary of components, draw its bounding box on the outimage.
+	If no color is supplied, the box will be the same color at the blob."""
+
+	# This is a bit hacky, but we need to keep track of the original argument
+	inColor = color
+
 	for entry in component_dictionary:
 		component = component_dictionary[entry][1]
-		color = component_dictionary[entry][0]
 		rect = component.rect
+
+		if inColor == None:
+			color = component_dictionary[entry][0]
+
 		p1 = cv.cvPoint(rect.x, rect.y)
 		p2 = cv.cvPoint(rect.x + rect.width, rect.y + rect.height)
 		p1 = transformer.translatePoint(p1, factor)

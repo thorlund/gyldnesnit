@@ -63,11 +63,12 @@ def getBlobImage(original, settings, cutNo):
 	return blobImage
 
 
-def getBoundingBoxImage(original, settings, cutNo):
+def getBoundingBoxImage(original, settings, cutNo, color=None):
 	"""Same as above but will paint the bounding boxes
 	original should be the image data
 	settings should be of class Settings
-	cutNo as int"""
+	cutNo as int
+	color as CV_RGB"""
 
 	# Get the cut defined by cutNo from the cuts from the first cut ratio in settings
 	cut = lib.findMeans(cv.cvGetSize(original), settings.cutRatios[0])[cutNo]
@@ -84,7 +85,7 @@ def getBoundingBoxImage(original, settings, cutNo):
 	lib.drawMargin(original, cut, margin)
 
 	# Draw the components
-	lib.drawBoundingBoxes(original, components)
+	lib.drawBoundingBoxes(original, components, color)
 
 	return original
 
