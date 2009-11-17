@@ -54,7 +54,8 @@ for line in csvfilelines:
 #	#The artist has changed we need to make an artist in the database
 	if not line[0]==currentArtist[0]:
 		(born, died) = parser.bornDied(line[1])
-		artist = m.Artist(name=line[0], born=born, died=died ,school=line[9],timeline=line[10])
+		if len(m.Artist.select(m.Artist.q.name == line[0]))==0:
+			artist = m.Artist(name=line[0], born=born, died=died ,school=line[9],timeline=line[10])
 		currentArtist=(line[0],artist.id)
 	url=line[6]
 	url = url.replace('html','art',1)
@@ -72,5 +73,6 @@ for line in csvfilelines:
 			count = count - 1
 			if not os.path.isfile(filepath):
 				urllib.urlretrieve(url,filepath)
+	if len(m.Painting.select(m.Painting.q.url==line[6])==0:
 	painting = m.Painting(artist=currentArtist[1],title=line[2],date = parser.dateParser(line[3]), paint = paint, material = material, realHeight = realHeight, realWidth = realWidth, location=line[5],url=line[6],form=line[7],type=line[8], width=None, height=None, filepath=filepath)
 # vim: set noexpandtab tabstop=4 softtabstop=4 shiftwidth=4 :
