@@ -1,5 +1,6 @@
 % Denne fil er inkluderet i udtraekning_af_regioner.tex
 {
+
 Floodfill finder i sin enkelthed områder i et billede, som har en farve
 der ligger inde for en vis afvigelse af den originale farve. Der vælges
 en pixel i billedet som har en farve angivet ved en RGB-værdi. Ud fra
@@ -76,19 +77,94 @@ mister sit blå flag, godt kan blive taget i betragtning igen senere når
 vi vælger en ny startpixel. En pixel kan dog højst blive taget i
 betragtning i alt fire gange fordi den har fire tilstødende pixels.
 
-\subsubsection{Hvilken metode passer bedst?}
-Som nævnt ovenfor er der to måder vi kan bruge floodfill på. Hvis man
-vælger at regne varianten ud fra den første startpixel vil metoden
-indskrænke sig meget og ikke komme ind i alle hjørner af en region. Til
-gengæld har denne fremgangsmåde sværere ved at krydse kanter og på den
-måde komme ind i en ny region.
+\subsubsection{Eksempler}
+Vi vil nu vise nogle eksempler på hvordan denne metode virker i praksis.
+Vi vil i dette afsnit manipulere billedet vist i figur \ref{bathers}.
+Dette billede er valgt, da det har været brugt i flere argumenter for at
+det gyldne snit er at finde i malerkunsten[XXX: Citation needed].  I
+de fem billeder vist i figur \ref{dot_ff_fixed_7_7}, \ref{dot_ff_var_7_7},
+\ref{dot_ff_fixed_10_10}, \ref{dot_ff_var_10_10} og \ref{dot_ff_var_9_9}
+bruges floodfill på den pixel i midten af den røde prik. Det anbefales
+at studere figurene og den tilhørende tekst.
 
-Vælger man at ændre varianten efter den nye startpixel vil man male
-større regioner. Da denne fremgangsmåde hele tiden tilpasser varianten,
-kan man medtage regioner der langsomt skifter farve. Dette er
+% Det her billede opfører sig underligt mht. scale :/
+\begin{figure}[!h]
+    \begin{center}
+        \includegraphics[scale=8]{afsnit/vores_implementation/billeder/flood_fill/seurat_bathers}
+    \end{center}
+    \caption[George Seurat: \emph{Bathers at Asnieres} - 1884]{George
+    Seurat: \emph{Bathers at Asnieres} - 1884\\Originalt billede}
+    \label{bathers}
+\end{figure}
+
+\begin{figure}[!h]
+    \begin{center}
+        \includegraphics[scale=0.49]{afsnit/vores_implementation/billeder/flood_fill/dot_ff_fixed_7_7}
+    \end{center}
+    \caption[]{Floodfill hvor der kun sammenlignes med farven på den
+    originale pixel.}
+    \label{dot_ff_fixed_7_7}
+\end{figure}
+
+\begin{figure}[!h]
+    \begin{center}
+        \includegraphics[scale=0.49]{afsnit/vores_implementation/billeder/flood_fill/dot_ff_var_7_7}
+    \end{center}
+    \caption[]{Floodfill hvor der sammenlignes med farven på den nye
+    startpixel. Afvigelsen er den samme som i figur
+    \ref{dot_ff_fixed_7_7}. Det ses at vi nu dækker et meget større
+    areal.}
+    \label{dot_ff_var_7_7}
+\end{figure}
+
+\begin{figure}[!h]
+    \begin{center}
+        \includegraphics[scale=0.49]{afsnit/vores_implementation/billeder/flood_fill/dot_ff_fixed_10_10}
+    \end{center}
+    \caption[]{Floodfill med udgangspunkt i en ny pixel og kun
+    sammenligning med den originale pixel. Den tilladte afvigelse er her
+    større end i figur \ref{dot_ff_fixed_7_7} og \ref{dot_ff_var_7_7}.}
+    \label{dot_ff_fixed_10_10}
+\end{figure}
+
+\begin{figure}[!h]
+    \begin{center}
+        \includegraphics[scale=0.49]{afsnit/vores_implementation/billeder/flood_fill/dot_ff_var_10_10}
+    \end{center}
+    \caption[]{Floodfill med samme udgangspunkt og afvigelse som i figur
+    \ref{dot_ff_fixed_10_10}, men der sammenlignes nu med den nye
+    startpixel. Med en større tilladt afvigelse, breder floodfill sig
+    meget mere og smelter både himmel, hav og dreng sammen.}
+    \label{dot_ff_var_10_10}
+\end{figure}
+
+\begin{figure}[!h]
+    \begin{center}
+        \includegraphics[scale=0.49]{afsnit/vores_implementation/billeder/flood_fill/dot_ff_var_9_9}
+    \end{center}
+    \caption[]{Floodfill med samme udgangspunkt som i figur
+    \ref{dot_ff_fixed_10_10} og \ref{dot_ff_var_10_10}. Her bruges
+    igen sammenligning med ny startpixel, men nu med en lavere tilladt
+    afvigelse. Vi holder os nu pænt indenfor den region som udgøres af
+    drengens hår.}
+    \label{dot_ff_var_9_9}
+\end{figure}
+
+\subsubsection{Hvilken metode passer bedst?}
+Som nævnt ovenfor og illustreret i billederne er der to måder vi kan
+bruge floodfill på. Hvis man vælger at regne varianten ud fra den første
+startpixel, ses det at metoden vil indskrænke sig meget og ikke komme
+ind i alle hjørner af en region. Til gengæld har denne fremgangsmåde
+sværere ved at krydse kanter og på den måde komme ind i en ny region.
+
+Vælger man at ændre varianten efter den nye startpixel, ses det at man
+man vil male større regioner. Da denne fremgangsmåde hele tiden
+tilpasser varianten, kan man medtage regioner der langsomt skifter
+farve. Et godt eksempel ses i figur \ref{dot_ff_var_10_10}, hvor
+drengens krop og bukser bliver set som sammenhængende. Dette er
 interessant især med hensyn til digitale billeder af malerier, da solen
-eller blitzens refleksion kan påvirke billedets farver. Af samme grund er
-den fremgangsmåde heller ikke særlig følsom overfor kanter, hvilket
+eller blitzens refleksion kan påvirke billedets farver. Af samme grund
+er den fremgangsmåde heller ikke særlig følsom overfor kanter, hvilket
 resulterer i at man let kommer til at gå ind i andre regioner.
 
 Vi har valgt at benytte os af den sidstnævnte metode, da den efter vores
@@ -97,9 +173,13 @@ små farveskift, vægter højere end at være sikker på at vi ikke går ud
 over kanterne. Vi vil senere beskrive hvordan vi på anden vis sikrer at
 vi beholder kanterne.
 
-For at få denne metode til at virke på 25000 billeder, hvor en del af
-billederne ikke har samme farvetone eller er blevet falmet, må der
-for hvert billede udregnes hvad for en varians i farve der skal bruges.
+Som illustreret i billederne skal vi dog stadig tage højde for hvordan
+vi vil sætte tærskelværdierne. Indtil videre bliver de sat efter hvad
+der giver det bedste resultat grafisk.
+
+%For at få denne metode til at virke på 25000 billeder, hvor en del af
+%billederne ikke har samme farvetone eller er blevet falmet, må der
+%for hvert billede udregnes hvad for en varians i farve der skal bruges.
 
 }
 

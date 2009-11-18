@@ -35,10 +35,10 @@ elif len(sys.argv) == 6:
 	x = int(sys.argv[4])
 	y = int(sys.argv[5])
 else:
-	lo = 6
-	up = 6
-	x = 200
-	y = 200
+	lo = 9
+	up = 9
+	x = 353
+	y = 148
 
 image = highgui.cvLoadImage (filename)
 
@@ -65,7 +65,13 @@ out = highgui.cvLoadImage (filename)
 #cv.cvSmooth(out, out, cv.CV_BLUR, 3, 3, 0)
 
 print points[:0]
-featureDetector.floodFillLine(image, out, points[:0], lines[0], lo, up, {})
+#featureDetector.floodFillLine(image, out, points[:0], lines[0], lo, up, {})
+#flags = cv.CV_FLOODFILL_FIXED_RANGE
+flags = 4
+color = lib.getRandomColor()
+comp = cv.CvConnectedComp()
+cv.cvFloodFill(out, cv.cvPoint(x,y), color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp ,flags)#, None);
+lib.plot(out, cv.cvPoint(x,y), 3, lib.COL_RED)
 
 #startpoint = lines[0].getPoints()[0]
 #points.append(lines[0].getPoints()[1])
@@ -79,6 +85,7 @@ featureDetector.floodFillLine(image, out, points[:0], lines[0], lo, up, {})
 winname = "floot"
 
 highgui.cvNamedWindow (winname, highgui.CV_WINDOW_AUTOSIZE)
+highgui.cvSaveImage('out.png', out)
 
 while True:
 	highgui.cvShowImage (winname, out)
