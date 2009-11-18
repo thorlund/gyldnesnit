@@ -1,10 +1,13 @@
 {
 {\sffamily Dette afsnit har til formål at beskrive hvordan vi trækker
 regioner ud af billedet. Kort sagt forsøger vi at segmentere billedet
-ved primært ved at bruge en metode kaldet floodfill. Vi præparerer dog
-først billedet ved at finde kanter og sløre billedet. Vi vil også komme
-ind på hvilke andre metoder vi har forsøgt os med. Først vil vi dog se
-på hvilke tanker vi har gjort os om valg af programmeringssprog og
+ved primært ved at bruge en metode kaldet floodfill. Billedet bliver
+først præpareret ved at finde kanter, en metode betegnet som
+kantdetektion, og viske farverne sammen ved en metode kaldet sløring. Vi
+vil i det følgende forklare, hvordan vi kombinerer disse metoder til at
+finde regioner i en digital gengivelse af et maleri. Vi vil også komme
+ind på hvilke andre metoder vi har forsøgt os med og til sidst se på
+hvilke tanker vi har gjort os om valg af programmeringssprog og
 implementationen generelt.
 %navnligt den funktion i OpenCV der er buggy, GoodFeaturesToTrack og
 %Perona and Malik fra Octave. Det følgende afsnit om Floodfill bør være
@@ -12,14 +15,17 @@ implementationen generelt.
 %sløring og kant detektion.
 }
 
-\subsection{Kantdetektion}
-\input{afsnit/vores_implementation/kantdetektion.tex}
+\subsection{Floodfill}                                  % Denne metode er udgangs punktet
+\input{afsnit/vores_implementation/floodfill.tex}
 
-\subsection{Sløring}
+\subsection{Sløring}                                    % Her maler vi større regioner
 \input{afsnit/vores_implementation/sloering.tex}
 
-\subsection{Floodfill}
-\input{afsnit/vores_implementation/floodfill.tex}
+\subsection{Kantdetektion}                              % Vi vil gerne afgrænse floodfill
+\input{afsnit/vores_implementation/kantdetektion.tex}
+
+\subsection{Sammensætning af metoder}
+Forklar hvordan vi kombinerer metoderne
 
 \subsection{Programmeringssprog og biblioteker}
 \input{afsnit/vores_implementation/programmeringssprog.tex}
