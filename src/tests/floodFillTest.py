@@ -35,8 +35,8 @@ elif len(sys.argv) == 6:
 	x = int(sys.argv[4])
 	y = int(sys.argv[5])
 else:
-	lo = 7
-	up = 7
+	lo = 6
+	up = 6
 	x = 200
 	y = 200
 
@@ -47,21 +47,25 @@ if not image:
 	print ""
 	sys.exit(-1)
 
-threshold1 = 70;
-threshold2 = 70;
+threshold1 = 75;
+threshold2 = 2.5 * threshold1;
 out = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
-edgeDetector.findEdges(image, out, threshold1, threshold2)
+edges = cv.cvCreateImage(cv.cvGetSize(image), 8, 1)
+#blurImage = cv.cvCreateImage(cv.cvGetSize(original), 8, 3)
+edgeDetector.findBWEdges(image, edges, threshold1, threshold2)
 
 print "Finding the golden means in the picture"
 
 lines = lib.findGoldenMeans(cv.cvGetSize(image))
 
 print "Test plot and line scanner methods"
-points = lineScanner.naiveLineScanner(out, image, lines[0])
+points = lineScanner.naiveBWLineScanner(edges, lines[0])
 
 out = highgui.cvLoadImage (filename)
+#cv.cvSmooth(out, out, cv.CV_BLUR, 3, 3, 0)
 
-(out, components) = featureDetector.floodFillLine(out, None, points, lines[0], lo, up)
+print points[:0]
+featureDetector.floodFillLine(image, out, points[:0], lines[0], lo, up, {})
 
 #startpoint = lines[0].getPoints()[0]
 #points.append(lines[0].getPoints()[1])
