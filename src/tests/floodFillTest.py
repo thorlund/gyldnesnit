@@ -54,6 +54,10 @@ edges = cv.cvCreateImage(cv.cvGetSize(image), 8, 1)
 #blurImage = cv.cvCreateImage(cv.cvGetSize(original), 8, 3)
 edgeDetector.findBWEdges(image, edges, threshold1, threshold2)
 
+#out = cv.cvCreateImage(cv.cvGetSize(image), 8, 1)
+
+#cv.cvCvtColor(image, out, cv.CV_BGR2GRAY)
+
 print "Finding the golden means in the picture"
 
 lines = lib.findGoldenMeans(cv.cvGetSize(image))
@@ -62,16 +66,18 @@ print "Test plot and line scanner methods"
 points = lineScanner.naiveBWLineScanner(edges, lines[0])
 
 out = highgui.cvLoadImage (filename)
-#cv.cvSmooth(out, out, cv.CV_BLUR, 3, 3, 0)
+#cv.cvSmooth(out, out, cv.CV_MEDIAN, 7, 7, 0)
+#cv.cvSmooth(out, out, cv.CV_BLUR, 7, 7, 0)
+cv.cvSmooth(out, out, cv.CV_GAUSSIAN, 7, 7, 0)
 
 print points[:0]
 #featureDetector.floodFillLine(image, out, points[:0], lines[0], lo, up, {})
 #flags = cv.CV_FLOODFILL_FIXED_RANGE
-flags = 4
+#flags = 4
 color = lib.getRandomColor()
 comp = cv.CvConnectedComp()
-cv.cvFloodFill(out, cv.cvPoint(x,y), color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp ,flags)#, None);
-lib.plot(out, cv.cvPoint(x,y), 3, lib.COL_RED)
+#cv.cvFloodFill(out, cv.cvPoint(x,y), color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp ,flags)#, None);
+#lib.plot(out, cv.cvPoint(x,y), 3, lib.COL_RED)
 
 #startpoint = lines[0].getPoints()[0]
 #points.append(lines[0].getPoints()[1])
