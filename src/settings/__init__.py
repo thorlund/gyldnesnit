@@ -37,7 +37,7 @@ class Settings:
 		"""Set threshold1
 		Will auto-set threshold2 to 2.5 * trsh"""
 		self.edgeThreshold1 = trsh
-		self.edgeThreshold2 = thrsh * 2.5
+		self.edgeThreshold2 = trsh * 2.5
 
 	def setThreshold2(self, trsh):
 		"""Set threshold2"""

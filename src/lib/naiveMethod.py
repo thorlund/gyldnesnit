@@ -176,6 +176,6 @@ def analyze(painting, settings):
 	"""Given a picture, of class painting, commence the analysis"""
 	original = painting.getImage()
 
-	analyzeImage(original, settings)
+	return analyzeImage(original, settings)
 
 # vim: set noexpandtab tabstop=4 softtabstop=4 shiftwidth=4 :
