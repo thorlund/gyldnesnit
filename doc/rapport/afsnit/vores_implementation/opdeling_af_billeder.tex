@@ -18,6 +18,7 @@ helt tal, men hvor meget af dataenden er tabt, og hvor maget af
 resultaterne kan man stole på.
 
 \subsubsection{Acceptabel afvigelse}
+(Nogle referancer)
 Det gyldne snit er et meget fast defineret matematisk begreb, som kan
 udregnes med mange decimaler. En kunstner, selv hvor god han er, har
 ingen chance for at male så præcist at man kan sige at strøet ligge
@@ -55,19 +56,19 @@ meget stort kan have en maller som kan malle meget dårlige.
 ikke komme nogle tvivl om at vi ikke laver noget forkert)
 
 
-\subsection{Hvordan deles billedet efter det gyldne snit}
+\subsection{Hvordan deles billedet efter det snit}
 I et billedet befinder der sig 4 gyldne snit. 2 i det vertikale plan med
-brede B, se figur \ref{lenasnit} og 2 i det horisontale plan med højte
+brede B, se figur \ref{box} og 2 i det horisontale plan med højte
 H. placeringen af de 4 snit udregnes i forhold til udledningen i
 afsnittet om det gyldne snit, se figur \ref{lenasnit2}, hvor konstanten
-$\varPhi = 0.618$ bliver fundet.
+$\varPhi = 0.618$ bliver fundet. $\varPhi$ bliver også betegnet som cutRatio i denne opgave.
 
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[scale=0.42,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/path2407}
 	\end{center}
 	\caption[]{Billedet opbygning}
-	\label{lenasnit}
+	\label{box}
 \end{figure}
 
 B og H bliver divideret med $\varPhi$ som giver to tal som betegner, hvor
@@ -80,6 +81,28 @@ billedet, som har B = 4000 pixel, vil punktet ligge ved.
 	\end{center}
 	\caption[]{Billedet som har indtegnet de fire gyldne snit}
 	\label{lenasnit2}
+\end{figure}
+
+I vores implementering af dette har vi give de 4 forskelige cut vær
+deres id 'cut 1 - 4' se figur \ref{cut}, vi vil i reste af raporten
+referet til dem ud fra deres id
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.42,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/Cut}
+	\end{center}
+	\caption[]{Billedet hvor de 4 cut er navngivet}
+	\label{cut}
+\end{figure}
+
+Hvis cutRatio er pracics 0.5 kommer cuttet til at ligge oven i hinanden, og kun skabe 2 cut i steden for firere. id for disse 2 snit er cut 0 og cut 1. ilustret i figur \ref{2Cut}
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.42,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/2Cut}
+	\end{center}
+	\caption[]{cutRation er 0.5, og skaver derfor kun 2 cuts}
+	\label{2Cut}
 \end{figure}
 
 \subsubsection*{Heltal i det gyldne snit}
