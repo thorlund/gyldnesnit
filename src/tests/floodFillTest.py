@@ -50,9 +50,9 @@ if not image:
 threshold1 = 75;
 threshold2 = 2.5 * threshold1;
 out = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
-edges = cv.cvCreateImage(cv.cvGetSize(image), 8, 1)
+edges = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
 #blurImage = cv.cvCreateImage(cv.cvGetSize(original), 8, 3)
-edgeDetector.findBWEdges(image, edges, threshold1, threshold2)
+edgeDetector.findEdges(image, edges, 75, 20)
 
 #out = cv.cvCreateImage(cv.cvGetSize(image), 8, 1)
 
@@ -63,14 +63,14 @@ print "Finding the golden means in the picture"
 lines = lib.findGoldenMeans(cv.cvGetSize(image))
 
 print "Test plot and line scanner methods"
-points = lineScanner.naiveBWLineScanner(edges, lines[0])
+#points = lineScanner.naiveBWLineScanner(edges, lines[0])
 
 out = highgui.cvLoadImage (filename)
 #cv.cvSmooth(out, out, cv.CV_MEDIAN, 7, 7, 0)
 #cv.cvSmooth(out, out, cv.CV_BLUR, 7, 7, 0)
 cv.cvSmooth(out, out, cv.CV_GAUSSIAN, 7, 7, 0)
 
-print points[:0]
+#print points[:0]
 #featureDetector.floodFillLine(image, out, points[:0], lines[0], lo, up, {})
 #flags = cv.CV_FLOODFILL_FIXED_RANGE
 #flags = 4
@@ -91,10 +91,10 @@ comp = cv.CvConnectedComp()
 winname = "floot"
 
 highgui.cvNamedWindow (winname, highgui.CV_WINDOW_AUTOSIZE)
-highgui.cvSaveImage('out.png', out)
+highgui.cvSaveImage('out.png', edges)
 
 while True:
-	highgui.cvShowImage (winname, out)
+	highgui.cvShowImage (winname, edges)
 
 	c = highgui.cvWaitKey(0)
 	
