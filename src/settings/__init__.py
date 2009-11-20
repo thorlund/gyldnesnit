@@ -12,6 +12,12 @@ class GlobalSettings:
 	"""Here global settings for the entire program can be placed"""
 	relativeDatabaseLocation = "database.db"
 	absoluteDatabaseLocation = os.path.abspath(relativeDatabaseLocation)
+	relativeCSVFileLocation = '/database/catalog.csv'
+	absoluteCSVFileLocation = os.path.abspath(relavitveCSVFileLocation)
+	def getDatabaseLocation(self):
+		return self.absoluteDatabaseLocation
+	def getCSVFileLocation(self):
+		return self.absoluteCSVFileLocation
 
 
 ### Settings For an Analysis ###

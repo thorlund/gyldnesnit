@@ -181,12 +181,14 @@ def getCutRatiosForRunId(runId):
 	sql += "WHERE result.run_id = (%s)" % runId
 
 	query = Result._connection.queryAll(sql)
+#Do some testing of this line to check if it correct
+#	query = m.result.select(m.result.q.run_id == runID).distinct()
 
 	cutRatios = []
 
 	# This is a bit lame, but the result are put in a tuple
 	for result in query:
-		cutRatios.append(result[0])
+		cutRatios.append(result)[0]
 
 	return cutRatios
 
@@ -251,7 +253,7 @@ def main():
 	Painting.createTable()
 	vangogh = Artist(name="Van Gogh", born=1234, died=4321, school="klatmalerier", timeline="1600ish")
 	print vangogh
-	solsikker = Painting(artist=Artist.selectBy(name="Van Gogh")[0].id,title="Solsikker", date=1900, paint="maling", material='lort', location="../res/local/small_seurat_bathers.png",url="www.bogus.com/help",form="pas",type="klatmaling", realHeight=2, realWidth=3, height=None, width=None)
+	solsikker = Painting(artist=Artist.selectBy(name="Van Gogh")[0].id,title="Solsikker", date=1900, paint="maling", material='lort', location="../res/local/small_seurat_bathers.png",url="www.bogus.com/help",form="pas",type="klatmaling", realHeight=2, realWidth=3, height=None, width=None,filepath=None)
 	print solsikker
 
 	# Test that getSize returns None

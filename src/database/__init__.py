@@ -31,17 +31,24 @@ class Database:
 		return self.count
 	def exists(self):
 		return os.path.isfile(self.location)
-	def __init__(self):
+	def empty(self):
+		value = m.Artist.select().count()==0
+		value = value and  m.Painting.select().count()==0
+		return value
+	def __init__(self,settings):
 		connectionString = 'sqlite:%s/%s' % (os.getcwd(), self.location)
 		connection = s.connectionForURI(connectionString)
 		s.sqlhub.processConnection = connection
+		m.Artist.createTable(ifNotExists=True)
+		m.Painting.createTable(ifNotExists=True)
+		m.Run.createTable(ifNotExists=True)
+		m.Result.createTable(ifNotExists=True)
+		m.Region.createTable(ifNotExists=True)
+		setCSVFile(settings.getCSVFileLocation())
+		setLocation(settings.getDatabaseLocation())
 
 	def constructDatabase(self):
 		csvfile = open(self.csvfile,'r')
-		#Creating the tables needed, if they exsists...That hack is kind of neat
-		m.Artist.createTable(ifNotExists=True)
-		m.Painting.createTable(ifNotExists=True)
-
 		#Parse the catelog.csv
 		csvfilelines = csvfile.readlines()
 
@@ -50,7 +57,7 @@ class Database:
 		csvfilelines = csvfilelines[1:]
 		categories = categories.split(';')
 		currentArtist = ("",)
-		#get the count on how many pictures should be downloaded
+		#get the count on how many pictures should be downloaded also make sure that only oil paintings are downloaded if a number is given
 		count = self.count
 		if not count == None:
 			count = count

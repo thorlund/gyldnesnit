@@ -8,7 +8,7 @@ from opencv import highgui
 import sys
 
 class Painting:
-	#All the values we sohuld fill.
+	#All the values we should fill.
 	id = None
 	image = None
 	width = None
@@ -17,7 +17,7 @@ class Painting:
 
 	def __init__(self, entry):
 		self.id = entry.id
-		filename = entry.location
+		filename = entry.filepath
 		self.image = highgui.cvLoadImage(filename)
 		if not self.image:
 			raise SystemError('This picture is not parsable by opencv :'+filename)

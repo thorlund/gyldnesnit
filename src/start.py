@@ -13,105 +13,19 @@ from painting import Painting
 import src.model as m
 from database import Database
 def main():
-	settings = Settings([2/3,goldenLibrary.PHI])
-	settings.setThreshold1(78)
-	settings.setMarginProcentage(0.025)
-	settings.setLo(4)
-	settings.setUp(4)
-	settings.method("naive")
-	db = Database()
-	db.setCount(5)
-	if not db.exists():
-		db.contructDatabase()
+	settings = Settings([0.66666,goldenLibrary.PHI])
+	globalSettings = GlobalSettings()
+	db = Database(globalSettings)
+	if db.empty():
+		print "database isnt found...lets make one"
+		db.constructDatabase()
 	run = m.createNewRun(settings)
 	paintings = m.Painting.select(m.Painting.q.form=="painting")
-	settings = settings()
 	for painting in paintings:
 		if os.path.isfile(painting.filepath):
-			paintingContainer = Painting((painting.id,painting.filepath))
-			donePainting = paintingAnalyzer.analyze(paintingContainer,settings)
-			# Get and draw the components
-			print donePainting
-			for ratio in donePainting:
-				for cut in donePainting[ratio]:
-					lib.drawBoundingBoxes(image, comps[ratio][cut])
-
-			
-	#def main():
-#	print "There's a picture hardcoded here... If the test fails, that's probably why"
-#	print "Supply a path to a picture you have on your local machine instead"
-#	print ""
-#	try:
-#		filename = sys.argv[1]
-#	except IndexError:
-#		filename = "../res/local/medium_seurat_bathers.png"
-#
-#	# Setup test database
-#	connection_string = 'sqlite:/:memory:'
-#	connection = m.s.connectionForURI(connection_string)
-#	m.s.sqlhub.processConnection = connection
-#
-#	m.Artist.createTable()
-#	m.Painting.createTable()
-#	m.Run.createTable()
-#	m.Result.createTable()
-#	m.Region.createTable()
-#
-#	vangogh = m.Artist(name="Van Gogh", born=1234, died=4321, school="klatmalerier", timeline="1600ish")
-#	solsikker = m.Painting(artist=m.Artist.selectBy(name="Van Gogh")[0].id,title="Solsikker", date=1900, paint="maling", material='lort', location="../res/local/small_seurat_bathers.png",url="www.bogus.com/help",form="pas",type="klatmaling", realHeight=2, realWidth=3, height=None, width=None)
-#
-#	# Initialize settings and a new run
-#	cutRatios = [2.0/3, goldenLibrary.PHI]
-#	settings = Settings(cutRatios)
-#	run = m.createNewRun(settings)
-#	runId = run.id
-#	print "RunId %s" % runId
-#
-#	for entry in list(m.Painting.select()):
-#		painting = Painting(entry)
-#		result = paintingAnalyzer.analyze(painting, settings)
-#		painting.setResults(result)
-#		m.saveResults(runId, painting)
-#
-#	results = list(m.Result.select())
-#
-#	for result in results:
-#		res = list(m.Region.select(m.Region.q.result==result.id))
-#		print result
-#		for r in res:
-#			print "\t%s" % r
-#
-#	settings = m.getSettingsForRunId(1)
-#	print settings
-#	print m.getSettingsForResultId(3)
-#	print m.getSettingsForRegionId(2)
-#	print m.getCutNoForRegionId(2)
-#	print m.getCutRatioForRegionId(2)
-#	print m.getRegionsForResultId(2)
-#	m.showPictureInResultId(4)
-#		result = paintingAnalyzer.analyze(painting, settings, "naive")
-#		painting.setResults(result)
-#		m.saveResults(runId, painting)
-#
-#	print list(m.Result.select())
-#
-#	#painting = Painting(filename)
-#	#cutRatios = [2.0/3, goldenLibrary.PHI]
-#	#settings = Settings(cutRatios)
-#	#res = paintingAnalyzer.analyze(painting, settings, "naive")
-#	#painting.setResults(result)
-#	#img = graphicHelper.boundingBoxResult(painting.getImage(), settings, 2)
-#	#img = graphicHelper.blobResult(painting.getImage(), settings, 2)
-#	#graphicHelper.showImage(img, "Test")
-#
-#	"""
-#	for ratio in res:
-#		print ratio
-#		for cut in res[ratio]:
-#			print "\t%s objects in cut no. %s" % (len(res[ratio][cut]), cut)
-#			for result in res[ratio][cut]:
-#				print "\t\t%s" % res[ratio][cut][result][1].area
-#	"""
+			paintingContainer = Painting(painting)
+			paintingContainer.setResults(paintingAnalyzer.analyze(paintingContainer,settings))
+			m.saveResults(run.id,paintingContainer)
 
 if __name__ == '__main__':
 	main()
