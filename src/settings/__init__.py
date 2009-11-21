@@ -13,7 +13,7 @@ class GlobalSettings:
 	relativeDatabaseLocation = "database.db"
 	absoluteDatabaseLocation = os.path.abspath(relativeDatabaseLocation)
 	relativeCSVFileLocation = '/database/catalog.csv'
-	absoluteCSVFileLocation = os.path.abspath(relavitveCSVFileLocation)
+	absoluteCSVFileLocation = os.path.abspath(relativeCSVFileLocation)
 	def getDatabaseLocation(self):
 		return self.absoluteDatabaseLocation
 	def getCSVFileLocation(self):
@@ -94,13 +94,13 @@ class Settings:
 def main():
 	# Studpid test for nothing
 	print "Test"
-	cutRatios = [0.618]
+	cutRatios = [lib.PHI]
 	test = Settings(cutRatios)
 	print test.edgeThreshold1
 	print test
 
-	globals = GlobalSettings()
-	print globals.absoluteDatabaseLocation
+	#globals = GlobalSettings()
+	#print globals.absoluteDatabaseLocation
 
 if __name__ == "__main__":
 	main()
