@@ -14,7 +14,7 @@ import sqlobject as s
 import parser
 import urllib
 class Database:
-	csvfile = os.getcwd() +'/'+ "catalog.csv"
+	csvfile = ""
 	location = "pictureresource.db"
 	count = None
 	def setCSVFile(self,csvfile):
@@ -44,8 +44,9 @@ class Database:
 		m.Run.createTable(ifNotExists=True)
 		m.Result.createTable(ifNotExists=True)
 		m.Region.createTable(ifNotExists=True)
-		setCSVFile(settings.getCSVFileLocation())
-		setLocation(settings.getDatabaseLocation())
+		self.setCSVFile(settings.getCSVFileLocation())
+		print self.csvfile
+		self.setLocation(settings.getDatabaseLocation())
 
 	def constructDatabase(self):
 		csvfile = open(self.csvfile,'r')
@@ -68,9 +69,10 @@ class Database:
 
 		#iterate over the rest of the lines
 		for line in csvfilelines:
-			if count > 0:
+			line = line.split(';')
+			print len(line)
+			if count > 0 and len(line)==11:
 				filepath = None
-				line = line.split(';')
 				(paint,material,realHeight,realWidth) = parser.parseTechnique(line[4])
 			#The artist has changed we need to make an artist in the database
 				if not line[0]==currentArtist[0]:

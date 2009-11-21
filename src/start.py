@@ -9,6 +9,7 @@ from lib import paintingAnalyzer
 from lib import goldenLibrary
 from lib import graphicHelper
 from settings import Settings
+from settings import GlobalSettings
 from painting import Painting
 import src.model as m
 from database import Database
@@ -16,9 +17,8 @@ def main():
 	settings = Settings([0.66666,goldenLibrary.PHI])
 	globalSettings = GlobalSettings()
 	db = Database(globalSettings)
-	if db.empty():
-		print "database isnt found...lets make one"
-		db.constructDatabase()
+	#db.empy doesnt work since the database might be half full or half empty
+	db.constructDatabase()
 	run = m.createNewRun(settings)
 	paintings = m.Painting.select(m.Painting.q.form=="painting")
 	for painting in paintings:
