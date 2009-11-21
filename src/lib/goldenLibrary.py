@@ -171,7 +171,7 @@ def drawLines(original, outimage=None, lines=None, color=COL_RED):
 	for line in lines:
 		cv.cvLine(outimage, line.p1, line.p2, color)
 	
-def drawBoundingBoxes(out, component_dictionary, color=None, factor=1):
+def drawBoundingBoxes(out, component_dictionary, thickness=1, color=None, factor=1):
 	"""Given a dictionary of components, draw its bounding box on the outimage.
 	If no color is supplied, the box will be the same color at the blob."""
 
@@ -189,7 +189,7 @@ def drawBoundingBoxes(out, component_dictionary, color=None, factor=1):
 		p2 = cv.cvPoint(rect.x + rect.width, rect.y + rect.height)
 		p1 = transformer.translatePoint(p1, factor)
 		p2 = transformer.translatePoint(p2, factor)
-		cv.cvRectangle(out, p1, p2, color)
+		cv.cvRectangle(out, p1, p2, color, thickness)
 
 def drawMargin(out, cut, margin, factor=1):
 	lines = getMargins(cut, margin, factor)

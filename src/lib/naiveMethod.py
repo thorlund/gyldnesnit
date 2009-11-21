@@ -63,7 +63,7 @@ def getBlobImage(original, settings, cutNo):
 	return blobImage
 
 
-def getBoundingBoxImage(original, settings, cutNo, color=None):
+def getBoundingBoxImage(original, settings, cutNo, thickness=1, color=None):
 	"""Same as above but will paint the bounding boxes
 	original should be the image data
 	settings should be of class Settings
@@ -85,7 +85,7 @@ def getBoundingBoxImage(original, settings, cutNo, color=None):
 	lib.drawMargin(original, cut, margin)
 
 	# Draw the components
-	lib.drawBoundingBoxes(original, components, color)
+	lib.drawBoundingBoxes(original, components, thickness, color)
 
 	return original
 
