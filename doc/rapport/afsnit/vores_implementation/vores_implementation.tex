@@ -1,21 +1,28 @@
 {
-{\sffamily Vi bør introducere problematikken ved billedbehandling her.
-Hvorfor er det at computeren ikke bare kan ``se'' ligesom mennesket.
-Hvordan opfatter computeren et billede. Giv en latterlig analogi, f.eks.
-en blind mand der bliver fortalt hvilken farve hver kvadratcentimeter
-har på et maleri og at han ud fra de oplysninger skal afgøre hvordan
-billedet tager sig ud.
+{\sffamily Vi vil i dette kapitel se på hvordan vi vil analysere
+billeder for tilstedeværelsen af det gyldne snit. Vi vil derfor starte
+med at give en kort introduktion til billedbehandling og problemerne der
+er tilknyttet. Vi vil her introducere nogle nøglebegreber i forbindelse
+med analysen på malerier. Kapitlets afsnit ser således ud:
 
-Vi bør i denne sammenhæng også komme ind på at billedbehandling, især
-ikke det givne problem, er veldefineret. Det er nok en afart af det
-ovenstående, men det bør understreges.
+\paragraph{Afsnit \ref{section_naiv}} Introducerer en simpel
+fremgangsmåde til at afgøre om et billede opfylder det gyldne snit.
 
-Vi skal introducere at vi i det følgende vil komme frem til en simpel
-algoritme hvorfra man kan afgøre om et billede opfylder det gyldne snit.
-Det er her vi skal have introduceret de forskellige begreber.
+\paragraph{Afsnit \ref{section_opdeling}} Omhandler problematikken
+ved at gå fra virkelige malerier til en digital gengivelse.
+
+\paragraph{Afsnit \ref{section_udtraek}} Beskriver hvordan vi ved brug
+af forskellige metoder fra billedbehandling, vil trække regioner ud af
+et billede.
+
+\paragraph{Afsnit \ref{section_database}} Gennemgår opbygningen af vores
+bagvedliggende database og forklarer tankerne bag.
 }
 
-\section{Naiv algoritme\label{naiv_algoritme}}
+\section{Kort introduktion til billedbehandling\label{section_kort_intro}}
+\input{afsnit/vores_implementation/introduktion.tex}
+
+\section{Naiv algoritme\label{section_naiv}}
 \input{afsnit/vores_implementation/naiv_algoritme.tex}
 
 \section{Opdeling af billeder\label{section_opdeling}}
@@ -24,7 +31,7 @@ Det er her vi skal have introduceret de forskellige begreber.
 \section{Udtrækning af regioner i et billede\label{section_udtraek}}
 \input{afsnit/vores_implementation/udtraekning_af_regioner.tex}
 
-\section{Opbevaring af data}
+\section{Opbevaring af data\label{section_database}}
 \input{afsnit/vores_implementation/opbevaring_af_data.tex}
 
 \section{Implementation}

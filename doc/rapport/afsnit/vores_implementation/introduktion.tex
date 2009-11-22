@@ -1,0 +1,134 @@
+{
+{\sffamily I billedbehandling tales der ofte om begrebet \emph{feature
+detection}. En \emph{feature} oversættes bedst som \emph{et træk} eller
+et \emph{kendetegn}. Man har da med \emph{detektion af træk} i et
+billede at gøre. Nøjagtig \emph{hvad} et træk \emph{er}, er ikke klart
+defineret, men skal tilpasses den enkelte opgave. En andet område
+indenfor detektion af træk kaldes for \emph{blob detection}, hvor en
+\emph{blob} kan kort beskrives som en ensfarvet region i billedet. Vi
+vil derfor fremover referere til en blob som en region. Det er også
+detekteringen af regioner vi hovedsageligt vil koncentrere os om.
+
+Opgaven i billedbehandling består nu i at finde de \emph{interessante}
+regioner i billedet. Vi vil i det følgende komme frem til præcis hvad vi
+forstår ved region. Senere i kapitlet, i afsnit \ref{section_naiv}, vil
+vi præsentere en simpel fremgangsmåde som fortæller os hvornår en region
+kan betegnes som interessant. Vi vil dog først se på hvordan billeder
+bliver repræsenteret internt i computeren og ud fra dette se hvorfor det
+i grunden er så svært at definere hvad der er kan betragtes som
+interessant i malerier.
+}
+
+\subsection{Intern repræsentation af billeder}
+Et digitalt billede er sammensat af det der kaldes pixels. En pixel kan
+ses som et punkt i et koordinatsystem hvortil der er knyttet en værdi.
+Som et simpelt eksempel siger vi nu, at en pixel i et billede kan antage
+to værdier: $0$ og $1$. En pixel med værdi $0$ vil ikke blive farvet,
+dvs. den forbliver sort, mens en pixel med værdien $1$ vil blive farvet
+hvid. Figur \ref{billede_pixels} viser et sådan simpelt, binært billede.
+
+% Please, PLEASE, do not try this at home!
+% This is the UGLY way to tex things :P
+\begin{figure}[!h]
+    \renewcommand{\arraystretch}{1.5}
+    \centering
+    \begin{tabular}{cc|c|c|c|}
+        % Start crying
+           & \multicolumn{4}{c}{\hspace{1.5em}$y$}\\
+           & \multicolumn{4}{c}{\hspace{1.6em}0\hspace{1.2em}1\hspace{1.2em}2} \\\cline{3-5}
+           &  0 & 1                                     & \cellcolor{black}\textcolor{white}{0} & 1 \\\cline{3-5}
+      $x$  &  1 & \cellcolor{black}\textcolor{white}{0} & \cellcolor{black}\textcolor{white}{0} & \cellcolor{black}\textcolor{white}{0} \\\cline{3-5}
+           &  2 & 1                                     & \cellcolor{black}\textcolor{white}{0} & 1 \\\cline{3-5}
+    \end{tabular}
+    \caption[]{Et simpelt $3 \times 3$ billede vist som pixels.}
+    \label{billede_pixels}
+\end{figure}
+
+Vi bemærker at en pixels koordinater kun kan antage heltallige værdier.
+Dette skyldes at billedet i sidste ende skal vises på en computerskærm.
+Skærmen er delt ind i mange små felter svarende til pixels og man kan
+derfor ikke have værdier mellem heltallene.  Endvidere ser vi at
+koordinatsystemet starter i øverste venstre hjørne stigende mod nedre
+højre hjørne.
+
+Et billede kan da opstilles som en $N \times M$ matrix som vist i
+ligning \ref{billede_matrix}.
+
+\begin{equation}
+    P = \left ( \begin{array}{ccc}
+        1 & 0 & 1 \\
+        0 & 0 & 0 \\
+        1 & 0 & 1
+    \end{array} \right )
+    \label{billede_matrix}
+\end{equation}
+
+At bruge billedet som en matrix har nogle beregningsmæssige fordele, men
+det falder udenfor denne introduktions formål at gå ind i dette.
+Endeligt skal det siges at pixels godt kan tage andre værdier end $0$ og
+$1$. Vi arbejder med billeder hvor værdien for hver pixel er
+repræsenteret ved tre 8 bit størrelser, hver især med værdier i mængden
+$\{0, 1, 2, \cdots, 254, 255\}$. Sammensætningen af de tre værdier, som
+beskrives som kanaler eller farvebånd, kaldes for en RGB-farve, hvor
+tallene repræsenteret ved $(R,G,B)$ henholdsvis angiver mængden af rød,
+grøn og blå farve i en pixel. Et sådan billede kaldes for et
+RGB-billede. For uddybende information omkring billeders repræsentation,
+se da \cite{SIOlsen}.
+
+\subsection{Regioner i vilkårlige malerier}
+\paragraph{Hvad er en region?}
+Vi betegner en region som et område i et maleri som har samme farve.
+For at tage et par eksempler, så kan himlen, i et maleri af et landskab,
+som regel være en region for sig og et ansigt kan være en region.
+
+\subsubsection*{Computeren som betragter}
+Giver man tre forskellige mennesker den opgave at afgøre hvad der er det
+interessante i et givet maleri, kan man meget vel få tre forskellige
+svar. Mere kompliceret bliver det når man spørger ind til \emph{hvordan}
+de er kommet frem til deres svar. Én begrunder måske sit valg med en
+viden om netop det givne maleri, en anden med viden om maleriets
+kunstner eller periode, mens en tredie begrunder det med æstetiske
+virkemidler eller subjektive holdninger. Her er alle muligheder åbne for
+at lave fejl, da man som regel ikke har kunstneren til rådighed til at
+give det rigtige svar, hvis han da overhovedet selv kender det.
+Maleriets motiv kan lede én på sporet af hvad der er interessant, men
+dette kræver måske en viden om motivets bagvedliggende historie.
+Mennesket tager altså en lang række overvejelser og baggrundsviden i
+betragtning når ovenstående opgave skal løses.
+
+Som allerede nævnt afhænger de interessante træk af den enkelte opgave.
+Hvis vi forestiller os en læge der kigger på et røntgenbillede af en
+patient som har brækket armen, er det indlysende hvad lægen betragter
+som det interessante i billedet, nemlig der hvor bruddet sidder. Når vi
+har med tilfældige malerier at gøre, så står vi dog stadig tilbage med
+spørgsmålet: \emph{``Hvad er egentlig \emph{interessant} i et maleri?''}
+Vi lader dette spørgsmål stå åbent for at se på hvordan computeren
+betragter et maleri.
+
+[Det er som om at det er lettest bare at spille fallit her]
+
+Når computeren ser på et billede ser den pixels. Computeren ser
+endvidere disse pixels \emph{én ad gangen}. Det svarer altså til at de
+enkelte pixelværdier bliver læst op for en person der ikke kan se selve
+billedet. For at køre eksemplet helt ud, så har vi at en person får
+følgende at vide:
+\begin{quote}
+    \emph{``Pixel med koordinater $(0, 0)$ har værdien $1$. Pixel med
+    koordinater $(1, 0)$ har værdien $0$.''} etc.
+\end{quote}
+Dette giver ingen egentlig information om \emph{hvad} billedet
+forestiller. Computeren kan ikke se billedet i sin helhed og har som
+udgangspunkt ikke nogen baggrundsviden at basere en vurdering på. Det
+eneste computeren kan gøre er at gå det igennem pixel for pixel og
+sammenligne dem. Dette betyder faktisk, at man for hver pixel bliver nød
+til at tage beslutningen om denne er del af noget interessant.
+
+\subsection{Antagelser}
+Vi kan med sikkerhed sige, at der ikke kan opstilles nogen globale
+regler for hvad der er interessant i et maleri.  Interessante regioner i
+billeder er fremhævet, har en vis størrelse og er ``tydeligt''
+afgrænset.
+
+}
+
+% vim: set tw=72 spell spelllang=da:
