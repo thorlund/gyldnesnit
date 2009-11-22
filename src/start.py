@@ -23,9 +23,12 @@ def main():
 	paintings = m.Painting.select(m.Painting.q.form=="painting")
 	for painting in paintings:
 		if os.path.isfile(painting.filepath):
-			paintingContainer = Painting(painting)
-			paintingContainer.setResults(paintingAnalyzer.analyze(paintingContainer,settings))
-			m.saveResults(run.id,paintingContainer)
+			try:
+				paintingContainer = Painting(painting)
+				paintingContainer.setResults(paintingAnalyzer.analyze(paintingContainer,settings))
+				m.saveResults(run.id,paintingContainer)
+			except:
+				pass
 
 if __name__ == '__main__':
 	main()
