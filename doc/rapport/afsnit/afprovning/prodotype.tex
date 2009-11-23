@@ -12,7 +12,7 @@ forbedre på fremgangsmåden.
 
 \subsection{Noget smart, kan bare ikke komme på det}
 Nå et billedet bearbejdes, i vores program, er der 2 naturlige steder
-hvor det vil være fornuftige at se om hvad der sker. Det første er efter vi har
+hvor det vil være fornuftige at se hvad der sker. Det første er efter vi har
 iteraret hen over et af de 4 cut og fundet alle de regioner som ligger
 på eller lige omkring snittet.
 
@@ -53,13 +53,35 @@ billedet. Men tilgængel er alle de store regioner så som baggrunden og
 græsset ikke blevet taget med. Det kan både siges at være godt og skidt.
 det gode er at vi nu har en god ide om, hvad der bliver fundet. hvis vi
 samme liner vores beskrivelse af vores fremgangsmåde, og hvordan
-billedet ser ud. Stemmer det over ens, så vores algoritme virker skulle virke. Det
-dårlige er, at vi fjerner ret meget. F.eks. kunne drengen være en
-region som man gerne vil have med.
+billedet ser ud. Stemmer det over ens, så vores algoritme virker skulle
+virke. Det dårlige er, at vi fjerner ret meget. F.eks. kunne drengen
+være en region som man gerne vil have med.
 
-For at give lidt parspiktic, vil jeg også visser vi et par andet billedet, hvor
-vores metode opføre sig en kende anderledes.
-	
+
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.40,angle=0]{afsnit/afprovning/billeder/BBcomposa.png}
+	\end{center}
+	\caption[]{Som man kan se finder vores metode 2 baunding boxe, en
+	           som omkranser nogle både og en som omkranser lidt af
+	           vært, Men hvad er det vi i virkelige som bounding boxne
+	           bliver laver ud fra.}
+	\label{BBcomposa}
+\end{figure}
+
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.40,angle=0]{afsnit/afprovning/billeder/FFcomposa.png}
+	\end{center}
+	\caption[]{som man kan se ud fra billedet er det som i virkelige har
+	           fundet er 2 ensardiet mørke groperinger som bliver
+	           andskildt af en stolpe. Heldigvis omfatter 1 af
+	           groperingerne en stor del af bådene så man kan sige at
+	           den er har fanget en sammenhæng, men den andet kunne lige
+	           så godt være gået en anden retning.}
+	\label{FFcomposa}
+\end{figure}
+
 \begin{figure}[h!!]
 	\begin{center}
 		\includegraphics[scale=0.20,angle=0]{afsnit/afprovning/billeder/nicofloodfillbilledet.png}
@@ -72,6 +94,7 @@ vores metode opføre sig en kende anderledes.
 	\label{nicofill}
 \end{figure}
 
+\subsection{Eksampel 4}
 \begin{figure}[h!!]
 	\begin{center}
 		\includegraphics[scale=0.30,angle=0]{afsnit/afprovning/billeder/BB1annunc2.png}
@@ -126,8 +149,8 @@ vores metode opføre sig en kende anderledes.
 	\begin{center}
 		\includegraphics[scale=0.35,angle=0]{afsnit/afprovning/billeder/BBCarruingcut2.png}
 	\end{center}
-	\caption[]{I dette billedet finder vi 4 ragioner som ligger i det
-	           gyldne snit, 3 hovder og et barne omris. Dette passer god}
+	\caption[]{I dette billedet finder vi 3 ragioner som ligger i det
+	           gyldne snit, 2 hovder som svare over ens med det vi gerne villle finde, og så en arm}
 	\label{BBCarruingcut2}
 \end{figure}
 
@@ -136,7 +159,9 @@ vores metode opføre sig en kende anderledes.
 	\begin{center}
 		\includegraphics[scale=0.50,angle=0]{afsnit/afprovning/billeder/BBMonalisacut1.png}
 	\end{center}
-	\caption[]{Monalisa med ved cut 1 , hvor der bliver fundet hindes overbryst og hindes pande, dette tyder på at noget af monalisas krop befinder sig inde i det gyldne snit}
+	\caption[]{Monalisa med ved cut 1 , hvor der bliver fundet hindes
+	overbryst og hindes pande, dette tyder på at noget af monalisas krop
+	befinder sig inde i det gyldne snit}
 	\label{BBMonalisacut1}
 \end{figure}
 

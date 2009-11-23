@@ -108,7 +108,8 @@ def main():
 	image = highgui.cvLoadImage (filename)
 	thickness = 4
 	settings.setMarginPercentage(0.025)
-
+	cut = int(sys.argv[2])
+	#settings.setThresholds(100,150)
 	# Set the color for the boxes
 	color = lib.COL_BLACK
 	#color = lib.COL_WHITE
@@ -116,8 +117,8 @@ def main():
 	#color = lib.COL_GREEN
 	#color = lib.COL_BLUE
 
-	blobImg = blobResult(image, settings, 0)
-	boxxImg = boundingBoxResult(image, settings, 0,thickness, color)
+	blobImg = blobResult(image, settings, cut)
+	boxxImg = boundingBoxResult(image, settings, cut, thickness, color)
 	compareImages(blobImg, boxxImg, "blob", "bounding box")
 	#highgui.cvSaveImage('floodfillbilledet.png', blobImg)
 	#highgui.cvSaveImage('boindingboxbilledet.png', boxxImg)
