@@ -36,9 +36,9 @@ hvid. Figur \ref{billede_pixels} viser et sådan simpelt, binært billede.
         % Start crying
            & \multicolumn{4}{c}{\hspace{1.5em}$y$}\\
            & \multicolumn{4}{c}{\hspace{1.6em}0\hspace{1.2em}1\hspace{1.2em}2} \\\cline{3-5}
-           &  0 & 1                                     & \cellcolor{black}\textcolor{white}{0} & 1 \\\cline{3-5}
+           &  0 & 1                                     & \cellcolor{black}\textcolor{white}{0} & 1                                     \\\cline{3-5}
       $x$  &  1 & \cellcolor{black}\textcolor{white}{0} & \cellcolor{black}\textcolor{white}{0} & \cellcolor{black}\textcolor{white}{0} \\\cline{3-5}
-           &  2 & 1                                     & \cellcolor{black}\textcolor{white}{0} & 1 \\\cline{3-5}
+           &  2 & 1                                     & \cellcolor{black}\textcolor{white}{0} & 1                                     \\\cline{3-5}
     \end{tabular}
     \caption[]{Et simpelt $3 \times 3$ billede vist som pixels.}
     \label{billede_pixels}
@@ -76,10 +76,13 @@ RGB-billede. For uddybende information omkring billeders repræsentation,
 se da \cite{SIOlsen}.
 
 \subsection{Regioner i vilkårlige malerier}
-\paragraph{Hvad er en region?}
-Vi betegner en region som et område i et maleri som har samme farve.
-For at tage et par eksempler, så kan himlen, i et maleri af et landskab,
-som regel være en region for sig og et ansigt kan være en region.
+Vi betegner en region som en samling af pixels i et billede, som har en
+farve indenfor en vis afvigelse af en givet startpixel. Hvis nu antager
+at vi sætter denne afvigelse til $0$, vil billedet i figur
+\ref{billede_pixels} have en sort region formet som et kryds. Alt efter
+hvordan man definerer afvigelsen, kan man da få regioner ud fra digitale
+gengivelser af malerier såsom en himmel, i et maleri af et landskab,
+eller et ansigt.
 
 \subsubsection*{Computeren som betragter}
 Giver man tre forskellige mennesker den opgave at afgøre hvad der er det
