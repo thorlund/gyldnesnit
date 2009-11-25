@@ -7,7 +7,7 @@ import src.model as m
 from src.settings import GlobalSettings
 from src.database import Database
 
-db = Database(globalSettings)
+db = Database(GlobalSettings)
 results = m.Result.select(m.Result.q.run==2)
 
 numberOfRegions = 0
