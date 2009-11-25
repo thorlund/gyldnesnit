@@ -4,7 +4,8 @@ import os
 
 sys.path.append(os.getcwd()[:os.getcwd().find('src')])
 import src.model as m
-from settings import GlobalSettings
+from src.settings import GlobalSettings
+from src.database import Database
 
 db = Database(globalSettings)
 results = m.Result.select(m.Result.q.run==2)
