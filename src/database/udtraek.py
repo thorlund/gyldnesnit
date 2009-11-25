@@ -15,7 +15,7 @@ results = m.Result.select(m.Result.q.run==2)
 numberOfRegions = 0
 amountOfPictures = 0
 for result in results:
-	numberOfRegions = numberOfRegion + result.numberOfRegions
+	numberOfRegions = numberOfRegions + result.numberOfRegions
 	amountOfPictures = amountOfPictures +1
 
 print ('There was %i regions detected in %i pictures',(numberOfRegions,amountOfPictures))
