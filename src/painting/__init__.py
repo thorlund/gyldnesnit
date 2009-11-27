@@ -47,6 +47,8 @@ class Painting:
 			raise SystemError('This picture is not a valid picture')
 		else:
 			return self.image
+	def getName(self):
+		return self.filename
 
 	def getWidth(self):
 		return self.width

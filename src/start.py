@@ -34,6 +34,8 @@ def main():
 		if os.path.isfile(painting.filepath):
 			try:
 				paintingContainer = Painting(painting)
+				print "now working on"
+				print painting.getName()
 				paintingContainer.setResults(paintingAnalyzer.analyze(paintingContainer,settings))
 				m.saveResults(run.id,paintingContainer)
 			except:
