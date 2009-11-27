@@ -14,7 +14,16 @@ from painting import Painting
 import src.model as m
 from database import Database
 def main():
-	settings = Settings([0.66666,goldenLibrary.PHI])
+	antalcuts = 9
+	cuts = [goldenLibrary.PHI]
+	while antalcuts > 0:
+		oldcut = cuts[len(cuts)-1]
+		newcut = oldcut +0.05
+		if newcut > 1:
+			newcut = newcut - 0.5
+		cuts.append(newcut)
+		antalcuts = antalcuts - 1
+	settings = Settings(cuts)
 	globalSettings = GlobalSettings()
 	db = Database(globalSettings)
 	#db.empy doesnt work since the database might be half full or half empty
