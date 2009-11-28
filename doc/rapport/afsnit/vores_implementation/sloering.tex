@@ -21,7 +21,7 @@ arbejde direkte på billedet, hvilket kræver et større pladsforbrug.
 
 \subsubsection*{Gaussisk sløring}
 Ved Gaussisk sløring ind gør der 3 steps, først at finde en kernel,
-multiplicere kernel rigtigt på billedet, kaldet Convolution. Udtrak
+multiplicere kernel rigtigt på billedet, kaldet Foldning. Udtrak
 værdigerne fra multiplikationen i et nyt billedet, som er det sløret
 billedet.
 
@@ -30,21 +30,22 @@ En kernel er en lille matrice, som betegner hvor stor del af billedet og
 hvor meget af pixels værdiger for farverne rund om et punkt, skal tages
 med i udregningen for den nye sløret farve.
 
-\subsubsection*{Convolution}
-Convoluting er en simpel matematisk metode, som beskriver hvordan man
-kan gange 2 matricer sammen som ikke har sammen mål, men samme
-dimission.
+\subsubsection*{Foldning}
+Foldning er en simpel matematisk metode, som beskriver hvordan man kan
+gange 2 matricer sammen, i vores tilfælde, en kernel $R^{n}~X~R^{m}$ og
+et billedet matrice $R^{k}~X~R^{d}$, hvor $n = d ~\vee~ m = k$ ikke behøver
+at være opfyldt.
 
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[scale=1,angle=0]{afsnit/vores_implementation/billeder/sloering/convolution}
 	\end{center}
 	\caption[]{Et billedet og en kernel}
-	\label{Convolution}
+	\label{Foldning}
 \end{figure}
 
-Som man kan se i figur \ref{Convolution} er selve billedet og kernel i
-vid forskellige størrelser. Måden Convolution virker på at man
+Som man kan se i figur \ref{Foldning} er selve billedet og kernel i
+vid forskellige størrelser. Måden Foldning virker på at man
 multiplicere kernelen ovenpå de værdiger som ligger rund om den pixel,
 som vi gerne vil finde den sløret farve af og tager gennemsnittet af den
 værdig, f.eks farven på pixel $(4,4)$, bliver
@@ -53,31 +54,34 @@ værdig, f.eks farven på pixel $(4,4)$, bliver
 	(4,4) = ((3,3)*4+(4,3)*2+(5,3)*3+(3,4)*3+(4,4)*9+(5,4)*3+(3,5)*2+(4,5)*4+(5,5)*9)*\frac{1}{39} 
 \end{equation}
 
-I dette eksempel, er punktet $(5,5)$ og $(4,4)$ vægtet højre i forhold til de andet, så farven vil blive sløret i den retning. Dette skyldes at kernelen er bygget tilfældig op, i en rigtige sløring er kernelen meget specifikt udvalgt for at give det beste resultat.
+I dette eksempel, er punktet $(5,5)$ og $(4,4)$ vægtet højre i forhold
+til de andet, så farven vil blive sløret i den retning. Dette skyldes at
+kernelen er bygget tilfældig op, i en rigtige sløring er kernelen meget
+specifikt udvalgt for at give det beste resultat.
  
 \subsubsection*{Gaussian kernel}
-Måde Gaussisk sløring bygger sin kernel op på, at ved brug af Gaussian
-fordelings formlen, som bliver brugt utallige steder i den matematiske
-verden, som en anderkedt og respektere fordelings metode. XXX(ved ikke
-om jeg skal komme ind på selve gaussan fordelige, da dette snilt kan
-komme op på den del)
+Måde Gaussisk sløring bygger sin kernel op på, at ved brug af Normale
+fordeling, som betegnet med denne formel
 
 
 \begin{equation}
 	G(x,y) = \frac{1}{2\pi\sigma^2}e^{-\frac{x^2+y^2}{2\sigma^2}}
 \end{equation}
 
-Hvis $\sigma = 1$ og vi lader x og y køre fra -2 til 2, med steps size på 1, og multiplicere så den laveste værdig kommer til at være 1 og runder værdien af. Få vi en kernel, se firgur \ref{gauss}.
+Hvis $\sigma = 1$ og vi lader x og y køre fra -1 til 1, med skridt størrelse
+på 1, og multiplicere alle værdiger, så den laveste værdig kommer til at være 1 og
+runder værdien af. Få vi en kernel som se på firgur \ref{gauss}.
 
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[scale=0.5,angle=0]{afsnit/vores_implementation/billeder/sloering/gauss}
 	\end{center}
-	\caption[]{Kernel for gauss sløring}
+	\caption[]{En $3~X~3$ Kernel for gauss sløring}
 	\label{gauss}
 \end{figure}
 
-Denne kernel kan så bruges ved hjælp af concolution til at danne det sløret billet, som vi kan se i figur \ref{gaussian_metode}
+Denne kernel kan så bruges ved hjælp af foldning til at danne det sløret
+billet, som vi kan se i figur \ref{gaussian_metode}
 
 \subsubsection*{Sløring ved statistisk median}
 Den sidste metode vi vil nævne er i grunden meget simpel. Grundidéen er
