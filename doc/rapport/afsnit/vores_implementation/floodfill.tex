@@ -87,8 +87,10 @@ der kaldes pointilistisk stil, hvilket vil sige at maleriet faktisk
 består af en masse små prikker. I de fem billeder vist i figur
 \ref{dot_ff_fixed_7_7}, \ref{dot_ff_var_7_7}, \ref{dot_ff_fixed_10_10},
 \ref{dot_ff_var_10_10} og \ref{dot_ff_var_9_9} bruges floodfill på den
-pixel i midten af den røde prik. Det anbefales at studere figurene og
-den tilhørende tekst.
+pixel i midten af den røde prik. Den tilladte afvigelse gives som en
+tupel $(lo, up)$ med en værdier for henholdsvis hvor meget RGB-værdien
+må falde og stige. Det anbefales at studere figurene og den tilhørende
+tekst.
 
 % Det her billede opfører sig underligt mht. scale :/
 \begin{figure}[!h]
@@ -105,7 +107,7 @@ den tilhørende tekst.
         \includegraphics[scale=0.49]{afsnit/vores_implementation/billeder/flood_fill/dot_ff_fixed_7_7}
     \end{center}
     \caption[]{Floodfill hvor der kun sammenlignes med farven på den
-    originale pixel.}
+    originale pixel med afvigelsen $(7,7)$.}
     \label{dot_ff_fixed_7_7}
 \end{figure}
 
@@ -114,7 +116,7 @@ den tilhørende tekst.
         \includegraphics[scale=0.49]{afsnit/vores_implementation/billeder/flood_fill/dot_ff_var_7_7}
     \end{center}
     \caption[]{Floodfill hvor der sammenlignes med farven på den nye
-    startpixel. Afvigelsen er den samme som i figur
+    startpixel. Afvigelsen er sat til $(7,7)$ ligesom i figur
     \ref{dot_ff_fixed_7_7}. Det ses at vi nu dækker et meget større
     areal.}
     \label{dot_ff_var_7_7}
@@ -125,8 +127,8 @@ den tilhørende tekst.
         \includegraphics[scale=0.49]{afsnit/vores_implementation/billeder/flood_fill/dot_ff_fixed_10_10}
     \end{center}
     \caption[]{Floodfill med udgangspunkt i en ny pixel og kun
-    sammenligning med den originale pixel. Den tilladte afvigelse er her
-    større end i figur \ref{dot_ff_fixed_7_7} og \ref{dot_ff_var_7_7}.}
+    sammenligning med den originale pixel. Den tilladte afvigelse er på
+    $(10,10)$.}
     \label{dot_ff_fixed_10_10}
 \end{figure}
 
@@ -146,10 +148,10 @@ den tilhørende tekst.
         \includegraphics[scale=0.49]{afsnit/vores_implementation/billeder/flood_fill/dot_ff_var_9_9}
     \end{center}
     \caption[]{Floodfill med samme udgangspunkt som i figur
-    \ref{dot_ff_fixed_10_10} og \ref{dot_ff_var_10_10}. Her bruges
-    igen sammenligning med ny startpixel, men nu med en lavere tilladt
-    afvigelse. Vi holder os nu pænt indenfor den region som udgøres af
-    drengens hår.}
+    \ref{dot_ff_fixed_10_10} og \ref{dot_ff_var_10_10}. Her bruges igen
+    sammenligning med ny startpixel, men nu med en afvigelse på $9,9$.
+    Denne lille ændring er nok til, at vi holder os pænt indenfor den
+    region som udgøres af drengens hår.}
     \label{dot_ff_var_9_9}
 \end{figure}
 
