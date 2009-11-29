@@ -3,6 +3,17 @@
 stå et andet sted$^{\textsf{TM}}$. Titlen er derfor dybt misvisende.
 }
 
+\subsection{Teknisk snak om billeder}
+Endeligt skal det siges at pixels godt kan tage andre værdier end $0$ og
+$1$. Vi arbejder med billeder hvor værdien for hver pixel er
+repræsenteret ved tre 8 bit størrelser, hver især med værdier i mængden
+$\{0, 1, 2, \cdots, 254, 255\}$. Sammensætningen af de tre værdier, som
+beskrives som kanaler eller farvebånd, kaldes for en RGB-farve, hvor
+tallene repræsenteret ved $(R,G,B)$ henholdsvis angiver mængden af rød,
+grøn og blå farve i en pixel. Et sådan billede kaldes for et
+RGB-billede. For uddybende information omkring billeders repræsentation,
+se da \cite{SIOlsen}.
+
 \subsection{Implementation af databasen}
 Vi bruger SQLite til selve databasen, hovedsageligt fordi der ikke kræves
 nogen videre konfiguration af en sådan database. Den underliggende
@@ -62,6 +73,9 @@ oprette runs, dictionary til at smække resultatet fra analysen ind.
 
 På grund af begrænsninger i \emph{OpenCV} kan vi ikke gemme regionens
 præcise form, men kun dennes begrænsende rektangel og regionens areal.
+
+Dette betyder faktisk, at man for hver pixel bliver nød
+til at tage beslutningen om denne er del af noget interessant.
 
 \subsection{Genskabelse af parametre og resultater (database)}
 At kunne genskabe de fundne resultater fra en analyse har meget stor
