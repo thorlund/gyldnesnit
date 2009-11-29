@@ -1,19 +1,17 @@
 {
-{\sffamily I billedbehandling findes begrebet \emph{feature detection}.
-En \emph{feature} oversættes bedst som \emph{et træk} eller et
-\emph{kendetegn}. Man har da med \emph{detektion af træk} i et billede
-at gøre. Nøjagtig \emph{hvad} et træk \emph{er}, er ikke klart
+{\sffamily I billedbehandling dækker begrebet \emph{feature detection}
+over den opgave at detektere \emph{features} i et givet billede. En
+\emph{feature} oversættes bedst som \emph{et træk} eller et
+\emph{kendetegn}. Nøjagtig \emph{hvad} et træk \emph{er}, er ikke klart
 defineret, men skal tilpasses den enkelte opgave. En andet område
 indenfor detektion af træk kaldes for \emph{blob detection}, hvor en
 \emph{blob} kan kort beskrives som en ensfarvet region i billedet. Vi
-vil derfor fremover referere til en blob som en region. Det er også
-detekteringen af regioner vi hovedsageligt vil koncentrere os om.
-
-Opgaven i billedbehandling består nu i at finde de \emph{interessante}
-regioner i billedet. Vi vil i det følgende komme frem til præcis hvad vi
-forstår ved region. Senere i kapitlet, i afsnit \ref{section_naiv}, vil
-vi præsentere en simpel fremgangsmåde som fortæller os hvornår en region
-kan betegnes som interessant. Vi vil dog først se på hvordan digitale billeder
+vil derfor fremover referere til en blob som en region. Man ønsker nu at
+udvælge kun de \emph{interessante} regioner i billedet. Vi vil i det
+følgende komme frem til præcis hvad vi forstår ved en region. Senere i
+kapitlet, i afsnit \ref{section_naiv}, vil vi præsentere en simpel
+fremgangsmåde som fortæller os hvornår en region kan betegnes som
+interessant. Vi vil dog først se på hvordan digitale billeder
 repræsenteres.
 }
 
@@ -71,19 +69,22 @@ At bruge billedet som en matrix har nogle beregningsmæssige fordele, men
 det falder udenfor denne introduktions formål at gå ind i dette.
 
 \subsection{Regioner i vilkårlige malerier}
-Vi betegner en region som en samling af pixels i et billede, som har en
-farve indenfor en vis afvigelse af en givet startpixel. Hvis nu antager
-at vi sætter denne afvigelse til $0$, vil billedet i figur
-\ref{billede_pixels} have en sort region formet som et kryds. Alt efter
-hvordan man definerer afvigelsen, kan man da få regioner ud fra digitale
-gengivelser af malerier såsom en himmel, i et maleri af et landskab,
-eller et ansigt. En regionen kan altså være hvad som helst i billedet.
+Givet et digitalt billede, defineres en region, som en sammenhængende
+gruppe af pixels med samme farve. Billedet i figur \ref{billede_pixels}
+vil da have en sort region formet som et kryds.  Egentlig har vi også
+fire små regioner i hjørnerne, hver enkelt på én pixel. I praksis
+tillades dog en afvigelse i farven. Alt efter hvordan man definerer
+afvigelsen, kan man da få regioner ud fra digitale gengivelser af
+malerier såsom en himmel, i et maleri af et landskab, eller et ansigt.
+En regionen kan altså være hvad som helst i billedet.
 
 \subsection{Antagelser}
-Vi kan med sikkerhed sige, at der ikke kan opstilles nogen globale
-regler for hvad der er interessant i et maleri.  Interessante regioner i
-billeder er fremhævet, har en vis størrelse og er ``tydeligt''
-afgrænset.
+Det er umuligt at opstille nogen regler for hvad der er interessant i et
+arbitrært maleri. Vi må dog antage, at det, som af et menneske, betragtes
+som interessant, er fremstår tydeligt i billedet. At noget fremstår
+tydeligt betyder at den region, som udgør det interessante område, er
+klart afgrænset i maleriet. Vi må endvidere antage at den interessante
+region har en vis størrelse.
 
 }
 
