@@ -4,7 +4,12 @@ Settings
 The settings are global constants for a run
 """
 
-import os
+# Access to other libraries
+import sys, os
+sys.path.append(os.getcwd()[:os.getcwd().find('src')])
+
+from src.lib import marginCalculator
+from src.lib.goldenLibrary import PHI
 
 ### Global Settings ###
 
@@ -24,13 +29,15 @@ class GlobalSettings:
 
 
 class Settings:
-	"""These are the default settings for the analysis"""
+	"""These are the default settings for the analysis.
+	The standard margin is the difference between phi and
+	2/3"""
 	edgeThreshold1 = 78
 	edgeThreshold2 = 2.5 * edgeThreshold1
 	lo = 4
 	up = 4
 	cutRatios = None
-	marginPercentage = 0.009
+	marginPercentage = (2.0/3) - PHI
 	method = 'naive'
 
 	def __init__(self, cutRatios):
@@ -38,6 +45,11 @@ class Settings:
 		if cutRatios is None:
 			raise StandardError()
 		self.setCutRatios(cutRatios)
+
+		# Get the marginPercentage
+		marginPercentage = marginCalculator.getPercentage(self.cutRatios, self.marginPercentage)
+		if not (marginPercentage is None):
+			self.marginPercentage = marginPercentage
 
 	def setThreshold1(self, trsh):
 		"""Set threshold1
@@ -69,6 +81,10 @@ class Settings:
 		for i in range(len(cutRatios)):
 			if cutRatios[i] < 0.5:
 				cutRatios[i] = 1 - cutRatios[i]
+			elif cutRatios[i] > 1.0:
+				# Scary
+				# Maybe raise an error
+				cutRatios[i] = cutRatios[i] - 1
 		self.cutRatios = cutRatios
 
 	def setMarginPercentage(self, perc):
@@ -81,7 +97,7 @@ class Settings:
 
 	def __repr__(self):
 		str =  "Settings\n"
-		str +="Margin ratios: \t\t%s\n" % self.cutRatios
+		str += "Margin ratios: \t\t%s\n" % self.cutRatios
 		str += "Thresholds: \t\t%s, %s\n" % (self.edgeThreshold1, self.edgeThreshold2)
 		str += "Bounds: \t\t%s, %s\n" % (self.lo, self.up)
 		str += "Margin percentage: \t%s\n" % self.marginPercentage
@@ -94,7 +110,9 @@ class Settings:
 def main():
 	# Studpid test for nothing
 	print "Test"
-	cutRatios = [lib.PHI]
+	cutRatios = [0.618, 1.0/2, 2.0/3]
+	cutRatios = [0.618034, 2.0/3]
+	cutRatios = [1.0/2]
 	test = Settings(cutRatios)
 	print test.edgeThreshold1
 	print test

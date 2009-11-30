@@ -2,27 +2,23 @@
 
 # Access to other libraries
 import sys, os
-sys.path.append(os.getcwd()[:os.getcwd().find('src')])
 
 import math
-from src.settings import Settings
 import goldenLibrary as lib
 
 
-def getPercentage(Rlist):
+def getPercentage(cutRatios, min=1):
 	"""Given a list of ratios return the minimum allowed percentage
-	for the margin"""
-	size = len(Rlist)
-	#the max magin that the function can return
-	tmp = 1
-	if size == 1:
-		return None
+	for the margin. An optional argument for the minimum value can
+	be supplied."""
+
+	size = len(cutRatios)
 
 	for i in range(0, size):
 		for j in range(0, size):
-			if (abs(Rlist[i] - Rlist[j]) < tmp) and not (j == i):
-				tmp = abs(Rlist[i] - Rlist[j])
-	return (tmp)/2.0
+			if (abs(cutRatios[i] - cutRatios[j]) < min) and not (j == i):
+				min = abs(cutRatios[i] - cutRatios[j])
+	return (min)/2.0
 
 
 def getPixels(image, line, marginPercentage):

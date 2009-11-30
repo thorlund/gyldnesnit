@@ -99,7 +99,7 @@ def analyzeCut(original, edgeImage, cut, settings, showBlobs=False):
 	up = settings.up
 
 	# Set up the margin with respect to the cut
-	margin = marginCalculator.getPixels(cv.cvGetSize(original), cut, settings.marginPercentage)
+	margin = marginCalculator.getPixels(original, cut, settings.marginPercentage)
 	superMargin = 0
 	# ^^ We don't use superMargin
 
