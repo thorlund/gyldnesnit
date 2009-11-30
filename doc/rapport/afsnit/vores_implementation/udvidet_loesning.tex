@@ -2,17 +2,51 @@ I den udvidet løsning har vi valt, at se på den måde, vi vælger ragioner
 ud på. Hvor vi i den naiveMethode valgte at se på ragionens bounding
 box, vil vi i den udviden metode valje at se på mindre snit af ragionen,
 vi har også valt at udvide måde vi bestemmer hvad en ragion er. En
-ragion før var, enden med eller ikke med i en snit. kommer udvidelsen
+ragion var før, ænden med eller ikke med i en snit. kommer den udvidelsen
 til at indeholde en kateroesering af ragionerne, så en ragion kan have
-en vis katerogiering i forhold til et snit.
+en vis katerogiering i forhold til et snit. 
+
+\subsection{Udvidelse af ragioner plasering}
+I denne udvidelse vil vi gerne indføre mere udføliger defination af hvornår en ragion ligger i et snit. hvor vi før kun arbejdet med ragionen som tagenteret inde i snittet, vil vi nu også gerne have ragioner med som skæres i midden af snittet se figur \ref{PCirkel}.(Vidre med billeder)
+
+\subsubsection{Forklaring at vi ikke laver om på vores featuer detector}
 
 
-\subsubsection{Forklaring om at vi ikke laver om på vores featuer detector}
+\subsubsection{Opdeling af ragion med et grid}
+Måden vi deller ragionen op på, er hved hjælp af et gridt som vi
+tilføjer vær baunding box. Da vi ved hvilken farve baunding boxens
+ragion har, tager vi alle de punkter i grittet som har denne farve, og
+få et bedre beskrivels af hvordan ragionen ser ud. For at gøre
+algoritmen lidt hurtiger, er vores gridt punkter lavet med 2 pixels
+mellemrum. XXX(dette rette vi nå vi pracis ved hvor stort vores gridt er)
+XXX(har vi skravet at vi altid laver ragionerne forskelige farver.)
 
 \subsubsection{Metode forklaring}
+Vi har nu x antal punkter i en ragion og vi andtager at det er et af den
+vertikale snit vi ser på. Så kan punkterne befinde sig oven på snittet
+XXX(margin), til venstre eller til højre fra snittet. Alle punkterne har
+også en afstand d til snittet og en afstand D til kanten af billedet. Med de 3 information kan vi sige en masse
+om ragionen, f.eks. skære snitte ragionen i 2 lige store delle eller
+befinder næste helle figuren sig lang væk fra snittet osv. Få at få
+nogle konkrate matematik ned, har vi valt at se på disse 2 formler
+\ref{MPunkt}, \ref{Fordeling}.
 
-\subsubsection{Teori}
+\begin{eqnarray} 
+ MPunkt &=& \frac {\sum{D}}{x}\label{MPunkt}
+\end{eqnarray}
 
+\begin{eqnarray} 
+ Fordeling &=& \frac{x_{venstre~side}-x_{højre~side}}{x}\label{Fordeling}
+\end{eqnarray}
+
+Formel \ref{MPunkt} finder et mid punktet af ragionen i forhold til venstre side for vertikale snit og toppen ved højesuntale snit. Formel \ref{Fordeling} beskriver den reletive pixel forskel på vær side af snittet. Vi har også indførst 3 kategoriera.
+kategori 1: Alle de ragioner som vi fand før med bounding box og $ |snit - MPunkt| \leq Q \wedge |Fordeling| \leq P_1$ \\
+kategori 2: $|snit - MPunkt| \leq Q \wedge |Fordeling| \leq P_2 \wedge (snit - MPunkt)*fordeling \geq 0$ \\
+kategori 3: Resten\\
+
+Hvor Q er antal pixels mellem snittet og margien og $P_1$ og $P_2$ er procentvis forskel på de to sider.
+(forklaring hvorfor man kan få de rigtige ragioner, hvis man lige sætte disse 3 kategorier op)
+\subsection{brugbarhed}
 \subsubsection{Fordele vs ulember}
 
 \subsubsection{Implemation}
