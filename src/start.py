@@ -14,6 +14,9 @@ from painting import Painting
 import src.model as m
 from database import Database
 def main():
+	testdatabase = false
+	#The amount of cuts are to make 20 cuts over the picutre.
+	#Should properly be moved to a cut generator if we need more of it
 	antalcuts = 9
 	cuts = [goldenLibrary.PHI]
 	while antalcuts > 0:
@@ -23,11 +26,14 @@ def main():
 			newcut = newcut - 0.5
 		cuts.append(newcut)
 		antalcuts = antalcuts - 1
+	#creating a settings to be used with run
 	settings = Settings(cuts)
 	settings.setMarginPercentage(0.024)
 	globalSettings = GlobalSettings()
 	db = Database(globalSettings)
-	#db.empy doesnt work since the database might be half full or half empty
+	#making a testdatabase if the varible is set
+	if testdatabase == true:
+		db.setCount(20)
 	db.constructDatabase()
 	run = m.createNewRun(settings)
 	paintings = m.Painting.select(m.Painting.q.form=="painting")
