@@ -34,7 +34,10 @@ def main():
 	#making a testdatabase if the varible is set
 	if testdatabase == true:
 		db.setCount(20)
-	db.constructDatabase()
+		if (m.Painting.select()).count() > 0:
+			db.constructDatabase()
+	else:
+		db.constructDatabase()
 	run = m.createNewRun(settings)
 	paintings = m.Painting.select(m.Painting.q.form=="painting")
 	for painting in paintings:
