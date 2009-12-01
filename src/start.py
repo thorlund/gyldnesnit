@@ -24,6 +24,7 @@ def main():
 		cuts.append(newcut)
 		antalcuts = antalcuts - 1
 	settings = Settings(cuts)
+	settings.setMarginPercentage(0.024)
 	globalSettings = GlobalSettings()
 	db = Database(globalSettings)
 	#db.empy doesnt work since the database might be half full or half empty
