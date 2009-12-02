@@ -21,7 +21,9 @@ class Painting:
 		self.image = highgui.cvLoadImage(filename)
 		if not self.image:
 			raise SystemError('This picture is not parsable by opencv :'+filename)
-		self.setSize(self.image.width,self.image.height)
+		self.setSize(self.image.width, self.image.height)
+		if entry.getSize() is None:
+			entry.setSize(cv.cvGetSize(self.image))
 
 	#setters and getters
 	def setResults(self, results):
