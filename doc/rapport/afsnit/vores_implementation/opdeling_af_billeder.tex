@@ -1,4 +1,9 @@
-\subsection*{Heltal Problematikken i billeder}
+\subsection*{Heltal Problematikken i vores udregninger}
+\subsection*{Trunkerings og afrundings fejl}
+\subsection*{Fejl ø}
+\subsection*{Mallers pracition og afrundings fejl}
+\subsection*{Heltal, er det et problem?}
+\subsection*{Kan heltal også være ikke hele}
 Mange af de metoder som vi bruger til at udregne, position af det gyldne
 snit eller størrelsen af en margin, udregnes ved hjælp af brøker.
 Til gengæld, er et billedet opbygget af pixels, Dette gør at vi må nød
@@ -24,8 +29,8 @@ præcis er maleren i sit valg og hvor godt passer rammen til billedet,
 Dette giver vi en afvigelse på 1 \%. Da vi igen mener at dette er den
 maksimalle afvigelse der kan opstå.
 
-Nå en maller, maller en figur eller en ting, forekommerer der normalt en
-lille kant rundt og objektet, som en omrids. Dette omrids kan vores
+Nå en maller, maller en figur eller en ting i et maleri, forekommerer der normalt en
+lille kant rundt og objektet, som et omrids. Dette omrids kan vores
 algoritmer ikke tage højte for, og vi må derfor modregne omridset. Nå vi
 er sikre at vi ser på objektet og ikke den omrids, Da et omrids ikke er
 særligt stor, har vi sat denne procent sats til 0.5\%. Alt i alt giver
@@ -46,7 +51,7 @@ I et billedet befinder der sig 4 gyldne snit. 2 i det vertikale plan med
 brede B, se figur \ref{box} og 2 i det horisontale plan med højte H.
 placeringen af de 4 snit udregnes i forhold til udledningen i afsnittet
 om det gyldne snit, se figur \ref{lenasnit2}, hvor konstanten $\varPhi =
-0.618$ bliver fundet. $\varPhi$ bliver også betegnet som cutRatio i
+0.618$ bliver fundet. $\varPhi$ bliver også betegnet som et cutRatio i
 denne opgave.
 
 \begin{figure}[h]
@@ -59,8 +64,7 @@ denne opgave.
 
 B og H bliver divideret med $\varPhi$ som giver to tal som betegner, hvor
 mange pixels fra begge kanter, det gyldne snit befinder sig f.eks ved et
-billedet, som har B = 4000 pixel, vil punktet ligge ved.
-
+billedet, som har B = 4000 pixel, vil punktet ligge ved, 4000/\varPhi = 2472.
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[scale=0.42,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/Lenagolden}
@@ -71,7 +75,9 @@ billedet, som har B = 4000 pixel, vil punktet ligge ved.
 
 I vores implementering af dette har vi give de 4 forskelige cut vær
 deres id 'cut 1 - 4' se figur \ref{cut}, vi vil i reste af raporten
-referet til dem ud fra deres id
+referet til dem ud fra deres id. Hvis cutRatio er pracics 0.5 kommer cuttet til at ligge oven i hinanden,
+og kun skabe 2 cut i steden for firere. id for disse 2 snit er cut 0 og
+cut 1. ilustret i figur \ref{2Cut}
 
 \begin{figure}[h]
 	\begin{center}
@@ -81,9 +87,7 @@ referet til dem ud fra deres id
 	\label{cut}
 \end{figure}
 
-Hvis cutRatio er pracics 0.5 kommer cuttet til at ligge oven i hinanden,
-og kun skabe 2 cut i steden for firere. id for disse 2 snit er cut 0 og
-cut 1. ilustret i figur \ref{2Cut}
+
 
 \begin{figure}[h]
 	\begin{center}
@@ -95,17 +99,19 @@ cut 1. ilustret i figur \ref{2Cut}
 
 \subsubsection*{Heltal i det gyldne snit}
 
-\begin{equation}
-	4000/\varPhi = 4000(\sqrt{5}-1)/2 = 2472.13595 \approx 2472
-\end{equation}
+
 
 Eksemplet med 4000 pixels ovenfor, approksimationen vi antal pixels ved at
-runde resultatet, dette gør at vi mister 0.13595 nøjagtighed, dette svare
+runde resultatet se udregning \ref{afrundning}. Det gør at vi mister 0.13595 nøjagtighed, dette svare
 til en misvisning af punktet på 0.00339875 $\%$ i forholdt til bredden på
-billedet. 
+billedet. se udregnig \ref{afrundning2}. 
 
 \begin{equation}
-	0.13595/4000*100 = 0.00339875
+	4000/\varPhi = 4000(\sqrt{5}-1)/2 = 2472.13595 \approx 2472 \label{afrundning}
+\end{equation}
+
+\begin{equation}
+	0.13595/4000*100 = 0.00339875 \label{afrundning2}
 \end{equation}
 
 Det er en maget lille del af selve billedet og skulle ikke give nogle
@@ -118,13 +124,13 @@ til at at se at det er en ok afrundning af snittet, som ikke kommmer til
 at give nogle problemer. 
 
 \subsubsection{Heltal ved udregning af Margin}
-Nå vi har 2 snit,f.eks $\varphi$ og $\frac{2}{3}$ som skal sammenligne og
+Nå vi har 2 snit, F.eks. $\varPhi$ og $\frac{2}{3}$ som skal sammenligne og
 som ligger meget tæt på hinanden, er det vigtigt at margin for vært
 snittet ikke krydser hinanden. Da dette vil indebære at de samme region
 vil blive fundet af begge snit, og vil give et skævt billedet af
-forskellen på de to snit. derfor må vi sørge for at de margin ikke
+forskellen på de to snit. Derfor må vi sørge for at de margin ikke
 krydser. hvis x betegner antal pixels i B eller H, og vi vil se
-forskellen mellem 2/3 og $\varphi$, multiplicere vi x med snittet for at
+forskellen mellem 2/3 og $\varPhi$, multiplicere vi x med snittet for at
 finde dens placering og subtrahere dem fra hinanden.
 
 \begin{eqnarray}
@@ -141,7 +147,11 @@ floor på helle funktionen.
 	\lfloor(0.048633x/2)\rfloor = 0.024316x
 \end{equation}
 
-Dette giver os et antal pixels som skildre de to snit. For at vise
+Talet $2.4316$ er så den minimale procent visse størelse som vores
+margin må have, nå vi sammen liner det gyldne snit og $\frac{2}{3}$,
+Dette betyder også at vi ikke må sammen line snit som ligger særlige
+meget tætter på hinanden, da 0.021 er den minimal procent margin som vi må have.
+$0.024316x$ giver os et antal pixels som skildre de to snit. For at vise
 hvor stort marginen egentlige kan være, bruger jeg denne formel på to
 billeder, et som svare til vores mindste billedet, 500 pixels, og et
 som svare til vores største billedet, 4000 pixels. Ved 500 pixels
@@ -161,5 +171,7 @@ Ved 4000 pixels giver det.
 	 \lfloor 4000(0.024316)\rfloor = 97
 \end{equation}
 
-Som også er god nok da $4000*0.021 = 84$ pixels.
+Som også er god nok da $4000*0.021 = 84$ pixels. Vi har valt at bruge
+$2.4\%$ som vores minimum margin procentiv og ikke 2.1 da vi gerne
+vil have en margin som er lidt støre en den teoratiske fejl margin.
 % vim: set tw=72 spell spelllang=da:
