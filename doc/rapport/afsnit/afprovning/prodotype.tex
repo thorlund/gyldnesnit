@@ -20,7 +20,7 @@ på eller lige omkring snittet.
 	\begin{center}
 		\includegraphics[scale=0.42,angle=0]{afsnit/afprovning/billeder/floodfillbilledet.png}
 	\end{center}
-	\caption[]{Billedet hvor vores algoritme har fundet x antal regioner}
+	\caption[]{Billedet hvor vores algoritme har fundet x antal regioner, margin er sat til 0.9\% og floodfils up,dawn er sat til 4}
 	\label{ff}
 \end{figure}
 
@@ -44,7 +44,7 @@ med, bliver inremmet i en bos og kan ses på billedet \ref{ff}.
 	\begin{center}
 		\includegraphics[scale=0.42,angle=0]{afsnit/afprovning/billeder/boindingboxbilledet.png}
 	\end{center}
-	\caption[]{Billedet de regioner som vi har tilbage, er i en box}
+	\caption[]{Billedet de regioner som vi har tilbage, er i en box, sammen opsætning som før}
 	\label{blob}
 \end{figure}
 
@@ -56,16 +56,15 @@ samme liner vores beskrivelse af vores fremgangsmåde, og hvordan
 billedet ser ud. Stemmer det over ens, så vores algoritme virker skulle
 virke. Det dårlige er, at vi fjerner ret meget. F.eks. kunne drengen
 være en region som man gerne vil have med.
-
+I alle de billeder som vi viser her, er floodfills up,dawn værdiger sat
+til 4, dog variere margin noget, thressholdet for edge detection er sat
+til 78 og 195.
 
 \begin{figure}[h!!]
 	\begin{center}
 		\includegraphics[scale=0.40,angle=0]{afsnit/afprovning/billeder/BBcomposa.png}
 	\end{center}
-	\caption[]{Som man kan se finder vores metode 2 baunding boxe, en
-	           som omkranser nogle både og en som omkranser lidt af
-	           vært, Men hvad er det vi i virkelige som bounding boxne
-	           bliver laver ud fra.}
+	\caption[]{billedet med 2 ragioner i snittet, margin = 2.5 \%}
 	\label{BBcomposa}
 \end{figure}
 
@@ -73,12 +72,8 @@ være en region som man gerne vil have med.
 	\begin{center}
 		\includegraphics[scale=0.40,angle=0]{afsnit/afprovning/billeder/FFcomposa.png}
 	\end{center}
-	\caption[]{som man kan se ud fra billedet er det som i virkelige har
-	           fundet er 2 ensardiet mørke groperinger som bliver
-	           andskildt af en stolpe. Heldigvis omfatter 1 af
-	           groperingerne en stor del af bådene så man kan sige at
-	           den er har fanget en sammenhæng, men den andet kunne lige
-	           så godt være gået en anden retning.}
+	\caption[]{De 2 ragioner som er fundet før, er 2 sorte plamasier i
+	billedet. Margin = 2.5\%}
 	\label{FFcomposa}
 \end{figure}
 
@@ -86,11 +81,9 @@ være en region som man gerne vil have med.
 	\begin{center}
 		\includegraphics[scale=0.20,angle=0]{afsnit/afprovning/billeder/nicofloodfillbilledet.png}
 	\end{center}
-	\caption[]{Som man kan se på billedet, er der kun en stor region.
-	           Grunden til dette er at billedet er af en anden kunstner
-	           og er blevet lidt gråligt, efter alle de år på muserum,
-	           så farverne ligger ikke særlige lang for hinanden. Dette
-	           få vores metode til at fejle en kende.}
+	\caption[]{En stor ragion på billedet, som forkommer da dette
+	billedet er falmet med tiden eller bare ikke har høj nok farve
+	intentitet. Margin = 0.9\%}
 	\label{nicofill}
 \end{figure}
 
@@ -99,12 +92,8 @@ være en region som man gerne vil have med.
 	\begin{center}
 		\includegraphics[scale=0.30,angle=0]{afsnit/afprovning/billeder/BB1annunc2.png}
 	\end{center}
-	\caption[]{Billedet af en engel, hvor noget af glorien og hinden
-	           hånd er fundet. som det kan ses ligger hånden efter vores
-	           defination i det gyldne snit, og er en ret interasat
-	           ting, da hånden viser hvad engelen hendtyr, selve glorien
-	           er også i interasant, men ligger ikke i snittet, så det
-	           er lidt uheldig at vi finder en fraktion af dem.}
+	\caption[]{Hånd, glorie og hå er fundet, samt noget ekstre klæde.
+	margin = 0.9\%}
 	\label{BB1annunc2}
 \end{figure}
 
@@ -112,12 +101,8 @@ være en region som man gerne vil have med.
 	\begin{center}
 		\includegraphics[scale=0.30,angle=0]{afsnit/afprovning/billeder/BB09crucif.png}
 	\end{center}
-	\caption[]{Metoden finder i dette billedet svanen, som er en meget
-	           framtradene ting i billedet, metoden finder også skildet,
-	           selve om det er svært at se, dette er et ret god eksempel
-	           på at vore metode faktisk finder nogle lunde pracice
-	           ragioner, dog kan man se at metoden ikke har det så god
-	           nå vi arbejder på firkandet billeder}
+	\caption[]{Svanen fundet samt skildet som er 2 ting som trader fram
+	i maleriet, margin = 2.5\%}
 	\label{BB09crucif}
 \end{figure}
 
@@ -125,13 +110,9 @@ være en region som man gerne vil have med.
 	\begin{center}
 		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/FFadorat.png}
 	\end{center}
-	\caption[]{Dette floodfillet billedet, vise at selv om vi har en
-	           metode som virker ok, så har vi stadig problemer nå
-	           billedet er rundt og ikke gå helt ud til kanten af
-	           rammen, få det ser faktisk ud som om kvinden og manden
-	           ligger i snittet. Men dette kan ændre sig meget, da det
-	           snit som er tegnet ind, er udregnet ud fra kanten af
-	           rammen, og ikke billedet kant.}
+	\caption[]{Runde billeder med ramme kan skabe problemer, da vi ikke
+	er sikre på at det er det rigtige snit som vi arbejder på. Margin =
+	2.5\%}
 	\label{FFadorat}
 \end{figure}
 
@@ -139,9 +120,7 @@ være en region som man gerne vil have med.
 	\begin{center}
 		\includegraphics[scale=0.50,angle=0]{afsnit/afprovning/billeder/BBallegory.png}
 	\end{center}
-	\caption[]{Dette er et fantastisk eksempel på at der ikke ligger
-	           noget som helst i dette snit, og der er heller ikke
-	           findet nogle ragioner i snittet.}
+	\caption[]{Ingen ting fundet, ingen ting at finde. Margin = 2.5\%}
 	\label{BBallegory}
 \end{figure}
 
@@ -150,7 +129,8 @@ være en region som man gerne vil have med.
 		\includegraphics[scale=0.35,angle=0]{afsnit/afprovning/billeder/BBCarruingcut2.png}
 	\end{center}
 	\caption[]{I dette billedet finder vi 3 ragioner som ligger i det
-	           gyldne snit, 2 hovder som svare over ens med det vi gerne villle finde, og så en arm}
+	gyldne snit, 2 hovder som svare over ens med det vi gerne villle
+	finde, og så en arm}
 	\label{BBCarruingcut2}
 \end{figure}
 
@@ -160,8 +140,7 @@ være en region som man gerne vil have med.
 		\includegraphics[scale=0.50,angle=0]{afsnit/afprovning/billeder/BBMonalisacut1.png}
 	\end{center}
 	\caption[]{Monalisa med ved cut 1 , hvor der bliver fundet hindes
-	overbryst og hindes pande, dette tyder på at noget af monalisas krop
-	befinder sig inde i det gyldne snit}
+	overbryst og hindes pande. margin  = 2.5\%}
 	\label{BBMonalisacut1}
 \end{figure}
 
