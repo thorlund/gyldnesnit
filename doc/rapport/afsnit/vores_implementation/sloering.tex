@@ -12,40 +12,30 @@ vores testbillede, der som tidligere nævnt er malet med en masse
 prikker, er det en stor hjælp at sløre billedet, så farverne bliver mere
 ensartede. Vi vil nu se på tre forskellige måder at opnå dette på.
 
-De to første et såkaldte lav-pas filtre som har svært ved at bibeholde
-kanterne i et billede, men arbejder til gengæld direkte på billedet. Den
-tredie metode bibeholder til en vis grad kanterne bedre, men kan ikke
-arbejde direkte på billedet, hvilket kræver et større pladsforbrug.
-
-\subsubsection*{Simpel sløring}
-
-\subsubsection*{Gaussisk sløring}
-Ved Gaussisk sløring ind gør der 3 steps, først at finde en kernel,
-multiplicere kernel rigtigt på billedet, kaldet Foldning. Udtrak
-værdigerne fra multiplikationen i et nyt billedet, som er det sløret
-billedet.
-
-\subsubsection*{Kernel}
-En kernel er en lille matrice, som betegner hvor stor del af billedet og
-hvor meget af pixels værdiger for farverne rund om et punkt, skal tages
-med i udregningen for den nye sløret farve.
-
-\subsubsection*{Foldning}
-Foldning er en simpel matematisk metode, som beskriver hvordan man kan
-gange 2 matricer sammen, i vores tilfælde, en kernel $R^{n}~X~R^{m}$ og
-et billedet matrice $R^{k}~X~R^{d}$, hvor $n = d ~\vee~ m = k$ ikke behøver
-at være opfyldt.
+De to første metoder har svært ved at bibeholde kanterne i et billede,
+men arbejder til gengæld direkte på billedet. Den tredie metode
+bibeholder til en vis grad kanterne bedre, men kan ikke arbejde direkte
+på billedet, hvilket kræver et større pladsforbrug. Metoden som bruges
+til de 2 første sløringer, heder foldning, som bruger en kernel til
+udregning af ny farver. En kernel er en lille matrice, som betegner hvor
+stor del af billedet og hvor meget af pixels værdiger fra farverne rund
+om et punkt, skal tages med i udregningen for den nye sløret farve. En
+kernel kan ses i figur \ref{Foldning}. Foldning er en simpel matematisk
+metode, som beskriver hvordan man kan gange 2 matricer sammen, i vores
+tilfælde, en kernel $\mathbb{Z}^{n}\times{} \mathbb{Z}^{m}$ og et
+billedet matrice $\mathbb{Z}^{k}\times{} \mathbb{Z}^{d}$, hvor $n = d
+~\vee~ m = k$ ikke behøver at være opfyldt.
 
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[scale=1,angle=0]{afsnit/vores_implementation/billeder/sloering/convolution}
 	\end{center}
-	\caption[]{Et billedet og en kernel}
+	\caption[]{Et billedet hvor x,x betegner plaseringen og en kernel med 9 tilfældige tal fra 0 til 9}
 	\label{Foldning}
 \end{figure}
 
 Som man kan se i figur \ref{Foldning} er selve billedet og kernel i
-vid forskellige størrelser. Måden Foldning virker på at man
+vid forskellige størrelser. Måden Foldning virker på, er at man
 multiplicere kernelen ovenpå de værdiger som ligger rund om den pixel,
 som vi gerne vil finde den sløret farve af og tager gennemsnittet af den
 værdig, f.eks farven på pixel $(4,4)$, bliver
@@ -58,25 +48,32 @@ I dette eksempel, er punktet $(5,5)$ og $(4,4)$ vægtet højre i forhold
 til de andet, så farven vil blive sløret i den retning. Dette skyldes at
 kernelen er bygget tilfældig op, i en rigtige sløring er kernelen meget
 specifikt udvalgt for at give det beste resultat.
- 
-\subsubsection*{Gaussian kernel}
-Måde Gaussisk sløring bygger sin kernel op på, at ved brug af Normale
-fordeling, som betegnet med denne formel
 
+\subsubsection*{Simpel sløring}
+I metoden simpel sløring er der 3 steps, først udregnes en kernel. Multiplicere
+kernel rigtigt på billedet, kaldet Foldning. Sættes værdigerne fra
+multiplikationen ind i billedet, som så bliver det nye sløret billedet nå
+alle punkter er omdannet. kernel for den simple sløring er en kvadradisk
+matrice med kun talet 1 i. Resultatet for en simpel sløring kan ses i
+figur \ref{simple_metode}
+
+\subsubsection*{Gaussisk sløring}
+Gaussisk sløring har de samme 3 steps som simpel sløring. 
+Måde Gaussisk sløring udregner sin kernel, at ved brug af Normale
+fordeling, som betegnet med denne formel
 
 \begin{equation}
 	G(x,y) = \frac{1}{2\pi\sigma^2}e^{-\frac{x^2+y^2}{2\sigma^2}}
 \end{equation}
 
-Hvis $\sigma = 1$ og vi lader x og y køre fra -1 til 1, med skridt størrelse
-på 1, og multiplicere alle værdiger, så den laveste værdig kommer til at være 1 og
-runder værdien af. Få vi en kernel som se på firgur \ref{gauss}.
+Vi sætter $\sigma = 1$ og lader x og y bevæge sig fra -1 til 1, med skridt størrelse
+på 1. Den upscalet afrundet kerne kan se på figur \ref{gauss}.
 
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[scale=0.5,angle=0]{afsnit/vores_implementation/billeder/sloering/gauss}
 	\end{center}
-	\caption[]{En $3~X~3$ Kernel for gauss sløring}
+	\caption[]{En $3~\times{}~3$ Kernel for gauss sløring}
 	\label{gauss}
 \end{figure}
 
