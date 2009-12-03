@@ -17,10 +17,6 @@ from src.lib import graphicHelper as g
 from src import painting as p
 from opencv import cv
 
-class Settings(s.SQLObject):
-	paintingcount = s.IntCol()
-	newestrun = s.IntCol()
-
 class Artist(s.SQLObject):
 	"""
 	_id_, name, born, died, school, timeline

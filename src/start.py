@@ -13,28 +13,31 @@ from settings import GlobalSettings
 from painting import Painting
 import src.model as m
 from database import Database
+
+experiment = "10cuts"
+if experiment = "10cuts":
+	from experiments import 10cuts as environment
+else:
+	#The default value will only work on the golden ratio
+	from experiments import golden as environment
 def main():
-	testdatabase = false
-	#The amount of cuts are to make 20 cuts over the picutre.
-	#Should properly be moved to a cut generator if we need more of it
-	antalcuts = 9
-	cuts = [goldenLibrary.PHI]
-	while antalcuts > 0:
-		oldcut = cuts[len(cuts)-1]
-		newcut = oldcut +0.05
-		if newcut > 1:
-			newcut = newcut - 0.5
-		cuts.append(newcut)
-		antalcuts = antalcuts - 1
+	#Set this to true if you want to create a personal database
+	testdatabase = False
+	#Set this due to how large you want your testdatabase
+	count = 10
 	#creating a settings to be used with run
+	cuts = environment.generateCuts()
 	settings = Settings(cuts)
-	settings.setMarginPercentage(0.024)
+	environment.setSettings(cuts)
 	globalSettings = GlobalSettings()
+	environment.setGlobalSettings(globalSettings)
 	db = Database(globalSettings)
 	#making a testdatabase if the varible is set
-	if testdatabase == true:
-		db.setCount(20)
-		if (m.Painting.select()).count() > 0:
+	if testdatabase == True:
+		currentDBCount= m.Painting.select()).count()
+		count = count - currentDBCount
+		if count > 0:
+			db.setCount(count)
 			db.constructDatabase()
 	else:
 		db.constructDatabase()
