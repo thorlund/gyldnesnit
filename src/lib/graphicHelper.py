@@ -23,6 +23,7 @@ import naiveMethod
 
 def showImage(image, name):
 	"""Helper method for displaying an image"""
+	# Do NOT save images to disk in this method
 	winname = name
 
 	highgui.cvNamedWindow (winname, highgui.CV_WINDOW_AUTOSIZE)
@@ -39,14 +40,13 @@ def showImage(image, name):
 
 
 def compareImages(img1, img2, name1, name2):
+	# Do NOT save images to disk in this method
 	winname1 = name1
 	winname2 = name2
 
 	highgui.cvNamedWindow (winname1, highgui.CV_WINDOW_AUTOSIZE)
 	highgui.cvNamedWindow (winname2, highgui.CV_WINDOW_AUTOSIZE)
-	highgui.cvSaveImage("hej.png", img1)
-	highgui.cvSaveImage("hej2.png", img2)
-	
+
 	while True:
 		highgui.cvShowImage (winname1, img1)
 		highgui.cvShowImage (winname2, img2)
@@ -97,7 +97,8 @@ def boundingBoxResult(original, settings, cutNo, thickness=1, color=None):
 def main():
 	"""
 	Just the test
-	This method is a god resource on how to handle the results
+	This method is a good resource on how to handle the results.
+	Save images in this method if you have to.
 	"""
 
 	filename = sys.argv[1]
@@ -119,9 +120,13 @@ def main():
 
 	blobImg = blobResult(image, settings, cut)
 	boxxImg = boundingBoxResult(image, settings, cut, thickness, color)
-	compareImages(blobImg, boxxImg, "blob", "bounding box")
+
+	# Save images
 	#highgui.cvSaveImage('floodfillbilledet.png', blobImg)
 	#highgui.cvSaveImage('boindingboxbilledet.png', boxxImg)
+
+	# Show images
+	compareImages(blobImg, boxxImg, "blob", "bounding box")
 
 if __name__ == "__main__":
 	main()
