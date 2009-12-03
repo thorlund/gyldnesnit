@@ -14,6 +14,7 @@ def gridIt(image, component_dictionary, step=1):
 	#print len(component_dictionary), 'len'
 	gridcordinates = []
 	for entry in component_dictionary:
+		tmpgridcondinates = []
 		color = component_dictionary[entry][0]
 		#print color, 'color'
 		component = component_dictionary[entry][1]
@@ -33,6 +34,7 @@ def gridIt(image, component_dictionary, step=1):
 			for j in range(lower_y, upper_y, step):
 				if lib.isSameColor(color, image[j][i]):
 					points = points + 1
-					gridcordinates.append(cv.cvPoint(i, j))
+					tmpgridcondinates.append(cv.cvPoint(i, j))
+		gridcordinates.append(tmpgridcondinates)
 		print points, 'points'
 	return gridcordinates

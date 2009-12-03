@@ -20,6 +20,9 @@ import src.lib.naiveMethod as naiveMethod
 import src.lib.grid as grid
 
 ### Methods for showing images
+COL_GREEN = cv.CV_RGB(0, 255, 0)
+COL_RED = cv.CV_RGB(255, 0, 0)
+
 
 def showImage(image, name):
 	"""Helper method for displaying an image"""
@@ -38,8 +41,18 @@ def showImage(image, name):
 			sys.exit(0)
 
 
-
-
+def centerOfMass(gridPointsList):
+	"""
+	Canculate the center of mass of alle the regions
+	"""
+	centerOfMassList = []
+	for ragions in gridPointsList:
+		temp = 0
+		for points in ragions:
+			temp = temp + points.x
+		centerOfMassList.append(temp/len(ragions))
+	return centerOfMassList
+	
 def main():
 	"""
 	Just the test
@@ -57,16 +70,25 @@ def main():
 	cutNo = int(sys.argv[2])
 	
 	cut = lib.findMeans(cv.cvGetSize(image), settings.cutRatios[0])[cutNo]
+	
 	# Get the BW edge image
 	edgeImage = naiveMethod.getEdgeImage(image, settings)
 
 	(blobImg, comp) = naiveMethod.analyzeCut(image, edgeImage, cut, settings, 'True')
-	gridcordinats = grid.gridIt(blobImg, comp)
-
+	#liste af liste 
+	
+	gridPointsList = grid.gridIt(blobImg, comp)
+	#print gridPointsList
+	points = centerOfMass(gridPointsList)
+	#(x,y)
+	for point in points:
+		cv.cvLine(image, cv.cvPoint(point, 0), cv.cvPoint(point,600), COL_GREEN)
+	lib.drawBoundingBoxes(image, comp)
+	
 	#highgui.cvSaveImage('floodfillbilledet.png', blobImg)
 	#highgui.cvSaveImage('boindingboxbilledet.png', boxxImg)
 	
-	showImage(blobImg, 'name')
+	showImage(image, 'name')
 if __name__ == "__main__":
 	main()
 
