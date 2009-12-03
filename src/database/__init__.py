@@ -69,8 +69,8 @@ class Database:
 
 		#iterate over the rest of the lines
 		for line in csvfilelines:
+			print 'database is now looking at %s' % line
 			line = line.split(';')
-			print len(line)
 			if count > 0 and len(line)==11:
 				filepath = None
 				(paint,material,realHeight,realWidth) = parser.parseTechnique(line[4])
