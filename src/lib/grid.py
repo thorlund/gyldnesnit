@@ -6,7 +6,7 @@ Provides a method for finding features
 from opencv import cv
 
 # import goldenLibrary
-import lib.goldenLibrary as lib
+import goldenLibrary as lib
 
 # Missing functions for differentiating grid points
 
@@ -36,5 +36,5 @@ def gridIt(image, component_dictionary, step=1):
 					points = points + 1
 					tmpgridcondinates.append(cv.cvPoint(i, j))
 		gridcordinates.append(tmpgridcondinates)
-		print points, 'points'
+		#print points, 'points'
 	return gridcordinates
