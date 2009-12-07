@@ -1,0 +1,86 @@
+{
+\subsection{Overvejelser}
+Før der konkluderes noget over resultaterne er det vigtigt at se på
+grundlaget, det meste af dette er givet tidligere i rapporten.
+Fordi det er den første kørsel bliver tærskelværdierne sat ud fra hvad
+der tidligere i rapporten er blevet bedømt som optimalt.
+Som det kan læses TODO: fix ref når dette afsnit er
+lavet og omdefiner\ref{chap:chap_afproevning}.
+Problemet ved dette er at de samme tærskelværdier kan give forskellige
+resultater på forskellige billeder.
+På grund af tidsbegrænsningen af denne opgave er det efterladt til
+fremtidigt arbejde, og det efterlades som en usikkerhed.
+
+Der er blevet snakket en del om usikkerheden både i
+\ref{chap:chap_afproevning} og om tærskelværdierne.
+Det er dog meget vigtigt at kigge på størrelsen af datasættet, før alle
+resultater afvises på grund af usikkerhederne.
+Følgende SQL sætning tæller antallet af billeder, som benyttes i et
+eksperiment.
+\begin{verbatim}
+sqlite> select Count(*) from painting where form = "painting";
+17364
+\end{verbatim}
+Algoritmen vil altså blive udført på 17364 billeder, for at opsummere så
+ligger det gyldne snit, altså fire steder på et billede. Grunden til det
+pointeres i kombination med usikkerhed er for at holde fokus på præcis
+hvor algoritmen lægger sit arbejde. Hvis algoritmen har en generel
+svaghed er det unægteligt problematisk, men speciale tilfælde vil
+forsvinde på grund af størrelsen af datasættet.
+
+Databasen er sat op til at kunne indeholde alle de data, der skal
+indsamles under eksperimentet. På grund af det behøves der ikke at tages
+speciale hensyn til f.eks. at en statistik om hvilken periode der indeholder
+flest gyldnesnit. Dette eksempel er en del af den udvidede løsning og
+brugt netop for at vise at der ikke skal tages hensyn pga. databasens
+opbygning.
+
+Nu er det den første kørsel på en så stor billedebase, derfor er det
+vigtigt at så meget data som muligt bliver opsamlet. Det er selvfølgelig
+også derfor at der er blevet snakket så meget om alle de forskellige
+indstillinger en sidste vigtig ting er hvilke snit skal der arbejdes på.
+Det ville selvfølgelig være oplagt at vælge $\Phi$ og $2/3$. Det kunne
+dog godt betyde at der gik informationer tabt. Hvordan bygges en kørsel
+så op hvis der skal findes mest mulige data, svaret på dette ligger i de
+tekniske begrænsninger og usikkerheden om hvor tæt to snit må ligge på
+hinanden.
+Med de tekniske begrænsninger menes mest af alt at algoritmen er bygget
+på fire snit, derfor skal der reelt kun findes snit der dækker halvdelen
+af billedet fordi der ellers vil komme meget redundant information.
+Derudover er tiden også en begrænsning. Ud fra udokumenterede tests
+virker det til at hvert snit tager op mod en halv dag.
+Tiden sammen med usikkerheden giver en minimumsgrænse for hvor mange
+snit det er muligt at have. Margin skal ifølge \ref{margin} minimum være
+$2.4\%$, potentielt betyder dette at der kunne være $50/2.4=20.8$ snit.
+Da op til 10 dages ventetid er lidt meget specielt i og med det er den
+første kørsel over alle billederne, vælges det halve altså $10$ snit
+eller et snit hver $5\%$.
+\subsection{Resultaterne}
+\begin{verbatim}
+number of features in the golden ratio in different periodes
+
+{'1301-1350\r\n': 151894, '1551-1600\r\n': 184246, '1201-1250\r\n': 419, '1851-1900\r\n': 15092, '1101-1150\r\n': 2817, '1651-1700\r\n': 171119, '1351-1400\r\n': 35464, '1251-1300\r\n': 11864, '1451-1500\r\n': 428338, '1701-1750\r\n': 115703, '1151-1200\r\n': 14688, '1751-1800\r\n': 67703, '1801-1850\r\n': 79182, '1601-1650\r\n': 273832, '1401-1450\r\n': 199989, '1501-1550\r\n': 394100}
+Which golden ration is the most popular, ranging from 0 to 3
+[56092, 57044, 59181, 54152]
+features in the different ratios
+{0.66803398874999997: 222018, 0.86803398875000004: 206899, 0.56803398875: 229650, 0.96803398875000002: 183833, 0.76803398874999995: 213570, 0.91803398874999997: 208340, 0.81803398875: 208081, 0.71803398875000002: 217432, 0.51803398874999995: 230144, 0.61803398875000004: 226462}
+Top 10 cuts, where the most features was found
+[239, 250, 254, 257, 274, 288, 298, 326, 430, 436]
+Top 10 images
+[546, 552, 554, 569, 570, 578, 592, 616, 634, 675]
+Top 10 images, with only the features in the golden feature
+[73, 75, 76, 77, 78, 86, 87, 87, 99, 147]
+Top 10 images, with only features in 2/3 that counts
+[144, 146, 171, 204, 209, 211, 221, 228, 251, 300]
+\end{verbatim}
+TODO:tilføj en ud af hvor mange billeder der var i den periode!
+	og hvilke billeder der er i top 10!
+	og en fordelen af hvor mange features der er i billeder generelt.
+
+Det mest overraskende er nok hvordan intensiteten af interessante
+regioner stiger alt efter hvor tæt på midten snittet ligger.
+Der er nogle billeder som indeholder et helt utroligt antal af
+interessante regioner.
+TODO: Indsæt nogle af de billeder.
+}
+% vim: set tw=72 spell spelllang=da:
