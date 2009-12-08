@@ -1,23 +1,40 @@
 {
-{\sffamily I den udvidet løsning har vi valt, at se på den måde, vi vælger
-ragioner ud på. Hvor vi i den naiveMethode valgte at se på ragionens bounding
-box, vil vi i den udviden metode valje at se på mindre snit af ragionen, vi har
-også valt at udvide måde vi bestemmer hvad en ragion er. En ragion var før,
-ænden med eller ikke med i en snit. kommer den udvidelsen til at indeholde en
-kateroesering af ragionerne, så en ragion kan have en vis katerogiering i
-forhold til et snit.
+{\sffamily Vi præsenterer her nogle udvidelser til den naive algoritme
+som afgør om et billede opfylder det gyldne snit. Som beskrevet i
+\ref{section_naiv} så har den naive fremgangsmåde nogle ulemper som vi
+gerne vil forsøge at reducere. Bemærk, at vi ikke vil forbedre metoden
+som trækker regioner ud af et billede, ej heller lave om på definition
+på en interessant region. Vi forbedrer udelukkende metoden til at afgøre
+om en interessant region er placeret i det gyldne snit. Vi vil i det
+følgende præsentere to metoder til dette formål. Den første bygger
+videre på den naive algoritme, med det formål at godtage de positive
+regioner som den naive fremgangsmåde ellers ville dømme ude. Den anden
+metode vi præsenterer tager afstand fra den binære klassifikation og
+sørger i stedet at tildele interessante regioner en værdi for
+\emph{hvor meget} de ligger i det gyldne snit.
 
-Vi laver ikke om i vores feature detector.
+Vi antager i det følgende at vi har perfekt udtrækning af regioner i et
+maleri. Den digitale gengivelse af et maleri bliver således segmenteret
+helt som ønsket. Dette betyder, at i et maleri hvor der figurerer en
+person, da vil denne person blive opfattet som én sammenhængende region.
+Med perfekt udtrækning af regioner kan vi koncentrere os netop kun om
+denne regions placering og udstrækning.
 }
 
-\subsection{Udvidelse af ragioner plasering}
-\input{afsnit/vores_implementation/gitter.tex}
+\subsection{Udvidelse til den naive metode}
+\input{afsnit/vores_implementation/massemidtpunkt.tex}
 
 \subsection{Topografisk kort til omkostninger}
 \input{afsnit/vores_implementation/topografi.tex}
 
-\subsection{Beslutning}
-Hvilken udvidelse har vi valgt at implementere?
+\subsection{Implementering af udvidelser}
+Vi har valgt at implementere den først nævnte udvidelse til bedømmelse
+af interessante regioner. Denne er valgt da det er en simpel udvidelse
+af den eksisterende metode, hvilket gør at vi også kan afprøve metoden på
+vores korpus. Strukturen i metoden med topografiske kort er meget
+langt væk fra den eksisterende metode, hvorfor vi har vurderet at denne
+ikke skulle implementeres. Topografiske kort indfører også et mål på
+regionerne, hvilket vi ikke benytter os af i den eksisterende metode.
 
 }
 

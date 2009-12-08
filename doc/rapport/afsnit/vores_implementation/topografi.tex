@@ -1,6 +1,11 @@
 {
-Hvad er et topografisk kort? Forklar. Eksempler på topografiske kort kan
-ses i figur \ref{topography_plus} og \ref{topography_times}.
+Et topografisk kort er et udtryk hentet fra geografi som er en
+fremstilling af tærrenforskelle i et landskab. Traditionelle
+topografiske kort bruger forskellige farver til at præsentere de
+relative højder over havet. Denne metode kan bruges i andre sammenhænge,
+f.eks. som vi vil gøre, ved at udskifte højde med en omkostning.
+Eksempler på topografiske kort til klassificering af regioner i billeder
+kan ses i figur \ref{topography_plus} og \ref{topography_times}.
 
 Vi vil nu beskrive en metode hvorved regioner bliver tildelt en
 omkostning. Denne omkostning beregnes ud fra regionens placering i
@@ -125,12 +130,13 @@ en ny funktion $u : \mathbb{Z}^{+} \times \mathbb{Z}^{+} \rightarrow
 hvor vi multiplicerer omkostningerne i stedet for at addere dem. Det
 resulterende topografiske kort ses i figur \ref{topography_times}. Da vi
 nu bruger multiplikation vil vi gange med $0$ i det gyldne snit, hvorfor
-dette er meget mere fremstående. Selvom dette måske ikke er helt
-hensigtsmæssigt vises nu en eksponentiel stigning i omkostningerne når
-vi bevæger os længere væk fra det gyldne snit. Funktionen $u$ mangler
-dog den gode egenskab fra $t$ hvor ekstremerne har store omkostninger.
-Optimalt ville man have den samme omkostning ved ekstremerne som i
-$t$, men med den eksponentielle stigning som i $u$.
+dette er meget mere fremstående. Det skal dog nævnes at det ikke er helt
+hensigtsmæssigt at omkostningen er meget lav ude ved ekstremerne.
+Funktionen $u$ mangler altså den gode egenskab fra $t$ hvor ekstremerne
+har store omkostninger.  Vi ser dog en eksponentiel stigning i
+omkostningerne når vi bevæger os længere væk fra det gyldne snit.
+Optimalt ville man have den samme omkostning ved ekstremerne som i $t$,
+men med den eksponentielle stigning som i $u$.
 
 Vi kan nu beregne omkostningen for en interessant region. Givet en
 mængde $R \in \{\mathbb{Z}^{+}\times\mathbb{Z}^{+}\}$, som angiver
