@@ -90,26 +90,33 @@ def checkSize(component, constraints):
 	defined by the constraints."""
 	return component.area >= constraints.size
 
-def checkCenterOfMass(constraints, grid):
+def checkCenterOfMass(constraints, grid, oriantesen):
 	"""muhaaa
 	"""
-	p = centerOfMass(grid)
+	p = centerOfMass(grid, oriantesen)
 	return (p in constraints.acceptRange)
 	
-def pixelSideCounter(gridPointsList, cut):
+def pixelSideCounter(gridPointsList, cut, oriantesen):
 	"""
 	counts the difrens in pixels at both side og the cut in are blob
 	"""
+	
 	counter = []
 	for ragions in gridPointsList:
 		tmp = 0
 		left = 0
 		right = 0
 		for points in ragions:
-			if cut > points.x:
-				left = left + 1.0
-			elif cut < points.x:
-				right = right + 1.0
+			if oriantesen:
+				if cut > points.x:
+					left = left + 1.0
+				elif cut < points.x:
+					right = right + 1.0
+			else:	
+				if cut > points.y:
+					left = left + 1.0
+				elif cut < points.y:
+					right = right + 1.0
 			tmp = tmp + 1.0;
 		if (tmp == 0):
 			counter.append(1)
@@ -117,14 +124,18 @@ def pixelSideCounter(gridPointsList, cut):
 			counter.append((right - left)/tmp)
 	return counter
 	
-def centerOfMass(grid):
+def centerOfMass(grid, oriantesen):
 	"""
 	Canculate the center of mass of alle the regions
 	"""
+	
 	centerOfMassList = []
 	tmp = 0
 	for points in grid:
-		tmp = tmp + points.x
+		if oriantesen:
+			tmp = tmp + points.x
+		else:	
+			tmp = tmp + points.y
 	if (tmp == 0):
 		return 0
 	else:
@@ -159,25 +170,27 @@ def pruneExpandedRegions(component_dictionary, contraints):
 	
 def pruneExpandedRagionsto(component_dictionary, contraints, cut, workImage):
 	"""
-	run center of mass an prune the ragion
+	Run center of mass an prune the ragion
 	"""
 	#Get the count af pixels from left ore top
-	if cut.getPoints()[0].x == cut.getPoints()[1]:
-		pixels = cut.getPoints()[1].y
-	else:
+	oriantesen = cut.getPoints()[0].x == cut.getPoints()[1].x
+	
+	if oriantesen:
 		pixels = cut.getPoints()[1].x
+	else:
+		pixels = cut.getPoints()[1].y
 		
 	#get are grid for alle the ragions
 	grids = grid.gridIt(workImage, component_dictionary)
 
 	#procent list over pixels on bots side 
-	rigensPixelSidecount = pixelSideCounter(grids, pixels)
+	rigensPixelSidecount = pixelSideCounter(grids, pixels, oriantesen)
 	
 	#remove the raions thet i no good in the
 	acceptedRegions = {}
 	i = 0
 	for entries in component_dictionary:
-		if abs(rigensPixelSidecount[i]) < 0.75 and checkCenterOfMass(contraints, grids[i]):
+		if abs(rigensPixelSidecount[i]) < 0.75 and checkCenterOfMass(contraints, grids[i], oriantesen):
 			acceptedRegions[entries] = component_dictionary[entries]
 		i = i + 1
 	return acceptedRegions
