@@ -1,28 +1,32 @@
 {
-Et topografisk kort er et udtryk hentet fra geografi som er en
+Et topografisk kort er et udtryk hentet fra geografi og er en
 fremstilling af tærrenforskelle i et landskab. Traditionelle
 topografiske kort bruger forskellige farver til at præsentere de
-relative højder over havet. Denne metode kan bruges i andre sammenhænge,
-f.eks. som vi vil gøre, ved at udskifte højde med en omkostning.
-Eksempler på topografiske kort til klassificering af regioner i billeder
-kan ses i figur \ref{topography_plus} og \ref{topography_times}.
+relative højder over havet. Vi kan bruge denne metode og udskifte højden
+med en omkostning.  Et simpelt eksempel på et topografisk kort er vist i
+figur \ref{topography_pixel}.
 
-Vi vil nu beskrive en metode hvorved regioner bliver tildelt en
-omkostning. Denne omkostning beregnes ud fra regionens placering i
-billedet på baggrund af et topografisk kort. Således vil regioner ikke
-blive vurderet efter hvorvidt de ligger i det gyldne snit eller ej, men
-efter \emph{hvor meget} de ligger i det gyldne snit.
+\begin{figure}[!h]
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{afsnit/vores_implementation/billeder/udvidet_loesning/topographic_pixelize.png}
+    \end{center}
+    \caption[]{Simpelt topografisk kort med dimensionerne $20 \times
+    31$. Hver pixel har en værdi angivet ved mængden af hvid farve.}
+    \label{topography_pixel}
+\end{figure}
+
+Vi vil nu beskrive en metode, hvorved regioner bliver tildelt en
+omkostning, beregnet ud fra regionens placering og udstrækning på
+baggrund af et topografisk kort. Således vil regioner ikke blive
+vurderet efter hvorvidt de ligger i det gyldne snit eller ej, men efter
+\emph{hvor meget} de ligger i det gyldne snit.
 
 \subsubsection*{Generering af topografisk kort}
-
 Givet en afbildning af et maleri ved matricen $\mathbf{I}$ med dimensioner
 $N \times{} M$, kan man opstille et topografisk kort $\mathbf{T}$ med dimensioner
-$N \times{} M$.
-
-Det topografiske kort generes ud fra to vektorer $\mathbf{X}^t =
+$N \times{} M$. Det topografiske kort genereres ud fra to vektorer $\mathbf{X}^t =
 \left(x_1, x_2, \cdots, x_n\right)$ og $\mathbf{Y} = \left(y_1, y_2,
-\cdots, y_m\right)$ med dimensioner på henholdsvis $N \times 1$ og $1
-\times M$.
+\cdots, y_m\right)$ med dimensioner på henholdsvis $N$ og $M$.
 
 Vi betragter vektoren $\mathbf{X}$ som liniestykket givet ved $AB$ i
 figur \ref{topograph_line}. Længden af liniestykket betegnes ved $|AB|$.
@@ -99,7 +103,7 @@ af at de har forskellig størrelse.
 
         \put(3, 0){\line(1, 0){233}}
     \end{picture}
-    \caption[]{Liniestykke}
+    \caption[]{Liniestykket repræsenteret af vektoren $X$.}
     \label{topograph_line}
 \end{figure}
 
@@ -139,7 +143,7 @@ Optimalt ville man have den samme omkostning ved ekstremerne som i $t$,
 men med den eksponentielle stigning som i $u$.
 
 Vi kan nu beregne omkostningen for en interessant region. Givet en
-mængde $R \in \{\mathbb{Z}^{+}\times\mathbb{Z}^{+}\}$, som angiver
+mængde $R \in \mathbb{Z}^{+2}$, som angiver
 punkterne i en region, kan man finde omkostningen $C$ ved
 \begin{equation}
     C(R) = \sum_{(x, y) \in R}{\frac{\tau(x, y)}{|R|}}
