@@ -23,11 +23,9 @@ regioner klassificeres som en positiv interessant region.
 	\label{hus}
 \end{figure}
 
-% Dette er implementations-snak! Det kan dog godt nævnes hurtigt.
-% Det er langt vigtigere at høre om metoden med det samme.
 
-%\subsubsection{Opdeling af ragion med et grid}
-%Når vi
+\subsubsection{Opdeling af ragion med et grid}
+Når vi
 
 % Original
 %\subsubsection{Opdeling af ragion med et grid}
@@ -40,13 +38,12 @@ regioner klassificeres som en positiv interessant region.
 %vores gridt er) XXX(har vi skravet at vi altid laver ragionerne
 %forskelige farver.)
 
-%\begin{figure}[h]
-%	\begin{center}
-%		\includegraphics[scale=0.76,angle=0]{afsnit/vores_implementation/billeder/udvidet_loesning/udvidetloesninglayer.png}
-%	\end{center}
-%	\caption[]{Et grid over en ragion i baunding box}
-%	\label{grid}
-%\end{figure}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.76,angle=0]{afsnit/vores_implementation/billeder/udvidet_loesning/udvidetloesninglayer.png}
+	\caption[]{Et grid over en ragion i baunding box}
+	\label{grid}
+\end{figure}
 
 \subsubsection{Bedømmelse med hensyn til massemidtpunkt}
 Givet en region $R$ betegner vi antallet af punkter i regionen med
@@ -58,8 +55,9 @@ Afstanden fra et punkt til snittet $G$ betegner vi $d$, mens afstanden
 fra en punkt til kanten af et billede kaldes $D$. Med disse
 informationer kan vi afgøre om regionen bliver delt i to lige store dele
 af snittet samt om store dele af regionen befinder sig langt væk fra
-snittet. Vi definerer nu to funktioner som kan sige noget om regionens
-form.
+snittet. Vi vil gerne kigger nu på en regions midtpunkt og ser om dette
+ligger inden for et margin. Vi beregner regionens massemidtpunkt ved
+funktionen
 
 %Vi har nu x antal punkter i en ragion og vi andtager at det er et af den
 %vertikale snit vi ser på. Så kan punkterne befinde sig oven på snittet,
@@ -75,6 +73,23 @@ form.
     m(R) & = & \frac{\sum_{p \in R}{D}}{|R|}
     \label{MPunkt}
 \end{eqnarray}
+
+Hvis $m(R)$ ligger inden for margin bliver regionen godtaget, som vist i
+figur \ref{oOMCutMargin}. Dette er dog ikke helt nok til at bedømme
+regionerne efter, da regionens form kan påvirke massemidtpunktet hvilket
+er vist i figur \ref{dontwork}.
+
+%Som man kan se i figur \ref{Fordeling} er det fundene midpunkt inde for
+%marginen, men figur \ref{dontwork} har en lang stang som ænder med at
+%være lang væk fra snittet. Dette vil vi helt undgå da denne figur ikke
+%ligger i snittet. Men da de fleste pixels ligger på højre sider af
+%figuren kan vi, kan vi sotere denne figur væk ved at sammen line pixel
+%andtal på begge sider og se om den reletive pixeltal kommer under en vis
+%granse. Formel \ref{Fordeling} bruges til dette formål. Denne metode gør
+%også at vi få soteret de figure væk hvor snittet gå i gemmen side af
+%figuren, f.eks. et andsigt hvor snittet gå i gemmen kinden og ikke
+%næsen. se figur \ref{dontwork2}
+
 \begin{eqnarray}
     f(R) & = & \frac{|R_{l}| - |R_{r}|}{|R|}
     \label{Fordeling}
@@ -87,21 +102,21 @@ form.
 % Fordeling &=& \frac{x_{venstre~side}-x_{højre~side}}{x}\label{Fordeling}
 %\end{eqnarray}
 
-Formel \ref{MPunkt} finder et mid punktet af ragionen i forhold til
-venstre side for vertikale snit og toppen ved højesuntale snit. se figur
-\ref{midpunkt}
+%Formel \ref{MPunkt} finder et mid punktet af ragionen i forhold til
+%venstre side for vertikale snit og toppen ved højesuntale snit. se figur
+%\ref{midpunkt}
 
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[scale=0.5,angle=0]{afsnit/vores_implementation/billeder/udvidet_loesning/centerOfmass.png}
-	\end{center}
-	\caption[]{ragion hvor masse midpunktet er tegnet in i forhold til venster side af billedet}
-	\label{midpunkt}
-\end{figure}
+%\begin{figure}[h]
+%	\begin{center}
+%		\includegraphics[scale=0.5,angle=0]{afsnit/vores_implementation/billeder/udvidet_loesning/centerOfmass.png}
+%	\end{center}
+%	\caption[]{ragion hvor masse midpunktet er tegnet in i forhold til venster side af billedet}
+%	\label{midpunkt}
+%\end{figure}
 
-Vi sammen linier nu midpunktet med snittet og få en afstand, hvis denne
-afstand er mindre en magien, så er ragione godtaget, se figur
-\ref{cOMCutMargin}
+%Vi sammen linier nu midpunktet med snittet og få en afstand, hvis denne
+%afstand er mindre en magien, så er ragione godtaget, se figur
+%\ref{cOMCutMargin}
 
 \begin{figure}[h]
 	\begin{center}
@@ -111,8 +126,8 @@ afstand er mindre en magien, så er ragione godtaget, se figur
 	\label{cOMCutMargin}
 \end{figure}
 
-Nu skulle man tror at alting er godt men desværre kan vi kommer ud for
-nogle figure som formel \ref{MPunkt} ikke tager højte for.
+%Nu skulle man tror at alting er godt men desværre kan vi kommer ud for
+%nogle figure som formel \ref{MPunkt} ikke tager højte for.
 
 \begin{figure}[h]
 	\begin{center}
@@ -121,17 +136,6 @@ nogle figure som formel \ref{MPunkt} ikke tager højte for.
 	\caption[]{Figur som overhold farmel \ref{MPunkt} men ikke \ref{Fordeling}}
 	\label{dontwork}
 \end{figure}
-
-Som man kan se i figur \ref{Fordeling} er det fundene midpunkt inde for
-marginen, men figur \ref{dontwork} har en lang stang som ænder med at
-være lang væk fra snittet. Dette vil vi helt undgå da denne figur ikke
-ligger i snittet. Men da de fleste pixels ligger på højre sider af
-figuren kan vi, kan vi sotere denne figur væk ved at sammen line pixel
-andtal på begge sider og se om den reletive pixeltal kommer under en vis
-granse. Formel \ref{Fordeling} bruges til dette formål. Denne metode gør
-også at vi få soteret de figure væk hvor snittet gå i gemmen side af
-figuren, f.eks. et andsigt hvor snittet gå i gemmen kinden og ikke
-næsen. se figur \ref{dontwork2}
 
 \begin{figure}[h]
 	\begin{center}
