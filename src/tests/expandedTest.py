@@ -43,7 +43,7 @@ def showImage(image, name):
 			sys.exit(0)
 
 
-def centerOfMass(gridPointsList):
+def centerOfMass(gridPointsList, oriantesen):
 	"""
 	Canculate the center of mass of alle the regions
 	"""
@@ -51,14 +51,17 @@ def centerOfMass(gridPointsList):
 	for ragions in gridPointsList:
 		tmp = 0
 		for points in ragions:
-			tmp = tmp + points.x
+			if oriantesen:
+				tmp = tmp + points.x
+			else:	
+				tmp = tmp + points.y
 		if (tmp == 0):
 			centerOfMassList.append(0)
 		else:
 			centerOfMassList.append(tmp/len(ragions))
 	return centerOfMassList
-	
-def pixelSideCounter(gridPointsList, cut):
+
+def pixelSideCounter(gridPointsList, cut,oriantesen):
 	"""
 	counts the difrens in pixels at both side og the cut in are blob
 	"""
@@ -68,10 +71,16 @@ def pixelSideCounter(gridPointsList, cut):
 		left = 0
 		right = 0
 		for points in ragions:
-			if cut > points.x:
-				left = left + 1.0
-			elif cut < points.x:
-				right = right + 1.0
+			if oriantesen:
+				if cut > points.x:
+					left = left + 1.0
+				elif cut < points.x:
+					right = right + 1.0
+			else:	
+				if cut > points.y:
+					left = left + 1.0
+				elif cut < points.y:
+					right = right + 1.0
 			tmp = tmp + 1.0;
 		if (tmp == 0):
 			counter.append(1)
@@ -88,7 +97,7 @@ def main():
 	filename = sys.argv[1]
 	image = highgui.cvLoadImage (filename)
 
-	cutRatios = [0.61]
+	cutRatios = [lib.PHI]
 	settings = Settings(cutRatios)
 	image = highgui.cvLoadImage (filename)
 	thickness = 4
@@ -99,10 +108,12 @@ def main():
 	cut = lib.findMeans(cv.cvGetSize(image), settings.cutRatios[0])[cutNo]
 	
 	# cuttet verdi, dog skal det vi generaliseres lidt
-	if cutNo < 3:
-		cutPixel = int(0.61 * cv.cvGetSize(image).width)
+	oriantesen = cut.getPoints()[0].x == cut.getPoints()[1].x
+	
+	if oriantesen:
+		cutPixel = cut.getPoints()[1].x
 	else:
-		cutPixel = int(0.61 * cv.cvGetSize(image).higth)
+		cutPixel = cut.getPoints()[1].y
 	
 
 	
@@ -121,19 +132,35 @@ def main():
 	gridPointsList = grid.gridIt(blobImg, comp)
 	#hvor mange pixel der er pa den ende side i forhold til den anden, i procent
 	
-	pixelRatio = pixelSideCounter(gridPointsList, cutPixel)
+	pixelRatio = pixelSideCounter(gridPointsList, cutPixel, oriantesen)
 	
 	#Udregning af center og mass
-	points = centerOfMass(gridPointsList)
+	points = centerOfMass(gridPointsList, oriantesen)
 	#Draw the cut
-	cv.cvLine(image, cv.cvPoint(cutPixel, 0), cv.cvPoint(cutPixel,600), COL_RED)
+	#print cut.getPoints()[0].y
+	#print cut.getPoints()[1].y
+	#print cut.getPoints()[0].x
+	#print cut.getPoints()[1].x
+	#print cutPixel
+	
+	if oriantesen:
+	#	print 'hej'
+		cv.cvLine(image, cv.cvPoint(cutPixel, cut.getPoints()[0].y), cv.cvPoint(cutPixel, cut.getPoints()[1].y), COL_RED)
+	else:
+		cv.cvLine(image, cv.cvPoint(cut.getPoints()[0].x, cutPixel), cv.cvPoint(cut.getPoints()[1].x, cutPixel), COL_RED)
 	
 	#Draw center of mass
 	for point in points:
-		cv.cvLine(image, cv.cvPoint(point, 0), cv.cvPoint(point,600), COL_GREEN)
+		if oriantesen:
+	#		print 'hej'
+	#		print point
+			cv.cvLine(image, cv.cvPoint(point, cut.getPoints()[0].y), cv.cvPoint(point, cut.getPoints()[1].y), COL_GREEN)
+		else:
+	#		print point
+			cv.cvLine(image, cv.cvPoint(cut.getPoints()[0].x, point), cv.cvPoint(cut.getPoints()[1].x, point), COL_GREEN)
 	lib.drawBoundingBoxes(image, comp)
 	#highgui.cvSaveImage('floodfillbilledet.png', blobImg)
-	#highgui.cvSaveImage('boindingboxbilledet.png', boxxImg)
+	highgui.cvSaveImage('centerOfMass.png', image)
 	
 	showImage(image, 'name')
 if __name__ == "__main__":
