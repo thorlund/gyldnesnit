@@ -16,7 +16,7 @@ interessant region at gøre.
 
 \subsection{Regionens placering}
 Når vi har trukket regioner ud af et billede og vil afgøre om de ligger
-i det gyldne snit, er det indlysende at deres placering har afgørende
+i det gyldne snit, er det indlysende at deres placering har en afgørende
 betydning.  Vi vil nu komme frem til en definition hvorved man kan
 afgøre om en region i billedet er placeret i det gyldne snit.
 
@@ -43,19 +43,19 @@ snittet.
 %fordi der i disse områder stadig er stor overgang i farverne.  Dette
 %bevirker at en regioner kan blive repræsenteret som mindre end de
 %virkelig er.
-Vi har også, at det gyldne snit baserer sig på det
-irrationelle tal $\varphi$ og vi kan derfor ikke regne os helt nøjagtig
-frem til hvor det egentlige snit ligger. Dette vil vi komme nærmere ind
-på i næste afsnit. Vi indfører derfor en margen hvori vi vil acceptere
-regioner.  I praksis betyder det at vi \emph{ikke kun} kigger på den
-linje der deler billedet ved det gyldne snit, men faktisk tager vi et
-bånd, sammensat af en række snit, og bruger dette bånd som et bredere
-gyldent snit.  Derved behøver en region ikke at tangere det gyldne snit
-helt nøjagtig for at kunne betragtes som liggende i det gyldne snit. For
-at give et eksempel, så vil regionen i figur \ref{pos_naiv_margin_1}
-anses som værende placeret i det gyldne snit.  Vær opmærksom på at vores
-bånd, rent visuelt i de følgende illustrationer, kan være stærkt
-overdrevet.
+Vi har også, at det gyldne snit baserer sig på det irrationelle tal
+$\varphi$ og vi kan derfor ikke regne os helt nøjagtig frem til hvor det
+egentlige snit ligger. Dette vil vi komme nærmere ind på i afsnit
+\ref{section_opdeling}. Vi indfører derfor et \textbf{margin} hvori vi vil
+acceptere regioner.  I praksis betyder det at vi \emph{ikke kun}
+betragter den linje der deler billedet ved det gyldne snit, men faktisk
+tager vi et bånd, sammensat af en række snit, og bruger dette bånd som
+et bredere gyldent snit.  Derved behøver en region ikke at tangere det
+gyldne snit helt nøjagtig for at kunne betragtes som liggende i det
+gyldne snit. For at give et eksempel, så vil regionen i figur
+\ref{pos_naiv_margin_1} anses som værende placeret i det gyldne snit.
+Vær opmærksom på at vores margin, rent visuelt i de følgende
+illustrationer, kan være stærkt overdrevet.
 \begin{figure}[h]
     \begin{center}
         \includegraphics[scale=\imgscale,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/naiv_positiv_blob_margin_1}
@@ -66,9 +66,10 @@ overdrevet.
     \label{pos_naiv_margin_1}
 \end{figure}
 
-Vi ser nu på det rektangel der der begrænser en region.  En side af
-dette rektangel vil vi kalde for en kant. Ved at studere figur
-\ref{bbox_section} ses det let, at en region skal have mindst én kant
+Vi ser nu på det rektangel der der begrænser en region. Dette vil vi
+kalde for en regions \textbf{begrænsende rektangel}. En side af
+dette rektangel vil vi kalde for en \textbf{kant}. Ved at studere figur
+\ref{bbox_section} kan det ses, at en region skal have mindst én kant
 indenfor båndet om det gyldne snit, før vi kan sige at regionen ligger i
 det gyldne snit. Dette betyder, at hvis en region har en kant indenfor
 båndet, så ligger denne region i det gyldne snit.
@@ -125,8 +126,9 @@ opmærksomheden mod et horisontalt snit.  Det generelle tilfælde vil være
 at en region kun er interessant i forhold til enten et vertikalt eller
 et horisontalt snit.  Et eksempel på dette ses i figur
 \ref{pos_horiz_naiv_margin_1}.  Der kan dog forekomme specialtilfælde,
-hvor en region vil være positiv i flere snit, hvilket vi vil komme ind
-på i et senere kapitel.
+hvor en region vil være positiv i flere snit, men det vil vi ikke tage
+højde for i denne fremgangsmåde.
+
 \begin{figure}[H]
     \begin{center}
         \includegraphics[scale=\imgscale,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/naiv_horiz_positiv_blob_1}
@@ -191,11 +193,9 @@ en region godt kan blive klassificeret som interessant, men ikke
 nødvendigvis liggende i det gyldne snit.
 
 Et billede opfylder altså det gyldne snit hvis vi har en eller flere
-interessante regioner der ligger i det gyldne snit.  Det er oplagt at
-give regioner som er positiv i flere snit større vægt, hvilket vi også
-vil komme ind på i et senere kapitel. Bemærk, at selvom ovenstående
-fremgangsmåde tager udgangspunkt i det gyldne snit, så kan metoden
-anvendes på ethvert snit i billedet.
+interessante regioner der ligger i det gyldne snit. Bemærk, at selvom
+ovenstående fremgangsmåde tager udgangspunkt i det gyldne snit, så kan
+metoden anvendes på ethvert snit i billedet.
 
 I kapitel \ref{chap_afproevning} vil vi komme nærmere ind på hvad
 tærskelværdierne i praksis skal sættes til.
