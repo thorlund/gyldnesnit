@@ -16,13 +16,13 @@ De to første metoder har svært ved at bibeholde kanterne i et billede,
 men arbejder til gengæld direkte på billedet. Den tredie metode
 bibeholder til en vis grad kanterne bedre, men kan ikke arbejde direkte
 på billedet, hvilket kræver et større pladsforbrug. Metoden som bruges
-til de 2 første sløringer, heder foldning, som bruger en kernel til
-udregning af ny farver. En kernel er en lille matrice, som betegner hvor
+til de 2 første sløringer, heder foldning, som bruger en foldningsmatrix til
+udregning af ny farver. En foldningsmatrix er en lille matrice, som betegner hvor
 stor del af billedet og hvor meget af pixels værdiger fra farverne rund
 om et punkt, skal tages med i udregningen for den nye sløret farve. En
-kernel kan ses i figur \ref{Foldning}. Foldning er en simpel matematisk
+foldningsmatrix kan ses i figur \ref{Foldning}. Foldning er en simpel matematisk
 metode, som beskriver hvordan man kan gange 2 matricer sammen, i vores
-tilfælde, en kernel $\mathbb{Z}^{n}\times{} \mathbb{Z}^{m}$ og et
+tilfælde, en foldningsmatrix $\mathbb{Z}^{n}\times{} \mathbb{Z}^{m}$ og et
 billedet matrice $\mathbb{Z}^{k}\times{} \mathbb{Z}^{d}$, hvor $n = d
 ~\vee~ m = k$ ikke behøver at være opfyldt.
 
@@ -30,37 +30,43 @@ billedet matrice $\mathbb{Z}^{k}\times{} \mathbb{Z}^{d}$, hvor $n = d
 	\begin{center}
 		\includegraphics[scale=1,angle=0]{afsnit/vores_implementation/billeder/sloering/convolution}
 	\end{center}
-	\caption[]{Et billedet hvor x,x betegner plaseringen og en kernel med 9 tilfældige tal fra 0 til 9}
+	\caption[]{En repratation af et billedet hvor $(i,j)$ betegner plaseringen og en foldningsmatrix med 9 tilfældige tal fra 0 til 9}
 	\label{Foldning}
 \end{figure}
 
-Som man kan se i figur \ref{Foldning} er selve billedet og kernel i
+Som man kan se i figur \ref{Foldning} er selve billedet og foldningsmatrix i
 vid forskellige størrelser. Måden Foldning virker på, er at man
-multiplicere kernelen ovenpå de værdiger som ligger rund om den pixel,
+multiplicere foldningsmatrixen ovenpå de værdiger som ligger rund om den pixel,
 som vi gerne vil finde den sløret farve af og tager gennemsnittet af den
 værdig, f.eks farven på pixel $(4,4)$, bliver
 
 \begin{equation}
-	(4,4) = ((3,3)*4+(4,3)*2+(5,3)*3+(3,4)*3+(4,4)*9+(5,4)*3+(3,5)*2+(4,5)*4+(5,5)*9)*\frac{1}{39} 
+	(4,4) = ((3,3)\cdot 4+(4,3) \cdot 2+(5,3) \cdot 3+(3,4) \cdot 3+(4,4) \cdot 9+(5,4) \cdot 3+(3,5) \cdot 2+(4,5) \cdot 4+(5,5) \cdot 9) \cdot \frac{1}{39} 
 \end{equation}
 
 I dette eksempel, er punktet $(5,5)$ og $(4,4)$ vægtet højre i forhold
 til de andet, så farven vil blive sløret i den retning. Dette skyldes at
-kernelen er bygget tilfældig op, i en rigtige sløring er kernelen meget
-specifikt udvalgt for at give det beste resultat.
+foldningsmatrixen er bygget tilfældig op, i en rigtige sløring er
+foldningsmatrixen meget specifikt udvalgt for at give det beste
+resultat.
 
 \subsubsection*{Simpel sløring}
-I metoden simpel sløring er der 3 steps, først udregnes en kernel. Multiplicere
-kernel rigtigt på billedet, kaldet Foldning. Sættes værdigerne fra
-multiplikationen ind i billedet, som så bliver det nye sløret billedet nå
-alle punkter er omdannet. kernel for den simple sløring er en kvadradisk
-matrice med kun talet 1 i. Resultatet for en simpel sløring kan ses i
-figur \ref{simple_metode}
+I metoden simpel sløring er der 3 steps.
+\begin{itemize}
+	\item{Udregnes en foldningsmatrix.}
+	\item{Multipliceres foldningsmatrix rigtigt på billedet foldning.}
+	\item{Sættes værdigerne fra multiplikationen ind i billedet, som så bliver det nye sløret billedet nå
+alle punkter er omdannet.}
+\end{itemize}
+
+Foldningsmatrix for den simple sløring er en kvadradisk matrix med kun
+talet 1 i. Resultatet for en simpel sløring kan ses i figur
+\ref{simple_metode}
 
 \subsubsection*{Gaussisk sløring}
-Gaussisk sløring har de samme 3 steps som simpel sløring. 
-Måde Gaussisk sløring udregner sin kernel, at ved brug af Normale
-fordeling, som betegnet med denne formel
+Gaussisk sløring har de samme 3 steps som simpel sløring. Måde Gaussisk
+sløring udregner sin foldningsmatrix, at ved brug af normalefordeling,
+som betegnet med denne formel
 
 \begin{equation}
 	G(x,y) = \frac{1}{2\pi\sigma^2}e^{-\frac{x^2+y^2}{2\sigma^2}}
@@ -73,11 +79,11 @@ på 1. Den upscalet afrundet kerne kan se på figur \ref{gauss}.
 	\begin{center}
 		\includegraphics[scale=0.5,angle=0]{afsnit/vores_implementation/billeder/sloering/gauss}
 	\end{center}
-	\caption[]{En $3~\times{}~3$ Kernel for gauss sløring}
+	\caption[]{En $3~\times{}~3$ foldningsmatrix for gauss sløring}
 	\label{gauss}
 \end{figure}
 
-Denne kernel kan så bruges ved hjælp af foldning til at danne det sløret
+Denne foldningsmatrix kan så bruges ved hjælp af foldning til at danne det sløret
 billet, som vi kan se i figur \ref{gaussian_metode}
 
 \subsubsection*{Sløring ved statistisk median}
