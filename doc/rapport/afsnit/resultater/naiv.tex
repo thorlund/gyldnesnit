@@ -1,61 +1,61 @@
 {
-\subsection{Overvejelser}
-Før der konkluderes noget over resultaterne er det vigtigt at se på
-grundlaget, det meste af dette er givet tidligere i rapporten.
-Fordi det er den første kørsel bliver tærskelværdierne sat ud fra hvad
-der tidligere i rapporten er blevet bedømt som optimalt.
-Som det kan læses TODO: fix ref når dette afsnit er
-lavet og omdefiner\ref{chap:chap_afproevning}.
-Problemet ved dette er at de samme tærskelværdier kan give forskellige
-resultater på forskellige billeder.
-På grund af tidsbegrænsningen af denne opgave er det efterladt til
-fremtidigt arbejde, og det efterlades som en usikkerhed.
+Hypotesen for dette eksperiment er at det gyldnesnit ikke bliver brugt
+mere end andre snit.
+\subsection{Eksperimentsopstilling}
+I \ref{chap:chap_afproevning} er de optimale tærskelværdier fundet.
+Idet denne hypotese blot kigger på frekvensen for brug af det gyldnesnit
+mod andre snit, hvis eneste restriktion er at de skal have et fælles
+forhold til det gyldnesnit.
+Det er også fordelagtigt at maksimere antallet af andre snit, da det
+giver et bedre grundlag for eksperimentet.
+Afstanden mellem to snit er begrænset af margin defineret til at være
+$2.4\%$\ref{margin}. 
+Denne margin skal være tilstede på begge sider af et snit, så derfor vil
+hvert snit fylde $(2.4*2)\%$.
+Det maksimale antal af snit på et billede må altså være
+$100/4.8=20.833$. Hvilket ses på denne figur \ref{snitogmargin}
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.3]{afsnit/resultater/billeder/20_cuts_med_margin}
+	\end{center}
+	\caption{Sort:snittene, grøn: margins og rød er midten}
+	\label{snitogmargin}
+\end{figure}
 
-Der er blevet snakket en del om usikkerheden både i
-\ref{chap:chap_afproevning} og om tærskelværdierne.
-Det er dog meget vigtigt at kigge på størrelsen af datasættet, før alle
-resultater afvises på grund af usikkerhederne.
-Følgende SQL sætning tæller antallet af billeder, som benyttes i et
-eksperiment.
-\begin{verbatim}
-sqlite> select Count(*) from painting where form = "painting";
-17364
-\end{verbatim}
-Algoritmen vil altså blive udført på 17364 billeder, for at opsummere så
-ligger det gyldne snit, altså fire steder på et billede. Grunden til det
-pointeres i kombination med usikkerhed er for at holde fokus på præcis
-hvor algoritmen lægger sit arbejde. Hvis algoritmen har en generel
-svaghed er det unægteligt problematisk, men speciale tilfælde vil
-forsvinde på grund af størrelsen af datasættet.
+Eksperimentet bliver kørt på alle 17364 billeder.
+\newpage
+\subsection{Forventninger}
+Det er tydeligt ud fra hypotesen at eksperimentet fejler hvis der bliver
+fundet flere interessante regioner i det gyldne snit end i alle andre
+snit.
 
-Databasen er sat op til at kunne indeholde alle de data, der skal
-indsamles under eksperimentet. På grund af det behøves der ikke at tages
-speciale hensyn til f.eks. at en statistik om hvilken periode der indeholder
-flest gyldnesnit. Dette eksempel er en del af den udvidede løsning og
-brugt netop for at vise at der ikke skal tages hensyn pga. databasens
-opbygning.
+\subsection{Resultater}
+%Indsæt graf over de forskellige ratios her.
+\begin{figure}
+	\begin{center}
+		blah blah TODO insæt graf over antallet af regioner fundet i de
+		forskellige snit
+	\end{center}
+	\caption{Antal af detektere interessante regioner på de forskellige snit.}
+	\label{diffratios}
+\end{figure}
+Der er kun to snit, hvor der bliver detekteret et mindre antal
+interessante regioner end i gyldne snit nemlig $0.968$ og
+$0.868$. Ganske tydeligt er det dog at se at der er et klart forhold til
+hvor tæt på midten grafen kommer.
+Yderpunkterne $0.958$ og $0.518$ er problematiske, $0.958$'s margin
+løber udover billedet, dvs. at den ren principielt går glip af at
+detektere en masse interessante regioner.
+$0.518$ lider af det modsatte problem, den kan potentielt fange
+interessante regioner, på begge sider af midten.
+For at være helt præcis så er det i $0.518$ tilfælde:\\
+$1-0.518 = 0.482$
+$0.518-0.482=0.036$\\
+Hvilket er afstanden mellem de to snit.
+Der er altså en stimmel på $0.05-0.036 = 0.014 = 1.4\%$ af billedet,
+hvor interessante regioner bliver talt to gange.
 
-Nu er det den første kørsel på en så stor billedebase, derfor er det
-vigtigt at så meget data som muligt bliver opsamlet. Det er selvfølgelig
-også derfor at der er blevet snakket så meget om alle de forskellige
-indstillinger en sidste vigtig ting er hvilke snit skal der arbejdes på.
-Det ville selvfølgelig være oplagt at vælge $\Phi$ og $2/3$. Det kunne
-dog godt betyde at der gik informationer tabt. Hvordan bygges en kørsel
-så op hvis der skal findes mest mulige data, svaret på dette ligger i de
-tekniske begrænsninger og usikkerheden om hvor tæt to snit må ligge på
-hinanden.
-Med de tekniske begrænsninger menes mest af alt at algoritmen er bygget
-på fire snit, derfor skal der reelt kun findes snit der dækker halvdelen
-af billedet fordi der ellers vil komme meget redundant information.
-Derudover er tiden også en begrænsning. Ud fra udokumenterede tests
-virker det til at hvert snit tager op mod en halv dag.
-Tiden sammen med usikkerheden giver en minimumsgrænse for hvor mange
-snit det er muligt at have. Margin skal ifølge \ref{margin} minimum være
-$2.4\%$, potentielt betyder dette at der kunne være $50/2.4=20.8$ snit.
-Da op til 10 dages ventetid er lidt meget specielt i og med det er den
-første kørsel over alle billederne, vælges det halve altså $10$ snit
-eller et snit hver $5\%$.
-\subsection{Resultaterne}
+
 \begin{verbatim}
 number of features in the golden ratio in different periodes
 
