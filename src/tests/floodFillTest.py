@@ -52,7 +52,7 @@ threshold2 = 2.5 * threshold1;
 out = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
 edges = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
 #blurImage = cv.cvCreateImage(cv.cvGetSize(original), 8, 3)
-edgeDetector.findEdges(image, edges, 75, 20)
+edgeDetector.findEdges(image, edges, 75, 175)
 
 #out = cv.cvCreateImage(cv.cvGetSize(image), 8, 1)
 
@@ -91,7 +91,7 @@ comp = cv.CvConnectedComp()
 winname = "floot"
 
 highgui.cvNamedWindow (winname, highgui.CV_WINDOW_AUTOSIZE)
-highgui.cvSaveImage('out.png', edges)
+#highgui.cvSaveImage('out.png', edges)
 
 while True:
 	highgui.cvShowImage (winname, edges)

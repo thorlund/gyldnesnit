@@ -117,14 +117,43 @@ nærmere ind på den indre funktionalitet i Canny, men vi vil i det
 følgende vise eksempler på resultater fra metoden.
 
 \subsubsection*{Eksempler}
+Vi viser nu nogle eksempler på hvordan Canny kantdetektion virker. Vi
+tager igen udgangspunkt i maleriet i figur \ref{bathers}. Billedet
+bliver først konverteret til gråtoner som da bruges til at finde kanter
+i. Metoden returnerer et nyt sort billede med hvide kanter. Billederne
+der vises er således ikke det direkte resultat fra metoden, men vi viser
+kun de dele af originalbilledet hvor metoden har fundet kanter. Metoden
+bruger to tærskelværdier som kan justeres alt efter hvor mange detajler
+man ønsker. Vi vil ved hjælp af de følgende eksempler komme frem til
+hvad tærskelværdierne betyder for resultatet.
 
 \begin{figure}[!h]
-    \begin{center}
-        \includegraphics[width=0.8\textwidth]{afsnit/vores_implementation/billeder/kantdetektion/canny_20_20}
-    \end{center}
-    \caption[]{Canny kantdetektion med tærskelværdierne $(20, 20)$.}
-    \label{bathers}
+    \centering
+    \subfloat[$(20, 20)$]{
+        \label{canny_20_20}
+        \includegraphics[width=0.8\textwidth]{afsnit/vores_implementation/billeder/kantdetektion/canny_20_20}}\\
+    \subfloat[$(20, 100)$]{
+        \label{canny_20_100}
+        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/vores_implementation/billeder/kantdetektion/canny_20_100}}\hspace{1em}
+    \subfloat[$(60, 150)$]{
+        \label{canny_60_150}
+        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/vores_implementation/billeder/kantdetektion/canny_60_150}}\\
+    \subfloat[$(70, 175)$]{
+        \label{canny_70_175}
+        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/vores_implementation/billeder/kantdetektion/canny_70_175}}\hspace{1em}
+    \subfloat[$(100, 295)$]{
+        \label{canny_100_290}
+        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/vores_implementation/billeder/kantdetektion/canny_100_290}}
+    \caption[]{Forskellige resultater med Canny kantdetektion.
+    Tærskelværdierne er noteret under billederne.}
+    \label{simple_metode}
 \end{figure}
+
+Når vi sammen ligner figur \ref{canny_20_20} og \ref{canny_20_100} ses
+det at anden parameter lader til at ignorere kanter som ligger
+``inden for'' andre kanter. Dette ses på stort set alle personernes
+kroppe i billedet. Når denne observation er gjort prøver vi at skrue op
+for tærskelværdierne.
 }
 
 % vim: set tw=72 spell spelllang=da:
