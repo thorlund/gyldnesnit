@@ -84,10 +84,10 @@ Eksemplet med 4000 pixels ovenfor, approksimerer vi antal pixels ved at
 afrunde resultatet, se udregning \ref{afrundning}. Det gør at vi mister
 0.13595 nøjagtighed, hvilket svare til en misvisning af punktet på
 0.00339875 $\%$ i forholdt til bredden på billedet. se udregnig
-\ref{afrundning2}. 
+\ref{afrundning2}.
 
 \begin{equation}
-	4000 \cdot \varPhi = 4000(\sqrt{5}-1)/2 = 2472.13595 \approx 2472 \label{afrundning}
+%	4000 \cdot \varPhi = 4000(\sqrt{5}-1)/2 = 2472.13595 \approx 2472 \label{afrundning}
 \end{equation}
 
 \begin{equation}
@@ -112,11 +112,11 @@ krydser. hvis $x$ betegner antal pixels i $B$ eller $H$, og vi vil se
 forskellen mellem $\frac{2}{3}$ og $\varPhi$, multiplicere vi $x$ med snittet for at
 finde dens placering og subtrahere dem fra hinanden.
 
-\begin*{eqnarray}
-	\frac{x2}{3}-\frac{x2}{\sqrt{5}+1} &=& x(\frac{2}{3}-\frac{2}{\sqrt{5}+1}) \\ \nonumber
-	&=& x(0.666667-0.618034) \\ \nonumber
-	&=& x(0.048633) \\ \nonumber
-\end*{eqnarray}
+\begin{eqnarray}
+	\frac{x2}{3} - \frac{x2}{\sqrt{5}+1} & = & x(\frac{2}{3} - \frac{2}{\sqrt{5} + 1}) \nonumber \\
+	& = & x(0.666667-0.618034) \\ \nonumber
+	& = & x(0.048633)
+\end{eqnarray}
 
 Vi har nu fundet antal pixels mellem de to snit. Vi vil gerne undgå at
 de to marginens ikke krydser hinanden, så der dividere vi med 2 og
@@ -141,7 +141,7 @@ bliver resultatet
 \end{equation}
 
 Det er en fint margin, da vores fejl på udregningerne ligger på 2.1 \%,
-som svare til $\lseil 500*0.021 \rseil = 11$ pixels, som er 1 pixels fra vores
+som svare til $\lceil 500*0.021 \rceil = 11$ pixels, som er 1 pixels fra vores
 margin
 
 Ved 4000 pixels giver det.

@@ -40,9 +40,11 @@ multiplicere foldningsmatrixen ovenpå de værdiger som ligger rund om den pixel
 som vi gerne vil finde den sløret farve af og tager gennemsnittet af den
 værdig, f.eks farven på pixel $(4,4)$, bliver
 
-\begin{equation}
-	(4,4) = ((3,3)\cdot 4+(4,3) \cdot 2+(5,3) \cdot 3+(3,4) \cdot 3+(4,4) \cdot 9+(5,4) \cdot 3+(3,5) \cdot 2+(4,5) \cdot 4+(5,5) \cdot 9) \cdot \frac{1}{39} 
-\end{equation}
+\begin{multline}
+    (4,4) = ((3,3)\cdot 4+(4,3) \cdot 2+(5,3) \cdot 3\\
+    + (3,4) \cdot 3+(4,4) \cdot 9+(5,4) \cdot 3\\
+    + (3,5) \cdot 2+(4,5) \cdot 4+(5,5) \cdot 9) \cdot \frac{1}{39}
+\end{multline}
 
 I dette eksempel, er punktet $(5,5)$ og $(4,4)$ vægtet højre i forhold
 til de andet, så farven vil blive sløret i den retning. Dette skyldes at
@@ -94,7 +96,7 @@ trivielt at sætte dem i en liste og sortere dem efter deres værdi. Hvis
 antallet af elementer i listen er ulige, er det midterste element i den
 sorterede liste medianen. Er der et lige antal elementer i listen,
 defineres medianen som gennemsnittet af de to midterste elementer.
-Pixels vælges i et $N \times M$ vindue med den originale pixel i
+Pixels vælges i et $N \times N$ vindue med den originale pixel i
 centrum, som vist i figur \ref{red_box_nxm} og vi vil således altid have
 et ulige antal elementer i listen.
 
