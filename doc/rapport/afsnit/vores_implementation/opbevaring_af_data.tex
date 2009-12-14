@@ -162,7 +162,6 @@ Databaseskemaet har været underlagt følgende designmål:
 \begin{itemize}
     \item Minimere redunsdans
     \item Mulighed for senere udvidelse
-    \item Mange forespørgelsesmuligheder (andet ord)
     \item Mulighed for rekonstruktion af kørte analyser
     \item Mulighed for at kunne analysere flere snit i én kørsel
 \end{itemize}
@@ -177,9 +176,15 @@ databasen igennem for at returnere en meget simpel forespørgsel. Derfor
 har vi valgt at gemme antallet at fundne regioner direkte i databasen.
 
 Databaseskemaet er let at udvide, hvis vi i udviklingen af mere
-avancerede metoder, skulle få brug for flere indgange. Specielt kunne
-tabellen \texttt{region} udvides med en vægt som et mål for ``hvor
-meget'' denne region ligger i snittet.
+avancerede metoder, skulle få brug for flere indgange. Det skal også
+bemærkes at tabellerne \ref{runTable}, \ref{resultTable} og
+\ref{regionTable} er specifikke for netop den naive algoritme.
+Tabellerne er kun tilknyttet maleriernes metadata ved feltet
+\texttt{paintingId}. Man kan derved let udvide databasen til at
+indeholde data om kørsler hvor en anden metode til udtrækning af
+regioner er brugt, eller ligeledes en anden metode til bedømmelse af de
+fundne regioner.
+
 }
 
 % vim: set tw=72 spell spelllang=da:
