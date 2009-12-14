@@ -53,11 +53,21 @@ for timeline in timelines:
 	timeline = timeline[0]
 	goldenFeatTimeline=goldenresults.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct().sum(m.Result.q.numberOfRegions)
 	picTimeline=results.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct().sum(m.Result.q.numberOfRegions)
-	featsInTimeline = results.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id
-	periodes[timeline] = (goldenFeatTimeline,picTimeline)
+	featsInTimeline = results.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct().sum(m.Result.q.numberOfRegions)
+	periodes[timeline] = (goldenFeatTimeline,featsInTimeline,picTimeline)
 
-print "The tuple is how many features is found in a given timeline and the amount of picutres"
+print "This tuple shows how many features are detected in the golden ratio and overall and the amount of pictures in/of a given timeline"
 print periodes
+
+
+print "The features per picture dict"
+featPerPicture = dict()
+for picture in results:
+	if picture.numberOfRegions not in featPerPicture:
+		featPerPicture[picture.numberOfRegions] = 1
+	else:
+		featPerPicture[picture.numberOfRegions] = featPerPicture[picture.numberOfRegions] +1
+
 
 #top ten images with the most features in the golden ratio
 print "The top ten images with the most features in the golden ratio"
