@@ -53,56 +53,24 @@ for timeline in timelines:
 	timeline = timeline[0]
 	goldenFeatTimeline=goldenresults.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct().sum(m.Result.q.numberOfRegions)
 	picTimeline=results.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct().sum(m.Result.q.numberOfRegions)
+	featsInTimeline = results.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id
 	periodes[timeline] = (goldenFeatTimeline,picTimeline)
 
 print "The tuple is how many features is found in a given timeline and the amount of picutres"
 print periodes
 
-toptencuts=dict()
-toptenfeatures=dict()
-toptengoldenfeatures=dict()
-toptenthirdsfeatures=[]
-'''
-for result in results:
-#	Det her er hvad vi skal finde i den raekkefolge
-#	top10 snit,billed? features, features i gyldnesnit per billed, features i 1/3 per billed
-	toptencutskey = str(result.paintingID)+str(result.cutNo)
-	if toptencutskey not in toptencuts:
-		toptencuts[toptencutskey]=result.numberOfRegions
-	else:
-		toptencuts[toptencutskey]=toptencuts[toptencutskey]+result.numberOfRegions
-	if result.paintingID not in toptenfeatures:
-		toptenfeatures[result.paintingID]=result.numberOfRegions
-	else:
-		toptenfeatures[result.paintingID]=toptenfeatures[result.paintingID]+result.numberOfRegions
-	if str(result.cutRatio) == str(goldenLibrary.PHI):
-		if result.paintingID not in toptengoldenfeatures:
-			toptengoldenfeatures[result.paintingID]=result.numberOfRegions
-		else:
-			toptengoldenfeatures[result.paintingID] = toptengoldenfeatures[result.paintingID]+result.numberOfRegions
-	toptenthirdsfeatures.append(result.numberOfRegions)
-	if result.numberOfRegions not in categories.keys():
-		categories[result.numberOfRegions]=1
-	else:
-		categories[result.numberOfRegions]= categories[result.numberOfRegions]+1
-	
-print "number of features in different periodes\n"
-print periodes
-print "Which golden ration is the most popular, ranging from 0 to 3"
-print goldenratiocuts
-print "features in the different ratios"
-print ratios
-	
-toptencuts = toptencuts.values()
-toptenfeatures = toptenfeatures.values()
-toptengoldenfeatures = toptengoldenfeatures.values()
-toptencuts.sort()
-toptenfeatures.sort()
-toptengoldenfeatures.sort()
-toptenthirdsfeatures.sort()
-print "Top 10 cuts, where the most features was found"
-print toptencuts[-10:]
-print toptenfeatures[-10:]
-print toptengoldenfeatures[-10:]
-print toptenthirdsfeatures[-10:]
-'''
+#top ten images with the most features in the golden ratio
+print "The top ten images with the most features in the golden ratio"
+for image in goldenresults.orderBy('numberOfRegions')[-10:]:
+	toptenimages=  m.Painting.select(m.Painting.q.id == image.painting).getOne()
+	print toptenimages.filepath
+	print "with:"
+	print image.numberOfRegions
+
+#top then image with the most features
+print "The top ten images with the most features in any ratio"
+for image in results.orderBy('numberOfRegions')[-10:]:
+	toptenimages=  m.Painting.select(m.Painting.q.id == image.painting).getOne()
+	print toptenimages.filepath
+	print "with:"
+	print image.numberOfRegions
