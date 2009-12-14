@@ -149,11 +149,15 @@ hvad tærskelværdierne betyder for resultatet.
     \label{simple_metode}
 \end{figure}
 
-Når vi sammen ligner figur \ref{canny_20_20} og \ref{canny_20_100} ses
+Når vi sammenligner figur \ref{canny_20_20} og \ref{canny_20_100} ses
 det at anden parameter lader til at ignorere kanter som ligger
 ``inden for'' andre kanter. Dette ses på stort set alle personernes
-kroppe i billedet. Når denne observation er gjort prøver vi at skrue op
-for tærskelværdierne.
+kroppe i billedet. Når denne observation er gjort, prøver vi at skrue op
+for tærskelværdierne. Det ses at ved højere tærskelværdier bliver
+billedet med kanter gradvist mindre detaljeret. I vores testbillede er
+kanterne på de fremtrædende objekter stadig at se, selv ved store
+tærskelværdier som vist i \ref{canny_100_290}. Vi vil i kapitel \ref{chap_afproevning} se på hvilke
+tærskelværdier vi bruger i praksis.
 }
 
 % vim: set tw=72 spell spelllang=da:

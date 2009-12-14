@@ -1,0 +1,73 @@
+{
+
+Vi vil nu, uden at gå alt for meget i detajler, give en intuitiv
+forklaring på hvordan ovenstående metoder bruges til at trække regioner
+ud af et billede.  Regioner trækkes ud i forhold til et snit i billedet,
+således at vi kun finder regioner inden for margin relevant for dette
+snit. Vi går gennem fire skridt, når vi trækker regioner ud, hvoraf de
+tre første kan betragtes som forberedelse af billedet inden den endelige
+segmentering segmentering ved floodfill:
+
+\paragraph{Kantdetektion}
+Først finder vi kanter i billedet. Vi skal bruge kanterne i senere
+skridt.
+
+\begin{figure}[!h]
+    \setlength\fboxsep{0pt}
+    \setlength\fboxrule{0.5pt}
+    \begin{center}
+        \fbox{Kantdetektion}
+    \end{center}
+    \caption[]{}
+    \label{sammen_kanter}
+\end{figure}
+
+\paragraph{Sløring}
+Billedet sløres således at vi kan male større regioner når vi senere
+bruger floodfill.
+
+\begin{figure}[!h]
+    \setlength\fboxsep{0pt}
+    \setlength\fboxrule{0.5pt}
+    \begin{center}
+        \fbox{Sløring}
+    \end{center}
+    \caption[]{}
+    \label{sammen_slør}
+\end{figure}
+
+\paragraph{Fremhævelse af kanter}
+Da vi slørede billedet brugte vi den simple sløringsmetode som kan
+ødelægge kanterne i billedet. Vi tager nu de originale kanter og lægger
+oveni billedet således at kanterne bevares.
+
+\begin{figure}[!h]
+    \setlength\fboxsep{0pt}
+    \setlength\fboxrule{0.5pt}
+    \begin{center}
+        \fbox{Fremhævede kanter}
+    \end{center}
+    \caption[]{}
+    \label{sammen_frem_kant}
+\end{figure}
+
+\paragraph{Segmentering}
+Vi har nu et sløret billede, men med de originale kanter fremhævet.
+Dette billede segmenteres nu ved at bruge floodfill. De originale kanter
+bruges i dette skridt også til at fortælle floodfill hvor nye regioner
+starter. Vi bruger således floodfill ned langs et snit i billedet og
+bruger en ny farve når vi passerer en kant i det originale billede.
+
+\begin{figure}[!h]
+    \setlength\fboxsep{0pt}
+    \setlength\fboxrule{0.5pt}
+    \begin{center}
+        \fbox{Floodfill}
+    \end{center}
+    \caption[]{}
+    \label{sammen_floodfill}
+\end{figure}
+
+}
+
+% vim: set tw=72 spell spelllang=da:
