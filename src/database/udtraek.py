@@ -52,7 +52,7 @@ periodes=dict()
 for timeline in timelines:
 	timeline = timeline[0]
 	goldenFeatTimeline=goldenresults.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct().sum(m.Result.q.numberOfRegions)
-	picTimeline=results.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct().sum(m.Result.q.numberOfRegions)
+	picTimeline=results.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct().count()
 	featsInTimeline = results.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct().sum(m.Result.q.numberOfRegions)
 	periodes[timeline] = (goldenFeatTimeline,featsInTimeline,picTimeline)
 
