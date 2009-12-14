@@ -8,65 +8,73 @@ snit. Vi går gennem fire skridt, når vi trækker regioner ud, hvoraf de
 tre første kan betragtes som forberedelse af billedet inden den endelige
 segmentering segmentering ved floodfill:
 
-\paragraph{Kantdetektion}
+\begin{enumerate}
+    \item \textbf{Kantdetektion}\\
 Først finder vi kanter i billedet. Vi skal bruge kanterne i senere
-skridt.
+skridt. Vi bruger parametrene $(72, 180)$ og resultatet kan ses i figur
+\ref{sammen_kanter}.
 
-\begin{figure}[!h]
-    \setlength\fboxsep{0pt}
-    \setlength\fboxrule{0.5pt}
-    \begin{center}
-        \fbox{Kantdetektion}
-    \end{center}
-    \caption[]{}
-    \label{sammen_kanter}
-\end{figure}
-
-\paragraph{Sløring}
+\item \textbf{Sløring}\\
 Billedet sløres således at vi kan male større regioner når vi senere
-bruger floodfill.
+bruger floodfill. Vi bruger simpel sløring med en $3\times3$
+foldningsmatrix. Det slørede billede vises ses i figur
+\ref{sammen_slor}.
 
-\begin{figure}[!h]
-    \setlength\fboxsep{0pt}
-    \setlength\fboxrule{0.5pt}
-    \begin{center}
-        \fbox{Sløring}
-    \end{center}
-    \caption[]{}
-    \label{sammen_slør}
-\end{figure}
+\item \textbf{Fremhævelse af kanter}\\
+Efter billedet er blevet sløret har vi ikke så gode kanter længere. Vi
+tager nu de originale kanter og lægger oveni billedet således at
+kanterne bevares. Billedet med fremhævede kanter kan ses i figur
+\ref{sammen_frem_kant}.
 
-\paragraph{Fremhævelse af kanter}
-Da vi slørede billedet brugte vi den simple sløringsmetode som kan
-ødelægge kanterne i billedet. Vi tager nu de originale kanter og lægger
-oveni billedet således at kanterne bevares.
-
-\begin{figure}[!h]
-    \setlength\fboxsep{0pt}
-    \setlength\fboxrule{0.5pt}
-    \begin{center}
-        \fbox{Fremhævede kanter}
-    \end{center}
-    \caption[]{}
-    \label{sammen_frem_kant}
-\end{figure}
-
-\paragraph{Segmentering}
+\item \textbf{Udtrækning}\\
 Vi har nu et sløret billede, men med de originale kanter fremhævet.
 Dette billede segmenteres nu ved at bruge floodfill. De originale kanter
 bruges i dette skridt også til at fortælle floodfill hvor nye regioner
 starter. Vi bruger således floodfill ned langs et snit i billedet og
-bruger en ny farve når vi passerer en kant i det originale billede.
+bruger en ny farve, når vi passerer en kant i det originale billede.
+\end{enumerate}
+
+I figur \ref{sammen_floodfill} bruger vi kun floodfill-metoden på
+snittet. Derved fanger vi ikke regioner som ligger \emph{tæt} på
+snittet. Vi tager derfor vores margin og bruger også floodfill på dette.
+Hvis vi betragter et vertikalt snit, bruges floodfill altså tre gange;
+Én gang på det venstre margin, én gang på snittet og endelig én gang på
+det højre snit. Vi fanger derved de regioner der befinder sig inden for
+vores margin. Dette ses i figur \ref{sammen_floodfill_margen}.
 
 \begin{figure}[!h]
-    \setlength\fboxsep{0pt}
-    \setlength\fboxrule{0.5pt}
-    \begin{center}
-        \fbox{Floodfill}
-    \end{center}
-    \caption[]{}
-    \label{sammen_floodfill}
+    \centering
+    \subfloat[Kantdetektion]{
+        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/vores_implementation/billeder/sammensaetning/kanter}
+        \label{sammen_kanter}}\hspace{1em}
+    \subfloat[Sløring]{
+        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/vores_implementation/billeder/sammensaetning/sloering}
+        \label{sammen_slor}}\\
+    \subfloat[Fremhævelse af kanter]{
+        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/vores_implementation/billeder/sammensaetning/fremhaevet}
+        \label{sammen_frem_kant}}\hspace{1em}
+    \subfloat[Udtrækning af regioner på snittet]{
+        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/vores_implementation/billeder/sammensaetning/combined_no_margin}
+        \label{sammen_floodfill}}\\
+    \subfloat[Udtrækning af regioner inden for margin]{
+        \includegraphics[angle=0,width=0.8\textwidth]{afsnit/vores_implementation/billeder/sammensaetning/combined_margin}
+        \label{sammen_floodfill_margen}}
+    \caption[]{Udtrækning af regioner i forhold til et snit}
+    \label{sammensaetning}
 \end{figure}
+
+\subsubsection{Vurdering}
+Vi har her præsenteret grundprincipperne i vores metode til udtrækning
+af regioner. Metoden er præsenteret med henblik på udtrækning omkring
+det gyldne snit, men ethvert andet snit i billedet kan bruges. Det skal
+bemærkes at den samme region godt kan trækkes ud af flere snit. Når
+regionerne relevant for et snit er trukket ud af billedet, kan vi
+vurderes efter den simple fremgangsmåde givet i afsnit
+\ref{section_naiv}.
+
+I kapitel \ref{chap_implementation} vil vi komme ind på de tekniske
+begrænsninger og problemer med denne fremgangsmåde, som vedrører den
+egentlige implementation af metoden.
 
 }
 

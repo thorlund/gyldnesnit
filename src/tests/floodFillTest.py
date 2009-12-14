@@ -13,6 +13,7 @@ import lib.goldenLibrary as lib
 import lib.edgeDetector as edgeDetector
 import lib.lineScanner as lineScanner
 import lib.featureDetector as featureDetector
+import lib.marginCalculator as marginCalculator
 
 # import the necessary things for OpenCV
 from opencv import cv
@@ -35,8 +36,8 @@ elif len(sys.argv) == 6:
 	x = int(sys.argv[4])
 	y = int(sys.argv[5])
 else:
-	lo = 9
-	up = 9
+	lo = 4
+	up = 4
 	x = 353
 	y = 148
 
@@ -50,9 +51,10 @@ if not image:
 threshold1 = 75;
 threshold2 = 2.5 * threshold1;
 out = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
-edges = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
-#blurImage = cv.cvCreateImage(cv.cvGetSize(original), 8, 3)
-edgeDetector.findEdges(image, edges, 75, 175)
+edges = cv.cvCreateImage(cv.cvGetSize(image), 8, 1)
+blurImage = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
+
+edgeDetector.findBWEdges(image, edges, 72, 2.5*72)
 
 #out = cv.cvCreateImage(cv.cvGetSize(image), 8, 1)
 
@@ -61,23 +63,37 @@ edgeDetector.findEdges(image, edges, 75, 175)
 print "Finding the golden means in the picture"
 
 lines = lib.findGoldenMeans(cv.cvGetSize(image))
+#lines = lib.findMeans(cv.cvGetSize(image), lib.PHI)
 
 print "Test plot and line scanner methods"
-#points = lineScanner.naiveBWLineScanner(edges, lines[0])
+points = lineScanner.naiveBWLineScanner(edges, lines[0])
 
-out = highgui.cvLoadImage (filename)
 #cv.cvSmooth(out, out, cv.CV_MEDIAN, 7, 7, 0)
-#cv.cvSmooth(out, out, cv.CV_BLUR, 7, 7, 0)
-cv.cvSmooth(out, out, cv.CV_GAUSSIAN, 7, 7, 0)
+cv.cvSmooth(image, blurImage, cv.CV_BLUR, 3, 3, 0)
+#cv.cvSmooth(out, out, cv.CV_GAUSSIAN, 7, 7, 0)
+#out = blurImage
+
+# Superimpose the edges onto the blured image
+cv.cvNot(edges, edges)
+cv.cvCopy(blurImage, out, edges)
+
+# We're done with the blurred image now
+#cv.cvReleaseImage(blurImage)
 
 #print points[:0]
-#featureDetector.floodFillLine(image, out, points[:0], lines[0], lo, up, {})
+cut = lines[0]
+margin = marginCalculator.getPixels(image, cut, 0.024)
+component_dictionary = featureDetector.ribbonFloodFill(image, edges, out, cut, margin, lo, up)
+#featureDetector.floodFillLine(image, out, points, cut, lo, up, {})
 #flags = cv.CV_FLOODFILL_FIXED_RANGE
 #flags = 4
 color = lib.getRandomColor()
 comp = cv.CvConnectedComp()
 #cv.cvFloodFill(out, cv.cvPoint(x,y), color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp ,flags)#, None);
 #lib.plot(out, cv.cvPoint(x,y), 3, lib.COL_RED)
+
+cv.cvLine(out, cut.p1, cut.p2, lib.COL_RED)
+lib.drawMargin(out, cut, margin)
 
 #startpoint = lines[0].getPoints()[0]
 #points.append(lines[0].getPoints()[1])
@@ -91,10 +107,10 @@ comp = cv.CvConnectedComp()
 winname = "floot"
 
 highgui.cvNamedWindow (winname, highgui.CV_WINDOW_AUTOSIZE)
-#highgui.cvSaveImage('out.png', edges)
+highgui.cvSaveImage('out.png', out)
 
 while True:
-	highgui.cvShowImage (winname, edges)
+	highgui.cvShowImage (winname, out)
 
 	c = highgui.cvWaitKey(0)
 	
