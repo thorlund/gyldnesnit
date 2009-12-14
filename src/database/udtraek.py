@@ -67,7 +67,7 @@ for picture in results:
 		featPerPicture[picture.numberOfRegions] = 1
 	else:
 		featPerPicture[picture.numberOfRegions] = featPerPicture[picture.numberOfRegions] +1
-
+print featPerPicture
 
 #top ten images with the most features in the golden ratio
 print "The top ten images with the most features in the golden ratio"
