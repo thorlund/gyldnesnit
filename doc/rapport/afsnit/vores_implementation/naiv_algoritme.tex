@@ -207,8 +207,16 @@ båndet, ikke vil blive karakterisseret som liggende i det gyldne snit.
 Regioner hvor et segment af denne faktisk ligger i båndet, som den
 øverste region i figur \ref{bbox_section}, hvor den vertikale del faktisk
 ligger i snittet, vil ikke blive udvalgt.  Det kræver en videre
-segmentering af de fundne regioner før at sådanne regioner vil blive
+segmentering af de fundne regioner, før en sådan region vil blive
 udvalgt.
+
+Hvis vi betragter arbitrære snit i billedet, skal man være opmærksom på,
+at en interessant region altid vil være positiv i fire snit; to i det
+vertikale plan og to i det horisontale plan. Derfor, hvis man ønsker at
+sammenligne positive regioner fra to arbitrære snit, skal man være
+omhyggelig med at deres margin ikke overlapper, da vi i dette tilfælde
+kan have duplikater af de positive regioner. Vi vil komme nærmere ind på
+denne problematik i det følgende afsnit.
 
 }
 
