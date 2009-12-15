@@ -1,0 +1,75 @@
+/home/gyldnesnit/gyldnesnit/src/database/catalog.csv
+Total number of regions found across all pictures
+2146488
+Total number of paintings
+17338
+The different ratios followed by the amount of features found i that ratio:
+{0.66803398874999997: 222026, 0.86803398875000004: 206905, 0.81803398875: 208085, 0.66666000000000003: None, 0.71803398875000002: 217438, 0.51803398874999995: 230146, 0.91803398874999997: 208346, 0.56803398875: 229655, 0.96803398875000002: 183841, 0.76803398874999995: 213577, 0.61803398875000004: 226469}
+How the four different cuts are used
+[56092, 57044, 59181, 54152]
+This tuple shows how many features are detected in the golden ratio and overall and the amount of pictures in/of a given timeline
+{'1301-1350\r\n': (727, 1857, 31360), '1801-1850\r\n': (479, 1027, 39640), '1551-1600\r\n': (521, 1551, 64360), '1201-1250\r\n': (16, 99, 240), '1851-1900\r\n': (261, 834, 7200), '1451-1500\r\n': (841, 3082, 98320), '1351-1400\r\n': (288, 790, 8680), '1651-1700\r\n': (662, 1995, 76680), '1251-1300\r\n': (291, 587, 2760), '1701-1750\r\n': (498, 1164, 46640), '1151-1200\r\n': (222, 643, 3600), '1751-1800\r\n': (496, 1267, 30400), '1101-1150\r\n': (121, 312, 880), '1401-1450\r\n': (696, 2318, 43120), '1601-1650\r\n': (544, 1634, 126520), '1501-1550\r\n': (862, 3184, 113120)}
+The features per picture dict
+{0: 270920, 1: 86000, 2: 66982, 3: 53570, 4: 42999, 5: 34477, 6: 27473, 7: 21854, 8: 17611, 9: 14106, 10: 11119, 11: 8943, 12: 7211, 13: 5670, 14: 4560, 15: 3717, 16: 3016, 17: 2308, 18: 1992, 19: 1537, 20: 1270, 21: 1016, 22: 824, 23: 662, 24: 564, 25: 471, 26: 400, 27: 311, 28: 279, 29: 235, 30: 202, 31: 167, 32: 138, 33: 129, 34: 108, 35: 95, 36: 73, 37: 58, 38: 47, 39: 44, 40: 51, 41: 41, 42: 29, 43: 33, 44: 17, 45: 14, 46: 15, 47: 10, 48: 13, 49: 7, 50: 16, 51: 11, 52: 10, 53: 6, 54: 4, 55: 6, 56: 6, 57: 4, 58: 1, 59: 3, 60: 5, 61: 6, 62: 3, 63: 3, 64: 3, 65: 3, 66: 2, 67: 1, 68: 2, 69: 1, 71: 1, 74: 5, 75: 2, 77: 1, 79: 1, 84: 2, 90: 1, 94: 1, 96: 1, 99: 1, 100: 1, 108: 1, 111: 1, 112: 1, 116: 1, 123: 1, 126: 1, 128: 1, 131: 1, 143: 1, 144: 1, 146: 1, 171: 1, 204: 1, 209: 1, 211: 1, 221: 1, 228: 1, 251: 1, 300: 1}
+The top ten images with the most features in the golden ratio
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/g/guardi/francesc/2/guard208.jpg
+with:
+43
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/g/ghirland/domenico/5sassett/1donor.jpg
+with:
+46
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/f/franciab/betrotha.jpg
+with:
+48
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/h/houasse/son/escorial.jpg
+with:
+48
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/b/bacchiac/joseph2d.jpg
+with:
+50
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/f/francesc/4sculptu/3allegor.jpg
+with:
+50
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/v/vermeer/02c/11drink4.jpg
+with:
+51
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/a/andrea/castagno/1_1440s/08lasts3.jpg
+with:
+55
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/c/cossa/schifano/1march/1march_.jpg
+with:
+68
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/g/giotto/assisi/upper/legend/legend.jpg
+with:
+128
+The top ten images with the most features in any ratio
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/b/bouts/dirk_e/lastsupp/1lastsu1.jpg
+with:
+144
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/t/tintoret/3b/3ground/00view.jpg
+with:
+146
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/r/rosso/2/61galeri.jpg
+with:
+171
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/m/michelan/3sistina/4wall.jpg
+with:
+204
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/u/uccello/3florenc/3clock.jpg
+with:
+209
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/a/altdorfe/2/00diptic.jpg
+with:
+211
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/s/sebastia/organ1.jpg
+with:
+221
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/d/duccio/buoninse/24bologn.jpg
+with:
+228
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/m/mielich/h_altar.jpg
+with:
+251
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/f/francesc/2paintin/8view.jpg
+with:
+300
