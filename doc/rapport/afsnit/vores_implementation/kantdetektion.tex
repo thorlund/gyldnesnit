@@ -107,14 +107,14 @@ må afvige.
 \end{equation}
 
 Definitionen på $\mathbf{E}$ tager ikke højde for støj i billedet,
-hvilket let kan forvirre kantdetektionen. Sobels algoritme er en
-etableret metode til at finde kanter i billeder som benytter to
-foldningsmatricer til at finde kanter vertikalt og horisontalt. Den
-lider dog under samme svaghed for støj som den simple metode[ref]. Vi
-vil benytte os af en metode udviklet af John F. Canny som kombinerer
-metoder fra bla. gaussisk sløring og Sobel[ref]. Vi vil ikke komme
-nærmere ind på den indre funktionalitet i Canny, men vi vil i det
-følgende vise eksempler på resultater fra metoden.
+hvilket let kan forvirre kantdetektionen. Sobel kantdetektion er en
+etableret metode til at finde kanter i billeder. Den benytter to
+foldningsmatricer til at finde kanter vertikalt og horisontalt, men er
+ligesom den simple metode følsom overfor støj[ref]. Vi benytter os af en
+metode udviklet af John F. Canny, da den kombinerer teknikker fra bla.
+gaussisk sløring og Sobel\cite{SIOlsen}, og således ikke ligeså følsom overfor
+støj. Vi vil ikke komme nærmere ind på den indre funktionalitet i Canny,
+men vi vil i det følgende vise eksempler på resultater fra metoden.
 
 \subsubsection*{Eksempler}
 Vi viser nu nogle eksempler på hvordan Canny kantdetektion virker. Vi
