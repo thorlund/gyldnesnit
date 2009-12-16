@@ -16,7 +16,7 @@ allerede nævnt vil vi finde de steder i billedet hvor vi har stor
 kontrast. Det er derfor almindeligt at konvertere billedet til sort/hvid
 når man vil finde kanterne. Metoden forklares for én dimension, da det
 let kan overføres til to dimensioner. Vi betragter derfor en vektor
-$\mathbf{P}^t = (p_1, p_2, \cdots, p_n)$ som antager værdier i mængden
+$\mathbf{P} = (p_1, p_2, \cdots, p_n)$ som antager værdier i mængden
 $\{0,1\}$.
 
 \begin{figure}[!h]
@@ -26,22 +26,22 @@ $\{0,1\}$.
         \hline
         1 & 1 & 1 & 1 & 1 & \cellcolor{black}\textcolor{white}{0} & \cellcolor{black}\textcolor{white}{0} & \cellcolor{black}\textcolor{white}{0} & \cellcolor{black}\textcolor{white}{0} & 1\\\hline
     \end{tabular}
-    \caption[]{Vektoren $\mathbf{P}^t$ med tilfældige værdier i mængden
+    \caption[]{Vektoren $\mathbf{P}$ med tilfældige værdier i mængden
     $\{0,1\}$.}
     \label{vektor_p_edge}
 \end{figure}
 Vektoren $\mathbf{P}$ kan betragtes som et liniestykke. Vi ønsker nu at
-konstruere en ny vektor $\mathbf{E}^t = (e_1, e_2, \cdots, e_n)$, hvor
+konstruere en ny vektor $\mathbf{E} = (e_1, e_2, \cdots, e_n)$, hvor
 $e_i \in \{0,1\}$ ud fra vektoren $\mathbf{P}$. Vi definerer
 $\mathbf{E}$ som
 \begin{equation}
     \begin{split}
-        \mathbf{E}^t &= (e_1, e_2, \cdots, e_n) \mathrm{~,~hvor~} \\
+        \mathbf{E} &= (e_1, e_2, \cdots, e_n) \mathrm{~,~hvor~} \\
         &e_i = \left\{
         \begin{array}{rl}
             0 & \text{hvis~} |p_i - p_{i - 1}| = 1\\
             1 & \text{hvis~} |p_i - p_{i - 1}| = 0
-        \end{array} \right. \mathrm{,~for~} p_i \subseteq \mathbf{P}
+        \end{array} \right. \mathrm{,~for~} p_i \mathrm{~i~} \mathbf{P}
         \mathrm{~og~} p_0 = p_1
     \end{split}
     \label{vektor_e_bin}
@@ -95,12 +95,12 @@ $t$ angiver den tærskelværdi, for hvor meget værdierne punkterne imellem
 må afvige.
 \begin{equation}
     \begin{split}
-        \mathbf{E}^t &= (e_1, e_2, \cdots, e_n) \mathrm{~,~hvor~} \\
+        \mathbf{E} &= (e_1, e_2, \cdots, e_n) \mathrm{~,~hvor~} \\
         &e_i = \left\{
         \begin{array}{rl}
             0 & \text{hvis~} |p_i - p_{i - 1}| \geq t\\
             1 & \text{hvis~} |p_i - p_{i - 1}| < t
-        \end{array} \right. \mathrm{,~for~} p_i \subseteq \mathbf{P}
+        \end{array} \right. \mathrm{,~for~} p_i \mathrm{~i~} \mathbf{P}
         \mathrm{~og~} p_0 = p_1
     \end{split}
     \label{vektor_e_generel}
@@ -110,7 +110,7 @@ Definitionen på $\mathbf{E}$ tager ikke højde for støj i billedet,
 hvilket let kan forvirre kantdetektionen. Sobel kantdetektion er en
 etableret metode til at finde kanter i billeder. Den benytter to
 foldningsmatricer til at finde kanter vertikalt og horisontalt, men er
-ligesom den simple metode følsom overfor støj[ref]. Vi benytter os af en
+ligesom den simple metode følsom overfor støj. Vi benytter os af en
 metode udviklet af John F. Canny, da den kombinerer teknikker fra bla.
 gaussisk sløring og Sobel\cite{SIOlsen}, og således ikke ligeså følsom overfor
 støj. Vi vil ikke komme nærmere ind på den indre funktionalitet i Canny,
@@ -128,11 +128,11 @@ man ønsker. Vi vil ved hjælp af de følgende eksempler komme frem til
 hvad tærskelværdierne betyder for resultatet. Eksemplerne er samlet i
 figur \ref{canny_kanter}.
 
-\begin{figure}[!h]
+\begin{figure}[!p]
     \centering
     \subfloat[$(20, 20)$]{
         \label{canny_20_20}
-        \includegraphics[width=0.8\textwidth]{afsnit/vores_implementation/billeder/kantdetektion/canny_20_20}}\\
+        \includegraphics[width=0.6\textwidth]{afsnit/vores_implementation/billeder/kantdetektion/canny_20_20}}\\
     \subfloat[$(20, 100)$]{
         \label{canny_20_100}
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/vores_implementation/billeder/kantdetektion/canny_20_100}}\hspace{1em}
@@ -141,24 +141,24 @@ figur \ref{canny_kanter}.
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/vores_implementation/billeder/kantdetektion/canny_60_150}}\\
     \subfloat[$(70, 175)$]{
         \label{canny_70_175}
-        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/vores_implementation/billeder/kantdetektion/canny_70_175}}\hspace{1em}
+        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/vores_implementation/billeder/kantdetektion/canny_70_175}}\\
     \subfloat[$(100, 295)$]{
         \label{canny_100_290}
-        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/vores_implementation/billeder/kantdetektion/canny_100_290}}
+        \includegraphics[angle=0,width=0.6\textwidth]{afsnit/vores_implementation/billeder/kantdetektion/canny_100_290}}
     \caption[]{Forskellige resultater med Canny kantdetektion.
     Tærskelværdierne er noteret under billederne.}
     \label{canny_kanter}
 \end{figure}
 
 Når vi sammenligner figur \ref{canny_20_20} og \ref{canny_20_100} ses
-det at anden parameter lader til at ignorere kanter som ligger
-``inden for'' andre kanter. Dette ses på stort set alle personernes
-kroppe i billedet. Når denne observation er gjort, prøver vi at skrue op
-for tærskelværdierne. Det ses at ved højere tærskelværdier bliver
-billedet med kanter gradvist mindre detaljeret. I vores testbillede er
-kanterne på de fremtrædende objekter stadig at se, selv ved store
-tærskelværdier som vist i \ref{canny_100_290}. Vi vil i kapitel \ref{chap_afproevning} se på hvilke
-tærskelværdier vi bruger i praksis.
+det at anden parameter lader til at ignorere kanter som ligger ``inden
+for'' andre kanter. Dette ses på stort set alle personernes kroppe i
+billedet. Når denne observation er gjort, prøver vi at skrue op for
+tærskelværdierne. Det ses at ved højere tærskelværdier bliver billedet
+med kanter gradvist mindre detaljeret. I vores testbillede er kanterne
+på de fremtrædende objekter stadig at se, selv ved store tærskelværdier
+som vist i \ref{canny_100_290}. Vi vil i kapitel \ref{chap_afproevning}
+se på hvilke tærskelværdier vi bruger i praksis.
 }
 
 % vim: set tw=72 spell spelllang=da:

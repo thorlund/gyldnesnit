@@ -1,12 +1,11 @@
 {
-
-Vi vil nu, uden at gå alt for meget i detajler, give en intuitiv
-forklaring på hvordan ovenstående metoder bruges til at trække regioner
-ud af et billede.  Regioner trækkes ud i forhold til et snit i billedet,
-således at vi kun finder regioner inden for margin relevant for dette
-snit. Vi går gennem fire skridt, når vi trækker regioner ud, hvoraf de
-tre første kan betragtes som forberedelse af billedet inden den endelige
-segmentering segmentering ved floodfill:
+Vi vil nu give en intuitiv forklaring på hvordan ovenstående metoder
+sammensættes til at trække regioner ud af et billede.  Regioner trækkes
+ud i forhold til et snit i billedet, således at vi kun finder regioner
+inden for margin relevant for dette snit. Vi går gennem fire skridt, når
+vi trækker regioner ud, hvoraf de tre første kan betragtes som
+forberedelse af billedet inden den endelige segmentering segmentering
+ved floodfill:
 
 \begin{enumerate}
     \item \textbf{Kantdetektion}\\
@@ -18,7 +17,8 @@ skridt. Vi bruger parametrene $(72, 180)$ og resultatet kan ses i figur
 Billedet sløres således at vi kan male større regioner når vi senere
 bruger floodfill. Vi bruger simpel sløring med en $3\times3$
 foldningsmatrix. Det slørede billede vises ses i figur
-\ref{sammen_slor}.
+\ref{sammen_slor}, men når billedet er skaleret ned ses sløringen ikke
+så godt.
 
 \item \textbf{Fremhævelse af kanter}\\
 Efter billedet er blevet sløret har vi ikke så gode kanter længere. Vi

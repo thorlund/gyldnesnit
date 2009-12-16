@@ -3,7 +3,8 @@
 over den opgave at detektere \emph{features} i et givet billede. En
 \emph{feature} oversættes bedst som \emph{et træk} eller et
 \emph{kendetegn}. Nøjagtig \emph{hvad} et træk \emph{er}, er ikke klart
-defineret, men skal tilpasses den enkelte opgave. En andet område
+defineret, men skal tilpasses den enkelte
+opgave\cite{WikiFeatureDetection}\cite{SIOlsen}. En andet område
 indenfor detektion af træk kaldes for \emph{blob detection}, hvor en
 \emph{blob} kan kort beskrives som en ensfarvet region i billedet. Vi
 vil derfor fremover referere til en blob som en region. Man ønsker nu at
@@ -12,19 +13,20 @@ følgende komme frem til præcis hvad vi forstår ved en region. Senere i
 kapitlet, i afsnit \ref{section_naiv}, vil vi præsentere en simpel
 fremgangsmåde som fortæller os hvornår en region kan betegnes som
 interessant. Vi vil dog først se på hvordan digitale billeder
-repræsenteres.
+repræsenteres. For en mere dybdegående indledning til billedbehandling
+henvises til \cite{SIOlsen}.
 }
 
 \subsection{Repræsentation af digitale billeder}
-Et digitalt billede er sammensat af \textbf{pixels}. En pixel er et
-punkt i et koordinatsystem hvortil der er knyttet en værdi. Et
-gråtonebillede er givet ved afbildningen
+Et digitalt billede er sammensat af pixels. En pixel er et punkt i et
+koordinatsystem hvortil der er knyttet en værdi. Et gråtonebillede er
+givet ved afbildningen
 \begin{equation}
     \mathbb{Z}^{+}\times{} \mathbb{Z}^{+} \rightarrow \mathbb{Z}^{+}
 \end{equation}
-fra to positive heltal over i et positivt heltal.
-Funktionen $G(x, y) \in \mathbb{Z}^{+}$ angiver mængden af hvid farve i
-en pixel med koordinaterne $(x, y)$.
+fra to positive heltal over i et positivt heltal.  Funktionen $G(x, y)
+\in \mathbb{Z}^{+}$ angiver mængden af hvid farve i en pixel med
+koordinaterne $(x, y)$.
 
 Som et simpelt eksempel siger vi nu, at en pixel i et billede kan antage
 to værdier: $0$ og $1$. Vi har altså afbildningen $\mathbb{Z}^{+}\times{}
