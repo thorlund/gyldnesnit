@@ -32,13 +32,19 @@ conn = m.Result._connection
 nameselect = conn.sqlrepr(b.Select(m.Result.q.cutRatio).distinct())
 diffratios = conn.queryAll(nameselect)
 ratios=dict()
-for ratio in diffratios:
-	ratio = ratio[0]
-	ratios[ratio]=results.filter(m.Result.q.cutRatio==ratio).sum(m.Result.q.numberOfRegions)
+cuts = []
+for cut in range(4):
+	for ratio in diffratios:
+		ratio = ratio[0]
+		ratios[ratio]=results.filter(b.AND(m.Result.q.cutRatio==ratio , m.Result.q.cutNo==cut)).sum(m.Result.q.numberOfRegions)
+	cuts.append(ratios)
+	ratios = dict()
+
 
 
 print "The different ratios followed by the amount of features found i that ratio:"
-print ratios
+print cuts
+
 goldenratiocuts=[0,0,0,0]
 for cut in range(4):
 	goldenratiocuts[cut]=goldenresults.filter(m.Result.q.cutNo==cut).sum(m.Result.q.numberOfRegions)
