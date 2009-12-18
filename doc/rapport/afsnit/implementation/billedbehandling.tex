@@ -22,15 +22,92 @@ se da \cite{SIOlsen}. Vi benytter os af 8 bit størrelsen, da dette er
 industristandarden\footnote{Reference}.
 
 \subsection{Vigtige datastrukturer i \emph{OpenCV}}
+Vi gennemgår nogle vigtige datastrukturer som vi bruger fra
+\emph{OpenCV}.  Alle datastrukturer og metoder fra \emph{OpenCV} er
+prefikset med ``cv'' hvilket gør det let at se hvor koden kommer fra.
+Der præsenteres i det følgende en notation for datastrukturer.
+Notationen er underlagt strukturen vist i
+\ref{types_class}.
+\begin{multline}
+    \textbf{class~} [\textit{name}] = \{ \\
+    \shoveleft{\qquad[\textit{type}] : [\textit{varName}]} \\
+    \shoveleft{\}}\shoveright{}
+    \label{types_class}
+\end{multline}
+I \ref{example_class} ses et eksempel på en struktur kaldet
+\textbf{ExampleClass}.
+\begin{multline}
+    \textbf{class~} \textrm{ExampleClass} = \{ \\
+    \shoveleft{\qquad\textbf{int} : \textit{intValue}} \\
+    \shoveleft{\qquad\textbf{string} : \textit{stringValue}} \\
+    \shoveleft{\qquad\textbf{int[2]} : \textit{arrayValues}} \\
+    \shoveleft{\}}\shoveright{}
+    \label{example_class}
+\end{multline}
+Når en type har et suffiks på formen $\textit{type}[i]$, hvor $i$ er et
+heltal, betyder det at dette er en liste af længde $i$ af typen
+\textit{type}.  Bemærk, at en strukturs navn bliver skrevet med fed
+skrift i brødteksten, når der refereres til en sådan. Ligeledes vil en
+strukturs navn blive skrevet med fed i pseudokoden hvis der refereres
+til den. Vi kan definere en ny struktur \textbf{NewClass} som viser
+dette i
+\ref{new_class} herunder.
+\begin{multline}
+    \textbf{class~} \textrm{NewClass} = \{ \\
+    \shoveleft{\qquad\textbf{ExampleClass} : \textit{exampleInstance}} \\
+    \shoveleft{\qquad\textbf{string} : \textit{stringValue}} \\
+    \shoveleft{\}}\shoveright{}
+    \label{new_class}
+\end{multline}
+Vi vil nu beskrive de vigtigste strukturer vi bruger med ovenstående
+notation.
+
 \subsubsection{cvScalar}
-Bruges til RGB-farver.
+Strukturen \textbf{cvScalar} fungerer egentlig blot som en almindelig
+liste med værdier. En instans af \textbf{cvScalar} kan dog kun indeholde
+1, 2, 3 eller 4 værdier. Strukturen vist i \ref{cvScalar_class} har fire
+værdier.
+\begin{multline}
+    \textbf{class~} \textrm{cvScalar} = \{ \\
+    \shoveleft{\qquad\textbf{double[4]} : \textit{value}} \\
+    \shoveleft{\}}\shoveright{}
+    \label{cvScalar_class}
+\end{multline}
+I \emph{OpenCV}, og vores implementation, bruges strukturen blandt andet
+til RGB-farver og tærskelværdier.
 
 \subsubsection{cvPoint}
-Beskriver punkter i det to-dimensionelle plan.
+Strukturen \textbf{cvPoint} har til formål at beskrive punkter i det
+to-dimensionelle plan. Den er givet i \ref{cvPoint_class}.
+\begin{multline}
+    \textbf{class~} \textrm{cvPoint} = \{ \\
+    \shoveleft{\qquad\textbf{int} : \textit{x}} \\
+    \shoveleft{\qquad\textbf{int} : \textit{y}} \\
+    \shoveleft{\}}\shoveright{}
+    \label{cvPoint_class}
+\end{multline}
+Strukturen er simpel, men er en meget central del af implementationen.
+Den bruges blandt andet til at angive snit i billedet og fortælle
+floodfill hvor vi skal male og skifte farve.
 
-\subsubsection{cvRectangle}
-Struktur som har et par $x,y$ og en bredde og højde. Koordinaterne
-angiver rektanglets øverste venstre hjørne.
+\subsubsection{cvRect}
+Denne struktur beskriver et rektangel ved at angive dets øverste venstre
+hjørne og dimensioner. Strukturen vises i \ref{cvRect_class}.
+\begin{multline}
+    \textbf{class~} \textrm{cvRect} = \{ \\
+    \shoveleft{\qquad\textbf{int} : \textit{x}} \\
+    \shoveleft{\qquad\textbf{int} : \textit{y}} \\
+    \shoveleft{\qquad\textbf{int} : \textit{height}} \\
+    \shoveleft{\qquad\textbf{int} : \textit{width}} \\
+    \shoveleft{\}}\shoveright{}
+    \label{cvRect_class}
+\end{multline}
+I vores implementation af den naive fremgangsmåde, som nævnt i afsnit
+\ref{section_naiv}, er det denne struktur som angiver en regions
+afgrænsende rektangel. Vi vil i afsnit \ref{section_vurdering_regioner}
+se hvordan strukturen \textbf{cvRect} bruges til at vurdere om regioner
+ligger i det gyldne snit. Først skal vi dog lige se på metoderne der
+bruges til at trække regionerne ud af billedet.
 
 \subsection{Centrale metoder}
 \subsubsection{cvCanny}

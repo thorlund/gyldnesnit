@@ -1,6 +1,9 @@
 {
 {\sffamily Vi giver en kort præsentation af programmets overordnede
 struktur. Mappestrukturen er vist i figur \ref{program_struktur}.
+Indholdet af mappen \texttt{tests} er blot afprøvninger fra forskellige
+stadier i udviklingen af programmet og vi vil derfor ikke komme nærmere
+ind på dette.
 
 \begin{figure}[!h]
     \dirtree{%
@@ -20,16 +23,11 @@ struktur. Mappestrukturen er vist i figur \ref{program_struktur}.
     \label{program_struktur}
 \end{figure}
 
-Mappen \texttt{database/} indeholder kode til initialisering af
-databasen og udtræk i sammenhæng med resultater. I mappen
-\texttt{experiments/} gemmes kørsler tilknyttet de videnskabelige
-eksperimenter. \texttt{lib/} indeholder alle metoder vedrørende
-billedbehandling, dvs. metoder til udtrækning og bedømmelse af regioner.
-I \texttt{model/} er databaseskemaet og hjælpefunktioner til at gemme
-specielle datastrukturer defineret. Mapperne \texttt{painting/} og
-\texttt{settings/} tilbyder datastrukturer til henholdsvis malerier og
-indstillinger. Vi vil i det følgende kigge lidt nærmere på de enkelte
-dele af programmet.
+I programmets rod ligger billededatabasen i filen
+\texttt{pictureresource.db}. Filen \texttt{start.py} starter en analyse
+på denne database. Den følgende korte introduktion til de enkelte dele
+af programmet går mapperne igennem alfabetisk.
+
 }
 
 \subsection{database/}
@@ -40,14 +38,28 @@ dele af programmet.
 .2 parser.py .
 .2 udtraek.py .
 }
-(wga.hu csv-fil, parsing af csv-fil, udtraek)
+%(wga.hu csv-fil, parsing af csv-fil, udtraek)
+\vspace{1.2em}
+Mappen \texttt{database/} vedrører population af databasen ud fra en
+csv-fil fra vores korpus. Der er udviklet en parser specifikt til denne
+csv-fil. I denne mappe ligger også koden tilknyttet udtræk fra databasen
+i forbindelse med de videnskabelige resultater i kapitel
+\ref{chap_resultater}.
 
 \subsection{experiments/}
 \dirtree{%
 .1 experiments/ .
 .2 \dots .
 }
-(dikumentation af eksperimenter)
+%(dikumentation af eksperimenter)
+\vspace{1.2em}
+
+I mappen \texttt{experiments/} gemmes kørsler tilknyttet de
+videnskabelige eksperimenter, således at de let kan hentes ind
+\texttt{start.py} i programmets rod og køres på databasen. Det er
+nyttigt at have eksperimenterne liggende separat på denne måde, da man
+kan oprette forskellige eksperimenter som kører analysen med specielle
+parametre eller udtrækningsmetoder.
 
 \subsection{lib/}
 \dirtree{%
@@ -68,29 +80,55 @@ dele af programmet.
 .2 statestik.py .
 .2 transformations.py .
 }
-(goldenLibrary - hjælpefunktioner, paintingAnalyser - sammensætter de
-øvrige metoder, naiveMethod, expandedMethod, regionSelector)
+%(goldenLibrary - hjælpefunktioner, paintingAnalyser - sammensætter de
+%øvrige metoder, naiveMethod, expandedMethod, regionSelector)
+\vspace{1.2em}
+
+\texttt{lib/} indeholder alle metoder vedrørende billedbehandling, dvs.
+metoder til udtrækning og bedømmelse af regioner. Filen
+\texttt{paintingAnalyser.py} er den centrale komponent i denne
+sammenhæng, da den binder hele udtrækningen og bedømmelsen af regioner
+sammen. Den distribuerer arbejdet, alt efter hvilken udtræknings- og
+bedømmelsesmetode der bruges.  I \texttt{goldenLibrary.py} er der
+defineret en række hjælpemetoder som bruges i billedbehandlingen.
 
 \subsection{model/}
 \dirtree{%
 .1 model/ .
 .2 \_\_init\_\_.py .
 }
-(database in/ud)
+%(database in/ud)
+\vspace{1.2em}
+
+I \texttt{model/} er selve databaseskemaet defineret. Her er også
+defineret hjælpefunktioner til at gemme specielle datastrukturer og
+gøre ofte brugte forespørgsler til databasen lettere.
 
 \subsection{painting/}
 \dirtree{%
 .1 painting/ .
 .2 \_\_init\_\_.py .
 }
-(container)
+%(container)
+\vspace{1.2em}
+
+Dette er blot en datastruktur til malerier i programmet således at
+databasen og billedbehandlingen har et fælles format at arbejde efter.
 
 \subsection{settings/}
 \dirtree{%
 .1 settings/ .
 .2 \_\_init\_\_.py .
 }
-(globale indstillinger, indstillinger til kørsel, kan gemmes i database)
+%(globale indstillinger, indstillinger til kørsel, kan gemmes i database)
+\vspace{1.2em}
+
+I \texttt{setting} stilles en klasse til rådighed som indeholder de
+forskellige parametre til billedbehandlingen. Dette drejer sig om
+tærskelværdier, marginstørrelse og hvilke snitratioer der skal
+undersøges. Her er også defineret globale indstillinger til programmet
+med specielt henblik på hvor databasen og maleriers metadata er placeret
+i filsystemet.
 
 }
 

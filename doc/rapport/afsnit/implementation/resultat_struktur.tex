@@ -1,0 +1,49 @@
+{
+{\sffamily Hvordan ser resultater ud.
+}
+
+Vi definerer en ny struktur inspireret fra Pythons \emph{dictionary},
+som vi vil forkorte \emph{dict}. I praksis er det en liste som man slår
+op i vedbrug af en nøgle. Nøglen kan være hvilken som helst type, men er
+gerne en streng eller et heltal. Til hver indgang i listen er der
+tilknyttet noget data som også kan være af en vilkårlig type. Man kan
+derved have \emph{dicts} inde i en \emph{dict}. En \emph{dict} defineres
+som vist i \ref{def_dict}.
+\begin{eqnarray}
+    \langle[\textit{dictName}]\rangle = \{ [\textit{key}] : [\textit{data}] \}
+    \label{def_dict}
+\end{eqnarray}
+Som et simpelt eksempel kan vi konstruere en \emph{dict}
+$\angles{LuckyNumbers}$ som indeholder personers lykketal:
+% TeX-Gods, please forgive me :(
+\begin{multline}
+    \angles{LuckyNumbers} = \{ \qquad \textrm{Tom Cruise} : 4 , \\
+    \textrm{Arthur Dent} : 42 \qquad\qquad\\
+    \shoveleft{\}}\shoveright{}
+    \label{lucky_dict}
+\end{multline}
+% In honor of the danish Tom Cruise
+
+\begin{multline}
+    \textbf{class~} \textrm{ConnectedComponent} = \{ \\
+    \shoveleft{\qquad\textbf{cvRect} : \textit{rect}} \\
+    \shoveleft{\qquad\textbf{int} : \textit{area}} \\
+    \shoveleft{\qquad\textbf{cvSeq} : \textit{seq}} \\
+    \shoveleft{\}}\shoveright{}
+\end{multline}
+
+\begin{multline}
+    \angles{CutRegions} = \{ \textit{~RegionId} : \\
+    (\textbf{cvScalar~}\textit{color},
+    \textbf{ConnectedComponent~}\textit{component}) \}\quad
+\end{multline}
+
+\begin{eqnarray}
+    \angles{RatioRegions} = \{ \textit{~CutNo} : \angles{CutRegions} \}
+\end{eqnarray}
+
+\begin{eqnarray}
+    \angles{ImageRegions} = \{ \textit{~CutRatio} : \angles{RatioRegions} \}
+\end{eqnarray}
+
+% vim: set tw=72 spell spelllang=da:
