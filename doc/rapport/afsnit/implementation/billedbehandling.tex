@@ -17,9 +17,9 @@ $\{0, 1, 2, \cdots, 254, 255\}$. Sammensætningen af de tre værdier, som
 beskrives som kanaler eller farvebånd, kaldes for en RGB-farve, hvor
 tallene repræsenteret ved $(R,G,B)$ henholdsvis angiver mængden af rød,
 grøn og blå farve i en pixel. Et sådan billede kaldes for et
-RGB-billede. For uddybende information omkring billeders repræsentation,
-se da \cite{SIOlsen}. Vi benytter os af 8 bit størrelsen, da dette er
-industristandarden\footnote{Reference}.
+RGB-billede.  Vi benytter os af 8 bit størrelsen, da dette er
+industristandarden\footnote{Reference}. For en uddybende forklaring om
+billeders repræsentation, refereres igen til \cite{SIOlsen}.
 
 \subsection{Vigtige datastrukturer i \emph{OpenCV}}
 Vi gennemgår nogle vigtige datastrukturer som vi bruger fra
@@ -27,14 +27,14 @@ Vi gennemgår nogle vigtige datastrukturer som vi bruger fra
 prefikset med ``cv'' hvilket gør det let at se hvor koden kommer fra.
 Der præsenteres i det følgende en notation for datastrukturer.
 Notationen er underlagt strukturen vist i
-\ref{types_class}.
+(\ref{types_class}).
 \begin{multline}
     \textbf{class~} [\textit{name}] = \{ \\
     \shoveleft{\qquad[\textit{type}] : [\textit{varName}]} \\
     \shoveleft{\}}\shoveright{}
     \label{types_class}
 \end{multline}
-I \ref{example_class} ses et eksempel på en struktur kaldet
+I (\ref{example_class}) ses et eksempel på en struktur kaldet
 \textbf{ExampleClass}.
 \begin{multline}
     \textbf{class~} \textrm{ExampleClass} = \{ \\
@@ -50,8 +50,7 @@ heltal, betyder det at dette er en liste af længde $i$ af typen
 skrift i brødteksten, når der refereres til en sådan. Ligeledes vil en
 strukturs navn blive skrevet med fed i pseudokoden hvis der refereres
 til den. Vi kan definere en ny struktur \textbf{NewClass} som viser
-dette i
-\ref{new_class} herunder.
+dette i (\ref{new_class}) herunder.
 \begin{multline}
     \textbf{class~} \textrm{NewClass} = \{ \\
     \shoveleft{\qquad\textbf{ExampleClass} : \textit{exampleInstance}} \\
@@ -65,7 +64,7 @@ notation.
 \subsubsection{cvScalar}
 Strukturen \textbf{cvScalar} fungerer egentlig blot som en almindelig
 liste med værdier. En instans af \textbf{cvScalar} kan dog kun indeholde
-1, 2, 3 eller 4 værdier. Strukturen vist i \ref{cvScalar_class} har fire
+1, 2, 3 eller 4 værdier. Strukturen vist i (\ref{cvScalar_class}) har fire
 værdier.
 \begin{multline}
     \textbf{class~} \textrm{cvScalar} = \{ \\
@@ -73,12 +72,12 @@ værdier.
     \shoveleft{\}}\shoveright{}
     \label{cvScalar_class}
 \end{multline}
-I \emph{OpenCV}, og vores implementation, bruges strukturen blandt andet
-til RGB-farver og tærskelværdier.
+I \emph{OpenCV}, og vores implementation i øvrigt, bruges strukturen
+blandt andet til RGB-farver og tærskelværdier.
 
 \subsubsection{cvPoint}
 Strukturen \textbf{cvPoint} har til formål at beskrive punkter i det
-to-dimensionelle plan. Den er givet i \ref{cvPoint_class}.
+to-dimensionelle plan. Den er givet i (\ref{cvPoint_class}).
 \begin{multline}
     \textbf{class~} \textrm{cvPoint} = \{ \\
     \shoveleft{\qquad\textbf{int} : \textit{x}} \\
@@ -92,7 +91,7 @@ floodfill hvor vi skal male og skifte farve.
 
 \subsubsection{cvRect}
 Denne struktur beskriver et rektangel ved at angive dets øverste venstre
-hjørne og dimensioner. Strukturen vises i \ref{cvRect_class}.
+hjørne og dimensioner. Strukturen vises i (\ref{cvRect_class}).
 \begin{multline}
     \textbf{class~} \textrm{cvRect} = \{ \\
     \shoveleft{\qquad\textbf{int} : \textit{x}} \\
@@ -111,9 +110,29 @@ bruges til at trække regionerne ud af billedet.
 
 \subsection{Centrale metoder}
 \subsubsection{cvCanny}
+Konverter til sort/hvid, kør cvCanny. Det kantdetekterede billede
+returneres i et andet billede.
+
 \subsubsection{cvSmooth}
+Rimelig ligetil, placerer resultat i nyt billede. Overvej om denne
+egentlig skal nævnes.
+
 \subsubsection{cvFloodfill}
+cvFloodfill returnerer en \textbf{cvConnectedComponent} med strukturen
+vist i (\ref{cvConnectedComponent_class}).
+\begin{multline}
+    \textbf{class~} \textrm{cvConnectedComponent} = \{ \\
+    \shoveleft{\qquad\textbf{cvRect} : \textit{rect}} \\
+    \shoveleft{\qquad\textbf{int} : \textit{area}} \\
+    \shoveleft{\qquad\textbf{cvSeq} : \textit{seq}} \\
+    \shoveleft{\}}\shoveright{}
+    \label{cvConnectedComponent_class}
+\end{multline}
+
 \subsubsection{RibbonFloodfill}
+Kører cvFloodfill flere gange langs et snit i billedet. I afsnit
+\ref{section_resultat_struktur} vil vi se på hvordan resultatet fra
+denne metode er struktureret.
 
 }
 
