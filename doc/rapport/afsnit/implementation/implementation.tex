@@ -1,40 +1,39 @@
+%% Bemærk:
+%%          Programmeringssprog skrives med stort begyndelsesbogstav (første gang fed, (hvis gennemgående))
+%%          Pakker skrives med kursiv (\emph{})
 {
-{\sffamily Dette kapitel er indtil videre en ren losseplads. Bør
-omhandle hvordan vi har implementeret tingene fra kapitel 2.
+{\sffamily Dette kapitel har til formål at gennemgå hvordan principperne
+fra kapitel \ref{chap_indledning} og metoderne fra kapitel
+\ref{chap_detektion} er blevet implementeret, samt hvilke problemer der
+kan opstå i denne forbindelse. Vi vil også komme ind på hvordan
+resultater, som dem vist i kapitel \ref{chap_afproevning}, repræsenteres
+og gemmes, og hvordan vi kører analysen på malerierne i vores database.
+Vi forklarer programmet ``fra bunden go op'', dvs. vi bevæger os fra
+lille kompleksitet, hvor der lægges ud med de helt grundlæggende
+strukturer i programmet, til stor kompleksitet når de enkelte dele af
+programmet sættes sammen.  Indledningsvist kigger vi på hvilke
+programmeringssprog og biblioteker vi benytter os af.
 }
 
 \section{Programmeringssprog og biblioteker\label{section_programmeringssprog}}
 \input{afsnit/implementation/programmeringssprog.tex}
 
+\section{Programmets struktur}
+\input{afsnit/implementation/programmet.tex}
+
+\section{Billedbehandling}
+\input{afsnit/implementation/billedbehandling.tex}
+
+\section{Vurdering af regioner}
+
+\section{Resultaters struktur}
+
+\section{Kørsel}
+Flow diagram.
+
 %%% Det øvrige bør puttes i separate filer ligesom alle andre steder!
 
 \section{Losseplads}
-
-\subsection{Teknisk snak om billeder}
-Endeligt skal det siges at pixels godt kan tage andre værdier end $0$ og
-$1$. Vi arbejder med billeder hvor værdien for hver pixel er
-repræsenteret ved tre 8 bit størrelser, hver især med værdier i mængden
-$\{0, 1, 2, \cdots, 254, 255\}$. Sammensætningen af de tre værdier, som
-beskrives som kanaler eller farvebånd, kaldes for en RGB-farve, hvor
-tallene repræsenteret ved $(R,G,B)$ henholdsvis angiver mængden af rød,
-grøn og blå farve i en pixel. Et sådan billede kaldes for et
-RGB-billede. For uddybende information omkring billeders repræsentation,
-se da \cite{SIOlsen}.
-
-\subsection{Implementation af databasen}
-Vi bruger SQLite til selve databasen, hovedsageligt fordi der ikke kræves
-nogen videre konfiguration af en sådan database. Den underliggende
-database er dog underordnet, da vi bruger Python-pakken \emph{SQLObject}
-som giver et abstraktionslag til en bred vifte af databaser. Vi opretter
-blot de tabeller vi ønsker at have i databasen som klasser gennem
-Python. Ligeledes får vi en sådan klasse tilbage når der laves
-forespørgsler til databasen. Da \emph{SQLObject} klarer al kommunikation
-med databasen er det derfor muligt at skifte den underliggende database
-ud hvis man ønsker det. Vi ser dog ikke nogen grund til at bruge en
-anden foreløbig, da SQLite opfylder vores behov. Endvidere har SQLite
-den umiddelbare fordel at selve databasen lægges i en fil i filsystemet.
-Det er derfor en let sag at tage sikkerhedskopier af databasen uden alt
-for meget besvær.
 
 \subsection{Crawler til wga.hu}
 I den kommaseparerede fil fra \cite{wgahu} er
@@ -159,4 +158,3 @@ tegne rektanglet på det tilknyttede billede.
 }
 
 % vim: set tw=72 spell spelllang=da:
-

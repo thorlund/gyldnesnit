@@ -1,0 +1,43 @@
+{
+{\sffamily Vi kaster i det følgende et detaljeret blik på
+billedbehandlingsmetoderne i programmet. Efter en kort teknisk
+introduktion til digitale billeder, vises hvilke datastrukturer og
+metoder \emph{OpenCV} stiller til rådighed og hvordan disse bruges til
+at udtrække og bedømme regioner i digitale billeder. Endeligt vil vi
+undersøge hvilke problemer vores implementation kan have.
+}
+
+\subsection{Digitale billeder}
+I afsnit \ref{section_kort_intro} blev der givet en kort introduktion
+til den digitale repræsentation af billeder. Vi antog at en pixel kunne
+antage værdier i mængden $\{0, 1\}$. I praksis kan pixels godt tage
+andre værdier. Vi arbejder med billeder, hvor værdien for hver pixel, er
+repræsenteret ved tre 8 bit størrelser, hver især med værdier i mængden
+$\{0, 1, 2, \cdots, 254, 255\}$. Sammensætningen af de tre værdier, som
+beskrives som kanaler eller farvebånd, kaldes for en RGB-farve, hvor
+tallene repræsenteret ved $(R,G,B)$ henholdsvis angiver mængden af rød,
+grøn og blå farve i en pixel. Et sådan billede kaldes for et
+RGB-billede. For uddybende information omkring billeders repræsentation,
+se da \cite{SIOlsen}. Vi benytter os af 8 bit størrelsen, da dette er
+industristandarden\footnote{Reference}.
+
+\subsection{Vigtige datastrukturer i \emph{OpenCV}}
+\subsubsection{cvScalar}
+Bruges til RGB-farver.
+
+\subsubsection{cvPoint}
+Beskriver punkter i det to-dimensionelle plan.
+
+\subsubsection{cvRectangle}
+Struktur som har et par $x,y$ og en bredde og højde. Koordinaterne
+angiver rektanglets øverste venstre hjørne.
+
+\subsection{Centrale metoder}
+\subsubsection{cvCanny}
+\subsubsection{cvSmooth}
+\subsubsection{cvFloodfill}
+\subsubsection{RibbonFloodfill}
+
+}
+
+% vim: set tw=72 spell spelllang=da:

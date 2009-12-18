@@ -1,55 +1,70 @@
-% Denne fil er inkluderet i udtraekning_af_regioner.tex
 {
 Ved valg af programmeringssprog har vi først og fremmest lagt vægt på at
-kunne udarbejde en prototype hurtigt og have et sprog som er let at gå
+kunne udarbejde en prototype hurtigt og bruge et sprog, som er let at gå
 til. Det valgte sprog skal også gøre det nemt at udvide den endelige
 implementation. Vi har også gerne ville undgå at skulle konstruere
 komplicerede datastrukturer for relativt simple metoder, både af hensyn
 til tidspres, men også til implementationens kompleksitet. Af
 ovenstående grunde har vi besluttet at udarbejde vores løsning i
-programmeringssproget Python, da netop dette sprog er yderst velegnet
-til at skrive forholdsvis avancerede prototyper i. Python er
+programmeringssproget \textbf{Python}, da netop dette sprog er yderst
+velegnet til at skrive forholdsvis avancerede prototyper i. Python er
 ydermere meget fleksibelt med hensyn til datastrukturer og byder
 umiddelbart på en lang række pakker relevant for problemstillingen.
 
 (Skal man skrive noget om Pythons udbredelse, anerkendelse og brug?)
 
-\subsubsection*{OpenCV}
+\subsection{OpenCV}
 Til at udføre billedmanipulation benytter vi os af et bibliotek skrevet
-i C og C++ der hedder \emph{OpenCV}. Biblioteket er udviklet af Intel og
-tilbyder, udover et solidt udvalg af algoritmer, bindinger til Python.
-Endelig er det meget veldokumenteret og giver referencer til
+i C og C++ der hedder \emph{OpenCV}. Biblioteket er udviklet af Intel,
+og tilbyder, udover et solidt udvalg af algoritmer, bindinger til
+Python.  Endelig er det meget veldokumenteret og giver referencer til
 publikationer om bibliotekets algoritmer. Biblioteket er udviklet med
 specielt henblik på real-tids behandling af billeder, f.eks. med et
-videokamera som kilde, men egner sig også til brug på enkelte billeder.
-\emph{OpenCV} tilbyder mange brugbare datastrukturer med hensyn til
-arbejdet med billeder i Python.
+videokamera som kilde. Det egner sig dog også til brug på enkelte
+billeder.  \emph{OpenCV} tilbyder mange brugbare datastrukturer med
+hensyn til arbejdet med billeder i Python.
 
-Der tilbydes også andre biblioteker til billedbehandling i Python. Her
-kan nævnes \emph{PIL} (Python Image Library) og \emph{PythonMagick}
+Der er også andre biblioteker til billedbehandling i Python. Her kan
+nævnes \emph{PIL} (Python Image Library) og \emph{PythonMagick}
 (ImageMagick bindings), men de er ikke nær så grundige som
-\emph{OpenCv}. Der findes dog metoder i \emph{OpenCV} til at samarbejde
-med \emph{PIL}, men vi har ikke set det nødvendigt at udnytte dette.
-
-%\subsubsection*{SQLite}
-% Der snakkes om dette i Opbevaring af billeder, mon ikke det er nok?
+\emph{OpenCv}. Der findes metoder i \emph{OpenCV} til at samarbejde med
+\emph{PIL}, men vi har ikke set det nødvendigt at udnytte dette.
 
 \subsubsection{Andre muligheder}
 Der er to helt oplagte mugligheder med hensyn til programmeringssprog
 når man taler om billedbehandling, nemlig Matlab og dets Open
-Source-alternativ Octave. De blev dog valgt fra, da vores samlede
-erfaring med udvikling i disse sprog ikke var stor nok. Endvidere, selv
-om de især egner sig til de beregninger vi skal lave, så finder vi at
-disse sprog besværlige at lave større programmer med. Matlab og Octave
-er dog blevet brugt til at sammenligne resultater og teste alternative
-metoder med. Dette vil vi vende tilbage til.
+Source-alternativ Octave. Disse sprog blev dog valgt fra, da vores
+samlede erfaring med udvikling i disse sprog ikke var stor nok.
+Endvidere, selv om de især egner sig til de beregninger vi skal lave, så
+finder vi at disse sprog besværlige at lave større programmer med.
+Matlab og Octave er dog blevet brugt til at sammenligne resultater og
+teste alternative metoder med. Dette vil vi vende tilbage til.
 
-Da \emph{OpenCV} er skrevet i C/C++ ville det også være oplagt at bruge et af
-disse sprog. Vores erfaring er dog, at man let kommer til at bruge mere
-tid på at konstruere de fornødne datastrukturer og hjælpemetoder hvilket
-let flytter fokus fra opgavens kerne. En senere implementation, med
-fokus på køretid, kunne med fordel implementeres i C/C++, da man vil
-have fuld kontrol over hvilke strukturer der bliver brugt i programmet.
+Da \emph{OpenCV} er skrevet i C/C++, ville det også være oplagt at bruge
+et af disse sprog. Vores erfaring er dog, at man let kommer til at bruge
+mere tid på at konstruere de fornødne datastrukturer og hjælpemetoder,
+end at fokusere på opgavens kerne. En senere implementation, med fokus
+på køretid, kunne med fordel implementeres i C/C++, da man vil have fuld
+kontrol over hvilke strukturer der bliver brugt i programmet.
+
+\subsection{Værktøjer til databasen}
+Vi bruger \textbf{SQLite} til selve databasen, hovedsageligt fordi der ikke
+kræves nogen videre konfiguration af en sådan database. Den
+underliggende database er dog underordnet, da vi bruger Python-pakken
+\emph{SQLObject} som giver et abstraktionslag til en bred vifte af
+databaser. Vi opretter blot de tabeller vi ønsker at have i databasen
+som klasser i Python. Ligeledes får vi en sådan klasse tilbage når der
+laves forespørgsler til databasen. Da \emph{SQLObject} klarer al
+kommunikation med databasen, er det derfor muligt at skifte den
+underliggende database ud hvis man ønsker det. SQLite har envidere den
+umiddelbare fordel, at selve databasen eksisterer som en fil i
+filsystemet.  Det er derfor en let sag at tage sikkerhedskopier af
+databasen uden alt for meget besvær.
+
+\subsection{Andre værktøjer}
+Vi gør også brug af statistikprogrammet \textbf{R} til at behandle og
+præsentere vores resultater.
+
 }
 
 % vim: set tw=72 spell spelllang=da:

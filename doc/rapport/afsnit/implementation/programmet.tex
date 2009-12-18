@@ -1,0 +1,97 @@
+{
+{\sffamily Vi giver en kort præsentation af programmets overordnede
+struktur. Mappestrukturen er vist i figur \ref{program_struktur}.
+
+\begin{figure}[!h]
+    \dirtree{%
+    .1 src/ .
+    .2 database/ .
+    .2 experiments/ .
+    .2 lib/ .
+    .2 model/ .
+    .2 painting/ .
+    .2 settings/ .
+    .2 tests/ .
+    .2 \_\_init\_\_.py .
+    .2 pictureresource.db .
+    .2 start.py .
+    }
+    \caption[]{Programmets struktur}
+    \label{program_struktur}
+\end{figure}
+
+Mappen \texttt{database/} indeholder kode til initialisering af
+databasen og udtræk i sammenhæng med resultater. I mappen
+\texttt{experiments/} gemmes kørsler tilknyttet de videnskabelige
+eksperimenter. \texttt{lib/} indeholder alle metoder vedrørende
+billedbehandling, dvs. metoder til udtrækning og bedømmelse af regioner.
+I \texttt{model/} er databaseskemaet og hjælpefunktioner til at gemme
+specielle datastrukturer defineret. Mapperne \texttt{painting/} og
+\texttt{settings/} tilbyder datastrukturer til henholdsvis malerier og
+indstillinger. Vi vil i det følgende kigge lidt nærmere på de enkelte
+dele af programmet.
+}
+
+\subsection{database/}
+\dirtree{%
+.1 database/ .
+.2 \_\_init\_\_.py .
+.2 catalog.csv .
+.2 parser.py .
+.2 udtraek.py .
+}
+(wga.hu csv-fil, parsing af csv-fil, udtraek)
+
+\subsection{experiments/}
+\dirtree{%
+.1 experiments/ .
+.2 \dots .
+}
+(dikumentation af eksperimenter)
+
+\subsection{lib/}
+\dirtree{%
+.1 lib/ .
+.2 \_\_init\_\_.py .
+.2 edgeDetector.py .
+.2 expandedMethod.py .
+.2 expandedMethon.py .
+.2 featureDetector.py .
+.2 goldenLibrary.py .
+.2 graphicHelper.py .
+.2 grid.py .
+.2 lineScanner.py .
+.2 marginCalculator.py .
+.2 naiveMethod.py .
+.2 regionSelector.py .
+.2 paintingAnalyzer.py .
+.2 statestik.py .
+.2 transformations.py .
+}
+(goldenLibrary - hjælpefunktioner, paintingAnalyser - sammensætter de
+øvrige metoder, naiveMethod, expandedMethod, regionSelector)
+
+\subsection{model/}
+\dirtree{%
+.1 model/ .
+.2 \_\_init\_\_.py .
+}
+(database in/ud)
+
+\subsection{painting/}
+\dirtree{%
+.1 painting/ .
+.2 \_\_init\_\_.py .
+}
+(container)
+
+\subsection{settings/}
+\dirtree{%
+.1 settings/ .
+.2 \_\_init\_\_.py .
+}
+(globale indstillinger, indstillinger til kørsel, kan gemmes i database)
+
+}
+
+% vim: set tw=72 spell spelllang=da:

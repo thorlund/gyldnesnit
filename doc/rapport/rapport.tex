@@ -25,6 +25,7 @@
 \usepackage{xypic}
 \usepackage[table]{xcolor}
 \usepackage{subfig}
+\usepackage{dirtree}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Indstillinger
@@ -90,18 +91,18 @@ pdfkeywords={Det gyldne snit, computer vision}
 
 \parskip=8pt plus 2pt minus 4pt
 
-\chapter{Indledning}
+\chapter{Indledning\label{chap_indledning}}
 \pagenumbering{arabic}
 \input{afsnit/baggrund/baggrund.tex}
 
 \chapter{Detektion af det gyldne snit\label{chap_detektion}}
 \input{afsnit/vores_implementation/vores_implementation.tex}
 
-\chapter{Implementation\label{chap_implementation}}
-\input{afsnit/implementation/implementation.tex}
-
 \chapter{Afprøvning\label{chap_afproevning}}
 \input{afsnit/afprovning/afprovning.tex}
+
+\chapter{Implementation\label{chap_implementation}}
+\input{afsnit/implementation/implementation.tex}
 
 \chapter{Videnskabelige resultater\label{chap_resultater}}
 \input{afsnit/resultater/resultater.tex}
