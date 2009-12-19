@@ -13,7 +13,7 @@ from settings import GlobalSettings
 from painting import Painting
 import src.model as m
 from database import Database
-from experiments import 10cuts as environment
+from experiments import tencuts as environment
 
 def main():
 	#Set this to true if you want to create a personal database
