@@ -15,7 +15,7 @@ import src.model as m
 from database import Database
 
 experiment = "10cuts"
-if experiment = "10cuts":
+if experiment == "10cuts":
 	from experiments import 10cuts as environment
 else:
 	#The default value will only work on the golden ratio
