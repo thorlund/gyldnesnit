@@ -30,7 +30,7 @@ def main():
 	db = Database(globalSettings)
 	#making a testdatabase if the varible is set
 	if testdatabase == True:
-		currentDBCount= m.Painting.select()).count()
+		currentDBCount= m.Painting.select().count()
 		count = count - currentDBCount
 		if count > 0:
 			db.setCount(count)
