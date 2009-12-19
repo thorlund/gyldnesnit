@@ -28,7 +28,8 @@ def main():
 	#creating a settings to be used with run
 	cuts = environment.generateCuts()
 	settings = Settings(cuts)
-	environment.setSettings(cuts)
+	environment.setSettings(settings)
+	settings.setMethod("expanded")
 	globalSettings = GlobalSettings()
 	environment.setGlobalSettings(globalSettings)
 	db = Database(globalSettings)
