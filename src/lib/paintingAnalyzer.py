@@ -18,6 +18,7 @@ import goldenLibrary as lib
 
 # Import methods
 import naiveMethod
+import expandedMethod
 
 
 def analyze(painting, settings):
@@ -27,6 +28,8 @@ def analyze(painting, settings):
 
 	if method == "naive":
 		return naiveMethod.analyzeImage(original, settings)
+	if method == "expanded":
+		return expandedMethod.analyzeImage(original,settings)
 	else:
 		raise StandardError("No method named %s" % method)
 
