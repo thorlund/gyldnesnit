@@ -55,16 +55,21 @@ out = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
 #edgeDetector.findEdges(image, out, threshold1, threshold2)
 edgeDetector.findBWEdges(image, bwe, threshold1, threshold2)
 
-cv.cvNot(bwe, bwe)
+#set if you need the image and the Edges togeter
+#cv.cvNot(bwe, bwe)
+
 cv.cvCopy(image, out, bwe)
 
 outname = "edgeDetectorTest"
 orgname = "Original"
-
+nystr = str(str(threshold1)+'-'+str(threshold2)+'.png')
+print nystr
 highgui.cvNamedWindow (outname, highgui.CV_WINDOW_AUTOSIZE)
 highgui.cvNamedWindow (orgname, highgui.CV_WINDOW_AUTOSIZE)
+highgui.cvSaveImage(nystr, out)
 
 while True:
+	
 	highgui.cvShowImage (orgname, image)
 	highgui.cvShowImage (outname, out)
 
