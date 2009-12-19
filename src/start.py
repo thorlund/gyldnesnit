@@ -13,13 +13,8 @@ from settings import GlobalSettings
 from painting import Painting
 import src.model as m
 from database import Database
+from experiments import 10cuts as environment
 
-experiment = "10cuts"
-if experiment == "10cuts":
-	from experiments import 10cuts as environment
-else:
-	#The default value will only work on the golden ratio
-	from experiments import golden as environment
 def main():
 	#Set this to true if you want to create a personal database
 	testdatabase = False
