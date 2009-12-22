@@ -1,5 +1,6 @@
 % vim: set tw=72 spell spelllang=da:
 \documentclass[a4paper, 10pt, danish, final]{report}
+%\documentclass[a4paper, twoside, openright, titlepage, 10pt, danish, final]{report}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Pakker
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -26,15 +27,18 @@
 \usepackage[table]{xcolor}
 \usepackage{subfig}
 \usepackage{dirtree}
+\usepackage{ulem}
+\usepackage{korrektur}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Indstillinger
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \parindent=5pt
+\renewcommand*\lstlistingname{Kodeboks}
 \lstset{language=Python, basicstyle=\scriptsize, showstringspaces=false, numbers=none, stepnumber=1, numberstyle=\tiny}
 \setcounter{tocdepth}{2}
 % Orddeling
-\hyphenation{hvis rekt-ang-el ud-regn-ing-en george}
+\hyphenation{hvis rekt-ang-el ud-regn-ing-en george lin-je-styk-ke lin-je-styk-ket}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Kommandoer
@@ -77,6 +81,7 @@ pdfkeywords={Det gyldne snit, computer vision}
 % Indhold
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
+\normalem
 \maketitle
 \pagenumbering{roman}
 \thispagestyle{empty}
@@ -95,30 +100,30 @@ pdfkeywords={Det gyldne snit, computer vision}
 
 \chapter{Indledning\label{chap_indledning}}
 \pagenumbering{arabic}
-\input{afsnit/baggrund/baggrund.tex}
+%\input{afsnit/baggrund/baggrund.tex}
 
 \chapter{Detektion af det gyldne snit\label{chap_detektion}}
-\input{afsnit/vores_implementation/vores_implementation.tex}
+%\input{afsnit/vores_implementation/vores_implementation.tex}
 
 \chapter{Afprøvning\label{chap_afproevning}}
-\input{afsnit/afprovning/afprovning.tex}
+%\input{afsnit/afprovning/afprovning.tex}
 
 \chapter{Implementation\label{chap_implementation}}
 \input{afsnit/implementation/implementation.tex}
 
 \chapter{Videnskabelige resultater\label{chap_resultater}}
-\input{afsnit/resultater/resultater.tex}
+%\input{afsnit/resultater/resultater.tex}
 
 \chapter{Fremtidigt arbejde}
-\input{afsnit/fremtidigt_arbejde/fremtidigt_arbejde.tex}
+%\input{afsnit/fremtidigt_arbejde/fremtidigt_arbejde.tex}
 
 % sort in citation order
 \bibliographystyle{unsrt}
 \bibliography{litteraturliste}
 \addcontentsline{toc}{chapter}{Litteratur}
 
-\chapter{Bilag}
-\appendix
+%\chapter{Bilag}
+%\appendix
 
 %\section{Kildekode}
 %\input{materialer.tex}
