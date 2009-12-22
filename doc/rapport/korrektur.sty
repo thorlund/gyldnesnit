@@ -73,7 +73,7 @@
 
 % Kommando:
 %       \nono[kommentar]{tekst}
-% Streg ord ud med rød linie. Ligesom \miss er første argument valgfrit
+% Streg ord ud med rød linie. Ligesom \mang er første argument valgfrit
 % og har standardværdi sat til = !
 % arg1 [optional]: Kommentar, default = !
 % arg2           : The no-no
@@ -86,3 +86,17 @@
 %       John skøjter på sin mor \nono{gentagelse}{på sin mor}
 %
 \newcommand{\nono}[2][!]{{\color{red}{\sout{\color{black}{#2}}}}\marginpar{\color{red} #1}}
+
+% Kommando:
+%       \erst[kommentar]{tekst}
+% Streg ord ud med rød linie, ligesom \nono. Her kan man dog
+% tilføje en alternativ formulering bagefter.
+% arg1 : Teskten
+% arg2 : Alternativ tekst
+%
+% Eksempel:
+%       Lokummet brænder
+%
+%       \nono{Lokummet brænder}{Det hele konvergerer mod lort}
+%
+\newcommand{\erst}[2]{{\color{red}{\sout{\color{black}{#1}}}} {\color{orange}{#2}}\marginpar{\color{orange} !}}
