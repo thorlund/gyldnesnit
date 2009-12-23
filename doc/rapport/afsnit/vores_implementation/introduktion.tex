@@ -1,25 +1,26 @@
 {
-{\sffamily I billedbehandling dækker begrebet \emph{feature detection}
-over den opgave at detektere \emph{features} i et givet billede. En
-\emph{feature} oversættes bedst som \emph{et træk} eller et
-\emph{kendetegn}. Nøjagtig \emph{hvad} et træk \emph{er}, er ikke klart
-defineret, men skal tilpasses den enkelte
-opgave\cite{WikiFeatureDetection}\cite{SIOlsen}. En andet område
-indenfor detektion af træk kaldes for \emph{blob detection}, hvor en
-\emph{blob} kan kort beskrives som en ensfarvet region i billedet. Vi
-vil derfor fremover referere til en blob som en region. Man ønsker nu at
-udvælge kun de \emph{interessante} regioner i billedet. Vi vil i det
-følgende komme frem til præcis hvad vi forstår ved en region. Senere i
-kapitlet, i afsnit \ref{section_naiv}, vil vi præsentere en simpel
-fremgangsmåde som fortæller os hvornår en region kan betegnes som
-interessant. Vi vil dog først se på hvordan digitale billeder
+{\sffamily Inden for billedbehandling dækker begrebet \emph{feature
+detection} over den opgave at detektere \emph{features} i et givet
+billede.  \emph{Feature} oversættes bedst med \emph{træk} eller
+\emph{kendetegn}, men nøjagtig \emph{hvad} et træk \emph{er}, er ikke
+klart defineret og skal tilpasses den enkelte
+opgave\cite{WikiFeatureDetection}\cite{SIOlsen}. Et andet område inden
+for detektion af træk kaldes for \emph{blob detection}, hvor en
+\emph{blob} kort kan beskrives som en ensfarvet region i billedet. Vi
+vil derfor fremover referere til en blob som en region, og i det
+følgende vil vi komme ind på præcis hvad vi forstår ved en sådan. Da det
+imidlertid kun er de interessante regioner, der ønskes udvalgt i
+billederne, præsenteres i afsnit \ref{section_naiv}, en simpel
+fremgangsmåde, som fortæller os, hvornår en region kan betegnes som
+interessant. Vi vil dog først se på, hvordan digitale billeder
 repræsenteres. For en mere dybdegående indledning til billedbehandling
 henvises til \cite{SIOlsen}.
 }
 
 \subsection{Repræsentation af digitale billeder}
-Et digitalt billede er sammensat af pixels. En pixel er et punkt i et
-koordinatsystem hvortil der er knyttet en værdi. Et gråtonebillede er
+Et digitalt billede er, som nævnt i afsnit
+\ref{section_computer_betragter}, sammensat af pixels. En pixel er et punkt i et
+koordinatsystem, hvortil der er knyttet en værdi. Et gråtonebillede er
 givet ved afbildningen
 \begin{equation}
     \mathbb{Z}^{+}\times{} \mathbb{Z}^{+} \rightarrow \mathbb{Z}^{+}
@@ -32,7 +33,7 @@ Som et simpelt eksempel siger vi nu, at en pixel i et billede kan antage
 to værdier: $0$ og $1$. Vi har altså afbildningen $\mathbb{Z}^{+}\times{}
 \mathbb{Z}^{+} \rightarrow \{0, 1\}$. En pixel med værdi $0$ vil ikke
 blive farvet, dvs. den forbliver sort, mens en pixel med værdien $1$ vil
-blive farvet hvid.  Figur \ref{billede_pixels} viser et sådan simpelt,
+blive farvet hvid.  Figur \ref{billede_pixels} viser et sådant simpelt,
 binært billede.
 
 % Please, PLEASE, do not try this at home!
@@ -52,8 +53,8 @@ binært billede.
     \label{billede_pixels}
 \end{figure}
 
-  Bemærk at koordinatsystemet starter i øverste
-venstre hjørne stigende mod nedre højre hjørne.
+Bemærk, at koordinatsystemet starter i øverste venstre hjørne, med
+stigende $x$- og $y$-værdier mod nedre højre hjørne.
 
 Et billede kan da opstilles som en $N \times M$ matrix som vist i
 ligning \ref{billede_matrix}.
@@ -68,25 +69,25 @@ ligning \ref{billede_matrix}.
 \end{equation}
 
 At bruge billedet som en matrix har nogle beregningsmæssige fordele, men
-det falder udenfor denne introduktions formål at gå ind i dette.
+det falder uden for denne introduktions formål at gå ind i dette.
 
 \subsection{Regioner i vilkårlige malerier}
-Givet et digitalt billede, defineres en \textbf{region}, som en sammenhængende
+Givet et digitalt billede, defineres en \textbf{region} som en sammenhængende
 gruppe af pixels med samme farve. Billedet i figur \ref{billede_pixels}
 vil da have en sort region formet som et kryds.  Egentlig har vi også
 fire små regioner i hjørnerne, hver enkelt på én pixel. I praksis
-tillades dog en afvigelse i farven. Alt efter hvordan man definerer
+tillades dog en vis afvigelse i farven. Alt efter hvordan man definerer
 afvigelsen, kan man da få regioner ud fra digitale gengivelser af
 malerier såsom en himmel, i et maleri af et landskab, eller et ansigt.
-En regionen kan altså være hvad som helst i billedet.
+En region kan altså være hvad som helst i billedet.
 
 \subsection{Antagelser}
-Det er meget svært at opstille nogen regler for hvad der er interessant i et
-arbitrært maleri. Vi må dog antage, at det, som af et menneske, betragtes
-som interessant, fremstår tydeligt i billedet. At noget fremstår
-tydeligt betyder at den region, som udgør det interessante område, er
-klart afgrænset i maleriet. Endvidere antager vi at den interessante
-region har en vis størrelse.
+Det er meget svært at opstille nogen regler for, hvad der er interessant
+i et arbitrært maleri. Vi må dog antage, at det, som af et menneske
+betragtes som interessant, fremstår tydeligt i billedet. At noget
+fremstår tydeligt betyder, at den region, som udgør det interessante
+område, er klart afgrænset i maleriet. Endvidere antager vi, at den
+interessante region har en vis størrelse.
 
 }
 
