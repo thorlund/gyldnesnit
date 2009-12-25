@@ -1,55 +1,57 @@
 % Denne fil er inkluderet i udtraekning_af_regioner.tex
 {
 Sløring, som kommer fra det engelske ord ``blur'', er en gruppering af
-filtre som bruges til at fjerne støj og uregelmæssigheder i billeder. Vi
-så i afsnit \ref{subsec_floodfill}, at metoden floodfill nogle gange kan
-have svært ved at fylde hele regionen ud. Specielt i figur
+filtre, som bruges til at fjerne støj og uregelmæssigheder i billeder.
+Vi så i afsnit \ref{subsec_floodfill}, at metoden floodfill nogle gange
+kan have svært ved at fylde hele regionen ud. Specielt i figur
 \ref{dot_ff_var_7_7} ses at himlen har små huller. En sløring af
 billedet kan hjælpe med at glatte farverne ud, således at vi dækker mere
 af regionen. Sløring af billedet kan også hjælpe til at fjerne diverse
-artefakter, såsom revner eller pletter i billedet. Specielt i
-vores testbillede, der som tidligere nævnt er malet med en masse
-prikker, er det en stor hjælp at sløre billedet, så farverne bliver mere
-ensartede. Vi vil nu se på tre forskellige måder at opnå dette på.
+artefakter, såsom revner eller pletter i billedet. Specielt i vores
+testbillede, der som tidligere nævnt er malet med prikker, er det en
+stor hjælp at sløre billedet, så farverne bliver mere ensartede. Vi vil
+nu se på tre forskellige måder at opnå denne effekt på.
 
-De to første metoder har svært ved at bibeholde kanterne i et billede,
-men arbejder til gengæld direkte på billedet. Den tredie metode
-bibeholder til en vis grad kanterne bedre, men kan ikke arbejde direkte
-på billedet, hvilket kræver et større pladsforbrug. Metoden som bruges
-til de 2 første sløringer, heder foldning, som bruger en foldningsmatrix til
-udregning af ny farver. En foldningsmatrix er en lille matrice, som betegner hvor
-stor del af billedet og hvor meget af pixels værdiger fra farverne rund
-om et punkt, skal tages med i udregningen for den nye sløret farve. En
-foldningsmatrix kan ses i figur \ref{Foldning}. Foldning er en simpel matematisk
-metode, som beskriver hvordan man kan gange 2 matricer sammen, i vores
-tilfælde, en foldningsmatrix $\mathbb{Z}^{n}\times{} \mathbb{Z}^{m}$ og et
-billedet matrice $\mathbb{Z}^{k}\times{} \mathbb{Z}^{d}$, hvor $n = d
-~\vee~ m = k$ ikke behøver at være opfyldt.
-
+De to første metoder bibeholder dårligt kanterne i et billede, men
+arbejder til gengæld direkte på billedet. Den tredie metode bibeholder
+til en vis grad kanterne bedre, men kan ikke arbejde direkte på
+billedet, hvilket kræver et større pladsforbrug. Metoden, som bruges til
+de to første sløringer, hedder foldning og bruger en foldningsmatrix til
+udregning af nye farver. Foldning er en simpel matematisk metode, som
+beskriver, hvordan man kan gange to matricer sammen --- i vores tilfælde
+en foldningsmatrix $\mathbb{Z}^{n}\times{} \mathbb{Z}^{m}$ og en
+billedmatrix $\mathbb{Z}^{k}\times{} \mathbb{Z}^{d}$ --- hvor $n = d ~\vee~
+m = k$ ikke behøver at være opfyldt.  En foldningsmatrix er en lille
+matrice, som betegner hvor stor en del af billedet, og hvor meget af
+pixelværdierne rund om et punkt, der skal tages med i udregningen for
+den nye, slørede farve. En foldningsmatrix kan ses i figur \ref{Foldning}.
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[scale=1,angle=0]{afsnit/vores_implementation/billeder/sloering/convolution}
 	\end{center}
-	\caption[]{En repratation af et billedet hvor $(i,j)$ betegner plaseringen og en foldningsmatrix med 9 tilfældige tal fra 0 til 9}
+    \caption[]{En billedmatrix, hvor $(i,j)$ betegner placeringen, og en
+    foldningsmatrix, med ni tilfældige tal fra 0 til 9.}
 	\label{Foldning}
 \end{figure}
 
-Som man kan se i figur \ref{Foldning} er selve billedet og foldningsmatrix i
-vid forskellige størrelser. Måden Foldning virker på, er at man
-multiplicere foldningsmatrixen ovenpå de værdiger som ligger rund om den pixel,
-som vi gerne vil finde den sløret farve af og tager gennemsnittet af den
-værdig, f.eks farven på pixel $(4,4)$, bliver
+Som man kan se i figur \ref{Foldning}, har billed- og foldningsmatrixen
+vidt forskellige størrelser. Foldning virker på den måde, at man
+multiplicerer foldningsmatricen oven på de værdier, som ligger rundt om den pixel,
+hvis farve vi gerne vil finde den slørede værdi for. Dernæst tages gennemsnittet af den
+nye værdi. I udregning \ref{foldning_udregning} ses, som eksempel på
+dette, udregningen af farven på pixel med koordinater $(4,4)$.
 
 \begin{multline}
     (4,4) = ((3,3)\cdot 4+(4,3) \cdot 2+(5,3) \cdot 3\\
     + (3,4) \cdot 3+(4,4) \cdot 9+(5,4) \cdot 3\\
     + (3,5) \cdot 2+(4,5) \cdot 4+(5,5) \cdot 9) \cdot \frac{1}{39}
+    \label{foldning_udregning}
 \end{multline}
 
-I dette eksempel, er punktet $(5,5)$ og $(4,4)$ vægtet højre i forhold
-til de andet, så farven vil blive sløret i den retning. Dette skyldes at
-foldningsmatrixen er bygget tilfældig op, i en rigtige sløring er
-foldningsmatrixen meget specifikt udvalgt for at give det beste
+I dette eksempel er punktet $(5,5)$ og $(4,4)$ vægtet højere end de
+andre, så farven vil blive sløret i den retning. Dette skyldes, at
+foldningsmatricen er bygget tilfældigt op. I en rigtig foldningsmatrix,
+for sløring, er matricen meget specifikt udvalgt for at give det bedste
 resultat.
 
 \subsubsection*{Simpel sløring}
@@ -89,16 +91,16 @@ Denne foldningsmatrix kan så bruges ved hjælp af foldning til at danne det sl�
 billet, som vi kan se i figur \ref{gaussian_metode}
 
 \subsubsection*{Sløring ved statistisk median}
-Den sidste metode vi vil nævne er i grunden meget simpel. Grundidéen er
-at finde den statistiske median i pixelværdierne rundt om en givet pixel
-og tildele medianværdien til denne. Givet et antal pixels, er det
+Den sidste metode, vi vil nævne, er i grunden meget simpel. Grundidéen
+er at finde den statistiske median i pixelværdierne rundt om en given
+pixel og tildele denne medianværdien. Givet et antal pixels, er det
 trivielt at sætte dem i en liste og sortere dem efter deres værdi. Hvis
 antallet af elementer i listen er ulige, er det midterste element i den
 sorterede liste medianen. Er der et lige antal elementer i listen,
 defineres medianen som gennemsnittet af de to midterste elementer.
 Pixels vælges i et $N \times N$ vindue med den originale pixel i
-centrum, som vist i figur \ref{red_box_nxm} og vi vil således altid have
-et ulige antal elementer i listen.
+centrum, som vist i figur \ref{red_box_nxm}, og vi vil således altid
+have et ulige antal elementer i listen.
 
 \begin{figure}[!h]
     \centering
@@ -124,21 +126,20 @@ et ulige antal elementer i listen.
         }
         \caption[]{
             Bestemmelse af median for pixel med koordinaterne $(2, 2)$.
-            \textbf{\ref{red_box_nxm})} Pixels i et $3\times3$ vindue
-            omkring $(2, 2)$ er markeret med rødt.
-            \textbf{\ref{3_3_vindue})} Værdierne i $3\times3$ vinduet.
-            Det ses den originale pixel har værdien $42$.
+            \textbf{\ref{red_box_nxm})} Pixels, i et $3\times3$ vindue
+            omkring $(2, 2)$, er markeret med rødt.
+            \textbf{\ref{3_3_vindue})} Her ses værdierne i $3\times3$
+            vinduet.  Den originale pixel har værdien $42$.
             \textbf{\ref{sorteret_median})} Den sorterede liste med
-            værdierne fra vinduet. Det ses at medianen har værdien
-            $29$. Den originale pixel vil da skifte værdi fra $42$ til
-            $29$.
+            værdierne fra vinduet. Det ses at medianen har værdien $29$.
+            Den originale pixel vil da skifte værdi fra $42$ til $29$.
         }
 \end{figure}
 
 Denne metode kan ikke køres direkte på det originale billede, da dette
-vil interferere med fastsættelse af medianen for alle pixels. Man må
-derfor oprette en kopi af det originale billede og sætte de fundne
-medianværdier i denne. Man finder således altid medianen i forhold til det
+vil interferere med fastsættelse af medianen for alle pixels. Det bliver
+derfor nødvendigt at oprette en kopi af originalen og indsætte de fundne
+medianværdier i den. Man finder således altid medianen i forhold til det
 originale billede.
 
 \subsubsection*{Eksempler}
@@ -150,14 +151,14 @@ originale billede.
     \subfloat[$3 \times 3$ vindue]{\label{simple_3_3}\includegraphics[angle=0,width=0.3\textwidth]{afsnit/vores_implementation/billeder/sloering/simple_3_3}}\hspace{1em}
     \subfloat[$7 \times 7$ vindue]{\label{simple_7_7}\includegraphics[angle=0,width=0.3\textwidth]{afsnit/vores_implementation/billeder/sloering/simple_7_7}}
     \caption[]{
-        \textbf{\ref{simple_original})} Zoom af detajler i det originale
+        \textbf{\ref{simple_original})} Detaljer i det originale
         billede.
         \textbf{\ref{simple_3_3})} Simpel sløring med et vindue på $3\times{}3$.
-        Farverne er lidt slørede, og kanterne begynder at flyde lidt ud.
+        Farverne er en smule slørede, og kanterne begynder at flyde lidt ud.
         \textbf{\ref{simple_7_7})} Simpel sløring med et vindue på $7\times{}7$.
         Farverne er meget sløret og man kan næsten ikke skelne mellem
-        baggrund og forgrund. Kanterne er meget udvandet, og hår og
-        ansigt kan kun lige skelnes ad.
+        baggrund og forgrund. Kanterne er meget udvandede, og hår og
+        ansigt kan kun lige skelnes fra hinanden.
     }
     \label{simple_metode}
 \end{figure}
@@ -167,13 +168,14 @@ originale billede.
     \subfloat[$3 \times 3$ vindue]{\label{gaussian_3_3}\includegraphics[angle=0,width=0.3\textwidth]{afsnit/vores_implementation/billeder/sloering/gaussian_3_3}}\hspace{1em}
     \subfloat[$7 \times 7$ vindue]{\label{gaussian_7_7}\includegraphics[angle=0,width=0.3\textwidth]{afsnit/vores_implementation/billeder/sloering/gaussian_7_7}}
     \caption[]{
-        \textbf{\ref{gaussian_original})} Zoom af detajler i det originale billede.
+        \textbf{\ref{gaussian_original})} Detaljer i det originale billede.
         \textbf{\ref{gaussian_3_3})} Gaussisk sløring med et vindue på
-        $3\times{}3$. Farverne er blevet lidt slørede men man kan stadig se
-        nuancer i håret og bagrunden. Kanterne er ret bibeholdt.
+        $3\times{}3$. Farverne er blevet lidt slørede, men man kan
+        stadig se nuancer i håret og i baggrunden. Kanterne er kun en
+        smule slørede.
         \textbf{\ref{gaussian_7_7})} Gaussisk sløring med et vindue på
-        $7\times{}7$. Farverne er blevet meget slørede, men konturene i
-        bagrunden og håret er der stadig. Kanterne er dog ret udvandede.
+        $7\times{}7$. Farverne er blevet meget slørede, men konturerne i
+        baggrunden samt håret er der stadig. Kanterne er dog ret udvandede.
     }
     \label{gaussian_metode}
 \end{figure}
@@ -184,13 +186,13 @@ originale billede.
     \subfloat[$3 \times 3$ vindue]{\label{median_3_3}\includegraphics[angle=0,width=0.3\textwidth]{afsnit/vores_implementation/billeder/sloering/median_3_3}}\hspace{1em}
     \subfloat[$7 \times 7$ vindue]{\label{median_7_7}\includegraphics[angle=0,width=0.3\textwidth]{afsnit/vores_implementation/billeder/sloering/median_7_7}}
     \caption[]{
-        \textbf{\ref{median_original})} Zoom af detajler i det originale billede.
+        \textbf{\ref{median_original})} Detaljer i det originale billede.
         \textbf{\ref{median_3_3})} Median med et vindue på $3\times{}3$.
-        Farverne er blevet mere ensartede mens kanterne stadig er
+        Farverne er blevet mere ensartede, mens kanterne stadig er
         skarpe.
-        \textbf{\ref{median_7_7})} Median med et vindue på $7\times{}7$. Farverne
-        er meget ensartede, men det ses at kanterne er blevet mere
-        udvisket med det større vindue.
+        \textbf{\ref{median_7_7})} Median med et vindue på $7\times{}7$.
+        Farverne er meget ensartede, men det ses at kanterne er blevet
+        mere udviskede med det større vindue.
     }
     \label{median_metode}
 \end{figure}

@@ -1,23 +1,23 @@
 % Denne fil er inkluderet i udtraekning_af_regioner.tex
 {
-Begrebet kantdetektion dækker over en metode som finder kanterne af
+Begrebet kantdetektion dækker over en metode, som finder kanterne af
 objekter i et billede. Egentlig prøver man at finde de punkter i
 billedet, hvor kontrasten er stor, hvilket er tilfældet ved et objekts
-grænse. Når vi har fundet kanterne til objekterne i billedet kan vi
-bruge disse til at afgøre hvor vi har en ny region i billedet.  Som vi
-skal se, så er kantdetektion et godt eksempel på hvor svært datamatsyn
-kan være, selv i meget simple algoritmer.
+grænse. Når vi har fundet objekternes kanter i billedet, kan vi bruge
+disse til at afgøre, hvor vi har en ny region.  Som vi skal se, så er
+kantdetektion et godt eksempel på, hvor svært datamatsyn kan være, selv
+i meget simple algoritmer.
 
 \subsubsection*{Metode}
-Der er forskellige algoritmer til rådighed for at finde kanter i
+Der er findes algoritmer til at finde kanter i
 billeder\cite{SIOlsen}. Vi vil beskrive en meget naiv tilgang til
 problemet, blot for at forklare grundprincipperne bag metoden. Som
-allerede nævnt vil vi finde de steder i billedet hvor vi har stor
+allerede nævnt, vil vi finde de steder i billedet, hvor vi har stor
 kontrast. Det er derfor almindeligt at konvertere billedet til sort/hvid
 når man vil finde kanterne. Metoden forklares for én dimension, da det
 let kan overføres til to dimensioner. Vi betragter derfor en vektor
-$\mathbf{P} = (p_1, p_2, \cdots, p_n)$ som antager værdier i mængden
-$\{0,1\}$.
+$\mathbf{P} = (p_1, p_2, \cdots, p_{10})$ som antager værdier i mængden
+$\{0,1\}$. Vektoren $\mathbf{P}$ ses i figur \ref{veltor_p_egde}.
 
 \begin{figure}[!h]
     \renewcommand{\arraystretch}{1.3}
@@ -48,11 +48,12 @@ $\mathbf{E}$ som
 \end{equation}
 Vektoren $\mathbf{E}$ konstrueres altså ved at sammenligne et givet
 punkts værdi med det forrige punkts værdi. Hvis den absolutte forskel
-til et punkts forgænger er lig $1$ så sættes dette punkt til værdien $0$
-i kantvektoren $\mathbf{E}$. Hvis der ikke er nogen forskel sættes værdien til
-$1$. Vi er i denne sammenhæng nødt til at definere $p_0$ til $p_1$, så
-vi undgår at finde en kant i starten af en linie. Kantvektoren
-$\mathbf{E}$ for $\mathbf{P}$ er vist i figur \ref{vektor_e_edge}.
+mellem et punkt og dets forgænger er lig $1$, så sættes dette punkt til
+værdien $0$ i kantvektoren $\mathbf{E}$. Hvis der ikke er nogen forskel,
+sættes værdien til $1$. Vi er i denne sammenhæng nødt til at definere
+$p_0$ til $p_1$, så vi undgår at finde en kant i starten af en linie.
+Kantvektoren $\mathbf{E}$ for $\mathbf{P}$ er vist i figur
+\ref{vektor_e_edge}.
 
 \begin{figure}[!h]
     \renewcommand{\arraystretch}{1.3}
@@ -65,20 +66,20 @@ $\mathbf{E}$ for $\mathbf{P}$ er vist i figur \ref{vektor_e_edge}.
     \caption[]{Kantvektoren $\mathbf{E}$ for $\mathbf{P}$.}
     \label{vektor_e_edge}
 \end{figure}
-Det ses at $e_6 = e_{10} = 0$, da $|p_6 - p_5| = |p_{10} - p_9| = 1$. Vi
-har nu markeret de steder hvor der er kontrast i den oprindelige vektor
-$\mathbf{P}$. Vi gør os en vigtig observation vedrørende definitionen på
-$\mathbf{E}$. Vi markerer en kant i det punkt hvor kontrasten netop
-\emph{er} skiftet. Derfor har vi også at $e_{10}$ bliver markeret som en
-kant, selvom man ved manuel inspektion ville markere $e_9$ som kanten.
-Dette skyldes at vi ikke har nogen hukommelse i definitionen og derfor
-ikke er klar over hvilke punkter der burde hænge sammen. Vi ved altså
-ikke hvilke værdier der er de interessante. Denne problematik
-understreges af det faktum, at end ikke mennesket altid kan afgøre hvor
-grænsen mellem to figurer går. Et klassisk eksempel er den optiske
-illusion ved \emph{Rubins vase}\cite{WikiRubinVase} vist i figur
-\ref{rubins_vase}. Alt efter hvad man vælger som fokus i billedet, vil
-kanten skulle redefineres.
+Det ses, at $e_6 = e_{10} = 0$, da $|p_6 - p_5| = |p_{10} - p_9| = 1$.
+Vi har nu markeret de steder, hvor der er kontrast i den oprindelige
+vektor $\mathbf{P}$. Vi gør os en vigtig observation vedrørende
+definitionen på $\mathbf{E}$: Vi markerer en kant i det punkt, hvor
+kontrasten netop \emph{er} skiftet. Derfor har vi også, at $e_{10}$
+bliver markeret som en kant, selvom man ved manuel inspektion ville
+markere $e_9$ som kanten.  Dette skyldes, at vi ikke har nogen
+hukommelse i definitionen og derfor ikke er klar over, hvilke punkter
+der burde hænge sammen. Vi ved altså ikke hvilke værdier, der er de
+interessante. Denne problematik understreges af det faktum, at end ikke
+mennesket altid er i stand til at afgøre, hvor grænsen mellem to figurer
+går. Et klassisk eksempel er den optiske illusion ved \emph{Rubins
+vase}\cite{WikiRubinVase} vist i figur \ref{rubins_vase}: Alt efter hvad
+man vælger som fokus i billedet, vil kanten skulle redefineres.
 
 \begin{figure}[!h]
     \begin{center}
@@ -89,10 +90,10 @@ kanten skulle redefineres.
 \end{figure}
 
 Vi kan generalisere definitionen for kantvektoren $\mathbf{E}$ i
-\ref{vektor_e_bin} således at vi kan have andre værdier end dem i
-$\{0,1\}$ og en anden tærskelværdi. I den følgende definition har vi at
-$t$ angiver den tærskelværdi, for hvor meget værdierne punkterne imellem
-må afvige.
+\ref{vektor_e_bin} således, at vi kan have andre værdier end dem i
+$\{0,1\}$ og en anden tærskelværdi. I den følgende definition har vi, at
+$t$ angiver tærskelværdien for, hvor meget værdierne må afvige punkterne
+imellem.
 \begin{equation}
     \begin{split}
         \mathbf{E} &= (e_1, e_2, \cdots, e_n) \mathrm{~,~hvor~} \\
@@ -109,24 +110,25 @@ må afvige.
 Definitionen på $\mathbf{E}$ tager ikke højde for støj i billedet,
 hvilket let kan forvirre kantdetektionen. Sobel kantdetektion er en
 etableret metode til at finde kanter i billeder. Den benytter to
-foldningsmatricer til at finde kanter vertikalt og horisontalt, men er
-ligesom den simple metode følsom overfor støj. Vi benytter os af en
-metode udviklet af John F. Canny, da den kombinerer teknikker fra bla.
-gaussisk sløring og Sobel\cite{SIOlsen}, og således ikke ligeså følsom overfor
-støj. Vi vil ikke komme nærmere ind på den indre funktionalitet i Canny,
-men vi vil i det følgende vise eksempler på resultater fra metoden.
+foldningsmatricer til at finde kanter vertikalt og horisontalt, men er,
+ligesom den simple metode, følsom overfor støj. Vi benytter os af en
+metode udviklet af John F. Canny, da den kombinerer teknikker fra bl. a.
+gaussisk sløring og Sobel\cite{SIOlsen} og således ikke er ligeså
+følsom. Vi vil ikke komme nærmere ind på den indre funktionalitet i
+Canny, men vi vil i det følgende vise eksempler på resultater fra
+metoden.
 
 \subsubsection*{Eksempler}
-Vi viser nu nogle eksempler på hvordan Canny kantdetektion virker. Vi
-tager igen udgangspunkt i maleriet i figur \ref{bathers}. Billedet
-bliver først konverteret til gråtoner som da bruges til at finde kanter
-i. Metoden returnerer et nyt sort billede med hvide kanter. Billederne
-der vises er således ikke det direkte resultat fra metoden, men vi viser
-kun de dele af originalbilledet hvor metoden har fundet kanter. Metoden
-bruger to tærskelværdier som kan justeres alt efter hvor mange detajler
-man ønsker. Vi vil ved hjælp af de følgende eksempler komme frem til
-hvad tærskelværdierne betyder for resultatet. Eksemplerne er samlet i
-figur \ref{canny_kanter}.
+Vi viser nu nogle eksempler på, hvordan Canny kantdetektion virker. Igen
+tages udgangspunkt i maleriet vist i figur \ref{bathers}. Billedet
+bliver først konverteret til gråtoner og siden undersøgt for kanter.
+Metoden returnerer et nyt sort billede med hvide kanter. Billederne, der
+vises, er således ikke det direkte resultat af metoden, men vi viser kun
+de dele af originalbilledet, hvor metoden har fundet kanter. Metoden
+bruger to tærskelværdier, som kan justeres, alt efter hvor mange
+detaljer, man ønsker. Vi vil ved hjælp af de følgende eksempler komme
+frem til, hvad tærskelværdierne betyder for resultatet. Eksemplerne er
+samlet i figur \ref{canny_kanter}.
 
 \begin{figure}[!p]
     \centering
@@ -150,15 +152,17 @@ figur \ref{canny_kanter}.
     \label{canny_kanter}
 \end{figure}
 
-Når vi sammenligner figur \ref{canny_20_20} og \ref{canny_20_100} ses
-det at anden parameter lader til at ignorere kanter som ligger ``inden
-for'' andre kanter. Dette ses på stort set alle personernes kroppe i
-billedet. Når denne observation er gjort, prøver vi at skrue op for
-tærskelværdierne. Det ses at ved højere tærskelværdier bliver billedet
-med kanter gradvist mindre detaljeret. I vores testbillede er kanterne
-på de fremtrædende objekter stadig at se, selv ved store tærskelværdier
-som vist i \ref{canny_100_290}. Vi vil i kapitel \ref{chap_afproevning}
-se på hvilke tærskelværdier vi bruger i praksis.
+Når vi sammenligner figur \ref{canny_20_20} og \ref{canny_20_100}, ses
+det, at den anden parameter lader til at ignorere kanter, som ligger
+``inden for'' andre kanter. Dette ses på stort set alle personernes
+kroppe i billedet. Når denne observation er gjort, prøver vi at øge
+tærskelværdierne. Det ses, at billedet med kanter ved højere
+tærskelværdier gradvist bliver mindre detaljeret ved højere
+tærskelværdier bliver billedet med kanter gradvist mindre detaljeret. I
+vores testbillede er kanterne på de fremtrædende objekter stadig at se,
+selv ved store tærskelværdier som vist i \ref{canny_100_290}. Vi vil i
+kapitel \ref{chap_afproevning} se på hvilke tærskelværdier, vi bruger i
+praksis.
 }
 
 % vim: set tw=72 spell spelllang=da:
