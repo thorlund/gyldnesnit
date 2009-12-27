@@ -23,9 +23,50 @@ undtagelser, hvor der kun bruges én kanal, således at vi arbejder med
 gråtonebilleder. For en uddybende forklaring om billeders
 repræsentation, refereres igen til \cite{SIOlsen}.
 
-\marker{Hvordan repræsenteres billeder i \emph{OpenCV}? Skriv det
-her.}{Husk det!}
-Noget med matricer og arrays og Python og \emph{OpenCV}.
+Vi har også tidligere, i ligning \ref{billede_matrix},  vist, at et
+digitalt billede kan skrives som en matrix. Ved denne matrix, kan man få
+værdien for en pixel med koordinater $(x,y)$ ved elementet
+$\mathbf{I}_{xy}$. Vi har altså, at x-aksen går fra øverste venstre
+hjørne i nedadgående retning og y-aksen fra øverste venstre hjørne mod
+højre. \emph{OpenCV} bruger dog et andet koordinatsystem, hvor akserne
+er vendt om, som vist i figur \ref{opencv_koordinatsystem}. Man skal
+derfor huske på at matricen, som\emph{OpenCV} bruger, er transponeret,
+og vi skal derfor bytte om på koordinaterne. For at få værdien på den
+pixel med koordinaterne $(x,y)$, skal vi altså bruge værdien
+$\mathbf{I}_{yx}$, hvor de omvendte koordinater bør bemærkes.
+
+\begin{figure}[!b]
+    \centering
+    \begin{picture}(122,55)
+        \put(61, 50){$x$}
+        \put(-10, 22){$y$}
+        \put(0, 45){\circle*{3}}
+        \put(-1, 45){\vector(1, 0){120}}
+        \put(0, 45){\vector(0, -1){48}}
+
+    \end{picture}
+    \caption[]{Koordinatsystemet, som bliver brugt i \emph{OpenCV}.}
+    \label{opencv_koordinatsystem}
+\end{figure}
+
+Billedematricen $\mathbf{I}$, repræsenteres i \emph{OpenCV} som et
+dobbelt-array. I figur \ref{opencv_billedematrix} er vist hvordan
+denne struktur ser ud, når vi har indlæst billedet givet i figur
+\ref{billede_pixels}. Hvis billedet er indlæst i variablen \texttt{I},
+kan vi i Python, tilgå pixelen med koordinater $(x,y) = (0,2)$ ved
+$\textbf{I}_{2,0} =~$\texttt{I[2][0]}.
+
+\begin{figure}[t]
+    \begin{verbatim}
+                        I = [ [0, 1, 0],
+                              [1, 1, 1],
+                              [0, 1, 0] ]
+    \end{verbatim}
+\vspace{-2em}
+\caption{Repræsentation af billedematricen fra ligning
+\ref{billede_pixels} i \emph{OpenCV}.}
+\label{opencv_billedematrix}
+\end{figure}
 
 \subsection{Resultaters struktur\label{resultat_struktur}}
 Indledningsvist vil vi introducere nogle vigtige datastrukturer, som vi
@@ -305,7 +346,7 @@ pixels med en kant, ikke farvet, dvs.  de forbliver sorte. At lade
 kanterne være sorte kan have nogle utilsigtede konsekvenser. Vi henviser
 til afsnit \ref{subsec_svagheder} for en gennemgang af disse.
 
-\subsubsection{Segmentering ved floodfill-metoden}
+\subsubsection{Segmentering med floodfill-metoden}
 Vi beskriver nu metoden, til at trække regioner ud af et billede, der er
 blevet præpareret som beskrevet ovenfor. Metoden bygger videre på
 beskrivelsen givet i \ref{sammensaetning_af_metoder}, hvor
@@ -462,9 +503,6 @@ for lineSegment in Cut:
     CutRegions[color.toString()] = (color, region)
 \end{lstlisting}
 
-\suppressfloats
-\clearpage
-
 Som vist i figur \ref{impUdtraek_kantpunkter}, kan snittet opdeles i
 mindre linjestykker. Nu antager vi meget naivt, at punkterne på
 linjestykket $Ae_1$ tilhører én region, mens punkterne på $e_1e_2$
@@ -506,6 +544,7 @@ Disse er vist i figurene \ref{region1} til \ref{region7}.
     \item Linjestykket $e_6B$ males lilla og vi returnerer igen en
         allerede fundet region.
 \end{enumerate}
+\clearpage
 Vi ender altså med at have returneret syv regioner, ligesom antallet af
 linjestykker, men når vi kigger på resultatet, i figur \ref{region7}, er
 der kun fire forskellige farver. Vi returnerer den samme region, den som
