@@ -1,6 +1,6 @@
 {
-{\sffamily I det følgende, kaster vi et detaljeret blik på nogle af
-billedbehandlingsmetoderne i programmet. Efter en kort teknisk
+{\sffamily I det følgende, kaster vi et detaljeret blik på
+billedbehandlingsmetoderne i programmet. Efter en teknisk
 introduktion til digitale billeder, vises hvilke datastrukturer og
 metoder \emph{OpenCV} stiller til rådighed, og hvordan disse bruges, til
 at udtrække regioner i digitale billeder. Endeligt vil vi undersøge,
@@ -10,22 +10,25 @@ hvilke svagheder vores implementation, til udtrækning af regioner, har.
 \subsection{Digitale billeder}
 I afsnit \ref{section_kort_intro} blev der givet en kort introduktion
 til den digitale repræsentation af billeder. Vi antog, at en pixel kunne
-antage værdier i mængden $\{0, 1\}$. I praksis kan pixels godt tage
+antage værdier i mængden $\{0, 1\}$. I praksis, kan pixels godt tage
 andre værdier. Vi arbejder med billeder, hvor værdien for hver pixel, er
-repræsenteret ved tre 8 bit størrelser --- hver især med værdier i mængden
-$\{0, 1, 2, \cdots, 254, 255\}$. Sammensætningen af de tre værdier, som
-beskrives som kanaler eller farvebånd, kaldes for en RGB-farve, hvor
-tallene repræsenteret ved $(R,G,B)$ henholdsvis angiver mængden af rød,
-grøn og blå farve i en pixel. Et sådant billede, kaldes for et
-RGB-billede.  Vi benytter os af 8 bit størrelsen, da dette er
-industristandarden\footnote{Reference}. For en uddybende forklaring om
-billeders repræsentation, refereres igen til \cite{SIOlsen}.
+repræsenteret ved tre 8 bit størrelser --- hver især med værdier i
+mængden $\{0, 1, 2, \cdots, 254, 255\}$. Sammensætningen af de tre
+værdier, som beskrives som kanaler eller farvebånd, kaldes for en
+RGB-farve, hvor tallene repræsenteret ved $(R,G,B)$ angiver mængden af
+hhv. rød, grøn og blå farve i en pixel. Et sådant billede, kaldes for et
+RGB-billede. Vores korpus består af sådanne RGB-billeder med 8 bits, og
+vi benytter derfor også denne repræsentation internt. Der er enkelte
+undtagelser, hvor der kun bruges én kanal, således at vi arbejder med
+gråtonebilleder. For en uddybende forklaring om billeders
+repræsentation, refereres igen til \cite{SIOlsen}.
 
 \marker{Hvordan repræsenteres billeder i \emph{OpenCV}? Skriv det
 her.}{Husk det!}
+Noget med matricer og arrays og Python og \emph{OpenCV}.
 
 \subsection{Resultaters struktur\label{resultat_struktur}}
-Indledningsvist vil vi introducere nogle vigtige datastrukturer som vi
+Indledningsvist vil vi introducere nogle vigtige datastrukturer, som vi
 bruger fra \emph{OpenCV}. Alle datastrukturer og metoder fra
 \emph{OpenCV}, er prefikset med ``cv'', hvilket gør det let, at skelne
 vores egne metoder fra dem der er givet i \emph{OpenCV}.  Der
@@ -130,30 +133,10 @@ region i billedet, som floodfill fylder ud.  Strukturen er vist i
 Strukturen indeholder en regions begrænsende rektangel og regionens
 areal.
 
-% Skal nok flyttes til snak om udtrækning
-%
-%\subsubsection{Line}
-%Den sidste struktur vi vil nævne kommer ikke fra \emph{OpenCV}, men er
-%blevet udviklet med henblik på at repræsentere snit i billeder.
-%Strukturen \textbf{Line} er reelt bare et linjestykke og har strukturen
-%vist i \eqref{Line_class}.
-%\begin{multline}
-%    \textbf{class~} \textrm{cvRect} = \{ \\
-%    \shoveleft{\qquad\textbf{cvPoint} : \textit{p1}} \\
-%    \shoveleft{\qquad\textbf{cvPoint} : \textit{p2}} \\
-%    \shoveleft{\}}\shoveright{}
-%    \label{Line_class}
-%\end{multline}
-
 \subsubsection{Resultater}
 Vi vil nu introducere en ny struktur, som repræsenterer Pythons
-\emph{dictionary}, forkortet \emph{dict}.
-%I praksis er det en
-%liste som man slår op i vedbrug af en nøgle. Nøglen kan være hvilken som
-%helst type, men er gerne en streng eller et heltal. Til hver indgang i
-%listen er der tilknyttet noget data som også kan være af en vilkårlig
-%type. Man kan derved have \emph{dicts} inde i en \emph{dict}.
-En \emph{dict} viser vi som i \ref{def_dict}.
+\emph{dictionary}, forkortet \emph{dict}.  En \emph{dict} viser vi som i
+\ref{def_dict}.
 \begin{eqnarray}
     \langle[\textit{dictName}]\rangle = \{ [\textit{key}] : [\textit{data}] \}
     \label{def_dict}
@@ -168,11 +151,10 @@ $\angles{LuckyNumbers}$, som indeholder personers lykketal:
     \label{lucky_dict}
 \end{multline}
 % In honor of the danish Tom Cruise
-Data i en \emph{dict} kan godt være af mere komplicerede typer, f.eks.
-kan man have en anden \emph{dict}. På denne måde kan man lave en
-hierakisk struktur, som egner sig til at opbevere fundne regioner i et
-billede. Vi ønsker at have hierakiet vist i figur
-\ref{resultat_hieraki}.
+Data i en \emph{dict}, kan godt være af mere komplicerede typer, f.eks.
+kan man have en anden \emph{dict}. Man kan således lave en hierakisk
+struktur, som egner sig opbevaring af fundne regioner i et billede. Vi
+ønsker at have hierakiet vist i figur \ref{resultat_hieraki}.
 
 \begin{figure}[!h]
     \dirtree{%
@@ -192,14 +174,14 @@ billede. Vi ønsker at have hierakiet vist i figur
 \end{figure}
 
 Vi har, at et billede kan have et endeligt antal snitratioer, som man
-ønsker at undersøge. Disse snitratioer, har enten to eller fire
-snit\footnote{jvf. afsnit \ref{section_opdeling}}. I disse snit er der
-et endeligt antal fundne regioner. Vi repræsenterer hver node i
+ønsker at undersøge. Disse snitratioer, har enten to eller fire snit,
+som nævnt i afsnit \ref{section_opdeling}. I disse snit er der et
+endeligt antal fundne regioner. Vi repræsenterer hver node i figur
 \ref{resultat_hieraki} med en \emph{dict}. På nederste niveau har vi
 selve regionen, som floodfill-metoden har lagt i strukturen
-\textbf{cvConnectedComp}. Vi ønsker dog også at gemme hvilken farve,
-regionen er blevet tildelt i det segmenterede billede. Vi gemmer
-derfor parret $(color, region)$, som er instanser af henholdsvis
+\textbf{cvConnectedComp}. Vi ønsker dog også, at gemme hvilken farve,
+regionen er blevet tildelt i det segmenterede billede. Vi gemmer derfor
+parret $(color, region)$, som er instanser af henholdsvis
 \textbf{CV\_RGB} og \textbf{cvConnectedComp}. Hver region bliver tildelt
 et \emph{id}, som er en strengrepræsentation af regionens farve.  Hvis
 det antages, at regionens farve er hvid, vil den have RGB-værdien $(255,
@@ -222,11 +204,10 @@ $\angles{RatioRegions}$. Den ses i \eqref{RatioRegions_dict}.
 \end{eqnarray}
 
 \noindent $\angles{RatioRegions}$ holder alle regioner for en givet
-snitratio.  Hvert snit i en snitratio er  --- i afsnit
-\ref{section_opdeling}  --- blevet tildelt et id i mængden
-$\{0,1,2,3\}$. Vi bruger snittets id som nøgle.  Data i
-$\angles{RatioRegions}$ er den instans af $\angles{CutRegions}$ som
-tilhører snittet.
+snitratio.  Hvert snit, tilknyttet en snitratio, blev i afsnit
+\ref{section_opdeling}, tildelt et id i mængden $\{0,1,2,3\}$. Vi bruger
+snittets id som nøgle.  Data i $\angles{RatioRegions}$ er den instans af
+$\angles{CutRegions}$ som tilhører snittet.
 
 Det sidste niveau i hierakiet fra figur \ref{resultat_hieraki}, er endnu
 en \emph{dict} givet ved $\angles{ImageRegions}$ vist i
@@ -262,6 +243,30 @@ I afsnit \ref{sammensaetning_af_metoder} er der givet en overordnet
 fremgangsmåde, for at trække regioner ud af billedet, i forhold til et
 givet snit. Resten af dette afsnit, vil omhandle den egentlige
 implementation af denne fremgangmåde og problemerne tilknyttet.
+Indledningsvist vises, hvordan snit i billedet repræsenteres.
+
+\subsubsection{Repræsentation af snit i billedet}
+Vi tidligere, i afsnit \ref{section_opdeling}, argumenteret for, hvordan
+vi finder det gyldne snit i et billede. Det er nævnt, at man ikke
+nødvendigvis behøver at betragte det gyldne snit, men vi kan arbejde med
+helt arbitrære snit. Vi vil derfor blot referere til \emph{snit i
+billedet}, da den enkelte snitratio er underordnet. Metoderne i dette
+afsnit er ikke specifikke for snitratioen $\varPhi$, men kan overføres
+til ethvert andet snit i billedet, med en arbitrær snitratio.
+
+Snit i et billede bliver imidlertid --- meget intuitivt --- blot
+repræsenteret ved et linjestykke. Vi præsenterer nu datastrukturen
+\textbf{Line}, som består af et linjestykkes to endepunkter.
+\begin{multline}
+    \textbf{class~} \textrm{Line} = \{ \\
+    \shoveleft{\qquad\textbf{cvPoint} : \textit{p1}} \\
+    \shoveleft{\qquad\textbf{cvPoint} : \textit{p2}} \\
+    \shoveleft{\}}\shoveright{}
+    \label{Line_class}
+\end{multline}
+Strukturen er simpel, men fleksibel, og lader mulighederne stå åbne,
+for, i en anden implementation, at betragte andet end blot vand- og
+lodrette snit i billedet.
 
 \subsubsection{Præparation af billedet}
 Det første skridt i præparation af billedet, inden udtrækningen af
@@ -325,7 +330,7 @@ billedet vi undersøger, har RGB-værdier i mængden
 $\{(0,0,0),(255,255,255)\}$, hvilket vil sige, at billedets pixels enten
 er helt sorte eller helt hvide --- billedet vi undersøger er binært.
 
-\begin{figure}[!h]
+\begin{figure}[p]
     \centering
     \begin{picture}(240,30)
         \put(0, 10){$A$}
@@ -354,38 +359,11 @@ er helt sorte eller helt hvide --- billedet vi undersøger er binært.
 
         \put(3, 0){\line(1, 0){233}}
     \end{picture}
-    \caption[]{Punkter hvor der er en kant der krydser snittet.}
+    \caption[]{Punkter, hvor der er en kant der krydser snittet.}
     \label{impUdtraek_kantpunkter}
 \end{figure}
-Som vist i figur \ref{impUdtraek_kantpunkter}, kan snittet opdeles i
-mindre linjestykker. Nu antager vi meget naivt, at punkterne på linjestykket
-$Ae_1$ tilhører én region, mens punkterne på $e_1e_2$ tilhører en anden
-region, og så fremdeles. Med denne antagelse, og antagelsen om at
-billedet er binært, kan vi, for hvert linjestykke mellem kanter, bruge
-\texttt{cvFloodFill} en enkelt gang. Hver gang vi passerer en kant,
-maler \texttt{cvFloodFill} med en ny tilfældig farve. På denne måde
-skelnes regioner fra hinanden. \texttt{cvFloodFill} kaldes, bland
-andet, med en en instans af \textbf{cvConnectedComp}, hvori den netop
-farvede region lægges. Vi bruger \texttt{cvFloodFill} på midten af hvert
-linjestykke og tildeler linjestykkerne tilfældige farver, som vist i
-figur \ref{impUdtraek_naiv_res}. Pseudokode for fremgangsmåden vises i
-kodeboks \ref{naiv_segmentering}.
 
-\begin{lstlisting}[caption={Naiv pseudokode til segmentering af binære
-    billeder.},captionpos=b,label={naiv_segmentering},numbers=left,
-    frame=single, breaklines=false, float=h]
-for lineSegment in Cut:
-    # Get a new color that is not in the component dictionary
-    color = getRandomColor()
-    region = cvConnectedComp()
-
-    center = getCenter(lineSegment)
-
-    cv.cvFloodFill(img, center, color, lowerThres, upperThres, region)
-
-\end{lstlisting}
-
-\begin{figure}[!h]
+\begin{figure}[p]
     \centering
     \begin{picture}(240,30)
         \color{red}
@@ -443,6 +421,64 @@ for lineSegment in Cut:
     }
     \label{impUdtraek_naiv_res}
 \end{figure}
+
+\begin{lstlisting}[caption={Naiv pseudokode til segmentering af binære
+    billeder.},captionpos=b,label={naiv_segmentering},numbers=left,
+    frame=single, breaklines=false, float=p]
+for lineSegment in Cut:
+    # Get a new color that is not in the component dictionary
+    color = getRandomColor()
+    region = cvConnectedComp()
+
+    center = getCenter(lineSegment)
+
+    cv.cvFloodFill(img, center, color, lowerThres, upperThres, region)
+
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Original pseudokode til udtrækning af
+    regioner. Denne kan returnere den samme region flere
+    gange.},captionpos=b,label={pseudo_udtraek_org},numbers=left,
+    frame=single, breaklines=false, float=h]
+for lineSegment in Cut:
+    # Get a new color that is not in the component dictionary
+    color = getRandomColor()
+    region = cvConnectedComp()
+
+    for pixel in lineSegment:
+
+        # Check if the color of the pixel equals current color
+        if not (color(pixel) ==  color):
+
+            # Check if the color of the pixel are in the saved regions
+            if not (color(pixel) in CutRegions):
+                cv.cvFloodFill(img, pixel, color, lowerThres, upperThres, region)
+
+    # Color the last pixel again to make sure that
+    # the returned component is the entire region
+    cv.cvFloodFill(img, pixel, color, lowerThres, upperThres, region)
+
+    # Put the results in the CutRegions-dictionary
+    CutRegions[color.toString()] = (color, region)
+\end{lstlisting}
+
+\suppressfloats
+\clearpage
+
+Som vist i figur \ref{impUdtraek_kantpunkter}, kan snittet opdeles i
+mindre linjestykker. Nu antager vi meget naivt, at punkterne på
+linjestykket $Ae_1$ tilhører én region, mens punkterne på $e_1e_2$
+tilhører en anden region, og så fremdeles. Med denne antagelse, samt
+antagelsen om at billedet er binært, kan vi, for hvert linjestykke
+mellem kanter, bruge \texttt{cvFloodFill} en enkelt gang. Hver gang vi
+passerer en kant, maler \texttt{cvFloodFill} med en ny tilfældig farve.
+Således skelnes regioner fra hinanden. \texttt{cvFloodFill} kaldes,
+bland andet, med en en instans af \textbf{cvConnectedComp}, hvori den
+netop farvede region lægges. Vi bruger \texttt{cvFloodFill} på midten af
+hvert linjestykke og tildeler linjestykkerne tilfældige farver, som vist
+i figur \ref{impUdtraek_naiv_res}. Pseudokode for fremgangsmåden vises i
+kodeboks \ref{naiv_segmentering}.
+
 Denne fremgangsmåde virker fint i det et-dimensionelle plan på binære
 billeder, som i figur \ref{impUdtraek_naiv_res}, men i to dimensioner,
 opstår der problemer med antagelsen om, at hvert linjestykke tilhører
@@ -509,7 +545,7 @@ returneret region.
     \subfloat[7. iteration]{
         \label{region7}
         \fbox{\includegraphics[width=0.4\textwidth]{afsnit/implementation/billeder/billedbehandling/binary_s7}}}
-        \caption[]{Iterationerne for kodeboks \ref{naiv_udtraekning}}
+        \caption[]{Iterationerne for kodeboks \ref{naiv_segmentering}}
     \label{region_extract}
 \end{figure}
 
@@ -535,7 +571,8 @@ som \emph{endnu ikke er blevet farvet af \texttt{cvFloodFill}}.
     \centering
     \fbox{\includegraphics[width=0.8\textwidth]{afsnit/implementation/billeder/billedbehandling/floodfill_color.png}}
     \caption[]{Problemet med floodfill-metoden i billeder med flere
-    farver. Den lyseblå region dækker ikke hele linjestykket.}
+    farver. Hvid farve er ikke blevet malet af floodfill-metoden endnu.
+    Den lyseblå region dækker ikke hele linjestykket.}
     \label{floodfill_taerskel_problem}
 \end{figure}
 
@@ -543,37 +580,11 @@ Fremgangsmåden, for at udtrække regioner ved et snit i et arbitrært
 billede, er vist i kodeboks \ref{pseudo_udtraek_org}. Metoden tager
 højde for den tidligere gjorte observation, hvor en allerede fundet
 region bliver overskrevet. Regioner gemmes i $\angles{CutRegions}$ på
-linje 20, som opretter en ny indgang med nøglen
-\texttt{color.toString()}, hvor \texttt{color.toString()} er regionens
-id. Ved inspektion ses det dog, at denne fremgangsmåde lider under
-nøjagtig samme svaghed som fremgangsmåden brugt i figur
-\ref{region_extract}.
+linje 20, som opretter en ny indgang med regionens id som nøgle.
+Regionens id fåes ved kaldet \texttt{color.toString()}. Ved
+inspektion ses det dog, at denne fremgangsmåde lider under nøjagtig
+samme svaghed som fremgangsmåden brugt i figur \ref{region_extract}.
 
-\begin{lstlisting}[caption={Original pseudokode til udtrækning af
-    regioner. Denne kan returnere den samme region flere
-    gange.},captionpos=b,label={pseudo_udtraek_org},numbers=left,
-    frame=single, breaklines=false, float=h]
-for lineSegment in Cut:
-    # Get a new color that is not in the component dictionary
-    color = getRandomColor()
-    region = cvConnectedComp()
-
-    for pixel in lineSegment:
-
-        # Check if the color of the pixel equals current color
-        if not (color(pixel) ==  color):
-
-            # Check if the color of the pixel are in the saved regions
-            if not (color(pixel) in CutRegions):
-                cv.cvFloodFill(img, pixel, color, lowerThres, upperThres, region)
-
-    # Color the last pixel again to make sure that
-    # the returned component is the entire region
-    cv.cvFloodFill(img, pixel, color, lowerThres, upperThres, region)
-
-    # Put the results in the CutRegions-dictionary
-    CutRegions[color.toString()] = (color, region)
-\end{lstlisting}
 Under udviklingen af metoden i kodeboks \ref{pseudo_udtraek_org},
 opdagede vi, at det ikke altid var hele regionen der blev returneret fra
 \texttt{cvFloodFill}. Vi betragter nu figur \ref{new_reg_small_box},
@@ -583,7 +594,7 @@ af \textbf{cvConnectedComp}, er den \emph{senest udfyldte}. Derfor får vi
 faktisk kun returneret et undersæt, af de pixels, som udgør den lyseblå
 region.
 
-\begin{figure}[!h]
+\begin{figure}[p]
     \setlength\fboxsep{0pt}
     \setlength\fboxrule{0.5pt}
     \centering
@@ -660,7 +671,6 @@ være sikre på resultatet. Metoden benytter et ``først til
 mølle''-princip, hvor en pixel, når den først et blevet tilknyttet en
 region, altid vil tilhøre denne.
 
-\note{Vi skal have beskrevet implementationen af udregning af margin}
 Pseudokoden i kodeboks \ref{pseudo_udtraek_rev} trækker dog kun de
 regioner ud som rører snittet. I kapitel \ref{chap_detektion} indførtes
 et margin, således at også regioner, som ligger tæt på snittet, kan
@@ -668,10 +678,11 @@ trækkes ud. Vi vil nu udvide pseudokoden i kodeboks
 \ref{pseudo_udtraek_rev} til også at trække regioner ud, som krydser
 margin. Vi navngiver metoden \texttt{ExtractRegions}, og den tager et
 snit som argument. Metoden ses i kodeboks
-\ref{pseudokode_udtraek_margin}. Metoden trækker først regioner ud med
+\ref{pseudo_udtraek_margin}. Metoden trækker først regioner ud med
 hensyn til det nedre margin, så med hensyn til det øvre margin og til
 sidst med hensyn til selve snittet. Alle regioner gemmes i den samme
-instans af $\angles{CutRatios}$.
+instans af $\angles{CutRatios}$. For selve udregningen af margin,
+henvises til afsnit \ref{subsec_margin_udregning}.
 
 \begin{lstlisting}[caption={Pseudokode til udtrækning af regioner med
     margin.},captionpos=b,label={pseudo_udtraek_margin},numbers=left,
@@ -720,18 +731,20 @@ def ExtractRegions(cut):
 \subsection{Svagheder\label{subsec_svagheder}}
 Den endelige metode, for udtrækning af regioner, med hensyn til et givet
 snit i billedet, har nogle svagheder, som bør nævnes. Den første er
-allerede nævnt i den foregående sætning: \note{Illustrér!}
-Metoden trækker kun regioner ud \emph{med hensyn} til et snit. Dette
-betyder, at kun regioner, som rører margin eller selve snittet, bliver
-trukket ud. Foregående skal tages helt bogstaveligt, i den forstand, at
-vi \emph{skal} have, at en region har en pixel enten på det nedre margin,
-det øvre margin eller på selve snittet, for at blive trukket ud. Vi kan
-altså godt have interessante regioner, som faktisk har mindst én kant af
-sit begrænsende rektangel inden for margin, som ikke bliver trukket ud.
-Dette er tilfældet, hvis \emph{to kanter} af det begrænsende ligger
-indenfor snittet, og regionens form og størrelse i øvrigt opfylder
-kravene for en interessant region. Denne opførsel er beklagelig, men kan
-faktisk løses trivielt. \note{Dette er måske ikke skide-smart at skrive,
+allerede nævnt i den foregående sætning: Metoden trækker kun regioner ud
+\emph{med hensyn} til et snit. Dette betyder, at kun regioner, som rører
+margin eller selve snittet, bliver trukket ud. Foregående skal tages
+helt bogstaveligt, i den forstand, at vi \emph{skal} have, at en region
+har en pixel enten på det nedre margin, det øvre margin eller på selve
+snittet, for at blive trukket ud. Vi kan altså godt have interessante
+regioner, som faktisk har mindst én kant af sit begrænsende rektangel
+inden for margin, som ikke bliver trukket ud.  Dette er tilfældet, hvis
+\emph{to kanter} af det begrænsende ligger indenfor snittet, og
+regionens form og størrelse i øvrigt opfylder kravene for en interessant
+region. Et eksempel er vist i figur \ref{respect_to_cut}, hvor den sorte
+region ikke vil blive trukket ud, selvom den har to kanter inden for
+margin. Denne opførsel er beklagelig, men kan faktisk løses trivielt.
+\note{Dette er måske ikke skide-smart at skrive,
 men det er et vagt forsøg på at dække over egen inkompetence. Skal vi
 rette koden igen?}
 Det overlades som opgave til læseren, at modificere pseudokoden i
@@ -740,20 +753,61 @@ begge kanter inden for margin.
 Når regioner kun trækkes ud, med hensyn til et snit, kan vi ved denne
 metode heller ikke garantere en fuld segmentering af billedet.
 
+\begin{figure}[p]
+    \setlength\fboxsep{0pt}
+    \setlength\fboxrule{0.5pt}
+    \centering
+    \fbox{\includegraphics[width=0.8\textwidth]{afsnit/implementation/billeder/billedbehandling/respect_to_cut.png}}
+    \caption[]{Sort region, som ikke bliver trukket ud af billedet.
+    Selvom regionens begrænsende rektangel ligger inden for margin, så
+    krydser regionen hverken nedre margin, øvre margin eller selve
+    snittet. Derfor opdages regionen ikke.}
+    \label{respect_to_cut}
+\end{figure}
+
+\subsubsection{Valg af tilfældige RGB-værdier}
 Man skal endvidere være opmærksom på, at hver gang vi markerer en ny
-region, vælges en tilfældig farve til denne. \note{Husk illustration!}
-Vi kan, i vores valg af farve, være uheldig og vælge en, som bliver
-brugt i det originale billede. Når vi kalder \texttt{cvFloodFill} igen,
-for at være sikre, at hele regionen bliver returneret, kan vi smelte to
-regioner sammen, som egentlig ikke burde hænge sammen. I samme
-forbindelse skal vi være opmærksomme på, at vi ligeledes kan være
-uheldige, at støde på en pixel, som har en farve lig med en allerede
-farvet region. I dette tilfælde, vil denne pixel blive anset som værende
-del af en eksisterende region, hvilket resulterer i at vi ikke bruger
-\texttt{cvFloodFill} på denne. Vi kan dog håbe, at denne pixel bliver
-inkluderet i den efterfølgende iteration --- hvis den næste pixels
-farve, da ikke er lig en allerede udvalgt regions, og denne ligger inden
-for den tilladte afvigelse, for \texttt{cvFloodFill}.
+region, vælges en tilfældig farve til denne.  Vi kan, i vores valg af
+farve, være uheldig og vælge en, som bliver brugt i det originale
+billede. Når vi kalder \texttt{cvFloodFill} igen, for at være sikre, at
+hele regionen bliver returneret, kan vi smelte to regioner sammen, som
+egentlig ikke burde hænge sammen. I figur \ref{floodfill_colors} er
+denne situation vist på det prærarerede billede fra figur \ref{bathers}.
+I samme forbindelse skal vi være opmærksomme på, at vi ligeledes kan
+være uheldige, at støde på en pixel, som har en farve lig med en
+allerede farvet region. I dette tilfælde, vil denne pixel blive anset
+som værende del af en eksisterende region, hvilket resulterer i at vi
+ikke bruger \texttt{cvFloodFill} på denne. Vi kan dog håbe, at denne
+pixel bliver inkluderet i den efterfølgende iteration --- hvis den næste
+pixels farve, da ikke er lig en allerede udvalgt regions, og denne
+ligger inden for den tilladte afvigelse, for \texttt{cvFloodFill}.  Vi
+vælger aldrig, at farve en region med en farve som allerede er brugt til
+en region, men vi kan også her være uheldige og vælge en farve, som
+ligger inden for floodfill-metodens tilladte afvigelse.
+
+\begin{figure}[p]
+    \setlength\fboxsep{0pt}
+    \setlength\fboxrule{0.5pt}
+    \centering
+    \subfloat[Originalt præpareret billede inden vi vælger en tilfældig
+    farve til floodfill.]{
+        \label{colors_1}
+        \fbox{\includegraphics[width=0.3\textwidth]{afsnit/implementation/billeder/billedbehandling/pre_floodfill_1}}}\hspace{1em}
+    \subfloat[Region fyldes med farve lig eksisterende pixels i
+    billedet. Pixels i drengens hår har nu samme farve som kroppen.]{
+        \label{colors_2}
+        \fbox{\includegraphics[width=0.3\textwidth]{afsnit/implementation/billeder/billedbehandling/pre_floodfill_2}}}\\
+    \subfloat[Når floodfill bruges en ekstra gang, for at være sikker på
+    at hele regionen returneres, smeltes drengens krop og hår sammen.]{
+        \label{colors_3}
+        \fbox{\includegraphics[width=0.3\textwidth]{afsnit/implementation/billeder/billedbehandling/pre_floodfill_3}}}\hspace{1em}
+    \subfloat[Hvis den første region havde fået en anden farve, ville vi
+    ikke have smeltet to regioner sammen.]{
+        \label{colors_4}
+        \fbox{\includegraphics[width=0.3\textwidth]{afsnit/implementation/billeder/billedbehandling/pre_floodfill_4}}}\\
+    \label{floodfill_colors}
+    \caption[]{Uheldige valg af tilfældig farve til regioner.}
+\end{figure}
 
 \subsubsection{Ikke-sammenhængende regioner}
 Metoden i kodeboks \ref{pseudo_udtraek_margin}, trækker højest én region
@@ -792,7 +846,7 @@ undlade at trække enkelte regioner ud.
     \label{usammenhaengende_region}
 \end{figure}
 
-\subsubsection{Fremhævelse af kanter}
+\subsubsection{Usikkerhed ved fremhævelse af kanter}
 Endeligt skal vi nævne problemerne tilknyttet måden, vi fremhæver kanter
 i et billede på. Som tidligere nævnt, så fremhæves kanterne, fordi vi
 har sløret billedet med en metode, som kan udviske kanterne. De
@@ -815,8 +869,39 @@ ramme burde være trivielt, men viste sig i praksis at være meget
 besværligt. En meget naiv løsning, hvor pixels kopieres én ad gangen,
 var tidskrævende på store billeder og vi beholdt derfor de sorte kanter.
 Alternativt kunne man beskære det originale billede, men vi besluttede
-at vi ikke ville manipulere med vores inddata og bevare det originale
-billede.
+at vi ikke ville manipulere med dimensionerne på vores inddata og bevare
+det originale billede.
+
+\subsection{Andre tilgange}
+Dette afsnit vil kort nævne andre fremgangsmåder, vi har prøvet, for at
+trække regioner ud af et billede. Vi har tidligt i udviklingen af
+programmet, eksperimenteret både med Octave og Matlab. Til at starte
+med, har vi brug disse sprog til at komme problemstillingen nærmere,
+og udvikle naive implementationer af enkelte algoritmer.
+
+I præparationen af billedet, inden udtrækning af regioner, vil vi gerne
+have, at farverne i billedet bliver ensartede, men vi ønsker også at
+bibeholde kanterne. Vi forsøgte at bruge en metode i \emph{OpenCV} der
+hedder \texttt{cvPyrMeanShiftFiltering}, som netop segmenterer billedet
+efter hvilke farver der ligner hinanden, men en fejl i biblioteket
+forsagede altid en segmenteringsfejl i det underliggende C-program. Vi
+blev siden gjort opmærksom på en sløringsmetode af Perona og
+Malik\cite{perona1990scale}, hvor det grafiske resultat tilnærmer sig
+det ønskede. Kun i Octaves \emph{Image}-pakke er denne implementeret. Vi
+lavede en hurtig afprøvning, hvor resultatet fra denne metode blev
+analyseret, men på basis at det endelige resultat, vurderede vi, at vi
+godt kunne nøjes med at fremhæve kanterne i billedet efter en simpel
+sløring.
+
+Vi har også eksperimenteret med, først at skallere billedet ned, inden
+man trak regioner ud. Dette gør nemlig, at kanterne forbliver intakte,
+mens farverne, til en vis grad, bliver mere ensartede. Vi stødte dog på
+problemer når billedet skulle skalleres op igen, eller rettere, få
+resultaterne skalleret op, så de passede til originalbilledet. Vi mister
+også meget præcision, når vi bruger et nedskalleret billede til at finde
+regioner i.
+
+}
 
 %\begin{figure}[!h]
 %    \centering
@@ -844,12 +929,5 @@ billede.
 %    \caption[]{Eksempel på regioner der krydser snittet.}
 %    \label{impUdtraek_regioner_snit}
 %\end{figure}
-
-\subsection{Andre tilgange}
-\note{Octave. Hvorfor ville vi bruge det? Kan man gøre det senere?}
-Dette afsnit vil kort nævne andre fremgangsmåder, vi har prøvet, for at
-trække regioner ud af et billede.
-
-}
 
 % vim: set tw=72 spell spelllang=da:
