@@ -16,7 +16,7 @@ Denne margin skal være tilstede på begge sider af et snit, så derfor vil
 hvert snit fylde $(2.4*2)\%$.
 Det maksimale antal af snit på et billede må altså være
 $100/4.8=20.833$. Hvilket ses på denne figur \ref{snitogmargin}
-\begin{figure}[h!]
+\begin{figure}[ht]
 	\begin{center}
 		\includegraphics[scale=0.3]{afsnit/resultater/billeder/20_cuts_med_margin}
 	\end{center}
@@ -48,6 +48,45 @@ Med den nuværende algoritme og billedebase burde det gyldnesnit
 altså ligge mellem $0.56803398875 +- 2.4\%$.
 Og tyder meget på at midten langt mere er stedet kunstrene arbejder
 ud fra.
+\begin{figure}[ht]
+	\begin{minipage}[b]{0.5\linewidth}
+		\begin{center}
+		\includegraphics[scale=0.4]{afsnit/resultater/billeder/cut0featsperratio.png}
+		\caption{Antal af detekterede interessante regioner i det højre
+		vertikale snit}
+		\label{cut0feats}
+		\end{center}
+	\end{minipage}
+	\hspace{0.5cm}
+	\begin{minipage}[b]{0.5\linewidth}
+		\begin{center}
+		\includegraphics[scale=0.4]{afsnit/resultater/billeder/cut1featsperratio.png}
+		\caption{Antal af detekterede interessante regioner i det
+		venstre vertikale snit}
+		\label{cut1feats}
+		\end{center}
+	\end{minipage}
+\end{figure}
+\begin{figure}[ht]
+	\begin{minipage}[b]{0.5\linewidth}
+		\begin{center}
+		\includegraphics[scale=0.4]{afsnit/resultater/billeder/cut2featsperratio.png}
+		\caption{Antal af detekterede interessante regioner i det højre
+		vertikale snit}
+		\label{cut0feats}
+		\end{center}
+	\end{minipage}
+	\hspace{0.5cm}
+	\begin{minipage}[b]{0.5\linewidth}
+		\begin{center}
+		\includegraphics[scale=0.4]{afsnit/resultater/billeder/cut3featsperratio.png}
+		\caption{Antal af detekterede interessante regioner i det
+		venstre vertikale snit}
+		\label{cut1feats}
+		\end{center}
+	\end{minipage}
+\end{figure}
+
 \begin{figure}[h!]
 	\begin{center}
 		\includegraphics[scale=0.5]{afsnit/resultater/billeder/featsperratio.png}
