@@ -1,34 +1,58 @@
-I vores program er der 3 forskelige thresholdt som påvirker hvordan
-metoden analysere billedet. Marginens brade, afvigelsen af farven i
-floodfill og afvigelsen i farven i kandtdetection. Alle 3 thresholdt er
-blevet introduseret i deres respektive afsnit, men ingen konkreade tal
+I vores program er der 3 forskellige tærskelværdier som påvirker hvordan
+metoden analysere billedet. Marginens brede, afvigelsen af farven i
+floodfill og afvigelsen i farven i kandtdetectionen. Alle 3 tærskelværdier er
+blevet introduceret i deres respektive afsnit, men ingen konkrate tal
 er opgivet. I dette afsnit vil vi opgive de tal, samt en forklaring på
 hvorfor vi har valt lige de tal.
 
 \subsection{Marginens brede}
-Vi regner marginens brade $MB$ ud fra en procent af billedets brade og
-højde. I afsnitte \ref{opdeling_af_billeder.tex} kom vi frem til en
-usikkerhed på $2.1 \%$ i vores udregninger, så hvores $MB$ skal minst
-være på $2.1 \%$. Ud over det er den minimale forskel på 2 snit,
+Vi regner marginens brede, $MB$ ud fra en procent af billedets brede og
+højde. I afsnittet \ref{opdeling_af_billeder.tex} kom vi frem til en
+usikkerhed på $2.1 \%$. Så vores $MB$ skal mindst
+være på $2.1 \%$. Ud over det er den minimale forskel på 2 snit vi foretager os,
 forskellen mellem det gyldne snit og $\frac{2}{3}$, som vi udregnet i
-section \ref{opdeling_af_billeder-tex} til maximal at have en $MB$ på
-$2.43$ få at margin ikke krysset. Så $MB \in [2.1, 2.43]$ og vi har valt
-at sætte $MB = 2.4$, da vi så kan tage højde for udforsende usikker
-heder som i ikke har opdaget inu XXX(er det en dog nok forklaring).
-
-\subsection{Afvigelsen af farver i floodfill}
-
-lo,lu = 4,4
-lo,lu = 5,5
-lo,lu = 6,6
-lo,lu = 3,3
+sektion \ref{opdeling_af_billeder.tex} til maksimalt at have en $MB$ på
+$2.43$, for at margin ikke krydser. Så $MB \in [2.1, 2.43]$. Vi har valt
+at sætte $MB = 2.4$, da vi derved kan tage højde for uforresette
+usikkerhed. XXX(er det en dog nok forklaring).
 
 \subsection{Afvigelsen af farver i kandtdetection}
-Vores ubberste mål med brugen af kandtdetection er af finde en kand rundt om de ragioner som vi menner er interasante, og undgå de kanter som ligger inde i ragioner. alt det kan ikke altid opfyldes, men vi kan komme så tæt på et kompromi mellem en perfect kant rund om ragion og ingen kanter inde i ragion som mulige. Dette gøres ved at ændre 2 tærskelværdiger i kantdetection ud for opsavationer som vi har taget på billederne i forvejen. Vi har valt at dele billederne som vi opsavere op i 9 kategorier, som vi vil gemmengå og komme inde på vores valg
+Det vi bruger kandtdetection til, er af finde en kanter rundt om de
+regioner som vi mener er interessante, og undgå de kanter som ligger
+inde i regioner. Begge de 2 mål kan ikke altid opfyldes, men vi kan
+komme så tæt på et krompromi mellem en perfekt kant rund om region og
+ingen kanter inde i region som mulige. Dette gøres ved at ændre 2
+tærskelværdier i kantdetectionen ud for observationer som vi har taget
+på billederne i forvejen. Vi har valt at dele billederne som vi
+observere op i 9 kategorier, som kan ses i tabel
+\ref{thressholdsTabelKant}, Kategorier er en grove opdeling af
+billederne efter detaljer og farve intensitet, som bruges til at give en
+bedre indblik på billedets opbygning. 
 
-\subsubsection{sammenlininger}
-Vi har set på et XX(hvormange) andtal malerier og har fundet de tærskelværdiger som vi menner passer best på billedet. Vi vil ilustrere framgange måden på maleriet \ref{kDetalier}, på maleriet kan man se der er mange farver og har masser af detaliger i sig. Måden vi har arbejdet os frem på er, ved at se på malleriet med tærskelværdig $[0,0],[100,100]......[900,900],[1000,1000]$ se figur \ref{allesammen1} og \ref{allesammen2}, og finde det intervalder hvor malerriet ikke har mistet nogle af sine kanter inu, men vil det, i næste intervalg, i ilustration vudere vi det til billedet \ref{300-300}, da billedet \ref{400-400} har mistet få meget af de kanter som vi gerne vil beholde. Som man kan se befinde tærskelværdien som vi gerne vil finde fram til fra $[300,300]$ og frem. Ved at sætte den anden tærskel værdig op lidt af gangen kan vi igen få en række billeder at vælje imellem, få at få det beste resultat, se sammenliningerne i figur \ref{allesammen3}. som man kan se begynder det er være svær at skeldne figurene i \ref{300-850} og der er lidt for mange kanter i \ref{300-700}, så vi har valdt at tage tærskeværdigerne $[300,750]$ få dette billedet. Man kunne god gå længer ned og se om tærskeværdig $[300,745]$ passet bedre, men XXX(). Det maleri vi lige har brugt er ikke serlige representativ for helle vores malleri database, så vi har taget en række billeder og brugt samme metode på dem og kommer frem til en midel tærskelværdig, jeg viser her en lille udsnit af dem, se figur %\ref{1},
-%\ref{2},\ref{3},\ref{4},\ref{5},\ref{6},\ref{7} og \ref{8}
+\subsubsection{Sammenligninger}
+Vi har set på XX(hvor mange) antal malerier og har fundet de
+tærskelværdier som vi mener passer bæst på billedet. Vi vil illustrerer
+den fremgange måden vi har brugt til at finde tærskelværdierne på, på
+maleriet \ref{kDetalier}. Maleriet er malet med mange farver og med
+masser af detaljer. Vi ser først på tærskelværdierne
+$[0,0],[100,100]......[900,900],[1000,1000]$ se figur \ref{allesammen1}
+og \ref{allesammen2}, og finde det interval hvor malerriet ikke har
+mistet nogle af kanterne rundt om regionerne i nu, men vil det, i næste
+interval. I illustration vurdere vi det til billedet \ref{300-300}, da
+billedet \ref{400-400} har mistet for mange af de kanter, som vi gerne
+vil beholde. Så tærskelværdien som vi gerne vil finde frem til, befinder
+sig fra $[300,300]$ og frem. Ved at sætte den anden tærskelværdig op
+lidt af gangen kan vi igen få en række billeder at vælge imellem, for at
+få det beste resultat, se sammenligningen i figur \ref{allesammen3}. som
+man kan se begynder det er være svær at skelne figurene i \ref{300-850}
+og der er lidt for mange kanter i \ref{300-700}, så vi har valt at bruge
+tærskeværdigerne $[300,750]$ for dette billedet. Man kunne god gå længer
+ned og se om tærskeværdig $[300,745]$ passet bedre, men vi har valt at
+holde . Det maleri vi lige har brugt er ikke særlige repræsentativ for
+helle vores maleri database, så vi har taget en række billeder og brugt
+samme metode på dem og kommer frem til en middel tærskelværdi, jeg viser
+her en lille udsnit af dem, se figur \ref{en},\ref{to},\ref{the}
+
 \begin{figure}[!h]
     \centering
     \subfloat[100,100]{
@@ -45,8 +69,10 @@ Vi har set på et XX(hvormange) andtal malerier og har fundet de tærskelværdig
         \label{400-400}}\\
      \label{allesammen1}
 \end{figure}
+
 \begin{figure}[!h]
-	    \subfloat[500,500]{
+	\centering
+	\subfloat[500,500]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/1_iteration/500-500.png}
         \label{500-500}}\hspace{1em}
     \subfloat[600,600]{
@@ -57,10 +83,11 @@ Vi har set på et XX(hvormange) andtal malerier og har fundet de tærskelværdig
         \label{700-700}}\hspace{1em}
     \subfloat[Original]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/kDetalier.jpg}
-        \label{kDetalier}}
+        \label{kDetalier}}\\
     \caption[]{Edgedetection på maleriet \ref{kDetalier} som har mange detaliger og kraftige farver, med tærskelværdierne fra 100-100 til 700-700}
-    \label{allesammen2}
+     \label{allesammen2}
 \end{figure}
+
 \begin{figure}[!h]
     \centering
     \subfloat[300,700]{
@@ -88,7 +115,7 @@ Vi har set på et XX(hvormange) andtal malerier og har fundet de tærskelværdig
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/svage_farver/svage_detalier/sDetalier.jpg}
         \label{Orginal}}\\
         \caption[]{Edgedetection på et billedet med svage farver og få detalier, hvor tærskenværdigern [100,250] er den beste}
-     \label{1}
+     \label{en}
 \end{figure}
 
 \begin{figure}[!h]
@@ -100,34 +127,82 @@ Vi har set på et XX(hvormange) andtal malerier og har fundet de tærskelværdig
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/svage_detalier/sDetalier1.jpg}
         \label{Orginal}}\\
         \caption[]{Edgedetection på et billedet med medium farver og få detalier, hvor tærskenværdigern [100,240] er den beste}
-     \label{2}
+     \label{to}
 \end{figure}
 
+\begin{figure}[!h]
+    \centering
+    \subfloat[200,460]{
+        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/medium_detalier/2_iteration/200-460.png}
+        \label{200-460}}\\
+    \subfloat[Orginal]{
+        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/medium_detalier/mDetalier1.jpg}
+        \label{Orginal}}\\
+        \caption[]{Edgedetection på et billedet med medium farver og medium detalier, hvor tærskenværdigern [200,460] er den beste}
+     \label{tre}
+\end{figure}
 
-\subsubsection{Krafige farver og medium detalier}
-\subsubsection{Krafige farver og få detalier}
-\subsubsection{Medium farver og mange detalier}
-\subsubsection{Medium farver og medium detalier}
-\subsubsection{Medium farver og få detalier}
-\subsubsection{Svage farver og mange detalier}
-\subsubsection{Svage farver og medium detalier}
-\subsubsection{Svage farver og få detalier}
+\begin{tabular}{| l | l | l | l |} \hline
+  						& Svage farver 	& Medium farver & kraftige farver \\ \hline
+	Få detalier 		& [100,250]		& [100,240]		& [200,320]\\ \hline
+	Medium detalier 	& [100,280]		& [200,460]		& [200,380]\\ \hline
+	Mange detalier		& [200,400]		& [200,380]		& [300,750]\\ \hline
+\end{tabular} \label{thressholdsTabelKant}
 
+Som man kan se at tabel \ref{thressholdsTabelKant} gå tærskelværdierne
+fra [100,240] til [300,750], så vi kan ikke umiddelbart sætte en fast
+tærskelværdi for alle malerier og få at lave en rigtige undersøgelse af
+tærskelværdi på malerierne, bliver man nød til at se på mangle flere
+malerierne og bestemme deres tærskelværdi og udregne median af de
+værdiger, men det vil krave en støre undersøgelse som vi ikke har valt
+at gøre, af 3 grunde. 1, det vil kun være en median tærskelværdi få lige
+det sæt malerier som vi arbejder på. 2 det vil krave at vi gennemgik
+XX(hvor mange) billeder. 3, selv med en median tærskelværdi vil der
+stadig være en stor rigge malerier hvor median tærskelværdien ikke vil
+være særlige god for. En anden fremgang måde er at regne
+tærskelværdierne løbene ud for vært billedet via et program. Men det
+problem falder uden for denne opgave og vi vil derfor ikke komme ind på
+det. Selv om vi måske ikke kan få det vi helst vil have er der stadig en
+del observationer som kan laves ud fra tabellen
+\ref{thressholdsTabelKant}. Tærskelværdierne bliver højre nu flere
+detaljer og nu kraftigere farverne er. Det virker også som om mange
+detaljer vægter lige højt i forholdt til tærskelværdierne en kraftige
+farver. Den anden tærskelværdi er ca 2.5 gangen støre en den første
+tærskelværdi.\\
 
+De tærskelværdier som vi har fundet svare til de optimale
+tærskelværdier for maleriet, men vi kan godt bruge en værdig som ligger
+laver, da metoden floodfill som gør brug af kandtdetektionen resultatset,
+god kan tage højde for små kanter, men fejler hvis der ikke er nogle.
+Derfor har vi valt at bruger den nederste tærskelværdi som vi har fundet
+[100,240] og sænke den lidt til $[78,78 \cdot 2.5 ]$.
 
+\subsection{Afvigelsen af farver i floodfill}
+Floodfill har 2 tærskelværdier $lo$ og $up$, som betegner hvor mange
+pixel værdier en nabo pixel farver må variere ned og op, en fyldestgørelses
+beskrivelse af floodfill findes i afsnit \ref{floodfill}. Vi har tænkt
+os at finde en fældes tærskelværdi til brug i vores program. Måde vi gør
+det på at ved at observere hvordan floodfill virker med forskellige
+tærskelværdier og finde de tærskelværdier som passer bæst til
+maleriet. Resultatet for observationen kan ses i tabel \ref{thressholdsTabelFF}, hvor de 9 sammen kategorier er vist. Et af de malerierne hvor den optimale tærskelværdi er fundet se i figur \ref{Floodfillbilledet}, så man kan se hvad vi har vurderet til at være den beste værdi.
 
+\begin{figure}[!h]
+    \centering
+    \subfloat[8,8]{
+        \includegraphics[angle=0,width=0.9\textwidth]{afsnit/afprovning/billeder/thressholds/svage_farver/kraftige_detalier/floodfill/8-8.png}
+        \label{8-8}}\\
+    \subfloat[Orginal]{
+        \includegraphics[angle=0,width=0.9\textwidth]{afsnit/afprovning/billeder/thressholds/svage_farver/kraftige_detalier/kDetalier.jpg}
+        \label{Orginal}}\\
+        \caption[]{tærskelværdierne på et billedet med svage farver og kraftige detaljer hvor tærskelværdien [8,8] passer best}
+     \label{Floodfillbilledet}
+\end{figure}
 
+\begin{tabular}{| l | l | l | l |} \hline
+  						& Svage farver 		& Medium farver & kraftige farver \\ \hline
+	Få detalier 		& \textbf{[2,2]}	& [3,3]			& [4,4]\\ \hline
+	Medium detalier 	& \textbf{[2,2]}	& \textbf{[5,5]}& \textbf{[2,2]}\\ \hline
+	Mange detalier		& [8,8]				& [4,4]			& [7,7]\\ \hline
+\end{tabular} \label{thressholdsTabelFF}\\\\
 
-
-
-
-
-threshold1,threshold2 = 78, 156
-threshold1,threshold2 = 78, 156
-
-
-
-
-
-
-
+Som man kan af tabellen er nogle af vadierne med fed, begrundelsen for det er at de vadier er de beste vi kunne finde for billedet, men at de vadier stadig ikke giver noget som er særlige brugbart, se sektion \ref{floodfilltest}. værdigerne i tabel fluktuere også en del, så vi har igen samme problem stilling som i tærskelværdierne ved kantdetektion og har valt at bruge tærskelværdien [4,4] da dette kommer tættest på gennemsnit.

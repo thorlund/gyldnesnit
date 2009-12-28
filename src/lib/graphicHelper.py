@@ -17,7 +17,7 @@ from src.settings import Settings
 
 # Import available methods
 import naiveMethod
-
+import src.lib.marginCalculator as marginCalculator
 
 ### Methods for showing images
 
@@ -120,7 +120,19 @@ def main():
 
 	blobImg = blobResult(image, settings, cut)
 	boxxImg = boundingBoxResult(image, settings, cut, thickness, color)
-
+	cutt = lib.findMeans(cv.cvGetSize(image), settings.cutRatios[0])[cut]
+	# cuttet verdi, dog skal det vi generaliseres lidt
+	oriantesen = cutt.getPoints()[0].x == cutt.getPoints()[1].x
+	if oriantesen:
+		cutPixel = cutt.getPoints()[1].x
+	else:
+		cutPixel = cutt.getPoints()[1].y
+	
+	if oriantesen:
+	#	print 'hej'
+		cv.cvLine(boxxImg, cv.cvPoint(cutPixel, cutt.getPoints()[0].y), cv.cvPoint(cutPixel, cutt.getPoints()[1].y), lib.COL_RED)
+	else:
+		cv.cvLine(boxxImg, cv.cvPoint(cutt.getPoints()[0].x, cutPixel), cv.cvPoint(cutt.getPoints()[1].x, cutPixel), lib.COL_RED)
 	# Save images
 	#highgui.cvSaveImage('floodfillbilledet.png', blobImg)
 	#highgui.cvSaveImage('boindingboxbilledet.png', boxxImg)

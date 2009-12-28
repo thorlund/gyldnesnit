@@ -1,0 +1,159 @@
+test på test billeder
+test masse
+
+
+I dette sektion vil vi teste den naive løsning, ved at se om den sortere
+de rigtige regioner væk og om løsningen opføre sig på samme måde som vi
+har håbet på. Det vil vi gøre ved ført at se på nogle fabrikeret test
+billeder få at se om den naive løsning virker efter meningen og bag
+efter vil vi teste på malerierne for at se om den naive løsning kan
+bruges i praktisk.
+  
+\subsection{Afprøvning på test billeder}
+Vi vil teste på de samme billeder som var i \ref{region_detektor_test} XX(og måske nogle flere) 
+
+\subsection{Afprøvning på malerier}
+Nå et billedet bearbejdes, i vores program, er der 2 naturlige steder
+hvor det vil være fornuftige at se hvad der sker. Det første er efter vi har
+iteraret hen over et af de 4 cut og fundet alle de regioner som ligger
+på eller lige omkring snittet.
+
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.42,angle=0]{afsnit/afprovning/billeder/floodfillbilledet.png}
+	\end{center}
+	\caption[]{Billedet hvor vores algoritme har fundet x antal regioner, margin er sat til 0.9\% og floodfils up,dawn er sat til 4}
+	\label{ff}
+\end{figure}
+
+I billedet \ref{ff} er vær region, indtegnet med vær sin farve, og snittet
+som er beregnet ud fra er det horisontale gyldne snit som ligger mest
+til højre. Som man kan se finder algoritmen en masse regioner, hvor
+nogle af dem er ret spændene at se på, som f.eks. drengen som er farvet
+helt lyserød. Der bliver også fundet en masse regioner som ikke er
+særlige spændene, f.eks. helle baggrunden som er malet mørkelilla i
+billedet. Som man kan af billedet, er der ikke særlige mange regioner, i
+selve snittet som bliver tværet ud og kommer til at falde i et med et af
+de andre regioner i billedet, det er et godt tegn, da sammensmeltningen af
+regioner vil give en forkert fortolkning af billedet.
+
+Det andet naturlige sted at se på, er nå vi tager alle de regioner som
+blev fundet og sortere, dem fra, som ikke passer overens med vores
+definition, af om regionen ligger i snittet. De regionerne som er taget
+med, bliver inremmet i en bos og kan ses på billedet \ref{ff}. 
+
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.42,angle=0]{afsnit/afprovning/billeder/boindingboxbilledet.png}
+	\end{center}
+	\caption[]{Billedet de regioner som vi har tilbage, er i en box, sammen opsætning som før}
+	\label{blob}
+\end{figure}
+
+Som man kan se er der kun 1 region tilbage, som omkredser en sko i
+billedet. Men tilgængel er alle de store regioner så som baggrunden og
+græsset ikke blevet taget med. Det kan både siges at være godt og skidt.
+det gode er at vi nu har en god ide om, hvad der bliver fundet. hvis vi
+samme liner vores beskrivelse af vores fremgangsmåde, og hvordan
+billedet ser ud. Stemmer det over ens, så vores algoritme virker skulle
+virke. Det dårlige er, at vi fjerner ret meget. F.eks. kunne drengen
+være en region som man gerne vil have med.
+I alle de billeder som vi viser her, er floodfills up,dawn værdiger sat
+til 4, dog variere margin noget, thressholdet for edge detection er sat
+til 78 og 195.
+
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.40,angle=0]{afsnit/afprovning/billeder/BBcomposa.png}
+	\end{center}
+	\caption[]{billedet med 2 ragioner i snittet, margin = 2.5 \%}
+	\label{BBcomposa}
+\end{figure}
+
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.40,angle=0]{afsnit/afprovning/billeder/FFcomposa.png}
+	\end{center}
+	\caption[]{De 2 ragioner som er fundet før, er 2 sorte plamasier i
+	billedet. Margin = 2.5\%}
+	\label{FFcomposa}
+\end{figure}
+
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.20,angle=0]{afsnit/afprovning/billeder/nicofloodfillbilledet.png}
+	\end{center}
+	\caption[]{En stor ragion på billedet, som forkommer da dette
+	billedet er falmet med tiden eller bare ikke har høj nok farve
+	intentitet. Margin = 0.9\%}
+	\label{nicofill}
+\end{figure}
+
+\subsection{Eksampel 4}
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.30,angle=0]{afsnit/afprovning/billeder/BB1annunc2.png}
+	\end{center}
+	\caption[]{Hånd, glorie og hå er fundet, samt noget ekstre klæde.
+	margin = 0.9\%}
+	\label{BB1annunc2}
+\end{figure}
+
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.30,angle=0]{afsnit/afprovning/billeder/BB09crucif.png}
+	\end{center}
+	\caption[]{Svanen fundet samt skildet som er 2 ting som trader fram
+	i maleriet, margin = 2.5\%}
+	\label{BB09crucif}
+\end{figure}
+
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/FFadorat.png}
+	\end{center}
+	\caption[]{Runde billeder med ramme kan skabe problemer, da vi ikke
+	er sikre på at det er det rigtige snit som vi arbejder på. Margin =
+	2.5\%}
+	\label{FFadorat}
+\end{figure}
+
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.50,angle=0]{afsnit/afprovning/billeder/BBallegory.png}
+	\end{center}
+	\caption[]{Ingen ting fundet, ingen ting at finde. Margin = 2.5\%}
+	\label{BBallegory}
+\end{figure}
+
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.35,angle=0]{afsnit/afprovning/billeder/BBCarruingcut2.png}
+	\end{center}
+	\caption[]{I dette billedet finder vi 3 ragioner som ligger i det
+	gyldne snit, 2 hovder som svare over ens med det vi gerne villle
+	finde, og så en arm}
+	\label{BBCarruingcut2}
+\end{figure}
+
+
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.50,angle=0]{afsnit/afprovning/billeder/BBMonalisacut1.png}
+	\end{center}
+	\caption[]{Monalisa med ved cut 1 , hvor der bliver fundet hindes
+	overbryst og hindes pande. margin  = 2.5\%}
+	\label{BBMonalisacut1}
+\end{figure}
+
+
+\subsection{hvad kan vi gøre bedre}
+I det første billedet \ref{ff}, mener vi at den ting som virkelige kan
+forbedre måde vores metode arbejder på. Er ved at ændre på den
+definition som sortere regioner fra. Så en region kan krydse begge
+marginer. Den anden ting man kunne se på, omhandler det andet billedet
+\ref{nicofill}, hvor vi få for meget med, dette kunne løses ved at se på
+individuelde billeder og regne ud hvor meget algoritmerne må tage med.
+Begge disse to forslag vil blive diskuteret yderligt i den udvidet
+løsning af problemet, hvor vi vil gå ind på hvad vi gør for at kommer
+over nogle at de problemer som vi har.

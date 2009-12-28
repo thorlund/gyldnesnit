@@ -48,13 +48,13 @@ if not image:
 	print ""
 	sys.exit(-1)
 
-threshold1 = 75;
-threshold2 = 2.5 * threshold1;
+threshold1 = 78;
+threshold2 = 196;
 out = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
 edges = cv.cvCreateImage(cv.cvGetSize(image), 8, 1)
 blurImage = cv.cvCreateImage(cv.cvGetSize(image), 8, 3)
 
-edgeDetector.findBWEdges(image, edges, 72, 2.5*72)
+edgeDetector.findBWEdges(image, edges, threshold1, threshold2)
 
 #out = cv.cvCreateImage(cv.cvGetSize(image), 8, 1)
 
@@ -104,10 +104,11 @@ lib.drawMargin(out, cut, margin)
 #	lib.plot(out, point, 2)
 #out = edgeDetector.findEdges(out, 70, 70)
 
-winname = "floot"
+nystr = str(str(lo)+'-'+str(up)+'.png')
+winname = 'hej'
 
 highgui.cvNamedWindow (winname, highgui.CV_WINDOW_AUTOSIZE)
-highgui.cvSaveImage('out.png', out)
+highgui.cvSaveImage(nystr, out)
 
 while True:
 	highgui.cvShowImage (winname, out)
