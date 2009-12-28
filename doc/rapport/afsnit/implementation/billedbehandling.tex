@@ -1,27 +1,27 @@
 {
-{\sffamily I det følgende, kaster vi et detaljeret blik på
-billedbehandlingsmetoderne i programmet. Efter en teknisk
-introduktion til digitale billeder, vises hvilke datastrukturer og
-metoder \emph{OpenCV} stiller til rådighed, og hvordan disse bruges, til
-at udtrække regioner i digitale billeder. Endeligt vil vi undersøge,
-hvilke svagheder vores implementation, til udtrækning af regioner, har.
+{\sffamily I det følgende, kaster vi et blik på detjlerne i programmets
+billedbehandlingsmetoder. Efter en teknisk introduktion til digitale
+billeder vises det, hvilke datastrukturer og metoder \emph{OpenCV}
+stiller til rådighed, samt hvordan disse bruges, til at udtrække
+regioner i digitale billeder. Endeligt vil vi undersøge, hvilke
+svagheder vores implementation, til udtrækning af regioner, har.
 }
 
 \subsection{Digitale billeder}
 I afsnit \ref{section_kort_intro} blev der givet en kort introduktion
-til den digitale repræsentation af billeder. Vi antog, at en pixel kunne
-antage værdier i mængden $\{0, 1\}$. I praksis, kan pixels godt tage
-andre værdier. Vi arbejder med billeder, hvor værdien for hver pixel, er
-repræsenteret ved tre 8 bit størrelser --- hver især med værdier i
-mængden $\{0, 1, 2, \cdots, 254, 255\}$. Sammensætningen af de tre
-værdier, som beskrives som kanaler eller farvebånd, kaldes for en
+til den digitale repræsentation af billeder. Det blev antaget, at en
+pixel kunne antage værdier i mængden $\{0, 1\}$, men i praksis, kan
+pixels godt antage andre værdier. Vi arbejder med billeder, hvor værdien
+for hver pixel er repræsenteret ved tre 8 bit størrelser, hver med
+værdier i mængden $\{0, 1, 2, \cdots, 254, 255\}$. Sammensætningen af de
+tre værdier, som beskrives som kanaler eller farvebånd, kaldes for en
 RGB-farve, hvor tallene repræsenteret ved $(R,G,B)$ angiver mængden af
 hhv. rød, grøn og blå farve i en pixel. Et sådant billede, kaldes for et
 RGB-billede. Vores korpus består af sådanne RGB-billeder med 8 bits, og
 vi benytter derfor også denne repræsentation internt. Der er enkelte
 undtagelser, hvor der kun bruges én kanal, således at vi arbejder med
-gråtonebilleder. For en uddybende forklaring om billeders
-repræsentation, refereres igen til \cite{SIOlsen}.
+gråtonebilleder. For en uddybning af billeders repræsentation henvises
+til \cite{SIOlsen}.
 
 Vi har også tidligere, i ligning \ref{billede_matrix},  vist, at et
 digitalt billede kan skrives som en matrix. Ved denne matrix, kan man få
@@ -71,10 +71,10 @@ $\textbf{I}_{2,0} =~$\texttt{I[2][0]}.
 \subsection{Resultaters struktur\label{resultat_struktur}}
 Indledningsvist vil vi introducere nogle vigtige datastrukturer, som vi
 bruger fra \emph{OpenCV}. Alle datastrukturer og metoder fra
-\emph{OpenCV}, er prefikset med ``cv'', hvilket gør det let, at skelne
-vores egne metoder fra dem der er givet i \emph{OpenCV}.  Der
-præsenteres i det følgende en notation for datastrukturer.  Notationen
-er underlagt strukturen vist i \eqref{types_class}.
+\emph{OpenCV}, har præfikset ``cv'', hvilket gør det let, at skelne
+vores egne metoder fra dem der er givet i \emph{OpenCV}. Vi præsenterer
+desuden en notation for datastrukturer, der er underlagt strukturen vist
+i \eqref{types_class}.
 \begin{multline}
     \textbf{class~} [\textit{name}] = \{ \\
     \shoveleft{\qquad[\textit{type}] : [\textit{varName}]} \\
@@ -91,13 +91,13 @@ I \eqref{example_class} ses et eksempel på en struktur kaldet
     \shoveleft{\}}\shoveright{}
     \label{example_class}
 \end{multline}
-Når en type har et suffiks på formen $\textit{type}[i]$, hvor $i$ er et
+Når en type har et suffiks af formen $\textit{type}[i]$, hvor $i$ er et
 heltal, betyder det, at dette er en liste af længde $i$ af typen
 \textit{type}.  Bemærk, at en strukturs navn bliver skrevet med fed
 skrift i brødteksten, når der refereres til en sådan. Ligeledes vil en
 strukturs navn blive skrevet med fed i pseudokoden, hvis der refereres
-til den. Vi kan definere en ny struktur \textbf{NewClass}, som viser
-dette, i \eqref{new_class} herunder.
+til den. Vi kan definere en ny struktur, \textbf{NewClass}, som
+illustrerer dette, i \eqref{new_class} herunder.
 \begin{multline}
     \textbf{class~} \textrm{NewClass} = \{ \\
     \shoveleft{\qquad\textbf{ExampleClass} : \textit{exampleInstance}} \\
@@ -109,9 +109,9 @@ Vi vil nu beskrive de vigtigste datastrukturer, som vi bruger, med
 ovenstående notation.
 
 \subsubsection{cvScalar}
-Strukturen \textbf{cvScalar} fungerer egentlig blot som en almindelig
-liste med værdier. En instans af \textbf{cvScalar} kan dog kun indeholde
-1, 2, 3 eller 4 værdier. Strukturen vist i \eqref{cvScalar_class} har fire
+Strukturen \textbf{cvScalar} fungerer egentlig som en almindelig liste
+med værdier, blot kan en instans af \textbf{cvScalar} kun indeholde 1,
+2, 3 eller 4 værdier. Strukturen vist i \eqref{cvScalar_class} har fire
 værdier.
 \begin{multline}
     \textbf{class~} \textrm{cvScalar} = \{ \\
@@ -119,7 +119,7 @@ værdier.
     \shoveleft{\}}\shoveright{}
     \label{cvScalar_class}
 \end{multline}
-I \emph{OpenCV}, og vores implementation i øvrigt, bruges strukturen
+I \emph{OpenCV}, og i vores implementation i øvrigt, bruges strukturen
 blandt andet til RGB-farver og tærskelværdier. Til RGB-værdier bruger
 \emph{OpenCV} også strukturen \textbf{CV\_RGB}, men dette er reelt blot
 en instans af \textbf{cvScalar}.
@@ -134,13 +134,13 @@ to-dimensionelle plan. Den er givet i \eqref{cvPoint_class}.
     \shoveleft{\}}\shoveright{}
     \label{cvPoint_class}
 \end{multline}
-Strukturen er simpel, men er en meget central del af implementationen.
-Den bruges blandt andet til at angive snit i billedet samt fortælle
-floodfill hvor vi skal male og skifte farve.
+Det er en simpel struktur, men den er en meget central del af
+implementationen.  Den bruges blandt andet til at angive snit i billedet
+samt til at fortælle floodfill, hvor vi skal male og skifte farve.
 
 \subsubsection{cvRect}
 Denne struktur beskriver et rektangel, ved at angive dets øverste venstre
-hjørne og dimensioner. Strukturen vises i \eqref{cvRect_class}.
+hjørne og dets dimensioner. Strukturen vises i \eqref{cvRect_class}.
 \begin{multline}
     \textbf{class~} \textrm{cvRect} = \{ \\
     \shoveleft{\qquad\textbf{int} : \textit{x}} \\
@@ -153,7 +153,7 @@ hjørne og dimensioner. Strukturen vises i \eqref{cvRect_class}.
 I vores implementation af den naive fremgangsmåde, som nævnt i afsnit
 \ref{section_naiv}, er det denne struktur, som angiver en regions
 begrænsende rektangel. Vi vil i afsnit \ref{section_vurdering_regioner},
-se hvordan strukturen \textbf{cvRect} bruges, til at vurdere, om regioner
+se, hvordan strukturen \textbf{cvRect} bruges til at vurdere, om regioner
 ligger i det gyldne snit.
 
 \subsubsection{cvConnectedComp}

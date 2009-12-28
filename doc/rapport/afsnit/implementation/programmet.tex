@@ -1,8 +1,9 @@
 {
-{\sffamily Vi giver en kort præsentation af programmets overordnede
+{\sffamily Vi giver her en kort præsentation af programmets overordnede
 struktur. Mappestrukturen er vist i figur \ref{program_struktur}.
+
 Indholdet af mappen \texttt{tests} er blot afprøvninger fra forskellige
-stadier i udviklingen af programmet og vi vil derfor ikke komme nærmere
+stadier i udviklingen af programmet, og vi vil derfor ikke komme nærmere
 ind på dette.
 
 \begin{figure}[!h]
@@ -25,8 +26,8 @@ ind på dette.
 
 I programmets rod ligger billededatabasen i filen
 \texttt{pictureresource.db}. Filen \texttt{start.py} starter en analyse
-på denne database. Den følgende korte introduktion til de enkelte dele
-af programmet går mapperne igennem alfabetisk.
+på denne database. Den følgende korte introduktion, til de enkelte dele
+af programmet, går mapperne igennem alfabetisk.
 
 }
 
@@ -42,7 +43,7 @@ af programmet går mapperne igennem alfabetisk.
 \vspace{1.4em}
 Mappen \texttt{database/} vedrører population af databasen ud fra en
 csv-fil fra vores korpus. Der er udviklet en parser specifikt til denne
-csv-fil. I denne mappe ligger også koden tilknyttet udtræk fra databasen
+csv-fil. I mappen ligger også koden tilknyttet udtræk fra databasen
 i forbindelse med de videnskabelige resultater i kapitel
 \ref{chap_resultater}.
 
@@ -54,10 +55,10 @@ i forbindelse med de videnskabelige resultater i kapitel
 \vspace{1.4em}
 
 I mappen \texttt{experiments/} gemmes kørsler tilknyttet de
-videnskabelige eksperimenter, således at de let kan hentes ind
+videnskabelige eksperimenter, således at de let kan hentes ind af
 \texttt{start.py} i programmets rod og køres på databasen. Det er
 nyttigt at have eksperimenterne liggende separat på denne måde, da man
-kan oprette forskellige eksperimenter som kører analysen med specielle
+kan oprette forskellige eksperimenter, som kører analysen med bestemte
 parametre eller udtrækningsmetoder.
 
 \vspace{1.4em}
@@ -84,9 +85,9 @@ parametre eller udtrækningsmetoder.
 metoder til udtrækning og bedømmelse af regioner. Filen
 \texttt{paintingAnalyser.py} er den centrale komponent i denne
 sammenhæng, da den binder hele udtrækningen og bedømmelsen af regioner
-sammen. Den distribuerer arbejdet, alt efter hvilken udtræknings- og
-bedømmelsesmetode der bruges.  I \texttt{goldenLibrary.py} er der
-defineret en række hjælpemetoder som bruges i billedbehandlingen.
+sammen. Den distribuerer arbejdet alt efter hvilken udtræknings- og
+bedømmelsesmetode, der bruges.  I \texttt{goldenLibrary.py} er der
+defineret en række hjælpemetoder, som bruges i billedbehandlingen.
 
 \vspace{1.4em}
 \dirtree{%
@@ -108,7 +109,7 @@ gøre ofte brugte forespørgsler til databasen lettere.
 %(container)
 \vspace{1.4em}
 
-Dette er blot en datastruktur til malerier i programmet således at
+Dette er blot en datastruktur til malerier i programmet, således at
 databasen og billedbehandlingen har et fælles format at arbejde efter.
 
 \vspace{1.4em}
@@ -119,12 +120,12 @@ databasen og billedbehandlingen har et fælles format at arbejde efter.
 %(globale indstillinger, indstillinger til kørsel, kan gemmes i database)
 \vspace{1.4em}
 
-I \texttt{setting} stilles en klasse til rådighed som indeholder de
-forskellige parametre til billedbehandlingen. Dette drejer sig om
-tærskelværdier, marginstørrelse og hvilke snitratioer der skal
+I \texttt{setting} stilles en klasse, som indeholder de forskellige
+parametre til billedbehandlingen, til rådighed. Det drejer sig om
+tærskelværdier, marginstørrelse og hvilke snitratioer, der skal
 undersøges. Her er også defineret globale indstillinger til programmet
-med specielt henblik på hvor databasen og maleriers metadata er placeret
-i filsystemet.
+med specielt henblik på, hvor databasen og maleriers metadata er
+placeret i filsystemet.
 
 }
 
