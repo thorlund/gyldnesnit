@@ -465,7 +465,7 @@ er helt sorte eller helt hvide --- billedet vi undersøger er binært.
 
 \begin{lstlisting}[caption={Naiv pseudokode til segmentering af binære
     billeder.},captionpos=b,label={naiv_segmentering},numbers=left,
-    frame=single, breaklines=false, float=p]
+    frame=tb, breaklines=false, float=p]
 for lineSegment in Cut:
     # Get a new color that is not in the component dictionary
     color = getRandomColor()
@@ -480,7 +480,7 @@ for lineSegment in Cut:
 \begin{lstlisting}[caption={Original pseudokode til udtrækning af
     regioner. Denne kan returnere den samme region flere
     gange.},captionpos=b,label={pseudo_udtraek_org},numbers=left,
-    frame=single, breaklines=false, float=h]
+    frame=tb, breaklines=false, float=h]
 for lineSegment in Cut:
     # Get a new color that is not in the component dictionary
     color = getRandomColor()
@@ -671,7 +671,7 @@ er vist i kodeboks \ref{pseudo_udtraek_rev}.
 \begin{lstlisting}[caption={Revideret pseudokode til udtrækning af
     regioner. Returnerer ingen
     duplikater.},captionpos=b,label={pseudo_udtraek_rev},numbers=left,
-    frame=single, breaklines=false, float=p]
+    frame=tb, breaklines=false, float=p]
 for lineSegment in Cut:
     # Get a new color that is not in the component dictionary
     color = getRandomColor()
@@ -725,7 +725,7 @@ henvises til afsnit \ref{subsec_margin_udregning}.
 
 \begin{lstlisting}[caption={Pseudokode til udtrækning af regioner med
     margin.},captionpos=b,label={pseudo_udtraek_margin},numbers=left,
-    frame=single, breaklines=false, float=h]
+    frame=tb, breaklines=false, float=h]
 def ExtractRegions(cut):
     # Calculate lowerMargin and upperMargin
     (lowerMargin, upperMargin) = calculateMargins(cut)

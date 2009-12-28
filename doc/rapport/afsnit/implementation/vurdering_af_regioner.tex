@@ -1,11 +1,101 @@
 {
-{\sffamily Mindre indledning.
+{\sffamily Vi vender nu opmærksomheden mod selve implementationen af de
+metoder, som afgør hvorvidt en udtrukket regionen kan siges at være
+interessant, samt hvordan vi har implementeret den naive fremgangsmåde,
+som bedømmer, om en region ligger i det gyldne snit. Al det følgende er
+implementeret i filen \texttt{regionSelector.py} i mappen \texttt{lib/}.
+Vi har igen, at metoderne ikke er specifikke for det gyldne snit, men
+kan anvendes på ethvert snit i billedet. Sidst i afsnittet viser vi,
+hvordan vi har implementeret den videregående vurdering, hvor regioner
+bedømmes ud fra deres massemidtpunkt. Vi starter med at se på en fælles
+datastruktur der bruges, når regioner bliver vurderet.
 }
+
+\paragraph{Fælles datastruktur til betingelser}
+Når vi skal afgøre, hvorvidt et antal udtrukne regioner er interessante
+og ligger i snittet, er der en række betingelser der skal være opfyldt.
+Til disse, er der forbundet nogle udregninger, som for hver region, vil
+være det samme. Vi bruger derfor en struktur til at holde resultaterne
+fra disse udregninger, således at de ikke skal udføres for hver eneste
+region vi kontrollerer. Datastrukturen kaldes \textbf{Constraints} og
+ses herunder.
+\begin{multline}
+    \textbf{class~} \textrm{Constraints} = \{ \\
+    \shoveleft{\qquad\textbf{int} : \textit{coordinate}} \\
+    \shoveleft{\qquad\textbf{int} : \textit{minSize}} \\
+    \shoveleft{\qquad\textbf{int} : \textit{minMass}} \\
+    \shoveleft{\qquad\textbf{int[]} : \textit{acceptRange}} \\
+    \shoveleft{\}}\shoveright{}
+    \label{Constraints_class}
+\end{multline}
+Variablene \texttt{minSize} og \texttt{minMass} relaterer sig kun til
+klassificering af interessante regioner, mens \texttt{coordinate} og
+\texttt{acceptRange} hører til klassificering af regioner liggende i
+snittet. De enkelte variable vil blive forklaret nærmere i det følgende,
+når det er relevant.
+
+\subsection{Interessante regioner}
+I afsnit \ref{section_naiv}, blev det defineret, at for at en region,
+kan betegnes som værende \textbf{interessant}, skal den
+\begin{enumerate}
+        \renewcommand{\labelenumi}{(\alph{enumi})}
+    \item have et areal større end en tærskelværdi, der sættes i
+        forhold til billedets størrelse
+    \item have en masse større end en tærskelværdi, der ligeledes,
+        sættes i forhold til billedets størrelse,
+\end{enumerate}
+Bemærk, at vurderingen af interessante regioner, ikke har noget at gøre
+med hverken snitratio eller margin. Vi undersøger udelukkende de
+udtrukne regioners areal og masse. Regioner bliver vurderet, umiddelbart
+efter de er blevet trukket ud, så vi har regionerne til rådighed som en
+instans af $\angles{CutRegions}$. Vi definerer nu to metoder; én til at
+kontrollere en regions størrelse og én til at kontrollere dens masse. Vi
+kalder disse \texttt{checkSize} og \texttt{checkMass}. De kan ses i
+kodeboks \ref{pseudo_size_mass}.
+
+\begin{lstlisting}[caption={Pseudokode},captionpos=b,label={pseudo_size_mass},
+    frame=tb, breaklines=false, float=h]
+def checkSize(component, constraints):
+    "Test if the component have size greater than the minumum size
+    defined by the constraints."
+    return component.area >= constraints.minSize
+
+def checkMass(component, constraints):
+    "Check if the component have mass greater than the minimum mass
+    defined by the contraints."
+    rect = component.rect
+    mass = component.area/(rect.width * rect.height)
+    return mass >= constraints.minMass
+\end{lstlisting}
+
+Med metoderne i kodeboks \ref{pseudo_size_mass}, kan vi kontrollere, for
+hver enkelt udtrukket region, om den lever op til betingelserne for at
+være interessant. Vi laver nu en ny metode, som returnerer en
+\emph{dict} med kun de interessante regioner. Metoden, kaldet
+\texttt{GetInterestingRegions}, ses i kodeboks
+\ref{pseudo_GetInterestingRegions}. Den tager, som argument, den instans
+af $\angles{CutRegions}$ som returneres fra \texttt{ExtractRegions} i
+kodeboks \ref{pseudo_udtraek_margin}.
+
+\begin{lstlisting}[caption={Pseudokode},captionpos=b,label={pseudo_GetInterestingRegions},
+    frame=tb, breaklines=false, float=h]
+def GetInterestingRegions(CutComponents, constraints):
+    acceptedRegions = {}
+    for id in CutComponents:
+        component = CutComponents[id][1]
+        if (checkSize(component, constraints) and
+                        checkMass(component, constraints)):
+            acceptedRegions[id] = CutComponents[id]
+    return acceptedRegions
+\end{lstlisting}
+
+\subsubsection{Ulemper}
+Kigger ikke på regionens form eller udstrækning.
 
 \subsection{Udregning af margin\label{subsec_margin_udregning}}
 
-\subsection{Repræsentation af snit}
+\subsection{Vurdering af regioner med naiv fremgangsmåde}
 
-\subsection{Udregning af snit}
+\subsection{Vurdering af regioner med udvidet fremgangsmåde}
 
 % vim: set tw=72 spell spelllang=da:
