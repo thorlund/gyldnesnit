@@ -51,9 +51,9 @@ ned og se om tærskeværdig $[300,745]$ passet bedre, men vi har valt at
 holde . Det maleri vi lige har brugt er ikke særlige repræsentativ for
 helle vores maleri database, så vi har taget en række billeder og brugt
 samme metode på dem og kommer frem til en middel tærskelværdi, jeg viser
-her en lille udsnit af dem, se figur \ref{en},\ref{to},\ref{the}
+her en lille udsnit af dem, se figur \ref{en}, \ref{to} og \ref{tre}.
 
-\begin{figure}[!h]
+\begin{figure}[p]
     \centering
     \subfloat[100,100]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/1_iteration/100-100.png}
@@ -66,9 +66,12 @@ her en lille udsnit af dem, se figur \ref{en},\ref{to},\ref{the}
         \label{300-300}}\hspace{1em}
     \subfloat[400,400]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/1_iteration/400-400.png}
-        \label{400-400}}\\
-     \label{allesammen1}
+        \label{400-400}}
+    \label{allesammen1}
+    \caption{Hvad er et her?}
 \end{figure}
+
+\clearpage
 
 \begin{figure}[!h]
 	\centering
@@ -83,7 +86,7 @@ her en lille udsnit af dem, se figur \ref{en},\ref{to},\ref{the}
         \label{700-700}}\hspace{1em}
     \subfloat[Original]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/kDetalier.jpg}
-        \label{kDetalier}}\\
+        \label{kDetalier}}
     \caption[]{Edgedetection på maleriet \ref{kDetalier} som har mange detaliger og kraftige farver, med tærskelværdierne fra 100-100 til 700-700}
      \label{allesammen2}
 \end{figure}
@@ -101,7 +104,7 @@ her en lille udsnit af dem, se figur \ref{en},\ref{to},\ref{the}
         \label{300-800}}\hspace{1em}
     \subfloat[300,850]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/2_iteration/300-850.png}
-        \label{300-850}}\\
+        \label{300-850}}
         \caption[]{Edgedetection hvor de 4 billeder som er intrasante taget med}
      \label{allesammen3}
 \end{figure}
@@ -113,7 +116,7 @@ her en lille udsnit af dem, se figur \ref{en},\ref{to},\ref{the}
         \label{100-250}}\hspace{1em}
     \subfloat[Orginal]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/svage_farver/svage_detalier/sDetalier.jpg}
-        \label{Orginal1}}\\
+        \label{Orginal1}}
         \caption[]{Edgedetection på et billedet med svage farver og få detalier, hvor tærskenværdigern [100,250] er den beste}
      \label{en}
 \end{figure}
@@ -121,11 +124,11 @@ her en lille udsnit af dem, se figur \ref{en},\ref{to},\ref{the}
 \begin{figure}[!h]
     \centering
     \subfloat[100,240]{
-        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/svage_detalier/2_iteration/100-240.png}
+        \includegraphics[angle=0,width=0.85\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/svage_detalier/2_iteration/100-240.png}
         \label{100-240}}\\
     \subfloat[Orginal]{
-        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/svage_detalier/sDetalier1.jpg}
-        \label{Orginal2}}\\
+        \includegraphics[angle=0,width=0.85\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/svage_detalier/sDetalier1.jpg}
+        \label{Orginal2}}
         \caption[]{Edgedetection på et billedet med medium farver og få detalier, hvor tærskenværdigern [100,240] er den beste}
      \label{to}
 \end{figure}
@@ -133,21 +136,26 @@ her en lille udsnit af dem, se figur \ref{en},\ref{to},\ref{the}
 \begin{figure}[!h]
     \centering
     \subfloat[200,460]{
-        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/medium_detalier/2_iteration/200-460.png}
+        \includegraphics[angle=0,width=0.85\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/medium_detalier/2_iteration/200-460.png}
         \label{200-460}}\\
     \subfloat[Orginal]{
-        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/medium_detalier/mDetalier1.jpg}
-        \label{Orginal3}}\\
+        \includegraphics[angle=0,width=0.85\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/medium_detalier/mDetalier1.jpg}
+        \label{Orginal3}}
         \caption[]{Edgedetection på et billedet med medium farver og medium detalier, hvor tærskenværdigern [200,460] er den beste}
      \label{tre}
 \end{figure}
 
-\begin{tabular}{| l | l | l | l |} \hline
-  						& Svage farver 	& Medium farver & kraftige farver \\ \hline
-	Få detalier 		& [100,250]		& [100,240]		& [200,320]\\ \hline
-	Medium detalier 	& [100,280]		& [200,460]		& [200,380]\\ \hline
-	Mange detalier		& [200,400]		& [200,380]		& [300,750]\\ \hline
-\end{tabular} \label{thressholdsTabelKant}
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{| l | l | l | l |} \hline
+        & Svage farver 	& Medium farver & Kraftige farver \\ \hline
+        Få detalier 		& [100,250]		& [100,240]		& [200,320]\\ \hline
+        Medium detalier 	& [100,280]		& [200,460]		& [200,380]\\ \hline
+        Mange detalier		& [200,400]		& [200,380]		& [300,750]\\ \hline
+    \end{tabular}
+    \caption{Beksriv!}
+    \label{thressholdsTabelKant}
+\end{table}
 
 Som man kan se at tabel \ref{thressholdsTabelKant} gå tærskelværdierne
 fra [100,240] til [300,750], så vi kan ikke umiddelbart sætte en fast
@@ -168,7 +176,7 @@ del observationer som kan laves ud fra tabellen
 detaljer og nu kraftigere farverne er. Det virker også som om mange
 detaljer vægter lige højt i forholdt til tærskelværdierne en kraftige
 farver. Den anden tærskelværdi er ca 2.5 gangen støre en den første
-tærskelværdi.\\
+tærskelværdi.
 
 De tærskelværdier som vi har fundet svare til de optimale
 tærskelværdier for maleriet, men vi kan godt bruge en værdig som ligger
@@ -178,13 +186,16 @@ Derfor har vi valt at bruger den nederste tærskelværdi som vi har fundet
 [100,240] og sænke den lidt til $[78,78 \cdot 2.5 ]$.
 
 \subsection{Afvigelsen af farver i floodfill}
-Floodfill har 2 tærskelværdier $lo$ og $up$, som betegner hvor mange
-pixel værdier en nabo pixel farver må variere ned og op, en fyldestgørelses
-beskrivelse af floodfill findes i afsnit \ref{floodfill}. Vi har tænkt
-os at finde en fældes tærskelværdi til brug i vores program. Måde vi gør
-det på at ved at observere hvordan floodfill virker med forskellige
-tærskelværdier og finde de tærskelværdier som passer bæst til
-maleriet. Resultatet for observationen kan ses i tabel \ref{thressholdsTabelFF}, hvor de 9 sammen kategorier er vist. Et af de malerierne hvor den optimale tærskelværdi er fundet se i figur \ref{Floodfillbilledet}, så man kan se hvad vi har vurderet til at være den beste værdi.
+Floodfill har 2 tærskelværdier $lo$ og $up$, som betegner hvor mange pixel
+værdier en nabo pixel farver må variere ned og op, en fyldestgørelses
+beskrivelse af floodfill findes i afsnit \ref{floodfill}. Vi har tænkt os at
+finde en fældes tærskelværdi til brug i vores program. Måde vi gør det på at
+ved at observere hvordan floodfill virker med forskellige tærskelværdier og
+finde de tærskelværdier som passer bæst til maleriet. Resultatet for
+observationen kan ses i tabel \ref{thressholdsTabelFF}, hvor de 9 sammen
+kategorier er vist. Et af de malerierne hvor den optimale tærskelværdi er
+fundet se i figur \ref{Floodfillbilledet}, så man kan se hvad vi har vurderet
+til at være den beste værdi.
 
 \begin{figure}[!h]
     \centering
@@ -193,16 +204,26 @@ maleriet. Resultatet for observationen kan ses i tabel \ref{thressholdsTabelFF},
         \label{8-8}}\\
     \subfloat[Orginal]{
         \includegraphics[angle=0,width=0.9\textwidth]{afsnit/afprovning/billeder/thressholds/svage_farver/kraftige_detalier/kDetalier.jpg}
-        \label{Orginal4}}\\
-        \caption[]{tærskelværdierne på et billedet med svage farver og kraftige detaljer hvor tærskelværdien [8,8] passer best}
-     \label{Floodfillbilledet}
+        \label{Orginal4}}
+    \caption[]{tærskelværdierne på et billedet med svage farver og kraftige detaljer hvor tærskelværdien [8,8] passer best}
+    \label{Floodfillbilledet}
 \end{figure}
 
-\begin{tabular}{| l | l | l | l |} \hline
-  						& Svage farver 		& Medium farver & kraftige farver \\ \hline
-	Få detalier 		& \textbf{[2,2]}	& [3,3]			& [4,4]\\ \hline
-	Medium detalier 	& \textbf{[2,2]}	& \textbf{[5,5]}& \textbf{[2,2]}\\ \hline
-	Mange detalier		& [8,8]				& [4,4]			& [7,7]\\ \hline
-\end{tabular} \label{thressholdsTabelFF}\\\\
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{| l | l | l | l |} \hline
+        & Svage farver 		& Medium farver & kraftige farver \\ \hline
+        Få detalier 		& \textbf{[2,2]}	& [3,3]			& [4,4]\\ \hline
+        Medium detalier 	& \textbf{[2,2]}	& \textbf{[5,5]}& \textbf{[2,2]}\\ \hline
+        Mange detalier		& [8,8]				& [4,4]			& [7,7]\\ \hline
+    \end{tabular}
+    \caption{Beskriv!}
+    \label{thressholdsTabelFF}
+\end{table}
 
-Som man kan af tabellen er nogle af vadierne med fed, begrundelsen for det er at de vadier er de beste vi kunne finde for billedet, men at de vadier stadig ikke giver noget som er særlige brugbart, se sektion \ref{floodfilltest}. værdigerne i tabel fluktuere også en del, så vi har igen samme problem stilling som i tærskelværdierne ved kantdetektion og har valt at bruge tærskelværdien [4,4] da dette kommer tættest på gennemsnit.
+Som man kan af tabellen er nogle af vadierne med fed, begrundelsen for det er
+at de vadier er de beste vi kunne finde for billedet, men at de vadier stadig
+ikke giver noget som er særlige brugbart, se sektion \ref{floodfilltest}.
+værdigerne i tabel fluktuere også en del, så vi har igen samme problem stilling
+som i tærskelværdierne ved kantdetektion og har valt at bruge tærskelværdien
+[4,4] da dette kommer tættest på gennemsnit.
