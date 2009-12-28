@@ -1,18 +1,18 @@
 {
 {\sffamily I forbindelse med analyse på store datasæt, spiller den
-bagvedliggende database en central rolle. Det er fra databasen vi henter
-billeder ind til analyse og samtidig også her hvor resultaterne bliver gemt. Vi
-præsenterer herunder det databaseskema som databasen er opbygget efter.
-Efterfølgende kaster vi et nærmere blik på de enkelte tabeller i
-databasen, hvor vi først vil kigge på hvordan vi opbevarer
-maleriernes metadata og endeligt hvordan resultater bliver opbevaret.
+bagvedliggende database en central rolle. Det er fra databasen, vi
+henter billeder ind til analyse og samtidig også her, resultaterne
+bliver gemt. Vi præsenterer herunder det databaseskema, som databasen er
+opbygget efter.  Efterfølgende kaster vi et nærmere blik på de enkelte
+tabeller i databasen, hvor vi først vil kigge på, hvordan vi opbevarer
+maleriernes metadata, og endelig på hvordan resultater bliver opbevaret.
 }
 
 \subsection{Databaseskema}
 Tabellerne \ref{artistTable}, \ref{paintingTable}, \ref{runTable},
 \ref{resultTable} og \ref{regionTable} herunder, udgør databaseskemaet.
-Der er i alle henseender lagt vægt på at eliminere redundans og mulighed
-for senere udvidelse.
+Der er i alle henseender lagt vægt på at eliminere redundans og på
+muligheden for senere udvidelse.
 
 \begin{table}[!h]
     \centering
@@ -73,20 +73,20 @@ for senere udvidelse.
 \end{table}
 
 \subsection{Metadata og billeder\label{section_opbv_billeder}}
-Vi starter med at kigge på hvordan vi opbevarer maleriernes metadata. Vi
-holder denne information i tabellerne \texttt{artist} (tabel
+Vi starter med at kigge på, hvordan vi opbevarer maleriernes metadata.
+Denne information findes i tabellerne \texttt{artist} (tabel
 \ref{artistTable}) og \texttt{painting} (tabel \ref{paintingTable}).
-Disse to tabeller lægger vægtpå at man let kan forespørge databasen ved
-en lang række parametre, såsom et maleris fysiske størrelse og
-kunstneres fødselsår. Vi har, at der til en kunstner kan være tilknyttet
-ét eller flere malerier og at der til et givet maleri, kun kan være én
-kunstner. Billederne som vi vil analysere, hentes fra et online
+Disse to tabeller lægger vægt på, at man let skal kunne forespørge
+databasen ved en lang række parametre, såsom et maleris fysiske
+størrelse og kunstnerens fødselsår. Vi har, at en kunstner kan være
+tilknyttet ét eller flere malerier, og at der, til et givet maleri, kun
+kan være én kunstner. Billederne, vi vil analysere, hentes fra et online
 kunstarkiv og gemmes på filsystemet i en mappestruktur lignende den i
-arkivet. Her indeles filerne i mapper navngivet efter deres kunstner.
-Kunstnerenes mapper inddeles efter forbogstav. På denne måde undgås
-problemet at to billeder kan have det samme filnavn. Vi gemmer da blot
-stien til en fil på filsystemet i databasen. Filstrukturen er grafisk
-illustreret i figur \ref{mappestruktur}.
+arkivet. Her inddeles filerne i mapper navngivet efter kunstner.
+Mapperne inddeles efter forbogstav. På denne måde undgås det, at to
+billeder tildeles samme filnavn. Vi gemmer kun stien til en fil på
+filsystemet i databasen. Filstrukturen er grafisk illustreret i figur
+\ref{mappestruktur}.
 
 % Mappestruktur
 \begin{figure}[!h]
@@ -107,9 +107,9 @@ $
 \end{figure}
 
 \subsection{Resultater fra kørsler\label{section_results}}
-Når vi har trukket regioner ud af billedet, jvf. afsnit
-\ref{section_udtraek}, og vurderet dem efter den naive algoritme givet i
-afsnit \ref{section_naiv}, kan vi stå tilbage med et egentligt
+Når vi har trukket regioner ud af billedet --- jvf. afsnit
+\ref{section_udtraek} --- og vurderet dem efter den naive algoritme
+givet i afsnit \ref{section_naiv}, står vi tilbage med et egentligt
 resultat. Vi ønsker at gemme dette resultat i databasen, så vi på et
 senere tidspunkt kan bruge det i en samlet analyse af resultaterne. Det
 øvrige databaseskema, der udgøres af tabellerne \texttt{run} (tabel
@@ -117,50 +117,50 @@ senere tidspunkt kan bruge det i en samlet analyse af resultaterne. Det
 \texttt{region} (tabel \ref{regionTable}), lægger vægt på at kunne gemme
 data fra flere forskellige kørsler med forskellige parametre og mulighed
 for at genskabe kørte analyser. Vi vil nu kigge på betydningen af de
-ovenstående tabeller og se på hvordan tabellerne giver mulighed for
+ovenstående tabeller og se på, hvordan tabellerne giver mulighed for
 designmålene.
 
 Hvis vi vil genskabe et fundet resultat, har vi brug for at vide hvilke
-parametre vi har brugt for at komme frem til resultatet. Til dette
-formål har vi tabellen \texttt{run} (tabel \ref{runTable}) som beskriver
-en kørsel. Denne tabel holder de parametre som er fælles for alle
-billeder i en kørsel. Her har vi adgang til de tærskelparametre som
-bruges til kantdetektion (\texttt{trsh1} og \texttt{trsh2}) samt nedre
-og øvre grænse for floodfill (\texttt{lo} og \texttt{up}). Her holdes
-også en procentsats for hvor stort et margin vi bruger i udvælgelse af
-regioner. Endelig har vi et felt der angiver hvilken metode der er
+parametre, vi har brugt for at komme frem til resultatet. Til dette
+formål har vi tabellen \texttt{run} (tabel \ref{runTable}), som
+beskriver en kørsel. Denne tabel holder de parametre, som er fælles for
+alle billeder i en kørsel, bl. a. de tærskelværdier, som bruges til
+kantdetektion (\texttt{trsh1} og \texttt{trsh2}), samt nedre og øvre
+grænse for floodfill (\texttt{lo} og \texttt{up}). Her holdes også en
+procentsats for, hvor stort et margin vi bruger i udvælgelse af
+regioner. Endelig har vi et felt, der angiver, hvilken metode der er
 blevet brugt til at finde resultatet. Dette er en tekststreng og vil i
 tilfældet af den naive algoritme være sat til \texttt{'naive'}. Felterne
 \texttt{trsh1}, \texttt{trsh2} og \texttt{marignPercentage} er
 repræsenteret som floats i databasen, mens \texttt{lo} og \texttt{up}
-står som heltal. Afslutningsvis har hver kørsel en unik id. Således vi
-kan tilknytte indgange i tabellen \texttt{result} (tabel
+står som heltal. Afslutningsvis har hver kørsel et unikt \emph{id}, så
+at vi kan tilknytte indgange i tabellen \texttt{result} (tabel
 \ref{resultTable}) til et sæt af parametre.
 
-Vi beskriver et resultat, som det antal af regioner vi får ud fra
+Vi beskriver et resultat som det antal af regioner, vi får ud fra
 analysen af et snit på et givet billede. Som beskrevet i afsnit
-\ref{section_opdeling} vil vi, givet en snitratio, typisk have fire snit
-hvor vi vil finde regioner i nærheden af. En undtagelse er hvis
-snitratioen deler billedet i to lige store dele. Vi vil i dette tilfælde
-kun have to snit vi kigger på. Tabellen \texttt{result} fortæller os
-hvilket af de mulige snit vi har med at gøre, hvilket billede resultatet
-er tilknyttet, hvilke parametre der er blevet brugt samt hvor mange
+\ref{section_opdeling} vil vi, givet en snitratio, typisk søge regioner
+i nærheden af fire snit. En undtagelse er, hvis snitratioen deler
+billedet i to lige store dele, og i dette tilfælde vil vi kun have to
+snit at se på. Tabellen \texttt{result} fortæller os hvilket af de
+mulige snit vi har med at gøre, hvilket billede resultatet er
+tilknyttet, hvilke parametre der er blevet brugt, samt hvor mange
 regioner vi har fundet. Tabellen gør det muligt at gemme resultater fra
 kørsler med forskellige parametre, hvorved man kan have data fra
 separate kørsler i databasen. Man har da grundlag for at sammenligne
 kørsler med forskellige metoder og parametre.
 
 Tabellen \texttt{region} (tabel \ref{regionTable}) holder alle de fundne
-regioner fra vores analyse. Hver region henviser til det resultat som
+regioner fra vores analyse. Hver region henviser til det resultat, som
 denne tilhører. Vi kan således skelne de enkelte regioner fra hinanden
-og afgøre i hvilket snit af billedet de ligger. En region bliver
+og afgøre, i hvilket snit af billedet de ligger. En region bliver
 repræsenteret som dens areal og afgrænsende rektangel.
 
 \subsection{Vurdering}
 Databaseskemaet har været underlagt følgende designmål:
 
 \begin{itemize}
-    \item Minimere redunsdans
+    \item Minimering af redundans
     \item Mulighed for senere udvidelse
     \item Mulighed for rekonstruktion af kørte analyser
     \item Mulighed for at kunne analysere flere snit i én kørsel
@@ -170,20 +170,19 @@ Vi har dog feltet \texttt{numberOfRgions} i tabellen \texttt{result} som
 på sin vis er redundant, da vi blot kan finde antallet af tilknyttede
 regioner ved at bruge simple SQL-sætninger. At have antallet stående
 direkte i databasen giver dog et umiddelbart bedre overblik over
-resultaterne end ved at bruge SQL-sætninger. Når databasen vokser, ved
-at ændre på parametrene, vil SQL-sætningerne skulle søge meget af
-databasen igennem for at returnere en meget simpel forespørgsel. Derfor
-har vi valgt at gemme antallet at fundne regioner direkte i databasen.
+resultaterne: Når databasen vokser, som følge af ændringer på
+parametrene, vil SQL-sætningerne skulle søge meget af databasen igennem
+for at returnere simple forespørgselser. Derfor har vi valgt at gemme
+antallet at fundne regioner direkte i databasen.
 
-Databaseskemaet er let at udvide, hvis vi i udviklingen af mere
+Databaseskemaet er let at udvide, hvis vi, i udviklingen af mere
 avancerede metoder, skulle få brug for flere indgange. Det skal også
-bemærkes at tabellerne \ref{runTable}, \ref{resultTable} og
+bemærkes, at tabellerne \ref{runTable}, \ref{resultTable} og
 \ref{regionTable} er specifikke for netop den naive algoritme.
 Tabellerne er kun tilknyttet maleriernes metadata ved feltet
 \texttt{paintingId}. Man kan derved let udvide databasen til at
-indeholde data om kørsler hvor en anden metode til udtrækning af
-regioner er brugt, eller ligeledes en anden metode til bedømmelse af de
-fundne regioner.
+indeholde data om kørsler, hvor en anden metode til udtrækning af
+regioner, eller til bedømmelse af samme, har været brugt.
 
 }
 

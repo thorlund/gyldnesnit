@@ -126,15 +126,16 @@ def analyzeCut(original, edgeImage, cut, settings, showBlobs=False):
 	# Retrive the regions touching the cut
 	component_dictionary = featureDetector.ribbonFloodFill(original, edgeImage, workImage, cut, margin, lo, up)
 
+	#start expanded
+
+	# Prune components BEFORE we delete the workImage
+	tmpnewComponents = regionSelector.pruneExpandedRegions(component_dictionary, constraints)
+	newComponents = regionSelector.pruneExpandedRagionsto(tmpnewComponents, constraints, cut, workImage)
+
 	# Clean up only if we do not return the image
 	if not showBlobs:
 		cv.cvReleaseImage(workImage)
-	
-	#start expanded
-	
-	# Prune components
-	tmpnewComponents = regionSelector.pruneExpandedRegions(component_dictionary, constraints)
-	newComponents = regionSelector.pruneExpandedRagionsto(tmpnewComponents, constraints, cut, workImage)
+
 	# Return the dictionary of accepted components or both
 	if not showBlobs:
 		return newComponents

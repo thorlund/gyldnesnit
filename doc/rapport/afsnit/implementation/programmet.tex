@@ -30,7 +30,7 @@ af programmet går mapperne igennem alfabetisk.
 
 }
 
-\subsection{database/}
+\vspace{1.4em}
 \dirtree{%
 .1 database/ .
 .2 \_\_init\_\_.py .
@@ -39,20 +39,19 @@ af programmet går mapperne igennem alfabetisk.
 .2 udtraek.py .
 }
 %(wga.hu csv-fil, parsing af csv-fil, udtraek)
-\vspace{1.2em}
+\vspace{1.4em}
 Mappen \texttt{database/} vedrører population af databasen ud fra en
 csv-fil fra vores korpus. Der er udviklet en parser specifikt til denne
 csv-fil. I denne mappe ligger også koden tilknyttet udtræk fra databasen
 i forbindelse med de videnskabelige resultater i kapitel
 \ref{chap_resultater}.
 
-\subsection{experiments/}
+\vspace{1.4em}
 \dirtree{%
 .1 experiments/ .
 .2 \dots .
 }
-%(dikumentation af eksperimenter)
-\vspace{1.2em}
+\vspace{1.4em}
 
 I mappen \texttt{experiments/} gemmes kørsler tilknyttet de
 videnskabelige eksperimenter, således at de let kan hentes ind
@@ -61,13 +60,12 @@ nyttigt at have eksperimenterne liggende separat på denne måde, da man
 kan oprette forskellige eksperimenter som kører analysen med specielle
 parametre eller udtrækningsmetoder.
 
-\subsection{lib/}
+\vspace{1.4em}
 \dirtree{%
 .1 lib/ .
 .2 \_\_init\_\_.py .
 .2 edgeDetector.py .
 .2 expandedMethod.py .
-.2 expandedMethon.py .
 .2 featureDetector.py .
 .2 goldenLibrary.py .
 .2 graphicHelper.py .
@@ -80,9 +78,7 @@ parametre eller udtrækningsmetoder.
 .2 statestik.py .
 .2 transformations.py .
 }
-%(goldenLibrary - hjælpefunktioner, paintingAnalyser - sammensætter de
-%øvrige metoder, naiveMethod, expandedMethod, regionSelector)
-\vspace{1.2em}
+\vspace{1.4em}
 
 \texttt{lib/} indeholder alle metoder vedrørende billedbehandling, dvs.
 metoder til udtrækning og bedømmelse af regioner. Filen
@@ -92,36 +88,36 @@ sammen. Den distribuerer arbejdet, alt efter hvilken udtræknings- og
 bedømmelsesmetode der bruges.  I \texttt{goldenLibrary.py} er der
 defineret en række hjælpemetoder som bruges i billedbehandlingen.
 
-\subsection{model/}
+\vspace{1.4em}
 \dirtree{%
 .1 model/ .
 .2 \_\_init\_\_.py .
 }
 %(database in/ud)
-\vspace{1.2em}
+\vspace{1.4em}
 
 I \texttt{model/} er selve databaseskemaet defineret. Her er også
 defineret hjælpefunktioner til at gemme specielle datastrukturer og
 gøre ofte brugte forespørgsler til databasen lettere.
 
-\subsection{painting/}
+\vspace{1.4em}
 \dirtree{%
 .1 painting/ .
 .2 \_\_init\_\_.py .
 }
 %(container)
-\vspace{1.2em}
+\vspace{1.4em}
 
 Dette er blot en datastruktur til malerier i programmet således at
 databasen og billedbehandlingen har et fælles format at arbejde efter.
 
-\subsection{settings/}
+\vspace{1.4em}
 \dirtree{%
 .1 settings/ .
 .2 \_\_init\_\_.py .
 }
 %(globale indstillinger, indstillinger til kørsel, kan gemmes i database)
-\vspace{1.2em}
+\vspace{1.4em}
 
 I \texttt{setting} stilles en klasse til rådighed som indeholder de
 forskellige parametre til billedbehandlingen. Dette drejer sig om

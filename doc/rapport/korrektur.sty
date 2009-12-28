@@ -1,0 +1,102 @@
+\ProvidesPackage{korrektur}
+\usepackage{xcolor}
+\usepackage{ulem}
+
+% Samling af nyttige kommandoer til korrektur og lignende
+
+% Metode til at markere tekst og tilføje kommentar i margen
+% Skriftypen gøres mindre herunder
+\setlength{\marginparwidth}{1.2in}
+\let\oldmarginpar\marginpar
+\renewcommand\marginpar[1]{\-\oldmarginpar[\raggedleft\footnotesize #1]%
+{\raggedright\footnotesize #1}}
+
+% Kommando:
+%       \note{kommentar}
+% Kommentar i margin. Shorthand til \marginpar
+% arg1: Kommentar
+%
+\newcommand{\note}[1]{\marginpar{#1}}
+
+% Kommando:
+%       \marker{tekst}{kommentar}
+% Marker tekst med rød baggrund og tilføj kommentar
+% arg1: Tekst til markering
+% arg2: Kommentar
+%
+% Eksempel:
+%     John løber på skøjter på sin mor
+%
+%     \marker{John løber på skøjter på sin mor}{Det giver ingen mening}
+%
+\newcommand{\marker}[2]{\colorbox{red}{#1}\marginpar{\color{red} #2}}
+
+% Kommando:
+%       \stav{tekst}
+% Indikator til forkert stavet ord. Rød bølge under tekst
+% arg1: Tekst til markering
+%
+% Eksempel:
+%       Fåk Vibår
+%
+%       \stav{Fåk Vibår}
+%
+\newcommand{\stav}[1]{{\color{red}{\uwave{\color{black}{#1}}}} }
+
+% Kommando:
+%       \gram{tekst}
+% Indikator til grammatikfejl
+% arg1: Tekst til markering
+%
+% Eksempel:
+%       \gram{Find selv på noget}
+%
+\newcommand{\gram}[1]{{\color{teal}{\uwave{\color{black}{#1}}}} }
+
+% Kommando:
+%       \mang[kommentar]{mangelTekst}
+% Der mangler et ord eller tegn i teksten. En kommentar kan tilføjes i
+% margin som første argument, men denne er valgfri. De manglende tekst skrives med rød.
+% arg1 [optional]: Kommentar, default = !
+% arg2           : Tegn der mangler
+%
+% Eksempel:
+%       Her Musse.
+%
+%       Her \mang{er} Musse.
+%
+%       Her Musses sko.
+%
+%       Her \mang{Brug ordet ``er'' lidt mere}{er} Musses sko.
+%
+\newcommand{\mang}[2][!]{{\color{red}{#2}}\marginpar{\color{red} #1}}
+
+% Kommando:
+%       \nono[kommentar]{tekst}
+% Streg ord ud med rød linie. Ligesom \mang er første argument valgfrit
+% og har standardværdi sat til = !
+% arg1 [optional]: Kommentar, default = !
+% arg2           : The no-no
+%
+% Eksempel:
+%       John skøjter på sin mor på sin mor
+%
+%       John skøjter på sin mor \nono{på sin mor}
+%  eller:
+%       John skøjter på sin mor \nono{gentagelse}{på sin mor}
+%
+\newcommand{\nono}[2][!]{{\color{red}{\sout{\color{black}{#2}}}}\marginpar{\color{red} #1}}
+
+% Kommando:
+%       \erst[kommentar]{tekst}
+% Streg ord ud med rød linie, ligesom \nono. Her kan man dog
+% tilføje en alternativ formulering bagefter.
+% arg1 : Teskten
+% arg2 : Alternativ tekst
+%
+% Eksempel:
+%       Lokummet brænder
+%
+%       \nono{Lokummet brænder}{Det hele konvergerer mod lort}
+%
+\newcommand{\erst}[2]{{\color{red}{\sout{\color{black}{#1}}}} {\color{orange}{#2}}\marginpar{\color{orange} !}}
