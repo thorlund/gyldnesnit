@@ -1,7 +1,7 @@
 {
-Et topografisk kort er et udtryk hentet fra geografi og er en
-fremstilling af tærrenforskelle i et landskab. Traditionelle
-topografiske kort bruger forskellige farver til at præsentere de
+Udtrykket \emph{topografisk kort} er hentet fra geografi og er en
+fremstilling af terrænforskelle i et landskab. Traditionelle
+topografiske kort bruger forskellige farver til at repræsentere de
 relative højder over havet. Vi kan bruge denne metode og udskifte højden
 med en omkostning.  Et simpelt eksempel på et topografisk kort er vist i
 figur \ref{topography_pixel}.
@@ -11,68 +11,24 @@ figur \ref{topography_pixel}.
         \includegraphics[width=0.8\textwidth]{afsnit/vores_implementation/billeder/udvidet_loesning/topographic_pixelize.png}
     \end{center}
     \caption[]{Simpelt topografisk kort med dimensionerne $20 \times
-    31$. Hver pixel har en værdi angivet ved mængden af hvid farve.}
+    31$. Hver pixel har en værdi angivet ved mængden af hvid farve. Helt
+    hvid er dyrest, mens sort er billigst.}
     \label{topography_pixel}
 \end{figure}
 
 Vi vil nu beskrive en metode, hvorved regioner bliver tildelt en
-omkostning, beregnet ud fra regionens placering og udstrækning på
-baggrund af et topografisk kort. Således vil regioner ikke blive
-vurderet efter hvorvidt de ligger i det gyldne snit eller ej, men efter
-\emph{hvor meget} de ligger i det gyldne snit.
+omkostning beregnet ud fra dens placering og udstrækning på baggrund af
+et topografisk kort. Således vil regioner ikke blive vurderet efter,
+hvorvidt de ligger i det gyldne snit eller ej, men efter \emph{hvor
+meget} de ligger i det gyldne snit.
 
-\subsubsection*{Generering af topografisk kort}
-Givet en afbildning af et maleri ved matricen $\mathbf{I}$ med dimensioner
-$N \times{} M$, kan man opstille et topografisk kort $\mathbf{T}$ med dimensioner
-$N \times{} M$. Det topografiske kort genereres ud fra to vektorer $\mathbf{X}^t =
-\left(x_1, x_2, \cdots, x_n\right)$ og $\mathbf{Y} = \left(y_1, y_2,
-\cdots, y_m\right)$ med dimensioner på henholdsvis $N$ og $M$.
-
-Vi betragter vektoren $\mathbf{X}$ som liniestykket givet ved $AB$ i
-figur \ref{topograph_line}. Længden af liniestykket betegnes ved $|AB|$.
-Det følger af definitionen på $\mathbf{X}$ at $|AB| = n$. På liniestykket $AB$
-er det gyldne snit placeret ved $G$ hvilket betegner indeks $\lfloor
-n\varPhi \rfloor$ i $\mathbf{X}$. Et margin er angivet ved punkterne $(G
-- \delta) = m$ og $(G + \delta) = m'$, hvor $\delta$ er størrelsen på
-margin. Ligeledes betegner $m$ og $m'$ indeks $\lfloor n \varPhi \pm
-\delta \rfloor$ i $\mathbf{X}$.  Endvidere har vi at $|Ap| = \lfloor
-\frac{1}{2}|AB| \rfloor \leq |pB|$ og $|m'q| = \lfloor \frac{1}{2}|qB|
-\rfloor \leq |qB|$. I figur \ref{topograph_line} er kun liniestykket
-$pB$ segmenteret, men $Ap$ segmenteres symmetrisk.
-
-Vi placerer nu et nyt punkt $x$ på $pB$. I det et-dimensionelle plan kan
-længden $|Gx|$ bruges som mål for hvor tæt $x$ er på det gyldne snit.
-Punktet $x$ har dog ingen udstrækning, hvorfor vi ikke blot kan bruge
-længden i praksis. Vi betragter nu en region $R \in \mathbb{Z}^{+}$.
-Regionen $R$ er en liniestykke i det et-dimensionelle plan. Vi kan da
-udregne placeringen af $R$ i forhold til punktet $G$ ved at summere alle
-afstandene fra punkterne $x$ i $R$ til $G$.  Dette medfører at lange
-liniestykker bliver tildelt højere værdi end små. Vi udregner således
-$\frac{\sum_{x \in R}{|Gx|}}{|R|} = |G(\frac{|R|}{2})|$, hvor $|R|$ er
-længden, dvs. antallet af punkter i $R$. Dette svarer til at beregne
-afstanden fra regionen midtpunkt til $G$. Dette er ikke ønskværdigt, da
-vi kan have to regioner med forskellig længde, men med samme midtpunkt.
-Hvis vi lader $R_{max}$ betegne den større region og $R_{min}$ være den
-mindre, hvor $ \frac{|R_{max}|}{2} = \frac{|R_{min}|}{2}$, da må
-$R_{max}$ nødvendigvis have et ekstrema tættere på $G$ end $R_{min}$.
-Det er derfor ikke retfærdigt at give begge regioner den samme værdi.
-
-Vi ønsker at belønne punkter der ligger i eller tæt ved det gyldne snit,
-men give stor omkostning til punkter som ikke ligger i det gyldne snit.
-Til dette bruges vektoren $\mathbf{X}$ angiver omkostningen for hvert
-punkt på liniestykket $AB$. Da vi ønsker at belønne punkter i det gyldne
-snit, tildels der ingen omkostning. Vi sætter derfor $\mathbf{X}_{|AG|}$
-til $0$. Vi ønsker heller ikke at straffe regioner som ligger inden for
-margin alt for meget. Vi sætter derfor $\mathbf{X}_{|Am|} =
-\mathbf{X}_{|Am'|} = 1$, hvilket angiver omkostningen for at ligge på
-margin. Værdierne mellem det gyldne snit og margin interpoleres således
-at vi har en lineær overgang. Passende værdier vælges til
-$\mathbf{X}_{|Ap|}$, $\mathbf{X}_{|Aq|}$ og $\mathbf{X}_{0} =
-\mathbf{X}_{|AB|}$, hvor der ligeledes interpoleres mellem punkterne.
-Liniestykket bliver således delt ind i nogle sektorer, som har en vis
-omkostning alt efter hvor tæt man ligger på snittet. Derved kan vi undgå
-ovenstående eksempel, hvor to regioner gives samme omkostning på trods
-af at de har forskellig størrelse.
+\subsubsection{Generering af topografiske kort}
+Givet en afbildning af et maleri ved matricen $\mathbf{I}$ med
+dimensioner $N \times{} M$, kan man opstille et topografisk kort
+$\mathbf{T}$ med dimensioner $N \times{} M$. Det topografiske kort
+genereres ud fra to vektorer $\mathbf{X} = \left(x_1, x_2, \cdots,
+x_n\right)$ og $\mathbf{Y} = \left(y_1, y_2, \cdots, y_m\right)$ med
+dimensioner på henholdsvis $N$ og $M$.
 
 \begin{figure}[!h]
     \centering
@@ -107,22 +63,69 @@ af at de har forskellig størrelse.
     \label{topograph_line}
 \end{figure}
 
+Vi betragter vektoren $\mathbf{X}$ som linjestykket givet ved $AB$ i
+figur \ref{topograph_line}. Længden af linjestykket betegnes ved $|AB|$.
+Det følger af definitionen på $\mathbf{X}$, at $|AB| = n$. På
+linjestykket $AB$ er det gyldne snit placeret ved $G$, hvilket betegner
+indeks $\lfloor n\varPhi \rfloor$ i $\mathbf{X}$. Et margin er angivet
+ved punkterne $(G - \delta) = m$ og $(G + \delta) = m'$, hvor $\delta$
+er størrelsen på margin. Ligeledes betegner $m$ og $m'$ indeks $\lfloor
+n \varPhi \pm \delta \rfloor$ i $\mathbf{X}$.  Endvidere har vi at $|Ap|
+= \lfloor \frac{1}{2}|AB| \rfloor \leq |pB|$ og $|m'q| = \lfloor
+\frac{1}{2}|qB| \rfloor \leq |qB|$. I figur \ref{topograph_line} er kun
+linjestykket $pB$ segmenteret, men $Ap$ segmenteres symmetrisk.
+
+Vi placerer nu et nyt punkt $x$ på $pB$. I det et-dimensionelle plan kan
+længden $|Gx|$ bruges som mål for, hvor tæt $x$ er på det gyldne snit.
+Punktet $x$ har dog ingen udstrækning, hvorfor vi ikke blot kan bruge
+længden i praksis. Vi betragter nu en region $R \in \mathbb{Z}^{+}$.
+Regionen $R$ er et linjestykke i det et-dimensionelle plan. Vi kan da
+udregne placeringen af $R$, i forhold til punktet $G$, ved at summere
+alle afstandene fra punkterne $x$ i $R$ til $G$.  Dette medfører, at
+lange linjestykker bliver tildelt højere værdi end små. Vi udregner
+således $\frac{\sum_{x \in R}{|Gx|}}{|R|} = |G(\frac{|R|}{2})|$, hvor
+$|R|$ er længden, dvs. antallet af punkter i $R$. Dette svarer til at
+beregne afstanden fra regionens midtpunkt til $G$, hvilket ikke er
+ønskværdigt, da vi kan have to regioner med forskellig længde, men med
+samme midtpunkt.  Hvis vi lader $R_{max}$ betegne den større region og
+$R_{min}$ den mindre, hvor $ \frac{|R_{max}|}{2} = \frac{|R_{min}|}{2}$,
+da må $R_{max}$ nødvendigvis have et ekstrema tættere på $G$ end
+$R_{min}$.  Det er derfor ikke retfærdigt at give begge regioner den
+samme værdi.
+
+Vi ønsker at belønne punkter, der ligger i eller tæt ved det gyldne
+snit, men give stor omkostning til punkter, som ikke ligger i det gyldne
+snit.  Til dette bruges vektoren $\mathbf{X}$, der angiver omkostningen
+for hvert punkt på linjestykket $AB$. Da vi ønsker at belønne punkter i
+det gyldne snit, tildeles disse ingen omkostning. Vi sætter derfor
+$\mathbf{X}_{|AG|}$ til $0$. Vi ønsker heller ikke at straffe regioner,
+som ligger inden for margin alt for meget, og vi sætter derfor
+$\mathbf{X}_{|Am|} = \mathbf{X}_{|Am'|} = 1$, hvilket angiver
+omkostningen for at ligge på margin. Værdierne, mellem det gyldne snit
+og margin, interpoleres således, at vi har en lineær overgang. Passende
+værdier vælges til $\mathbf{X}_{|Ap|}$, $\mathbf{X}_{|Aq|}$ og
+$\mathbf{X}_{0} = \mathbf{X}_{|AB|}$, hvor der ligeledes interpoleres
+mellem punkterne.  Liniestykket bliver således delt ind i nogle
+sektorer, som har en vis omkostning alt efter hvor tæt, man ligger på
+snittet. Derved kan vi undgå ovenstående eksempel, hvor to regioner
+gives samme omkostning på trods af, at de har forskellig størrelse.
+
 \paragraph{Omkostningsfunktionen}
-Vi vil nu overføre det ovenstående til to dimensioner. Det er trivielt
+Vi vil nu overføre det ovenstående til to dimensioner, hvor det er let
 at opdele vektoren $\mathbf{Y}$ på samme måde som $\mathbf{X}$. Vi
 ønsker at beregne en omkostning ud fra værdierne i vektorerne ved en
-given koordinat. Vi definerer en funktion $t :
-\mathbb{Z}^{+} \times \mathbb{Z}^{+} \rightarrow \mathbb{R}_{0}$ ved
+given koordinat, og til dette defineres en funktion $t : \mathbb{Z}^{+}
+\times \mathbb{Z}^{+} \rightarrow \mathbb{R}_{0}$ ved
 \begin{equation}
     t(x, y) = \mathbf{X}_x + \mathbf{Y}_y
     \label{topo_plus}
 \end{equation}
 Det topografiske kort, som angivet ved funktionen \ref{topo_plus}, kan
-ses i figur \ref{topography_plus}. Omkostninger er illustreret ved
-mængden af hvid farve. Kortet viser at der ikke er nogen omkostning i
-punktet $(G, G)$. Endvidere ses det at omkostningen er høj for punkter
-ved hjørnerne og ved kanterne generelt. Dog kan man ret tydeligt se
-grænserne mellem regionerne, da der interpoleres lineært.
+ses i figur \ref{topography_plus}, hvor omkostningerne er illustreret
+ved mængden af hvid farve. Kortet viser, at der ikke er nogen omkostning
+i punktet $(G_{x}, G_{y})$. Endvidere ses det, at omkostningen er høj
+for punkter ved hjørnerne og ved kanterne generelt. Dog kan man ret
+tydeligt se grænserne mellem regionerne, da der interpoleres lineært.
 
 Vi kan lave en mere flydende overgang mellem regionerne ved at definere
 en ny funktion $u : \mathbb{Z}^{+} \times \mathbb{Z}^{+} \rightarrow
@@ -134,27 +137,26 @@ en ny funktion $u : \mathbb{Z}^{+} \times \mathbb{Z}^{+} \rightarrow
 hvor vi multiplicerer omkostningerne i stedet for at addere dem. Det
 resulterende topografiske kort ses i figur \ref{topography_times}. Da vi
 nu bruger multiplikation vil vi gange med $0$ i det gyldne snit, hvorfor
-dette er meget mere fremstående. Det skal dog nævnes at det ikke er helt
-hensigtsmæssigt at omkostningen er meget lav ude ved ekstremerne.
-Funktionen $u$ mangler altså den gode egenskab fra $t$ hvor ekstremerne
+dette er meget mere fremstående. Det skal dog nævnes, at det ikke er
+helt hensigtsmæssigt, at omkostningen er meget lav ude ved ekstremerne.
+Funktionen $u$ mangler altså den gode egenskab fra $t$, hvor ekstremerne
 har store omkostninger.  Vi ser dog en eksponentiel stigning i
-omkostningerne når vi bevæger os længere væk fra det gyldne snit.
+omkostningerne, når vi bevæger os længere væk fra det gyldne snit.
 Optimalt ville man have den samme omkostning ved ekstremerne som i $t$,
 men med den eksponentielle stigning som i $u$.
 
 Vi kan nu beregne omkostningen for en interessant region. Givet en
-mængde $R \in \mathbb{Z}^{+2}$, som angiver
-punkterne i en region, kan man finde omkostningen $C$ ved
+mængde $R \in \mathbb{Z}^{+2}$, som indeholder punkterne regionen, kan
+man finde omkostningen $C$ ved
 \begin{equation}
     C(R) = \sum_{(x, y) \in R}{\frac{\tau(x, y)}{|R|}}
 \end{equation}
-hvor $\tau$ er en funktion fra $\mathbb{Z}^{+}\times\mathbb{Z}^{+}$ ind
-i $\mathbb{R}_0$ som beregner omkostningen for et punkt fra et
+hvor $\tau$ er en funktion, fra $\mathbb{Z}^{+}\times\mathbb{Z}^{+}$ ind
+i $\mathbb{R}_0$, som beregner omkostningen for et punkt ud fra et
 topografisk kort. Vi har foreslået funktionerne $t$ og $u$. Jo lavere
 omkostning en region har, jo bedre er den placeret i forhold til det
-gyldne snit. I praksis er det oplagt at approksimere regionens
-størrelse ved at bruge et gitter, ligesom i det foregående afsnit.
-
+gyldne snit. I praksis er det oplagt at approksimere regionens størrelse
+og udstrækning, ved at bruge et gitter, ligesom i det foregående afsnit.
 
 \begin{figure}[h]
     \setlength\fboxsep{0pt}
@@ -164,7 +166,7 @@ størrelse ved at bruge et gitter, ligesom i det foregående afsnit.
     \end{center}
     \caption[]{Topografisk kort angivet ved funktionen $t(x, y) =
     \mathbf{X}_x + \mathbf{Y}_y$. Mængden af hvid farve reflekterer
-    omkostningen. Helt hvid er dyrest, mens sort er billigst.}
+    omkostningen.}
     \label{topography_plus}
 \end{figure}
 
@@ -180,14 +182,14 @@ størrelse ved at bruge et gitter, ligesom i det foregående afsnit.
     \label{topography_times}
 \end{figure}
 
-\subsubsection*{Fastsættelse af omkostninger}
+\subsubsection{Fastsættelse af omkostninger}
 Det er let at se, at udformningen af det topografiske kort ikke blot
-afhænger af funktionen $\tau$, men mere af de værdier man tildeler
+afhænger af funktionen $\tau$, men snarere af de værdier, man tildeler
 omkostningsvektorerne. Værdierne, som er tildelt i det ovenstående, er
 valgt arbitrært efter det bedste grafiske resultat. Vi har tidligere
-nævnt, at værdierne interpoleres lineært. Hvis man adderer værdierne er
-denne metode ikke helt hensigtsmæssig. Det er dog oplagt at gøre brug af
-normalfordelingen til at fastsætte omkostninger. Dette skal dog ses med
+nævnt, at hvis værdierne interpoleres lineært, er det ikke helt
+hensigtsmæssigt at addere dem. Det er dog oplagt at gøre brug af
+normalfordelingen til at fastsætte omkostninger, men dette skal ses med
 omvendt fortegn, hvilket betyder, at vi nu tildeler regioner points. Man
 kan altså basere antallet af points for et punkt i det et-dimensionelle
 plan, ved at bruge en normalfordeling $N(\mu, \sigma)$ med middelværdi
@@ -195,7 +197,8 @@ $n\varPhi$ og en passende varians til margin. Umiddelbart ville man
 sætte standardafvigelsen til $\delta$, vores margin, hvilket giver os en
 varians på $\sigma^{2} = \delta^{2}$. Dette giver os en meget spids
 normalfordeling, hvor punkter bliver tildelt mange points for at ligge
-inden for margin, men hurtigt aftager når man bevæger sig længere væk.
+inden for margin, men hvor antal points hurtigt aftager, når man bevæger
+sig længere væk.
 
 %\subsubsection*{Fordele og ulemper}
 %Brug af omkostninger ved topografiske kort har den umiddelbare fordel at
