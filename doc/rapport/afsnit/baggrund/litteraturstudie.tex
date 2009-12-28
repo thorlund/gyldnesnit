@@ -85,19 +85,30 @@ efter det gyldne snit.  Til denne opgave er det oplagt at udnytte
 regnekraften fra computeren, hvilket også giver anledning til  at
 analysere langt større datasæt.
 
-\subsection{Billedbehandling}
-Indenfor billedbehandlingsfeltet er begrebet "feature detection" eller
-interessante regioner detektion, ikke klart defineret.
-Forskellige gerne af billedbehandling definere begrebet indenfor
-deres egen gren, som et eksempel kan en interessant region i film
-er et punkt, der let kan genkendes.
-Dette punkt kan bruges til at skabe 3d modeller af et objekt ud fra 2d billeder.
+\subsection{Eksisterende datalogisk forskning}
+Der er ingen direkte tidligere datalogisk forskning, det tætteste er et
+eksperiment om at analysere æstetik i fotografier.\cite{DattaWang} 
+Det væsenlige ved dette eksperiment er hvorledes det bliver billederne
+bedømmes. Her arbejdes der med 56 forskellige kandidater til at definere
+et billede, som mere eller mindre æstetisk korrekt og originalt. 
+Kandidaterne bliver udvalgt i forskellige kategorier, tre af kandidater 
+bliver vurderet ud fra ``The rule of Thirds'', som er beskrevet som en 
+sløset approksimation på $varphi$. 
 
-Selvom der er skrevet utrolig meget litteratur om interessante regioner
-detektion, så er der to grunde til at forkaste hovedparten af teorierne.
+%fyld? meget fedt at få sagt det men jeg ved ikke om det er specielt
+%vigtigt
+Deres kandidater dækker over noget ganske centralt i store dele af
+billedbehandling nemlig detektion af
+interessante regioner i billeder, problemet begrebet slet ikke er
+entydigt defineret men skifter mening fra fagområde til fagområde.
+Dette vil blive diskuteret i \ref{chap:section_kort_intro}
 
-Den første er "Machine Learning", dette stammer faktisk fra Kunstig
-Intelligens feltet af datalogi. Indenfor billedbehandling bliver det dog
+Området detektion af interessante regioner, for tilpas specifikke
+definitioner af interessante, indeholder nogle avancerede tekniker, der
+potentielt kunne forbedre udtrækning af interessante regioner.
+
+Den første er maskineindlæring, dette stammer faktisk fra kunstig
+intelligens feltet af datalogi. Indenfor billedbehandling bliver det dog
 brugt til at finde interessante regioner med stor præcision. Formålet
 med brugen er dog med at finde ansigter, mennesker og
 biler\cite{ViolaJones01}\cite{SchneidermanKanade00}\cite{Gabor}. Præcisionen på
@@ -113,13 +124,6 @@ den type region der ledes efter. De besidder dog adskillige
 negative egenskaber. En af disse er at de fleste algoritmer har svært
 ved at fungere på støj i billedet, der er selvfølgelig veje at reducere
 dette problem, dog er de meget beregningstunge.\cite{PalPal}
-
-Få eksperimenter er gjort med algoritmer, der finder det spændende i
-billeder. Det tætteste er et forsøg på at analysere æstetik i
-fotografier.\cite{DattaWang} Det gyldne snit bliver faktisk nævnt, det
-er dog en sidebemærkning under et kapitel om "The rule of Thirds".
-Forsøget benytter sig af en statistik tilgang til problemet, dog
-kombineret med "Machine Learning"
 
 }
 % vim: set tw=72 spell spelllang=da:
