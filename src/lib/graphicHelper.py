@@ -110,12 +110,13 @@ def main():
 	thickness = 4
 	settings.setMarginPercentage(0.025)
 	cut = int(sys.argv[2])
+	winname = sys.argv[3]+".png"
 	#settings.setThresholds(100,150)
 	# Set the color for the boxes
-	color = lib.COL_BLACK
+	#color = lib.COL_BLACK
 	#color = lib.COL_WHITE
 	#color = lib.COL_RED
-	#color = lib.COL_GREEN
+	color = lib.COL_GREEN
 	#color = lib.COL_BLUE
 
 	blobImg = blobResult(image, settings, cut)
@@ -134,11 +135,11 @@ def main():
 	else:
 		cv.cvLine(boxxImg, cv.cvPoint(cutt.getPoints()[0].x, cutPixel), cv.cvPoint(cutt.getPoints()[1].x, cutPixel), lib.COL_RED)
 	# Save images
-	#highgui.cvSaveImage('floodfillbilledet.png', blobImg)
-	#highgui.cvSaveImage('boindingboxbilledet.png', boxxImg)
+	highgui.cvSaveImage('floodfillbilledet.png', blobImg)
+	highgui.cvSaveImage(winname, boxxImg)
 
 	# Show images
-	compareImages(blobImg, boxxImg, "blob", "bounding box")
+	compareImages(blobImg, boxxImg, "blob", winname)
 
 if __name__ == "__main__":
 	main()
