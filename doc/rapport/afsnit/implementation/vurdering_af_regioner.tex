@@ -313,7 +313,103 @@ def GetInterestingRegionsInCut(CutRegions, constraints):
 \end{lstlisting}
 
 \subsection{Udvidet vurdering af regioner}
-\subsubsection{Gitter (Grid)}
-\subsubsection{Massemidtpunkt}
+Der er også blevet implementeret en anden tilgang til vurdering af
+interessante regioner. Grundprincipperne til denne er gennemgået i
+afsnit \ref{subsec_udvidet_massemidtpunkt}. Vi kigger nu ikke længere på
+en regions afgrænsende rektangel, men betragter i stedet regionens
+form og udstrækning, for at vurdere, om den ligger i snittet. Endvidere
+tilgodeser denne fremgangsmåde i højere grad regioner, som er centreret
+om snittet, fremfor regioner som ligger op ad snittet. Når vi ikke
+længere gør brug af det afgrænsende rektangel, har vi brug for en anden
+måde, at repræsentere regionen på. Vi tager derfor billedet, som
+\texttt{cvFloodFill} har arbejdet på, og bruger dette til at
+approksimere regionens form.
+
+\subsubsection{Approksimation af regioners form og udstrækning}
+Fremgangsmåden for at approksimere en regions form og udstrækning er ret
+simpel. Givet et segmenteret billede, fra \texttt{cvFloodFill}, og den
+resulterende $\angles{CutRegions}$, fra \texttt{ExtractRegions}, kan vi,
+for hver pixel i det afgrænsende rektangel, kontrollere om denne har
+samme farve, som regionen er blevet tildelt. Hvis farverne er ens, så
+gemmes dette punkt i en liste. Hvis regionen er stor, kan dette godt
+være en tidskrævende procedure, så i praksis ønsker vi ikke at
+kontrollere hver eneste pixel i det afgrænsende rektangel. Vi springer
+derfor et antal pixels over for hver gang vi har kontrolleret en pixel.
+På denne måde får vi lavet et gitter, som vist i figur
+\ref{grid}. Pseudokode, for at approksimere en regions form og
+udstrækning, er vist i kodeboks \ref{pseudo_GetRegionGrid}, som definerer
+metoden \texttt{GetRegionGrid}, der returnerer en liste med punkter for
+en region.
+
+\begin{lstlisting}[caption={Metode til at approksimere en regions
+    form. Bemærk linje 19, hvor der ses et eksempel på det omvendte
+    koordinatsystem i \emph{OpenCV}.}, captionpos=b,
+    label={pseudo_GetRegionGrid}, frame=tb,
+    breaklines=false, float=bh, numbers=left]
+def GetRegionGrid(image, color, component, step):
+    rect = component.rect
+
+    # Initialize the area we want to traverse
+    lower_x = rect.x
+    lower_y = rect.y
+    upper_x = lower_x + rect.width
+    upper_y = lower_y + rect.height
+
+    # Initialize an empty array
+    coordinates = []
+
+    # Traverse the bounding box with the defined step size
+    for x in range(lower_x, upper_x, step):
+        for y in range(lower_y, upper_y, step):
+
+            # If we find a color in the image that equals the region
+            # color, then we save that point
+            if isSameColor(color, image[y][x]):
+                coordinates.append(cvPoint(x, y))
+
+    # Finally, return the resulting set of points
+    return coordinates
+\end{lstlisting}
+% Sorry, I'm really sorry :(
+\newpage
+For god ordens skyld, og senere brug, vil vi definere en metode, som finder
+en approksimation til alle regioner i en instans af $\angles{CutRegions}$. Denne
+metode returnerer en modificeret instans af $\angles{CutRegions}$, som
+vi kalder for $\angles{CutGridRegions}$, således at den også indeholder
+approksimationen til regionen. Strukturen er vist i
+\eqref{CutGridRegions_dict}.
+\begin{multline}
+    \angles{CutRegions} = \{ \textit{~RegionId} : \\
+    (\textbf{CV\_RGB~}\textit{color}, \textbf{cvConnectedComp~}\textit{region}, \textbf{cvPoint[]~}\textit{grid}) \}\quad
+    \label{CutGridRegions_dict}
+\end{multline}
+Metoden \texttt{GridIt}, er vist i kodeboks \ref{pseudo_GridIt}, og går
+alle regionerne igennem mens den bygger den nye \emph{dict} op.
+
+\begin{lstlisting}[caption={Metode, som finder approksimationen til alle
+    regioner i en instans af $\angles{CutRegions}$.}, captionpos=b,
+    label={pseudo_GridIt}, frame=tb,
+    breaklines=false, float=t]
+def GridIt(image, CutRegions, step):
+    # Initialize an empty dict
+    CutGridRegions = {}
+
+    for id in CutRegions:
+        # Get the color and component
+        color = CutRegions[id][0]
+        component = CutRegions[id][1]
+
+        # Get the grid for the region
+        grid = GetRegionGrid(image, color, component, step)
+
+        # Save the findings
+        CutGridRegions[id] = (color, component, grid)
+
+    # Well, return
+    return CutGridRegions
+\end{lstlisting}
+
+\subsubsection{Vurdering ved massemidtpunkt og udstrækning}
+?
 
 % vim: set tw=72 spell spelllang=da:
