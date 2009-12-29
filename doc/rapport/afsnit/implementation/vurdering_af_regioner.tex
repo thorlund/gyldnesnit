@@ -43,7 +43,7 @@ kan betegnes som værende \textbf{interessant}, skal den
     \item have et areal større end en tærskelværdi, der sættes i
         forhold til billedets størrelse
     \item have en masse større end en tærskelværdi, der ligeledes,
-        sættes i forhold til billedets størrelse,
+        sættes i forhold til billedets størrelse.
 \end{enumerate}
 Bemærk, at vurderingen af interessante regioner, ikke har noget at gøre
 med hverken snitratio eller margin. Vi undersøger udelukkende de
@@ -140,29 +140,29 @@ specifik søgning, hvorfor vi kun kan frasortere regioner, ud fra
 informationen om deres størrelse og masse.
 
 \subsection{Naiv vurdering af regioner}
-Vi vil i dette afsnit se på, hvordan den naive fremgangsmåde, givet i
-kapitel \ref{chap_detektion}, vurderer hvorvidt en region ligger i det
-gyldne snit. Vi vil dog først give en forklaring på hvordan vores margin
-bliver repræsenteret.
+Vi vil nu se på, hvordan den naive fremgangsmåde, givet i kapitel
+\ref{chap_detektion}, vurderer hvorvidt en region ligger i det gyldne
+snit. Da det eneste krav er, at en region skal have en kant af dens
+afgrænsende rektangel inden for margin, vil vi først give en forklaring
+på, hvordan vores margin bliver repræsenteret.
 
 \subsubsection{Udregning af margin\label{subsec_margin_udregning}}
-Inden vi ser på, hvordan det vurderes, hvorvidt en region er placeret i
-et givet snit, skal vi se på hvordan vi egentlig regner margin ud. Som
-nævnt, både i kapitel \ref{chap_detektion} og \ref{chap_afproevning},
-bruges en procentsats til at angive vores margin. Denne procentsats vil,
-hvis vi kun undersøger ét snit, blive sat til $2.4\%$ af billedets højde
-eller bredde, alt efter hvilken orientering det aktuelle snit har.
-Procentsatsen er baseret på forskellen mellem det gyldne snit og snittet
-ved to tredjedele. Vi har implementeret fastsættelsen af denne
-procentsats således, at \emph{hvis} man ønsker at sammenligne snit, som
-ligger tættere på hinanden end det gyldne snit og to tredjedele, så
-findes den procentsats der gør, at disse snits margin ikke overlapper. I
-praksis gives en liste med snitratioer, der ønskes undersøgt, og fra
-denne liste, findes den mindste differens mellem ratioerne,. Den mindste
-differens mellem snitratioer, bruges da, som procentsats for alle snit i
-analysen. Hvis den mindste differens, mellem snitrationerne, er større
-end $2.4\%$, sættes procentsatsen for margin til $2.4\%$. Vi antager i
-det følgende, at vores procentsats for margin er blevet sat til $2.4\%$.
+Som nævnt, både i kapitel \ref{chap_detektion} og
+\ref{chap_afproevning}, bruges en procentsats til at angive vores
+margin. Denne procentsats vil, hvis vi kun undersøger ét snit, blive sat
+til $2.4\%$ af billedets højde eller bredde, alt efter hvilken
+orientering det aktuelle snit har.  Procentsatsen er baseret på
+forskellen mellem det gyldne snit og snittet ved to tredjedele. Vi har
+implementeret fastsættelsen af denne procentsats således, at \emph{hvis}
+man ønsker at sammenligne snit, som ligger tættere på hinanden end det
+gyldne snit og to tredjedele, så findes den procentsats der gør, at
+disse snits margin ikke overlapper. I praksis gives en liste med
+snitratioer, der ønskes undersøgt, og fra denne liste, findes den
+mindste differens mellem ratioerne,. Den mindste differens mellem
+snitratioer, bruges da, som procentsats for alle snit i analysen. Hvis
+den mindste differens, mellem snitrationerne, er større end $2.4\%$,
+sættes procentsatsen for margin til $2.4\%$. Vi antager i det følgende,
+at vores procentsats for margin er blevet sat til $2.4\%$.
 
 Når vi skal vurdere regioner med hensyn til vores margin, får vi brug
 for den eksakte pixelstørrelse på margin. I filen
@@ -173,7 +173,7 @@ snittet til margin i pixels, som vi også skriver som $\delta$. Det er
 også i \texttt{marginCalculator.py} som finder den mindste differens
 mellem snitratioer, ved metoden \texttt{getPercentage}.
 
-\begin{figure}[b]
+\begin{figure}[t]
     \centering
     \begin{picture}(122,55)
         \put(61, 50){$x$}
@@ -223,12 +223,13 @@ indikerer om snittet vi undersøger er vertikalt eller horisontalt. Er
 snittet vertikalt, sættes \texttt{coordinate} til $0$, og $1$ for et
 horisontalt snit. For ethvert snit, kan vi da finde de accepterende
 $x$-værdier, som vist i kodeboks \ref{pseudo_acceptRange}. Variablen
-\texttt{margin}, der tages som argument, er del pixelstørrelse der er
+\texttt{margin}, der tages som argument, er den pixelstørrelse der er
 returnet fra metoden \texttt{getPixels} fra
 \texttt{marginCalculator.py}.
 
-\begin{lstlisting}[caption={Pseudokode},captionpos=b,label={pseudo_acceptRange},
-    frame=tb, breaklines=false, float=t]
+\begin{lstlisting}[caption={Metode som genererer sættet af accepterende
+    koordinater.},captionpos=b,label={pseudo_acceptRange},
+    frame=tb, breaklines=false, float=b]
 GetAcceptRange(cut, margin, coordinate):
     if coordinate:
         # Horizontal cut
@@ -248,7 +249,7 @@ GetAcceptRange(cut, margin, coordinate):
 \begin{lstlisting}[caption={Metode, som kontrollerer, hvorvidt en region
     har en kant af det afgrænsende rektangel inden for margin.},
     captionpos=b, label={pseudo_position}, frame=tb, breaklines=false,
-    float=b]
+    float=t]
 def checkPosition(component, constraints):
     "Test if the component have a bounding box inside the accepting
     rectangle defined in the constraints."
@@ -290,7 +291,7 @@ metode, for vurdering efter den naive fremgangsmåde, kaldes
     regioner, der har en kant, af deres afgrænsende rektangel, inden for
     margin.},
     captionpos=b, label={pseudo_GetInterestingRegionsInCut}, frame=tb, breaklines=false,
-    float=t]
+    float=hb]
 def GetInterestingRegionsInCut(CutRegions, constraints):
 
     # First remove uninteresting regions
