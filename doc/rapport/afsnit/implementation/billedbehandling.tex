@@ -889,8 +889,8 @@ undlade at trække enkelte regioner ud.
 Endeligt skal vi nævne problemerne tilknyttet måden, vi fremhæver kanter
 i et billede på. Som tidligere nævnt, så fremhæves kanterne, fordi vi
 har sløret billedet med en metode, som kan udviske kanterne. De
-fremhævede kanter tegnes i det slørede billede med sort farve.  Sort
-farve vælges, uanset hvilke farver der er brugt i maleriet. Vi kan
+fremhævede kanter, tegnes i det slørede billede, med sort farve, som
+vælges uanset hvilke farver, der er brugt i maleriet i forvejen. Vi kan
 derfor støde på problemer med mørke malerier eller lokalt i mørke
 områder af et billede. Vi kan også være uheldige, at komme til at
 forbinde to regioner, ved at markere kanterne med sort.
@@ -898,7 +898,7 @@ forbinde to regioner, ved at markere kanterne med sort.
 Vi valgte, at bruge sorte kanter, da dette var den hurtigste løsning på
 daværende tidspunkt. Metoden \texttt{cvFloodFill} gør det faktisk
 muligt, at bruge en maske, som, i mangel af et passende dansk ord, kan
-bekrives som digital malertape. Man kan kalde \texttt{cvFloodFill} med
+beskrives som digital malertape. Man kan kalde \texttt{cvFloodFill} med
 et kantdetekteret billede, således at man ikke maler over de steder i
 billedet, hvor der er detekteret en kant. \emph{OpenCV} gør det dog
 yderst besværligt, at bruge denne funktion, da det kantdetekterede
@@ -909,7 +909,11 @@ besværligt. En meget naiv løsning, hvor pixels kopieres én ad gangen,
 var tidskrævende på store billeder og vi beholdt derfor de sorte kanter.
 Alternativt kunne man beskære det originale billede, men vi besluttede
 at vi ikke ville manipulere med dimensionerne på vores inddata og bevare
-det originale billede.
+det originale billede. På grund af, at kanterne kun males en anden
+farve, kan vi, ved floodfill-metoden, komme til at male kanter, som har
+samme retning som vi bevæger os i. Dvs, at lodrette kanter kan blive
+malet ved vertikale snit og omvendt kan vandrette kanter risikere at
+blive malet ved horisontale snit.
 
 \subsection{Andre tilgange}
 Dette afsnit vil kort nævne andre fremgangsmåder, vi har prøvet, for at
