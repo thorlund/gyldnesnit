@@ -419,8 +419,21 @@ afsnit \ref{subsec_udvidet_massemidtpunkt}. Vi skal bruge
 approkimationen af regionens form og udstrækning til at afgøre
 ovenstående egenskaber.
 
-\begin{lstlisting}[caption={Metode som finder fordelingen af en regions
-    masse.}, captionpos=b, label={pseudo_distribution}, frame=tb,
+Vi starter med at kigge på fordelingen af en regions masse. Helt enkelt
+skal vi bare finde forholdet mellem punkter på højre og venstre side af
+snittet. Metoden i kodeboks \ref{pseudo_distribution}, gør netop dette.
+Metoden returnerer en sandhedsværdi for, om regionens masse er
+jævnt fordelt. Vi har tidligere fastsat, at regionens masse er jævnt
+fordelt, hvis forholdet mellem de to sider er under $0.75$. Metoden gør
+brug af snittets orientering, hentet i
+$\textbf{Constraints}.\textit{coordinate}$, og det faktum, at vi kan
+finde det midterste element i vores accepterende værdier, ved at tage
+det $(\lfloor \frac{|\textit{acceptRange}|}{2}\rfloor + 1)$'te element i
+$\textbf{Constraints}.\textit{acceptRange}$.
+
+\begin{lstlisting}[caption={Metode som, på baggrund af regionens
+    fordeling af masse, afgør, om denne region er jævnt fordelt},
+    captionpos=b, label={pseudo_distribution}, frame=tb,
     breaklines=false, float=t]
 def checkDistribution(grid, constraints):
     # If we've got no approximation, there's no distribution
@@ -454,7 +467,7 @@ def checkDistribution(grid, constraints):
     return distribution < 0.75
 \end{lstlisting}
 
-\begin{lstlisting}[caption={Metode, som kontrollerer om en regions
+\begin{lstlisting}[caption={Metode, som kontrollerer, om en regions
     massemidtpunkt er inden for margin.}, captionpos=b,
     label={pseudo_checkCenterOfMass}, frame=tb, breaklines=false,
     float=t]
