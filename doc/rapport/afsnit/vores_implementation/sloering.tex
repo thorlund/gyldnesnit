@@ -16,25 +16,25 @@ De to første metoder bibeholder dårligt kanterne i et billede, men
 arbejder til gengæld direkte på billedet. Den tredie metode bibeholder
 til en vis grad kanterne bedre, men kan ikke arbejde direkte på
 billedet, hvilket kræver et større pladsforbrug. Metoden, som bruges til
-de to første sløringer, hedder foldning og bruger en foldningsmatrix til
+de to første sløringer, hedder foldning og bruger en foldningsmatrice til
 udregning af nye farver. Foldning er en simpel matematisk metode, som
 beskriver, hvordan man kan gange to matricer sammen --- i vores tilfælde
-en foldningsmatrix $\mathbb{Z}^{n}\times{} \mathbb{Z}^{m}$ og en
-billedmatrix $\mathbb{Z}^{k}\times{} \mathbb{Z}^{d}$ --- hvor $n = d ~\vee~
-m = k$ ikke behøver at være opfyldt.  En foldningsmatrix er en lille
+en foldningsmatrice $\mathbb{Z}^{n}\times{} \mathbb{Z}^{m}$ og en
+billedmatrice $\mathbb{Z}^{k}\times{} \mathbb{Z}^{d}$ --- hvor $n = d ~\vee~
+m = k$ ikke behøver at være opfyldt.  En foldningsmatrice er en lille
 matrice, som betegner hvor stor en del af billedet, og hvor meget af
-pixelværdierne rund om et punkt, der skal tages med i udregningen for
-den nye, slørede farve. En foldningsmatrix kan ses i figur \ref{Foldning}.
+pixels værdierne rund om et punkt, der skal tages med i udregningen for
+den nye, slørede farve. En foldningsmatrice kan ses i figur \ref{Foldning}.
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[scale=1,angle=0]{afsnit/vores_implementation/billeder/sloering/convolution}
 	\end{center}
-    \caption[]{En billedmatrix, hvor $(i,j)$ betegner placeringen, og en
+    \caption[]{En billedmatrice, hvor $(i,j)$ betegner placeringen, og en
     foldningsmatrix, med ni tilfældige tal fra 0 til 9.}
 	\label{Foldning}
 \end{figure}
 
-Som man kan se i figur \ref{Foldning}, har billed- og foldningsmatrixen
+Som man kan se i figur \ref{Foldning}, har billed- og foldningsmatricen
 vidt forskellige størrelser. Foldning virker på den måde, at man
 multiplicerer foldningsmatricen oven på de værdier, som ligger rundt om den pixel,
 hvis farve vi gerne vil finde den slørede værdi for. Dernæst tages gennemsnittet af den
@@ -57,19 +57,19 @@ resultat.
 \subsubsection*{Simpel sløring}
 I metoden simpel sløring er der 3 steps.
 \begin{itemize}
-	\item{Udregnes en foldningsmatrix.}
-	\item{Multipliceres foldningsmatrix rigtigt på billedet foldning.}
+	\item{Udregnes en foldningsmatrice.}
+	\item{Multipliceres foldningsmatrice rigtigt på billedet foldning.}
 	\item{Sættes værdigerne fra multiplikationen ind i billedet, som så bliver det nye sløret billedet nå
 alle punkter er omdannet.}
 \end{itemize}
 
-Foldningsmatrix for den simple sløring er en kvadradisk matrix med kun
-talet 1 i. Resultatet for en simpel sløring kan ses i figur
+Foldningsmatrice for den simple sløring er en kvadratisk matrice med kun
+tallet 1 i. Resultatet for en simpel sløring kan ses i figur
 \ref{simple_metode}
 
 \subsubsection*{Gaussisk sløring}
 Gaussisk sløring har de samme 3 steps som simpel sløring. Måde Gaussisk
-sløring udregner sin foldningsmatrix, at ved brug af normalefordeling,
+sløring udregner sin foldningsmatrice, at ved brug af normalfordeling,
 som betegnet med denne formel
 
 \begin{equation}
@@ -83,11 +83,11 @@ på 1. Den upscalet afrundet kerne kan se på figur \ref{gauss}.
 	\begin{center}
 		\includegraphics[scale=0.5,angle=0]{afsnit/vores_implementation/billeder/sloering/gauss}
 	\end{center}
-	\caption[]{En $3~\times{}~3$ foldningsmatrix for gauss sløring}
+	\caption[]{En $3~\times{}~3$ foldningsmatrice for gaussisk sløring}
 	\label{gauss}
 \end{figure}
 
-Denne foldningsmatrix kan så bruges ved hjælp af foldning til at danne det sløret
+Denne foldningsmatrice kan så bruges ved hjælp af foldning til at danne det sløret
 billet, som vi kan se i figur \ref{gaussian_metode}
 
 \subsubsection*{Sløring ved statistisk median}
