@@ -1,0 +1,23 @@
+{
+\subsection{Opbygning af en Kørsel}
+Start.py er distributør af arbejde til de andre dele af programkoden.
+Her følger en kort beskrivelse af hvad start.py gør og derefter kan ses
+noget pseudokode for hvad gør.
+Når en ny kørsel skal laves, skal der laves en ny python fil i
+eksperiments mappen og denne skal importeres som environment.
+Når alle indstillinger globale eller kørsels afhængige er blevet sat
+startes kørselen.
+\begin{lstlisting}
+	cuts = environment.generateCuts()
+	environment.setSettings(settings)
+	environment.setGlobalSettings(globalSettings)
+	db = Database(globalSettings)
+	run = m.createNewRun(settings)
+	paintings = m.Painting.select(m.Painting.q.form=="painting")
+		for painting in paintings:
+				paintingContainer = Painting(painting)
+				paintingContainer.setResults(paintingAnalyzer.analyze(paintingContainer,settings))
+				m.saveResults(run.id,paintingContainer)
+\end{lstlisting}
+}
+% vim: set tw=72 spell spelllang=da:
