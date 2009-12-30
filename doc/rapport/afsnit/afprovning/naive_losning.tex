@@ -11,7 +11,7 @@ efter vil vi teste på malerierne for at se om den naive løsning kan
 bruges i praktisk.
 }
   
-\subsection{Afprøvning på test billeder}
+\subsection{Afprøvning på testbilleder}
 Vi vil teste på de samme billeder som var i figur
 \ref{region_detektor_test}, samt nogle af de test billeder som blev
 brugt i forklaringen af den naive metodes, de 4 billeder som vi har valt
@@ -63,7 +63,7 @@ virker. Beskrivelsen af hvad der sker i billedet vil stå i caption
 	\begin{center}
 		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/naive_losning/naiv_kfarver_sdetaljer.png}
 	\end{center}
-	\caption[]{5 ud af de 6 store regioner fra figur \ref{GRD_virker1} valt til at ligge i snittet skoende er få små til at blive taget i betragtning}
+	\caption[]{5 ud af de 6 store regioner fra figur \ref{GRD_virker1} valt til at ligge i snittet, skoene er få små til at blive taget i betragtning}
 	\label{naiv_kfarver_sdetaljer}
 \end{figure}
 
@@ -71,7 +71,7 @@ virker. Beskrivelsen af hvad der sker i billedet vil stå i caption
 	\begin{center}
 		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/naive_losning/naiv_mfarver_mdetaljer.png}
 	\end{center}
-	\caption[]{}
+	\caption[]{Bukserne og skoene er tager med af den naive løsning, men drengen er sorteret vær da har krydser snittet}
 	\label{naiv_mfarver_mdetaljer}
 \end{figure}
 
@@ -79,18 +79,37 @@ virker. Beskrivelsen af hvad der sker i billedet vil stå i caption
 	\begin{center}
 		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/naive_losning/naiv_kfarver_kdetaljer.png}
 	\end{center}
-	\caption[]{}
+	\caption[]{Et billedet med mange hoder i snittet, hvor 2 af dem bliver godtaget af den naive metode til at ligger i snittet, en trøje bliver desværre også taget med »»(måske noget med at der bliver soteret få mange hover fra)}
 	\label{naiv_kfarver_kdetaljer}
 \end{figure}
 
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/naive_losning/naiv_virker_ikke1.png}
+	\end{center}
+	\caption[]{Mallerie hvor region detektor ikke virker, den naive løsning godtager tager en region som ligger helt forkert }
+	\label{naiv_virker_ikke1}
+\end{figure}
+
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/naive_losning/naiv_virker_ikke2.png}
+	\end{center}
+	\caption[]{3 regioner bliver godtaget, selv om de ikke er særlige intresante ««(er det ikke en farlige ting at sige )}
+	\label{naiv_virker_ikke2}
+\end{figure}
+
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/naive_losning/naiv_virker_ikke3.png}
+	\end{center}
+	\caption[]{Der bliver fundet 3 region, hvor kun en af dem passer på en ting i billedet}
+	\label{naiv_virker_ikke3}
+\end{figure}
 \clearpage
-\subsection{hvad kan vi gøre bedre}
-I det første billedet \ref{ff}, mener vi at den ting som virkelige kan
-forbedre måde vores metode arbejder på. Er ved at ændre på den
-definition som sortere regioner fra. Så en region kan krydse begge
-marginer. Den anden ting man kunne se på, omhandler det andet billedet
-\ref{nicofill}, hvor vi få for meget med, dette kunne løses ved at se på
-individuelde billeder og regne ud hvor meget algoritmerne må tage med.
-Begge disse to forslag vil blive diskuteret yderligt i den udvidet
-løsning af problemet, hvor vi vil gå ind på hvad vi gør for at kommer
-over nogle at de problemer som vi har.
+
+\subsection{konkulution}
+Det virker som om den naive løsning virker efter vores entationer dog
+med nogle få falske positive, hvis region detektoren virker på
+malerierne, dog fejler den på malerier hvor region detektoren fejler, og
+kommer med en masse falske positive.

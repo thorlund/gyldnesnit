@@ -104,7 +104,8 @@ def main():
 	filename = sys.argv[1]
 	image = highgui.cvLoadImage (filename)
 
-	cutRatios = [lib.PHI]
+	#cutRatios = [lib.PHI]
+	cutRatios = [0.75]
 	settings = Settings(cutRatios)
 	image = highgui.cvLoadImage (filename)
 	thickness = 4

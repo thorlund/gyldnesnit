@@ -81,7 +81,7 @@ cv.cvCopy(blurImage, out, edges)
 #cv.cvReleaseImage(blurImage)
 
 #print points[:0]
-cut = lines[0]
+cut = lines[1]
 margin = marginCalculator.getPixels(image, cut, 0.024)
 component_dictionary = featureDetector.ribbonFloodFill(image, edges, out, cut, margin, lo, up)
 #featureDetector.floodFillLine(image, out, points, cut, lo, up, {})

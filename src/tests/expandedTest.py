@@ -97,11 +97,12 @@ def main():
 	filename = sys.argv[1]
 	image = highgui.cvLoadImage (filename)
 
-	cutRatios = [lib.PHI]
+	cutRatios = [0.75]
+	#cutRatios = [lib.PHI]
 	settings = Settings(cutRatios)
 	image = highgui.cvLoadImage (filename)
 	thickness = 4
-	settings.setMarginPercentage(0.05)
+	settings.setMarginPercentage(0.025)
 	cutNo = int(sys.argv[2])
 	
 	#udtrak af cut
@@ -133,7 +134,7 @@ def main():
 	#hvor mange pixel der er pa den ende side i forhold til den anden, i procent
 	
 	pixelRatio = pixelSideCounter(gridPointsList, cutPixel, oriantesen)
-	
+	print pixelRatio
 	#Udregning af center og mass
 	points = centerOfMass(gridPointsList, oriantesen)
 	#Draw the cut
@@ -158,7 +159,7 @@ def main():
 		else:
 	#		print point
 			cv.cvLine(image, cv.cvPoint(cut.getPoints()[0].x, point), cv.cvPoint(cut.getPoints()[1].x, point), COL_GREEN)
-	lib.drawBoundingBoxes(image, comp)
+	lib.drawBoundingBoxes(image, comp, 4, COL_GREEN)
 	#highgui.cvSaveImage('floodfillbilledet.png', blobImg)
 	highgui.cvSaveImage('centerOfMass.png', image)
 	
