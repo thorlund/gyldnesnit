@@ -266,16 +266,16 @@ def checkPosition(component, constraints):
 \end{lstlisting}
 Når vi har fundet værdierne i \texttt{acceptRange}, og dermed også
 fastfast \texttt{coordinate}, dvs. vi ved hvilken orientering snittet
-har, kan vi endelig afgøre om en interessant region ligger placeret i
-snittet eller ej. Vi har allerede udnyttet, at vi kun behøver at
-betragte én koordinat, når vi kun har vertikale og horisontale snit. Det
-er derfor ligetil, at kontrollere, om en regions afgrænsende rektangel,
-har en kant inden for margin. Regionen er repræsenteret som en instans
-af \textbf{cvConnectedComp}, hvori der er gemt en instans af
+har, kan vi afgøre om en interessant region ligger placeret i snittet
+eller ej. Vi har allerede udnyttet, at vi kun behøver at betragte én
+koordinat, når vi kun har vertikale og horisontale snit. Det er derfor
+ligetil, at kontrollere, om en regions afgrænsende rektangel, har en
+kant inden for margin. Regionen er repræsenteret som en instans af
+\textbf{cvConnectedComp}, hvori der er gemt en instans af
 \textbf{cvRect}. Vi har en metode, kaldet \texttt{checkPosition}, som,
 alt efter om vi har et vertikalt eller et horisontalt snit, returnerer
-en sandhedsværdi for ,om den relevante koordinat findes i de accepterende
-koordinater. Metoden ses i kodeboks \ref{pseudo_position}.
+en sandhedsværdi for, om den relevante koordinat findes i de
+accepterende koordinater. Metoden ses i kodeboks \ref{pseudo_position}.
 
 Vi kan nu sammensætte en metode som returnerer alle interessante
 regioner, med en kant inden for margin. Metoden tager en instans af
@@ -316,17 +316,14 @@ def GetInterestingRegionsInCut(CutRegions, constraints):
 Der er også blevet implementeret en anden tilgang til vurdering af
 interessante regioner. Grundprincipperne bag denne er gennemgået i
 afsnit \ref{subsec_udvidet_massemidtpunkt}. Vi kigger nu ikke længere på
-en regions afgrænsende rektangel, men betragter i stedet regionens
-form og udstrækning, for at vurdere, om den ligger i snittet. Endvidere
-tilgodeser denne fremgangsmåde i højere grad regioner, som er centreret
-om snittet, fremfor regioner, som ligger op ad snittet. Når vi ikke
-længere gør brug af det afgrænsende rektangel, har vi brug for en anden
-måde, at repræsentere regionen på. Vi tager derfor billedet, som
-\texttt{cvFloodFill} har arbejdet på, og bruger dette til at
-approksimere regionens form.
+en regions afgrænsende rektangel, men betragter i stedet regionens form
+og udstrækning, for at vurdere, om den ligger i snittet, så vi har brug
+for en anden måde, at repræsentere regionen på. Vi tager derfor
+billedet, som \texttt{cvFloodFill} har arbejdet på, og bruger dette til
+at approksimere regionens form.
 
 \subsubsection{Approksimation af regioners form og udstrækning}
-Fremgangsmåden for at approksimere en regions form og udstrækning er ret
+Fremgangsmåden for at approksimere en regions form og udstrækning er
 simpel. Givet et segmenteret billede, fra \texttt{cvFloodFill}, og den
 resulterende $\angles{CutRegions}$, fra \texttt{ExtractRegions}, kan vi,
 for hver pixel i det afgrænsende rektangel, kontrollere om denne har
@@ -371,11 +368,10 @@ def GetRegionGrid(image, color, component, step):
     return coordinates
 \end{lstlisting}
 % Sorry, I'm really sorry :(
-\newpage
-For god ordens skyld, og senere brug, vil vi definere en metode, som finder
-en approksimation til alle regioner i en instans af $\angles{CutRegions}$. Denne
-metode returnerer en modificeret instans af $\angles{CutRegions}$, som
-vi kalder for $\angles{CutGridRegions}$, således at den også indeholder
+Til senere brug, vil vi definere en metode, som finder en approksimation
+til alle regioner i en instans af $\angles{CutRegions}$. Denne metode
+returnerer en modificeret instans af $\angles{CutRegions}$, som vi
+kalder for $\angles{CutGridRegions}$, således at den også indeholder
 approksimationen til regionen. Strukturen er vist i
 \eqref{CutGridRegions_dict}.
 \begin{multline}
@@ -384,7 +380,7 @@ approksimationen til regionen. Strukturen er vist i
     \label{CutGridRegions_dict}
 \end{multline}
 Metoden \texttt{GridIt}, er vist i kodeboks \ref{pseudo_GridIt}, og går
-alle regionerne igennem mens den bygger den nye \emph{dict} op.
+alle regionerne igennem, mens den bygger den nye \emph{dict} op.
 
 \begin{lstlisting}[caption={Metode, som finder approksimationen til alle
     regioner i en instans af $\angles{CutRegions}$.}, captionpos=b,
@@ -419,17 +415,18 @@ afsnit \ref{subsec_udvidet_massemidtpunkt}. Vi skal bruge
 approkimationen af regionens form og udstrækning til at afgøre
 ovenstående egenskaber.
 
-Vi starter med at kigge på fordelingen af en regions masse. Helt enkelt
-skal vi bare finde forholdet mellem punkter på højre og venstre side af
-snittet. Metoden i kodeboks \ref{pseudo_distribution}, gør netop dette.
-Metoden returnerer en sandhedsværdi for, om regionens masse er jævnt
-fordelt. Vi har tidligere fastsat, at regionens masse er jævnt fordelt,
-hvis forholdet mellem de to sider er under $0.75$. Metoden gør brug af
+Vi starter med at kigge på fordelingen af en regions masse, hvor vi skal
+finde forholdet mellem punkter på højre og venstre side af snittet.
+Metoden i kodeboks \ref{pseudo_distribution}, gør netop dette, og
+returnerer en sandhedsværdi for, om regionens masse er jævnt fordelt. Vi
+har tidligere fastsat, at regionens masse er jævnt fordelt, hvis
+forholdet mellem de to sider er under $0.75$. Metoden gør brug af
 snittets orientering, hentet i
 $\textbf{Constraints}.\textit{coordinate}$, og det faktum, at vi kan
 finde det midterste element i vores accepterende værdier, ved at tage
-det $(\left\lfloor \frac{|\textit{acceptRange}|}{2}\right\rfloor + 1)$'te
-element i $\textbf{Constraints}.\textit{acceptRange}$.
+det $\left(\left\lfloor \frac{|\textit{acceptRange}|}{2}\right\rfloor +
+1\right)$'te element i $\textbf{Constraints}.\textit{acceptRange}$.
+Dette er selve snittet.
 
 \begin{lstlisting}[caption={Metode som, på baggrund af regionens
     fordeling af masse, afgør, om denne region er jævnt fordelt},
@@ -467,6 +464,11 @@ def checkDistribution(grid, constraints):
     return distribution < 0.75
 \end{lstlisting}
 
+Vi skal også bruge en metode, til at finde en regions massemidtpunkt.
+Denne metode er vist i kodeboks \ref{pseudo_checkCenterOfMass} og
+returnerer en sandhedsværdi for, hvorvidt en regions massemidtpunkt
+befinder sig inden for margin.
+
 \begin{lstlisting}[caption={Metode, som kontrollerer, om en regions
     massemidtpunkt er inden for margin.}, captionpos=b,
     label={pseudo_checkCenterOfMass}, frame=tb, breaklines=false,
@@ -487,6 +489,40 @@ def checkCenterOfMass(grid, constraints):
     centerOfMass = sum/len(grid)
 
     return centerOfMass in constraints.acceptRange
+\end{lstlisting}
+
+Endeligt samler vi alle metoderne, så vi kan sortere i alle resultaterne
+returneret fra segmentering af billedet. Vi kalder denne metode for
+\texttt{GetExpandedRegions} og viser denne i kodeboks
+\ref{pseudo_GetExpandedRegions}.
+
+\begin{lstlisting}[caption={Pseudokode, som returnerer alle interessante
+    regioner, der er nævnt fordelt over snittet og har et massemidtpunkt
+    inden for margin.},
+    captionpos=b, label={pseudo_GetExpandedRegions}, frame=tb, breaklines=false,
+    float=hb]
+def GetInterestingRegionsInCut(image, CutRegions, constraints):
+
+    # First remove uninteresting regions
+    interestingRegions = GetInterestingRegions(CutRegions, constraints)
+
+    # Initialize the grid
+    interestingRegions = GridIt(image, interestingRegions, constraints)
+
+    # Initialize an empty dict
+    interestingRegionsInCut = {}
+
+    # Check every interesting region for center of mass
+    # and distribution
+    for id in interestingRegions:
+        grid = interestingRegions[id][2]
+        if checkDistribution(grid, constraints)
+            and checkCenterOfMass(grid, constraints):
+            interestingRegionsInCut[id] = interestingRegions[id]
+
+    # The resulting dict contains only interesting regions
+    # that qualify
+    return interestingRegionsInCut
 \end{lstlisting}
 
 % vim: set tw=72 spell spelllang=da:
