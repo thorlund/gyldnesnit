@@ -1,0 +1,75 @@
+/home/gyldnesnit/gyldnesnit/src/database/catalog.csv
+Total number of regions found across all pictures
+2048728
+Total number of paintings
+17338
+The different ratios followed by the amount of features found i that ratio:
+[{0.66803398874999997: 53169, 0.86803398875000004: 49113, 0.81803398875: 49013, 0.66666000000000003: None, 0.71803398875000002: 51170, 0.51803398874999995: 55162, 0.91803398874999997: 47760, 0.56803398875: 54688, 0.96803398875000002: 40099, 0.76803398874999995: 50302, 0.61803398875000004: 53769}, {0.66803398874999997: 53467, 0.86803398875000004: 50139, 0.81803398875: 50010, 0.66666000000000003: None, 0.71803398875000002: 52752, 0.51803398874999995: 54176, 0.91803398874999997: 49189, 0.56803398875: 55006, 0.96803398875000002: 41651, 0.76803398874999995: 51489, 0.61803398875000004: 54680}, {0.66803398874999997: 55826, 0.86803398875000004: 56575, 0.81803398875: 55220, 0.66666000000000003: None, 0.71803398875000002: 55727, 0.51803398874999995: 56118, 0.91803398874999997: 60918, 0.56803398875: 57575, 0.96803398875000002: 55070, 0.76803398874999995: 56440, 0.61803398875000004: 57166}, {0.66803398874999997: 50661, 0.86803398875000004: 41179, 0.81803398875: 44081, 0.66666000000000003: None, 0.71803398875000002: 48675, 0.51803398874999995: 55515, 0.91803398874999997: 39403, 0.56803398875: 53941, 0.96803398875000002: 33249, 0.76803398874999995: 46332, 0.61803398875000004: 52253}]
+How the four different cuts are used
+[53769, 54680, 57166, 52253]
+This tuple shows how many features are detected in the golden ratio and overall and the amount of pictures in/of a given timeline
+{'1301-1350\r\n': (537, 1208, 31360), '1801-1850\r\n': (420, 959, 39640), '1551-1600\r\n': (487, 1318, 64360), '1201-1250\r\n': (16, 99, 240), '1851-1900\r\n': (261, 680, 7200), '1451-1500\r\n': (795, 1725, 98320), '1351-1400\r\n': (288, 790, 8680), '1651-1700\r\n': (633, 1483, 76680), '1251-1300\r\n': (254, 550, 2760), '1701-1750\r\n': (498, 1015, 46640), '1151-1200\r\n': (222, 602, 3600), '1751-1800\r\n': (453, 1168, 30400), '1101-1150\r\n': (121, 312, 880), '1401-1450\r\n': (600, 1849, 43120), '1601-1650\r\n': (544, 1297, 126520), '1501-1550\r\n': (737, 1535, 113120)}
+The features per picture dict
+{0: 270920, 1: 94448, 2: 69997, 3: 54825, 4: 39197, 5: 32732, 6: 26669, 7: 21463, 8: 16169, 9: 13279, 10: 10645, 11: 8694, 12: 6577, 13: 5303, 14: 4330, 15: 3560, 16: 2715, 17: 2134, 18: 1868, 19: 1448, 20: 1126, 21: 914, 22: 739, 23: 624, 24: 497, 25: 405, 26: 360, 27: 283, 28: 247, 29: 204, 30: 188, 31: 149, 32: 108, 33: 104, 34: 93, 35: 84, 36: 52, 37: 45, 38: 40, 39: 41, 40: 45, 41: 28, 42: 23, 43: 25, 44: 13, 45: 9, 46: 9, 47: 10, 48: 10, 49: 4, 50: 12, 51: 10, 52: 7, 53: 4, 54: 3, 55: 3, 56: 5, 57: 3, 58: 1, 59: 3, 60: 2, 61: 5, 62: 2, 63: 1, 64: 2, 65: 1, 66: 1, 68: 1, 71: 1, 74: 1}
+The top ten images with the most features in the golden ratio
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/b/bleker/gerrit/staghunt.jpg
+with:
+40
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/r/raphael/4stanze/1segnatu/2/disputa2.jpg
+with:
+40
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/g/gijsbrec/quodlibe.jpg
+with:
+41
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/g/goes/portinar/centre12.jpg
+with:
+42
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/b/bruegel/pieter_e/12/03monkey.jpg
+with:
+43
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/f/franciab/betrotha.jpg
+with:
+48
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/h/houasse/son/escorial.jpg
+with:
+48
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/f/francesc/4sculptu/3allegor.jpg
+with:
+50
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/v/vermeer/02c/11drink4.jpg
+with:
+51
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/c/cossa/schifano/1march/1march_.jpg
+with:
+68
+The top ten images with the most features in any ratio
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/f/ferrari/gaudenzi/polyptyc.jpg
+with:
+62
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/v/veronese/02a/2nave/2wall.jpg
+with:
+62
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/c/carnicer/balloon1.jpg
+with:
+63
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/c/caravagg/12/84jupite.jpg
+with:
+64
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/m/master/zunk_fl/15_paint/1/07louis2.jpg
+with:
+64
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/v/vermeer/03c/25artpa5.jpg
+with:
+65
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/v/veronese/07/2lunett1.jpg
+with:
+66
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/c/cossa/schifano/1march/1march_.jpg
+with:
+68
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/m/michelan/3sistina/6lunette/01/lu01ele2.jpg
+with:
+71
+/home/gyldnesnit/gyldnesnit/res/wga.hu/art/v/vermeer/04/33faith2.jpg
+with:
+74
