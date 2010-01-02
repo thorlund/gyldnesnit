@@ -12,44 +12,66 @@ bruges i praktisk.
 }
   
 \subsection{Afprøvning på testbilleder}
-Vi vil teste på de samme billeder som var i figur
-\ref{region_detektor_test}, samt nogle af de test billeder som blev
-brugt i forklaringen af den naive metodes, de 4 billeder som vi har valt
-at test kan se i figur \ref{naiv_detektion_test} hvor en grån kasse
-rundt om en region, betyder at den er valt til at ligge i det gyldne
-snit af den naive metode. Det første billedet \ref{naiv_blob1}, har 5
+Vi vil teste på de samme billeder som var i sideste afsnit samt et nyt
+test billeder som blev brugt i forklaringen af den naive metodes, de 4
+billeder som vi har valt at test kan se i figur
+\ref{naiv_detektion_test} hvor en grån kasse rundt om en region, betyder
+at den er valt til at ligge i det gyldne snit af den naive metode. 
+
+Det første billedet \ref{naiv_blob1}, har 5
 regioner og hvor 3 af dem blev fundet af reginon detektoren, vores naive
 løsning har så sorteret baggrundens regionen og den øverste region i
 snitte vær, da de begge krydser marginer og derfor ikke overholder regel
-\ref{2.2.4, c}. Det andet billedet \ref{naiv_blob2}, er alle blevet
-sorteret vær, også den lille region som ligger lige i miden af snittet.
-Grunde til det er at den er for lille og derfor ikke overholder regel
-\ref{2.2.4, a}. I test billedet \ref{naive_hoisont1}, sortere algoritmen
-himlen fra, da den krydser margin lidt, men tager jorden med. I test
-billedet \ref{naiv_masse} er der kun en af den 3 regioner som ikke
-bliver sorteret væk, grunden til at den nederste region ikke bliver
-tager med er at den ikke har en masse der er stor nok, som forklaret i
-\ref{2.2.3} og derfor ikke overholder regel \ref{2.2.4 b}. Alle de test
-billeder som vi har vist her opføre sig præcist på den måde som vi havde
-regnet med.\node{mere plas i teksten og så skal alle de oginale billeder være der}
+\ref{2.2.4, c}. 
 
 \begin{figure}[!h]
     \centering
 		\subfloat[Naive algoritme finder 1 ud af 5 regioner]{
         	\includegraphics[angle=0,width=0.55\textwidth]{afsnit/afprovning/billeder/naive_losning/naiv_blob1.png}
         	\label{naiv_blob1}}\hspace{1em}
-    		\subfloat[Værgen den lille region eller den store er fundet]{
-	        	\includegraphics[angle=0,width=0.55\textwidth]{afsnit/afprovning/billeder/naive_losning/naiv_blob2.png}
-	       	\label{naiv_blob2}}\hspace{1em}
-    		\subfloat[Kun den nederste højrisondt er fundet]{
-	        	\includegraphics[angle=0,width=0.55\textwidth]{afsnit/afprovning/billeder/naive_losning/naiv_hoisont1.png}
-		    \label{naiv_hoisont1}}\hspace{1em}
-		    \subfloat[2 regioner hvor den ende er sorteret vær på grund af dens masse]{
-	        	\includegraphics[angle=0,width=0.55\textwidth]{afsnit/afprovning/billeder/naive_losning/naiv_mass.png}
-	       	\label{naiv_masse}}\hspace{1em}
-        \caption[]{4 test billeder som også blev brugt til at illustrere den naive løsnings fremgangs måde, grån kasse rund om region, betyder at den er taget med af dem naive løsning}
-     \label{naiv_detektion_test}
 \end{figure}
+
+Det andet billedet \ref{naiv_blob2}, er alle blevet
+sorteret vær, også den lille region som ligger lige i miden af snittet.
+Grunde til det er at den er for lille og derfor ikke overholder regel
+\ref{2.2.4, a}. 
+
+\begin{figure}[!h]
+    \centering
+		\subfloat[Værgen den lille region eller den store er fundet]{
+	       	\includegraphics[angle=0,width=0.55\textwidth]{afsnit/afprovning/billeder/naive_losning/naiv_blob2.png}
+	       	\label{naiv_blob2}}\hspace{1em}
+\end{figure}
+
+I test billedet \ref{naive_hoisont1}, sortere algoritmen
+himlen fra, da den krydser margin lidt, men tager jorden med. 
+
+
+\begin{figure}[!h]
+    \centering
+		\subfloat[Kun den nederste højrisondt er fundet]{
+	       	\includegraphics[angle=0,width=0.55\textwidth]{afsnit/afprovning/billeder/naive_losning/naiv_hoisont1.png}
+		    \label{naive_hoisont1}}\hspace{1em}
+\end{figure}
+
+I test billedet \ref{naiv_masse} er der kun en af den 3 regioner som ikke
+bliver sorteret væk, grunden til at den nederste region ikke bliver
+tager med er at den ikke har en masse der er stor nok, som forklaret i
+\ref{2.2.3} og derfor ikke overholder regel \ref{2.2.4 b}. Alle de test
+billeder som vi har vist her opføre sig præcist på den måde som vi havde
+regnet med. \note{mere plas i teksten og sa skal alle de oginale billeder vere der}
+
+
+\begin{figure}[!h]
+    \centering
+		\subfloat[2 regioner hvor den ende er sorteret vær på grund af dens masse]{
+	        \includegraphics[angle=0,width=0.55\textwidth]{afsnit/afprovning/billeder/naive_losning/naiv_mass.png}
+	       	\label{naiv_masse}}\hspace{1em}
+	    \subfloat[Original]{
+	        \includegraphics[angle=0,width=0.55\textwidth]{afsnit/afprovning/billeder/naive_losning/mass.png}
+	       	\label{naiv_masse_original}}\hspace{1em}
+\end{figure}
+
 \clearpage
 
 \subsection{Afprøvning på malerier}

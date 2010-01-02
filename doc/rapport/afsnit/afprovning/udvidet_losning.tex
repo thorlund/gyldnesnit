@@ -9,44 +9,57 @@ udvalgte malerier.
 }
 \subsection{Afprøvning på testbilleder}
 Vi vil teste om den udvidet løsning virker som vi har beskrevet i
-opgave, vi ser på 4 test billeder, billedet \ref{hus_virker} er et hus
-hvor snittet og massemidtpunktet næsten ligge oven i hinanden. I det
-andet billedet \ref{hus_virker_ikke} er huset forskubbet så masse
+opgave, vi ser på 4 test billeder. 
+
+Billedet \ref{hus_virker} er et hus
+hvor snittet og massemidtpunktet næsten ligge oven i hinanden. 
+
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_hus1_test.png}
+	\end{center}
+	\caption[]{Et hus der er symetrisk og der har massemidtpunkt i spisen af taget, massemidtpunktet er inde for margin så huset bliver udvalgt til at ligge i snittet.}
+	\label{hus_virker}
+\end{figure}
+
+I det andet billedet \ref{hus_virker_ikke} er huset forskubbet så masse
 midtpunktet lige lige uden for margin, og derved ikke skulle blive tage
-med af algoritmen. Det tredje billedet har en region som er meget lille
+med af algoritmen. 
+
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_hus2_test.png}
+	\end{center}
+	\caption[]{Hus hvor masse midtpunktet er flyttet få pixels ud for margin, den udvide løsning vælger ikke at tage huset med.}
+	\label{hus_virker_ikke}
+\end{figure}
+
+Det tredje billedet \ref{udvidet_blob_test} har en region som er meget lille
 og derfor bliver fra sorteret på grund af den størrelse, den stor
 region, bliver taget med at dens massemidtpunkt ligger inden for margin,
 denne figur samt huset ville ikke være blevet taget med i den naive
-løsning XX(skal jeg overhoved nævne det). Det 4 billedet er der en
-region med som har et massemidtpunkt inde i margin, men som har en skæv
-fordeling af pixels i forhold til snittet og derfor bliver sorteret fra.
-Ud fra de fire observationer, virker den udvidet løsning som vi havde
-forventet.
+løsning XX(skal jeg overhoved nævne det). 
 
-\begin{figure}[!h]
-    \centering
-		\subfloat[Et hus der er symetrisk og der har massemidtpunkt i spisen af taget, massemidtpunktet er inde for margin så huset bliver udvalgt til at ligge i snittet.]{
-        	\includegraphics[angle=0,width=1.0\textwidth]{afsnit/afprovning/billeder/udvidet_losning/udvidet_hus1_test.png}
-        	\label{hus_virker}}\hspace{1em}
-    	\subfloat[Hus hvor masse midtpunktet er flyttet få pixels ud for margin, den udvide løsning vælger ikke at tage huset med]{
-        	\includegraphics[angle=0,width=1.0\textwidth]{afsnit/afprovning/billeder/udvidet_losning/udvidet_hus2_test.png}
-        	\label{hus_virker_ikke}}\hspace{1em}        	    			
-        \caption[]{}
-     \label{naiv_detektion_test}
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_blob2_test.png}
+	\end{center}
+	\caption[]{2 regioner hvor den nederste har et massemidtpunkt inde for margin.}
+	\label{udvidet_blob_test}
 \end{figure}
 
-\begin{figure}[!h]
-    \centering
-    	\subfloat[2 regioner hvor den nederste har et massemidtpunkt inde for margin ]{
-        	\includegraphics[angle=0,width=1.0\textwidth]{afsnit/afprovning/billeder/udvidet_losning/udvidet_blob2_test.png}
-        	\label{udvidet_blob_test}}\hspace{1em}
-    	\subfloat[margin er sat meget op, så man kan se at regionen har et massemidtpunkt ind for margin, men da størstedelen af regionens pixels er på højre side, vælger den fra]{
-        	\includegraphics[angle=0,width=1.0\textwidth]{afsnit/afprovning/billeder/udvidet_losning/udvidet_bleksprutte_test.png}
-        	\label{bleksprutte_test}}\hspace{1em}        	    			
-        \caption[]{}
-     \label{naiv_detektion_test}
-\end{figure}
+Det fjere billedet \ref{bleksprutte_test} er der en region med som har
+et massemidtpunkt inde i margin, men som har en skæv fordeling af pixels
+i forhold til snittet og derfor bliver sorteret fra. Ud fra de fire
+observationer, virker den udvidet løsning som vi havde forventet.
 
+\begin{figure}[h!!]
+	\begin{center}
+		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_bleksprutte_test.png}
+	\end{center}
+	\caption[]{Margin er sat meget op, så man kan se at regionen har et massemidtpunkt ind for margin, men da størstedelen af regionens pixels er på højre side, vælger den fra.}
+	\label{bleksprutte_test}
+\end{figure}
 \clearpage
 
 \subsection{Afprøvning på malerier}
