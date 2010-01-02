@@ -422,14 +422,14 @@ ovenstående egenskaber.
 Vi starter med at kigge på fordelingen af en regions masse. Helt enkelt
 skal vi bare finde forholdet mellem punkter på højre og venstre side af
 snittet. Metoden i kodeboks \ref{pseudo_distribution}, gør netop dette.
-Metoden returnerer en sandhedsværdi for, om regionens masse er
-jævnt fordelt. Vi har tidligere fastsat, at regionens masse er jævnt
-fordelt, hvis forholdet mellem de to sider er under $0.75$. Metoden gør
-brug af snittets orientering, hentet i
+Metoden returnerer en sandhedsværdi for, om regionens masse er jævnt
+fordelt. Vi har tidligere fastsat, at regionens masse er jævnt fordelt,
+hvis forholdet mellem de to sider er under $0.75$. Metoden gør brug af
+snittets orientering, hentet i
 $\textbf{Constraints}.\textit{coordinate}$, og det faktum, at vi kan
 finde det midterste element i vores accepterende værdier, ved at tage
-det $(\lfloor \frac{|\textit{acceptRange}|}{2}\rfloor + 1)$'te element i
-$\textbf{Constraints}.\textit{acceptRange}$.
+det $(\left\lfloor \frac{|\textit{acceptRange}|}{2}\right\rfloor + 1)$'te
+element i $\textbf{Constraints}.\textit{acceptRange}$.
 
 \begin{lstlisting}[caption={Metode som, på baggrund af regionens
     fordeling af masse, afgør, om denne region er jævnt fordelt},

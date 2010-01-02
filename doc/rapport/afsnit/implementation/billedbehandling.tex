@@ -69,7 +69,7 @@ $\textbf{I}_{2,0} =~$\texttt{I[2][0]}.
 \end{figure}
 
 \subsection{Resultaters struktur\label{resultat_struktur}}
-Indledningsvist vil vi introducere nogle vigtige datastrukturer, som vi
+Indledningsvist vil vi introducere to vigtige datastrukturer, som vi
 bruger fra \emph{OpenCV}. Alle datastrukturer og metoder fra
 \emph{OpenCV}, har præfikset ``cv'', hvilket gør det let, at skelne
 vores egne metoder fra dem der er givet i \emph{OpenCV}. Vi præsenterer
@@ -105,38 +105,8 @@ illustrerer dette, i \eqref{new_class} herunder.
     \shoveleft{\}}\shoveright{}
     \label{new_class}
 \end{multline}
-Vi vil nu beskrive de vigtigste datastrukturer, som vi bruger, med
-ovenstående notation.
-
-\subsubsection{cvScalar}
-Strukturen \textbf{cvScalar} fungerer egentlig som en almindelig liste
-med værdier, blot kan en instans af \textbf{cvScalar} kun indeholde 1,
-2, 3 eller 4 værdier. Strukturen vist i \eqref{cvScalar_class} har fire
-værdier.
-\begin{multline}
-    \textbf{class~} \textrm{cvScalar} = \{ \\
-    \shoveleft{\qquad\textbf{double[4]} : \textit{value}} \\
-    \shoveleft{\}}\shoveright{}
-    \label{cvScalar_class}
-\end{multline}
-I \emph{OpenCV}, og i vores implementation i øvrigt, bruges strukturen
-blandt andet til RGB-farver og tærskelværdier. Til RGB-værdier bruger
-\emph{OpenCV} også strukturen \textbf{CV\_RGB}, men dette er reelt blot
-en instans af \textbf{cvScalar}.
-
-\subsubsection{cvPoint}
-Strukturen \textbf{cvPoint} har til formål at beskrive punkter i det
-to-dimensionelle plan. Den er givet i \eqref{cvPoint_class}.
-\begin{multline}
-    \textbf{class~} \textrm{cvPoint} = \{ \\
-    \shoveleft{\qquad\textbf{int} : \textit{x}} \\
-    \shoveleft{\qquad\textbf{int} : \textit{y}} \\
-    \shoveleft{\}}\shoveright{}
-    \label{cvPoint_class}
-\end{multline}
-Det er en simpel struktur, men den er en meget central del af
-implementationen.  Den bruges blandt andet til at angive snit i billedet
-samt til at fortælle floodfill, hvor vi skal male og skifte farve.
+Med ovenstående notation kan vi nu beskrive to vigtige strukturer fra
+\emph{OpenCV} kaldet \textbf{cvRect} og \textbf{cvConnectedComp}.
 
 \subsubsection{cvRect}
 Denne struktur beskriver et rektangel, ved at angive dets øverste venstre
@@ -150,18 +120,15 @@ hjørne og dets dimensioner. Strukturen vises i \eqref{cvRect_class}.
     \shoveleft{\}}\shoveright{}
     \label{cvRect_class}
 \end{multline}
-I vores implementation af den naive fremgangsmåde, som nævnt i afsnit
-\ref{section_naiv}, er det denne struktur, som angiver en regions
+I vores implementation bruges denne struktur til at angive en regions
 begrænsende rektangel. Vi vil i afsnit \ref{section_vurdering_regioner},
-se, hvordan strukturen \textbf{cvRect} bruges til at vurdere, om regioner
-ligger i det gyldne snit.
+se, hvordan strukturen \textbf{cvRect} bruges i vurderingen af regioner.
 
 \subsubsection{cvConnectedComp}
-\emph{OpenCV} har en implementation af den floodfill-metode beskrevet i
-afsnit \ref{subsec_floodfill}. Vi vil komme nærmere ind på denne senere,
-men den nævnes nu, da den gør brug af en datastruktur kaldet
+\emph{OpenCV} har en implementation af floodfill-metoden beskrevet i
+afsnit \ref{subsec_floodfill}, som gør brug af en datastruktur kaldet
 \textbf{cvConnectedComp}. Denne struktur bruges, til at beskrive den
-region i billedet, som floodfill fylder ud.  Strukturen er vist i
+region i billedet, som metoden fylder ud.  Strukturen er vist i
 \eqref{cvConnectedComp_class}.
 \begin{multline}
     \textbf{class~} \textrm{cvConnectedComp} = \{ \\
@@ -175,7 +142,7 @@ Strukturen indeholder en regions begrænsende rektangel og regionens
 areal.
 
 \subsubsection{Resultater}
-Vi vil nu introducere en ny struktur, som repræsenterer Pythons
+Nu introduceres en ny struktur, som repræsenterer Pythons
 \emph{dictionary}, forkortet \emph{dict}.  En \emph{dict} viser vi som i
 \ref{def_dict}.
 \begin{eqnarray}
@@ -195,39 +162,31 @@ $\angles{LuckyNumbers}$, som indeholder personers lykketal:
 Data i en \emph{dict}, kan godt være af mere komplicerede typer, f.eks.
 kan man have en anden \emph{dict}. Man kan således lave en hierakisk
 struktur, som egner sig opbevaring af fundne regioner i et billede. Vi
-ønsker at have hierakiet vist i figur \ref{resultat_hieraki}.
+ønsker at have hierakiet illustreret ved grammatikken i
+\eqref{resultat_hieraki}.
 
-\begin{figure}[!h]
-    \dirtree{%
-    .1 $\textrm{ImageRegions}$ .
-    .2 $\textrm{RatioRegions}$ .
-    .3 $\textrm{CutRegions}$ .
-    .4 $region0$ .
-    .4 $region1$ .
-    .4 $region2$ .
-    .2 $\textrm{RatioRegions}$ .
-    .3 $\textrm{CutRegions}$ .
-    .2 $\textrm{RatioRegions}$ .
-    .2 \dots .
-    }
-    \caption[]{Hierakisk struktur til resultater}
+\begin{equation}
+    \begin{split}
+        \textit{ImageRegions}  & \to  (\textit{RatioRegions~ImageRegions}')\\
+        \textit{ImageRegions}' & \to  \textit{RatioRegions~ImageRegions}'\\
+        \textit{ImageRegions}' & \to  \\
+        \textit{RatioRegions}  & \to  (\textit{CutRegions~CutRegions~RatioRegions}')\\
+        \textit{RatioRegions}' & \to  \textit{CutRegions~CutRegions}\\
+        \textit{RatioRegions}' & \to  \\
+        \textit{CutRegions}    & \to  (\textbf{CV\_RGB}, \textbf{cvConnectedComp})\textit{~CutRegions} \\
+        \textit{CutRegions}    & \to
+    \end{split}
     \label{resultat_hieraki}
-\end{figure}
+\end{equation}
 
-Vi har, at et billede kan have et endeligt antal snitratioer, som man
+Vi har da, at et billede kan have et endeligt antal snitratioer, som man
 ønsker at undersøge. Disse snitratioer, har enten to eller fire snit,
-som nævnt i afsnit \ref{section_opdeling}. I disse snit er der et
-endeligt antal fundne regioner. Vi repræsenterer hver node i figur
-\ref{resultat_hieraki} med en \emph{dict}. På nederste niveau har vi
-selve regionen, som floodfill-metoden har lagt i strukturen
-\textbf{cvConnectedComp}. Vi ønsker dog også, at gemme hvilken farve,
-regionen er blevet tildelt i det segmenterede billede. Vi gemmer derfor
-parret $(color, region)$, som er instanser af henholdsvis
-\textbf{CV\_RGB} og \textbf{cvConnectedComp}. Hver region bliver tildelt
-et \emph{id}, som er en strengrepræsentation af regionens farve.  Hvis
-det antages, at regionens farve er hvid, vil den have RGB-værdien $(255,
-255, 255)$ og den får derfor tildelt $id = \textrm{'255255255'}$.
-Regioners id er kun unikt for et givet snit. Vi konstruerer nu
+hvor der i hvert snit, er et antal fundne regioner, med en tilhørende farve.
+
+Hver region i et snit bliver tildelt et \emph{id}, som er en
+strengrepræsentation af regionens farve.  Hvis det antages, at regionens
+farve er hvid, vil den have RGB-værdien $(255, 255, 255)$ og den får
+derfor tildelt $id = \textrm{'255255255'}$. Vi konstruerer nu
 $\angles{CutRegions}$, som indeholder de fundne regioner for et snit.
 $\angles{CutRegions}$ er vist herunder i \eqref{CutRegions_dict}.
 \begin{multline}
@@ -285,15 +244,16 @@ fremgangsmåde, for at trække regioner ud af billedet, i forhold til et
 givet snit. Resten af dette afsnit, vil omhandle den egentlige
 implementation af denne fremgangmåde og problemerne tilknyttet.
 Indledningsvist vises, hvordan snit i billedet repræsenteres.
+\begin{figure}[!h]
+    \includegraphics[width=\textwidth]{afsnit/implementation/billeder/billedbehandling/pipeline.png}
+    \label{pipeline}
+    \caption{Pipeline}
+\end{figure}
 
 \subsubsection{Repræsentation af snit i billedet}
-Vi tidligere, i afsnit \ref{section_opdeling}, argumenteret for, hvordan
-vi finder det gyldne snit i et billede. Det er nævnt, at man ikke
-nødvendigvis behøver at betragte det gyldne snit, men vi kan arbejde med
-helt arbitrære snit. Vi vil derfor blot referere til \emph{snit i
-billedet}, da den enkelte snitratio er underordnet. Metoderne i dette
-afsnit er ikke specifikke for snitratioen $\varPhi$, men kan overføres
-til ethvert andet snit i billedet, med en arbitrær snitratio.
+Det skal nævnes, at metoderne i dette afsnit er ikke
+specifikke for snitratioen $\varPhi$, men kan overføres til ethvert
+andet snit i billedet, med en arbitrær snitratio.
 
 Snit i et billede bliver imidlertid --- meget intuitivt --- blot
 repræsenteret ved et linjestykke. Vi præsenterer nu datastrukturen
@@ -310,54 +270,47 @@ for, i en anden implementation, at betragte andet end blot vand- og
 lodrette snit i billedet.
 
 \subsubsection{Præparation af billedet}
-Det første skridt i præparation af billedet, inden udtrækningen af
-regioner, er at detektere kanterne på objekter i billedet.  Som nævnt i
-afsnit \ref{udtraek_kanter}, bruger vi kantdetektionsmetoden Canny.
-\emph{OpenCV} har implementeret denne metode som \texttt{cvCanny}.
+Det første skridt i præparation af billedet, inden segmentering og
+udtrækning af regioner, er at detektere kanterne på objekter i billedet.
 Metoden skal køres på et sort/hvid-billede, så vi starter med at lave en
-sort/hvid kopi af det originale billede. Vi skal også bruge et tomt
-output-billede, hvori kanterne kan indtegnes. Dette skal ligeledes være
-et sort/hvid-billede. Resultatet fra \texttt{cvCanny} er tidligere vist
-i figurene \ref{canny_kanter} og \ref{sammen_kanter}.
+sort/hvid kopi af det originale billede. Inden den egentlige
+kantdetektion, sløres det sort/hvide billede, således at vi kun
+betragter kanter, som fremstår tydeligt i billedet.
 
-I andet skridt af fremgangsmåden sløres billedet, så vi tillader
-floodfill-metoden at dække et større areal. \emph{OpenCV} stiller
-metoden \texttt{cvSmooth} til rådighed, for sløring af billeder.
-\texttt{cvSmooth} tager følgende argumenter: det oprindelige billede, et
-billede hvori resultatet vises, dimensionerne på foldningsmatricen der
-skal bruges samt hvilken sløringsmetode der ønskes brugt. Metoderne vist
-i afsnit \ref{udtraek_sloering} er til rådighed ved at bruge
-konstanterne \texttt{CV\_BLUR}, \texttt{CV\_GAUSSIAN} og
-\texttt{CV\_MEDIAN}. Inden vi detekterer kanter i et billede, bruger vi
-simpel sløring, da vi på denne måde kun betragter kanter, som fremstår
-tydeligt i billedet.  Simpel sløring er hurtigt og effektiv, og bliver
-derfor også brugt på billedet inden vi bruger floodfill-metoden.
+I andet skridt af fremgangsmåden sløres det originale billede. Både i
+sløringingen inden kantdetektion og denne bruges simpel sløring, som er
+hurtigt og effektiv.
 
-Sidste skridt, inden den egentlige segmentering og udtrækning af
-regioner, er fremhævelse af de detekterede kanter. Kanterne skal
-fremhæves, da den simple sløringsmetode kan have visket nogle de
-originale kanter ud.  Vi ønsker stadig, at kunne begrænse
-floodfill-metoden, så vi kan holde regioner i billedet adskilt. Kanterne
-fremhæves ved at oprette et nyt billede, med samme størrelse som
-originalbilledet. Alle pixels, i det nye billede, farves sort. Alle
-pixels, fra det originale billede, kopieres over i det nye billede, med
-undtagelse af pixels, hvorpå der er detekteret en kant. Derved bliver
-pixels med en kant, ikke farvet, dvs.  de forbliver sorte. At lade
-kanterne være sorte kan have nogle utilsigtede konsekvenser. Vi henviser
-til afsnit \ref{subsec_svagheder} for en gennemgang af disse.
+Sidste skridt er fremhævelse af de detekterede kanter. Det gøres ved at
+oprette et nyt billede, med samme størrelse som originalbilledet. Alle
+pixels, i det nye billede, farves sort. Dernæst kopieres alle pixels fra
+det originale billede, over i det sorte billede, med undtagelse af de
+pixels, hvor der er detekteret en kant. Derved forbliver kanterne sorte.
+At lade kanterne være sorte kan have nogle utilsigtede konsekvenser. Vi
+henviser til afsnit \ref{subsec_svagheder} for en gennemgang af disse.
+
+Præparation af et billede er fremstillet som pseudokode i kodeboks
+[do it].
 
 \subsubsection{Segmentering med floodfill-metoden}
-Vi beskriver nu metoden, til at trække regioner ud af et billede, der er
-blevet præpareret som beskrevet ovenfor. Metoden bygger videre på
-beskrivelsen givet i \ref{sammensaetning_af_metoder}, hvor
-floodfill-metoden bruges på hver pixel langs et snit. I praksis er denne
-fremgangsmåde meget langsom, især på store billeder. Vi vil derfor komme
-frem til en metode, som kun bruger floodfill-metoden på de nødvendige
-pixels.  Vi starter med, at forklare en meget naiv algoritme, som vi
-løbende videreudvikler, for at komme frem til den endelige fremgangsmåde
-for at trække regioner ud, af et præpareret billede. \emph{OpenCV} har
-implementeret floodfill-metoden som \texttt{cvFloodFill} og det er denne
-vi bruger, til at markere regioner i billedet.
+% Plan
+% Vi optimerer, maler ikke alle pixel
+% Vi bruger det kantdetekterede billede
+% Vi laver linjestykker
+% Vi bemærker at ikke hele regionen bliver fyldt ud
+% Vi maler to gange, men det er en fejl
+% Vi retter koden
+Vi beskriver nu metoden, til at trække regioner ud af et prærareret
+billede. Metoden bygger videre på beskrivelsen givet i
+\ref{sammensaetning_af_metoder}, hvor floodfill-metoden bruges på hver
+pixel langs et snit. I praksis er denne fremgangsmåde meget langsom,
+især på store billeder. Vi vil derfor komme frem til en metode, som kun
+bruger floodfill-metoden på de nødvendige pixels.  Vi starter med, at
+forklare en meget naiv algoritme, som vi løbende videreudvikler, for at
+komme frem til den endelige fremgangsmåde for at trække regioner ud, af
+et præpareret billede. \emph{OpenCV} har implementeret floodfill-metoden
+som \texttt{cvFloodFill} og det er denne vi bruger, til at markere
+regioner i billedet.
 
 Informationerne fra et kantdetekteret billede, kan hjælpe
 \texttt{cvFloodFill} til at segmentere et billede, for endeligt at
