@@ -24,137 +24,15 @@ vi på, hvilke programmeringssprog og biblioteker vi benytter os af.
 \section{Vurdering af regioner\label{section_vurdering_regioner}}
 \input{afsnit/implementation/vurdering_af_regioner.tex}
 
+\section{Database\label{section_imp_database}}
+\input{afsnit/implementation/database.tex}
+
 \section{Kørsel\label{section_koersel}}
-%% Ooohhhooh (jeg står fint her, okay!?)
-%% XXX: Skal i fil for sig selv
+\textbf{Sæt sammen med database-afsnittet}\\
 Flow diagram (flot).
 \subsection{Indstillinger}
 Snak om indstillinger for de enkelte kørsler og globale indstillinger.
 
-%%% Det øvrige bør puttes i separate filer ligesom alle andre steder!
-
-\section{Losseplads}
-
-\subsection{Crawler til wga.hu}
-I den kommaseparerede fil fra \cite{wgahu} er
-malerier opstillet efter kunstneren, hvilket gør det let først at
-oprette denne i databasen og derefter oprette de efterfølgende malerier
-tilknyttet denne kunstner.
-
-Vores korpus består af billeder hentet fra hjemmesiden \cite{wgahu} som
-indeholder europæiske kunstartikler fra år 1001 -- 1900. I
-kunstartiklerne, hvor det samlede antal er omkring 23.000, indgår
-møbler, skulpturer, mosaikker og malerier, hvor sidstnævnte vil være
-vores fokus. Fra \cite{wgahu} tilbydes en kommasepareret fil over hele
-deres database som vi har brugt til at populere vores egen database med.
-Der gives mange oplysninger om den enkelte artikel samt dennes kunstner.
-Vi har konstrueret en parser som trækker disse informationer ud fra
-filen og lægger dem ind i tabellerne \ref{artistTable0} og
-\ref{paintingTable0} i databasen. Da vi primært vil beskæftige os med
-malerier vil vi nu blot omtale kunstartikler som malerier.
-
-Den konstruerede parser til den kommaseparerede fil er dog ret grov, da
-folkene bag \cite{wgahu} ikke har lagt meget vægt på at være konsistente
-i deres formulering af en kunstners fødsels- og dødsår eller en
-genstands dimensioner. En følge deraf er, at nogle kunstnere, hvor
-\cite{wgahu} ikke har en klar indikation af dennes levealder, ikke bliver
-registreret i databasen. Vi kan dog stadig slå kunstneren op ved at
-bruge feltet ``timeline'' i tabel \ref{artistTable0} som angiver hvilken
-periode kunstneren tilhører. Vi har i enkelte tilfælde set os nødsaget
-til at rette i den kommaseparerede fil i tilfælde hvor der er blevet
-indsat tegn der helt umuliggør korrekt parsing, såsom ekstra komma
-eller semikolon.
-
-Givet den kommaseparerede fil fra \cite{wgahu} er det en smal sag at
-konstruere en crawler som henter alle billederne fra hjemmesiden ned. I
-filen gives nemlig en henvisning til hvor man kan finde et billede af
-genstanden på deres side.
-
-\subsection{Oprettelse af resultater (database)}
-Denne sektion afhænger til dels af en færdig implementation af den
-automatiserede analyse. Hvordan lægger vi resultater fra en kørsel ind i
-databasen? Forklar de (smarte) metoder vi har til rådighed. Vi kan blot
-kaste klasser ind i databasen. Vores settings-klasse bruges til at
-oprette runs, dictionary til at smække resultatet fra analysen ind.
-
-På grund af begrænsninger i \emph{OpenCV} kan vi ikke gemme regionens
-præcise form, men kun dennes begrænsende rektangel og regionens areal.
-
-Dette betyder faktisk, at man for hver pixel bliver nød
-til at tage beslutningen om denne er del af noget interessant.
-
-\subsection{Genskabelse af parametre og resultater (database)}
-At kunne genskabe de fundne resultater fra en analyse har meget stor
-betydning, dels for at kunne udtage stikprøver i udviklingen af hele
-programmet, men også for at kunne fremvise grafiske resultater. Vi har
-allerede været inde på, at man for at kunne genskabe et resultat, skal
-vide hvilke parametre der oprindeligt har været brugt. Ovenstående
-databaseskema gør det let at hente disse parametre ud. Hvis vi får et
-resultat med overraskende mange regioner og gerne vil undersøge dette
-tilfælde, har vi metoder til rådighed der giver os lige nøjagtig de
-informationer vi har brug for at vise dette grafisk. Helt konkret har vi
-metoderne vist i listing \ref{rekonst_koersel} til rådighed.
-
-\vspace{0.5cm}
-\begin{lstlisting}[caption={Metoder til rekonstruktion af kørsler},captionpos=b,label={rekonst_koersel},numbers=none]
-def getSettingsForRunId(runId):
-    """Return the settings instance for a given run"""
-    pass
-
-def getCutRatiosForRunId(runId):
-    """Return the list of cut ratios for a given run"""
-    pass
-
-def getSettingsForResultId(resultId):
-    """Return the settings instance for a given result"""
-    pass
-
-def getSettingsForRegionId(regionId):
-    """Return the settings instance for a given region"""
-    pass
-
-def getCutRatioForRegionId(regionId):
-    """Return the list of cut ratios for a given region"""
-    pass
-
-def getCutNoForRegionId(regionId):
-    """Return the cut number for a given region"""
-    pass
-
-def getRegionsForResultId(resultId):
-    """Return the list of regions for a given result"""
-    pass
-\end{lstlisting}
-
-Selvom metoderne i listing \ref{rekonst_koersel} ikke viser noget
-egentlig kode, bør det ud fra sammenhængen være klart hvad disse metoder
-gør. Alle metoder der starter med \texttt{getSettings} returnerer
-klassen \texttt{Settings} som vist i listing \ref{settings_klassen} med
-indstillinger tilpasset den enkelte forespørgelse\footnote{Det kan godt tænkes
-at denne klasse allerede bliver introduceret i afsnittet inden}.
-
-\vspace{0.5cm}
-\begin{lstlisting}[caption={Settings-klassen med standardindstillinger},captionpos=b,label={settings_klassen},numbers=none]
-class Settings:
-    """These are the default settings for the analysis"""
-    edgeThreshold1 = 78
-    edgeThreshold2 = 2.5 * edgeThreshold1
-    lo = 4
-    up = 4
-    cutRatios = None
-    marginPercentage = 0.009
-    method = 'naive'
-    ...
-\end{lstlisting}
-
-Det ses at vi har mulighed for at trække de fundne regioner ved et
-snit ud og vi behøver derfor ikke at køre nogen analyse på billedet hvis
-vi blot ønsker at få de fundne regioners begrænsende areal vist. I dette
-tilfælde kan vi nøjes med at forespørge databasen om de regioner der er
-tilknyttet et snit vi gerne vil undersøge og traversere gennem den liste
-af regioner vi får tilbage. Hver region er repræsenteret som en klasse
-hvor vi kan trække rektanglet ud og vi bruger da \emph{OpenCV} til at
-tegne rektanglet på det tilknyttede billede.
 }
 
 % vim: set tw=72 spell spelllang=da:

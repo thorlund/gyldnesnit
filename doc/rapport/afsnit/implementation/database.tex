@@ -1,0 +1,187 @@
+{
+{\sffamily Det følgende afsnit giver en kort introduktion til hvordan
+databasen er blevet implementeret. Vi ser på, hvordan tabeller oprettes
+i databasen, hvordan databasen populeres samt hvordan vi gemmer
+resultater fra kørsler. Endeligt vil vi komme ind på, hvordan vi kan
+genskabe enkelte grafiske resultater fra databasen.
+}
+
+\subsection{Databaseskema}
+Ved at bruge \emph{SQLObject} er det ligetil at konstruere tabeller i
+databasen. Vi har i afsnit \ref{section_database} givet det database
+skema som vi opbygger databasen efter. I kodeboks
+\ref{code_tabel_artist} er vist hvordan tabellen \texttt{artist}
+konstrueres ved brug af \emph{SQLObject} i Python.
+
+\begin{lstlisting}[caption={Pythonkode for oprettelse af tabeller i
+    databasen.}, captionpos=b, label={code_tabel_artist}, frame=tb,
+    breaklines=false, float=hb]
+import sqlobject as s
+
+class Artist(s.SQLObject):
+    "
+    _id_, name, born, died, school, timeline
+    "
+    name = s.StringCol()
+    born = s.IntCol()
+    died = s.IntCol()
+    school = s.StringCol()
+    timeline = s.StringCol()
+\end{lstlisting}
+
+Når man vil oprette en ny kunstner i databasen gøres det som vist
+i kodeboks \ref{code_new_artist}.
+
+\begin{lstlisting}[caption={Oprettelse af en kunstner i databasen.},
+    captionpos=b, label={code_new_artist}, frame=tb, breaklines=false,
+    float=h]
+# Init variables
+name = "Homer Simpson"
+born = 1968
+died = 2000
+school = "Springfield"
+timeline = "1950-2000"
+
+# Create the artist in the database
+Artist(name=name, born=born, died=died, school=school, timeline=timeline)
+\end{lstlisting}
+
+\emph{SQLObject} opretter automatisk et id-felt til alle tabeller i
+databasen. Vi kan udnytte dette til at lave \emph{foreign keys} i
+tabellerne. Vi viser i kodeboks \ref{code_tabel_result} hvordan tabellen
+\texttt{result} oprettes i databasen, hvor det er interessant at bemærke
+hvorledes de to \emph{foreign keys} oprettes.
+
+\begin{lstlisting}[caption={Pythonkode for oprettelse af \emph{foreign
+    keys} i databasen.}, captionpos=b, label={code_tabel_result}, frame=tb,
+    breaklines=false, float=h]
+class Result(s.SQLObject):
+    "
+    _id_, ^runId, ^paintingId, cutRatio, cutNo, numberOfRegions
+    "
+
+    run = s.ForeignKey('Run')
+    painting = s.ForeignKey('Painting')
+    cutRatio = s.FloatCol()
+    cutNo = s.IntCol()
+    numberOfRegions = s.IntCol()
+\end{lstlisting}
+
+\subsection{Populering af databasen}
+Vores korpus består af billeder fra en online kunstdatabase kaldet
+``The Web Gallery of Art''\cite{wgahu}. Herfra er suppleret en
+kommasepareret fil, som indeholder maleriernes metadata, heriblandt også
+en webadresse til billedet af maleriet. Det har således været
+problemfrit at konstruere en crawler til at hente alle billeder ned til
+egen disk, givet denne fil.
+
+\subsubsection{Parsing af kommasepareret fil}
+I filen gives endvidere mange oplysninger, om den enkelte artikel samt
+dennes kunstner.  Vi har konstrueret en parser, som trækker disse
+informationer ud fra filen og lægger dem ind i databasen. Da vi primært
+vil beskæftige os med malerier, vil vi nu blot omtale kunstartikler som
+malerier.
+
+Den konstruerede parser, til den kommaseparerede fil, er dog ret grov,
+da folkene bag \cite{wgahu} ikke har lagt meget vægt på, at være
+konsistente i deres formulering af en kunstners fødsels- og dødsår eller
+en genstands dimensioner. En følge deraf er, at nogle kunstnere, hvor
+\cite{wgahu} ikke har en klar indikation af dennes levealder, ikke
+bliver registreret i databasen. Vi kan dog stadig slå kunstneren op ved
+at bruge feltet ``timeline'', som angiver hvilken periode kunstneren
+tilhører. Vi har i enkelte tilfælde, set os nødsaget til at rette i den
+kommaseparerede fil, hvor der er blevet indsat tegn, som helt umuliggør
+korrekt parsing af filen, såsom ekstra komma eller semikolon.
+
+\subsubsection{Automatiseret populering}
+I mappen \texttt{database/} findes redskaber til en automatiseret
+populering af databasen. Scriptet i filen \texttt{\_\_init\_\_.py}
+brugere parseren, og sørger for at indsætte værdierne rigtigt i
+databasen.
+
+\subsection{Oprettelse af resultater}
+\paragraph{Noter}
+Denne sektion afhænger til dels af en færdig implementation af den
+automatiserede analyse. Hvordan lægger vi resultater fra en kørsel ind i
+databasen? Forklar de (smarte) metoder vi har til rådighed. Vi kan blot
+kaste klasser ind i databasen. Vores settings-klasse bruges til at
+oprette runs, dictionary til at smække resultatet fra analysen ind.
+
+På grund af begrænsninger i \emph{OpenCV} kan vi ikke gemme regionens
+præcise form, men kun dennes begrænsende rektangel og regionens areal.
+
+\subsection{Genskabelse af parametre og resultater}
+At kunne genskabe de fundne resultater fra en analyse har meget stor
+betydning, dels for at kunne udtage stikprøver i udviklingen af hele
+programmet, men også for at kunne fremvise grafiske resultater. Vi har
+allerede været inde på, at man for at kunne genskabe et resultat, skal
+vide hvilke parametre der oprindeligt har været brugt. Ovenstående
+databaseskema gør det let at hente disse parametre ud. Hvis vi får et
+resultat med overraskende mange regioner og gerne vil undersøge dette
+tilfælde, har vi metoder til rådighed der giver os lige nøjagtig de
+informationer vi har brug for at vise dette grafisk. Helt konkret har vi
+metoderne vist i listing \ref{rekonst_koersel} til rådighed.
+
+\vspace{0.5cm}
+\begin{lstlisting}[caption={Metoder til rekonstruktion af kørsler},captionpos=b,label={rekonst_koersel},numbers=none]
+def getSettingsForRunId(runId):
+    """Return the settings instance for a given run"""
+    pass
+
+def getCutRatiosForRunId(runId):
+    """Return the list of cut ratios for a given run"""
+    pass
+
+def getSettingsForResultId(resultId):
+    """Return the settings instance for a given result"""
+    pass
+
+def getSettingsForRegionId(regionId):
+    """Return the settings instance for a given region"""
+    pass
+
+def getCutRatioForRegionId(regionId):
+    """Return the list of cut ratios for a given region"""
+    pass
+
+def getCutNoForRegionId(regionId):
+    """Return the cut number for a given region"""
+    pass
+
+def getRegionsForResultId(resultId):
+    """Return the list of regions for a given result"""
+    pass
+\end{lstlisting}
+
+Selvom metoderne i listing \ref{rekonst_koersel} ikke viser noget
+egentlig kode, bør det ud fra sammenhængen være klart hvad disse metoder
+gør. Alle metoder der starter med \texttt{getSettings} returnerer
+klassen \texttt{Settings} som vist i listing \ref{settings_klassen} med
+indstillinger tilpasset den enkelte forespørgelse.
+\vspace{0.5cm}
+\begin{lstlisting}[caption={Settings-klassen med standardindstillinger},captionpos=b,label={settings_klassen},numbers=none]
+class Settings:
+    """These are the default settings for the analysis"""
+    edgeThreshold1 = 78
+    edgeThreshold2 = 2.5 * edgeThreshold1
+    lo = 4
+    up = 4
+    cutRatios = None
+    marginPercentage = 0.009
+    method = 'naive'
+    ...
+\end{lstlisting}
+
+Det ses at vi har mulighed for at trække de fundne regioner ved et
+snit ud og vi behøver derfor ikke at køre nogen analyse på billedet hvis
+vi blot ønsker at få de fundne regioners begrænsende areal vist. I dette
+tilfælde kan vi nøjes med at forespørge databasen om de regioner der er
+tilknyttet et snit vi gerne vil undersøge og traversere gennem den liste
+af regioner vi får tilbage. Hver region er repræsenteret som en klasse
+hvor vi kan trække rektanglet ud og vi bruger da \emph{OpenCV} til at
+tegne rektanglet på det tilknyttede billede.
+
+}
+
+% vim: set tw=72 spell spelllang=da:
+
