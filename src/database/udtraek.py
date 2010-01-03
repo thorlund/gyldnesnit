@@ -68,7 +68,7 @@ print "The features per pcitures dict"
 featPerPicture = dict()
 pictures = m.Painting.select().distinct()
 for picture in pictures:
-	numbOfRegions = m.Result.select(b.AND(m.Result.q.run == runId, picture.painting = m.Painting.q.id)).sum(m.Result.q.numberOfRegions)
+	numbOfRegions = m.Result.select(b.AND(m.Result.q.run == runId, picture.id == m.Painting.q.id)).sum(m.Result.q.numberOfRegions)
 	if numbOfRegions not in featPerPicture:
 		featPerPicture[numbOfRegions] = 1
 	else:
@@ -77,7 +77,7 @@ print featPerPicture
 
 goldenpictures = [0,0,0,0]
 for cut in range(4):
-	goldenpictures[cut]=m.Painting.select(b.AND(m.Result.q.run == runId, m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61, m.Painting.q.id == m.Result.q.painting, m.Result.q.cutNO==cut, m.Result.q.numberOfRegions > 0)).distinct().count()
+	goldenpictures[cut]=m.Painting.select(b.AND(m.Result.q.run == runId, m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61, m.Painting.q.id == m.Result.q.painting, m.Result.q.cutNo==cut, m.Result.q.numberOfRegions > 0)).distinct().count()
 print "Antallet af billeder, der har regioner i det gyldne snit, for snit 0-3"
 print goldenpictures
 
