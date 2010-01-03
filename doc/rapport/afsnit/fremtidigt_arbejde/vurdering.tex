@@ -1,15 +1,28 @@
 {
-{\sffamily Bla bla vurdering bla bla.
+{\sffamily Vi giver nu en kort vurdering af de enkelte dele, som er
+blevet udviklet.
 }
 
 \subsection{Udtrækning af regioner}
-Vores udtrækning af regioner er på ingen måde perfekt.
+Vores udtrækning af regioner er på ingen måde perfekt. Det er har dog
+aldrig været et mål i sig selv, at lave \emph{god} udtrækning af
+regioner, blot noget der virker. Når udtrækningen af regioner ikke er
+særlig sofistikeret, kan vi senere komme til at tage nogle dårlige valg,
+da vores metoder der vurderer regioner antager at den kun modtager
+interessante regioner i billedet.
+
+\subsection{Vurdering af interessante regioner}
+Det er nævnt helt fra start, at det at afgøre, om noget er interessant i
+et billede, er et utroligt følsomt område. Vi kan, med vores udtrækning,
+ikke vurdere regionerne på andet end deres størrelse og masse. Hvis man
+begynder at vurdere regionerne på andre områder, såsom deres
+massemidtpunkt eller fordeling, tager vi beslutninger 
 
 \subsection{Naiv vurdering af regioner}
-Fungerer sådan set fint nok, givet tilpas simple billeder eller bedre
-udtrækning af regioner. Mangler dog en egenskab lignende den fra den
-udvidede vurdering, hvor man også kigger på regionens udstrækning i
-billedet.
+Den naive vurdering af regioner, fungerer sådan set fint nok, givet
+tilpas simple billeder eller bedre udtrækning af regioner. Metoden
+mangler dog en egenskab, lignende den fra den udvidede vurdering, hvor
+man også kigger på regionens udstrækning i billedet.
 
 \subsection{Udvidet vurdering af regioner}
 Denne metode tillader, til en vis grad, mindre fejl end den naive
