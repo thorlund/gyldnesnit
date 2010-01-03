@@ -41,8 +41,8 @@ Start and stop point is the point that the def runs from to"""
 	#Sets the flag
 	flags = 4 + (255 << 8) + cv.CV_FLOODFILL_FIXED_RANGE
 
-	#Sets are observer on the blob
-	comp = cv.CvConnectedComp()
+	# Set the region to None, as we haven't found any yet
+	comp = None
 	
 	(p1, p2) = line.getPoints()
 	
@@ -70,7 +70,6 @@ Start and stop point is the point that the def runs from to"""
 		color = lib.getRandomColor(color)
 		inDict = colorString(color) in component_dict
 
-	tmp = 0;
 	#Color between start_point+1 and point-1
 	#Tmp is the tims we find new color that lie in component_dict. 
 	#This giv are indekeder that telle os have mots time we save whit the check
@@ -78,20 +77,17 @@ Start and stop point is the point that the def runs from to"""
 		seed = cv.cvPoint(seed.x + dx, seed.y + dy)
 		#Check if the color of the next pixel equals color 
 		if not (lib.isSameColor(out[seed.y][seed.x], color)):
-			tmp = tmp + 1;
 			#Check if the color of the next pixel are in component_dict
 			if not (colorString(out[seed.y][seed.x]) in component_dict):
-				tmp = tmp - 1;
+				comp = cv.CvConnectedComp()
 				cv.cvFloodFill(out, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
-	
-	#print if you need to se have meny pixels that are lept over
-	#if not (tmp == 0):
-	#	print tmp
-	# Color the last pixel again to make sure that the returned component is the entire region
-	cv.cvFloodFill(out, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
 
-	# Put the results in the component dictionary
-	component_dict[colorString(color)] = (color, comp)
+				# Color the pixel again to make sure we return the entire region
+				cv.cvFloodFill(out, seed, color, cv.CV_RGB(lo,lo,lo), cv.CV_RGB(up,up,up),comp)# ,flags, None);
+
+	# Put the results in the component dictionary if we have found a region
+	if not (comp is None):
+		component_dict[colorString(color)] = (color, comp)
 
 def ribbonFloodFill(original, edges, out, cut, margin, lo, up):
 	"""This method will run call the method floodFillLine three times.
