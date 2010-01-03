@@ -97,6 +97,7 @@ for image in results.orderBy('numberOfRegions')[-10:]:
 	print "with:"
 	print image.numberOfRegions
 
+paintings = m.Painting.select(b.AND(m.Result.q.run==runId,m.Painting.q.id==m.Result.q.painting)).distinct()
 # Get number of paintings with golden section canvas BY PIXEL SIZE
 print ""
 print "Number of images with golden section canvas MEASSURED BY PIXEL SIZE"
@@ -105,13 +106,14 @@ lower = goldenLibrary.phi - (0.024 * goldenLibrary.phi)
 upper = goldenLibrary.phi + (0.024 * goldenLibrary.phi)
 print "	We have that the larger side, divided by the smaller"
 print "	is in the interval [%s, %s]" % (lower, upper)
-for painting in m.Painting.select():
+for painting in paintings.filter(b.AND(m.Painting.q.height!=None,m.Painting.q.width!=None)):
 	factor = max(painting.height, painting.width)/float(min(painting.height, painting.width))
 	if lower <= factor <= upper:
 		gCount = gCount + 1
 
-print "%s painting with a canvas as a golden rectangle" % gCount
-print "That is %s percent" % ((float(gCount)/numberOfPaintings)*100)
+total = paintings.filter(b.AND(m.Painting.q.height!=None,m.Painting.q.width!=None)).count()
+print "%s painting with a canvas as a golden rectangle of %s total" % (gCount, total)
+print "That is %s percent" % ((float(gCount)/total)*100)
 
 # Get number of paintings with golden section canvas BY REAL SIZE
 print ""
@@ -119,13 +121,11 @@ print "Number of images with golden section canvas MEASSURED BY REAL SIZE"
 gCount = 0
 print "	We have that the larger side, divided by the smaller"
 print "	is in the interval [%s, %s]" % (lower, upper)
-for painting in m.Painting.select():
-	if not ((painting.realHeight is None) or (painting.realWidth)):
-		factor = max(painting.realHeight, painting.realWidth)/min(painting.realHeight, painting.realWidth)
-		if lower <= factor <= upper:
-			gCount = gCount + 1
+for painting in paintings.filter(b.AND(m.Painting.q.realWidth!=None,m.Painting.q.realHeight!=None)).distinct():
+	factor = max(painting.realHeight, painting.realWidth)/min(painting.realHeight, painting.realWidth)
+	if lower <= factor <= upper:
+		gCount = gCount + 1
 
-numberOfPsWithSize = m.Painting.select(b.AND(m.Painting.q.realWidth!=None,m.Painting.q.realHeight!=None))
-numberOfPsWithSize = numberOfPsWithSize.distinct().count()
-print "%s painting with a canvas as a golden rectangle" % gCount
-print "That is %s percent" % ((float(gCount)/numberOfPsWithSize)*100)
+total = paintings.filter(b.AND(m.Painting.q.realWidth!=None,m.Painting.q.realHeight!=None)).distinct().count()
+print "%s painting with a canvas as a golden rectangle of %s total" % (gCount, total)
+print "That is %s percent" % ((float(gCount)/total)*100)
