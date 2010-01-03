@@ -90,3 +90,19 @@ for image in results.orderBy('numberOfRegions')[-10:]:
 	print toptenimages.filepath
 	print "with:"
 	print image.numberOfRegions
+
+# Get number of paintings with golden section canvas
+print ""
+print "Number of images with golden section canvas"
+gCount = 0
+lower = goldenLibrary.phi - (0.024 * goldenLibrary.phi)
+upper = goldenLibrary.phi + (0.024 * goldenLibrary.phi)
+print "	We have that the larger side, divided by the smaller"
+print "	is in the interval [%s, %s]" % (lower, upper)
+for painting in m.Painting.select():
+	factor = max(painting.height, painting.width)/float(min(painting.height, painting.width))
+	if lower <= factor <= upper:
+		gCount = gCount + 1
+
+print "%s painting with a canvas as a golden rectangle" % gCount
+print "That is %s percent" % ((float(gCount)/numberOfPaintings)*100)
