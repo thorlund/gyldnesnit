@@ -66,9 +66,9 @@ print periodes
 
 print "The features per pcitures dict"
 featPerPicture = dict()
-pictures = m.Painting.select().distinct()
+pictures = m.Painting.select(b.AND(m.Result.q.id == m.Painting.q.id, m.Result.q.run == runId)).distinct()
 for picture in pictures:
-	numbOfRegions = m.Result.select(b.AND(m.Result.q.run == runId, picture.id == m.Painting.q.id)).sum(m.Result.q.numberOfRegions)
+	numbOfRegions = pictures.filter(picture.id == m.Painting.q.id).sum(m.Result.q.numberOfRegions)
 	if numbOfRegions not in featPerPicture:
 		featPerPicture[numbOfRegions] = 1
 	else:
