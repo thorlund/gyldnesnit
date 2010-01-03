@@ -2,6 +2,25 @@
 {\sffamily Bla bla vurdering bla bla.
 }
 
+\subsection{Udtrækning af regioner}
+Vores udtrækning af regioner er på ingen måde perfekt.
+
+\subsection{Naiv vurdering af regioner}
+Fungerer sådan set fint nok, givet tilpas simple billeder eller bedre
+udtrækning af regioner. Mangler dog en egenskab lignende den fra den
+udvidede vurdering, hvor man også kigger på regionens udstrækning i
+billedet.
+
+\subsection{Udvidet vurdering af regioner}
+Denne metode tillader, til en vis grad, mindre fejl end den naive
+vurdering, da kravene til regionen er langt mere præcist defineret. Man
+skal dog kraftigt overveje hvilket størrelse gitter der bruges til at
+approksimere regionerne, da dette har markant indflydelse på køretiden.
+
+\subsection{Databaseskema}
+Resultaterne, der gemmes i databasen, er kun de regioner som er blevet
+udvalgt til at ligge i snittet. Det ville imidlertid også være rart, at
+have de regioner der \emph{ikke} er blevet udvalgt til rådighed.
 
 }
 
