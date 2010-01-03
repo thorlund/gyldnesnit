@@ -40,8 +40,6 @@ for cut in range(4):
 	cuts.append(ratios)
 	ratios = dict()
 
-
-
 print "The different ratios followed by the amount of features found i that ratio:"
 print cuts
 
@@ -66,14 +64,22 @@ print "This tuple shows how many features are detected in the golden ratio and o
 print periodes
 
 
-print "The features per picture dict"
+print "The features per pcitures dict"
 featPerPicture = dict()
-for picture in results:
-	if picture.numberOfRegions not in featPerPicture:
-		featPerPicture[picture.numberOfRegions] = 1
+pictures = m.Painting.select().distinct()
+for picture in pictures:
+	numbOfRegions = m.Result.select(b.AND(m.Result.q.run == runId, picture.painting = m.Painting.q.id)).sum(m.Result.q.numberOfRegions)
+	if numbOfRegions not in featPerPicture:
+		featPerPicture[numbOfRegions] = 1
 	else:
-		featPerPicture[picture.numberOfRegions] = featPerPicture[picture.numberOfRegions] +1
+		featPerPicture[numbOfRegions] = featPerPicture[numbOfRegions] +1
 print featPerPicture
+
+goldenpictures = [0,0,0,0]
+for cut in range(4):
+	goldenpictures[cut]=m.Painting.select(b.AND(m.Result.q.run == runId, m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61, m.Painting.q.id == m.Result.q.painting, m.Result.q.cutNO==cut, m.Result.q.numberOfRegions > 0)).distinct().count()
+print "Antallet af billeder, der har regioner i det gyldne snit, for snit 0-3"
+print goldenpictures
 
 #top ten images with the most features in the golden ratio
 print "The top ten images with the most features in the golden ratio"
