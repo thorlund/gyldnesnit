@@ -14,6 +14,7 @@ sys.path.append(os.getcwd()[:os.getcwd().find('src')])
 import sqlobject as s
 from src.settings import Settings
 from src.lib import graphicHelper as g
+from src.lib import goldenLibrary
 from src import painting as p
 from opencv import cv
 
@@ -221,6 +222,24 @@ def showPictureInResultId(resultId):
 	painting = p.Painting(Result.select(Result.q.id==resultId)[0].painting)
 	g.showImage(painting.getImage(), "Wee")
 
+
+def getPaintingInResultId(resultId):
+	return p.Painting(Result.select(Result.q.id==resultId)[0].painting)
+
+
+def showRegionsForResultId(resultId, color):
+	painting = getPaintingInResultId(resultId)
+	title = Result.select(Result.q.id==resultId)[0].painting.title
+	image = painting.getImage()
+	regions = getRegionsForResultId(resultId)
+
+	for region in regions:
+		rect = region.getBoundingBox()
+		p1 = cv.cvPoint(rect.x, rect.y)
+		p2 = cv.cvPoint(rect.x + rect.width, rect.y + rect.height)
+		cv.cvRectangle(image, p1, p2, color, 2)
+
+	g.showImage(image, title)
 
 ### Test ###
 
