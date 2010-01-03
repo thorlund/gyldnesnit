@@ -1,107 +1,128 @@
 {
-Denne udvidelse sigter mod at forbedre den eksisterende bedømmelse af
-interessante regioner i forhold til det gyldne snit. Specielt er der
-en type af interessante regioner som bliver fravalgt af den naive
-metode, nemlig regioner med massemidtpunkt i det gyldne snit, men med et
-afgrænsende rektangel uden for margin. Et eksempel på dette kan ses i
+Denne udvidelse tager udgangspunkt i den eksisterende naive
+fremgangsmåde, men søger at redefinere den idéelle position, for at en
+region ligger i det gyldne snit. Hvor den naive fremgangsmåde tilgodeser
+regioner som ligger op ad snittet, leder vi nu efter regioner som i
+højere grad er centreret på snittet. Vi leder nu efter regioner med
+massemidtpunkt i det gyldne snit, og kigger ikke længere på denne
+regions afgrænsende rektangel. Et eksempel på dette kan ses i
 figur \ref{hus}, hvor den sorte region ikke anses som liggende i det
-gyldne snit af den naive fremgangsmåde. Vi vil gerne have at sådanne
-regioner klassificeres som en positiv interessant region.
+gyldne snit af den naive fremgangsmåde. Vi vil gerne have, at sådanne
+regioner, klassificeres som en positiv, interessant region.
 
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[scale=0.3,angle=0]{afsnit/vores_implementation/billeder/udvidet_loesning/husworks.png}
 	\end{center}
-	\caption[]{Et hus som bliver skåret over så midten ligger inde for snittet margin}
+	\caption[]{Et hus som bliver skåret over, så midten ligger inde for
+    snittets margin.}
 	\label{hus}
 \end{figure}
 
+\subsubsection{Opdeling af region med et gitter}
+Når vi ikke længere bruger regionens afgrænsende rektangel, har vi brug
+for en anden måde at repræsentere denne på. Vi laver derfor en
+approksimation, af regionens form og udstrækning, ved at bruge et gitter.
+Alt efter hvor finmasket dette gitter er, kan man justere hvor præcis
+approksimationen af regionen skal være. Et eksempel på et gitter, ses i
+figur \ref{grid}, hvor regionen beskrives ved de punkter, hvor to linjer
+krydser, og befinder sig inden for regionen.
 
-\subsubsection{Opdeling af region med et grid}
-% Original
-%\subsubsection{Opdeling af ragion med et grid}
-Måden vi deller ragionen op på, er hved hjælp af et gridt som vi
-tilføjer vær baunding box, se figur \ref{grid}. Da vi ved hvilken farve
-baunding boxens ragion er, tager vi alle de punkter i grittet som har
-denne farve, og få der ved en bedre beskrivels af hvordan ragionen ser
-ud. For at gøre algoritmen lidt hurtiger, er vores gridt punkter lavet
-med 1 pixels mellemrum.
+I praksis bruges det segmenterede billede fra floodfill-metoden, til at
+konstruere regionens approksimation. Vi kontrollerer hver pixel, som er
+en del af gitteret, i det afgrænsende rektangel for en given region, om
+denne har samme farve, som regionen er blevet tildelt. Vi finder da et
+undersæt af punkter til at beskrive regionen.
 
 \begin{figure}[h]
-	\centering
-	\includegraphics[scale=0.76,angle=0]{afsnit/vores_implementation/billeder/udvidet_loesning/udvidetloesninglayer.png}
-	\caption[]{Et grid over en ragion i baunding box}
-	\label{grid}
+    \centering
+    \includegraphics[scale=0.76,angle=0]{afsnit/vores_implementation/billeder/udvidet_loesning/udvidetloesninglayer.png}
+    \caption[]{Et gitter over en regions afgrænsende rektangel.}
+    \label{grid}
 \end{figure}
 
 \subsubsection{Bedømmelse med hensyn til massemidtpunkt}
 Givet en region $R$ betegner vi antallet af punkter i regionen med
-$|R|$. Vi antager at vi betragter et vertikalt snit $G$ i et billede.
-Det gælder for alle punkter $p \in R$ at de kan befinde sig ovenpå, til
-højre eller til venstre for $G$. I denne sammenhæng lader vi $R_r$ og
-$R_l$ beskrive punkter henholdsvis til højre og venstre for snittet $G$.
-Afstanden fra en punkt til kanten af et billede kaldes $D_p$, hvor
-kanten er origo i billedet. Med disse informationer kan vi afgøre om
-snitte deler regionen to lige store dele, samt om store dele af regionen
-befinder sig langt væk fra snittet. Vi vil gerne kigge på en regions
-massemidtpunkt og se om dette ligger inden for margin. Vi beregner
-regionens massemidtpunkt ved funktionen
-
+$|R|$. Vi antager, at vi betragter et vertikalt snit $G$ i et billede.
+Det gælder, for alle punkter $p \in R$, at de kan befinde sig ovenpå,
+til højre eller til venstre for $G$. I denne sammenhæng lader vi $R_r$
+og $R_l$ beskrive punkter, henholdsvis til højre og venstre for snittet
+$G$.  Afstanden fra et punkt til kanten af et billede kaldes $D_p$, hvor
+kanten er origo i billedet. Med disse informationer, kan vi afgøre, om
+snittet deler regionen i to lige store dele, samt om store dele af
+regionen, befinder sig langt væk fra snittet. Vi vil gerne kigge på en
+regions massemidtpunkt, og se om dette ligger inden for margin. Vi
+beregner regionens massemidtpunkt ved funktionen vist i \eqref{MPunkt.}
 
 \begin{eqnarray}
     m(R) & = & \frac{\sum_{p \in R}{D_p}}{|R|} \label{masssemidpunkt}
     \label{MPunkt}
 \end{eqnarray}
 
-hvor m(R) giver os en værdi for hvad for et lige linie der delle ragionen
-op i 2 delle, som er mest ens.
+hvor $m(R)$ giver os en værdi for, hvad for en lige linje, der deler
+regionen op i to dele, som er mest ens.
 
 \begin{figure}[h]
-	\begin{center}
-		\includegraphics[scale=0.5,angle=0]{afsnit/vores_implementation/billeder/udvidet_loesning/cOMCutMargin.png}
-	\end{center}
-	\caption[]{Regioner hvor massemidtpunktet, snit og margin er tegnet ind, som man kan se ligger midtpunktet inde for marginen}
-	\label{cOMCutMargin}
+    \begin{center}
+        \includegraphics[scale=0.5,angle=0]{afsnit/vores_implementation/billeder/udvidet_loesning/cOMCutMargin.png}
+    \end{center}
+    \caption[]{Region, hvor massemidtpunkt, snit og margin er tegnet
+    ind. Det ses, at massemidtpunktet, tegnet med en grøn linje, ligger
+    inde for margin.}
+    \label{cOMCutMargin}
 \end{figure}
 
-Hvis $m(R)$ ligger inden for margin, se figur \ref{cOMCutMargin}. Bliver
-regionen godtaget som liggende i snittet. Det er dog ikke helt nok kun
-at bedømme regionerne efter massemidtpunkt, da man kan konstruere en
-region som vi ikke vil godtage, men som har massemidtpunkt inde for
-marginen, se figur \ref{dontwork}. 
+Hvis $m(R)$ ligger inden for margin, som tilfældet i figur
+\ref{cOMCutMargin}, siger vi at regionen ligger i snittet. Det er dog
+ikke helt nok, kun
+at bedømme regionerne efter massemidtpunkt, da man kan konstruere
+regioner, som vi egentlig ikke vil godtage, men som har massemidtpunkt inde for
+marginen. Et eksempel på en sådan region er vist i figur \ref{dontwork},
+hvor selve fordelingen af regionen er skæv.
 
 \begin{figure}[h]
-	\begin{center}
-		\includegraphics[scale=0.5,angle=0]{afsnit/vores_implementation/billeder/udvidet_loesning/dontWork.png}
-	\end{center}
-	\caption[]{Figur som har et massemidtpunkt indenfor margin, men vi ikke vil have med i godtaget regioner, på grund af den lange stang}
-	\label{dontwork}
+    \begin{center}
+        \includegraphics[scale=0.5,angle=0]{afsnit/vores_implementation/billeder/udvidet_loesning/dontWork.png}
+    \end{center}
+    \caption[]{Region, som har massemidtpunkt inden for margin, men som
+    ikke kvalificerer sig til at ligge i snittet pga. arealets
+    fordeling.}
+    \label{dontwork}
 \end{figure}
 
-Måden vi få løst problemet på er ved at lave en nyt tjek som kan sortere
-de regioner fra som vi ikke vil have godkende. Det gør vi hjælp af
-funktion
+Vi forsøger at løse dette problem, ved at kontrollere regionens
+fordeling over snittet. Vi definerer, at en region er jævnt fordelt over
+snittet, hvis forholdet mellem punkterne, på den højre og venstre side,
+er lavere en $0.75$. Vi finder regionens fordeling, som vist i
+\eqref{Fordeling}.
 
 \begin{eqnarray}
     f(R) & = & \frac{|R_{l}| - |R_{r}|}{|R|}
     \label{Fordeling}
 \end{eqnarray}
 
-Som sammenligner antal pixels på begge sider af snittet og giver en
-procent på hvor stor forskel der er, det vil sige at $f(R) \in [-1,1]$.
-Hvis $f(R)$ er positivt, er der $f(R)$ procent flere pixels på $|R_l|$
-side og vise verser. hvis den abselutte værdig af $f(R)$ er over $0.75$
-betyder det at regionen er få skævt fordelt og den sortere den fra. Få
-at give et eksempel på hvornår vores naive algoritme virker, se figur \ref{centerOfMass}
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[scale=0.35,angle=0]{afsnit/vores_implementation/billeder/udvidet_loesning/centerOfMass.png}
-	\end{center}
-	\caption[]{Eksempel på hvordan den udvidet algoritme virker på et billedet hvor den naive algoritme ikke vil have fundet det}
-	\label{centerOfMass}
-\end{figure}
+I \eqref{Fordeling} sammenlignes antal punkter, på begge sider af
+snittet, og giver en procentsats for, hvor stor forskel der er mellem
+siderne. Vi har at $f(R) \in [-1,1]$.  Hvis $f(R)$ er positivt, er der
+$f(R)$ procent flere punkter på venstre side og vice versa. Her vises
+netop, hvorfor denne fremgangsmåde adskiller sig markant fra den naive.
+Den naive fremgangsmåde søger nemlig at udvælge de regioner $R$, hvor
+størstedelen af punkter ligger på den ene side af snittet, dvs. $|f(R)|
+\geq 0.75$. Den udvidede løsning gør nøjagtig det modsatte og finder
+regioner som er jævnt fordelt over snittet.
 
-\clearpage
+% Fjernet, da dette vil være første gang vi viser et egentligt resultat.
+% Man ved ikke hvad man ser. Sådanne billeder bør vente til afprøvning.
+%
+%Få
+%at give et eksempel på hvornår vores naive algoritme virker, se figur \ref{centerOfMass}
+%\begin{figure}[h]
+%	\begin{center}
+%		\includegraphics[scale=0.35,angle=0]{afsnit/vores_implementation/billeder/udvidet_loesning/centerOfMass.png}
+%	\end{center}
+%	\caption[]{Eksempel på hvordan den udvidet algoritme virker på et billedet hvor den naive algoritme ikke vil have fundet det}
+%	\label{centerOfMass}
+%\end{figure}
 
 }
 

@@ -331,12 +331,12 @@ samme farve, som regionen er blevet tildelt. Hvis farverne er ens, så
 gemmes dette punkt i en liste. Hvis regionen er stor, kan dette godt
 være en tidskrævende procedure, så i praksis ønsker vi ikke at
 kontrollere hver eneste pixel i det afgrænsende rektangel. Vi springer
-derfor et antal pixels over for hver gang vi har kontrolleret en pixel.
-På denne måde får vi lavet et gitter, som vist i figur
-\ref{grid}. Pseudokode, for at approksimere en regions form og
-udstrækning, er vist i kodeboks \ref{pseudo_GetRegionGrid}, som definerer
-metoden \texttt{GetRegionGrid}, der returnerer en liste med punkter for
-en region.
+derfor et antal pixels over, for hver gang vi har kontrolleret en pixel.
+På denne måde får vi lavet et gitter, som vist i figur \ref{grid}.
+Pseudokode, for at approksimere en regions form og udstrækning, er vist
+i kodeboks \ref{pseudo_GetRegionGrid}, som definerer metoden
+\texttt{GetRegionGrid}, der returnerer en liste med punkter for en
+region.
 
 \begin{lstlisting}[caption={Metode til at approksimere en regions
     form. Bemærk linje 19, hvor der ses et eksempel på det omvendte
@@ -408,20 +408,20 @@ def GridIt(image, CutRegions, step):
 \subsubsection{Vurdering ved massemidtpunkt og udstrækning}
 Vi siger nu, at en region ligger i snittet, hvis denne har et
 massemidtpunkt inden for margin og dens masse i øvrigt er jævnt fordelt
-over snittet. Til at afgøre, hvorvidt regionens masse er jævnt fordelt,
-bruger vi ligning \eqref{Fordeling}, og til at finde regionens
-massemidtpunkt, bruges ligning \eqref{MPunkt}, som begge kan findes i
-afsnit \ref{subsec_udvidet_massemidtpunkt}. Vi skal bruge
+over snittet. Til at afgøre, hvorvidt regionens masse er jævnt fordelt
+over snittet, bruger vi ligning \eqref{Fordeling}, og til at finde
+regionens massemidtpunkt, bruges ligning \eqref{MPunkt}, som begge kan
+findes i afsnit \ref{subsec_udvidet_massemidtpunkt}. Vi skal bruge
 approkimationen af regionens form og udstrækning til at afgøre
 ovenstående egenskaber.
 
 Vi starter med at kigge på fordelingen af en regions masse, hvor vi skal
 finde forholdet mellem punkter på højre og venstre side af snittet.
 Metoden i kodeboks \ref{pseudo_distribution}, gør netop dette, og
-returnerer en sandhedsværdi for, om regionens masse er jævnt fordelt. Vi
-har tidligere fastsat, at regionens masse er jævnt fordelt, hvis
-forholdet mellem de to sider er under $0.75$. Metoden gør brug af
-snittets orientering, hentet i
+returnerer en sandhedsværdi for, om regionens masse er jævnt fordelt
+over snittet. Vi har tidligere fastsat, at regionens masse er jævnt
+fordelt over et snit, hvis forholdet mellem de to sider er under $0.75$.
+Metoden gør brug af snittets orientering, hentet i
 $\textbf{Constraints}.\textit{coordinate}$, og det faktum, at vi kan
 finde det midterste element i vores accepterende værdier, ved at tage
 det $\left(\left\lfloor \frac{|\textit{acceptRange}|}{2}\right\rfloor +
@@ -524,5 +524,26 @@ def GetInterestingRegionsInCut(image, CutRegions, constraints):
     # that qualify
     return interestingRegionsInCut
 \end{lstlisting}
+
+\subsection{Optimeringer}
+Den naive fremgangsmåde er svær at optimere, da den er så enkel i sin
+struktur. I den udvidede metode, kan der dog gøres nogle overvejelser
+mht. regionens approksimation. Da vi i højere grad kigger kigger på
+regionens udstrækning, er det værd at overveje, om approksimationen ved
+brug af et gitter, faktisk er for grundig. Ved store regioner, kan man
+med fordel bruge et større gitter, men man udelukker da mindre regioner,
+da disse kan falde gennem nettet.
+
+Man kan derfor overveje at implementere en variabel gitterstørelse,
+afhængig af regionens areal, således at regioner blev approksimeret med
+et passende gitter.
+
+Man kunne også bruge en anden approksimation end gitteret. F.eks. virker
+det tiltalende at finde det konvekse hylster for en region. Dette
+gør, at der skal færre punkter til at beskrive regionen, men vi mister
+til gengæld en del information om regionens form. Køretiden på gitteret
+kan som sagt, blive meget krævende, ved store regioner, og det kan
+tænkes, at det konvekse hylster kan give en mere tilfredsstillende
+køretid, mod lidt mindre præcision ved fordeling og massemidtpunkt.
 
 % vim: set tw=72 spell spelllang=da:
