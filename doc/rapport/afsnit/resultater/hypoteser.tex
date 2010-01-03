@@ -1,27 +1,76 @@
 {
 {\sffamily Vi vil i det følgende præsentere de hypoteser, som vi, på
-baggrund af resultaterne fra en analyse, vil forsøge at besvare. De
-fleste af hypoteserne antager den generelle opfattelse, at det gyldne
-snit er specielt æstetisk tiltalende og af denne grund, er meget brugt i
-malerkunsten. Vi deler hypoteserne op i nogle kategorier, alt efter
-hvilket aspekt af det gyldne snit vi undersøger. Inden vi præsenterer de
+baggrund af resultaterne fra en analyse på vores datasæt, vil forsøge at
+besvare. De fleste af hypoteserne antager den generelle opfattelse, at
+det gyldne snit er specielt æstetisk tiltalende og af denne grund, er
+meget brugt i malerkunsten. Vi deler hypoteserne op i nogle kategorier,
+alt efter hvilket aspekt hypotesen belyser. Inden vi præsenterer de
 omtalte hypoteser, er det dog nødvendigt at kaste et kritisk blik på
-vores korpus.
+vores datasæt.
 }
 
-\subsection{Korpus}
-Hvilken data har vi rådighed? Hvor har vi den fra? Tidsperiode, lande,
-kultur. Er malerierne ``anerkendt'' på nogen måde? Hvem har valgt dem
-ud? Er der nogen kriterier for udvælgelse? Er der nogle kunstværker vi
-mangler? Billedernes grafiske kvalitet. \textbf{Vi skal ind på at
-billeder kan være delt op.}
+\subsection{Datasæt}
+Det korpus, vi kører vores analyse på, består af billeder hentet fra
+hjemmesiden wga.hu\cite{wgahu}, som er en online billededatabase, med
+europæiske kunstartikler fra år 1001 -- 1900. I kunstartiklerne, hvor
+det samlede antal er omkring 23.000, indgår møbler, kalkmalerier,
+skulpturer, mosaikker og malerier, hvor sidstnævnte, vil være vores
+fokus. Over halvdelen af disse kunstartikler står udstillet på museum.
+Databasen blev oprettet i 1996, med det formål at præsentere kunst fra
+renæssancen (ca.  14. -- 17.  århundrede), men blev senere udvidet, til
+også at inkludere kunst fra andre perioder. Dette betyder, at
+størstedelen af malerierne vi undersøger, er fra tidsperioden 1450 --
+1650 og er malet af italienske kunstnere. Endvidere er langt de fleste
+malerier, klassificeret som religiøse.  Disse informationer er givet fra
+wga.hu, men er også suppleret i bilag \ref{appendix_grafer} som
+grafer.
 
-\paragraph{Flyttet fra noget med database}
-Vores korpus består af billeder hentet fra hjemmesiden \cite{wgahu} som
-indeholder europæiske kunstartikler fra år 1001 -- 1900. I
-kunstartiklerne, hvor det samlede antal er omkring 23.000, indgår
-møbler, skulpturer, mosaikker og malerier, hvor sidstnævnte vil være
-vores fokus.
+Vi må af ovenstående grunde forvente, at resultater, fra en analyse på
+vores datasæt, vil være farvet af samlingen af malerier, og det derfor
+kan være svært at drage nogen konklusioner for malerkunsten generelt, da
+resultaterne vil være begrænset, til kun at gælde for et udsnit af
+vestlig kultur. Endvidere findes der ingen nyere malerier i datasættet,
+hvilket gør at vi ikke kan udtale os om nyere malerkunst.
+
+Billederne, som suppleres fra databasen, er af høj kvalitet, men der er
+visse problemer, som vi nævner nedenfor.
+
+\begin{itemize}
+    \item \textbf{Beskæring af billeder}\\
+        Vi kan ikke vide os sikre på, om billederne i datasættet er
+        ordentligt beskåret. Dvs. vi \emph{kan} have, at noget af
+        billedrammen er med i billedet. Dette kan muligvis volde lidt
+        problemer med udtrækning af regioner, men hvad værre er, så gør
+        det vores mål, for hvor det gyldne snit ligger, upræcist. Dette
+        har vi dog taget højde for, i kraft af vores margin.  Endeligt
+        er der inkluderet billeder af malerier detaljer i databasen, som
+        er udsnit af maleriet, således at målene på billedet ikke
+        passer.
+    \item \textbf{Forvrængning og perspektiv}\\
+        Billederne af malerier er taget med et kamera, hvor linsen muligvis kan
+        forvrænge billedet. Vi kan derfor have skæve linjer og tage
+        forkerte beslutninger, for regioner, pga. dette. Endvidere kan
+        billedet være taget skævt, således at billedet hælder til den
+        ene side. Vi kan selvfølgelig også have at perspektivet i
+        billedet er forkert, fordi billedet er taget fra en skæv vinkel.
+    \item \textbf{Opdelte malerier}\\
+        Nogle store malerier kan være blevet opdelt, da databasen har
+        det formål at vise malerierne på en computerskærm, hvor meget
+        store billeder kan være svære at betragte. Dette betyder, at
+        nogle billeder ikke viser hele maleriet, men blot er et udsnit,
+        hvilket påvirker vores muligheder for at sige noget fornuftigt
+        om det gyldne snit i maleriet.
+\end{itemize}
+
+Nogle stilarter, såsom kalkmalerier og tegninger, har gennem
+udokumenterede afprøvninger, vist sig at være besværlige at analysere,
+pga. meget svingende farvegengivelse. Endvidere, kan disse være billeder
+af en hvælving i en kirke, som ikke egner sig til analyse for det gyldne
+snit. Vi har derfor valgt kun at analysere malerier, kendetegnet ved at
+de er beskrevet som ``painting'' fra wga.hu.
+
+Alt det ovenstående vil påvirke resultaterne, ved analyse på vores
+datasæt.
 
 \subsection{Generelle hypoteser}
 Følgende hypoteser er ret generelle. Altså sådan nogenlunde.
@@ -80,7 +129,7 @@ nationalitet, årstal og kunstner. [Bør omformuleres].
 \end{hypotese}
 
 \begin{hypotese}
-    Hvis det gyldne snit altid har været specielt æstetisk tiltalende,
+    Hvis det gyldne snit altid er ligeså  æstetisk tiltalende for alle,
     må vi have, at antallet af regioner liggende i det gyldne snit,
     nationaliteter imellem, højest kan afvige med $\pm10\%$.
 \end{hypotese}
@@ -90,7 +139,7 @@ nationalitet, årstal og kunstner. [Bør omformuleres].
     må vi have, at antallet af regioner liggende i det gyldne snit, mod
     antallet af regioner liggende i alle andre snit, højst må afgive med
     $\pm10\%$ mellem de enkelte kunstnere. Vi skal altså have, at
-    procentdelen af regioner liggende i det gyldne snit er nogenlunde
+    procentdelen af regioner liggende i det gyldne snit, er nogenlunde
     den samme.  \textbf{Meget kontroversiel og nok ikke værd
     at undersøge}.
 \end{hypotese}
