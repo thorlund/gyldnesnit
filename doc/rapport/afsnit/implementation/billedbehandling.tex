@@ -548,11 +548,11 @@ Vi ender altså med at have returneret syv regioner, ligesom antallet af
 linjestykker, men når vi kigger på resultatet, i figur \ref{region7}, er
 der kun fire forskellige farver. Vi returnerer den samme region, den som
 i originalen var hvid, i alt fire gange.  Fejlen i linje 17 har
-eksisteret selv under vores kørte eksperiment
-i \marker{ref}{Husk husk husk}.
-Vi har fjernet duplikaterne på databaseniveau, men metoden er senere
-blevet rettet til at have den korrekte opførsel. Den reviderede metode
-er vist i kodeboks \ref{pseudo_udtraek_rev}.
+eksisteret selv under vores kørte eksperiment i afsnit
+\ref{section_naiv_koersel}.  Vi har fjernet duplikaterne på
+databaseniveau, men metoden er senere blevet rettet til at have den
+korrekte opførsel. Den reviderede metode er vist i kodeboks
+\ref{pseudo_udtraek_rev}.
 
 \begin{lstlisting}[caption={Revideret pseudokode til udtrækning af
     regioner. Returnerer ingen
@@ -820,12 +820,12 @@ def FixGetRegions(img, edges, cut):
         pass
 \end{lstlisting}
 
-Vi har også eksperimenteret med, først at skallere billedet ned, inden
+Vi har også eksperimenteret med, først at skalere billedet ned, inden
 man trak regioner ud. Dette gør nemlig, at kanterne forbliver intakte,
 mens farverne, til en vis grad, bliver mere ensartede. Vi stødte dog på
-problemer når billedet skulle skalleres op igen, eller rettere, få
+problemer når billedet skulle skaleres op igen, eller rettere, få
 resultaterne skalleret op, så de passede til originalbilledet. Vi mister
-også meget præcision, når vi bruger et nedskalleret billede til at finde
+også meget præcision, når vi bruger et nedskaleret billede til at finde
 regioner i.
 
 \subsubsection{Bedre fremhævelse af kanter}
@@ -856,16 +856,16 @@ at vi ikke ville manipulere med dimensionerne på vores inddata og bevare
 det originale billede.
 
 \subsubsection{Optimeringer}
-Et hurtigt kig på arbejdsgangen i figur \ref{graphic_pipeline} viser
-allerede mindst ét sted hvor vi kan optimere programmet. Billedet bliver
+Et hurtigt kig på arbejdsgangen i figur \ref{graphic_pipeline}, viser
+allerede mindst ét sted, hvor vi kan optimere programmet. Billedet bliver
 nemlig sløret to steder, både i forbindelse med kantdetektion og den
 generelle sløring. Det er derfor oplagt, kun at sløre billedet én gang
-og passere det slørede billede videre, som argument til de metoder som
-skal bruge det. Dette kan dog kun gøres hvis vi ønsker at bruge den
-samme sløringsmetode til de to billeder.
+og passere det slørede billede videre, som argument til de metoder, som
+skal bruge det. Dette kan dog kun gøres, hvis vi ønsker at bruge den
+samme sløringsmetode, til de to billeder.
 
-Endvidere kan selve udtrækningen af regioner forbedres ved at bruge
-sløring ved statistisk median, men denne metode har vi ikke fået testet
+Endvidere, kan selve udtrækningen af regioner måske forbedres, ved at bruge
+sløring ved statistisk median. Denne metode har vi dog ikke fået testet
 ordentlig igennem. Ved brug af en anden sløringsmetode, kunne det godt
 tænkes, at fremhævelse af kanter bliver helt overflødig
 
