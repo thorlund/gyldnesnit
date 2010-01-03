@@ -15,11 +15,11 @@ aspekt.
 
 \subsection{Marginens brede}
 Vi regner marginens brede ud fra en procent af billedets brede og
-højde. I afsnittet \ref{opdeling_af_billeder.tex} kom vi frem til en
+højde. I afsnittet \ref{section_opdeling} kom vi frem til en
 usikkerhed på $2.1 \%$. Så vores margin procent sats $\Delta$ skal mindst
 være på $2.1 \%$. Ud over det er den minimale forskel på 2 snit vi foretager os,
 forskellen mellem det gyldne snit og $\frac{2}{3}$, som vi udregnet i
-sektion \ref{opdeling_af_billeder.tex} til maksimalt at have en $\Delta$ på
+sektion \ref{section_opdeling} til maksimalt at have en $\Delta$ på
 $2.43$, for at margin ikke krydser. Så $\Delta \in [2.1, 2.43]$. Vi har valt
 at sætte $\Delta = 2.4$, da vi derved kan tage højde for uforresette
 usikkerhed. XXX(er det en dog nok forklaring).
@@ -205,7 +205,7 @@ en smugle fra den denne afprøvning.
 Floodfill har 2 tærskelværdier $lo$ og $up$, som betegner hvor mange
 pixel værdier en nabo pixel farver må variere ned og op for at blive tage med af algoritmen, en
 fyldestgørelses beskrivelse af floodfill findes i afsnit
-\ref{floodfill}. Vi har tænkt os at finde en fældes tærskelværdi til
+\ref{section_opdeling}. Vi har tænkt os at finde en fældes tærskelværdi til
 brug i vores program. Måde vi gør det på at ved at observere hvordan
 floodfill virker med forskellige tærskelværdier og finde de
 tærskelværdier som passer bæst til maleriet. Resultatet for
@@ -240,7 +240,7 @@ vurderet til at være den beste værdi.
 
 Som man kan se af tabel \ref{thressholdsTabelFF} er nogle af vadierne med fed, begrundelsen for det er
 at de vadier er de beste vi kunne finde for billedet, men at de vadier stadig
-ikke giver noget som er særlige brugbart, se sektion \ref{floodfilltest}.
+ikke giver noget som er særlige brugbart.
 værdigerne i tabel fluktuere også en del, så vi har igen samme problem stilling
 som i tærskelværdierne ved kantdetektion og har valt at bruge tærskelværdien
 [4,4] da dette kommer tættets på gennemsnit.

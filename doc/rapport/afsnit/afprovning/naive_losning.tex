@@ -14,15 +14,15 @@ bruges i praktisk.
 \subsection{Afprøvning på testbilleder}
 Vi vil teste på de samme billeder som var i sideste afsnit samt et nyt
 test billeder som blev brugt i forklaringen af den naive metodes, de 4
-billeder som vi har valt at test kan se i figur
-\ref{naiv_detektion_test} hvor en grån kasse rundt om en region, betyder
+billeder som vi har valt at test kan se i afsnit \ref{region_detektor} og billedet 
+\ref{naiv_masse_original} hvor en grån kasse rundt om en region, betyder
 at den er valt til at ligge i det gyldne snit af den naive metode. 
 
 Det første billedet \ref{naiv_blob1}, har 5
 regioner og hvor 3 af dem blev fundet af reginon detektoren, vores naive
 løsning har så sorteret baggrundens regionen og den øverste region i
 snitte vær, da de begge krydser marginer og derfor ikke overholder regel
-\ref{2.2.4, c}. 
+\ref{naiv_regler} c. 
 
 \begin{figure}[!h]
     \centering
@@ -34,7 +34,7 @@ snitte vær, da de begge krydser marginer og derfor ikke overholder regel
 Det andet billedet \ref{naiv_blob2}, er alle blevet
 sorteret vær, også den lille region som ligger lige i miden af snittet.
 Grunde til det er at den er for lille og derfor ikke overholder regel
-\ref{2.2.4, a}. 
+\ref{naiv_regler} a. 
 
 \begin{figure}[!h]
     \centering
@@ -57,7 +57,7 @@ himlen fra, da den krydser margin lidt, men tager jorden med.
 I test billedet \ref{naiv_masse} er der kun en af den 3 regioner som ikke
 bliver sorteret væk, grunden til at den nederste region ikke bliver
 tager med er at den ikke har en masse der er stor nok, som forklaret i
-\ref{2.2.3} og derfor ikke overholder regel \ref{2.2.4 b}. Alle de test
+\ref{naiv_regler} og derfor ikke overholder regel \ref{naiv_regler} b. Alle de test
 billeder som vi har vist her opføre sig præcist på den måde som vi havde
 regnet med. \note{mere plas i teksten og sa skal alle de oginale billeder vere der}
 
