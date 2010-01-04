@@ -98,8 +98,9 @@ for image in results.orderBy('numberOfRegions')[-10:]:
 	print image.numberOfRegions
 
 paintings = m.Painting.select(b.AND(m.Result.q.run==runId,m.Painting.q.id==m.Result.q.painting))
+print paintings
 print "how many pictures are used two or more times?"
-detailpic = paintings.filter("title LIKE '%detail%'")
+detailpic = paintings.filter("painting.title LIKE '%detail%'")
 print detailpic.count()
 
 paintings = paintings.distinct()
