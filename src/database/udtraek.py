@@ -14,7 +14,11 @@ import sqlobject as s
 globalSettings = GlobalSettings()
 db = Database(globalSettings)
 runId = m.Result.select().max('run_id')
-results = m.Result.select(m.Result.q.run==runId)
+paintings = m.Painting.select("painting.title LIKE '%detail%'")
+paintings = paintings.filter(b.AND(m.Result.q.run==runId,m.Result.q.painting == m.Painting.q.id)).distinct()
+results = m.Result.select("painting.title NOT LIKE '%detail%'")
+results = results.filter(b.AND(m.Result.q.run==runId,m.Result.q.painting == m.Painting.q.id))
+#results = m.Result.select(m.Result.q.run==runId)
 #sorts resulsts after numberOfRegions, the starting one low and rising
 results = results.orderBy('numberOfRegions')
 goldenresults = results.filter(b.AND(m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61))
@@ -66,9 +70,8 @@ print periodes
 
 print "The features per pcitures dict"
 featPerPicture = dict()
-pictures = m.Painting.select(b.AND(m.Result.q.id == m.Painting.q.id, m.Result.q.run == runId)).distinct()
-for picture in pictures:
-	numbOfRegions = pictures.filter(picture.id == m.Painting.q.id).sum(m.Result.q.numberOfRegions)
+for picture in paintings:
+	numbOfRegions = paintings.filter(picture.id == m.Painting.q.id).sum(m.Result.q.numberOfRegions)
 	if numbOfRegions not in featPerPicture:
 		featPerPicture[numbOfRegions] = 1
 	else:
@@ -96,14 +99,6 @@ for image in results.orderBy('numberOfRegions')[-10:]:
 	print toptenimages.filepath
 	print "with:"
 	print image.numberOfRegions
-
-paintings = m.Painting.select(b.AND(m.Result.q.run==runId,m.Painting.q.id==m.Result.q.painting))
-print paintings
-print "how many pictures are used two or more times?"
-detailpics = paintings.filter("painting.title LIKE %detail%")
-detailpic = m.Painting.select("painting.title LIKE %detail%")
-print detailpic
-print detailpics.count()
 
 paintings = paintings.distinct()
 # Get number of paintings with golden section canvas BY PIXEL SIZE
