@@ -96,6 +96,9 @@ for image in results.orderBy('numberOfRegions')[-10:]:
 	print toptenimages.filepath
 	print "with:"
 	print image.numberOfRegions
+print "how many pictures are used two or more times?"
+detailpic = m.Painting.select("title LIKE '%detail%'")
+print detailpic.count()
 
 paintings = m.Painting.select(b.AND(m.Result.q.run==runId,m.Painting.q.id==m.Result.q.painting)).distinct()
 # Get number of paintings with golden section canvas BY PIXEL SIZE
