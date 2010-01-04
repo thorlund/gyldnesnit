@@ -31,10 +31,44 @@ Hvilket er afstanden mellem de to snit.
 Der er altså en stimmel på $0.05-0.036 = 0.014 = 1.4\%$ af billedet,
 hvor interessante regioner bliver talt to gange.
 
-Eksperimentet bliver kørt på 17364 billeder.
+\subsection{Resultater}
+Vi har kørt vores analyse på $17364$ billeder, men i vores resultater
+sorterer vi $2989$ af disse fra, da de kun er udsnit af et større maleri.
+Som vist i tabel \ref{tabel_fjern_detaljer} herunder, er dette en nedgang
+på $17.21$ procent og vi har $14375$ brugbare resultater tilbage.
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|p{12em}|r|r@{.}l|}
+        \hline
+        Analyserede malerier & $17364$ & $100$ & $00\%$   \\
+        Udsnit af malerier   &  $2989$ &  $17$ & $21\%$   \\\hline
+        Resultater           & $14375$ &  $82$ & $79\%$   \\\hline
+    \end{tabular}
+    \caption[]{Udregning af brugbare resultater.}
+    \label{tabel_fjern_detaljer}
+\end{table}
+
+Af de brugbare resultater, ser vi i tabel \ref{tabel_fordeling}, at der
+i $91.43$ procent af malerierne er fundet mindst én region som ligger i
+det gyldne snit. Vi kan derfor ikke afvise hypotese \ref{hypo_binaer}.
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|p{12em}|r|r@{.}l|}
+        \hline
+        Positive resultater   & $13143$ &  $91$ & $43\%$ \\
+        Negative resultater   &  $1232$ &   $8$ & $57\%$ \\\hline
+        Resultater i alt      & $14375$ & $100$ & $00\%$ \\\hline
+    \end{tabular}
+    \caption[]{Et positivt resultat beskriver et maleri, hvori der er
+    fundet mindst én region, som ligger i det gyldne snit. Et negativt
+    resultat er et maleri, hvori der ikke findes nogen regioner, som
+    ligger i det gyldne snit.}
+    \label{tabel_fordeling}
+\end{table}
 
 \newpage
-\subsection{Resultater}
 Resultaterne strider ikke mod hypotesen, dog tegner \ref{diffratios}
 et meget et interessante billede. Det er kun de to snit der ligger
 tættere på midten, der indeholder flere interessante regioner.
