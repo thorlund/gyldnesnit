@@ -14,7 +14,7 @@ import sqlobject as s
 globalSettings = GlobalSettings()
 db = Database(globalSettings)
 runId = m.Result.select().max('run_id')
-paintings = m.Painting.select("painting.title LIKE '%detail%'")
+paintings = m.Painting.select("painting.title NOT LIKE '%detail%'")
 paintings = paintings.filter(b.AND(m.Result.q.run==runId,m.Result.q.painting == m.Painting.q.id)).distinct()
 results = m.Result.select("painting.title NOT LIKE '%detail%'")
 results = results.filter(b.AND(m.Result.q.run==runId,m.Result.q.painting == m.Painting.q.id))
@@ -30,7 +30,7 @@ print numberOfRegions
 numberOfPaintings = m.Painting.select(b.AND(m.Result.q.run==runId,m.Painting.q.id==m.Result.q.painting))
 numberOfPaintings = numberOfPaintings.distinct().count()
 print "Total number of paintings"
-print numberOfPaintings
+print paintings.count()
 
 conn = m.Result._connection
 nameselect = conn.sqlrepr(b.Select(m.Result.q.cutRatio).distinct())
@@ -78,9 +78,9 @@ for picture in paintings:
 		featPerPicture[numbOfRegions] = featPerPicture[numbOfRegions] +1
 print featPerPicture
 
-goldenpictures = [0,0,0,0]
-for cut in range(4):
-	goldenpictures[cut]=m.Painting.select(b.AND(m.Result.q.run == runId, m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61, m.Painting.q.id == m.Result.q.painting, m.Result.q.cutNo==cut, m.Result.q.numberOfRegions > 0)).distinct().count()
+print "The amout of regions in the golden ratio "
+
+goldenpictures = paintings.filter(b.AND(m.Result.q.cutRatio < 0.62,m.Result.q.cutRatio > 0.61, m.Result.q.numberOfRegions > 0)).distinct().count()
 print "Antallet af billeder, der har regioner i det gyldne snit, for snit 0-3"
 print goldenpictures
 
