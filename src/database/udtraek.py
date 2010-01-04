@@ -18,6 +18,8 @@ paintings = m.Painting.select("painting.title NOT LIKE '%detail%'")
 paintings = paintings.filter(b.AND(m.Result.q.run==runId,m.Result.q.painting == m.Painting.q.id)).distinct()
 results = m.Result.select("painting.title NOT LIKE '%detail%'")
 results = results.filter(b.AND(m.Result.q.run==runId,m.Result.q.painting == m.Painting.q.id))
+artists = m.Artist.select("painting.title NOT LIKE '%detail%'")
+artists = artists.filter(b.AND(m.Result.q.run==runId, m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist == m.Artist.q.id))
 #results = m.Result.select(m.Result.q.run==runId)
 #sorts resulsts after numberOfRegions, the starting one low and rising
 results = results.orderBy('numberOfRegions')
@@ -78,7 +80,23 @@ for picture in paintings:
 		featPerPicture[numbOfRegions] = featPerPicture[numbOfRegions] +1
 print featPerPicture
 
-print "The amout of regions in the golden ratio "
+print "Procentage of different schools use the golden ratio "
+schoolsSelect = conn.sqlrepr(b.Select(m.Artist.q.school).distinct())
+schools = conn.queryAll(schoolsSelect)
+countries = dict()
+for school in schools:
+	school = school[0]#dont ask
+	amountOfPaintings = paintings.filter(b.AND(m.Painting.q.artist == m.Artist.q.id, m.Artist.q.school == school)).distinct().count()
+#	print paintings.filter(b.AND(m.Painting.q.artist == m.Artist.q.id, m.Artist.q.school == school)).distinct()
+	amountOfArtist = artists.filter(m.Artist.q.school==school).distinct().count()
+	amountOfRegions = results.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist == m.Artist.q.id, m.Artist.q.school == school)).distinct().count()
+	amountOfGoldenRegions =goldenresults.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist == m.Artist.q.id, m.Artist.q.school == school)).distinct().count()
+	print school
+	print amountOfGoldenRegions
+	print amountOfRegions
+	print amountOfPaintings
+	countries[school] = (amountOfGoldenRegions, amountOfRegions, amountOfPaintings,amountOfGoldenRegions/amountOfRegions/amountOfPaintings)
+print countires 
 
 goldenpictures = paintings.filter(b.AND(m.Result.q.cutRatio < 0.62,m.Result.q.cutRatio > 0.61, m.Result.q.numberOfRegions > 0)).distinct().count()
 print "Antallet af billeder, der har regioner i det gyldne snit, for snit 0-3"
