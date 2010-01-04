@@ -100,8 +100,10 @@ for image in results.orderBy('numberOfRegions')[-10:]:
 paintings = m.Painting.select(b.AND(m.Result.q.run==runId,m.Painting.q.id==m.Result.q.painting))
 print paintings
 print "how many pictures are used two or more times?"
-detailpic = paintings.filter("painting.title LIKE '%detail%'")
-print detailpic.count()
+detailpics = paintings.filter("painting.title LIKE %detail%")
+detailpic = m.Painting.select("painting.title LIKE %detail%")
+print detailpic
+print detailpics.count()
 
 paintings = paintings.distinct()
 # Get number of paintings with golden section canvas BY PIXEL SIZE
