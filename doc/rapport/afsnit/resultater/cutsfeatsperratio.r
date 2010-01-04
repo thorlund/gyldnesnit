@@ -1,17 +1,16 @@
-d0 <- read.table("cut0featsperratio.csv", sep=",", header=TRUE)
-d1 <- read.table("cut1featsperratio.csv", sep=",", header=TRUE)
-d2 <- read.table("cut2featsperratio.csv", sep=",", header=TRUE)
-d3 <- read.table("cut3featsperratio.csv", sep=",", header=TRUE)
-png("billeder/cut0featsperratio.png")
-barplot(d0$interessante.regioner,beside=TRUE, names=d0$ratios,cex.names=0.5)
-dev.off()
-png("billeder/cut1featsperratio.png")
-barplot(d1$interessante.regioner,beside=TRUE, names=d1$ratios,cex.names=0.5)
-dev.off()
-png("billeder/cut2featsperratio.png")
-barplot(d2$interessante.regioner,beside=TRUE, names=d2$ratios,cex.names=0.5)
-dev.off()
-png("billeder/cut3featsperratio.png")
-barplot(d3$interessante.regioner,beside=TRUE, names=d3$ratios,cex.names=0.5)
-dev.off()
-q()
+R version 2.9.2 (2009-08-24)
+Copyright (C) 2009 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+REvolution R enhancements not installed.  For improved
+performance and other extensions: apt-get install revolution-r
+
+> [K> ^Z
