@@ -39,9 +39,14 @@ Den naive finder de der ligger op ad snittet, mens den udvidede finder
 dem som centrerer sig på snittet. Det er derfor oplagt at kombinere
 metoderne, således at vi vælger begge typer regioner. Udvælgelsen af
 regioner er dog stadig binær --- enten godtages en region, eller også
-gør den ikke --- og deri ligger deres største svaghed. Vi kan nemlig
-ikke umiddelbart sammenligne to godkendte regioner, for at afgøre
-hvilken der ligger bedst i snittet.
+gør den ikke --- og deri ligger deres største svaghed.
+
+Det er ikke helt hensigtsmæssigt, at de to sæt af regioner, som trækkes
+ud af samme billede, men ved to forskellige snit, er helt uafhængige. Vi
+kan nemlig godt trække den samme region ud fra to forskellige snit, men
+der gemmes ingen indikation på, at disse regioner er ens.  Dette er dog
+en konsekvens af at regioner, i begge metoder, kun bliver vurderet i
+forhold til ét snit og den binære klassifikation.
 
 \subsection{Databaseskema}
 Resultaterne, der gemmes i databasen, er kun de regioner som er blevet
@@ -79,14 +84,22 @@ været del af det samme digitale billede, som blot er delt op. Hvis
 billederne bare sættes sammen, kan vi have, at det færdige billede
 bliver sat skævt sammen, pga. forskelligt perspektiv i billederne, som
 der er vist et eksempel på i figur \ref{fucked_up_painting}. Der findes
-helt sikkert metoder til at løse problemet i figur
-\ref{fucked_up_painting}, men man vil sikkert komme ud for problemer med
-beskæring af det sammensatte billede.
+metoder til at løse problemet i figur \ref{fucked_up_painting}, men man
+vil sikkert komme ud for problemer med beskæring af det sammensatte
+billede.
 
 At afgøre, hvorvidt et billede er et udsnit af et større billede, vil
 enten kræve en meget omfattende parser eller en omstrukturering af data
 i wga.hu's kommaseparerede fil, så det blev klart indikeret, hvor et
 billede hører til.
+
+\subsection{Overordnet vurdering}
+Vi må indse, at det svageste led, i den udviklede implementation, er
+udtrækningen af regioner kombineret med definitionen på en interessant
+region. Vores søgen efter objekter i malerier er for upræcis, og vi får
+derfor alt for mange falske positiver. At begrænse søgningen i malerier
+kun til ansigter, ville nok have været mere teknisk kompliceret, men
+ville i sidste ende give mere pålidelige resultater.
 
 }
 
