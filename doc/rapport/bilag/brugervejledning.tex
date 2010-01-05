@@ -1,0 +1,64 @@
+{
+Her gives en kort introduktion til hvordan vores program hentes og køres
+på en maskine med et Debian-system. Andre systemer vil ikke blive
+dækket. Initialisering og kørsel af programmet kræver
+programmeringserfaring i Python.
+
+\section{Nødvendige pakker}
+De følgende pakker bør være installeret, for at køre programmet:
+
+\begin{itemize}
+    \item \texttt{python2.6}
+    \item \texttt{python-opencv}
+    \item \texttt{opencv-doc}
+    \item \texttt{python-numpy}
+    \item \texttt{python-sqlobject}
+    \item \texttt{sqlite3}
+\end{itemize}
+
+Ønsker man at oversætte rapporten, anbefales det at have
+\texttt{texlive-full} installeret.
+
+\section{Anskaffelse af programmet}
+Vores implementation ligger i et git-repository på GitHub og kan tilgås
+ved \url{http://github.com/thorlund/gyldnesnit}. Her kan rapporten også
+findes.
+
+Programmet kan anskaffes på to måder: Via \textbf{git} eller ved at
+hente et \texttt{tgz} eller \texttt{zip}-arkiv fra
+\url{http://github.com/thorlund/gyldnesnit/downloads}. Det anbefales at
+hente programmet via \textbf{git}, da arkiverne kan være uddaterede.
+
+Hjælp, til at pakke arkiverne ud, findes ved kommandoerne
+\begin{verbatim}
+    # > man tar
+    # > man unzip
+\end{verbatim}
+
+For at hente programmet via \textbf{git}, skal man have
+pakken \texttt{git} installeret. Kildekoden hentes ved kommandoen:
+\begin{verbatim}
+    # > git clone git://github.com/thorlund/gyldnesnit.git
+\end{verbatim}
+eller, hvis ovenstående fejler:
+\begin{verbatim}
+    # > git clone http://github.com/thorlund/gyldnesnit.git
+\end{verbatim}
+Dette opretter mappen \texttt{gyldnesnit/} i den aktuelle mappe, hvor
+kildekoden ligger.
+
+\subsection{Initialisering af billeddatabasen}
+Lav om i \texttt{start.py} eller sådan noget.
+
+\subsection{Start af en kørsel}
+\subsubsection{Oprettelse af \texttt{environment}}
+
+\subsubsection{Start}
+
+\subsection{Udtrækning af resultater}
+Udtrækning af resultater kræver erfaring med \emph{SQLObject}, SQL
+og/eller Sqlite.
+
+}
+
+% vim: set tw=72 spell spelllang=da:
