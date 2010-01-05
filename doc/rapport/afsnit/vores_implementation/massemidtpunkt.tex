@@ -5,7 +5,7 @@ region ligger i det gyldne snit. Hvor den naive fremgangsmåde tilgodeser
 regioner som ligger op ad snittet, leder vi nu efter regioner som i
 højere grad er centreret på snittet. Vi leder nu efter regioner med
 massemidtpunkt i det gyldne snit, og kigger ikke længere på denne
-regions afgrænsende rektangel. Et eksempel på dette kan ses i
+regions begrænsende rektangel. Et eksempel på dette kan ses i
 figur \ref{hus}, hvor den sorte region ikke anses som liggende i det
 gyldne snit af den naive fremgangsmåde. Vi vil gerne have, at sådanne
 regioner, klassificeres som en positiv, interessant region.
@@ -20,7 +20,7 @@ regioner, klassificeres som en positiv, interessant region.
 \end{figure}
 
 \subsubsection{Opdeling af region med et gitter}
-Når vi ikke længere bruger regionens afgrænsende rektangel, har vi brug
+Når vi ikke længere bruger regionens begrænsende rektangel, har vi brug
 for en anden måde at repræsentere denne på. Vi laver derfor en
 approksimation, af regionens form og udstrækning, ved at bruge et gitter.
 Alt efter hvor finmasket dette gitter er, kan man justere hvor præcis
@@ -30,14 +30,14 @@ krydser, og befinder sig inden for regionen.
 
 I praksis bruges det segmenterede billede fra floodfill-metoden, til at
 konstruere regionens approksimation. Vi kontrollerer hver pixel, som er
-en del af gitteret, i det afgrænsende rektangel for en given region, om
+en del af gitteret, i det begrænsende rektangel for en given region, om
 denne har samme farve, som regionen er blevet tildelt. Vi finder da et
 undersæt af punkter til at beskrive regionen.
 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.76,angle=0]{afsnit/vores_implementation/billeder/udvidet_loesning/udvidetloesninglayer.png}
-    \caption[]{Et gitter over en regions afgrænsende rektangel.}
+    \caption[]{Et gitter over en regions begrænsende rektangel.}
     \label{grid}
 \end{figure}
 
