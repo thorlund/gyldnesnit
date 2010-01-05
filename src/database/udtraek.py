@@ -24,8 +24,7 @@ artists = artists.filter(b.AND(m.Result.q.run==runId, m.Result.q.painting == m.P
 #sorts resulsts after numberOfRegions, the starting one low and rising
 goldenresults = results.filter(b.AND(m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61)).distinct()
 #only the golden ratios and the paintings
-goldenpaintings = paintings.filter(b.AND(m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61))
-print goldenpaintings.count()
+goldenpaintings = paintings.filter(b.AND(m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61)).distinct()
 
 print "Total number of regions found across all pictures"
 numberOfRegions = results.distinct().sum('number_of_regions')
