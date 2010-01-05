@@ -16,7 +16,7 @@ bruges, når regioner bliver vurderet.
 Når vi skal afgøre, hvorvidt et antal udtrukne regioner er interessante
 og ligger i snittet, er der en række betingelser, der skal være opfyldt.
 Til disse, er der forbundet nogle udregninger, som vil være de samme for
-hver region. Vi bruger derfor en struktur, som indholder resultaterne
+hver region. Vi bruger derfor en struktur, som indeholder resultaterne
 fra disse udregninger, således at de ikke skal udføres for hver eneste
 region vi kontrollerer. Datastrukturen kaldes \textbf{Constraints} og
 ses herunder i \eqref{Constraints_class}.
@@ -151,8 +151,7 @@ Som nævnt, både i kapitel \ref{chap_detektion} og
 \ref{chap_afproevning}, bruges en procentsats, til at angive vores
 margin. Denne procentsats vil, hvis vi kun undersøger ét snit, blive sat
 til $2.4\%$ af billedets højde eller bredde, alt efter hvilken
-orientering det aktuelle snit har.  Procentsatsen er baseret på
-forskellen mellem det gyldne snit og snittet ved to tredjedele. Vi har
+orientering det aktuelle snit har.  Vi har
 implementeret fastsættelsen af denne procentsats således, at \emph{hvis}
 man ønsker at sammenligne to snit, som ligger tættere på hinanden end det
 gyldne snit og to tredjedele, så findes den procentsats der gør, at
@@ -161,8 +160,7 @@ snitratioer, der ønskes undersøgt, og fra denne liste, findes den
 mindste differens mellem ratioerne. Den mindste differens mellem
 snitratioer, bruges da, som procentsats for alle snit i analysen. Hvis
 den mindste differens, mellem snitrationerne, er større end $2.4\%$,
-sættes procentsatsen for margin til $2.4\%$. Vi antager i det følgende,
-at vores procentsats for margin er blevet sat til $2.4\%$.
+sættes procentsatsen for margin til $2.4\%$.
 
 Når vi skal vurdere regioner med hensyn til vores margin, får vi brug
 for den eksakte pixelstørrelse på margin. I filen
