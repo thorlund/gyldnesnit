@@ -71,17 +71,26 @@ for timeline in timelines:
 print "This tuple shows how many features are detected in the golden ratio and overall and the amount of pictures in/of a given timeline"
 print periodes
 
-"""
 print "The features per pcitures dict"
 featPerPicture = dict()
+topten = dict()
+toptengolden = dict()
 for picture in paintings:
 	numbOfRegions = paintings.filter(picture.id == m.Painting.q.id).sum(m.Result.q.numberOfRegions)
+	numbOfGoldenRegions = goldenpaintings.filter(picture.id == m.Painting.q.id).sum(m.Result.q.numberOfRegions)
+	if numbOfRegions not in topten:
+		topten[numbOfRegions] = [picture.id]
+	else:
+		topten[numbOfRegions].append(picture.id)
+	if numbOfGoldenRegions not in toptengolden:
+		toptengolden[numbOfGoldenRegions] = [picture.id]
+	else:
+		toptengolden[numbOfGoldenRegions].append(picture.id)
 	if numbOfRegions not in featPerPicture:
 		featPerPicture[numbOfRegions] = 1
 	else:
 		featPerPicture[numbOfRegions] = featPerPicture[numbOfRegions] +1
 print featPerPicture
-"""
 
 print "Procentage of different schools use the golden ratio "
 schoolsSelect = conn.sqlrepr(b.Select(m.Artist.q.school).distinct())
@@ -99,23 +108,28 @@ print countries
 
 goldenpictures = paintings.filter(b.AND(m.Result.q.cutRatio < 0.62,m.Result.q.cutRatio > 0.61, m.Result.q.numberOfRegions > 0)).distinct().count()
 print "Antallet af billeder, der har regioner i det gyldne snit, for snit 0-3"
-print goldenpictures
 
 #top ten images with the most features in the golden ratio
+#from the toptengolden dict in the calcutation of how many features in general is in a picture
 print "The top ten images with the most features in the golden ratio"
-for image in goldenpaintings.orderBy('result.numberOfRegions')[-10:]:
-	toptenimages=  m.Painting.select(m.Painting.q.id == image.id).getOne()
-	print toptenimages.filepath
-	print "with:"
-	print image.numberOfRegions
+toptengoldenkeys = toptengolden.keys()
+for feats in toptengoldenkeys[-10:]:
+	for paintingId in toptengolden[feats]:
+		toptenimages=  m.Painting.select(m.Painting.q.id == paintingId).getOne()
+		print toptenimages.filepath
+		print "with:"
+		print feats
 
 #top then image with the most features
+#from the topten dict in the calcutation of how many features in general is in a picture
 print "The top ten images with the most features in any ratio"
-for image in paintings.orderBy('result.numberOfRegions')[-10:]:
-	toptenimages=  m.Painting.select(m.Painting.q.id == image.id).getOne()
-	print toptenimages.filepath
-	print "with:"
-	print image.numberOfRegions
+toptenkeys = topten.keys()
+for feats in toptenkeys[-10:]:
+	for paintingId in topten[feats]:
+		toptenimages=  m.Painting.select(m.Painting.q.id == paintingId).getOne()
+		print toptenimages.filepath
+		print "with:"
+		print feats
 
 paintings = paintings.distinct()
 # Get number of paintings with golden section canvas BY PIXEL SIZE
