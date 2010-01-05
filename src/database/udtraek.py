@@ -22,17 +22,15 @@ artists = m.Artist.select("painting.title NOT LIKE '%detail%'")
 artists = artists.filter(b.AND(m.Result.q.run==runId, m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist == m.Artist.q.id))
 #results = m.Result.select(m.Result.q.run==runId)
 #sorts resulsts after numberOfRegions, the starting one low and rising
-results = results.orderBy('numberOfRegions')
 goldenresults = results.filter(b.AND(m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61))
 #only the golden ratios and the paintings
-goldenpaintings = paintings.filter(b.AND(m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61)).distinct()
+goldenpaintings = paintings.filter(b.AND(m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61)).
 
 print "Total number of regions found across all pictures"
-numberOfRegions = results.sum('number_of_regions')
+numberOfRegions = results.distinct().sum('number_of_regions')
 print numberOfRegions
 
-numberOfPaintings = m.Painting.select(b.AND(m.Result.q.run==runId,m.Painting.q.id==m.Result.q.painting))
-numberOfPaintings = numberOfPaintings.distinct().count()
+numberOfPaintings = paintings.distinct().count()
 print "Total number of paintings"
 print paintings.count()
 
@@ -53,7 +51,7 @@ print cuts
 
 goldenratiocuts=[0,0,0,0]
 for cut in range(4):
-	goldenratiocuts[cut]=goldenresults.filter(m.Result.q.cutNo==cut).sum(m.Result.q.numberOfRegions)
+	goldenratiocuts[cut]=goldenresults.filter(m.Result.q.cutNo==cut).distinct().sum(m.Result.q.numberOfRegions)
 print "How the four different cuts are used"
 print goldenratiocuts
 
