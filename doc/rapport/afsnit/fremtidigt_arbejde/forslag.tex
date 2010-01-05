@@ -20,16 +20,20 @@ implementation og analyse. Nogle af forslagene kan dog overlappe.
         eller dennes konvekse hylster.
     \item \textbf{Bonus for regioner, som ligger i flere gyldne snit}\\
         Det kunne være interessant at undersøge, om fundne regioner
-        kvalificerer sig til at ligge i mere end et gyldent snit. Bruges
-        binær klassifikation, har vi brug for en måde at undersøge, om
-        to regioner egentlig er den samme. Bruges der derimod
-        pointscore, vil regionens værdi afspejle dennes særlige
+        kvalificerer sig til at ligge i mere end et gyldent snit. Med
+        den nuværende udtrækning \emph{vil} vi have, at hvis en region
+        ligger i to snit, så \emph{vil} denne blive trukket ud to gange.
+        Vi vil derfor have brug for metoder til at undersøge, om to
+        regioner egentlig er den samme. Dette skal løses med en anden
+        metode for udtrækning af regioner. Ved binær klassificering skal
+        det overvejes hvordan sådanne regioner belønnes. Bruges der i
+        stedet pointscore, vil regionens værdi afspejle dennes specielle
         placering.
     \item \textbf{Ligger der interessante regioner i ``Eye of God''?}\\
         Nogle mener, at punktet vist i figur \ref{eye_of_god} er
         specielt interessant i forbindelse med det gyldne snit. Det
-        kunne derfor være spændende at undersøge om der befinder sig
-        særlig mange interessante regioner omkring dette punkt.
+        kunne derfor være spændende at undersøge, om der er en tendens
+        til at placere interessante regioner omkring dette punkt.
         Ligeledes kunne man finde morskab i at undersøge, om
         interessante regioner følger bestemte linjer i billedet, f.eks,
         diagonalerne indtegnet i figur \ref{eye_of_god} eller den gyldne
@@ -94,6 +98,9 @@ implementation og analyse. Nogle af forslagene kan dog overlappe.
         Det kunne være interessant, at sammenligne resultater fra en
         analyse på et andet datasæt. Dette vil give os en indikation på
         om vores resultater fra det oprindelige datasæt kan bruges.
+        Ydermere, ville det være interessante, at sammensætte et datasæt
+        af malerier, hvor det er et faktum, at de er opbygget efter det
+        gyldne snit, med det formål at afprøve metoderne på dette.
     \item \textbf{Implementere programmet i et andet sprog}\\
         For en hurtigere analyse af malerier, kunne programmet
         implementeres i $\textrm{C}^{++}$, som \emph{OpenCV} er
