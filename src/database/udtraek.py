@@ -71,7 +71,7 @@ for timeline in timelines:
 print "This tuple shows how many features are detected in the golden ratio and overall and the amount of pictures in/of a given timeline"
 print periodes
 
-
+"""
 print "The features per pcitures dict"
 featPerPicture = dict()
 for picture in paintings:
@@ -81,6 +81,7 @@ for picture in paintings:
 	else:
 		featPerPicture[numbOfRegions] = featPerPicture[numbOfRegions] +1
 print featPerPicture
+"""
 
 print "Procentage of different schools use the golden ratio "
 schoolsSelect = conn.sqlrepr(b.Select(m.Artist.q.school).distinct())
@@ -102,7 +103,7 @@ print goldenpictures
 
 #top ten images with the most features in the golden ratio
 print "The top ten images with the most features in the golden ratio"
-for image in goldenpaintings.orderBy('numberOfRegions')[-10:]:
+for image in goldenpaintings.orderBy('result.numberOfRegions')[-10:]:
 	toptenimages=  m.Painting.select(m.Painting.q.id == image.id).getOne()
 	print toptenimages.filepath
 	print "with:"
@@ -110,7 +111,7 @@ for image in goldenpaintings.orderBy('numberOfRegions')[-10:]:
 
 #top then image with the most features
 print "The top ten images with the most features in any ratio"
-for image in paintings.orderBy('numberOfRegions')[-10:]:
+for image in paintings.orderBy('result.numberOfRegions')[-10:]:
 	toptenimages=  m.Painting.select(m.Painting.q.id == image.id).getOne()
 	print toptenimages.filepath
 	print "with:"
