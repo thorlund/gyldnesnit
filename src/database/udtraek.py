@@ -15,7 +15,7 @@ globalSettings = GlobalSettings()
 db = Database(globalSettings)
 runId = m.Result.select().max('run_id')
 paintings = m.Painting.select("painting.title NOT LIKE '%detail%'")
-paintings = paintings.filter(b.AND(m.Result.q.run==runId,m.Result.q.painting == m.Painting.q.id)).distinct()
+paintings = paintings.filter(b.AND(m.Result.q.run==runId,m.Result.q.painting == m.Painting.q.id))
 results = m.Result.select("painting.title NOT LIKE '%detail%'")
 results = results.filter(b.AND(m.Result.q.run==runId,m.Result.q.painting == m.Painting.q.id))
 artists = m.Artist.select("painting.title NOT LIKE '%detail%'")
@@ -64,8 +64,10 @@ periodes=dict()
 for timeline in timelines:
 	timeline = timeline[0]
 	goldenFeatTimeline=goldenresults.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct().sum(m.Result.q.numberOfRegions)
+	print goldenresults.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct()
 	picTimeline=paintings.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct().count()
 	featsInTimeline = results.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct().sum(m.Result.q.numberOfRegions)
+	print featsInTimeline
 	periodes[timeline] = (goldenFeatTimeline,featsInTimeline,picTimeline)
 
 print "This tuple shows how many features are detected in the golden ratio and overall and the amount of pictures in/of a given timeline"
