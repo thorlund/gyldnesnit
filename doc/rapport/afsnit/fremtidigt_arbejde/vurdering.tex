@@ -48,6 +48,27 @@ der gemmes ingen indikation på, at disse regioner er ens.  Dette er dog
 en konsekvens af at regioner, i begge metoder, kun bliver vurderet i
 forhold til ét snit og den binære klassifikation.
 
+\subsubsection{Optimeringer}
+Den naive fremgangsmåde er svær at optimere, da den er så enkel i sin
+struktur. I den udvidede metode, kan der dog gøres nogle overvejelser
+mht. regionens approksimation. Da vi i højere grad kigger kigger på
+regionens udstrækning, er det værd at overveje, om approksimationen ved
+brug af et gitter, faktisk er for grundig. Ved store regioner, kan man
+med fordel bruge et større gitter, men man udelukker da mindre regioner,
+da disse kan falde gennem nettet.
+
+Man kan derfor overveje at implementere en variabel gitterstørelse,
+afhængig af regionens areal, således at regioner blev approksimeret med
+et passende gitter.
+
+Man kunne også bruge en anden approksimation end gitteret. F.eks. virker
+det tiltalende at finde det konvekse hylster for en region. Dette
+gør, at der skal færre punkter til at beskrive regionen, men vi mister
+til gengæld en del information om regionens form. Køretiden på gitteret
+kan som sagt, blive meget krævende, ved store regioner, og det kan
+tænkes, at det konvekse hylster kan give en mere tilfredsstillende
+køretid, mod lidt mindre præcision ved fordeling og massemidtpunkt.
+
 \subsection{Databaseskema}
 Resultaterne, der gemmes i databasen, er kun de regioner som er blevet
 udvalgt til at ligge i snittet. Dette giver god mening, da det i sandhed
