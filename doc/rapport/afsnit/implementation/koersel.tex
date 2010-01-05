@@ -28,6 +28,54 @@ for painting in paintings:
 	\caption{De blå pile er ting, som sker en enkelt gang, mens de blå
 	bliver gentaget indtil der ikke er flere billeder at arbejde på}
 \end{figure}
-	
+
+\begin{lstlisting}[caption={Pseudokode for den naive metode},
+    captionpos=b, label={pseudo_naiveMethod}, frame=tb,
+    breaklines=false, float=h]
+def NaiveMethod(image, settings):
+    # Init ImageRegions dict
+    ImageRegions = {}
+
+    # Walk through all the CutRatios
+    for CutRatio in settings:
+        # Init RatioRegions dict
+        RatioRegions = {}
+
+        # Walk through every Cut in the ratio
+        for Cut in CutRatio:
+            # Set up the constraints, extract regions and prune the regions
+            Constraints = new Constraints(image, Cut, settings)
+            CutRegions = NaiveExtraction(image)
+            InterestingRegions = GetInterestingRegions(CutRegions, Constraints)
+            InterestingRegionsInCut =
+                    GetInterestingRegionsInCut(InterestingRegionsInCut, Constraints)
+
+            # Put the resulting instance of CutRegions
+            # in the Regions-dict
+            RatioRegions[Cut] = InterestingRegionsInCut
+
+        # Put the resulting RatioRegions in the ImageRegions-dict
+        ImageRegions[CutRatio] = RatioRegions
+
+    # Return the resulting ImageRegions-dict
+    return ImageRegions
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Pseudokode til analyse af malerier efter
+    metode}, captionpos=b, label={pseudo_naiveMethod}, frame=tb,
+    breaklines=false, float=h]
+def AnalysePainting(painting, settings):
+    # Get the method used for the analysis
+    method = settings.method
+
+    # Use the right method
+    if method == 'naive':
+        image = painting.getImage()
+        return NaiveMethod(image, settings)
+    else:
+        print 'No such method'
+        return None
+\end{lstlisting}
+
 }
 % vim: set tw=72 spell spelllang=da:
