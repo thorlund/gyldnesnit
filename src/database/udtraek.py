@@ -27,7 +27,7 @@ goldenresults = results.filter(b.AND(m.Result.q.cutRatio < 0.62 , m.Result.q.cut
 goldenpaintings = paintings.filter(b.AND(m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61)).distinct()
 
 print "Total number of regions found across all pictures"
-numberOfRegions = results.distinct().sum('number_of_regions')
+numberOfRegions = results.sum('number_of_regions')
 print numberOfRegions
 
 numberOfPaintings = paintings.distinct().count()
