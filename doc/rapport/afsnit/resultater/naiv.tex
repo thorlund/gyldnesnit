@@ -32,17 +32,17 @@ Der er altså en stimmel på $0.05-0.036 = 0.014 = 1.4\%$ af billedet,
 hvor interessante regioner bliver talt to gange.
 
 \subsection{Resultater}
-Vi har kørt vores analyse på $17364$ billeder, men i vores resultater
-sorterer vi $2989$ af disse fra, da de kun er udsnit af et større maleri.
+Vi har kørt vores analyse på $17,364$ billeder, men i vores resultater
+sorterer vi $2,989$ af disse fra, da de kun er udsnit af et større maleri.
 Som vist i tabel \ref{tabel_fjern_detaljer} herunder, er dette en nedgang
-på $17.21$ procent og vi har $14375$ brugbare resultater tilbage.
+på $17.21$ procent og vi har $14,375$ brugbare resultater tilbage.
 
-\begin{table}[!h]
+\begin{table}[H]
     \centering
     \begin{tabular}{r@{\ \ }p{12em}r|r@{.}l}
-            & Analyserede malerier & $17364$ & $100$ & $00\%$   \\
-        $-$ & Udsnit af malerier   &  $2989$ &  $17$ & $21\%$   \\\hline
-            & Resultater           & $14375$ &  $82$ & $79\%$
+            & Analyserede malerier & $17,364$ & $100$ & $00\%$   \\
+        $-$ & Udsnit af malerier   &  $2,989$ &  $17$ & $21\%$   \\\hline
+            & Resultater           & $14,375$ &  $82$ & $79\%$
     \end{tabular}
     \caption[]{Udregning af brugbare resultater.}
     \label{tabel_fjern_detaljer}
@@ -52,12 +52,12 @@ Af de brugbare resultater, ser vi i tabel \ref{tabel_fordeling}, at der
 i $91.43$ procent af malerierne er fundet mindst én region som ligger i
 det gyldne snit. Vi kan derfor ikke afvise hypotese \ref{hypo_binaer}.
 
-\begin{table}[!h]
+\begin{table}[H]
     \centering
     \begin{tabular}{r@{\ \ }p{12em}r|r@{.}l}
-            & Positive resultater   & $13143$ &  $91$ & $43\%$ \\
-        $+$ & Negative resultater   &  $1232$ &   $8$ & $57\%$ \\\hline
-            & Resultater i alt      & $14375$ & $100$ & $00\%$
+            & Positive resultater   & $13,143$ &  $91$ & $43\%$ \\
+        $+$ & Negative resultater   &  $1,232$ &   $8$ & $57\%$ \\\hline
+            & Resultater i alt      & $14,375$ & $100$ & $00\%$
     \end{tabular}
     \caption[]{Et positivt resultat beskriver et maleri, hvori der er
     fundet mindst én region, som ligger i det gyldne snit. Et negativt
@@ -65,6 +65,44 @@ det gyldne snit. Vi kan derfor ikke afvise hypotese \ref{hypo_binaer}.
     ligger i det gyldne snit.}
     \label{tabel_fordeling}
 \end{table}
+
+Vi undersøger nu, hvor mange af de brugbare resultater, som er forsynet
+med dimensioner i databasen, så vi kan undersøge om lærredet er
+konstrueret som et gyldent rektangel. Udregningen i tabel
+\ref{tabel_med_dimensioner} viser, at af de brugbare resultater, mangler
+$2,410$ denne information og vi har således $11,965$ malerier tilbage at
+undersøge for det gyldne rektangel i lærredets dimensioner.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{r@{\ \ }p{14em}r|r@{.}l}
+            & Resultater                     & $14,375$ & $100$ & $00\%$ \\
+        $-$ & Resultater uden dimensioner    &  $2,410$ &  $16$ & $77\%$ \\\hline
+            & Resultater med dimensioner     & $11,965$ &  $83$ & $23\%$
+    \end{tabular}
+    \caption[]{Brugbare resultater med dimensioner.}
+    \label{tabel_med_dimensioner}
+\end{table}
+
+Vi ser nu, hvor mange af de $11,965$ malerier, har at dets lange side,
+$L$, divideret med dets korte side, $K$, ligger i intervallet $G =
+[1.57920117302, 1.65686680448] = \varphi \pm 2.4\%$. Tabel
+\ref{tabel_real_dimensions} viser at kun $3.99\%$ falder inden for
+dette interval. Vi kan således ikke bekræfte hypotese
+\ref{hypo_golden_ractangle}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{r@{\ \ }p{14em}r|r@{.}l}
+            & $L/K \in G$                  &    $478$ &   $3$ & $99\%$ \\
+        $+$ & $L/K \notin G$               & $11,487$ &  $96$ & $01\%$ \\\hline
+            & Resultater med dimensioner   & $11,965$ & $100$ & $00\%$
+    \end{tabular}
+    \caption[]{Resultater med dimensioner, hvor disse er et gyldent
+    rektangel med en afvigelse på $2.4\%$.}
+    \label{tabel_real_dimensions}
+\end{table}
+
 
 %\newpage
 %Resultaterne strider ikke mod hypotesen, dog tegner \ref{diffratios}
