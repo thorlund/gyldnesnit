@@ -1,54 +1,53 @@
-\subsection*{Trunkerings og afrundings problemer}
-Mange af de metoder som vi bruger til at udregne, position af det gyldne
-snit eller størrelsen af en margin, udregnes med brøker. Hvor i mod et
-billedet opbygget af pixels, Dette gør at vi må nød til at tage
-approksimationer af udregningerne for at få dem tilbage til et helt tal,
-men hvor meget af dataenden er tabt, og hvor maget af resultaterne kan
-man stole på.
+\subsection*{Trunkerings- og afrundingsproblemer}
+Mange af de metoder, vi bruger til at udregne, det gyldne
+snits position eller størrelsen af en margin, udregnes med brøker. Hvorimod et
+billede opbygges af pixels. Dette gør, at vi bliver nødt til at tage
+approksimationer af udregningerne for at få dem tilbage til et helt tal.
+Men hvor meget af data er gået tabt, og hvor mange af resultaterne kan
+man stole på?
 
 \subsubsection{Acceptabel afvigelse}
-(Nogle referancer)
-Som beskravet i kapitel 1, udregnes det gyldne snit med mange decimaler.
-En kunstner, selv hvor god han er, har ingen chance for at male så
-præcist at man kan sige at strøet ligge nøjagtigt oven på snittet. Vi
-starter med at se på alle de ting som kan skabe en usikkerhed fra
-malerens side. Man kan gå ud fra at den procentvise afvigelse ikke er
-særlig stor, da de malerier som vi arbejder på kommer fra kunstner som
-har være udstillet, dog har vi sat den procentvise afvigelse til 0.5 \%.
-Det vil sige at en maller med et lærred på 100 cm, kan male maksimalt
-$0.5$ cm forkert.
+\note{Nogle referanse}Som beskrevet i afsnit \ref{mange_tal}, udregnes
+det gyldne snit med mange decimaler. En kunstner, hvor god han end er,
+har ingen chance for at male så præcist at man kan sige at strøget
+ligger nøjagtigt oven på snittet selv om hans ententioner er at ramme
+snittet. Vi kommer derfor til at have en vis uprecis hed på de data vi
+få fra billedet selv. Vi starter med at se på alle de ting, som kan
+skabe en usikkerhed fra malerens side. Man kan gå ud fra at den
+procentvise afvigelse ikke er særlig stor, da vi ikke har bestræbelser
+på at arbejde på abstrakt malerier, dog har vi sat den procentvise
+afvigelse til 0.5 \%. Det vil sige at en maler med et lærred på 100
+cm,maksimalt vil male $0.5$ cm forkert.
 
-Nå maleren vælger en ramme og et lærred, har vi igen problemtikken.
-Maleren kan være upræcis med sit valg af lærret og ramme. Derfor sætter
-vi den afvigelse til $1\%$. Da vi igen mener at dette er den maksimalle
-afvigelse der kan opstå.
+Når maleren vælger en ramme og et lærred, har vi igen problematikken,
+selv om maleren spicifikt gå efter at bygge maleriet op efter det gyldne
+snit, kan snittets placering i maleriet have forskubbet sig, ved dårlige
+valg at ramme eller lærred. Derfor sætter vi den afvigelse til $1\%$. Da
+vi igen mener at dette er den maksimale afvigelse, der kan opstå.
 
-Nå en maller, maller en region i et maleri, forekommerer der normalt en
-lille kant rundt og objektet, som et omrids. Dette omrids kan vores
-algoritmer ikke tage højte for, og vi må derfor modregne omridset. Nå vi
-er sikre at vi ser på region og ikke den omrids, Da et omrids ikke er
-særligt stor, har vi sat denne procent sats til $0.5\%$. Alt i alt giver
-det en afvigelse på vores aktuelde data på $2\%$ det vil sige at nå vi
-finder en region i billedet som ligger på pixel 200, og et billedet som
-er $500$ bredt, befinder den sig faktisk i intervallet [190,210]. Måden
-vi tager højte for den forskel, er ved hjælp af marginer, som er afsnit
-$2.2$.
+Når maleren maler en region i et maleri, forekommerer der normalt en
+lille kant rundt om objektet, et omrids. Dette omrids kan vores
+algoritmer ikke tage højde for, og vi må derfor modregne omridset, så vi
+er sikre på at vi ser på regionen og ikke dens omrids. Da et omrids ikke
+er særligt stort, har vi sat denne procentsats til $0.5\%$. 
 
-Vi regner med procenter, som godt kan være lidt misvisende, da det
-afhænger af billedets størrelse, et billedet som er meget stort, kan
-maleren male meget ved siden af, i forhold til en lille billedet. Men
-da vi gerne vil have at løsningen er dynamisk, er procenter den beste
-variabel.
+Alt i alt giver det en afvigelse på vores aktuelle udtrækning af data
+fra malerierne på $2\%$ det vil sige at finder vi en region, som ligger
+på pixel 200, i et billedet, der er $500$ cm bredt, befinder den sig
+faktisk i intervallet [190,210]. Måden hvorpå vi tager højde for den
+forskel, er ved hjælp af marginer, som nævnt i afsnit
+\ref{section_naiv}.
 
-\subsection{Hvordan deles billedet efter snittet}
+\subsection{Inddeling af billede efter snit}
 
-I billedet bliver højde og bredden betegnet som $H$ og $B$, se figur
-\ref{cut}. Der er 4 snit i billederne 2 vertikale og 2 horisontale, i
-figur \ref{lenasnit2} er de 4 gyldne snit tegnet ind. For at finde ud af hvor
-de 4 snit skal ligge i billedet multipliceres B og H med $\varPhi$ som
-giver to tal som betegner, hvor mange pixels fra begge kanter, det
-gyldne snit befinder sig f.eks ved et billedet, som har $B = 4000$ pixel,
-vil snittet ligge ved, $4000 \cdot \varPhi \approx 2472$.
+I et billede betegnes højden og bredden som hhv. $H$ og $B$, se figur
+\ref{cut}. Der er 4 gyldne snit, 2 vertikale og 2 horisontale, som vist
+i figur \ref{lenasnit2}. For at finde ud af, hvor de 4 snit skal ligge i
+billedet, multipliceres B og H med $\varPhi$,og man får to tal. Disse
+betegner, hvor mange pixels, det gyldne snit befinder sig fra hhv. $H$
+og $B$ f.eks vil de 2 horisontale snit, i et billedet, som har $B =
+4000$ pixel, ligge hhv. $4000 \cdot \varPhi \approx 2472$ pixels fra
+billedets øvre og nedre kant.
 
 \begin{figure}[h]
 	\begin{center}
@@ -62,30 +61,31 @@ vil snittet ligge ved, $4000 \cdot \varPhi \approx 2472$.
 	\begin{center}
 		\includegraphics[scale=0.42,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/Cut}
 	\end{center}
-	\caption[]{Billedet hvor de 4 snit er navngivet og højden og bredden}
+	\caption[]{Billedets højde og bredde betegnes hvv. H og B. De 4 snit er navngivet.}
 	\label{cut}
 \end{figure}
 
-De 4 snit bliver tildelt vært deres id, snit 0,3 som de vil bliver
-refereret til i resten af rapporten. hvis vi i stedet for det gyldne snit
-vil finde et snittet 0.5 bliver der kun skabe 2 cut i stedet for firere.
-id for disse 2 snit er snit 0 og snit 1. illustreret i figur \ref{2Cut}.
+De 4 snit tildeles hvert deres Id, "snit 0,1,2 og 3" så vi kan kende
+forskel på de individuelde snit, Id'erne placering kan ses i figur
+\ref{cut}. Vi vil i resten af rapporten kalde snittene efter deres Id.
+Hvis vi gerne vil finde snittet som ligger i miden kommer der kun 2
+snit, med vær deres Id "snit 0 og 1" som kan ses i figur \ref{Cut2}
 
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[scale=0.42,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/2Cut}
 	\end{center}
-	\caption[]{billedet bliver kun skøret af 2 snit}
+	\caption[]{Billedet skæres her kun af 2 snit}
 	\label{2Cut}
 \end{figure}
 
-\subsubsection*{Heltal i det gyldne snit}
+\subsubsection{Heltal i det gyldne snit}
 
-Eksemplet med 4000 pixels ovenfor, approksimerer vi antal pixels ved at
-afrunde resultatet, se udregning \ref{afrundning}. Det gør at vi mister
-0.13595 nøjagtighed, hvilket svare til en misvisning af punktet på
-0.00339875 $\%$ i forholdt til bredden på billedet. se udregning
-\ref{afrundning2}.
+I eksemplet med 4000 pixels ovenfor, approksimerer vi antal pixels ved
+at afrunde resultatet $2472.13595 \approx 2472$, se udregning
+\ref{afrundning}. Det betyder at vi mister 0.13595 pixels i præction,
+hvilket svarer til en misvisning af punktet på 0.00339875 $\%$ i forholdt
+til $B$ på billedet. Se udregning \ref{afrundning2}.
 
 \begin{equation}
 	4000 \cdot \varPhi = 4000(\sqrt{5}-1)/2 = 2472.13595 \approx 2472 \label{afrundning}
@@ -95,23 +95,36 @@ afrunde resultatet, se udregning \ref{afrundning}. Det gør at vi mister
 	0.13595/4000 \cdot 100 = 0.00339875 \label{afrundning2}
 \end{equation}
 
-Det er en maget lille del af selve billedet og skulle ikke give nogle
+Det er en meget lille del af selve billedet og skulle ikke give nogle
 misvisninger i forhold til udregningen. For at gøre det lidt mere
-generedt, sætter vi trunkeringsfejlen til $0.5$, da det er den maksimale
-afrundings factor som kan forekomme. Hvis billedet har en størrelse på
-500 pixels, som er det miste billedet vi har, dette giver en fejl margen
-på $0.1\%$, Dette tal bliver adderet til fejl satsen ovenfor, og giver
-en samlet afvigelse på $2.1\%$
+generelt, sætter vi trunkeringsfejlen til $0.5$, da det er den maksimale
+afrundingsfacktor som kan forekomme. Hvis billedet har en størrelse på
+500 pixels, hvilket er det mindste billedet vi har, giver dette en fejlmargin
+på $0.1 \%$. Dette tal bliver adderet til fejlsatsen ovenfor, og giver
+en samlet afvigelse på $2.1\%$.
+
+\subsubsection{Snitratio}
+End til vider har vi kun arbejder med det gyldne snit, men andre snit i
+billedet kan godt optræde, derfor indføre vi en nu betegnelse
+snitratio, som betegner en procents sats for hvor lang inde i billedet
+snittet befinder sig. Det vil sige at hvis en snitration er på $0.2$. Et
+billedet har $B$ på 4000 vil et snit befinde sig i pixel $4000*0.2 =
+800$.
 
 \subsubsection{Heltal ved udregning af Margin}
-Når vi har 2 snit, F.eks. ved $\varPhi$ og $\frac{2}{3}$ som skal sammenligne og
-som ligger meget tæt på hinanden, er det vigtigt at margin for vært
-snittet ikke krydser hinanden. Hvis margin krydser vil det indebære at de samme region
-vil blive fundet af begge snit, og vil give et skævt billedet af
-forskellen på de to snit. Derfor må vi sørge for at de margin ikke
-krydser. hvis $x$ betegner antal pixels i $B$ eller $H$, og vi vil se
-forskellen mellem $\frac{2}{3}$ og $\varPhi$, multiplicere vi $x$ med snittet for at
-finde dens placering og subtrahere dem fra hinanden.
+Når vi har 2 forskellige snitratioer, f.eks. $\varPhi$ og $\frac{2}{3}$,
+som ligger meget tæt på hinanden, og vi gerne vil sammenligne hvilken
+regioner der ligger i snitratioernens snit, er det vigtigt at margin for
+vært af de 2 snitratioers snit ikke krydser hinanden. 
+
+Hvis margin krydser. Vil det indebære, at den samme region bliver fundet
+af begge snit. Dette vil give et skævt billedet af forskellen på de to.
+Derfor må vi sørge for at marginerne ikke krydser. Hvis $x$ betegner
+antal pixels i $B$ eller $H$, og vi vil se på, hvor mange pixels, der er
+mellem snitratio $\frac{2}{3}$ og $\varPhi$, multiplicerer vi $x$ med de
+to snitratioen for at finde deres placering. Derefter subtraheres vi et
+af de snit som befinder sig tetest på hinanden i vær snitratio med
+hinanden.
 
 \begin{eqnarray}
 	\frac{x2}{3} - \frac{x2}{\sqrt{5}+1} & = & x(\frac{2}{3} - \frac{2}{\sqrt{5} + 1}) \nonumber \\
