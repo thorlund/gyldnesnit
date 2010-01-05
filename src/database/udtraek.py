@@ -15,24 +15,23 @@ globalSettings = GlobalSettings()
 db = Database(globalSettings)
 runId = m.Result.select().max('run_id')
 paintings = m.Painting.select("painting.title NOT LIKE '%detail%'")
-paintings = paintings.filter(b.AND(m.Result.q.run==runId,m.Result.q.painting == m.Painting.q.id)).distinct()
+paintings = paintings.filter(b.AND(m.Result.q.run==runId,m.Result.q.painting == m.Painting.q.id))
 results = m.Result.select("painting.title NOT LIKE '%detail%'")
-results = results.filter(b.AND(m.Result.q.run==runId,m.Result.q.painting == m.Painting.q.id)).distinct()
+results = results.filter(b.AND(m.Result.q.run==runId,m.Result.q.painting == m.Painting.q.id))
 artists = m.Artist.select("painting.title NOT LIKE '%detail%'")
-artists = artists.filter(b.AND(m.Result.q.run==runId, m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist == m.Artist.q.id)).distinct()
+artists = artists.filter(b.AND(m.Result.q.run==runId, m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist == m.Artist.q.id))
 #results = m.Result.select(m.Result.q.run==runId)
 #sorts resulsts after numberOfRegions, the starting one low and rising
-goldenresults = results.filter(b.AND(m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61)).distinct()
+goldenresults = results.filter(b.AND(m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61))
 #only the golden ratios and the paintings
-goldenpaintings = paintings.filter(b.AND(m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61)).distinct()
+goldenpaintings = paintings.filter(b.AND(m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61))
 
 print "Total number of regions found across all pictures"
-numberOfRegions = results.sum('number_of_regions')
+numberOfRegions = results.sum(m.Result.q.numberOfRegions)
 print numberOfRegions
 
-numberOfPaintings = paintings.distinct().count()
 print "Total number of paintings"
-print paintings.count()
+print paintings.distinct().count()
 
 conn = m.Result._connection
 nameselect = conn.sqlrepr(b.Select(m.Result.q.cutRatio).distinct())
@@ -51,7 +50,7 @@ print cuts
 
 goldenratiocuts=[0,0,0,0]
 for cut in range(4):
-	goldenratiocuts[cut]=goldenresults.filter(m.Result.q.cutNo==cut).distinct().sum(m.Result.q.numberOfRegions)
+	goldenratiocuts[cut]=goldenresults.filter(m.Result.q.cutNo==cut).sum(m.Result.q.numberOfRegions)
 print "How the four different cuts are used"
 print goldenratiocuts
 
@@ -61,9 +60,9 @@ timelines = conn.queryAll(nameselect)
 periodes=dict()
 for timeline in timelines:
 	timeline = timeline[0]
-	goldenFeatTimeline=goldenresults.filter(b.AND( m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct().sum(m.Result.q.numberOfRegions)
+	goldenFeatTimeline=goldenresults.filter(b.AND( m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).sum(m.Result.q.numberOfRegions)
 	picTimeline=paintings.filter(b.AND( m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct().count()
-	featsInTimeline = results.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct().sum(m.Result.q.numberOfRegions)
+	featsInTimeline = results.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).sum(m.Result.q.numberOfRegions)
 	print featsInTimeline
 	periodes[timeline] = (goldenFeatTimeline,featsInTimeline,picTimeline)
 
@@ -100,8 +99,8 @@ for school in schools:
 	amountOfPaintings = paintings.filter(b.AND(m.Painting.q.artist == m.Artist.q.id, m.Artist.q.school == school)).distinct().count()
 #	print paintings.filter(b.AND(m.Painting.q.artist == m.Artist.q.id, m.Artist.q.school == school)).distinct()
 	amountOfArtist = artists.filter(m.Artist.q.school==school).distinct().count()
-	amountOfRegions = results.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist == m.Artist.q.id, m.Artist.q.school == school)).distinct().count()
-	amountOfGoldenRegions =goldenresults.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist == m.Artist.q.id, m.Artist.q.school == school)).distinct().count()
+	amountOfRegions = results.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist == m.Artist.q.id, m.Artist.q.school == school)).sum(m.Result.q.numberOfRegions)
+	amountOfGoldenRegions =goldenresults.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist == m.Artist.q.id, m.Artist.q.school == school)).sum(m.Result.q.numberOfRegions)
 	countries[school] = (amountOfGoldenRegions, amountOfRegions, amountOfPaintings,amountOfGoldenRegions/amountOfRegions/amountOfPaintings)
 print countries 
 
