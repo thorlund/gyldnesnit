@@ -9,16 +9,38 @@ fra vores kunst database og se hvordan de virker. Udover det vil vi
 finde tærskelværdier til kandetection, floodfill og margin, ud fra
 observationer gjort under afprøvning. Vi vil også afprøve den generalle
 region detektor og kommer ind på dens fordele og ulemper, undervejs vil
-vi lave nogle kunklutioner på de 2 metoder, samen en sammenlining i
+vi lave nogle konklutioner på de 2 metoder, samen en sammenligning i
 slutningen af afsnittet. }
 
 \section{Tærskelværdier\label{terskelverdi}}
 \input{afsnit/afprovning/thressholds.tex}
 \clearpage
 
+\section{Sløring}
+\input{afsnit/afprovning/sloring.tex}
+\clearpage
+
 \section{Regions detektor\label{region_detektor}}
 \input{afsnit/afprovning/region_detektor.tex}
 \clearpage
+
+\section{Sortering i interessante regioner}
+{\sffamily 
+Nå regions detekter har fundet alle regioner vil vi gerne sortere ud i
+dem, da små regioner og regioner med en for lille masse ikke er
+interessante for vores 2 metoder
+}
+\subsection{Masse}
+\input{afsnit/afprovning/masse.tex}
+\clearpage
+
+\subsection{Regionstørrelse \label{region_stoerlse}}
+\input{afsnit/afprovning/blob_stoerlse.tex}
+\clearpage
+
+\subsection{overvejlser}
+\input{afsnit/afprovning/overvejlser.tex}
+
 
 \section{Naive løsning}
 \input{afsnit/afprovning/naive_losning.tex}
@@ -32,17 +54,7 @@ slutningen af afsnittet. }
 \input{afsnit/afprovning/sammenlining.tex}
 \clearpage
 
-\section{Sløring}
-\input{afsnit/afprovning/sloring.tex}
-\clearpage
 
-\section{Masse}
-\input{afsnit/afprovning/masse.tex}
-\clearpage
-
-\section{Regionstørrelse \label{region_stoerlse}}
-\input{afsnit/afprovning/blob_stoerlse.tex}
-\clearpage
 }
 
 % vim: set tw=72 spell spelllang=da:
