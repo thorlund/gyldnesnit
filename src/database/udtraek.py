@@ -24,6 +24,8 @@ artists = artists.filter(b.AND(m.Result.q.run==runId, m.Result.q.painting == m.P
 #sorts resulsts after numberOfRegions, the starting one low and rising
 results = results.orderBy('numberOfRegions')
 goldenresults = results.filter(b.AND(m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61))
+#only the golden ratios and the paintings
+goldenpaintings = paintings.filter(b.AND(m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61)).distinct()
 
 print "Total number of regions found across all pictures"
 numberOfRegions = results.sum('number_of_regions')
@@ -62,7 +64,7 @@ periodes=dict()
 for timeline in timelines:
 	timeline = timeline[0]
 	goldenFeatTimeline=goldenresults.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct().sum(m.Result.q.numberOfRegions)
-	picTimeline=results.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct().count()
+	picTimeline=paintings.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct().count()
 	featsInTimeline = results.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct().sum(m.Result.q.numberOfRegions)
 	periodes[timeline] = (goldenFeatTimeline,featsInTimeline,picTimeline)
 
@@ -91,10 +93,6 @@ for school in schools:
 	amountOfArtist = artists.filter(m.Artist.q.school==school).distinct().count()
 	amountOfRegions = results.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist == m.Artist.q.id, m.Artist.q.school == school)).distinct().count()
 	amountOfGoldenRegions =goldenresults.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist == m.Artist.q.id, m.Artist.q.school == school)).distinct().count()
-	print school
-	print amountOfGoldenRegions
-	print amountOfRegions
-	print amountOfPaintings
 	countries[school] = (amountOfGoldenRegions, amountOfRegions, amountOfPaintings,amountOfGoldenRegions/amountOfRegions/amountOfPaintings)
 print countries 
 
@@ -104,16 +102,16 @@ print goldenpictures
 
 #top ten images with the most features in the golden ratio
 print "The top ten images with the most features in the golden ratio"
-for image in goldenresults.orderBy('numberOfRegions')[-10:]:
-	toptenimages=  m.Painting.select(m.Painting.q.id == image.painting).getOne()
+for image in goldenpaintings.orderBy('numberOfRegions')[-10:]:
+	toptenimages=  m.Painting.select(m.Painting.q.id == image.id).getOne()
 	print toptenimages.filepath
 	print "with:"
 	print image.numberOfRegions
 
 #top then image with the most features
 print "The top ten images with the most features in any ratio"
-for image in results.orderBy('numberOfRegions')[-10:]:
-	toptenimages=  m.Painting.select(m.Painting.q.id == image.painting).getOne()
+for image in paintings.orderBy('numberOfRegions')[-10:]:
+	toptenimages=  m.Painting.select(m.Painting.q.id == image.id).getOne()
 	print toptenimages.filepath
 	print "with:"
 	print image.numberOfRegions
