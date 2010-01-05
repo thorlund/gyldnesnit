@@ -15,16 +15,17 @@ globalSettings = GlobalSettings()
 db = Database(globalSettings)
 runId = m.Result.select().max('run_id')
 paintings = m.Painting.select("painting.title NOT LIKE '%detail%'")
-paintings = paintings.filter(b.AND(m.Result.q.run==runId,m.Result.q.painting == m.Painting.q.id))
+paintings = paintings.filter(b.AND(m.Result.q.run==runId,m.Result.q.painting == m.Painting.q.id)).distinct()
 results = m.Result.select("painting.title NOT LIKE '%detail%'")
-results = results.filter(b.AND(m.Result.q.run==runId,m.Result.q.painting == m.Painting.q.id))
+results = results.filter(b.AND(m.Result.q.run==runId,m.Result.q.painting == m.Painting.q.id)).distinct()
 artists = m.Artist.select("painting.title NOT LIKE '%detail%'")
-artists = artists.filter(b.AND(m.Result.q.run==runId, m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist == m.Artist.q.id))
+artists = artists.filter(b.AND(m.Result.q.run==runId, m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist == m.Artist.q.id)).distinct()
 #results = m.Result.select(m.Result.q.run==runId)
 #sorts resulsts after numberOfRegions, the starting one low and rising
-goldenresults = results.filter(b.AND(m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61))
+goldenresults = results.filter(b.AND(m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61)).distinct()
 #only the golden ratios and the paintings
-goldenpaintings = paintings.filter(b.AND(m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61)).
+goldenpaintings = paintings.filter(b.AND(m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61))
+print goldenpaintings.count()
 
 print "Total number of regions found across all pictures"
 numberOfRegions = results.distinct().sum('number_of_regions')
