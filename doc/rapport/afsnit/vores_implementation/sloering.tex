@@ -25,9 +25,10 @@ m = k$ ikke behøver at være opfyldt.  En foldningsmatrice er en lille
 matrice, som betegner hvor stor en del af billedet, og hvor meget af
 pixels værdierne rund om et punkt, der skal tages med i udregningen for
 den nye, slørede farve. En foldningsmatrice kan ses i figur \ref{Foldning}.
-\begin{figure}[h]
+
+\begin{figure}[]
 	\begin{center}
-		\includegraphics[scale=1,angle=0]{afsnit/vores_implementation/billeder/sloering/convolution}
+		\includegraphics[scale=0.9,angle=0]{afsnit/vores_implementation/billeder/sloering/convolution.png}
 	\end{center}
     \caption[]{En billedmatrice, hvor $(i,j)$ betegner placeringen, og en
     foldningsmatrix, med ni tilfældige tal fra 0 til 9.}
@@ -48,49 +49,38 @@ dette, udregningen af farven på pixel med koordinater $(4,4)$.
     \label{foldning_udregning}
 \end{multline}
 
-I dette eksempel er punktet $(5,5)$ og $(4,4)$ vægtet højere end de
-andre, så farven vil blive sløret i den retning. Dette skyldes, at
-foldningsmatricen er bygget tilfældigt op. I en rigtig foldningsmatrix,
-for sløring, er matricen meget specifikt udvalgt for at give det bedste
-resultat.
+\subsubsection{Simpel sløring}
+Metoden simpel sløring rummer 4 trin:.
+\begin{enumerate}
+	\item{Der udregnes en foldningsmatrice. I dette tilfælde en matrice med kun 1 taler i}
+	\item{Multipliceres foldningsmatrice på billedet for en pixel. Som beskravet overfor}
+	\item{Værdigerne fra multiplikationen sættes ind i billedet}
+	\item{Start fra punkt 2 igen, med næste pixel, indtil alle pixels bliver lavet om i billedet}
+\end{enumerate}
+Resultatet for en simpel sløring med 2 forskellige foldningsmatrice størrelse, kan ses i figur \ref{simple_metode}
 
-\subsubsection*{Simpel sløring}
-I metoden simpel sløring er der 3 steps.
-\begin{itemize}
-	\item{Udregnes en foldningsmatrice.}
-	\item{Multipliceres foldningsmatrice rigtigt på billedet foldning.}
-	\item{Sættes værdigerne fra multiplikationen ind i billedet, som så bliver det nye sløret billedet nå
-alle punkter er omdannet.}
-\end{itemize}
-
-Foldningsmatrice for den simple sløring er en kvadratisk matrice med kun
-tallet 1 i. Resultatet for en simpel sløring kan ses i figur
-\ref{simple_metode}
-
-\subsubsection*{Gaussisk sløring}
-Gaussisk sløring har de samme 3 steps som simpel sløring. Måde Gaussisk
-sløring udregner sin foldningsmatrice, at ved brug af normalfordeling,
-som betegnet med denne formel
+\subsubsection{Gaussisk sløring}
+Metoden "gaussisk sløring" rummer samme 4 trin som simpel sløring, dog
+med en anden foldningsmatrice. Gaussisk sløring udregner sin
+foldningsmatrice, ved hjælp af normalefordeling, Som er defineret i
+formlen \ref{normalfordeling}.
 
 \begin{equation}
 	G(x,y) = \frac{1}{2\pi\sigma^2}e^{-\frac{x^2+y^2}{2\sigma^2}}
+	\label{normalfordeling}
 \end{equation}
 
-Vi sætter $\sigma = 1$ og lader x og y bevæge sig fra -1 til 1, med skridt størrelse
-på 1. Den upscalet afrundet kerne kan se på figur \ref{gauss}.
+I formlen sætter $\sigma = 1$ og lader x og y bevæge sig fra -1 til 1, med skridtstørrelse på 1, Alle værdier i foldningsmatricen bliver oprundet, resultatet kan ses i figur \ref{gauss}.
 
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[scale=0.5,angle=0]{afsnit/vores_implementation/billeder/sloering/gauss}
 	\end{center}
-	\caption[]{En $3~\times{}~3$ foldningsmatrice for gaussisk sløring}
+	\caption[]{En $3~\times{}~3$ foldningsmatrice for gaussiskisk sløring}
 	\label{gauss}
 \end{figure}
 
-Denne foldningsmatrice kan så bruges ved hjælp af foldning til at danne det sløret
-billet, som vi kan se i figur \ref{gaussian_metode}
-
-\subsubsection*{Sløring ved statistisk median}
+\subsubsection{Sløring ved statistisk median}
 Den sidste metode, vi vil nævne, er i grunden meget simpel. Grundidéen
 er at finde den statistiske median i pixelværdierne rundt om en given
 pixel og tildele denne medianværdien. Givet et antal pixels, er det

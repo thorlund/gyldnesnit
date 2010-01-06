@@ -1,16 +1,18 @@
-\subsection*{Trunkerings- og afrundingsproblemer}
-Mange af de metoder, vi bruger til at udregne, det gyldne
-snits position eller størrelsen af en margin, udregnes med brøker. Hvorimod et
-billede opbygges af pixels. Dette gør, at vi bliver nødt til at tage
-approksimationer af udregningerne for at få dem tilbage til et helt tal.
-Men hvor meget af data er gået tabt, og hvor mange af resultaterne kan
-man stole på?
+\textsf{
+Mange af de metoder, vi bruger til at udregne, det gyldne snits position
+eller størrelsen af en margin, udregnes med brøker. Hvorimod et billede
+opbygges af pixels. Dette gør, at vi bliver nødt til at tage
+approksimationer af udregningerne. Vi vil også kommer ind på nogle af de
+fejl som kan opstå i tilblivelse af maleriet}
 
-\subsubsection{Acceptabel afvigelse}
+\subsection{Acceptabel afvigelse}
+\begin{comment}"""
+Som beskravet i afsnit \ref{mange_tal}, udregnes det gyldne snit med mange decimaler. Selv den beste kunstner har et maksimum på hvor præcis han kan male, om det er hans øjne der sætter grandsen eller størrelsen på han pensler eller om han bare ikke maler særlige præcis, så kan han aldrig malle så præcis som vi kan udregne det gyldne snit til. Derfor sætter vi en afvigelse på $0.5 \%$, som maleren vi sat en 
+\end{comment}
 \note{Nogle referanse}Som beskrevet i afsnit \ref{mange_tal}, udregnes
 det gyldne snit med mange decimaler. En kunstner, hvor god han end er,
 har ingen chance for at male så præcist at man kan sige at strøget
-ligger nøjagtigt oven på snittet selv om hans ententioner er at ramme
+ligger nøjagtigt oven på snittet selv om hans intentioner er at ramme
 snittet. Vi kommer derfor til at have en vis uprecis hed på de data vi
 få fra billedet selv. Vi starter med at se på alle de ting, som kan
 skabe en usikkerhed fra malerens side. Man kan gå ud fra at den
@@ -79,7 +81,7 @@ snit, med vær deres Id "snit 0 og 1" som kan ses i figur \ref{Cut2}
 	\label{2Cut}
 \end{figure}
 
-\subsubsection{Heltal i det gyldne snit}
+\subsection{Heltal i det gyldne snit}
 
 I eksemplet med 4000 pixels ovenfor, approksimerer vi antal pixels ved
 at afrunde resultatet $2472.13595 \approx 2472$, se udregning
@@ -103,7 +105,7 @@ afrundingsfacktor som kan forekomme. Hvis billedet har en størrelse på
 på $0.1 \%$. Dette tal bliver adderet til fejlsatsen ovenfor, og giver
 en samlet afvigelse på $2.1\%$.
 
-\subsubsection{Snitratio}
+\subsection{Snitratio}
 End til vider har vi kun arbejder med det gyldne snit, men andre snit i
 billedet kan godt optræde, derfor indføre vi en nu betegnelse
 snitratio, som betegner en procents sats for hvor lang inde i billedet
@@ -111,7 +113,7 @@ snittet befinder sig. Det vil sige at hvis en snitration er på $0.2$. Et
 billedet har $B$ på 4000 vil et snit befinde sig i pixel $4000*0.2 =
 800$.
 
-\subsubsection{Heltal ved udregning af Margin}
+\subsection{Heltal ved udregning af Margin}
 Når vi har 2 forskellige snitratioer, f.eks. $\varPhi$ og $\frac{2}{3}$,
 som ligger meget tæt på hinanden, og vi gerne vil sammenligne hvilken
 regioner der ligger i snitratioernens snit, er det vigtigt at margin for
