@@ -17,7 +17,7 @@ skabe en usikkerhed fra malerens side. Man kan gå ud fra at den
 procentvise afvigelse ikke er særlig stor, da vi ikke har bestræbelser
 på at arbejde på abstrakt malerier, dog har vi sat den procentvise
 afvigelse til 0.5 \%. Det vil sige at en maler med et lærred på 100
-cm,maksimalt vil male $0.5$ cm forkert.
+cm, maksimalt vil male $0.5$ cm forkert.
 
 Når maleren vælger en ramme og et lærred, har vi igen problematikken,
 selv om maleren spicifikt gå efter at bygge maleriet op efter det gyldne
@@ -132,31 +132,29 @@ hinanden.
 	& = & x(0.048633)
 \end{eqnarray}
 
-Vi har nu fundet antal pixels mellem de to snit. Vi vil gerne undgå at
-de to marginens ikke krydser hinanden, så der dividere vi med 2 og
-afrunder værdien.
+Vi har nu fundet antal pixel mellem de to snit. Vi vil gerne undgå at
+de to marginer krydser hinanden, så vi dividere antal pixel mellem de to snit med to og afrunder værdien.
 
 \begin{equation}
 	\left\lfloor \frac{0.048633x}{2}\right\rfloor = \left\lfloor0.024316x \right\rfloor
+	\label{marginstoerlse}
 \end{equation}
 
-Tallet $2.4316$ er altså den minimale procentvise størrelse som vores
-margin må have, nå vi sammen liner det gyldne snit og $\frac{2}{3}$.
-Det betyder også at vi ikke må sammen line snit som ligger særlig
-meget tætter på hinanden, da 0.021 er den minimale procent margin som vi må have.
-$\lfloor 0.024316x \rfloor$ giver os et antal pixels som skildre de to snit. For at vise
-hvor stort marginen egentlige kan være, bruger jeg denne formel på to
-billeder, et som svare til vores mindste billedet, 500 pixels, og et
-som svare til vores største billedet, 4000 pixels. Ved 500 pixels
-bliver resultatet
+Den minimale procentvise størrelse, vores margin må have, når vi
+sammenligner det gyldne snit og $\frac{2}{3}$, er altså $2.4316$ Det
+betyder også, at vi ikke må sammenligne snit som ligger særlig meget
+tætter på hinanden, da $2.1\%$ er den minimale procent margin som vi må
+have. For at vise, hvor stor marginen egentlige kan være, bruger vi formel \ref{marginstoerlse} på to billeder, et, som svarer til vores mindste billede, på
+500 pixels, og et, som svarer til vores største billede, på 4000 pixels. Ved
+500 pixels bliver resultatet.
 
 \begin{equation}
 	 \lfloor 500(0.024316)\rfloor = 12
 \end{equation}
 
-Det er en fint margin, da vores fejl på udregningerne ligger på 2.1 \%,
-som svare til $\lceil 500*0.021 \rceil = 11$ pixels, som er 1 pixels fra vores
-margin
+Det er en fin margin, da vores fejl på udregningerne ligger på 2.1 \%,
+som svarer til $\lceil 500*0.021 \rceil = 11$ pixels. Der er 1 pixel fra vores
+margin.
 
 Ved 4000 pixels giver det.
 
@@ -164,5 +162,5 @@ Ved 4000 pixels giver det.
 	 \left\lfloor 4000(0.024316)\right\rfloor = 97
 \end{equation}
 
-Som også er god nok da $4000*0.021 = 84$ pixels.
+Som også er god nok, da $4000*0.021 = 84$ pixels.
 % vim: set tw=72 spell spelllang=da:
