@@ -47,17 +47,60 @@ eller, hvis ovenstående fejler:
 Dette opretter mappen \texttt{gyldnesnit/} i den aktuelle mappe, hvor
 kildekoden ligger.
 
-\subsection{Initialisering af billeddatabasen}
-Lav om i \texttt{start.py} eller sådan noget.
+\subsection{Indstillinger for en kørsel}
+Programmet startes ved at køre \texttt{start.py} fra mappen
+\texttt{src/} med kommandoen
+\begin{verbatim}
+    # > ./start.py
+\end{verbatim}.
+Programmet vil initialisere hele billeddatabasen første gang det
+startes. Programmet vil derfor også sætte crawleren til WGA igang med at
+hente billeder. Hvis man ikke er interesseret i at hente alle $23,000$
+billeder, kan man oprette en mindre testdatabase, hvor der kun vil blive
+hentet et begrænset antal billeder. Dette kræver at man sætter de to
+følgende variable i \texttt{start.py}.
+\begin{verbatim}
+    #Set this to true if you want to create a personal database
+    testdatabase = True
+    #Set this due to how large you want your testdatabase
+    count = 10
+\end{verbatim}
+Ovenstående vil begrænse crawleren til at hente 10 billeder fra WGA.
+Hele databasen initialiseres stadigvæk med informationerne givet fra
+WGA.
 
-\subsection{Start af en kørsel}
-\subsubsection{Oprettelse af \texttt{environment}}
+Programmet vil efter endt initialisering begynde analysen på databasen.
+Analysemetoden som programmet skal bruge sættes i \texttt{start.py} ved
+kaldet
+\begin{verbatim}
+    settings.setMethod('expanded')
+\end{verbatim}
+hvor \texttt{naive} og \texttt{expanded} er til rådighed. Ved første
+kørsel anbefales det at sætte
+\begin{verbatim}
+    settings.setMethod('naive')
+\end{verbatim}.
 
-\subsubsection{Start}
+Selve eksperimentet som skal køres vælges fra mappen
+\texttt{experiments/}. Vi har eksperimenterne \texttt{golden} og
+\texttt{tenCuts} til rådighed.  \texttt{golden} er meget simpel og
+analyserer kun det gyldne snit.  \texttt{tenCuts} er langt mere
+avanceret og tager lang tid at køre på hvert billede, da denne analyse
+dækker stort set hele billedet. Man kan også lave sine egne
+eksperimenter, ved at se på strukturen af de eksisterende. Eksperimentet
+sættet ved at importere filen som variablen \texttt{environment} i
+\texttt{start.py}. Som standard importeres \texttt{tenCuts}.
+\begin{verbatim}
+    from experiments import tenCuts as environment
+\end{verbatim}
+Det anbefales at ændre dette til \texttt{golden}.
 
 \subsection{Udtrækning af resultater}
 Udtrækning af resultater kræver erfaring med \emph{SQLObject}, SQL
-og/eller Sqlite.
+og/eller Sqlite. Se evt. filen \texttt{src/database/udtraek.py} for
+at se hvordan man bruger \emph{SQLObject} til databaseudtræk. Man også
+blot køre \texttt{udtraek.py} som giver en del information om
+resultaterne.
 
 }
 
