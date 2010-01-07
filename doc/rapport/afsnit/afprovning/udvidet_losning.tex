@@ -8,10 +8,7 @@ hade planlagt på test billeder og om hvordan den virker i praktisk på
 udvalgte malerier.
 }
 \subsection{Afprøvning på testbilleder}
-Vi vil teste om den udvidet løsning virker som vi har beskrevet i
-opgave, vi ser på 4 test billeder. 
-
-Billedet \ref{hus_virker} er et hus
+Vi teste metoden på 4 test billeder. Billedet \ref{hus_virker} er et hus
 hvor snittet og massemidtpunktet næsten ligge oven i hinanden. 
 
 \begin{figure}[h!!]
@@ -36,9 +33,7 @@ med af algoritmen.
 
 Det tredje billedet \ref{udvidet_blob_test} har en region som er meget lille
 og derfor bliver fra sorteret på grund af den størrelse, den stor
-region, bliver taget med at dens massemidtpunkt ligger inden for margin,
-denne figur samt huset ville ikke være blevet taget med i den naive
-løsning XX(skal jeg overhoved nævne det). 
+region, bliver taget med at dens massemidtpunkt ligger inden for margin. 
 
 \begin{figure}[h!!]
 	\begin{center}
@@ -48,10 +43,11 @@ løsning XX(skal jeg overhoved nævne det).
 	\label{udvidet_blob_test}
 \end{figure}
 
-Det fjere billedet \ref{bleksprutte_test} er der en region med som har
+Det fjerre billedet \ref{bleksprutte_test} er der en region med som har
 et massemidtpunkt inde i margin, men som har en skæv fordeling af pixels
 i forhold til snittet og derfor bliver sorteret fra. Ud fra de fire
-observationer, virker den udvidet løsning som vi havde forventet.
+observationer, virker det som om, den udvidet løsning virker efter
+forventningerne.
 
 \begin{figure}[h!!]
 	\begin{center}
@@ -60,10 +56,15 @@ observationer, virker den udvidet løsning som vi havde forventet.
 	\caption[]{Margin er sat meget op, så man kan se at regionen har et massemidtpunkt ind for margin, men da størstedelen af regionens pixels er på højre side, vælger den fra.}
 	\label{bleksprutte_test}
 \end{figure}
+
+Som man kan se af testbillederne vælger den udvidet løsning vid
+forskellige regioner til at ligger i snittet. 
 \clearpage
 
+
 \subsection{Afprøvning på malerier}
-Afprøvningen af den udvidet løsning på malerier fra vores database vil foregå på samme måde som den naive test. Hvor 6 billeder vil bliver fremvist med en forklaring i deres caption på hvad der sker i billedet og hvorfor.
+Afprøvningen af den udvidet løsning på malerier fra vores database,
+foregå på samme måde som den naive test.
 
 \begin{figure}[h!!]
 	\begin{center}
@@ -130,5 +131,5 @@ de tilfælde hvor regions detektoren ikke virker godt, er den udvide
 løsning god til at sorter regioner væk og kommer derfor ikke med særlige
 mange regioner som ikke skulle være der, se figur
 \ref{udvidet_virker_ikke2} og \ref{udvidet_virker_ikke3}. Dog kommer vi
-stadig ud i problemer hvor der kun er regioner som er forkerte med,
-figur \ref{udvidet_virker_ikke1}.
+stadig ud i problemer, hvor der kun er regioner som er forkerte med,
+se figur \ref{udvidet_virker_ikke1}.

@@ -6,12 +6,12 @@
 I dette afsnit vil vi afprøve den generelde region detektor, det vil
 sige hvad der egentlig bliver fundet inden, vores to metoder sortere
 regionerne fra. selve metodes fremgangsmåde er beskravet i sektion
-\ref{section_udtraek}, hvor det sideste skrid nå billedet
+\ref{section_udtraek}, hvor det sideste skrid er nå billedet
 bliver floodfilldet, derfor vil vi forklare afprøvningen af metode ud
 fra billeder som er kommer til dette skridt, hvor tærskelværdierne er
 sat til de fundene tærskelværdier. Den første del vil omhandle test på
 opbygget billeder og den anden del vil omhandle test på udvalgte
-billeder fra vores billedet database.
+malerier fra vores kustdatabase.
 }
 
 \subsection{Afprøvning på test billeder}
@@ -72,6 +72,7 @@ I de 3 figur \ref{GRD_test1_sammen}, \ref{GRD_test1_sammen} og
 \ref{GRD_test1_sammen} er de 3 test billeder afbilledet, de opføre sig
 efter de standarter som vi frem satte i afsnit \ref{section_naiv} og
 virker efter vores forventniger.
+\clearpage
 
 \subsection{Afprøvning på malerier}
 Vi vil afprøve region detektor på 6 udvalte billeder, som vær viser
@@ -95,18 +96,18 @@ vores region detektor virker rigtige godt.
 Det første maleri \ref{GRD_virker1} finder region detektoren 7 store
 regioner og en masse små, metoden finder forskel på de forskellige
 paneler i kaminen og vært tøj stykke på personen i maleriet er blevet
-vær deres region, de små regioner er samlet ved et skift fra et panel
-til et andet og forstyrrer ikke de store region ved at gå i gennem dem,
-man kunne måske have ønsket at den fylde lidt mere af han karpe ud, men
+vær deres region. De små regioner er samlet ved et skift fra et panel
+til et andet og forstyrrer ikke de store region ved at gå i gennem dem.
+Man kunne måske have ønsket at den fylde lidt mere af han karpe ud, men
 eller et meget godt eksempel på hvordan den generelde region detektor
 finde lige det vi vil have den til at finde. 
 
-I maleriet \ref{GRD_virker2} finder vi mange af de samme
-godt ting, drengen i miden af maleriet er helt udfyldt, en sko og et
-håndklæde er også fundet, det er dog vigtigt at ligge mærke til at de
-andre personer i vandet, fylder i et med baggrunden, som normalt vil
-være en dårlig ting, men som ikke gør noget her da, metoden kun ser
-efter regioner i snittet, repræsenteret af den røde linie.
+I maleriet \ref{GRD_virker2} finder vi mange af de samme godt ting,
+drengen i miden af maleriet er helt udfyldt, en sko, drengens bade
+bukser og et håndklæde er også fundet, det er dog vigtigt at ligge mærke
+til at de andre personer i vandet, fylder i et med baggrunden, som
+normalt vil være en dårlig ting, men som ikke gør noget her da, metoden
+kun ser efter regioner i snittet, repræsenteret af den røde linie.
  
 \begin{figure}[!h]
     \centering
@@ -121,7 +122,7 @@ efter regioner i snittet, repræsenteret af den røde linie.
 \end{figure}
 
 I figuren \ref{generelde_region_detektor_virker_nesten} og er der 2
-malerier, hvor vores region detektor ikke virker efter vores ønsker med
+malerier, hvor vores region detektor ikke virker efter vores ønsker, men
 stadig har noget vi kan bruge. 
 
 I maleriet \ref{GRD_virker_nesten1}
@@ -139,8 +140,7 @@ detektor at fange, det tyder på at en støre sløring godt kunne være
 problemløseren få at algoritmen virker på dette maleri. 
 
 Grunden til at lige de her 2 bilder er interessante er at ved ændring på
-tærskelværdier og sløring kunne vores region detektor virker godt XX(her
-skal der billeder hvor det virker), 
+tærskelværdier og sløring kunne vores region detektor virker godt.
 
 \begin{figure}[!h]
     \centering
@@ -151,7 +151,7 @@ skal der billeder hvor det virker),
         \includegraphics[angle=0,width=0.46\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/medium_detalier/mDetalier}
         \label{GRD_virker_ikke1_orginal}}
      \label{generelde_region_detektor_virker_ikke}
-     \caption{}
+     \caption{Maleri af blomster, hvor region detectoren ikke virker}
 \end{figure}
 
 \begin{figure}[!h]
@@ -179,6 +179,5 @@ tærskelværdien i floodfill på bare 1 vil få regiondetektoren til at gå
 fra at finde ingen regioner til at finde en stor, som på billedet, dette
 kan også skyldes at kantdetektionen tilføje en mørk kan rundt om
 regionerne, men da maleriet er mørkt i forvejen hjælper kandetektionen
-ikke. XX(jeg kan ikke helt prolamere dette unden at have nogle bileder
-at bagge det op)
+ikke.
 

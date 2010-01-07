@@ -3,39 +3,38 @@
 %%          med \sffamlily-typen. Denne stil bør også følges her.
 %%
 {\sffamily
-I dette sektion vil vi teste den naive løsning, ved at se om den sortere
+I dette sektion vil vi teste den naive løsning. ved at se om den sortere
 de rigtige regioner væk og om løsningen opføre sig på samme måde som vi
 har håbet på. Det vil vi gøre ved ført at se på nogle fabrikeret test
-billeder få at se om den naive løsning virker efter meningen og bag
-efter vil vi teste på malerierne for at se om den naive løsning kan
+billeder, får at se om den naive løsning virker efter meningen og
+bagefter vil vi teste på malerierne for at se om den naive løsning kan
 bruges i praktisk.
 }
   
 \subsection{Afprøvning på testbilleder}
-Vi vil teste på de samme billeder som var i sideste afsnit samt et nyt
-test billeder som blev brugt i forklaringen af den naive metodes, de 4
+Vi vil teste på de samme testbilleder som i sideste afsnit, samt et nyt
+testbilleder som blev brugt i forklaringen af den naive metodes, de fire
 billeder som vi har valt at test kan se i afsnit \ref{region_detektor} og billedet 
 \ref{naiv_masse_original} hvor en grån kasse rundt om en region, betyder
 at den er valt til at ligge i det gyldne snit af den naive metode. 
 
-Det første billedet \ref{naiv_blob1}, har 5
-regioner og hvor 3 af dem blev fundet af reginon detektoren, vores naive
+Det første billedet \ref{naiv_blob1}, har fem
+regioner og hvor tre af dem blev fundet af reginon detektoren, vores naive
 løsning har så sorteret baggrundens regionen og den øverste region i
-snitte vær, da de begge krydser marginer og derfor ikke overholder regel
-\ref{naiv_regler} c. 
+snitte vær, da de begge krydser marginer og derfor ikke overholder definition
+\ref{} . 
 
 \begin{figure}[!h]
 	\begin{center}
         \includegraphics[angle=0,width=0.55\textwidth]{afsnit/afprovning/billeder/naive_losning/naiv_blob1.png}
 	\end{center}       
-	\caption{Naive algoritme finder 1 ud af 5 regioner}	
+	\caption{Naive algoritme finder en ud af fem regioner}	
 	\label{naiv_blob1}
 \end{figure}
 
-Det andet billedet \ref{naiv_blob2}, er alle blevet
-sorteret vær, også den lille region som ligger lige i miden af snittet.
-Grunde til det er at den er for lille og derfor ikke overholder regel
-\ref{naiv_regler} a. 
+Det andet billedet \ref{naiv_blob2}, er alle blevet sorteret vær, også
+den lille, da den er for lille, derfor ikke overholder definition
+\ref{def_interessant} b. 
 
 \begin{figure}[!h]
 	\begin{center}
@@ -59,10 +58,9 @@ himlen fra, da den krydser margin lidt, men tager jorden med.
 \clearpage
 
 \subsection{Afprøvning på malerier}
-For at se på hvordan den naive metode virker på malerier afprøver vi den
-på 6 malerier, først på 3 malerier, hvor regions detektoren virker
+Vi afprøver den naive algoritme på 6 malerier, først på 3 malerier, hvor regions detektoren virker
 efter vores hensigt og så på 3 malerier, hvor region detektoren ikke
-virker. Beskrivelsen af hvad der sker i billedet vil stå i caption
+virker. Beskrivelsen af hvad der sker i billedet vil står i caption
 
 
 \begin{figure}[h!!]
@@ -77,7 +75,7 @@ virker. Beskrivelsen af hvad der sker i billedet vil stå i caption
 	\begin{center}
 		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/naive_losning/naiv_mfarver_mdetaljer.png}
 	\end{center}
-	\caption[]{Bukserne og skoene er tager med af den naive løsning, men drengen er sorteret vær da har krydser snittet}
+	\caption[]{Bukserne og skoene er tager med af den naive løsning, men drengen er sorteret væk da har krydser snittet}
 	\label{naiv_mfarver_mdetaljer}
 \end{figure}
 
@@ -101,7 +99,7 @@ virker. Beskrivelsen af hvad der sker i billedet vil stå i caption
 	\begin{center}
 		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/naive_losning/naiv_virker_ikke2.png}
 	\end{center}
-	\caption[]{3 regioner bliver godtaget, selv om de ikke er særlige intresante ««(er det ikke en farlige ting at sige )}
+	\caption[]{3 regioner bliver godtaget, selv om de ikke er særlige intresante }
 	\label{naiv_virker_ikke2}
 \end{figure}
 
@@ -114,7 +112,7 @@ virker. Beskrivelsen af hvad der sker i billedet vil stå i caption
 \end{figure}
 \clearpage
 
-\subsection{konkulution}
+\subsection{Konkulution}
 Det virker som om den naive løsning virker efter vores entationer dog
 med nogle få falske positive, hvis region detektoren virker på
 malerierne, dog fejler den på malerier hvor region detektoren fejler, og
