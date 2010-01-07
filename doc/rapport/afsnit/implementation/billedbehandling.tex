@@ -251,13 +251,13 @@ repræsenteres.
 \end{figure}
 
 \subsubsection{Repræsentation af snit i billedet}
-Det skal nævnes, at metoderne i dette afsnit er ikke
+Metoderne i dette afsnit er ikke
 specifikke for snitratioen $\varPhi$, men kan overføres til ethvert
 andet snit i billedet, med en arbitrær snitratio.
 
-Snit i et billede bliver imidlertid --- meget intuitivt --- blot
-repræsenteret ved et linjestykke. Vi præsenterer nu datastrukturen
-\textbf{Line}, som består af et linjestykkes to endepunkter.
+Snit i et billede bliver repræsenteret ved et linjestykke. Vi
+præsenterer nu datastrukturen \textbf{Line}, som består af et
+linjestykkes to endepunkter.
 \begin{multline}
     \textbf{class~} \textrm{Line} = \{ \\
     \shoveleft{\qquad\textbf{cvPoint} : \textit{p1}} \\
@@ -265,17 +265,13 @@ repræsenteret ved et linjestykke. Vi præsenterer nu datastrukturen
     \shoveleft{\}}\shoveright{}
     \label{Line_class}
 \end{multline}
-Strukturen er simpel, men fleksibel, og lader mulighederne stå åbne,
-for, i en anden implementation, at betragte andet end blot vand- og
-lodrette snit i billedet.
 
 \subsubsection{Præparation af billedet}
-Det første skridt i præparation af billedet, inden segmentering og
-udtrækning af regioner, er at detektere kanterne på objekter i billedet.
-Metoden skal køres på et sort/hvid-billede, så vi starter med at lave en
-sort/hvid kopi af det originale billede. Inden den egentlige
-kantdetektion, sløres det sort/hvide billede, således at vi kun
-betragter kanter, som fremstår tydeligt i billedet.
+Det første skridt i præparation af billedet, er at detektere kanterne på
+objekter i billedet.  Kanter detekteres i et sort/hvid-billede, så vi
+starter med at lave en sort/hvid kopi af det originale billede. Inden
+den egentlige kantdetektion, sløres det sort/hvide billede, således at
+vi kun betragter kanter, som fremstår tydeligt i billedet.
 
 I andet skridt af fremgangsmåden sløres det originale billede. Både i
 sløringingen inden kantdetektion og denne bruges simpel sløring, som er
@@ -346,7 +342,7 @@ def Preprocessing(original, thresholds):
 % Vi bemærker at ikke hele regionen bliver fyldt ud
 % Vi maler to gange, men det er en fejl
 % Vi retter koden
-Vi beskriver nu metoden, til at trække regioner ud af et prærareret
+Vi beskriver nu metoden, til at trække regioner ud af et præpareret
 billede. Metoden bygger videre på beskrivelsen givet i
 \ref{sammensaetning_af_metoder}, hvor floodfill-metoden bruges på hver
 pixel langs et snit. I praksis er denne fremgangsmåde meget langsom,
@@ -355,7 +351,7 @@ bruger floodfill-metoden på de nødvendige pixels.
 
 Vi bruger de detekterede kanter, til at hjælpe med at segmentere
 billedet, da vi vil bruge floodfill med en ny farve når vi passerer en
-kant. Vi trækker derfor de punkter ud hvor en kant krydser snittet ved
+kant. Vi trækker derfor de punkter ud, hvor en kant krydser snittet, ved
 metoden vist i kodeboks \ref{pseudo_GetPoints}.
 
 \begin{lstlisting}[caption={Pseudokode for metode til at finde punkter,
@@ -405,24 +401,26 @@ vist i figur \ref{impUdtraek_kantpunkter}.
     \label{impUdtraek_kantpunkter}
 \end{figure}
 
-Vi vil nu bruge floodfill således at hvert linjestykke bliver tildelt
-hver sin farve. Naivt ville man bruge floodfill på midten af hvert
-linjestykke, men dette er ikke holdbart, da vi ikke kan være sikre på,
-at hele linjestykket farves. Figur \ref{floodfill_taerskel_problem}
-viser netop dette, hvor det ikke er ligemeget \emph{hvor} på
-linjestykket man bruger floodfill, når vi har med arbitrære billeder at
-gøre. Vi vil derfor gå langs snittet og bruge floodfill på alle pixels,
-som endnu ikke er blevet farvet af floodfill.  Hver gang vi bruger
-floodfill returneres en instans af strukturen \textbf{cvConnectedComp}.
-Når dette gøres, skal vi også være sikre på, at floodfill returnerer
-hele den fundne region. Den returnerede \textbf{cvConnectedComp} er den
-\emph{senest farvede} region. I figur
-\ref{floodfill_return_entire_region} vises en situation, hvor vi ikke
-har farvet hele linjestykket, og når vi udvider den fundne region,
-returnerer floodfill kun et undersæt af alle pixels i regionen. Vi skal
-derfor bruge floodfill mere end én gang, for at sikre os, at hele
-regionen returneres. Vi har dertil udviklet pseudokoden i kodeboks
-\ref{pseudo_udtraek_org}.
+Vi vil nu bruge floodfill således, at hvert linjestykke bliver tildelt
+en tilfældig farve, som endnu ikke er blevet givet til et andet
+linjestykke, og maler hvert linjestykke med denne. Naivt ville man bruge
+floodfill på midten af hvert linjestykke, men dette er ikke holdbart, da
+vi ikke kan være sikre på, at hele linjestykket farves. Figur
+\ref{floodfill_taerskel_problem} viser, at det ikke er
+ligemeget \emph{hvor} på linjestykket man bruger floodfill, når vi har
+med arbitrære billeder at gøre. Vi vil derfor gå langs snittet og bruge
+floodfill på alle pixels, som endnu ikke er blevet farvet af floodfill.
+Hver gang vi bruger floodfill, returneres en instans af strukturen
+\textbf{cvConnectedComp}.
+
+Vi skal også være sikre på, at floodfill returnerer hele den fundne
+region. Den returnerede \textbf{cvConnectedComp} er den \emph{senest
+farvede} region. I figur \ref{floodfill_return_entire_region} vises en
+situation, hvor vi ikke har farvet hele linjestykket, og når vi udvider
+den fundne region, returnerer floodfill kun et undersæt af alle pixels i
+regionen. Vi skal derfor bruge floodfill mere end én gang, for at sikre
+os, at hele regionen returneres. Vi har dertil udviklet pseudokoden i
+kodeboks \ref{pseudo_udtraek_org}.
 
 \begin{figure}[h]
     \setlength\fboxsep{0pt}
@@ -489,67 +487,11 @@ også, at der \emph{altid} bliver returneret en region for hvert segment.
 Dette er ikke ønskværdigt, specielt ikke hvis vi er sprunget over alle
 pixels på et linjestykke. Dette sker, netop når hele regionen allerede
 er blevet fyldt ud. I praksis betyder dette, at der kan blive fundet
-flere regioner i et billede end der reelt er. Vi viser problemet ved en
-håndkørsel af fremgangsmåden på billedet i figur \ref{region_init} hvor
-vi traverserer snittet vist i figur \ref{impUdtraek_kantpunkter}.
-Snittet ligger således, at vi rammer alle tre sorte kasser.
+flere regioner i et billede end der reelt er. I bilag \ref{appendix_bug}
+er givet en håndkørsel af den fejlende kode.
 
-\begin{figure}[!p]
-    \setlength\fboxsep{0pt}
-    \setlength\fboxrule{0.5pt}
-    \centering
-    \subfloat[Original]{
-        \label{region_init}
-        \fbox{\includegraphics[width=0.4\textwidth]{afsnit/implementation/billeder/billedbehandling/binary_init}}}\hspace{1em}
-    \subfloat[1. iteration]{
-        \label{region1}
-        \fbox{\includegraphics[width=0.4\textwidth]{afsnit/implementation/billeder/billedbehandling/binary_s1}}}\\
-    \subfloat[2. iteration]{
-        \label{region2}
-        \fbox{\includegraphics[width=0.4\textwidth]{afsnit/implementation/billeder/billedbehandling/binary_s2}}}\hspace{1em}
-    \subfloat[3. iteration]{
-        \label{region3}
-        \fbox{\includegraphics[width=0.4\textwidth]{afsnit/implementation/billeder/billedbehandling/binary_s3}}}\\
-    \subfloat[4. iteration]{
-        \label{region4}
-        \fbox{\includegraphics[width=0.4\textwidth]{afsnit/implementation/billeder/billedbehandling/binary_s4}}}\hspace{1em}
-    \subfloat[5. iteration]{
-        \label{region5}
-        \fbox{\includegraphics[width=0.4\textwidth]{afsnit/implementation/billeder/billedbehandling/binary_s5}}}\\
-    \subfloat[6. iteration]{
-        \label{region6}
-        \fbox{\includegraphics[width=0.4\textwidth]{afsnit/implementation/billeder/billedbehandling/binary_s6}}}\hspace{1em}
-    \subfloat[7. iteration]{
-        \label{region7}
-        \fbox{\includegraphics[width=0.4\textwidth]{afsnit/implementation/billeder/billedbehandling/binary_s7}}}
-        \caption[]{Iterationerne for kodeboks \ref{pseudo_udtraek_org}
-        ved snittet vist i figur \ref{impUdtraek_kantpunkter}}
-    \label{region_extract}
-\end{figure}
-\begin{enumerate}
-    \item Linjestykket $Ae_1$ bliver malet rødt. Hele den hvide baggrund
-        males rød og denne region returneres.
-    \item Linjestykket $e_1e_2$ males. Den første kasse fra venstre
-        bliver malet grøn. Denne region returneres.
-    \item Linjestykket $e_2e_3$ males blåt, men dette er den samme region som
-        fundet i første iteration. Der returneres alligevel en ny
-        region.
-    \item Linjestykket $e_3e_4$ males lyseblåt og udgøres af den
-        midterste kasse, der returneres som en ny region.
-    \item Linjestykket $e_4e_5$ bliver malet og endnu engang findes en
-        region som vi allerede har fundet.
-    \item Linjestykket $e_5e_6$ males orange og vi finder den sidste
-        kasse.
-    \item Linjestykket $e_6B$ males lilla og vi returnerer igen en
-        allerede fundet region.
-\end{enumerate}
-
-Vi ender altså med at have returneret syv regioner, ligesom antallet af
-linjestykker, men når vi kigger på resultatet, i figur \ref{region7}, er
-der kun fire forskellige farver. Vi returnerer den samme region, den som
-i originalen var hvid, i alt fire gange.  Fejlen i linje 17 har
-eksisteret selv under vores kørte eksperiment i afsnit
-\ref{section_naiv_koersel}.  Vi har fjernet duplikaterne på
+Fejlen i linje 17 har eksisteret selv under vores kørte eksperiment i
+afsnit \ref{section_naiv_koersel}.  Vi har fjernet duplikaterne på
 databaseniveau, men metoden er senere blevet rettet til at have den
 korrekte opførsel. Den reviderede metode er vist i kodeboks
 \ref{pseudo_udtraek_rev}.
@@ -672,17 +614,17 @@ def NaiveExtraction(original):
 
 \subsection{Svagheder\label{subsec_svagheder}}
 Den endelige metode, for udtrækning af regioner, med hensyn til et givet
-snit i billedet, har nogle svagheder, som bør nævnes. Den første er
-allerede nævnt i den foregående sætning: Metoden trækker kun regioner ud
-\emph{med hensyn} til et snit. Dette betyder, at kun regioner, som rører
-margin eller selve snittet, bliver trukket ud. Foregående skal tages
-helt bogstaveligt, i den forstand, at vi \emph{skal} have, at en region
-har en pixel enten på det nedre margin, det øvre margin eller på selve
-snittet, for at blive trukket ud. Vi kan altså godt have interessante
-regioner, som faktisk har mindst én kant af sit begrænsende rektangel
-inden for margin, som ikke bliver trukket ud. Et eksempel er vist i
-figur \ref{respect_to_cut}, hvor den sorte region ikke vil blive trukket
-ud, selvom den har to kanter inden for margin.
+snit i billedet, har nogle svagheder. Den første er allerede nævnt:
+Metoden trækker kun regioner ud \emph{med hensyn} til et snit. Dette
+betyder, at kun regioner, som rører margin eller selve snittet, bliver
+trukket ud. Foregående skal tages helt bogstaveligt, i den forstand, at
+vi \emph{skal} have, at en region har en pixel enten på det nedre
+margin, det øvre margin eller på selve snittet, for at blive trukket ud.
+Vi kan altså godt have interessante regioner, som faktisk har mindst én
+kant af sit begrænsende rektangel inden for margin, som ikke bliver
+trukket ud. Et eksempel er vist i figur \ref{respect_to_cut}, hvor den
+sorte region ikke vil blive trukket ud, selvom den har to kanter inden
+for margin.
 
 \begin{figure}[h]
     \setlength\fboxsep{0pt}
@@ -698,23 +640,21 @@ ud, selvom den har to kanter inden for margin.
 
 \subsubsection{Valg af tilfældige RGB-værdier}
 Man skal endvidere være opmærksom på, at hver gang vi markerer en ny
-region, vælges en tilfældig farve til denne.  Vi kan, i vores valg af
+region, tildeles denne en tilfældig farve.  Vi kan, i vores valg af
 farve, være uheldig og vælge en, som bliver brugt i det originale
 billede. Når vi kalder \texttt{cvFloodFill} igen, for at være sikre, at
 hele regionen bliver returneret, kan vi smelte to regioner sammen, som
 egentlig ikke burde hænge sammen. I figur \ref{floodfill_colors} er
-denne situation vist på det prærarerede billede fra figur \ref{bathers}.
-I samme forbindelse skal vi være opmærksomme på, at vi ligeledes kan
-være uheldige, at støde på en pixel, som har en farve lig med en
-allerede farvet region. I dette tilfælde, vil denne pixel blive anset
-som værende del af en eksisterende region, hvilket resulterer i at vi
-ikke bruger \texttt{cvFloodFill} på denne. Vi kan dog håbe, at denne
-pixel bliver inkluderet i den efterfølgende iteration --- hvis den næste
-pixels farve, da ikke er lig en allerede udvalgt regions, og denne
-ligger inden for den tilladte afvigelse, for \texttt{cvFloodFill}.  Vi
-vælger aldrig, at farve en region med en farve som allerede er brugt til
-en region, men vi kan også her være uheldige og vælge en farve, som
-ligger inden for floodfill-metodens tilladte afvigelse.
+denne situation vist på det præparerede billede fra figur \ref{bathers}.
+Ligeledes kan vi være uheldige, at støde på en pixel, som har en farve
+lig med en allerede farvet region. I dette tilfælde, vil denne pixel
+blive anset som værende del af en eksisterende region, hvilket
+resulterer i at vi ikke bruger \texttt{cvFloodFill} på denne. Vi kan dog
+håbe, at denne pixel bliver inkluderet i den efterfølgende iteration.
+Vi vælger aldrig, at farve en region med en farve, som allerede er brugt
+til en anden region, men vi kan være uheldige og vælge en farve, som
+ligger inden for floodfill-metodens tilladte afvigelse, således at to
+regioner smeltes sammen.
 
 \begin{figure}[h]
     \setlength\fboxsep{0pt}
@@ -756,7 +696,7 @@ De sorte cirkler markerer dér, hvor vi har fundet kanter, som krydser
 snittet. Vi har altså fem segmenter på snittet. På det længste segment,
 ser vi, at den mørkeblå region er blevet afbrudt af en tidligere fundet
 region. Den mørkeblå region er således ikke sammenhængende. Metoden
-returnerer kun den nederste mørkeblå region, da vi ikke kan få forbundet
+returnerer kun den nederste mørkeblå region, da vi ikke kan forbinde
 de to mørkeblå regioner. Vi mister derfor informationen om at der
 faktisk befinder sig en region i midten af billedet.
 
@@ -784,18 +724,19 @@ derfor støde på problemer med mørke malerier eller lokalt i mørke
 områder af et billede. Vi kan også være uheldige, at komme til at
 forbinde to regioner, ved at markere kanterne med sort.
 
-På grund af, at kanterne kun males en anden farve, kan vi, ved
-floodfill-metoden, komme til at male kanter, som har samme retning som
-vi bevæger os i. Dvs, at lodrette kanter kan blive malet ved vertikale
-snit og omvendt kan vandrette kanter risikere at blive malet ved
-horisontale snit.
+På grund af, at kanterne fremhæves ved at male i billedet, kan vi, ved
+floodfill-metoden, komme til at male kanter, som har samme retning, som
+det snit vi betragter. Dvs, at lodrette kanter kan blive malet ved
+vertikale snit og omvendt kan vandrette kanter risikere at blive malet
+ved horisontale snit.
 
 \subsection{Andre tilgange og forbedringer}
 Dette afsnit vil kort nævne andre fremgangsmåder, vi har prøvet, for at
 trække regioner ud af et billede. Vi har tidligt i udviklingen af
 programmet, eksperimenteret både med Octave og Matlab. Til at starte
 med, har vi brugt disse sprog til at komme problemstillingen nærmere,
-og udvikle naive implementationer af enkelte algoritmer.
+og udvikle naive implementationer af enkelte algoritmer. Vi ser nu på
+hvad der kan gøres for at forbedre udtrækningen af regioner.
 
 \subsubsection{Udtrækning af alle regioner}
 At vi kan have regioner som ikke trækkes ud af billedet, som i figur
@@ -828,7 +769,7 @@ resultaterne skalleret op, så de passede til originalbilledet. Vi mister
 også meget præcision, når vi bruger et nedskaleret billede til at finde
 regioner i.
 
-\subsubsection{Bedre fremhævelse af kanter}
+
 I præparationen af billedet, vil vi gerne have, at farverne i billedet
 bliver ensartede, men vi ønsker også at bibeholde kanterne. Vi forsøgte
 at bruge en metode i \emph{OpenCV}, der hedder
@@ -842,6 +783,8 @@ lavede en hurtig afprøvning, hvor resultatet fra denne metode blev
 analyseret, men på basis at det endelige resultat, vurderede vi, at vi
 godt kunne nøjes med at fremhæve kanterne i billedet efter en simpel
 sløring.
+
+\subsubsection{Bedre fremhævelse af kanter}
 
 \emph{OpenCV} gør det faktisk muligt, at bruge en maske, så man kan
 kalde \texttt{cvFloodFill} med et kantdetekteret billede, således at man

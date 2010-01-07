@@ -1,17 +1,15 @@
 {
-{\sffamily Vi præsenterer to udvidelser til den naive algoritme som
-afgør, om et billede har interessante regioner i det gyldne snit.  Som
-beskrevet i \ref{section_naiv}, har den naive fremgangsmåde nogle
-ulemper, som vi gerne vil forsøge at reducere. Det bør bemærkes, at vi
+{\sffamily Vi præsenterer to udvidede fremgangsmåder til at afgøre, om
+et billede har interessante regioner i det gyldne snit. Bemærk, at vi
 ikke vil forbedre metoden som trækker regioner ud af et billede, eller
 ændre på definition af en interessant region. Vi forbedrer udelukkende
 metoden, der skal afgøre, om en interessant region er placeret i det
 gyldne snit, og i det følgende præsenteres to metoder til dette formål.
 Den første metode, bygger videre på den naive algoritme, hvor den
-ideelle placering i det gyldne snit redefineres. Den anden metode, vi
-præsenterer, tager afstand fra den binære klassifikation og søger i
-stedet at tildele interessante regioner en værdi, der angiver, i hvor
-høj grad de ligger i det gyldne snit.
+ideelle placering i det gyldne snit redefineres. Den anden metode tager
+afstand fra den binære klassifikation, og søger i stedet at tildele
+interessante regioner en værdi, der angiver, i hvor høj grad de ligger i
+det gyldne snit.
 
 Vi antager i det følgende, at vi har perfekt udtrækning af regioner i et
 maleri, og at den digitale gengivelse af maleriet således bliver

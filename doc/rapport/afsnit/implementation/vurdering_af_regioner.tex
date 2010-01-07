@@ -1,15 +1,14 @@
 {
 {\sffamily Vi vender nu opmærksomheden mod selve implementationen af de
-metoder, som afgør, hvorvidt en udtrukket regionen kan siges at være
-interessant, samt hvordan vi har implementeret den naive fremgangsmåde,
-som bedømmer, om en region ligger i det gyldne snit. Alle metoder
-vedrørende vurdering af regioner er implementeret i filen
-\texttt{regionSelector.py} i mappen \texttt{lib/}.  Vi har igen, at
-metoderne ikke er specifikke for det gyldne snit, men kan anvendes på
-ethvert snit i billedet. Sidst i afsnittet viser vi, hvordan vi har
-implementeret den udvidede vurdering, hvor regioner bedømmes ud fra
-deres massemidtpunkt og udstrækning. Vi starter med at se på en fælles
-datastruktur, som bruges, når regioner bliver vurderet.
+metoder, som afgør, hvorvidt en udtrukket regionen er interessant, samt
+hvordan vi har implementeret den naive fremgangsmåde, som bedømmer, om
+en region ligger i det gyldne snit. Alle metoder vedrørende vurdering af
+regioner er implementeret i filen \texttt{regionSelector.py} i mappen
+\texttt{lib/}.  Vi har igen, at metoderne ikke er specifikke for det
+gyldne snit, men kan anvendes på ethvert snit i billedet. Sidst i
+afsnittet viser vi, hvordan vi har implementeret den udvidede vurdering.
+Vi starter med at se på en fælles datastruktur, som bruges, når regioner
+bliver vurderet.
 }
 
 \subsection{Datastruktur til betingelser}
@@ -30,29 +29,21 @@ ses herunder i \eqref{Constraints_class}.
     \label{Constraints_class}
 \end{multline}
 Variablene \texttt{minSize} og \texttt{minMass} relaterer sig kun til
-klassificering af interessante regioner, mens \texttt{coordinate} og
-\texttt{acceptRange} hører til klassificering af regioner, liggende i
-snittet. De enkelte variable vil, i det følgende, blive forklaret
-nærmere, når det er relevant.
+klassificering af \emph{interessante regioner}, mens \texttt{coordinate}
+og \texttt{acceptRange} hører til klassificering af regioner,
+\emph{liggende i snittet}. De enkelte variable vil, i det følgende,
+blive forklaret nærmere, når det er relevant.
 
 \subsection{Interessante regioner}
-I afsnit \ref{section_naiv}, blev det defineret, at for at en region,
-kan betegnes som værende \textbf{interessant}, skal den
-\begin{enumerate}
-        \renewcommand{\labelenumi}{(\alph{enumi})}
-    \item have et areal større end en tærskelværdi, der sættes i
-        forhold til billedets størrelse
-    \item have en masse større end en tærskelværdi, der ligeledes,
-        sættes i forhold til billedets størrelse.
-\end{enumerate}
-Bemærk, at vurderingen af interessante regioner, ikke har noget at gøre
-med hverken snitratio eller margin. Vi undersøger udelukkende de
-udtrukne regioners areal og masse. Regioner bliver vurderet, umiddelbart
-efter de er blevet trukket ud, så vi har regionerne til rådighed som en
-instans af $\angles{CutRegions}$. Vi definerer nu to metoder; én til at
-kontrollere en regions størrelse og én til at kontrollere dens masse. Vi
-kalder disse \texttt{checkSize} og \texttt{checkMass}. De kan ses i
-kodeboks \ref{pseudo_size_mass}.
+Til at afgøre om udtrukket region er interessant, bruges definition
+\ref{def_interessant}. Bemærk, at vurderingen af interessante regioner,
+ikke har noget at gøre med hverken snitratio eller margin. Vi undersøger
+udelukkende de udtrukne regioners areal og masse. Regioner bliver
+vurderet, umiddelbart efter de er blevet trukket ud, så vi har
+regionerne til rådighed, som en instans af $\angles{CutRegions}$. Vi
+definerer nu to metoder; én til at kontrollere en regions størrelse og
+én til at kontrollere dens masse. Vi kalder disse \texttt{checkSize} og
+\texttt{checkMass}. De kan ses i kodeboks \ref{pseudo_size_mass}.
 
 \begin{lstlisting}[caption={Metoder til at konstollere en regions
     størrelse og masse.},captionpos=b,label={pseudo_size_mass},
@@ -70,11 +61,11 @@ def checkMass(component, constraints):
     return mass >= constraints.minMass
 \end{lstlisting}
 
-Med metoderne i kodeboks \ref{pseudo_size_mass}, returnerer begge en
-sandhedsværdi for, hvorvidt en region lever op til betingelserne, for en
+Metoderne i kodeboks \ref{pseudo_size_mass}, returnerer begge en
+sandhedsværdi, for hvorvidt en region lever op til betingelserne, for en
 interessant region. Vi vil imidlertid gerne kontrollere hver enkelt
-region, så vi konstruere en ny metode, som returnerer en \emph{dict} med
-kun de interessante regioner.  Metoden, kaldet
+region, så vi konstruerer en ny metode, som returnerer en \emph{dict}
+kun med de interessante regioner.  Metoden, kaldet
 \texttt{GetInterestingRegions}, ses i kodeboks
 \ref{pseudo_GetInterestingRegions}. Den tager, som argument, den instans
 af $\angles{CutRegions}$, som returneres fra \texttt{ExtractRegions}, se
@@ -120,33 +111,30 @@ med regionen masse direkte.
 
 \clearpage
 \subsection{Naiv vurdering af regioner}
-Vi vil nu se på, hvordan den naive fremgangsmåde, givet i kapitel
-\ref{chap_detektion}, vurderer hvorvidt en region, ligger i det gyldne
-snit. Da det eneste krav er, at en region skal have en kant, af dens
-begrænsende rektangel, inden for margin, vil vi først give en forklaring
-på, hvordan dette margin bliver repræsenteret.
+Vi vil nu se på, hvordan den naive fremgangsmåde vurderer hvorvidt en
+region, ligger i det gyldne snit. Definition \ref{def_naiv} siger, at en
+region mindst skal have én kant inden for margin, så vi vil først give
+en forklaring på, hvordan dette margin bliver repræsenteret.
 
 \subsubsection{Udregning af margin\label{subsec_margin_udregning}}
-Som nævnt, både i kapitel \ref{chap_detektion} og
-\ref{chap_afproevning}, bruges en procentsats, til at angive vores
-margin. Denne procentsats vil, hvis vi kun undersøger ét snit, blive sat
-til $2.4\%$ af billedets højde eller bredde, alt efter hvilken
-orientering det aktuelle snit har.  Vi har implementeret fastsættelsen
-af denne procentsats således, at \emph{hvis} man ønsker at sammenligne
-to snit, som ligger tættere på hinanden, end det gyldne snit og to
-tredjedele, så findes den procentsats der gør, at disse snits margin
-ikke overlapper. I praksis gives en liste med snitratioer, der ønskes
-undersøgt, og fra denne liste, findes den mindste differens mellem
-ratioerne. Den mindste differens mellem snitratioer, bruges da, som
-procentsats for alle snit i analysen. Hvis den mindste differens, mellem
-snitrationerne, er større end $2.4\%$, sættes procentsatsen for margin
-til $2.4\%$.
+Størrelsen på margin er givet ved en procentsats $\Delta$.  Hvis vi kun
+undersøger ét snit, bliver $\Delta$ sat til $2.4\%$ af billedets højde
+eller bredde, alt efter hvilken orientering det aktuelle snit har.  Vi
+har implementeret fastsættelsen af $\Delta$ således, at \emph{hvis} man
+ønsker at sammenligne to snit, som ligger tættere på hinanden, end det
+gyldne snit og to tredjedele, så findes den værdi af $\Delta$, der gør,
+at disse snits margin ikke overlapper. I praksis gives en liste med
+snitratioer, der ønskes undersøgt, og fra denne liste, findes den
+mindste differens mellem ratioerne. Den mindste differens mellem
+snitratioer, bruges da, som $\Delta$ for alle snit i analysen. Hvis den
+mindste differens, mellem snitrationerne, er større end $2.4\%$, sættes
+$\Delta$ til $2.4\%$.
 
 Når vi skal vurdere regioner med hensyn til vores margin, får vi brug
 for den eksakte pixelstørrelse på margin. I filen
 \texttt{marginCalculator.py} i mappen \texttt{lib/} er der implementeret
 metoder til dette. Her bruges metoden \texttt{getPixels}, som, givet et
-billede, et snit og en procentsats for margin, returnerer afstanden fra
+billede, et snit og $\Delta$, returnerer afstanden fra
 snittet til margin i pixels, som vi også skriver som $\delta$. I
 \texttt{marginCalculator.py} finder vi også den mindste differens mellem
 snitratioer, ved metoden \texttt{getPercentage}.
@@ -183,28 +171,26 @@ snitratioer, ved metoden \texttt{getPercentage}.
     margin repræsenteres kun ved de tilladte $x$-værdier.}
     \label{margin_koordinatsystem}
 \end{figure}
-Når vi skal afgøre, om en region ligger inden for vores margin, kan vi
-udnytte, at vi enten betragter et vertikalt eller horisontalt snit.  Når
-vi har et vertikalt snit, behøver vi kun at betragte $x$-værdier, da
+Vi udnytter, at vi enten betragter et vertikalt eller horisontalt snit.
+Når vi har et vertikalt snit, behøver vi kun at betragte $x$-værdier, da
 $y$-værdien ikke influerer på det vertikale snit. Omvendt med
 horisontale snit, behøver vi kun at betragte $y$-værdier, da
 $x$-værdierne, i denne situation, ikke har betydning for snittet.
 Tilfældet, for det vertikale snit, er vist i figur
 \ref{margin_koordinatsystem}.
 
-Ovenstående egenskab gør, at vi nu kan oprette et sæt, bestående af
-netop kun de koordinater, som ligger inden for margin. Hvis vi betragter
-et vertikalt snit, kan vi i Python oprette sættet af accepterende
-$x$-værdier, ved at bruge strukturen \texttt{range}. F.eks. vil
-\texttt{range(1, 4)} returnere listen $\{1,2,3\}$.  Vores implementation
-bruger endvidere variablen \texttt{coordinate} i \textbf{Constraints},
-som, lidt misvisende, indikerer om snittet vi undersøger, er vertikalt
-eller horisontalt. Er snittet vertikalt, sættes \texttt{coordinate} til
-$0$, og $1$ for et horisontalt snit. For ethvert snit, kan vi da finde
-de accepterende $x$-værdier, som vist i kodeboks
-\ref{pseudo_acceptRange}. Variablen \texttt{margin}, der tages som
-argument, er den pixelstørrelse, der er returnet fra metoden
-\texttt{getPixels} fra \texttt{marginCalculator.py}.
+Ovenstående gør, at vi nu kan oprette et sæt, bestående af de
+koordinater, som ligger inden for margin. Hvis vi betragter et vertikalt
+snit, kan vi i Python oprette sættet af accepterende $x$-værdier, ved at
+bruge \texttt{range}. Vores implementation bruger endvidere variablen
+\texttt{coordinate} i \textbf{Constraints}, som, lidt misvisende,
+indikerer om snittet vi undersøger, er vertikalt eller horisontalt. Er
+snittet vertikalt, sættes \texttt{coordinate} til \texttt{0}, og
+\texttt{1} for et horisontalt snit. For ethvert snit, kan vi da finde de
+accepterende $x$-værdier, som vist i kodeboks \ref{pseudo_acceptRange}.
+Variablen \texttt{margin}, der tages som argument, er den
+pixelstørrelse, der er returnet fra metoden \texttt{getPixels} fra
+\texttt{marginCalculator.py}.
 
 \begin{lstlisting}[caption={Metode som genererer sættet af accepterende
     koordinater.},captionpos=b,label={pseudo_acceptRange},
@@ -243,17 +229,17 @@ def checkPosition(component, constraints):
 
     return lowerInRange or upperInRange
 \end{lstlisting}
-Når vi har fundet værdierne i \texttt{acceptRange}, og dermed også
-fastfast \texttt{coordinate}, ved vi hvilken orientering snittet har og
-vi kan afgøre, om en interessant region, ligger placeret i snittet. Vi
-har allerede udnyttet, at vi kun behøver at betragte én koordinat, og
-det er derfor ligetil, at kontrollere, om en regions begrænsende
-rektangel, har en kant inden for margin. Regionen er repræsenteret som
-en instans af \textbf{cvConnectedComp}, hvori der er en instans af
-\textbf{cvRect}. Vi har en metode, kaldet \texttt{checkPosition}, som,
-alt efter om vi har et vertikalt eller et horisontalt snit, returnerer
-en sandhedsværdi for, om den relevante koordinat findes i de
-accepterende koordinater. Metoden ses i kodeboks \ref{pseudo_position}.
+Når vi har fastsat \texttt{coordinate} og fundet værdierne i
+\texttt{acceptRange} kan vi kan afgøre, om en interessant region, ligger
+placeret i snittet. Vi har allerede udnyttet, at vi kun behøver at
+betragte én koordinat, og det er derfor ligetil, at kontrollere, om en
+regions begrænsende rektangel, har en kant inden for margin. Regionen er
+repræsenteret som en instans af \textbf{cvConnectedComp}, hvori der er
+en instans af \textbf{cvRect}. Vi har en metode, kaldet
+\texttt{checkPosition}, som, alt efter om vi har et vertikalt eller et
+horisontalt snit, returnerer en sandhedsværdi for, om den relevante
+koordinat findes i de accepterende koordinater. Metoden ses i kodeboks
+\ref{pseudo_position}.
 
 Vi kan nu sammensætte en metode, som returnerer alle interessante
 regioner, med en kant inden for margin. Metoden tager en instans af
@@ -291,7 +277,7 @@ def GetInterestingRegionsInCut(CutRegions, constraints):
 \end{lstlisting}
 
 \subsection{Udvidet vurdering af regioner}
-Vi har også implementeret en anden tilgang til vurdering af interessante
+Vi har også implementeret en udvidet vurdering af interessante
 regioner. Grundprincipperne bag denne er gennemgået i afsnit
 \ref{subsec_udvidet_massemidtpunkt}. Da vi ikke længere betragter en
 regions begrænsende rektangel, men i stedet regionens form og
@@ -383,22 +369,21 @@ def GridIt(image, CutRegions, step):
 \end{lstlisting}
 
 \subsubsection{Vurdering ved massemidtpunkt og udstrækning}
-Vi siger nu, at en region ligger i snittet, hvis denne har et
+Definition \ref{def_expanded} fortæller os, at hvis en region har et
 massemidtpunkt inden for margin og dens masse i øvrigt er jævnt fordelt
-over snittet. Til at afgøre, hvorvidt regionens masse er jævnt fordelt
-over snittet, bruger vi ligning \eqref{Fordeling}, og til at finde
-regionens massemidtpunkt, bruges ligning \eqref{MPunkt}, som begge kan
-findes i afsnit \ref{subsec_udvidet_massemidtpunkt}. Vi skal bruge
-approkimationen af regionens form og udstrækning til at afgøre
-ovenstående egenskaber.
+over snittet, så ligger denne i snittet.  En regions fordeling af masse
+er givet i definition \ref{def_fordeling_ligning} og en regions
+massemidtpunkt er givet i definition \ref{def_massemidtpunkt}. Vi skal
+bruge approkimationen af regionens form og udstrækning til at afgøre om
+regionen ligger i snittet.
 
 Vi starter med at kigge på fordelingen af en regions masse, hvor vi skal
 finde forholdet mellem punkter på højre og venstre side af snittet.
 Metoden i kodeboks \ref{pseudo_distribution}, gør netop dette, og
 returnerer en sandhedsværdi for, om regionens masse er jævnt fordelt
-over snittet. Vi har tidligere fastsat, at regionens masse er jævnt
-fordelt over et snit, hvis forholdet mellem de to sider er under $0.75$.
-Metoden gør brug af snittets orientering, hentet i
+over snittet. Definition \ref{def_fordeling_procent} siger, at regionens
+masse er jævnt fordelt over et snit, hvis forholdet mellem de to sider
+er under $0.75$.  Metoden gør brug af snittets orientering, hentet i
 $\textbf{Constraints}.\textit{coordinate}$, og det faktum, at vi kan
 finde det midterste element i vores accepterende værdier, ved at tage
 det $\left(\left\lfloor \frac{|\textit{acceptRange}|}{2}\right\rfloor +
@@ -419,7 +404,7 @@ def checkDistribution(grid, constraints):
     lDist = 0.0
 
     # Get the middle value of the accepting range, i.e. the cut
-    middleIndex = floor(len(constraints.acceptRange)) + 1
+    middleIndex = floor(len(constraints.acceptRange)/2) + 1
     cutVal = constraints.acceptRange[middleIndex]
 
     # Check the position of every pixel in the grid
