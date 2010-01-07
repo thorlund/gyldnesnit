@@ -3,76 +3,75 @@
 %%          med \sffamlily-typen. Denne stil bør også følges her.
 %%
 {\sffamily
-I vores program er der 3 forskellige tærskelværdier som påvirker hvordan
-metoden analysere billedet. Marginens brede, afvigelsen af farven i
-floodfill og afvigelsen i farven i kandtdetectionen. Alle 3
-tærskelværdier er blevet introduceret i deres respektive afsnit, men
-ingen konkrate tal er opgivet. I dette afsnit vil vi opgive de tal, samt
-en forklaring på hvorfor vi har valt lige de tal. Malerierne som er
-brugt i afprøvning er spicælt udvalgt for deres for deres illustrative
-aspekt. 
+I vores program er der 4 forskellige tærskelværdier som påvirker hvordan
+regions detektoren analysere billedet. Alle 4 tærskelværdier er blevet
+introduceret i deres respektive afsnit, men ingen konkrate tal er
+opgivet. I dette afsnit vil vi opgive de tal, samt en forklaring på
+hvorfor vi har valt lige de tal. Malerierne som er brugt i afprøvning er
+spicældt udvalgt for deres illustrative aspekt. 
 }
 
 \subsection{Marginens brede}
-Vi regner marginens brede ud fra en procent af billedets brede og
-højde. I afsnittet \ref{section_opdeling} kom vi frem til en
-usikkerhed på $2.1 \%$. Så vores margin procent sats $\Delta$ skal mindst
-være på $2.1 \%$. Ud over det er den minimale forskel på 2 snit vi foretager os,
-forskellen mellem det gyldne snit og $\frac{2}{3}$, som vi udregnet i
-sektion \ref{section_opdeling} til maksimalt at have en $\Delta$ på
-$2.43$, for at margin ikke krydser. Så $\Delta \in [2.1, 2.43]$. Vi har valt
-at sætte $\Delta = 2.4$, da vi derved kan tage højde for uforresette
-usikkerhed. XXX(er det en dog nok forklaring).
+Vi regner marginens brede ud fra en procent stats $\psi$ af billedets
+$B$ og $H$. I afsnittet \ref{section_opdeling} kom vi frem til en
+usikkerhed på $2.1 \%$. Så $\psi$ skal være støre en $2.1 \%$. 
+
+Den minimale forskel på 2 snit vi foretager os, er forskellen mellem det
+gyldne snit og $\frac{2}{3}$, margin brade udregnet i section
+\ref{section_opdeling} til maksimal at være $2.43\%$. For at marginen
+ikke krudser. 
+
+Det vil sige at $\psi \in [2.1, 2.43]$. Vi har valt at
+sætte $\psi = 2.4$, da vi derved kan tage højde for uforresette
+usikkerhed.
 
 \subsection{Afvigelsen af farver i kandtdetection}
-Det vi bruger kandtdetection til, er af finde en kanter rundt om de
-regioner som vi mener er interessante, og undgå de kanter som ligger
-inde i regioner. Begge de 2 mål kan ikke altid opfyldes, men vi kan
-komme så tæt på et krompromi mellem en perfekt kant rund om region og
-ingen kanter inde i region som mulige. Dette gøres ved at ændre 2
-tærskelværdier i kantdetectionen ud for observationer som vi har taget
-på billederne i forvejen. Vi har valt at dele billederne som vi
-observere op i 9 kategorier, som kan ses i tabel
-\ref{thressholdsTabelKant}, Kategorier er en grove opdeling af
-billederne efter detaljer og farve intensitet, som bruges til at give en
-bedre indblik på billedets opbygning. 
+Vi bruger kandtdetection til, er af finde en kanter rundt om de regioner
+som vi mener er interessante, og undgå de kanter som ligger inde i
+regioner. Begge de 2 mål kan ikke altid opfyldes, men vi kan komme så
+tæt på et krompromi mellem en perfekt kant rund om region og ingen
+kanter inde i region som mulige. Dette gøres ved at ændre 2
+tærskelværdier i kantdetectionen. Vi har valt at dele billederne som vi
+observere op i 9 kategorier, se tabel \ref{thressholdsTabelKant},
+Kategorier er en grove opdeling af billederne efter detaljer og farve
+intensitet, som bruges til at give en bedre indblik på billedets
+opbygning. 
 
 \subsubsection{Sammenligninger}
 Vi har set på 9 malerier og har fundet de tærskelværdier som vi mener
 passer bæst på malerierne. Vi vil illustrerer hvordan vi har fastsat
-tærskelværdierne på maleriet maleriet \ref{kDetalier}.
+tærskelværdierne på maleriet \ref{kDetalier}.
 
 Maleriet er malet med mange farver og med masser af detaljer. Vi ser
-først på tærskelværdierne $[0,0],[100,100]......[600,600],[700,700]$ se
+først på tærskelværdierne $(0,0),(100,100).....(600,600),(700,700)$ se
 figur \ref{allesammen1} og \ref{allesammen2}, og finde det interval hvor
 malerriet ikke har mistet nogle af kanterne rundt om regionerne endnu,
 men vil det, i næste interval. I illustration vurdere vi det til
 billedet \ref{300-300}, da billedet \ref{400-400} har mistet for mange
-af de kanter, som vi gerne vil beholde. Tærskelværdien som vi gerne vil
-finde frem til, befinder sig fra $[300,300]$ og frem. 
+af de kanter, som vi gerne vil beholde.
 
-Ved at sætte en af tærskelværdierne op lidt af gangen kan vi igen få en
-række billeder at vælge imellem, se sammenligningen i figur
+Ved at sætte en af tærskelværdierne op lidt af gangen, kan vi igen få en
+række billeder at vælge imellem. Se sammenligningen i figur
 \ref{allesammen3}. Man kan se at det begynder at være svær at skelne
 figurene i \ref{300-850} og der er lidt for mange kanter i
-\ref{300-700}, så vi har valt at fastsætte tærskeværdigerne til
-$[300,750]$. Det maleri vi lige har brugt er ikke særlige repræsentativ
+\ref{300-700}, så vi har valgt at fastsætte tærskeværdigerne til
+$(300,750)$. Det maleri vi lige har brugt er ikke særlige repræsentativ
 for helle vores maleri database, så vi har taget 8 andre billeder og
 brugt samme metode på dem og fastsat en middel tærskelværdi, jeg viser
 her en lille udsnit af dem, se figur \ref{en}, \ref{to} og \ref{tre}.
 
 \begin{figure}[p]
     \centering
-    \subfloat[100,100]{
+    \subfloat[(100,100)]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/1_iteration/100-100.png}
         \label{100-100}}\hspace{1em}
-    \subfloat[200,200]{
+    \subfloat[(200,200)]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/1_iteration/200-200.png}
         \label{200-200}}\\
-    \subfloat[300,300]{
+    \subfloat[(300,300)]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/1_iteration/300-300.png}
         \label{300-300}}\hspace{1em}
-    \subfloat[400,400]{
+    \subfloat[(400,400)]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/1_iteration/400-400.png}
         \label{400-400}}
     \label{allesammen1}
@@ -83,13 +82,13 @@ her en lille udsnit af dem, se figur \ref{en}, \ref{to} og \ref{tre}.
 
 \begin{figure}[!h]
 	\centering
-	\subfloat[500,500]{
+	\subfloat[(500,500)]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/1_iteration/500-500.png}
         \label{500-500}}\hspace{1em}
-    \subfloat[600,600]{
+    \subfloat[(600,600)]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/1_iteration/600-600.png}
         \label{600-600}}\\
-    \subfloat[700,700]{
+    \subfloat[(700,700)]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/1_iteration/700-700.png}
         \label{700-700}}\hspace{1em}
     \subfloat[Original. Navn: The Archangel Michae. År: Ca 1490 Af: Abadia, Juan de la]{
@@ -101,16 +100,16 @@ her en lille udsnit af dem, se figur \ref{en}, \ref{to} og \ref{tre}.
 
 \begin{figure}[!h]
     \centering
-    \subfloat[300,700]{
+    \subfloat[(300,700)]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/2_iteration/300-700.png}
         \label{300-700}}\hspace{1em}
-    \subfloat[300,750]{
+    \subfloat[(300,750)]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/2_iteration/300-750.png}
         \label{300-750}}\\
-    \subfloat[300,800]{
+    \subfloat[(300,800)]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/2_iteration/300-800.png}
         \label{300-800}}\hspace{1em}
-    \subfloat[300,850]{
+    \subfloat[(300,850)]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/2_iteration/300-850.png}
         \label{300-850}}
         \caption[]{Edgedetection hvor de 4 billeder som er intrasante taget med}
@@ -119,7 +118,7 @@ her en lille udsnit af dem, se figur \ref{en}, \ref{to} og \ref{tre}.
  
 \begin{figure}[!h]
     \centering
-    \subfloat[100,250]{
+    \subfloat[(100,250)]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/svage_farver/svage_detalier/2_iteration/100-250.png}
         \label{100-250}}\hspace{1em}
     \subfloat[Orginal. Navn: The Lamentation over St Francis. År: 1440. Af: Angelico, Fra. ]{
@@ -131,7 +130,7 @@ her en lille udsnit af dem, se figur \ref{en}, \ref{to} og \ref{tre}.
 
 \begin{figure}[!h]
     \centering
-    \subfloat[100,240]{
+    \subfloat[(100,240)]{
         \includegraphics[angle=0,width=0.85\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/svage_detalier/2_iteration/100-240.png}
         \label{100-240}}\\
     \subfloat[Orginal. Navn:The Ninth Wave. År:1850. Af:Aivazovsky, Ivan Konstantinovich.]{
@@ -143,7 +142,7 @@ her en lille udsnit af dem, se figur \ref{en}, \ref{to} og \ref{tre}.
 
 \begin{figure}[!h]
     \centering
-    \subfloat[200,460]{
+    \subfloat[(200,460)]{
         \includegraphics[angle=0,width=0.85\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/medium_detalier/2_iteration/200-460.png}
         \label{200-460}}\\
     \subfloat[Orginal. Name: The last supper. År: 1498. Af: Leonardo da Vinci]{
@@ -165,9 +164,9 @@ her en lille udsnit af dem, se figur \ref{en}, \ref{to} og \ref{tre}.
     \label{thressholdsTabelKant}
 \end{table}
 
-Som man kan se at tabel \ref{thressholdsTabelKant} gå tærskelværdierne
-fra $[100,240]$ til $[300,750]$, så vi kan ikke umiddelbart sætte en
-fast tærskelværdi for alle malerier og få at lave en rigtige
+Som man kan se af tabel \ref{thressholdsTabelKant} gå tærskelværdierne
+fra $(100,240)$ til $(300,750)$, så vi kan ikke umiddelbart sætte en
+fast tærskelværdi for alle malerier og får at lave en rigtige
 undersøgelse af tærskelværdi på malerierne, bliver man nød til at se på
 mangle flere malerierne \note{her skal der være noget statestik om
 hvordan en rigtige undersøgelse er} og bestemme deres tærskelværdi og
