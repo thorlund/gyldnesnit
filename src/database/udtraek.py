@@ -20,7 +20,6 @@ results = m.Result.select("painting.title NOT LIKE '%detail%'")
 results = results.filter(b.AND(m.Result.q.run==runId,m.Result.q.painting == m.Painting.q.id))
 artists = m.Artist.select("painting.title NOT LIKE '%detail%'")
 artists = artists.filter(b.AND(m.Result.q.run==runId, m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist == m.Artist.q.id))
-#results = m.Result.select(m.Result.q.run==runId)
 #sorts resulsts after numberOfRegions, the starting one low and rising
 goldenresults = results.filter(b.AND(m.Result.q.cutRatio < 0.62 , m.Result.q.cutRatio > 0.61))
 #only the golden ratios and the paintings
@@ -56,22 +55,39 @@ print goldenratiocuts
 
 nameselect = conn.sqlrepr(b.Select(m.Artist.q.timeline).distinct())
 timelines = conn.queryAll(nameselect)
-
+ratios=dict()
 periodes=dict()
+area=dict()
 for timeline in timelines:
 	timeline = timeline[0]
-	goldenFeatTimeline=goldenresults.filter(b.AND( m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).sum(m.Result.q.numberOfRegions)
-	picTimeline=paintings.filter(b.AND( m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct().count()
-	featsInTimeline = results.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).sum(m.Result.q.numberOfRegions)
-	periodes[timeline] = (goldenFeatTimeline,featsInTimeline,picTimeline)
+	cuts = []
+	for cut in range(4):
+		for ratio in diffratios:
+			ratio = ratio[0]
+			ratios[ratio]=results.filter(b.AND(m.Result.q.cutRatio==ratio , m.Result.q.cutNo==cut, m.Artist.q.timeline==timeline)).sum(m.Result.q.numberOfRegions)
+		cuts.append(ratios)
+		ratios=dict()
+	picTimeline=paintings.filter(b.AND( m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline)).distinct()
+	for painting in picTimeline:
+		if not (painting.realWidth == None and painting.realHeight == None):
+			if int(painting.realWidth*painting.realHeight) not in area:
+				area[int(painting.realWidth*painting.realHeight)] = int(painting.realWidth*painting.realHeight)
+			else:
+				area[int(painting.realWidth*painting.realHeight)] = int(painting.realWidth*painting.realHeight) + area[int(painting.realWidth*painting.realHeight)]
+	picTimeline = picTimeline.count()
+	periodes[timeline] = (cuts,area,picTimeline)
+	area = dict()
 
 print "This tuple shows how many features are detected in the golden ratio and overall and the amount of pictures in/of a given timeline"
 print periodes
 
-print "The features per pcitures dict"
+print "The features per paintings dict"
 featPerPicture = dict()
 topten = dict()
 toptengolden = dict()
+area = dict()
+#This is also used toptengolden and topten images
+#Also a ratio for the size of the paintings
 for picture in paintings.distinct():
 	numbOfRegions = paintings.filter(picture.id == m.Painting.q.id).sum(m.Result.q.numberOfRegions)
 	numbOfGoldenRegions = goldenpaintings.filter(picture.id == m.Painting.q.id).sum(m.Result.q.numberOfRegions)
@@ -87,20 +103,43 @@ for picture in paintings.distinct():
 		featPerPicture[numbOfRegions] = 1
 	else:
 		featPerPicture[numbOfRegions] = featPerPicture[numbOfRegions] +1
+	#Size of painting calculations
+	if picture.realHeight > 0 and picture.realWidth > 0:
+		if int(picture.realWidth*picture.realHeight) not in area:
+			area[int(picture.realWidth*picture.realHeight)] = numbOfRegions
+		else:
+			area[int(picture.realWidth*picture.realHeight)] = area[int(picture.realWidth*picture.realHeight)] + numbOfRegions
 print featPerPicture
+
+#printing the area/feats
+print "The area combined with how many regions are found"
+print area
 
 print "Procentage of different schools use the golden ratio "
 schoolsSelect = conn.sqlrepr(b.Select(m.Artist.q.school).distinct())
 schools = conn.queryAll(schoolsSelect)
 countries = dict()
+area = dict()
+cuts = []
 for school in schools:
 	school = school[0]#dont ask
+	for cut in range(4):
+		for ratio in diffratios:
+			ratio = ratio[0]
+			ratios[ratio]=results.filter(b.AND(m.Result.q.cutRatio==ratio , m.Result.q.cutNo==cut, m.Artist.q.school==school)).sum(m.Result.q.numberOfRegions)
+		cuts.append(ratios)
+		ratios = dict()
 	amountOfPaintings = paintings.filter(b.AND(m.Painting.q.artist == m.Artist.q.id, m.Artist.q.school == school)).distinct().count()
-#	print paintings.filter(b.AND(m.Painting.q.artist == m.Artist.q.id, m.Artist.q.school == school)).distinct()
 	amountOfArtist = artists.filter(m.Artist.q.school==school).distinct().count()
-	amountOfRegions = results.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist == m.Artist.q.id, m.Artist.q.school == school)).sum(m.Result.q.numberOfRegions)
-	amountOfGoldenRegions =goldenresults.filter(b.AND(m.Result.q.painting == m.Painting.q.id, m.Painting.q.artist == m.Artist.q.id, m.Artist.q.school == school)).sum(m.Result.q.numberOfRegions)
-	countries[school] = (amountOfGoldenRegions, amountOfRegions, amountOfPaintings,amountOfGoldenRegions/amountOfRegions/amountOfPaintings)
+	schoolsPaintings =paintings.filter(b.AND(m.Painting.q.artist == m.Artist.q.id, m.Artist.q.school == school)).distinct()
+	for painting in schoolsPaintings:
+		if painting.realWidth != None and painting.realHeight != None:
+			if int(painting.realWidth * painting.realHeight) not in area:
+				area[int(painting.realWidth * painting.realHeight)] = paintings.filter(painting.id == m.Painting.q.id).sum(m.Result.q.numberOfRegions)
+			else:
+				area[int(painting.realWidth * painting.realHeight)] = area[int(painting.realWidth * painting.realHeight)]+paintings.filter(painting.id == m.Painting.q.id).sum(m.Result.q.numberOfRegions)
+	countries[school] = (cuts,area,amountOfPaintings)
+	area = dict()
 print countries 
 
 goldenpictures = paintings.filter(b.AND(m.Result.q.cutRatio < 0.62,m.Result.q.cutRatio > 0.61, m.Result.q.numberOfRegions > 0)).distinct().count()
@@ -127,7 +166,6 @@ for feats in toptenkeys[-10:]:
 		print toptenimages.filepath
 		print "with:"
 		print feats
-
 paintings = paintings.distinct()
 # Get number of paintings with golden section canvas BY PIXEL SIZE
 print ""
