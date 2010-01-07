@@ -70,9 +70,15 @@ implementation og analyse. Nogle af forslagene kan dog overlappe.
 
 \begin{figure}[!h]
     \centering
+    \subfloat[Leonardo da Vinci: \emph{Mona Lisa} -- 1503--1505/1507 --
+    Original]{
+    \includegraphics[angle=0,width=0.4\textwidth]{afsnit/fremtidigt_arbejde/billeder/Mona_Lisa.jpeg}
+    }
+    \subfloat[Arbitrære gyldne rektangler]{
     \includegraphics[angle=0,width=0.4\textwidth]{afsnit/fremtidigt_arbejde/billeder/monalisa_fake.jpg}
-    \caption[]{Eksempel på regioner i billedet, som er konstrueret i det
-    gyldne snit.}
+    }
+    \caption[]{Eksempel på regioner i billedet, som skulle være
+    konstrueret efter det gyldne snit.}
     \label{monalisa_fake}
 \end{figure}
 
@@ -105,21 +111,6 @@ implementation og analyse. Nogle af forslagene kan dog overlappe.
         billedet, kunne man trække alle regioner ud med det samme. Dette
         vil gøre det lettere, at vurdere regionerne i billedet og man
         vil således også let kunne afgøre om en region lå i flere snit.
-\end{itemize}
-
-\subsection{Generelle forbedringer}
-\begin{itemize}
-    \item \textbf{Køre analyse på et andet datasæt, som havde større diversitet}\\
-        Det kunne være interessant, at sammenligne resultater fra en
-        analyse på et andet datasæt. Dette vil give os en indikation på
-        om vores resultater fra det oprindelige datasæt kan bruges.
-        Ydermere, ville det være interessante, at sammensætte et datasæt
-        af malerier, hvor det er et faktum, at de er opbygget efter det
-        gyldne snit, med det formål at afprøve metoderne på dette.
-    \item \textbf{Implementere programmet i et andet sprog}\\
-        For en hurtigere analyse af malerier, kunne programmet
-        implementeres i $\textrm{C}^{++}$, som \emph{OpenCV} er
-        implementeret i. Programmet kunne med fordel parallelliseres.
 \end{itemize}
 
 \subsection{Andre forslag inden for området}
