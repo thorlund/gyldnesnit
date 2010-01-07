@@ -103,12 +103,66 @@ dette interval. Vi kan således ikke bekræfte hypotese
     \label{tabel_real_dimensions}
 \end{table}
 
+\subsubsection{Antallet af fundne regioner over alle snit}
+I alle $14,375$ malerier er der i alt fundet $1,578,611$ interessante
+regioner, med en middelværdi på $109.82$, en standardafvigelse på
+$83.21$ og et $95\%$-konfidensinterval på $[108.46, 111.18]$. I figur
+\ref{total_regions_plots} er vist nogle plots over hvordan antallet af
+regioner fordeler sig i malerierne. Figurene viser, at antallet af
+fundne regioner ikke er normalfordelt, hvilket havde været forventet.
+I figur \ref{graf_total_regions_zoom}, hvor der ses bort fra et stort
+antal billeder uden nogen regioner, har vi en fordeling der kunne ligne
+den eksponentielle normalfordeling, men en logaritmisk transformation af
+data, giver ikke en normalfordeling. Dette vises også i de to QQ-plots i
+figur \ref{qq_plots}, hvor punkterne ikke følger en ret linje, som de
+burde, hvis vi havde en normalfordeling.
+
+Tallene kunne dog godt ligne en eksponentialfordeling, hvorfor vi i
+figur \ref{hist_total_regions} har tegnet en sådan, hvor $\lambda =
+\frac{1}{109.82}$. Fordelingen nærmer sig de observerede værdier, men
+den teoretiske fordeling ligger et stykke under vores værdier.
+
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.9\textwidth]{afsnit/resultater/billeder/totalregions}
-    \caption[]{Plot som viser hvor mange malerier, hvori der er fundet
-    et vist antal interessante regioner over alle snit i billedet.}
-    \label{graf_total_regions}
+    \subfloat{
+        \includegraphics[width=0.49\textwidth]{afsnit/resultater/billeder/totalregions_var}
+        \label{graf_total_regions_var}
+    }
+    \subfloat[]{
+        \includegraphics[width=0.49\textwidth]{afsnit/resultater/billeder/totalregions}
+        \label{graf_total_regions_zoom}
+    }
+    \caption[]{Fordelingen af fundne regioner på malerier.
+    \textbf{\ref{graf_total_regions_var}:} Plot som viser hvor mange
+    malerier, hvori der er fundet et vist antal interessante regioner
+    over alle snit i billedet.  \textbf{\ref{graf_total_regions_zoom}:}
+    Samme plot som i figur \ref{graf_total_regions_var}, men hvor antal
+    billeder uden regioner ikke er vist.}
+    \label{total_regions_plots}
+\end{figure}
+
+\begin{figure}[!h]
+    \centering
+    \subfloat{
+        \includegraphics[width=0.49\textwidth]{afsnit/resultater/billeder/qq_totalregions}
+        \label{qq_totalregions}
+    }
+    \subfloat[]{
+        \includegraphics[width=0.49\textwidth]{afsnit/resultater/billeder/qq_log_totalregions}
+        \label{qq_log_totalregions}
+    }\\
+    \subfloat[]{
+        \includegraphics[width=0.62\textwidth]{afsnit/resultater/billeder/hist_totalregions}
+        \label{hist_total_regions}
+    }
+    \caption[]{QQ-plots som ikke viser tegn på en normalfordeling af
+    fundne regioner. \textbf{\ref{qq_totalregions}:} QQ-plot af antal
+    billeder med én eller flere regioner.
+    \textbf{\ref{qq_log_totalregions}:} Samme plot som i figur
+    \ref{qq_totalregions}, men data er logaritmisk transformeret.
+    \textbf{\ref{hist_total_regions}:} Histogram over antal fundne
+    regioner med en eksponentialfordeling tegnet.}
+    \label{qq_plots}
 \end{figure}
 
 }
