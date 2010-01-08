@@ -5,6 +5,78 @@ opbygges af pixels. Dette gør, at vi bliver nødt til at tage
 approksimationer af udregningerne. Vi vil også kommer ind på nogle af de
 fejl som kan opstå i tilblivelse af maleriet}
 
+\subsection{Inddeling af billede efter snit}
+Vi vil i dette afsnit give nogle definitioner på hvordan et billedet er
+bygget op, samt hvilke afrundings fejl der kan opstår ved denne
+opbygning. For at få nogle faste definitioner på hvordan et billedet ser
+ud samt hvad et snit er, har vi stillet de her to definitioner op.
+
+\begin{definition}
+	I et billede betegnes \textbf{højden og bredden} som hhv. $H$ og
+	$B$, som illustreres i figur \ref{cut}.
+\end{definition}
+
+\begin{definition}
+	Et \textbf{snit} er en lige vertikale eller horisont linje, som
+	strækker sig fra kant til kant.
+\end{definition}
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.42,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/Cut}
+	\end{center}
+	\caption[]{Billedets højde og bredde betegnes hvv. H og B. De 4 snit er navngivet.}
+	\label{cut}
+\end{figure}
+
+End til vider har vi kun arbejder med det gyldne snit, men andre snit i
+billedet kan godt optræde, derfor indføre vi en nu betegnelse
+snitratio.
+
+\begin{definition}
+	En \textbf{snitratio} er en procents sats, som ganget på $B$ eller
+	$H$, finde placeringen af et snit i billedet.
+\end{definition}
+
+Det vil sige at hvis en snitration er på $0.2$. Et billedet har $B$ på
+4000 vil et snit befinde sig i pixel $4000*0.2 = 800$ fra højre side af
+billedet, det samme antal pixel fra venstre side vil også være et snit.
+Samme metode kan bruges på $H$ for at få 2 snit mere. 
+
+\begin{definition}
+	For vær snitration er der fire snit, to i det vertikale plan og to i
+	det horisontale plan, som er illustreret på maleri \ref{lenasnit2},
+	med røde streger. Med mindre snitration er 0.5, så er der kun 2 snit.
+\end{definition}
+
+Hvis snitratioen er $0.5$ kommer snittene til at ligge over på hinanden,
+og derved vil snitratioen kun have 2 snit, de 2 snit Id, samt snitenes
+plascring kan ses i figur \ref{2Cut}.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.42,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/Lenagolden}
+	\end{center}
+	\caption[]{Billedet som har indtegnet de fire gyldne snit}
+	\label{lenasnit2}
+\end{figure}
+
+De 4 snit tildeles hvert deres Id, "snit 0,1,2 og 3" så vi kan kende
+forskel på de individuelde snit, Id'erne placering kan ses i figur
+\ref{cut}. Vi vil i resten af rapporten kalde snittene efter deres Id.
+
+\begin{definition}
+	Vær snit af vær snitratio, har et fast \textbf{Id}, "Snit 0,1,2 og 3", som kan ses i figur \ref{cut}, hvor vært snit er indtegnet, samt deres Id som label. 
+\end{definition}
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.42,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/2Cut}
+	\end{center}
+	\caption[]{Billedet skæres her kun af 2 snit}
+	\label{2Cut}
+\end{figure}
+
 \subsection{Acceptabel afvigelse}
 \begin{comment}"""
 Som beskravet i afsnit \ref{mange_tal}, udregnes det gyldne snit med mange decimaler. Selv den beste kunstner har et maksimum på hvor præcis han kan male, om det er hans øjne der sætter grandsen eller størrelsen på han pensler eller om han bare ikke maler særlige præcis, så kan han aldrig malle så præcis som vi kan udregne det gyldne snit til. Derfor sætter vi en afvigelse på $0.5 \%$, som maleren vi sat en 
@@ -40,54 +112,14 @@ faktisk i intervallet [190,210]. Måden hvorpå vi tager højde for den
 forskel, er ved hjælp af marginer, som nævnt i afsnit
 \ref{section_naiv}.
 
-\subsection{Inddeling af billede efter snit}
-
-I et billede betegnes højden og bredden som hhv. $H$ og $B$, se figur
-\ref{cut}. Der er 4 gyldne snit, 2 vertikale og 2 horisontale, som vist
-i figur \ref{lenasnit2}. For at finde ud af, hvor de 4 snit skal ligge i
-billedet, multipliceres B og H med $\varPhi$,og man får to tal. Disse
-betegner, hvor mange pixels, det gyldne snit befinder sig fra hhv. $H$
-og $B$ f.eks vil de 2 horisontale snit, i et billedet, som har $B =
-4000$ pixel, ligge hhv. $4000 \cdot \varPhi \approx 2472$ pixels fra
-billedets øvre og nedre kant.
-
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[scale=0.42,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/Lenagolden}
-	\end{center}
-	\caption[]{Billedet som har indtegnet de fire gyldne snit}
-	\label{lenasnit2}
-\end{figure}
-
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[scale=0.42,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/Cut}
-	\end{center}
-	\caption[]{Billedets højde og bredde betegnes hvv. H og B. De 4 snit er navngivet.}
-	\label{cut}
-\end{figure}
-
-De 4 snit tildeles hvert deres Id, "snit 0,1,2 og 3" så vi kan kende
-forskel på de individuelde snit, Id'erne placering kan ses i figur
-\ref{cut}. Vi vil i resten af rapporten kalde snittene efter deres Id.
-Hvis vi gerne vil finde snittet som ligger i miden kommer der kun 2
-snit, med vær deres Id "snit 0 og 1" som kan ses i figur \ref{Cut2}
-
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[scale=0.42,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/2Cut}
-	\end{center}
-	\caption[]{Billedet skæres her kun af 2 snit}
-	\label{2Cut}
-\end{figure}
 
 \subsection{Heltal i det gyldne snit}
-
-I eksemplet med 4000 pixels ovenfor, approksimerer vi antal pixels ved
-at afrunde resultatet $2472.13595 \approx 2472$, se udregning
-\ref{afrundning}. Det betyder at vi mister 0.13595 pixels i præction,
-hvilket svarer til en misvisning af punktet på 0.00339875 $\%$ i forholdt
-til $B$ på billedet. Se udregning \ref{afrundning2}.
+Nå vi udregner hvor et snit for et billedet med $H = 4000$,
+approksimerer vi antal pixels ved at afrunde resultatet $2472.13595
+\approx 2472$, se udregning \ref{afrundning}. Det betyder at vi mister
+0.13595 pixels i præction, hvilket svarer til en misvisning af punktet
+på 0.00339875 $\%$ i forholdt til $B$ på billedet. Se udregning
+\ref{afrundning2}.
 
 \begin{equation}
 	4000 \cdot \varPhi = 4000(\sqrt{5}-1)/2 = 2472.13595 \approx 2472 \label{afrundning}
@@ -105,13 +137,7 @@ afrundingsfacktor som kan forekomme. Hvis billedet har en størrelse på
 på $0.1 \%$. Dette tal bliver adderet til fejlsatsen ovenfor, og giver
 en samlet afvigelse på $2.1\%$.
 
-\subsection{Snitratio}
-End til vider har vi kun arbejder med det gyldne snit, men andre snit i
-billedet kan godt optræde, derfor indføre vi en nu betegnelse
-snitratio, som betegner en procents sats for hvor lang inde i billedet
-snittet befinder sig. Det vil sige at hvis en snitration er på $0.2$. Et
-billedet har $B$ på 4000 vil et snit befinde sig i pixel $4000*0.2 =
-800$.
+
 
 \subsection{Heltal ved udregning af Margin}
 Når vi har 2 forskellige snitratioer, f.eks. $\varPhi$ og $\frac{2}{3}$,
