@@ -3,23 +3,25 @@
 %%          med \sffamlily-typen. Denne stil bør også følges her.
 %%
 {\sffamily
-I vores program er der 4 forskellige tærskelværdier som påvirker hvordan
-regions detektoren analysere billedet. Alle 4 tærskelværdier er blevet
-introduceret i deres respektive afsnit, men ingen konkrate tal er
-opgivet. I dette afsnit vil vi opgive de tal, samt en forklaring på
-hvorfor vi har valt lige de tal. Malerierne som er brugt i afprøvning er
-spicældt udvalgt for deres illustrative aspekt. 
+I vores program er der fire forskellige tærskelværdier som påvirker
+hvordan maleriet analyseres, nå regioner udtrækning af maleriet.
+Margionbredde, kandtdetektion, flootfill og sløring. I dette sektion vil
+vi finde værdier for de fire tærskelværdier, samt forklaring hvorfor vi
+har valt lige de tal. Malerierne som er brugt i afprøvning er specielt
+udvalgt for deres illustrative aspekt. 
 }
 
-\subsection{Marginens brede}
-Vi regner marginens brede ud fra en procent stats $\psi$ af billedets
-$B$ og $H$. I afsnittet \ref{section_opdeling} kom vi frem til en
-usikkerhed på $2.1 \%$. Så $\psi$ skal være støre en $2.1 \%$. 
+\subsection{Størrelsen på margin}
+Vi regner marginbredde ud fra en procent stats, som vi kalder $\psi$, af
+billedets $B$ og $H$. I defination \ref{margin_min} definere vi den
+minimale størrelse på margin til $2.1 \%$. Så $\psi$ skal være støre en
+$2.1 \%$. 
 
-Den minimale forskel på 2 snit vi foretager os, er forskellen mellem det
-gyldne snit og $\frac{2}{3}$, margin brade udregnet i section
-\ref{section_opdeling} til maksimal at være $2.43\%$. For at marginen
-ikke krudser. 
+I defination \ref{margin_max}
+Den minimale forskel på to snit vi foretager os, er forskellen mellem
+det gyldne snit og $\frac{2}{3}$. I definition \ref{margin_max} er den
+maksimale bredde margin kan have $2.43\%$. For at marginen ikke
+overlapper. Så $\psi$ skal være mindre en $2.43\%$. 
 
 Det vil sige at $\psi \in [2.1, 2.43]$. Vi har valt at
 sætte $\psi = 2.4$, da vi derved kan tage højde for uforresette
