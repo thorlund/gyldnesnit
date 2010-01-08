@@ -103,8 +103,9 @@ for picture in paintings.distinct():
 	else:
 		featPerPicture[numbOfRegions] = featPerPicture[numbOfRegions] +1
 	#Size of painting calculations
-	if picture.realHeight > 0 and picture.realWidth > 0:
+	if picture.realHeight != None and picture.realWidth !=None:
 		if int(picture.realWidth*picture.realHeight) not in area:
+			print "I R IN LOOP"
 			area[int(painting.realWidth * painting.realHeight)] = results.filter(painting.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions)
 		else:
 			area[int(picture.realWidth*picture.realHeight)] = area[int(picture.realWidth*picture.realHeight)] + results.filter(painting.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions)
