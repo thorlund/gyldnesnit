@@ -1,3 +1,4 @@
+{
 For at beskrive integrationen og samspillet mellem en kørsel og
 databasen vil der følge en beskrivelse af de vigtige kald mellem 
 start.py og databasen. 
@@ -17,9 +18,9 @@ forklaret i resten af dette kapitel.
 \end{figure}
 \begin{lstlisting}[caption={Pseudokode for
 start},frame=tb,label={pseudo_workflow}
-cuts = environment.generateCuts()
-environment.setSettings(settings)
-environment.setGlobalSettings(globalSettings)
+cuts = experiment.generateCuts()
+experiment.setSettings(settings)
+experiment.setGlobalSettings(globalSettings)
 db = Database(globalSettings)
 run = m.createNewRun(settings)
 paintings = m.Painting.select(m.Painting.q.form=="painting")
@@ -28,6 +29,10 @@ for painting in paintings:
 	paintingContainer.setResults(paintingAnalyzer.analyze(paintingContainer,settings))
 	m.saveResults(run.id,paintingContainer)
 \end{lstlisting}
+\subsubsection{Eksperimenter}
+Eksperimenterne er til for at 
 %Settings 
 %konstruktion af databasen inklusiv downloading og crawling
 %Loop
+}
+% vim: set tw=72 spell spelllang=da:
