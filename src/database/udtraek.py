@@ -88,7 +88,7 @@ area = dict()
 #This is also used toptengolden and topten images
 #Also a ratio for the size of the paintings
 for picture in paintings.distinct():
-	numbOfRegions = paintings.filter(picture.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions)
+	numbOfRegions = results.filter(picture.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions)
 	numbOfGoldenRegions = goldenpaintings.filter(picture.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions)
 	if numbOfRegions not in topten:
 		topten[numbOfRegions] = [picture.id]
