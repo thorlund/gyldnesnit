@@ -17,7 +17,7 @@ forklaret i resten af dette kapitel.
 	bliver gentaget indtil der ikke er flere billeder at arbejde på}
 \end{figure}
 \begin{lstlisting}[caption={Pseudokode for
-start},frame=tb,label={pseudo_workflow}
+start},frame=tb,label={pseudo_workflow}]
 cuts = experiment.generateCuts()
 experiment.setSettings(settings)
 experiment.setGlobalSettings(globalSettings)
@@ -30,7 +30,33 @@ for painting in paintings:
 	m.saveResults(run.id,paintingContainer)
 \end{lstlisting}
 \subsubsection{Eksperimenter}
-Eksperimenterne er til for at 
+Eksperimenterne er til for at samle konfigurationen af en kørsel.
+Kravene til et eksperiment er at den skal have mindst tre metoder:
+generation af snit, sætte globale indstillinger samt sætte
+kørselsspecifikke indstillinger. \ref{pseudo_experiment} er et eksempel
+på hvordan et eksperiment evt. kunne se ud.
+\begin{lstlisting}[caption={Pseudokode for et
+experiment, som checker på $\varPhi$},frame=tb,label={pseudo_experiment}]
+def generateCuts():
+	cuts = [goldenLibrary.PHI,2/3]
+	return cuts
+def setSettings(settings):
+	settings.setMarginPercentage(0.024)
+	return 0
+def setGlobalSettings(globalSettings):
+	return 0
+\end{lstlisting}
+\subsubsection{Indstillinger}
+\subsubsubsection{Globale indstillinger}
+Globale indstillinger er informationer, som har brug for at blive gemt
+mellem kørsler. I det nuværende tilfælde er det placeringen på databasen og
+csvfilen fra wga.hu, det kunne udvides til også at inkludere placeringen
+af billederne istedet for at være fastdefineret.
+\subsubsubsection{Kørselsindstillinger}
+Disse indstilinger kan afvige i forskellige kørsler, det er variable
+hvis indstillinger betyder meget for resultaterne og derfor er vigtige
+at kunne ændre.
+\ref{tærskelværdi}.   
 %Settings 
 %konstruktion af databasen inklusiv downloading og crawling
 %Loop
