@@ -71,13 +71,12 @@ for timeline in timelines:
 	for painting in picTimeline:
 		if not (painting.realWidth == None and painting.realHeight == None):
 			if int(painting.realWidth*painting.realHeight) not in area:
-				area[int(painting.realWidth*painting.realHeight)] = painting.numberOfRegions
+				area[int(painting.realWidth * painting.realHeight)] = results.filter(painting.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions)
 			else:
-				area[int(painting.realWidth*painting.realHeight)] = painting.numberOfRegions + area[int(painting.realWidth*painting.realHeight)]
+				area[int(painting.realWidth*painting.realHeight)] =results.filter(painting.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions) + area[int(painting.realWidth*painting.realHeight)]
 	picTimeline = picTimeline.count()
 	periodes[timeline] = (cuts,area,picTimeline)
 	area = dict()
-
 print "This tuple shows how many features are detected in the golden ratio and overall and the amount of pictures in/of a given timeline"
 print periodes
 
@@ -106,9 +105,9 @@ for picture in paintings.distinct():
 	#Size of painting calculations
 	if picture.realHeight > 0 and picture.realWidth > 0:
 		if int(picture.realWidth*picture.realHeight) not in area:
-			area[int(picture.realWidth*picture.realHeight)] = numbOfRegions
+			area[int(painting.realWidth * painting.realHeight)] = results.filter(painting.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions)
 		else:
-			area[int(picture.realWidth*picture.realHeight)] = area[int(picture.realWidth*picture.realHeight)] + numbOfRegions
+			area[int(picture.realWidth*picture.realHeight)] = area[int(picture.realWidth*picture.realHeight)] + results.filter(painting.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions)
 print featPerPicture
 
 #printing the area/feats
@@ -120,8 +119,8 @@ schoolsSelect = conn.sqlrepr(b.Select(m.Artist.q.school).distinct())
 schools = conn.queryAll(schoolsSelect)
 countries = dict()
 area = dict()
-cuts = []
 for school in schools:
+	cuts = []
 	school = school[0]#dont ask
 	for cut in range(4):
 		for ratio in diffratios:
@@ -144,6 +143,7 @@ print countries
 
 goldenpictures = paintings.filter(b.AND(m.Result.q.cutRatio < 0.62,m.Result.q.cutRatio > 0.61, m.Result.q.numberOfRegions > 0)).distinct().count()
 print "Antallet af billeder, der har regioner i det gyldne snit, for snit 0-3"
+print goldenpictures
 
 #top ten images with the most features in the golden ratio
 #from the toptengolden dict in the calcutation of how many features in general is in a picture
