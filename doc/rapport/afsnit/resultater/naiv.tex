@@ -32,7 +32,7 @@ Der er altså en stimmel på $0.05-0.036 = 0.014 = 1.4\%$ af billedet,
 hvor interessante regioner bliver talt to gange.
 
 \subsection{Resultater}
-Vi har kørt vores analyse på $17,364$ billeder, men i vores resultater
+Vi har kørt vores analyse på $17,364$ malerier, men i vores resultater
 sorterer vi $2,989$ af disse fra, da de kun er udsnit af et større maleri.
 Som vist i tabel \ref{tabel_fjern_detaljer} herunder, er dette en nedgang
 på $17.21$ procent og vi har $14,375$ brugbare resultater tilbage.
@@ -105,65 +105,65 @@ dette interval. Vi kan således ikke bekræfte hypotese
 
 \subsubsection{Antallet af fundne regioner over alle snit}
 I alle $14,375$ malerier er der i alt fundet $1,578,611$ interessante
-regioner, med en middelværdi på $109.82$, en standardafvigelse på
-$83.21$ og et $95\%$-konfidensinterval på $[108.46, 111.18]$. I figur
-\ref{total_regions_plots} er vist nogle plots over hvordan antallet af
-regioner fordeler sig i malerierne. Figurene viser, at antallet af
-fundne regioner ikke er normalfordelt, hvilket havde været forventet.
-I figur \ref{graf_total_regions_zoom}, hvor der ses bort fra et stort
-antal billeder uden nogen regioner, har vi en fordeling der kunne ligne
-den eksponentielle normalfordeling, men en logaritmisk transformation af
-data, giver ikke en normalfordeling. Dette vises også i de to QQ-plots i
-figur \ref{qq_plots}, hvor punkterne ikke følger en ret linje, som de
-burde, hvis vi havde en normalfordeling.
-
-Tallene kunne dog godt ligne en eksponentialfordeling, hvorfor vi i
-figur \ref{hist_total_regions} har tegnet en sådan, hvor $\lambda =
-\frac{1}{109.82}$. Fordelingen nærmer sig de observerede værdier, men
-den teoretiske fordeling ligger et stykke under vores værdier.
+regioner. Vi har en middelværdi på $109.82$ med standardafvigelse på
+$83.21$. I figur \ref{total_regions_plots} er vist nogle plots over
+hvordan antallet af regioner fordeler sig i malerierne.  I figur
+\ref{graf_total_regions_zoom}, hvor der ses bort fra $298$ malerier, som
+ikke har nogen regioner. Regionerne i malerierne har en fordeling, der
+kunne ligne en eksponentialfordeling, som vist i histogrammet i figur
+\ref{hist_total_regions}. De observerede værdier fraviger dog noget fra
+de teoretiske værdier.
 
 \begin{figure}[!h]
     \centering
-    \subfloat{
+    \subfloat[]{
         \includegraphics[width=0.49\textwidth]{afsnit/resultater/billeder/totalregions_var}
         \label{graf_total_regions_var}
     }
     \subfloat[]{
         \includegraphics[width=0.49\textwidth]{afsnit/resultater/billeder/totalregions}
         \label{graf_total_regions_zoom}
-    }
-    \caption[]{Fordelingen af fundne regioner på malerier.
-    \textbf{\ref{graf_total_regions_var}:} Plot som viser hvor mange
-    malerier, hvori der er fundet et vist antal interessante regioner
-    over alle snit i billedet.  \textbf{\ref{graf_total_regions_zoom}:}
-    Samme plot som i figur \ref{graf_total_regions_var}, men hvor antal
-    billeder uden regioner ikke er vist.}
-    \label{total_regions_plots}
-\end{figure}
-
-\begin{figure}[!h]
-    \centering
-    \subfloat{
-        \includegraphics[width=0.49\textwidth]{afsnit/resultater/billeder/qq_totalregions}
-        \label{qq_totalregions}
-    }
-    \subfloat[]{
-        \includegraphics[width=0.49\textwidth]{afsnit/resultater/billeder/qq_log_totalregions}
-        \label{qq_log_totalregions}
     }\\
     \subfloat[]{
         \includegraphics[width=0.62\textwidth]{afsnit/resultater/billeder/hist_totalregions}
         \label{hist_total_regions}
     }
-    \caption[]{QQ-plots som ikke viser tegn på en normalfordeling af
-    fundne regioner. \textbf{\ref{qq_totalregions}:} QQ-plot af antal
-    billeder med én eller flere regioner.
-    \textbf{\ref{qq_log_totalregions}:} Samme plot som i figur
-    \ref{qq_totalregions}, men data er logaritmisk transformeret.
+    \caption[]{Fordelingen af fundne regioner på malerier.
+    \textbf{\ref{graf_total_regions_var}:} Plot som viser hvor mange
+    malerier, hvori der er fundet et vist antal interessante regioner
+    over alle snit i maleriet.  \textbf{\ref{graf_total_regions_zoom}:}
+    Samme plot som i figur \ref{graf_total_regions_var}, men hvor antal
+    malerier uden regioner ikke er vist.
     \textbf{\ref{hist_total_regions}:} Histogram over antal fundne
-    regioner med en eksponentialfordeling tegnet.}
-    \label{qq_plots}
+    regioner, hvor en eksponentialfordeling med $\lambda = 1/109.82$ er
+    indtegnet.}
+    \label{total_regions_plots}
 \end{figure}
+
+Vi ser, at et maleri typisk har omkring $110$ interessante regioner i
+alle snit. Her skal man være opmærksom på, at hver region meget vel
+indgår fire gange. Vi ser, at der er et lille antal malerier, hvori der
+bliver fundet rigtig mange regioner. Det tynder dog ud omkring
+$380$ regioner, hvor antallet af malerier, med flere regioner,
+forekommer mindre hyppigt.
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|l|c|c|}
+        \hline
+        Hypotese nr.        & Afvist & Ikke afvist  \\\hline
+        1                   &        & \checkmark   \\\hline
+        2                   &        &              \\\hline
+        3                   &        &              \\\hline
+        4                   &        &              \\\hline
+        5                   &        &              \\\hline
+        6                   &        &              \\\hline
+        7                   &        &              \\\hline
+        8                   &        &              \\\hline
+    \end{tabular}
+    \caption[]{Hypoteser i forhold til den naive kørsel.}
+    \label{hypoteser_naiv}
+\end{table}
 
 }
 % vim: set tw=72 spell spelllang=da:

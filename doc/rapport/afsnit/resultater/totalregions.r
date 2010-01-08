@@ -53,11 +53,11 @@ dev.off();
 
 #Regioner <- Regioner[299:length(Regioner)];
 png("billeder/hist_totalregions.png");
-hist(Regioner, nclass=50, prob=TRUE);
+hist(Regioner, nclass=30, prob=TRUE);
 #barplot(prob, beside=TRUE,cex.names=1)
 #plot(d0$interessante.regioner, prob, "h", ylab="Antal malerier", xlab="Antal fundne insteressante regioner");
 #yval = seq(1,600);
-fval <- dexp(yval, rate = 1/mean(Regioner), log = FALSE)
+fval <- dexp(yval, rate = 1/(mean(Regioner)), log = FALSE)
 #fval <- dnorm(yval, mean=mean(Regioner), sd=sd(Regioner));
 points(yval, fval, type="l");
 dev.off();
