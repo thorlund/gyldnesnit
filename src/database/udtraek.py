@@ -106,9 +106,9 @@ for picture in paintings.distinct():
 	if picture.realHeight != None and picture.realWidth !=None:
 		if int(picture.realWidth*picture.realHeight) not in area:
 			print "I R IN LOOP"
-			area[int(painting.realWidth * painting.realHeight)] = results.filter(painting.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions)
+			area[int(picture.realWidth * picture.realHeight)] = results.filter(picture.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions)
 		else:
-			area[int(picture.realWidth*picture.realHeight)] = area[int(picture.realWidth*picture.realHeight)] + results.filter(painting.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions)
+			area[int(picture.realWidth*picture.realHeight)] = area[int(picture.realWidth*picture.realHeight)] + results.filter(picture.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions)
 print featPerPicture
 
 #printing the area/feats
