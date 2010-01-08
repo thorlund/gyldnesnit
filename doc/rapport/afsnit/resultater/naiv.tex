@@ -66,6 +66,26 @@ det gyldne snit. Vi kan derfor ikke afvise hypotese \ref{hypo_binaer}.
     \label{tabel_fordeling}
 \end{table}
 
+Vi vil gerne se på, hvordan fordelingen af fundne interessante regioner i
+de fire gyldne snit ser ud. Fordelingen er vist i tabel
+\ref{tabel_fire_snit}. Vi ser, at ingen af snittene afviger med mere end
+$\pm10\%$ fra et andet og vi kan derfor ikke afvise hypotese
+\ref{hypo_fire_g_snit}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{r@{\ \ }p{12em}r|r@{.}l}
+            & Regioner i snit 0   &  $41,087$ &  $24$ & $36\%$ \\
+        $+$ & Regioner i snit 1   &  $42,400$ &  $25$ & $14\%$ \\
+        $+$ & Regioner i snit 2   &  $45,038$ &  $26$ & $71\%$ \\
+        $+$ & Regioner i snit 3   &  $40,125$ &  $23$ & $79\%$ \\\hline
+            & Regioner i alt      & $168,650$ & $100$ & $00\%$
+    \end{tabular}
+    \caption[]{Forholdet mellem de interessante regioner fundet i de
+    fire gyldne snit.}
+    \label{tabel_fire_snit}
+\end{table}
+
 Vi undersøger nu, hvor mange af de brugbare resultater, som er forsynet
 med dimensioner i databasen, således at vi kan undersøge, hvorvidt
 lærredet er konstrueret som et gyldent rektangel. Udregningen i tabel
@@ -88,7 +108,7 @@ Vi ser nu, hvor mange af de $11,965$ malerier, der har, at dets lange
 side, $L$, divideret med dets korte side, $K$, ligger i intervallet $G =
 [1.57920117302, 1.65686680448] = \varphi \pm 2.4\%$. Tabel
 \ref{tabel_real_dimensions} viser, at kun $3.99\%$ falder inden for
-dette interval. Vi kan således ikke bekræfte hypotese
+dette interval. Vi kan således afvise hypotese
 \ref{hypo_golden_ractangle}.
 
 \begin{table}[H]
@@ -151,15 +171,16 @@ forekommer mindre hyppigt.
     \centering
     \begin{tabular}{|l|c|c|}
         \hline
-        Hypotese nr.        & Afvist & Ikke afvist  \\\hline
-        1                   &        & \checkmark   \\\hline
-        2                   &        &              \\\hline
-        3                   &        &              \\\hline
-        4                   &        &              \\\hline
-        5                   &        &              \\\hline
-        6                   &        &              \\\hline
-        7                   &        &              \\\hline
-        8                   &        &              \\\hline
+            & Afvist & Ikke afvist  \\\hline
+        1   &            & \checkmark   \\\hline
+        2   &            & \checkmark   \\\hline
+        3   & \checkmark &              \\\hline
+        4   & \checkmark &              \\\hline
+        5   &            & \checkmark   \\\hline
+        6   & \checkmark &              \\\hline
+        7   &            &              \\\hline
+        8   &            &              \\\hline
+        9   &            &              \\\hline
     \end{tabular}
     \caption[]{Hypoteser i forhold til den naive kørsel.}
     \label{hypoteser_naiv}
