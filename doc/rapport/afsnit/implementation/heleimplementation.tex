@@ -46,19 +46,21 @@ def setSettings(settings):
 def setGlobalSettings(globalSettings):
 	return 0
 \end{lstlisting}
-\subsubsection{Indstillinger}
-\subsubsubsection{Globale indstillinger}
+%Settings 
+\subsubsection{Globale indstillinger}
 Globale indstillinger er informationer, som har brug for at blive gemt
 mellem kørsler. I det nuværende tilfælde er det placeringen på databasen og
 csvfilen fra wga.hu, det kunne udvides til også at inkludere placeringen
 af billederne istedet for at være fastdefineret.
-\subsubsubsection{Kørselsindstillinger}
+\subsubsection{Initiallisering af databasen}
+%konstruktion af databasen inklusiv downloading og crawling
+
+\subsubsection{Kørselsindstillinger}
 Disse indstilinger kan afvige i forskellige kørsler, det er variable
 hvis indstillinger betyder meget for resultaterne og derfor er vigtige
-at kunne ændre.
-\ref{tærskelværdi}.   
-%Settings 
-%konstruktion af databasen inklusiv downloading og crawling
+at kunne ændre. De består af tærskelværdier for floodfill og
+kantdetektion samt størrelsen på margin\ref{tærskelværdi}, de snit, som
+skal undersøges og hvilken metode, der skal benyttes.
 %Loop
 }
 % vim: set tw=72 spell spelllang=da:
