@@ -66,7 +66,7 @@ forskel på de individuelde snit, Id'erne placering kan ses i figur
 \ref{cut}. Vi vil i resten af rapporten kalde snittene efter deres Id.
 
 \begin{definition}
-	Vær snit af vær snitratio, har et fast \textbf{Id}, "Snit 0,1,2 og 3", som kan ses i figur \ref{cut}, hvor vært snit er indtegnet, samt deres Id som label. 
+	Vært snit af vært snitratio, har et fast \textbf{Id}, "Snit 0,1,2 og 3", som kan ses i figur \ref{cut}, hvor vært snit er indtegnet, samt deres Id som label. 
 \end{definition}
 
 \begin{figure}[h]
@@ -77,10 +77,26 @@ forskel på de individuelde snit, Id'erne placering kan ses i figur
 	\label{2Cut}
 \end{figure}
 
+Nå vi arbejder på et snit er det svært for noget at ligger i snittet, da
+snittet kun er en pixel bredde, derfor udvider vi snitte til at have en
+større bredde, ved at indføre bredde som en definitionen kaldet margin. 
+
+\being{definition}
+	Vært snit har en \textbf{Margin}, som er to linier, der er,
+	parralælde med snittet, har samme afstand fra snittet og befinder
+	sig på vær side af snittet. I figur \ref{margin} er marginen indtegnet som
+	to blå stiplet linjer og snittet en indtegnet en rød linje . 
+\end{definition}s
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.42,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/margin.png}
+	\end{center}
+	\caption[]{snittet er den røde linie, margine er de to blå stiplet linier}
+	\label{margin}
+\end{figuree}
+
 \subsection{Acceptabel afvigelse}
-\begin{comment}"""
-Som beskravet i afsnit \ref{mange_tal}, udregnes det gyldne snit med mange decimaler. Selv den beste kunstner har et maksimum på hvor præcis han kan male, om det er hans øjne der sætter grandsen eller størrelsen på han pensler eller om han bare ikke maler særlige præcis, så kan han aldrig malle så præcis som vi kan udregne det gyldne snit til. Derfor sætter vi en afvigelse på $0.5 \%$, som maleren vi sat en 
-\end{comment}
 \note{Nogle referanse}Som beskrevet i afsnit \ref{mange_tal}, udregnes
 det gyldne snit med mange decimaler. En kunstner, hvor god han end er,
 har ingen chance for at male så præcist at man kan sige at strøget
