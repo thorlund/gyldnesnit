@@ -22,6 +22,7 @@ cuts = experiment.generateCuts()
 experiment.setSettings(settings)
 experiment.setGlobalSettings(globalSettings)
 db = Database(globalSettings)
+db.construct(Database)
 run = m.createNewRun(settings)
 paintings = m.Painting.select(m.Painting.q.form=="painting")
 for painting in paintings:
@@ -54,7 +55,19 @@ csvfilen fra wga.hu, det kunne udvides til også at inkludere placeringen
 af billederne istedet for at være fastdefineret.
 \subsubsection{Initiallisering af databasen}
 %konstruktion af databasen inklusiv downloading og crawling
-
+Databasen bliver altid initialiseret, undtagen i speciel tilfældet at
+der skal skabes en testdatabase\ref{test_db}. 
+\begin{lstlisting}[caption={Pseudokode for database
+initialisering},frame=tb,label={pseudo_init_db}]
+csvfile = open(Settings.csvfilelocation)
+for line in csvfile:
+	line = parser.parse(line)
+	if not os.path.isfile(line.path):
+		download(line.url)
+	if database.Painting.select(database.Painting.url==line.url).count() == 0:
+		painting = database.Painting(line)
+\end{lstlisting}
+\subsubsubsection{Testdatabase}\label{test_db}
 \subsubsection{Kørselsindstillinger}
 Disse indstilinger kan afvige i forskellige kørsler, det er variable
 hvis indstillinger betyder meget for resultaterne og derfor er vigtige
