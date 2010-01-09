@@ -35,7 +35,7 @@ Eksperimenterne er til for at samle konfigurationen af en kørsel.
 Kravene til et eksperiment er at den skal have mindst tre metoder:
 generation af snit, sætte globale indstillinger samt sætte
 kørselsspecifikke indstillinger. \ref{pseudo_experiment} er et eksempel
-på hvordan et eksperiment evt. kunne se ud.
+på hvordan et eksperiment evt. kunne se ud.
 \begin{lstlisting}[caption={Pseudokode for et
 experiment, som checker på $\varPhi$},frame=tb,label={pseudo_experiment}]
 def generateCuts():
@@ -51,7 +51,7 @@ def setGlobalSettings(globalSettings):
 \subsubsection{Globale indstillinger}
 Globale indstillinger er informationer, som har brug for at blive gemt
 mellem kørsler. I det nuværende tilfælde er det placeringen på databasen og
-csvfilen fra wga.hu, det kunne udvides til også at inkludere placeringen
+csvfilen fra wga.hu, det kunne udvides til også at inkludere placeringen
 af billederne istedet for at være fastdefineret.
 \subsubsection{Initiallisering af databasen}
 %konstruktion af databasen inklusiv downloading og crawling
@@ -67,12 +67,12 @@ for line in csvfile:
 	if database.Painting.select(database.Painting.url==line.url).count() == 0:
 		painting = database.Painting(line)
 \end{lstlisting}
-\subsubsubsection{Testdatabase}\label{test_db}
+\subsubsection{Testdatabase}\label{test_db}
 \subsubsection{Kørselsindstillinger}
 Disse indstilinger kan afvige i forskellige kørsler, det er variable
 hvis indstillinger betyder meget for resultaterne og derfor er vigtige
 at kunne ændre. De består af tærskelværdier for floodfill og
-kantdetektion samt størrelsen på margin\ref{tærskelværdi}, de snit, som
+kantdetektion samt størrelsen på margin\ref{terskelverdi}, de snit, som
 skal undersøges og hvilken metode, der skal benyttes.
 %Loop
 }
