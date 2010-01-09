@@ -27,78 +27,87 @@ Det vil sige at $\psi \in [2.1, 2.43]$. Vi har valt at
 sætte $\psi = 2.4$, da vi derved kan tage højde for uforresette
 usikkerhed.
 
-\subsection{Afvigelsen af farver i kandtdetection}
-Vi bruger kandtdetection til, er af finde en kanter rundt om de regioner
-som vi mener er interessante, og undgå de kanter som ligger inde i
-regioner. Begge de 2 mål kan ikke altid opfyldes, men vi kan komme så
-tæt på et krompromi mellem en perfekt kant rund om region og ingen
-kanter inde i region som mulige. Dette gøres ved at ændre 2
-tærskelværdier i kantdetectionen. Vi har valt at dele billederne som vi
-observere op i 9 kategorier, se tabel \ref{thressholdsTabelKant},
-Kategorier er en grove opdeling af billederne efter detaljer og farve
-intensitet, som bruges til at give en bedre indblik på billedets
-opbygning. 
+\subsection{Afvigelsen af farver i kantdetektion}
+Vi bruger kantdetektion til, er af finde en kanter rundt om de regioner
+som vi mener er interessante, og vi vil gerne undgå kanter inde i
+regionerne. Begge mål kan ikke altid opfyldes, men vi kan komme så tæt
+på et krompromis mellem en perfekt kant rundt om region og ingen kanter
+inde i en region som muliget. Dette gøres ved at ændre to tærskelværdier
+i kantdetektionen. Vi har valgt at dele billederne som vi observerer op
+i ni kategorier, se tabel \ref{thressholdsTabelKant}. Kategoriernr er en
+grov opdeling af billederne efter detaljer og farveintensitet, som
+bruges til at give en bedre indblik i billedets opbygning.
 
 \subsubsection{Sammenligninger}
-Vi har set på 9 malerier og har fundet de tærskelværdier som vi mener
-passer bæst på malerierne. Vi vil illustrerer hvordan vi har fastsat
-tærskelværdierne på maleriet \ref{kDetalier}.
+Vi har undersøgt på ni malerier og har fundet de tærskelværdier, vi mener
+passer bedst på malerierne. Vi vil illustrere, hvordan vi har fastsat
+tærskelværdierne, på maleriet \ref{kDetalier}.
 
-Maleriet er malet med mange farver og med masser af detaljer. Vi ser
-først på tærskelværdierne $(0,0),(100,100).....(600,600),(700,700)$ se
-figur \ref{allesammen1} og \ref{allesammen2}, og finde det interval hvor
-malerriet ikke har mistet nogle af kanterne rundt om regionerne endnu,
-men vil det, i næste interval. I illustration vurdere vi det til
-billedet \ref{300-300}, da billedet \ref{400-400} har mistet for mange
-af de kanter, som vi gerne vil beholde.
+Maleriet er malet med mange farver og med mange detaljer. Vi ser først
+på tærskelværdierne $(0,0),(100,100).....(600,600),(700,700)$. I
+figurene \ref{allesammen1} og \ref{allesammen2} kan man se hvordan de
+forskellige tærskelværdier påvirker hvad kantdetektoren finde af kanter i
+billedet, læg mærke til at nu højre tærskelværdierne er, nu færre kanter
+bliver der også fundet, og det blive svære og svære at genkende maleriet i kanterne. 
 
-Ved at sætte en af tærskelværdierne op lidt af gangen, kan vi igen få en
-række billeder at vælge imellem. Se sammenligningen i figur
-\ref{allesammen3}. Man kan se at det begynder at være svær at skelne
-figurene i \ref{300-850} og der er lidt for mange kanter i
-\ref{300-700}.
+Vi finde det billedet i \ref{allesammen1} og \ref{allesammen2}, med
+højest tærskelværdi, som ikke har mistet for mange kanterne rundt om
+regionerne endnu. Vi vurderer at billedet \ref{300-300} passer bedst på
+den beskrivelse, da regionerne som vingerne, hovet og kroben stadig er
+omkranset af en kant. Så tærskelværdien $(300-300)$ er den værdi som for
+vores kantdetektor til at virke bedst, ind til vidre.
 
-Vi har valgt at fastsætte tærskeværdigerne til $(300,750)$. Det maleri
-vi lige har brugt er ikke særlige repræsentativ for helle vores maleri
-database. så vi har taget 8 andre billeder og brugt samme metode på dem og fastsat en
-middel tærskelværdi. Vi viser her en lille udsnit af dem, se figur
-\ref{en}, \ref{to} og \ref{tre}.
+Ved at sætte en af tærskelværdierne lidt op af gangen, kan vi finde en
+bedre tærskelværdi for kantdetektoren. Vi opstille igen en rigge
+billeder med forskellige tærskelværdier og vurderer billederne ud fra
+samme kriterier. Vi vurderer her at billedet \ref{300-750} passe bedst,
+da vingerne, hoved og kroben stadig har mange af deres kanter. Derfor er
+(300-750) den tærskelværdi som vi vurdere til at være bedst til at
+opfylder krompromis meller kanter rundet om regioner og få kanter inde i
+regionerne.
+
+Det brugte maleri er ikke særlig repræsentativt for hele vores
+billeddatabase. Så vi har også brugt metoden på otte andre billeder. Et
+lille udsnit af de otte billeder kan ses i figur \ref{en}, \ref{to} og
+\ref{tre}, hvor man skal ligge mærke til at det kandetekteret billedet
+liner et omrids af det originale billet regioner. 
+
 \clearpage
 \begin{figure}[p]
     \centering
+    \subfloat[Det original maleri. Navn: The Archangel Michae. År: Ca 1490 Af: Abadia, Juan de la]{
+        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/kDetalier.jpg}
+        \label{kDetalier}}
     \subfloat[(100,100)]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/1_iteration/100-100.png}
-        \label{100-100}}\hspace{1em}
+        \label{100-100}}\\
     \subfloat[(200,200)]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/1_iteration/200-200.png}
-        \label{200-200}}\\
+        \label{200-200}}
     \subfloat[(300,300)]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/1_iteration/300-300.png}
         \label{300-300}}\hspace{1em}
-    \subfloat[(400,400)]{
-        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/1_iteration/400-400.png}
-        \label{400-400}}
-    \label{allesammen1}
-    \caption{Edgedetection på maleriet \ref{kDetalier} som har mange detaliger og kraftige farver, med tærskelværdierne fra (100-100) til (400-400)}
+    \caption{Kantdetektion på maleriet \ref{kDetalier} som har mange detaljer og kraftige farver, med tærskelværdierne fra (100-100) til (300-300)}
+	\label{allesammen1}
 \end{figure}
 
 \clearpage
 
 \begin{figure}[!h]
 	\centering
+    \subfloat[(400,400)]{
+        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/1_iteration/400-400.png}
+        \label{400-400}}    
 	\subfloat[(500,500)]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/1_iteration/500-500.png}
-        \label{500-500}}\hspace{1em}
+        \label{500-500}}\\
     \subfloat[(600,600)]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/1_iteration/600-600.png}
-        \label{600-600}}\\
+        \label{600-600}}
     \subfloat[(700,700)]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/1_iteration/700-700.png}
-        \label{700-700}}\hspace{1em}
-    \subfloat[Original. Navn: The Archangel Michae. År: Ca 1490 Af: Abadia, Juan de la]{
-        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/kDetalier.jpg}
-        \label{kDetalier}}
-    \caption[]{Edgedetection på maleriet \ref{kDetalier} som har mange detaliger og kraftige farver, med tærskelværdierne fra (500-500) til (700-700)}
+        \label{700-700}}
+    \caption[]{Kantdetektion på maleriet \ref{kDetalier} som har mange detaljer og kraftige farver, med tærskelværdierne fra (400-400) til (700-700)}
      \label{allesammen2}
 \end{figure}
 
@@ -116,43 +125,44 @@ middel tærskelværdi. Vi viser her en lille udsnit af dem, se figur
     \subfloat[(300,850)]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/2_iteration/300-850.png}
         \label{300-850}}
-        \caption[]{Edgedetection hvor de 4 billeder som er intrasante taget med}
+        \caption[]{Kantdetektion hvor de fire billeder som er interessante er taget med}
      \label{allesammen3}
 \end{figure}
  
 \begin{figure}[!h]
     \centering
+    \subfloat[Det original maleri. Navn: The Lamentation over St Francis. År: 1440. Af: Angelico, Fra. ]{
+        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/svage_farver/svage_detalier/sDetalier.jpg}
+        \label{Orginal1}}
     \subfloat[(100,250)]{
         \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/svage_farver/svage_detalier/2_iteration/100-250.png}
         \label{100-250}}\hspace{1em}
-    \subfloat[Orginal. Navn: The Lamentation over St Francis. År: 1440. Af: Angelico, Fra. ]{
-        \includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/thressholds/svage_farver/svage_detalier/sDetalier.jpg}
-        \label{Orginal1}}
-        \caption[]{Edgedetection på et billedet med svage farver og få detalier, hvor tærskenværdigern [100,250] er den beste}
+        \caption[]{Kantdetektion på et billedet med svage farver og få detaljer, hvor tærskelværdien (100,250) er den bedste}
      \label{en}
 \end{figure}
 
 \begin{figure}[!h]
     \centering
+    \subfloat[Det Original maleri. Navn:The Ninth Wave. År:1850. Af:Aivazovsky, Ivan Konstantinovich.]{
+        \includegraphics[angle=0,width=0.85\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/svage_detalier/sDetalier1.jpg}
+        \label{Orginal2}}\\
     \subfloat[(100,240)]{
         \includegraphics[angle=0,width=0.85\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/svage_detalier/2_iteration/100-240.png}
-        \label{100-240}}\\
-    \subfloat[Orginal. Navn:The Ninth Wave. År:1850. Af:Aivazovsky, Ivan Konstantinovich.]{
-        \includegraphics[angle=0,width=0.85\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/svage_detalier/sDetalier1.jpg}
-        \label{Orginal2}}
-        \caption[]{Edgedetection på et billedet med medium farver og få detalier, hvor tærskenværdigern [100,240] er den beste}
+        \label{100-240}}
+        \caption[]{Kantdetektion på et billede med medium farver og få detaljer, hvor tærskelværdien (100,240) er den bedste}
      \label{to}
 \end{figure}
 
 \begin{figure}[!h]
     \centering
+    \subfloat[Det original maleri. Name: The last supper. År: 1498. Af: Leonardo da Vinci]{
+        \includegraphics[angle=0,width=0.85\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/medium_detalier/mDetalier1.jpg}
+        \label{Orginal3}}\\
     \subfloat[(200,460)]{
         \includegraphics[angle=0,width=0.85\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/medium_detalier/2_iteration/200-460.png}
-        \label{200-460}}\\
-    \subfloat[Orginal. Name: The last supper. År: 1498. Af: Leonardo da Vinci]{
-        \includegraphics[angle=0,width=0.85\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/medium_detalier/mDetalier1.jpg}
-        \label{Orginal3}}
-        \caption[]{Edgedetection på et billedet med medium farver og medium detalier, hvor tærskenværdigern [200,460] er den beste}
+        \label{200-460}}
+
+        \caption[]{Kantdetektion på et billedet med medium farver og medium detaljer, hvor tærskelværdien [200,460] er den bedste}
      \label{tre}
 \end{figure}
 
@@ -168,37 +178,38 @@ middel tærskelværdi. Vi viser her en lille udsnit af dem, se figur
     \label{thressholdsTabelKant}
 \end{table}
 
-Som man kan se af tabel \ref{thressholdsTabelKant} gå tærskelværdierne
+Det ses i tabel \ref{thressholdsTabelKant} går tærskelværdierne
 fra $(100,240)$ til $(300,750)$, så vi tager en gennemsnit af værdierne
-og få at de to tærskelværdier skal være (177 og 384). 
+og få at de to tærskelværdier skal være $(177,384)$. 
 
-Vi har dog i vores forsøg regnet med værdierne 78 og 194, da vores
-indledende afprøvninger afviger en smugle fra den denne afprøvning.
+Vi har dog i vores forsøg regnet med værdierne $(78,194)$, da vores
+indledende afprøvninger afviger en smule fra den denne afprøvning.
 
 \subsection{Afvigelsen af farver i floodfill}
-Floodfill har 2 tærskelværdier $lo$ og $up$, som betegner hvor mange
-pixel værdier en nabo pixel farver må variere, ned og op. En
+Floodfill har to tærskelværdier $lo$ og $up$, som betegner hvor mange
+pixelværdier en nabopixels farver må afvige. En
 fyldestgørelses beskrivelse af floodfill findes i afsnit
 \ref{section_opdeling}. 
 
-Vi har tænkt os at finde en fældes tærskelværdi til brug i vores
-program. Måde vi gør det på at ved at observere hvordan floodfill virker
-med forskellige tærskelværdier og finde de tærskelværdier som passer
-bæst til maleriet. Resultatet for observationen kan ses i tabel
-\ref{thressholdsTabelFF}, hvor de 9 sammen kategorier er vist og
-afprøvet på de samme 9 malerier. Et af de malerierne kan se i
-figur \ref{Floodfillbilledet}, hvor man kan se hvad vi har valt til at
-være de optimale værdier.
+Vi har tænkt os at finde en fælles tærskelværdi til brug i vores
+program. Vi observere hvordan floodfill virker med forskellige
+tærskelværdier og finder dem, som passer bedst til maleriet. Resultatet
+for observationen kan ses i tabel \ref{thressholdsTabelFF}, hvor de
+sammen ni kategorier er brugt og afprøvet på de samme ni malerier. Et af
+de malerier hvor den optimale tærskelværdi er fundet kan ses i figur
+\ref{Floodfillbilledet}, lig mærke til hvordan træet, samt sne
+baggrunden, er fyldt næsten helt ud, uden at nogle af menneskerne er
+farvet over.
 
 \begin{figure}[!h]
     \centering
+    \subfloat[Det Originale maleri. Navn: Winter Landscape. År: Ukent. Af:Avercamp, Hendrick.]{
+        \includegraphics[angle=0,width=0.9\textwidth]{afsnit/afprovning/billeder/thressholds/svage_farver/kraftige_detalier/kDetalier.jpg}
+        \label{Orginal4}}\\
     \subfloat[8,8]{
         \includegraphics[angle=0,width=0.9\textwidth]{afsnit/afprovning/billeder/thressholds/svage_farver/kraftige_detalier/floodfill/8-8.png}
-        \label{8-8}}\\
-    \subfloat[Orgina. Navn: Winter Landscape. År: Ukent. Af:Avercamp, Hendrick.]{
-        \includegraphics[angle=0,width=0.9\textwidth]{afsnit/afprovning/billeder/thressholds/svage_farver/kraftige_detalier/kDetalier.jpg}
-        \label{Orginal4}}
-    \caption[]{tærskelværdierne på et billedet med svage farver og kraftige detaljer hvor tærskelværdien [8,8] passer best}
+        \label{8-8}}
+    \caption[]{tærskelværdierne på et billedet med svage farver og kraftige detaljer hvor tærskelværdien (8,8) passer bedst}
     \label{Floodfillbilledet}
 \end{figure}
 
@@ -206,16 +217,17 @@ være de optimale værdier.
     \centering
     \begin{tabular}{| l | l | l | l |} \hline
         & Svage farver 		& Medium farver & kraftige farver \\ \hline
-        Få detalier 		& \textbf{[2,2]}	& [3,3]			& [4,4]\\ \hline
-        Medium detalier 	& \textbf{[2,2]}	& \textbf{[5,5]}& \textbf{[2,2]}\\ \hline
-        Mange detalier		& [8,8]				& [4,4]			& [7,7]\\ \hline
+        Få detalier 		& \textbf{(2,2)}	& (3,3)			& (4,4)\\ \hline
+        Medium detalier 	& \textbf{(2,2)}	& \textbf{(5,5)}& \textbf{(2,2)}\\ \hline
+        Mange detalier		& (8,8)				& (4,4)			& (7,7)\\ \hline
     \end{tabular}
-    \caption{Tabel over floodfill tærskelværdier på 9 malerier}
+    \caption{Tabel over floodfill tærskelværdier på ni malerier}
     \label{thressholdsTabelFF}
 \end{table}
 
-Som man kan se af tabel \ref{thressholdsTabelFF}, er nogle af vadierne
-med fed, begrundelsen for det, er at vadierne, er de beste, vi kan finde
-for billedet, men at de vadier stadig ikke giver noget som er særlige
+\note{hjælp med formulering, bliver ved med at lave det samme krab}
+Det ses i tabel \ref{thressholdsTabelFF} at nogle af værdierne er med
+fed, grundet til det, er at, vadierne, er de beste, vi kan finde for
+billedet, men at de vadier stadig ikke giver noget som er særlige
 brugbart. værdigerne i tabel fluktuere også en del, så vi tager
-gennemsnittet og får tærskelværdierne til at være (5,5).
+gennemsnittet af værdierne uden fed og får en tærskelværdierne på (5,5).
