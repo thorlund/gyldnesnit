@@ -15,21 +15,20 @@ db = Database(globalSettings)
 #run = sys.argv[1]
 runId = m.Result.select().max('run_id')
 results = m.Result.select(m.Result.q.run == runId)
+conn = m.Result._connection
 for result in results:
-    print "new result"
-    count = 0
-    feats = dict()
-    regions = m.Region.select(m.Region.q.result == result.id).distinct()
-    for region in regions:
-#        print region
-        key = str(region.x)+str(region.y)+str(region.height)+str(region.width)+str(region.blobArea)
-        if key not in feats:
-#            print "key:"
-#            print key
-            feats[key]=True
-            count = count +1
-    if count > 0 and ((result.numberOfRegions/count) >3):
-#        print feats
-#        print count
-#        print result.numberOfRegions
-    result.numberOfRegions = count
+	count = 0
+	feats = dict()
+	regions = m.Region.select(m.Region.q.result == result.id).distinct()
+	regionsSelect = conn.sqlrepr(b.Select([m.Region.q.x,m.Region.q.y,m.Region.q.height,m.Region.q.width,m.Region.q.blobArea],where=(result.id == m.Region.q.result)).distinct()) 
+	regionsSelectResult=conn.queryAll(regionsSelect)
+	"""
+	for region in regions:
+		key = str(region.x)+str(region.y)+str(region.height)+str(region.width)+str(region.blobArea)
+		if key not in feats:
+			feats[key]=True
+			count = count +1
+	print count
+	"""
+	result.numberOfRegions = len(regionsSelectResult)
+	print result.id
