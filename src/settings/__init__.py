@@ -15,7 +15,7 @@ from src.lib.goldenLibrary import PHI
 
 class GlobalSettings:
 	"""Here global settings for the entire program can be placed"""
-	relativeDatabaseLocation = "database.db"
+	relativeDatabaseLocation = "pictureresource.db"
 	absoluteDatabaseLocation = os.path.abspath(relativeDatabaseLocation)
 	relativeCSVFileLocation = 'database/catalog.csv'
 	absoluteCSVFileLocation = os.path.abspath(relativeCSVFileLocation)

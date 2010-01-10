@@ -36,6 +36,7 @@ class Database:
 		value = value and  m.Painting.select().count()==0
 		return value
 	def __init__(self,settings):
+		self.setLocation(settings.getDatabaseLocation())
 		connectionString = 'sqlite:%s/%s' % (os.getcwd(), self.location)
 		connection = s.connectionForURI(connectionString)
 		s.sqlhub.processConnection = connection
@@ -45,8 +46,7 @@ class Database:
 		m.Result.createTable(ifNotExists=True)
 		m.Region.createTable(ifNotExists=True)
 		self.setCSVFile(settings.getCSVFileLocation())
-		print self.csvfile
-		self.setLocation(settings.getDatabaseLocation())
+		#print self.csvfile
 
 	def constructDatabase(self):
 		csvfile = open(self.csvfile,'r')
