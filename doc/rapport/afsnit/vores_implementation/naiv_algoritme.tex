@@ -8,10 +8,8 @@ gyldne snit. For at afgøre dette trækker vi regioner ud af billeder og
 vurderer dem efter deres placering, størrelse og form. Afsnit
 \ref{section_udtraek} vil forklare, hvordan selve udtrækningen af
 regioner foregår, men her antager vi, at vi allerede har trukket
-regionerne ud. Vi siger, at et billede opfylder det gyldne snit, hvis en
-eller flere interessante regioner kan siges at ligge i snittet.  I det
-følgende vil vi se på, hvornår en region ligger i det gyldne snit, samt
-hvornår vi har med en interessant region at gøre.
+regionerne ud. I det følgende vil vi se på, hvornår en region ligger i
+det gyldne snit, samt hvornår vi har med en interessant region at gøre.
 }
 
 \subsection{Regionens placering}
@@ -35,18 +33,15 @@ ses, at regionen nærmest tangerer linjen.
     \label{pos_naiv_1}
 \end{figure}
 
-I praksis er det dog sjældent tilfældet, at regioner ligger helt præcist
-på snittet.
 %På grund af den måde, vi trækker regioner ud af billedet på,
 %kan vi ikke være sikre på at regionen er fyldt helt ud til dens kanter,
 %fordi der i disse områder stadig er stor overgang i farverne.  Dette
 %bevirker at en regioner kan blive repræsenteret som mindre end de
 %virkelig er.
-Vi har også, at det gyldne snit baserer sig på det irrationelle tal
-$\varphi$, og vi kan derfor ikke regne os helt nøjagtig frem til, hvor
-det egentlige snit ligger. Dette vil vi komme nærmere ind på i afsnit
-\ref{section_opdeling}. Vi indfører derfor et \textbf{margin}, hvori vi
-vil acceptere regioner som liggende i snittet.
+I praksis er det dog sjældent tilfældet, at regioner ligger helt præcist
+på snittet. Vi har i afsnit \ref{section_opdeling} defineret et margin,
+som tager højde for dette. Hvis en region ligger inden for margin,
+accepterer vi denne som liggende i snittet.
 \begin{definition}
     Et \textbf{margin} er en udvidelse af vores snit, hvori vi vil
     godtage regioner, som liggende i snittet.
@@ -56,7 +51,7 @@ I praksis betyder det, at vi \emph{ikke kun} betragter den linje, der
 deler billedet ved det gyldne snit, men faktisk tager et bånd, sammensat
 af en række snit, og bruger dette som et bredere gyldent snit.  Derved
 behøver en region ikke at tangere det gyldne snit helt nøjagtig, for at
-ligge i snittet, f.eks, er regionen i figur \ref{pos_naiv_margin_1}
+ligge i snittet, f. eks, er regionen i figur \ref{pos_naiv_margin_1}
 placeret i det gyldne snit.  Vær opmærksom på, at vores margin, i de
 følgende illustrationer, kan være stærkt overdrevet rent visuelt.
 \begin{figure}[hb]
@@ -64,7 +59,7 @@ følgende illustrationer, kan være stærkt overdrevet rent visuelt.
     \includegraphics[scale=\imgscale,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/naiv_positiv_blob_margin_1}
     \caption[Positiv region i margen]{En region, som ligger inden for
     den givne margin af det gyldne snit, betragtes som positiv. De blå
-    stiplede linjer angiver vores bånd.}
+    stiplede linjer angiver vores margin.}
     \label{pos_naiv_margin_1}
 \end{figure}
 
@@ -96,8 +91,8 @@ sige, at den ligger i snittet.
         \includegraphics[scale=\imgscale,angle=0]{afsnit/vores_implementation/billeder/naiv_algoritme/bbox_section}
     \end{center}
     \caption[Begrænsende rektangler]{Den øverste region ligger ikke i
-    det gyldne snit, da den ikke har nogen kanter inden for båndet. Den
-    nederste region, derimod, har én kant inden for båndet og ligger
+    det gyldne snit, da den ikke har nogen kanter inden for margin. Den
+    nederste region, derimod, har én kant inden for margin og ligger
     derfor i det gyldne snit.} \label{bbox_section}
 \end{figure}
 
@@ -114,7 +109,7 @@ Med ovenstående definition i tankerne kigger vi nu på, hvordan et
 rigtigt billede kan tage sig ud, når vi vil finde regioner. I figur
 \ref{realworld_example} ser vi, at der i dette tilfælde vil blive
 udvalgt mange små regioner, som egentlig ikke kan tillægges nogen
-betydning.
+betydning. Vi har derfor brug for at sortere uinteressante regioner fra.
 
 \subsection{Interessante regioner}
 Vi vil nu gå videre og opsætte nogle kriterier for, hvornår en region er
