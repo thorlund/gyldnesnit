@@ -67,7 +67,7 @@ for timeline in timelines:
 			ratios[ratio]=results.filter(b.AND(m.Result.q.cutRatio==ratio , m.Result.q.cutNo==cut, m.Artist.q.timeline==timeline)).distinct().sum(m.Result.q.numberOfRegions)
 		cuts.append(ratios)
 		ratios=dict()
-	picTimeline=paintings.filter(b.AND( m.Painting.q.artist==m.Artist.q.id, m.Artist.q.timeline==timeline))
+	picTimeline=paintings.filter(b.AND(m.Artist.q.id == m.Painting.q.artist,m.Artist.q.timeline==timeline)).distinct()
 	for painting in picTimeline:
 		if not (painting.realWidth == None and painting.realHeight == None):
 			if int(painting.realWidth*painting.realHeight) not in area:
