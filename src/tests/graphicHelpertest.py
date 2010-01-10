@@ -111,7 +111,7 @@ def main():
 	settings = Settings(cutRatios)
 	image = highgui.cvLoadImage (filename)
 	thickness = 4
-	settings.setMarginPercentage(0.025)
+	settings.setMarginPercentage(0.024)
 	cuts = (0,1,2,3)
 	cut = int(sys.argv[2])
 	winname = sys.argv[3]+".png"
@@ -125,13 +125,14 @@ def main():
 	tmp = 0
 	for r in cuts:
 		cut = r
+		print str(r), '---------------------------------'
 		for i in ratios:
 			#settings = Settings(cutRatios)
-			#print i
+			print i
 			cutd = lib.findMeans(cv.cvGetSize(image), i)[cut]
 			edgeImage = naiveMethod.getEdgeImage(image, settings)
 			components = naiveMethod.analyzeCut(image, edgeImage, cutd, settings)
-			#print len(components)		
+			print len(components)		
 			tmp = tmp + len(components)
 	print tmp
 	blobImg = blobResult(image, settings, cut)
