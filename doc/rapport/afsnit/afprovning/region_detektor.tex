@@ -108,17 +108,29 @@ tilfælde.
 
 \begin{figure}[!h]
     \centering
-		\subfloat[Maleri med kraftige farver og mange detaljer.]{
-       	 	\includegraphics[angle=270,width=0.90\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/floodfill/4-4.png}
-		    \label{GRD_virker_nesten1}}\hspace{1em}
+	\subfloat[Maleri med kraftige farver og mange detaljer, hvor de tærskelværdierne fundet i afsnit \ref{terskelverdi} er brugt.]{
+   	 	\includegraphics[angle=270,width=0.90\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/floodfill/4-4.png}
+	    \label{GRD_virker_nesten1}}\hspace{1em}
+    \subfloat[Det samme maleri, hvor Tærskelværdier er valt specifikt for det her maleri]{
+        \includegraphics[angle=270,width=0.95\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/s7_e200_f5.png}
+        \label{GRD_virker_nesten1_super}}\\
+     \caption[]{Et malerier, hvor den generelle metode ikke helt virker efter vores ønske, men med nye tærskelværider vil virker meget bedre}
+     \label{generelde_region_detektor_virker_nesten1}
+\end{figure}
+
+\begin{figure}[!h]
+    \centering
     \subfloat[Maleri med middel kraftige farver og medium antal detaljer.]{
         \includegraphics[angle=0,width=0.95\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/medium_detalier/floodfill/4-4.png}
         \label{GRD_virker_nesten2}}\\
-     \caption[]{To malerier, hvor den generelle metode ikke helt virker efter vores ønske, men stadig finder noget vi kan bruge.}
-     \label{generelde_region_detektor_virker_nesten}
+	\subfloat[Det samme maleri, hvor Tærskelværdier er valt specifikt for det her maleri]{
+   	 	\includegraphics[angle=0,width=0.90\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/medium_detalier/s5_e90_e200_f4.png}
+	    \label{GRD_virker_nesten2_super}}\hspace{1em}
+     \caption[]{Et malerier, hvor den generelle metode ikke helt virker efter vores ønske, men med nye tærskelværdier vil virker meget bedre}
+     \label{generelde_region_detektor_virker_nesten2}
 \end{figure}
 
-I figur \ref{generelde_region_detektor_virker_nesten} er der to
+I figur \ref{generelde_region_detektor_virker_nesten1} og \ref{generelde_region_detektor_virker_nesten2} er der to
 malerier, hvor metoden ikke fungerer optimalt efter hensigten. Dog kan
 vi stadig bruge figurerne til noget
 
@@ -139,9 +151,13 @@ algoritmen til at virke i maleriet.
 Når netop de to figure \ref{GRD_virker_nesten1} og
 \ref{GRD_virker_nesten2} er interessante, er det fordi, at en ændring af
 tærskelværdier, samt en højre grad af sløring, ville bevirke, at den
-generelle metode kom til at fungere bedre.
+generelle metode kom til at fungere bedre. I billedet
+\ref{GRD_virker_nesten1_super} og \ref{GRD_virker_nesten1_super} er
+protretere de samme malerier, men hvor tærskelværdierne passer bedre til
+maleriet, man kan se det ved f.eks at karben på anglen samt det meste af
+loftet bliver fundet.
 
-\note{illustrationer på det}
+\clearpage
 
 \begin{figure}[!h]
     \centering
@@ -176,7 +192,41 @@ sænkning vil resultere i, at ingen af blomsterne bliver trukket ud.
 Maleriet \ref{GRD_virker_ikke2} repræsenterer en anden problemstilling,
 som vi ikke kan komme udenom: Farverne er så mørke og svage, at en
 ændring i tærskelværdien i floodfill på bare en vil få metoden til at gå
-fra at finde ingen regioner til at finde én stor. Dette kan også
-skyldes, at kantdetektionen tilføjer en mørk kant rundt om regionerne,
-men da maleriet er mørkt i forvejen, hjælper kandetektionen ikke.
-\note{illustrationer}
+fra at finde ingen regioner til at finde for store regioner. det kan ses
+i figur \ref{ff_munke}, hvor de 2 malerier, hvor floodfills tærskelværdi
+er sat til den lavest og næst laves værdi. Som man kan se, finde metoden
+mange snå regioner som ikke er særlige intrasant i maleri
+\ref{munk_etff}, men i \ref{munk_toff}, bliver der fundet 2 meget store
+regioner, som er blevet alt for store. Dette er et problem da vi så ikke
+kan have en tærskelværdi som virker.
+
+\begin{figure}[!h]
+    \centering
+     \subfloat[Tærskelværdierne for floordfill på maleriet er sat til en]{
+        \includegraphics[angle=0,width=0.46\textwidth]{afsnit/afprovning/billeder/thressholds/svage_farver/svage_detalier/1-1.png}
+        \label{munk_etff}}
+    \subfloat[Tærskelværdierne for floodfill på maleriet er sat til to]{
+        \includegraphics[angle=0,width=0.46\textwidth]{afsnit/afprovning/billeder/thressholds/svage_farver/svage_detalier/2-2.png}
+        \label{munk_toff}}
+     \caption{Et maleri hvor tærskelværdien for floodfill er sat til den laveste værdi den kan have, og et hvor denne næst laves tærskelværdien er sat.}
+     \label{ff_munke}
+\end{figure}
+
+Dette kan også skyldes, at kantdetektionen tilføjer en mørk kant rundt
+om regionerne, men da maleriet er mørkt i forvejen, hjælper
+kandetektionen ikke. I maleri \ref{bla} er kanten tegnet med blåt og man
+kan se at munken to fra venstre, ikke får sit skæg med, men hvor han går
+det i maleriet med sort kant, se maleri \ref{sort}.
+
+\begin{figure}[!h]
+    \centering
+     \subfloat[Maleri med blå kanter i kantdetektionen]{
+        \includegraphics[angle=0,width=0.46\textwidth]{afsnit/afprovning/billeder/thressholds/svage_farver/svage_detalier/blueE.png}
+        \label{bla}}
+    \subfloat[Maleri med sorte kanter i kantdetektionen]{
+        \includegraphics[angle=0,width=0.46\textwidth]{afsnit/afprovning/billeder/thressholds/svage_farver/svage_detalier/floodfill/4-4.png}
+        \label{sort}}
+     \caption{To forskellige farver brugt til at ligge kanter på maleriernes regioner}
+     \label{fleremunke}
+\end{figure}
+

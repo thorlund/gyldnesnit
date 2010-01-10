@@ -31,27 +31,50 @@ Hvilket er afstanden mellem de to snit.
 Der er altså en stimmel på $0.05-0.036 = 0.014 = 1.4\%$ af billedet,
 hvor interessante regioner bliver talt to gange.
 
+\subsection{Systematisk Bug}
+I den naive løsning er der desværre en bug som gør at vi finde nogle af
+regioner flere gange, buggen er beskravet i \ref{hvor_hende}. Vi har
+rettet buggen, men vi har desværre ikke tid til at lave en ny kørsel på
+vores datasæt. Det betyder at de resultater som vi fremvise for kørslen
+af den naive løsning ikke helt passer. For at give en indblik på hvor
+mange regioner der bliver fundet igen, har vi afprøvet programmet med
+buggen på 11 malerier og sammenlignet dem med de samme billeder kørt med
+programmet uden bug.
+
+De 11 malerier er opstillet i tabel \ref{bug_tabel}, hvor kolonne en og
+to er antal summeret regioner fundet i billedets, men og unde buggen.
+Kolonne tre er hvor mange flere procents vis regioner der er fundet i
+løsningen med buggen, en den unde. Dem procent vise spredning er $[60
+\%,~377 \%]$, så de resultater vi giver, kan være op til $377\%$ for
+høje. Gennemsnitlige er der $172 \%$ flere regioner, og median vis er
+der $93\%$ flere regioner. Så man skal nok regne med at antal regioner
+opgivet i resultaterne for den naive løsning er halv så store.
 
 \begin{table}[!h]
     \centering
     \begin{tabular}{|l|c|c|c|}
         \hline
-            & Løst problem 	& Ikke løst problem & Procent vis forskel\\\hline
-        1   & 70 			& 112 				& 160 \% \\\hline
-        2   & 84 			& 145 				& 173 \% \\\hline
-        3   & 85 			& 201 				& 236 \% \\\hline
-        4   & 16 			& 75 				& 468 \% \\\hline
-        5   & 164 			& 554 				& 338 \% \\\hline
-        6   & 115 			& 548 				& 477 \% \\\hline
-        7   & 78 			& 197 				& 253 \% \\\hline
-        8   & 88 			& 170 				& 193 \% \\\hline
-        9   & 27 			& 45 				& 167 \% \\\hline
-        10  & 52 			& 98 				& 172 \% \\\hline
-        11  & 32 			& 57 				& 178 \% \\\hline
-    \end{tabular}
-    \caption[]{Hypoteser i forhold til den naive kørsel.}
-    \label{hypoteser_naiv}
+  Maleri  & Bug løst 		& Bug ikke løst		& Procent vis forskel\\\hline
+        1   & 70 			& 112 				& 60 \% \\\hline
+        2   & 27 			& 45 				& 67 \% \\\hline
+        3	& 52 			& 98 				& 72 \% \\\hline
+        4   & 84 			& 145 				& 73 \% \\\hline
+        5	& 32 			& 57 				& 78 \% \\\hline
+        6   & 88 			& 170 				& 93 \% \\\hline
+        7   & 85 			& 201 				& 136 \% \\\hline
+        8   & 78 			& 197 				& 153 \% \\\hline
+        9   & 164 			& 554 				& 238 \% \\\hline
+        10	& 16 			& 75 				& 368 \% \\\hline
+        11	& 115 			& 548 				& 377 \% \\\hline
+	Total	& 881			& 2202				& 172 \% \\\hline
+	  \end{tabular}
+    \caption[]{Tabel om, antal regioner fundne i versionen med og unde
+    buggen om duplikater af regioner. den sideste kolonne er hvor mange
+    procent flere regioner der bliver fundet.}
+    \label{bug_tabel}
 \end{table}
+
+\clearpage
 
 \subsection{Resultater}
 Vi har kørt vores analyse på $17,364$ malerier, men i vores resultater
