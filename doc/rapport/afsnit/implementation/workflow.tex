@@ -2,9 +2,11 @@
 {\sffamily
 For at beskrive integrationen og samspillet mellem en kørsel og
 databasen vil der følge en beskrivelse af de vigtige kald mellem 
-start.py og databasen. 
+programmet og databasen. 
 }
-Start.py er distributør af arbejde til de andre dele af programkoden.
+
+
+Filen start.py er distributør af arbejde til de andre dele af programkoden.
 Diagram \ref{start_workflow} og pseudokode \ref{pseudo_workflow} giver et overblik over hvad der bliver
 forklaret i resten af dette kapitel. 
 \begin{figure}[h!]
@@ -36,7 +38,7 @@ generation af snit, sætte globale indstillinger samt sætte
 kørselsspecifikke indstillinger. \ref{pseudo_experiment} er et eksempel
 på hvordan et eksperiment evt. kunne se ud.
 \begin{lstlisting}[caption={Pseudokode for et
-experiment, som checker på $\varPhi$},frame=tb,label={pseudo_experiment}]
+experiment, som checker på $\varPhi$ og $frac{2}{3}$,frame=tb,label={pseudo_experiment}]
 def generateCuts():
 	cuts = [goldenLibrary.PHI,2/3]
 	return cuts
