@@ -8,7 +8,7 @@ kan have svært ved at fylde hele regionen ud. Specielt i figur
 billedet kan hjælpe med at glatte farverne ud, således at vi dækker mere
 af regionen. Sløring af billedet kan også hjælpe til at fjerne diverse
 artefakter, såsom revner eller pletter i billedet. Specielt i vores
-testbillede, der som tidligere nævnt er malet med prikker, er det en
+testbillede, der som tidligere nævnt, er malet med prikker, er det en
 stor hjælp at sløre billedet, så farverne bliver mere ensartede. Vi vil
 nu se på tre forskellige måder at opnå denne effekt på.
 
@@ -16,31 +16,33 @@ De to første metoder bibeholder dårligt kanterne i et billede, men
 arbejder til gengæld direkte på billedet. Den tredie metode bibeholder
 til en vis grad kanterne bedre, men kan ikke arbejde direkte på
 billedet, hvilket kræver et større pladsforbrug. Metoden, som bruges til
-de to første sløringer, hedder foldning og bruger en foldningsmatrice til
-udregning af nye farver. Foldning er en simpel matematisk metode, som
-beskriver, hvordan man kan gange to matricer sammen --- i vores tilfælde
-en foldningsmatrice $\mathbb{Z}^{n}\times{} \mathbb{Z}^{m}$ og en
-billedmatrice $\mathbb{Z}^{k}\times{} \mathbb{Z}^{d}$ --- hvor $n = d ~\vee~
-m = k$ ikke behøver at være opfyldt.  En foldningsmatrice er en lille
-matrice, som betegner hvor stor en del af billedet, og hvor meget af
-pixels værdierne rund om et punkt, der skal tages med i udregningen for
-den nye, slørede farve. En foldningsmatrice kan ses i figur \ref{Foldning}.
+de to første sløringer, hedder foldning og bruger en foldningsmatrice
+til udregning af nye farver. Foldning er en simpel matematisk metode til
+at multiplicere to matricer --- i vores tilfælde en foldningsmatrice
+$\mathbb{Z}^{n}\times{} \mathbb{Z}^{m}$ og en billedmatrice
+$\mathbb{Z}^{k}\times{} \mathbb{Z}^{d}$ --- hvor $n = d ~\vee~ m = k$
+ikke behøver at være opfyldt.  En foldningsmatrice er en lille matrix,
+som betegner hvor stor en del af billedet, og hvor meget af
+pixelværdierne rund om et punkt, der skal tages med i udregningen for
+den nye, slørede farve. En foldningsmatrix kan ses i figur
+\ref{Foldning}.
 
 \begin{figure}[]
 	\begin{center}
 		\includegraphics[scale=0.9,angle=0]{afsnit/vores_implementation/billeder/sloering/convolution.png}
 	\end{center}
-    \caption[]{En billedmatrice, hvor $(i,j)$ betegner placeringen, og en
+    \caption[]{En billedematrix, hvor $(i,j)$ betegner placeringen, og en
     foldningsmatrix, med ni tilfældige tal fra 0 til 9.}
 	\label{Foldning}
 \end{figure}
 
 Som man kan se i figur \ref{Foldning}, har billed- og foldningsmatricen
-vidt forskellige størrelser. Foldning virker på den måde, at man
-multiplicerer foldningsmatricen oven på de værdier, som ligger rundt om den pixel,
-hvis farve vi gerne vil finde den slørede værdi for. Dernæst tages gennemsnittet af den
-nye værdi. I udregning \ref{foldning_udregning} ses, som eksempel på
-dette, udregningen af farven på pixel med koordinater $(4,4)$.
+vidt forskellige størrelser. Med foldning multipliceres
+foldningsmatricen oven på de værdier, som ligger rundt om den pixel,
+hvis farve, vi gerne vil finde den slørede værdi for. Dernæst tages
+gennemsnittet af den nye værdi. I udregning \eqref{foldning_udregning}
+ses, som eksempel på dette, udregningen af farven på pixel med
+koordinater $(4,4)$.
 
 \begin{multline}
     (4,4) = ((3,3)\cdot 4+(4,3) \cdot 2+(5,3) \cdot 3\\
@@ -50,47 +52,52 @@ dette, udregningen af farven på pixel med koordinater $(4,4)$.
 \end{multline}
 
 \subsubsection{Simpel sløring}
-Metoden simpel sløring rummer 4 trin:.
+Metoden simpel sløring rummer 4 trin:
 \begin{enumerate}
-	\item{Der udregnes en foldningsmatrice. I dette tilfælde en matrice med kun 1 taler i}
-	\item{Multipliceres foldningsmatrice på billedet for en pixel. Som beskravet overfor}
-	\item{Værdigerne fra multiplikationen sættes ind i billedet}
-	\item{Start fra punkt 2 igen, med næste pixel, indtil alle pixels bliver lavet om i billedet}
+    \item Der udregnes en foldningsmatrix. I dette tilfælde er det en
+        matrix med kun 1 taler i.
+	\item Multiplicerer foldningsmatricen på billedet for en pixel, som
+        beskrevet overfor.
+	\item Værdierne fra multiplikationen sættes ind i billedet.
+	\item Start fra punkt 2 igen, med næste pixel, indtil alle pixels
+        bliver lavet om i billedet.
 \end{enumerate}
-Resultatet for en simpel sløring med 2 forskellige foldningsmatrice størrelse, kan ses i figur \ref{simple_metode}
+Resultatet, for en simpel sløring med to forskellige størrelser på
+foldningsmatricen, kan ses i figur \ref{simple_metode}.
 
 \subsubsection{Gaussisk sløring}
-Metoden "gaussisk sløring" rummer samme 4 trin som simpel sløring, dog
-med en anden foldningsmatrice. Gaussisk sløring udregner sin
-foldningsmatrice, ved hjælp af normalefordeling, Som er defineret i
-formlen \ref{normalfordeling}.
+Gaussisk sløring har samme fire trin som simpel sløring, men bruger en
+anden foldningsmatrix. Gaussisk sløring udregner sin foldningsmatrix
+ved hjælp af normalefordelingen, som er defineret i formlen
+\ref{normalfordeling}.
 
 \begin{equation}
 	G(x,y) = \frac{1}{2\pi\sigma^2}e^{-\frac{x^2+y^2}{2\sigma^2}}
 	\label{normalfordeling}
 \end{equation}
 
-I formlen sætter $\sigma = 1$ og lader x og y bevæge sig fra -1 til 1, med skridtstørrelse på 1, Alle værdier i foldningsmatricen bliver oprundet, resultatet kan ses i figur \ref{gauss}.
+I formlen sættes $\sigma = 1$ og vi lader $x$ og $y$ bevæge sig fra $-1$
+til $1$, med skridtstørrelse på $1$. Alle værdier i foldningsmatricen
+bliver rundet op. Resultatet kan ses i figur \ref{gauss}.
 
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[scale=0.5,angle=0]{afsnit/vores_implementation/billeder/sloering/gauss}
 	\end{center}
-	\caption[]{En $3~\times{}~3$ foldningsmatrice for gaussiskisk sløring}
+	\caption[]{En $3~\times{}~3$ foldningsmatrix for gaussiskisk sløring}
 	\label{gauss}
 \end{figure}
 
 \subsubsection{Sløring ved statistisk median}
-Den sidste metode, vi vil nævne, er i grunden meget simpel. Grundidéen
-er at finde den statistiske median i pixelværdierne rundt om en given
-pixel og tildele denne medianværdien. Givet et antal pixels, er det
-trivielt at sætte dem i en liste og sortere dem efter deres værdi. Hvis
-antallet af elementer i listen er ulige, er det midterste element i den
-sorterede liste medianen. Er der et lige antal elementer i listen,
-defineres medianen som gennemsnittet af de to midterste elementer.
-Pixels vælges i et $N \times N$ vindue med den originale pixel i
-centrum, som vist i figur \ref{red_box_nxm}, og vi vil således altid
-have et ulige antal elementer i listen.
+Grundidéen, i den sidste metode er at finde den statistiske median, i
+pixelværdierne, rundt om en given pixel og tildele denne medianværdien.
+Givet et antal pixels, er det trivielt at sætte dem i en liste og
+sortere dem efter deres værdi. Hvis antallet af elementer i listen er
+ulige, er det midterste element i den sorterede liste medianen. Er der
+et lige antal elementer i listen, defineres medianen som gennemsnittet
+af de to midterste elementer.  Pixels vælges i et $N \times N$ vindue
+med den originale pixel i centrum, som vist i figur \ref{red_box_nxm},
+og vi vil således altid have et ulige antal elementer i listen.
 
 \begin{figure}[!h]
     \centering
@@ -126,7 +133,7 @@ have et ulige antal elementer i listen.
         }
 \end{figure}
 
-Denne metode kan ikke køres direkte på det originale billede, da dette
+Metoden kan ikke køres direkte på det originale billede, da dette
 vil interferere med fastsættelse af medianen for alle pixels. Det bliver
 derfor nødvendigt at oprette en kopi af originalen og indsætte de fundne
 medianværdier i den. Man finder således altid medianen i forhold til det
