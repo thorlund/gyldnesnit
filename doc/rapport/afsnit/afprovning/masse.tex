@@ -1,20 +1,20 @@
-For at en region bliver taget i betragtning skal den have en masse som
-er støre en vis tærskelværdi, som forklare i section \ref{naiv_regler}. På samme
-fremgangsmåde som i afsnit \ref{region_stoerlse} sammenligner vi fem
-forskellige tærskelværdier. Vi kommer frem til at hvis figurens masse er
-under $\frac{1}{4}$ af afgrænsende rektangel, vil vi ikke tage den
-med. En illustrere af hvad vi vælger at tage med kan ses i figur
-\ref{masse}, hvor region detektoren er kørt på billedet
-\ref{naiv_masse_original} og resultatet kan ses i figur \ref{naiv_masse}
+Definition \ref{def_interessant} siger, at en region bliver kun taget i
+betragtning, hvis den har en masse større end en vis tærskelværdi.
+På samme fremgangsmåde som i afsnit \ref{region_stoerlse}, sammenligner vi fem
+forskellige tærskelværdier. Vi kommer frem til, at hvis regionens masse er
+under $\frac{1}{4}$ af dens begrænsende rektangel, vil vi ikke tage den med. En
+illustration af hvad vi vælger at tage med, kan ses i figur \ref{masse}, hvor
+udtrækning af regioner er kørt på billedet \ref{naiv_masse_original}, og
+resultatet kan ses i figur \ref{naiv_masse}.
 
 \begin{figure}[!h]
     \centering
-		\subfloat[2 regioner hvor den ende er sorteret vær på grund af dens masse]{
-	        \includegraphics[angle=0,width=0.55\textwidth]{afsnit/afprovning/billeder/naive_losning/naiv_mass.png}
-	       	\label{naiv_masse}}\hspace{1em}
-	    \subfloat[Original]{
-	        \includegraphics[angle=0,width=0.55\textwidth]{afsnit/afprovning/billeder/naive_losning/mass.png}
-	       	\label{naiv_masse_original}}\hspace{1em}
-		\label{masse}
-		\caption{2 billeder som ilustrere forskellen på den region vi tager med og en vi ikke tager med}
+    \subfloat[Original]{
+        \includegraphics[angle=0,width=0.55\textwidth]{afsnit/afprovning/billeder/naive_losning/mass.png}
+        \label{naiv_masse_original}}\hspace{1em}
+    \subfloat[To regioner, hvor den ene er sorteret fra på grund af dens masse.]{
+        \includegraphics[angle=0,width=0.55\textwidth]{afsnit/afprovning/billeder/naive_losning/naiv_mass.png}
+        \label{naiv_masse}}
+    \label{masse}
+    \caption{To regioner, som ilustrerer forskellen, på den region vi tager med, og en vi ikke tager med.}
 \end{figure}

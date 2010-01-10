@@ -55,11 +55,11 @@ koordinater $(4,4)$.
 Metoden simpel sløring rummer 4 trin:
 \begin{enumerate}
     \item Der udregnes en foldningsmatrix. I dette tilfælde er det en
-        matrix med kun 1 taler i.
-	\item Multiplicerer foldningsmatricen på billedet for en pixel, som
+        matrix hvor alle indgange har værdien $1$.
+	\item Foldningsmatricen multipliceres på billedet for en pixel, som
         beskrevet overfor.
 	\item Værdierne fra multiplikationen sættes ind i billedet.
-	\item Start fra punkt 2 igen, med næste pixel, indtil alle pixels
+	\item Der startes fra punkt 2 igen med næste pixel, indtil alle pixels
         bliver lavet om i billedet.
 \end{enumerate}
 Resultatet, for en simpel sløring med to forskellige størrelser på
