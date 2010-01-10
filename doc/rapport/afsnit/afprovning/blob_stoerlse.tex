@@ -2,13 +2,14 @@
 %%          Resten af rapporten følger en stil hvor indledninger skrives
 %%          med \sffamlily-typen. Denne stil bør ikke bruges her, da dette ikke er \section
 %%
-I vores region detektor sætter vi en værdi for hvor stor en region skal
-være få at blive tage i betrakting, i dette sektion vil vi test,
-hvor stor en regionen skal være for at vi vil tage den med. Problemetiken
-med få små regioner er illustret i maleri \ref{alt_med} hvor alle de
-gråne kasser er en region som vores naive algoritme mener er
-interessante, og da alle regioner tage med, bliver 939 regioner godtaget
-til at ligge i snittet.
+{
+Ved udtrækning af regioner sætter vi en værdi for, hvor stor en region skal
+være, for at blive tage i betragtning, i dette sektion vil vi test, hvor stor
+en regionen skal være for at vi vil tage den med. Problematikken med for små
+regioner er illustreret i maleriet i figur \ref{alt_med}, hvor alle de grønne
+kasser, er en region, som vores naive algoritme mener er interessante, og da
+alle regioner er taget med, bliver 939 regioner vurderet til at ligge i
+snittet.
 
 \begin{figure}[¡h]
     \setlength\fboxsep{0pt}
@@ -20,41 +21,43 @@ til at ligge i snittet.
 	\label{alt_med}
 \end{figure}
 
-For at teste hvilken størrelse vi gerne vil godtage er der fremstilet et
-testbilledet \ref{original_stoerelse} hvor ni regioner er opstillet så de
-alle ligger i sammen snit. Dem øvereste regioner er den minste, og så
-stiger regioners størrelse gradvis ned af i billedet.
+For at teste hvilken størrelse vi gerne vil godtage, er der fremstillet et
+testbillede i figur \ref{original_stoerelse}, hvor ni regioner er opstillet,
+således at de alle ligger i samme snit. Den øverste region er den mindste, og
+så stiger regioners størrelse gradvist ned langs snittet.
 
-I vær at de andre fem testbilleder i figur \ref{stoerelse_sammenlining}
-er tærskelværdierne gradvis sat op, i testbillederne skal man ligge
-mærke til hvilke størrelse regioner der bliver godtaget, representeret
-af den grånde kasse. Vi mener at der bliver taget for mange regioner med
-i billedet \ref{0,0}, \ref{0,005}, \ref{0,001} og \ref{0,0015}. I
-billedet \ref{0,002} vurdere vi at store nok regioner kun taget med, og
-vi har derfor valt at sætte tærskelværdien til $0.002$
- 
+I hver af de andre fem testbilleder i figur \ref{stoerelse_sammenlining}, er
+tærskelværdierne gradvist sat op. Bemærk hvilken størrelse regioner der bliver
+godtaget, repræsenteret af grønne kasser. Vi mener, at der bliver taget for
+mange regioner med i billede \ref{0,0}, \ref{0,005}, \ref{0,001} og
+\ref{0,0015}. I billedet \ref{0,002} vurderer vi, at det kun er store nok
+regioner, som er blevet udvalgt, og vi har derfor valgt at sætte tærskelværdien
+til $0.002$.
+
 \begin{figure}[!h]
     \setlength\fboxsep{0pt}
     \setlength\fboxrule{0.5pt}
     \centering
-    \subfloat[Det original billedet]{
+    \subfloat[Det originale billede]{
         \fbox{\includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/stoerelse/stoerelse.png}}
        \label{original_stoerelse}}
-    \subfloat[Tærskelværdien sat til 0]{
+    \subfloat[Tærskelværdien sat til $0$]{
         \fbox{\includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/stoerelse/0.png}}
        \label{0,0}}\\
-    \subfloat[Tærskelværdien sat til 0.0005]{
+    \subfloat[Tærskelværdien sat til $0.0005$]{
         \fbox{\includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/stoerelse/0,0005.png}}
        \label{0,005}}
-    \subfloat[Tærskelværdien sat til 0.001]{
+    \subfloat[Tærskelværdien sat til $0.001$]{
         \fbox{\includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/stoerelse/0,001.png}}
        \label{0,001}}\\
-    \subfloat[Tærskelværdien sat til 0.0015]{
+    \subfloat[Tærskelværdien sat til $0.0015$]{
         \fbox{\includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/stoerelse/0,0015.png}}
        \label{0,0015}}
-    \subfloat[Tærskelværdien sat til 0.002]{
+    \subfloat[Tærskelværdien sat til $0.002$]{
         \fbox{\includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/stoerelse/0,002.png}}
        \label{0,002}}
-    \caption{Testbilledet med ni regioner, som bliver støre og støre. Hvor den originale billedet samt 5 forskellige tærskelværdier er afbilledet}
+    \caption{Testbillede, med ni regioner som bliver større og større, hvor den
+    originale billede, samt fem forskellige tærskelværdier, er afbilledet.}
     \label{stoerelse_sammenlining}
 \end{figure}
+}
