@@ -31,30 +31,31 @@ Hvilket er afstanden mellem de to snit.
 Der er altså en stimmel på $0.05-0.036 = 0.014 = 1.4\%$ af billedet,
 hvor interessante regioner bliver talt to gange.
 
-\subsection{Systematisk Bug}
-I den naive løsning er der desværre en bug som gør at vi finde nogle af
-regioner flere gange, buggen er beskravet i \ref{hvor_hende}. Vi har
-rettet buggen, men vi har desværre ikke tid til at lave en ny kørsel på
-vores datasæt. Det betyder at de resultater som vi fremvise for kørslen
-af den naive løsning ikke helt passer. For at give en indblik på hvor
-mange regioner der bliver fundet igen, har vi afprøvet programmet med
-buggen på 11 malerier og sammenlignet dem med de samme billeder kørt med
-programmet uden bug.
+\subsection{Systematisk fejl\label{program_bug}}
+I den naive løsning findes en fejl i udtrækningen af regioner, som gør
+at vi finder nogle af
+regionerne flere gange. Denne fejl nævnt i afsnit
+\ref{section_impBilledbehandling} og gennemgået i bilag
+\ref{appendix_bug}. Det betyder, at de resultater vi fremviser for kørslen
+af den naive løsning, ikke helt passer. For at give en indblik i, hvor
+mange regioner der bliver fundet flere gange, har vi afprøvet programmet med
+fejlen på 11 malerier, og sammenlignet dem med en kørsel, hvor fejlen er
+rettet.
 
-De 11 malerier er opstillet i tabel \ref{bug_tabel}, hvor kolonne en og
-to er antal summeret regioner fundet i billedets, men og unde buggen.
-Kolonne tre er hvor mange flere procents vis regioner der er fundet i
-løsningen med buggen, en den unde. Dem procent vise spredning er $[60
-\%,~377 \%]$, så de resultater vi giver, kan være op til $377\%$ for
-høje. Gennemsnitlige er der $172 \%$ flere regioner, og median vis er
-der $93\%$ flere regioner. Så man skal nok regne med at antal regioner
-opgivet i resultaterne for den naive løsning er halv så store.
+De 11 malerier er opstillet i tabel \ref{bug_tabel}, hvor de to første
+kolonner er antal regioner fundet i billedet, uden og med fejl.  Tredje
+kolonne er en procentsats for, hvor mange flere regioner der bliver
+fundet, når den fejlende kode køres. Den procentvise spredning er $[60
+\%,~377 \%]$, så de resultater vi får, kan være op til $377\%$ for høje.
+Gennemsnitligt er der $172 \%$ flere regioner. Vi kan godt antage, at
+antallet af regioner opgivet i resultaterne for den naive løsning, er
+halv så store.
 
 \begin{table}[!h]
     \centering
     \begin{tabular}{|l|c|c|c|}
         \hline
-  Maleri  & Bug løst 		& Bug ikke løst		& Procent vis forskel\\\hline
+  Maleri  & Bug løst 		& Bug ikke løst		& Procentvis forskel\\\hline
         1   & 70 			& 112 				& 60 \% \\\hline
         2   & 27 			& 45 				& 67 \% \\\hline
         3	& 52 			& 98 				& 72 \% \\\hline
@@ -68,8 +69,8 @@ opgivet i resultaterne for den naive løsning er halv så store.
         11	& 115 			& 548 				& 377 \% \\\hline
 	Total	& 881			& 2202				& 172 \% \\\hline
 	  \end{tabular}
-    \caption[]{Tabel om, antal regioner fundne i versionen med og unde
-    buggen om duplikater af regioner. den sideste kolonne er hvor mange
+    \caption[]{Tabel for antal fundne regioner i versionen med og uden
+    fejlen som duplikerer regioner. Den sidste kolonne er hvor mange
     procent flere regioner der bliver fundet.}
     \label{bug_tabel}
 \end{table}
