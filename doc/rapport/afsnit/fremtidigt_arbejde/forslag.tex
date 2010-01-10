@@ -16,6 +16,21 @@ implementation og analyse. Nogle af forslagene kan dog overlappe.
         For en hurtigere analyse af malerier, kunne programmet
         implementeres i $\textrm{C}^{++}$, som \emph{OpenCV} er
         implementeret i. Programmet kunne med fordel parallelliseres.
+    \item \textbf{Distribueret analyse af billeder}\\
+        Med en distribueret løsning, til analyse af malerier, ville man,
+        ved at lade flere maskiner deles om arbejdet, kunne kunne få
+        hastigheden på analysen op.
+    \item \textbf{Webservice}\\
+        Webservice, hvor klienter kan sende resultater fra kørsel på
+        egen maskine. Kan udvides til at man selv organiserer billeders
+        metadata, således at man ikke er afhængig af et eksternt
+        repository.
+    \item \textbf{Mere avanceret database}\\
+        En mere avanceret database ville være at foretrække. Der har
+        været problemer med SQLite som låser dele af databasen når man
+        arbejder på den. Ligeledes er det værd at overveje en mere
+        sofistikeret pakke til databasekommunikation i Python. Det er
+        oplagt at bruge \emph{SQLAlchemy}\cite{SQLAlchemy}.
 \end{itemize}
 
 \subsection{Vurdering af regioner}
