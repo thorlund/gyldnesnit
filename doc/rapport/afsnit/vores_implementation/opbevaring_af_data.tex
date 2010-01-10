@@ -81,7 +81,7 @@ databasen ved en lang række parametre, såsom et maleris fysiske
 størrelse og kunstnerens fødselsår. Vi har, at en kunstner kan være
 tilknyttet ét eller flere malerier, og at der, til et givet maleri, kun
 kan være én kunstner. Billederne, vi vil analysere, hentes fra et online
-kunstarkiv og gemmes på filsystemet i en mappestruktur lignende den i
+kunstarkiv og gemmes på filsystemet i en mappestruktur, der ligner den i
 arkivet. Her inddeles filerne i mapper navngivet efter kunstner.
 Mapperne inddeles efter forbogstav. På denne måde undgås det, at to
 billeder tildeles samme filnavn. Vi gemmer kun stien til en fil på
@@ -127,7 +127,7 @@ beskriver en kørsel. Denne tabel holder de parametre, som er fælles for
 alle billeder i en kørsel, bl. a. de tærskelværdier, som bruges til
 kantdetektion (\texttt{trsh1} og \texttt{trsh2}), samt nedre og øvre
 grænse for floodfill (\texttt{lo} og \texttt{up}). Her holdes også en
-procentsats for, hvor stort et margin vi bruger i udvælgelse af
+procentsats for, hvor stor et margin vi bruger i udvælgelse af
 regioner. Endelig har vi et felt, der angiver, hvilken metode der er
 blevet brugt til at finde resultatet. Dette er en tekststreng og vil i
 tilfældet af den naive algoritme være sat til \texttt{'naive'}. Felterne
@@ -141,7 +141,7 @@ Vi beskriver et resultat som det antal af regioner, vi får ud fra
 analysen af et snit på et givet billede. Som beskrevet i afsnit
 \ref{section_opdeling} vil vi, givet en snitratio, typisk søge regioner
 i nærheden af fire snit. En undtagelse er, hvis snitratioen deler
-billedet i to lige store dele, og i dette tilfælde vil vi kun have to
+billedet i to lige store dele, og vi vil kun i dette tilfælde have to
 snit at se på. Tabellen \texttt{result} fortæller os hvilket af de
 mulige snit vi har med at gøre, hvilket billede resultatet er
 tilknyttet, hvilke parametre der er blevet brugt, samt hvor mange
