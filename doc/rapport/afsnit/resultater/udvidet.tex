@@ -22,6 +22,62 @@ Den udvidede metode indeholder derfor ingen duplikater, men resultaterne
 er ikke direkte sammenlignelige med dem fra den naive kørsel.
 
 \subsection{Resultater}
+Vi har i denne kørsel analyseret $608$ malerier, men som vist herunder i
+udregning \ref{ud_tabel_fjern_detaljer}, har vi kun $524$ brugbare
+resultater, når vi har fjernet de billeder, som ikke er hele malerier.
+Dette svarer til en nedgang på $13.82\%$.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{r@{\ \ }p{12em}r|r@{.}l}
+            & Analyserede malerier & $608$ & $100$ & $00\%$   \\
+        $-$ & Udsnit af malerier   &  $84$ &  $13$ & $82\%$   \\\hline
+            & Resultater           & $524$ &  $86$ & $18\%$
+    \end{tabular}
+    \caption[]{Udregning af brugbare resultater fra udvidet kørsel.}
+    \label{ud_tabel_fjern_detaljer}
+\end{table}
+
+I udregning \ref{ud_tabel_fordeling} herunder undersøger vi, hvor mange
+af de brugbare resultater, som har mindst en region liggende i det
+gyldne snit. Vi har at der i $87.02\%$ af malerierne er blevet fundet
+regioner i det gyldne snit, og vi kan derfor ikke afvise hypotese
+\ref{hypo_binaer}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{r@{\ \ }p{12em}r|r@{.}l}
+            & Positive resultater   & $456$ &  $87$ & $02\%$ \\
+        $+$ & Negative resultater   &  $68$ &  $12$ & $98\%$ \\\hline
+            & Resultater i alt      & $524$ & $100$ & $00\%$
+    \end{tabular}
+    \caption[]{Et positivt resultat beskriver et maleri hvori der er
+    fundet mindst en region i det gyldne snit, ved brug af den udvidede
+    vurdering af regioner.}
+    \label{ud_tabel_fordeling}
+\end{table}
+
+Fordelingen af regioner, over de fire gyldne snit i malerierne, ses i
+udregning \ref{ud_tabel_fire_snit}. Intet af de fire snit afviger med
+mere end $10\%$ fra et andet, og vi kan således ikke afvise hypotese
+\ref{hypo_fire_g_snit}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{r@{\ \ }p{12em}r|r@{.}l}
+            & Regioner i snit 0   &  $405$ &  $22$ & $29\%$ \\
+        $+$ & Regioner i snit 1   &  $421$ &  $23$ & $17\%$ \\
+        $+$ & Regioner i snit 2   &  $499$ &  $27$ & $46\%$ \\
+        $+$ & Regioner i snit 3   &  $492$ &  $27$ & $08\%$ \\\hline
+            & Regioner i alt      & $1817$ & $100$ & $00\%$
+    \end{tabular}
+    \caption[]{Forholdet mellem de interessante regioner fundet i de
+    fire gyldne snit ved udvidet vurdering.}
+    \label{ud_tabel_fire_snit}
+\end{table}
+
+% Spacer! Ikke over denne linje HAHAHA
+
 I graf \ref{antal_regioner_vertikale_cut_udvidet} er der afbilledet,
 antale sammelet regioner i de 20 vertikale snit for helle datasættet.
 Som man kan se er der fundet makant flere regioner i de to snit som
@@ -71,9 +127,9 @@ hvad for et ration, der er dominerne, så vi kan forkaste hyptese
     \begin{tabular}{|l|c|c|}
         \hline
             & Afvist & Ikke afvist  \\\hline
-        1   &            &    \\\hline
-        2   &            &    \\\hline
-        3   &  			 &              \\\hline
+        1   &            & \checkmark   \\\hline
+        2   &            & \checkmark   \\\hline
+        3   & \checkmark$^{\textrm{*}}$ &              \\\hline
         4   & \checkmark &              \\\hline
         5   & \checkmark &    	\\\hline
         6   & \checkmark &              \\\hline
@@ -81,7 +137,9 @@ hvad for et ration, der er dominerne, så vi kan forkaste hyptese
         8   &            &              \\\hline
         9   &            & 	\\\hline
     \end{tabular}
-    \caption[]{Hypoteser i forhold til den udvidet kørsel.}
+    \caption[]{Hypoteser i forhold til den udvidet kørsel.
+    $^{\textrm{*}}$Jvf. udregning \ref{tabel_real_dimensions}.
+    }
     \label{hypoteser_udvidet}
 \end{table}
 
