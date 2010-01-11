@@ -222,6 +222,9 @@ def showPictureInResultId(resultId):
 	painting = p.Painting(Result.select(Result.q.id==resultId)[0].painting)
 	g.showImage(painting.getImage(), "Wee")
 
+def savePictureInResultId(resultId, name):
+	painting = p.Painting(Result.select(Result.q.id==resultId)[0].painting)
+	cv.highgui.cvSaveImage(name,painting.getImage())
 
 def getPaintingInResultId(resultId):
 	return p.Painting(Result.select(Result.q.id==resultId)[0].painting)
