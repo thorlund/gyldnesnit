@@ -20,7 +20,7 @@ class GlobalSettings:
 	relativeCSVFileLocation = 'database/catalog.csv'
 	absoluteCSVFileLocation = os.path.abspath(relativeCSVFileLocation)
 	def getDatabaseLocation(self):
-		return self.absoluteDatabaseLocation
+		return self.relativeDatabaseLocation
 	def getCSVFileLocation(self):
 		return self.absoluteCSVFileLocation
 
