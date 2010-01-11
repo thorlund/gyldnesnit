@@ -51,6 +51,7 @@ Vi kan også finde polynomiets anden rod som angives ved $\varPhi$
 \begin{eqnarray}
 	\varPhi & = & \frac{1}{\varphi} \\
 		& = & \varphi - 1 \\
+        & = & \frac{\sqrt{5} - 1}{2} \\
 		& = & 0.6180\ 3398\ 8749\ 8948\ 4820 \dots
 		\label{mange_tal}
 \end{eqnarray}
@@ -101,31 +102,31 @@ $\varphi$ vises.
 \end{table}
 
 \subsection{Et gyldent rektangel}
-På samme måde som vi kan opdele et linjestykke efter det gyldne snit,
+Ligesom vi kan opdele et linjestykke efter det gyldne snit,
 kan vi konstruere et rektangel, hvor forholdene mellem højde og bredde er
 $\varphi$. Vi konstruerer et rektangel, hvor alle sider er lig 1, og
 tegner en diagonal fra dette rektangels midte til dets modsatte hjørne. Med
 denne diagonal som radius tegnes en cirkel, som et gyldent rektangel kan
 tegnes efter. Figur \ref{golden_rectangle} illustrerer denne metode.
 
-\begin{figure}[h!]
-	\begin{center}
-		\includegraphics[scale=0.35,angle=0]{afsnit/baggrund/billeder/Golden_Rectangle_Construction}
-	\end{center}
+\begin{figure}[t]
+	\centering
+	\includegraphics[scale=0.35,angle=0]{afsnit/baggrund/billeder/Golden_Rectangle_Construction}
 	\caption[Et gyldent rektangel]{Et gyldent rektangel - \emph{Kilde: Wikipedia}}
 	\label{golden_rectangle}
 \end{figure}
+
 Det ses, at rektanglet har forholdet $\varphi:1$ og at eksemplet er helt
 analogt til linjestykket givet i figur \ref{line_segment}. Dog skal
 det bemærkes, at det rektangel, der kan konstrueres af linjestykkerne 1
 og $\varphi - 1$, også er et gyldent rektangel med forholdet $1:\varphi
 -1 = \varPhi$. Man kan derved konstruere gyldne rektangler ud i det
-uendelige ved hele tiden at lave nye gyldne rektangler.
+uendelige, ved hele tiden at lave nye gyldne rektangler.
 
 \subsection{Spiraler og det gyldne snit}
 Når man, som ovenfor, gentagne gange deler et gyldent rektangel, kan man
 bruge dette til at konstruere en gylden spiral. En gylden spiral kan
-skrives ved ligningen for generelle logaritmiske spiraler som
+skrives ved ligningen for generelle logaritmiske spiraler, som
 \begin{equation}
 	r = ae^{c\theta}
 	\label{log_spiral_2}
@@ -136,28 +137,30 @@ eller
 	\label{log_spiral_1}
 \end{equation}
 hvor $e$ er grundtallet for den naturlige logaritme og $c$ skal have en
-speciel værdi for at kunne være en gylden spiral.
+speciel værdi, for at kunne være en gylden spiral.
 
 Det kan være svært at tegne logaritmiske spiraler korrekt, men man kan
 approksimere en spiral ved at sammensætte dele af cirkler. Man kan
-således approksimere en gylden spiral ved at sammensætte kvarte cirkler.
-Denne approksimation giver dog ikke en ægte gylden spiral, og faktisk kan
-ingen sådanne approksimationer af sammensatte cirkler gengives ved en
-matematisk ligning\cite{Sharp2002}. Det er i tabel
-\ref{fibonacci_sequence} vist hvordan Fibonaccis talrække konvergerer
-mod det gyldne snit. Vi kan også konstruere et approksimeret gyldent
-rektangel ud fra fibonaccitallene, som vist i figur
-\ref{fibonacci_rektangel}, ved sammensatte $F(n)$ x $F(n)$-rektangler.
-\begin{figure}[h!]
-	\begin{center}
-		\includegraphics[scale=0.35,angle=0]{afsnit/baggrund/billeder/fib_rect}
-	\end{center}
+således approksimere en gylden spiral, ved at sammensætte kvarte
+cirkler.  Denne approksimation giver dog ikke en ægte gylden spiral, og
+faktisk kan ingen sådanne approksimationer af sammensatte cirkler
+gengives ved en matematisk ligning\cite{Sharp2002}. 
+
+Det er i tabel \ref{fibonacci_sequence} vist hvordan Fibonaccis talrække
+konvergerer mod det gyldne snit. Vi kan også konstruere et approksimeret
+gyldent rektangel ud fra fibonaccitallene, som vist i figur
+\ref{fibonacci_rektangel}, ved sammensatte $F(n)\times F(n)$-rektangler.
+
+\begin{figure}[t]
+    \centering
+	\includegraphics[scale=0.35,angle=0]{afsnit/baggrund/billeder/fib_rect}
     \caption[Rektangel opbygget efter Fibonaccis talrække]{Rektangel
     opbygget efter Fibonaccis talrække. Man kan blive ved med at sætte
-    $F(n)$ x $F(n)$-rektangler på denne figur og derved tilnærme sig et
-    ægte gyldent rektangel jvf. tabel \ref{fibonacci_sequence}.}
+    $F(n)\times F(n)$-rektangler på denne figur, og derved tilnærme sig et
+    ægte gyldent rektangel, jvf. tabel \ref{fibonacci_sequence}.}
 	\label{fibonacci_rektangel}
 \end{figure}
+
 Vi kan nu tegne kvarte cirkler i figur \ref{fibonacci_rektangel}, med
 radius $F(n)$, og derved approksimere en gylden spiral, som vist i figur
 \ref{fibonacci_spiral}. Hvor tæt vi kommer på en egentlig gylden spiral
@@ -166,21 +169,22 @@ efter. Et højere antal rektangler giver en spiral, som er tættere på en
 egentlig gylden spiral. Formelt kan det direkte udledes af tabel
 \ref{fibonacci_sequence}, hvor tæt en approksimation vi har på en gylden
 spiral.
-\begin{figure}[h!]
-	\begin{center}
-		\includegraphics[scale=0.35,angle=0]{afsnit/baggrund/billeder/Fibonacci_spiral}
-	\end{center}
+
+Hvis man udregner den korrekte faktor $c$ og tegner en ægte gylden
+spiral, i et gyldent rektangel, vil man se, at spiralen faktisk går
+\emph{uden for} rektanglet\cite{Sharp2002}. Ovenstående approksimation,
+med radius $F(n)$, vil aldrig gå ud over rektanglet, og vi ser, at
+fibonaccispiralen blot er en approksimation.
+
+\begin{figure}[!h]
+    \centering
+	\includegraphics[scale=0.35,angle=0]{afsnit/baggrund/billeder/Fibonacci_spiral}
 	\caption[En fibonaccispiral]{En fibonaccispiral - \emph{Kilde: Wikipedia}}
 	\label{fibonacci_spiral}
 \end{figure}
-Hvis man regner den korrekte faktor $c$ ud og tegner en ægte gylden
-spiral i et gyldent rektangel vil man se at spiralen faktisk går
-\emph{uden for} rektanglet\cite{Sharp2002}. Ovenstående approksimation,
-med radius $F(n)$, vil aldrig gå ud over rektanglet, og det bliver derved
-klart, at fibonaccispiralen i sandhed blot er en approksimation.
 
 For en fuld gennemgang af spiraler, specielt med henblik på det gyldne
-snit, se \cite{Sharp2002}. Vi vil nu kaste et hurtigt blik på
+snit, henvises til \cite{Sharp2002}. Vi vil nu kaste et hurtigt blik på
 problematikken ved at afgøre hvad der er interessant i et billede og se
 på hvordan computeren kan bruges i denne sammenhæng.
 

@@ -8,7 +8,7 @@ påvirker præcisionen på målinger i billeder og hvordan vi tager højde
 for andre fejlkilder.
 }
 
-\subsection{Inddeling af billede efter snit}
+\subsection{Inddeling af et billede efter snit}
 Indledningsvist gives nogle grundlæggende definitioner på hvordan et
 billede er bygget op, samt hvilke begreber vi vil benytte os af ved
 senere analyse af et billede.
@@ -64,14 +64,14 @@ og derved vil snitratioen kun have to snit, som vist i figur \ref{2Cut}.
     \label{lenasnit2}
 \end{figure}
 
-De fire snit får tildelt hver deres Id i mændgen $\{0,1,2,3\}$. Således
-kan vi skelne de enkelte snit fra hinanden. De enkelte snit navngives
-som vist i figur \ref{cut}. Vi vil i fremover referere til et snit ved
-dets Id.
+De fire snit bliver tildelt hver deres \textbf{Id} i mændgen $\{0,1,2,3\}$.
+Således kan vi skelne de enkelte snit fra hinanden. De enkelte snit
+navngives som vist i figur \ref{cut}. Vi vil i fremover referere til et
+snit ved dets Id.
 
 \begin{definition}
-    Hvert snit tilknyttet en snitratio, får tildelt et fast Id, som, alt
-    efter snittets placering, tilhører mængden $\{0,1,2,3\}$.
+    Hvert snit tilknyttet en snitratio, får tildelt et fast \textbf{Id},
+    som, alt efter snittets placering, tilhører mængden $\{0,1,2,3\}$.
 \end{definition}
 
 \begin{figure}[h]
@@ -95,7 +95,7 @@ at en maler med et lærred på 100 cm, maksimalt vil male $0.5$ cm
 forkert.
 
 Når maleren vælger en ramme og et lærred, har vi igen problematikken.
-Selvom maleren specifikt går efter at bygge maleriet op efter det gyldne
+Selvom maleren specifikt går efter, at bygge maleriet op efter det gyldne
 snit, kan snittets placering i maleriet have forskubbet sig, ved dårlige
 valg at ramme eller lærred. Derfor sætter vi den afvigelse til $1\%$, da
 vi anser dette som den maksimale afvigelse, der kan opstå.
@@ -137,7 +137,8 @@ Vi udregner, hvor det gyldne snit er placeret, i et billede med $H =
 antal pixels, ved at afrunde resultatet $2472.13595 \approx 2472$.
 
 \begin{equation}
-    4000 \cdot \varPhi = 4000(\sqrt{5}-1)/2 = 2472.13595 \approx 2472 \label{afrundning}
+    4000 \cdot \varPhi = 4000(\sqrt{5}-1)/2 = 2472.13595 \approx 2472
+    \label{afrundning}
 \end{equation}
 
 Ifølge udregningen i \eqref{afrundning2} betyder det, at vi mister
@@ -145,7 +146,8 @@ $0.13595$ pixels i præcision, hvilket svarer til en misvisning af
 punktet på $0.00339875\%$ i forholdt til $H$.
 
 \begin{equation}
-    0.13595/4000 \cdot 100 = 0.00339875 \label{afrundning2}
+    0.13595/4000 \cdot 100 = 0.00339875
+    \label{afrundning2}
 \end{equation}
 
 Det er en meget lille del af selve billedet og skulle ikke give nogle
@@ -162,18 +164,17 @@ er det vigtigt, at disse to snits margin ikke overlapper.
 
 Hvis margin overlapper, vil det betyde, at den samme region kan blive
 fundet i begge snit. Dette vil give et skævt billedet af regionerne i de
-to snit.  I udregning \ref{diff_snit} lader vi derfor $x$ betegne
-antal pixels i $B$ eller $H$, og vi vil se på, hvor mange pixels, der er
+to snit.  I udregning \ref{diff_snit} lader vi $x$ betegne
+antal pixels i $B$ eller $H$. For at finde, hvor mange pixels der er
 mellem snitratio $\frac{2}{3}$ og $\varPhi$, multiplicerer vi $x$ med de
-to snitratioer for at finde deres placering.  Derefter subtraherer vi et
+to snitratioer for at finde deres placering. Derefter subtraherer vi et
 af de snit, som befinder sig tættest på hinanden, i hver snitratio med
 hinanden.
 
 \begin{eqnarray}
 	\frac{x2}{3} - \frac{x2}{\sqrt{5}+1} & = & x(\frac{2}{3} - \frac{2}{\sqrt{5} + 1}) \nonumber \\
-	& = & x(0.666667-0.618034) \\ \nonumber
+	& = & x(0.666667-0.618034) \label{diff_snit}\\ \nonumber
 	& = & x(0.048633)
-    \label{diff_snit}
 \end{eqnarray}
 
 Vi har nu fundet antal pixel mellem de to snit. I udregning
