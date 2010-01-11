@@ -127,5 +127,42 @@ de er beskrevet som ``painting'' fra WGA.
 Alt det ovenstående vil påvirke resultaterne, ved analyse på vores
 datasæt.
 
+\subsection{Eksperimentsopstilling}
+I \ref{chap_afproevning} er de optimale tærskelværdier fundet.  Idet
+denne hypotese blot kigger på frekvensen for brug af det gyldnesnit mod
+andre snit, hvis eneste restriktion er at de skal have et fælles forhold
+til det gyldnesnit.  Det er også fordelagtigt at maksimere antallet af
+andre snit, da det giver et bedre grundlag for eksperimentet.  Afstanden
+mellem to snit er begrænset af margin defineret til at være
+$2.4\%$\ref{margin}.  Denne margin skal være tilstede på begge sider af
+et snit, så derfor vil hvert snit fylde $(2.4*2)\%$.  Det maksimale
+antal af snit på et billede må altså være $100/4.8=20.833$. Hvilket ses
+på denne figur \ref{snitogmargin}
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[scale=0.3]{afsnit/resultater/billeder/20_cuts_med_margin}
+    \end{center}
+    \caption{Sort:snittene, grøn: margins og rød er midten}
+    \label{snitogmargin}
+\end{figure}
+
+Yderpunkterne $0.958$ og $0.518$ er problematiske, $0.958$'s margin
+løber udover billedet, dvs. at den ren principielt går glip af at
+detektere en masse interessante regioner.  $0.518$ lider af det modsatte
+problem, den kan potentielt fange interessante regioner, på begge sider
+af midten.  For at være helt præcis så er det i $0.518$ tilfælde:
+\begin{equation}
+    1-0.518 = 0.482
+    0.518-0.482 = 0.036
+\end{equation}
+\note{Hvad fanden er det her for nogle tal?!?}
+\begin{equation}
+    0.518-0.482 = 0.036
+\end{equation}
+Hvilket er afstanden mellem de
+to snit.  Der er altså en stimmel på $0.05-0.036 = 0.014 = 1.4\%$ af
+billedet, hvor interessante regioner bliver talt to gange.
+
 }
 % vim: set tw=72 spell spelllang=da:

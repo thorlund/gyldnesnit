@@ -1,11 +1,27 @@
+{
+{\sffamily Dette afsnit vil præsentere vores resultater fra
+eksperimentet, hvor vi har brugt den udvidede metode, til at vurdere
+regionerne. Da eksperimentet blev kørt, har vi sat opløsningen på
+regionernes approksimation med et gitter for højt, hvilket har
+resulteret i, at vi kun har 524 brugbare resultater til rådighed. Dette
+svare til $\mathsf{3.65\%}$ af de brugbare resultater fra den naive
+kørsel. Vores datasæt bliver gennemgået alfabetisk efter kunstnerens
+efternavn, så vi har kun resultater fra kunstnere med efternavn
+startende med 'A' og 'B'.
+}
+
+\subsection{Håndtering af systematisk fejl}
+Selvom denne analyse også har brugt den fejlbehæftede metode, til
+udtrækning af regioner, så sorteres duplikater fra, når vi approksimerer
+en region. Vi har gemt farven, som en region er blevet tildelt af
+floodfill, og hvis denne farve ikke er at finde i regionens begrænsende
+rektangel, betyder det, at regionen er blevet malet over senere. Vi
+smider derfor denne region væk.
+
+Den udvidede metode indeholder derfor ingen duplikater, men resultaterne
+er ikke direkte sammenlignelige med dem fra den naive kørsel.
+
 \subsection{Resultater}
-Vi har kørt vores analyse på $524$ malerier, ud af vores datasæt på
-$14,375$ malerier. Det svare til at $3.65 \%$ af datasættet er
-gemmenløsbet. Siden vores datasæt bliver gemmenløbet alfabetisk efter
-kunstnerns navn, er resultaterne, fra kunstner med efternavn startene med A
-og B.
-
-
 I graf \ref{antal_regioner_vertikale_cut_udvidet} er der afbilledet,
 antale sammelet regioner i de 20 vertikale snit for helle datasættet.
 Som man kan se er der fundet makant flere regioner i de to snit som
@@ -68,3 +84,7 @@ hvad for et ration, der er dominerne, så vi kan forkaste hyptese
     \caption[]{Hypoteser i forhold til den udvidet kørsel.}
     \label{hypoteser_udvidet}
 \end{table}
+
+} % Eh eh eh. Nallerne væk!
+
+% vim: set tw=72 spell spelllang=da:
