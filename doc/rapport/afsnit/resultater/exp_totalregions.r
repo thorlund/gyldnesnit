@@ -34,12 +34,11 @@ print(mean(Regioner));
 print("Standardafvigelse");
 print(sd(Regioner));
 #print(Regioner);
-t.test(Regioner);
 
 # Plot
 png("billeder/exp_totalregions.png");
-#plot(d0$interessante.regioner, d0$antal, "h", ylab="Antal malerier", xlab="Antal fundne insteressante regioner");
-barplot(d0$antal, beside=TRUE, names=d0$interessante.regioner, ylab="Antal malerier", xlab="Antal fundne insteressante regioner");
+plot(d0$interessante.regioner, d0$antal, "h", ylab="Antal malerier", xlab="Antal fundne insteressante regioner");
+#barplot(d0$antal, beside=TRUE, names=d0$interessante.regioner, ylab="Antal malerier", xlab="Antal fundne insteressante regioner");
 #barplot(d0$antal,beside=TRUE, names=d0$interessante.regioner,cex.names=1)
 dev.off();
 
@@ -69,3 +68,15 @@ png("billeder/qq_exp_totalregions.png");
 qqnorm(Regioner);
 qqline(Regioner);
 dev.off();
+
+t.test(sum(prod) * fval);
+r = sum(prod) * fval;
+mu = mean(Regioner);
+sd = sd(Regioner);
+error <- qnorm(0.975)*sd/sqrt(sum(prod));
+left <- mu-error;
+right <- mu+error;
+print(left);
+print(right);
+print(mean(r));
+print(sd(r));

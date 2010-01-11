@@ -2,28 +2,13 @@
 {\sffamily Dette afsnit vil præsentere vores resultater fra
 eksperimentet, hvor vi har brugt den udvidede metode, til at vurdere
 regionerne. Da eksperimentet blev kørt, har vi sat opløsningen på
-regionernes approksimation med et gitter for højt, hvilket har
-resulteret i, at vi kun har 524 brugbare resultater til rådighed. Dette
-svare til $\mathsf{3.65\%}$ af de brugbare resultater fra den naive
-kørsel. Vores datasæt bliver gennemgået alfabetisk efter kunstnerens
-efternavn, så vi har kun resultater fra kunstnere med efternavn
-startende med 'A' og 'B'.
+regionernes approksimation med et gitter for højt, hvilket er resulteret
+i, at kørslen ikke er kommet igennem hele vores datasæt.
 }
 
-\subsection{Håndtering af systematisk fejl}
-Selvom denne analyse også har brugt den fejlbehæftede metode, til
-udtrækning af regioner, så sorteres duplikater fra, når vi approksimerer
-en region. Vi har gemt farven, som en region er blevet tildelt af
-floodfill, og hvis denne farve ikke er at finde i regionens begrænsende
-rektangel, betyder det, at regionen er blevet malet over senere. Vi
-smider derfor denne region væk.
-
-Den udvidede metode indeholder derfor ingen duplikater, men resultaterne
-er ikke direkte sammenlignelige med dem fra den naive kørsel.
-
-\subsection{Resultater}
-Vi har i denne kørsel analyseret $608$ malerier, men som vist herunder i
-udregning \ref{ud_tabel_fjern_detaljer}, har vi kun $524$ brugbare
+\subsection{Reduceret datasæt}
+Kørslen har nået at analysere $608$ malerier, men som vist herunder i
+tabel \ref{ud_tabel_fjern_detaljer}, har vi kun $524$ brugbare
 resultater, når vi har fjernet de billeder, som ikke er hele malerier.
 Dette svarer til en nedgang på $13.82\%$.
 
@@ -38,10 +23,30 @@ Dette svarer til en nedgang på $13.82\%$.
     \label{ud_tabel_fjern_detaljer}
 \end{table}
 
-I udregning \ref{ud_tabel_fordeling} herunder undersøger vi, hvor mange
-af de brugbare resultater, som har mindst en region liggende i det
-gyldne snit. Vi har at der i $87.02\%$ af malerierne er blevet fundet
-regioner i det gyldne snit, og vi kan derfor ikke afvise hypotese
+Dette svarer til $\mathsf{3.65\%}$ af de brugbare resultater fra den
+naive kørsel. Vores datasæt bliver gennemgået alfabetisk efter
+kunstnerens efternavn, så vi har kun resultater fra kunstnere med
+efternavn startende med 'A' og 'B'.
+
+Indsæt grafer over maleriernes ophav.
+
+
+\subsection{Håndtering af systematisk fejl}
+Selvom denne analyse også har brugt den fejlbehæftede metode, til
+udtrækning af regioner, så sorteres duplikater fra, når vi approksimerer
+en region. Vi har gemt farven, som en region er blevet tildelt af
+floodfill, og hvis denne farve ikke er at finde i regionens begrænsende
+rektangel, betyder det, at regionen er blevet malet over senere. Vi
+smider derfor denne region væk.
+
+Den udvidede metode indeholder derfor ingen duplikater, men resultaterne
+er ikke direkte sammenlignelige med dem fra den naive kørsel.
+
+\subsection{Resultater}
+Udregningen i tabel \ref{ud_tabel_fordeling} redegør for, hvor mange af
+de brugbare resultater, der har mindst en region liggende i det gyldne
+snit. Vi ser at der i $87.02\%$ af malerierne, er blevet fundet regioner
+i det gyldne snit, og vi kan derfor ikke afvise hypotese
 \ref{hypo_binaer}.
 
 \begin{table}[H]
@@ -58,7 +63,7 @@ regioner i det gyldne snit, og vi kan derfor ikke afvise hypotese
 \end{table}
 
 Fordelingen af regioner, over de fire gyldne snit i malerierne, ses i
-udregning \ref{ud_tabel_fire_snit}. Intet af de fire snit afviger med
+tabel \ref{ud_tabel_fire_snit}. Intet af de fire snit afviger med
 mere end $10\%$ fra et andet, og vi kan således ikke afvise hypotese
 \ref{hypo_fire_g_snit}.
 
@@ -75,6 +80,56 @@ mere end $10\%$ fra et andet, og vi kan således ikke afvise hypotese
     fire gyldne snit ved udvidet vurdering.}
     \label{ud_tabel_fire_snit}
 \end{table}
+
+\subsubsection{Antallet af fundne regioner over alle snit}
+Analysen har fundet $17,705$ regioner over alle snit i malerierne, med
+middelværdi $\mu = 33.79$ og standardafgivelse $\sigma = 18.58$.
+Antallet af fundne regioner i malerierne er illustreret i figur
+\ref{ud_graf_total_regions}. I figur \ref{ud_qq_total_regions} er vist
+et QQ-plot, som viser hvorvidt vores data er normalfordelt. Dette er
+tilfældet, hvis punkterne følger diagonalen i grafen. Vi ser, at de
+observerede data følger linjen nogenlunde, men har et udsving nederst
+til venstre, hvilket antyder at fordelingen er lidt skæv. Vi har i figur
+\ref{ud_hist_total_regions} sammenlignet et histogram over de
+observerede værdier, med tæthedsfunktionen for normalfordelingen $X \sim
+N(\mu = 33.79, \sigma^2 = 345.22)$. De observerede værdier, følger dog
+ikke de teoretiske værdier særlig pænt, og kun få steder falder de
+teoretiske værdier inden for det observerede interval, hvorfor vi ikke
+kan komme frem til et troværdigt konfidensinterval.
+
+Med et større antal fundne regioner, kunne vi meget vel komme tættere på
+en normalfordeling, og vi kunne da udtale os mere sikkert, om det
+forventede antal fundne regioner i et arbitrært billede.
+
+\begin{figure}[!h]
+    \centering
+    \subfloat[]{
+        \includegraphics[width=0.49\textwidth]{afsnit/resultater/billeder/exp_totalregions}
+        \label{ud_graf_total_regions}
+    }
+    \subfloat[]{
+        \includegraphics[width=0.49\textwidth]{afsnit/resultater/billeder/qq_exp_totalregions}
+        \label{ud_qq_total_regions}
+    }\\
+    \subfloat[]{
+        \includegraphics[width=0.62\textwidth]{afsnit/resultater/billeder/hist_exp_totalregions}
+        \label{ud_hist_total_regions}
+    }
+    \caption[]{Fordelingen af fundne regioner på malerier ved udvidet
+    vurdering.
+    \textbf{\ref{ud_graf_total_regions}:} Fordelingen af de fundne
+    regioner.
+    \textbf{\ref{ud_qq_total_regions}:} QQ-plot, som viser at vi er tæt
+    på at have en normalfordeling med den teoretiske fordeling $X \sim N(\mu,
+    \sigma^2)$.
+    \textbf{\ref{ud_hist_total_regions}:} Histrogram med
+    tæthedsfunktionen for normalfordeling, hvor $\mu = 33.79$ og
+    $\sigma^2 = 345.22$.
+    }
+    \label{ud_total_regions_plots}
+\end{figure}
+
+\subsubsection{Spacer}
 
 % Spacer! Ikke over denne linje HAHAHA
 
