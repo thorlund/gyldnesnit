@@ -11,21 +11,21 @@ omhandle afprøvning af metoden på testbilleder, og anden del afprøvning
 ad metoden på udvalgte billeder fra databasen.}
 
 \subsection{Afprøvning på test billeder}
-I dette underafsnit afprøves metoden på billeder konstrueret med en hvis
-baggrund og sorte regioner. Det snit, vi anvender,samt margin, er
-indtegnet på testbillederne
+I dette følgende afprøves metoden på billeder konstrueret med en hvid
+baggrund og sorte regioner. Snittet, som der vil blive kigget på, vil
+blive tegnet med rødt på billederne. Snittes margin vil blive tegnet med blåt.
 
-I billedet \ref{GRD_test1} er der fem regioner. tre af dem bliver
-fundet, da de ligger i snittet. De to regioner som ikke er fundet, er
+I billedet \ref{GRD_test1} er der fem regioner. Tre af dem bliver
+fundet, da de ligger i snittet. De to sidste regioner som ikke er fundet, er
 stadig sorte. Som man kan se, bliver både den, der krydser snittet og den,
 der tangere snittet, taget med. 
 
 \begin{figure}[!h]
     \centering
-    	\subfloat[Det originale malert.]{
+    	\subfloat[Det originale maleri.]{
 	       	\includegraphics[angle=0,width=0.7\textwidth]{afsnit/afprovning/billeder/region_selector/blob_section.png}
 	       	\label{GRD_test1_original}}\hspace{1em}
-		\subfloat[Her ses fire regioner samt en baggrund. to af figurerne og baggrunden er blevet fundet af metoden.]{
+		\subfloat[Her ses fire regioner samt en baggrund. To af figurerne og baggrunden er blevet fundet af metoden.]{
         	\includegraphics[angle=0,width=0.7\textwidth]{afsnit/afprovning/billeder/region_selector/blob_region_section.png}
         	\label{GRD_test1}}\hspace{1em}
         \caption[]{}
@@ -88,7 +88,7 @@ fungerer godt, mens den fungerer dårligt på andre
 \end{figure}
 
 I figuren \ref{generelde_region_detektor_virker} er der to malerier, hvor
-vores region detektor virker rigtige godt. 
+vores regionsudtrækning virker rigtig godt. 
 
 I det første maleri \ref{GRD_virker1} finder metoden syv store regioner
 samt en dele små. Den skelner mellem de forskellige paneler om kaminen,

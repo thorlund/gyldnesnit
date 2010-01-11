@@ -32,13 +32,11 @@ for painting in paintings:
 	m.saveResults(run.id,paintingContainer)
 \end{lstlisting}
 \subsection{Eksperimenter}
-Eksperimenterne er til for at samle konfigurationen af en kørsel.
-Kravene til et eksperiment er at den skal have mindst tre metoder:
-generation af snit, sætte globale indstillinger samt sætte
-kørselsspecifikke indstillinger. \ref{pseudo_experiment} er et eksempel
+Eksperimenter kontrollere hvilke snit og indstillinger en given kørsel
+skal afvikles med.  \ref{pseudo_experiment} er et eksempel
 på hvordan et eksperiment evt. kunne se ud.
 \begin{lstlisting}[caption={Pseudokode for et
-experiment, som checker på $\varPhi$ og $frac{2}{3}$},frame=tb,label={pseudo_experiment}]
+experiment, som checker på $\varPhi$ og $\frac{2}{3}$},frame=tb,label={pseudo_experiment}]
 def generateCuts():
 	cuts = [goldenLibrary.PHI,2/3]
 	return cuts
@@ -50,10 +48,9 @@ def setGlobalSettings(globalSettings):
 \end{lstlisting}
 %Settings 
 \subsection{Globale indstillinger}
-Globale indstillinger er informationer, som har brug for at blive gemt
-mellem kørsler. I det nuværende tilfælde er det placeringen på databasen og
-csvfilen fra wga.hu, det kunne udvides til også at inkludere placeringen
-af billederne istedet for at være fastdefineret.
+De globale indstillinger er placeringen på databasen og den
+kommasepareredefil. Dette er indstillinger, som ikke ændre sig fra
+kørsel til kørsel, dog er de vitale for hele programmet.
 
 \subsection{Kørselsindstillinger}
 Disse indstilinger kan afvige i forskellige kørsler, det er variable
