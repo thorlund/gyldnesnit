@@ -1,14 +1,14 @@
 def main():
-	yerfile = open("yers_snits.txt")
+	yerfile = open("yers_snitsU.txt")
 	lines = yerfile.readlines()[0]
 	#print lines
 	lines = lines.split(")")
 	lines.pop(16)
 	size = len(lines)
-	newfile0 = open('csv/yearcut0.csv' , 'w' )
-	newfile1 = open('csv/yearcut1.csv' , 'w' )
-	newfile2 = open('csv/yearcut2.csv' , 'w' )
-	newfile3 = open('csv/yearcut3.csv' , 'w' )
+	newfile0 = open('csv/yearcut0U.csv' , 'w' )
+	newfile1 = open('csv/yearcut1U.csv' , 'w' )
+	newfile2 = open('csv/yearcut2U.csv' , 'w' )
+	newfile3 = open('csv/yearcut3U.csv' , 'w' )
 	newfile0.write("\"ratios\",\"interessante regioner\"\n")
 	newfile1.write("\"ratios\",\"interessante regioner\"\n")
 	newfile2.write("\"ratios\",\"interessante regioner\"\n")
