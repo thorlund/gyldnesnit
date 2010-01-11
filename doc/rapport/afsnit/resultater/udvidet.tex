@@ -28,8 +28,17 @@ naive kørsel. Vores datasæt bliver gennemgået alfabetisk efter
 kunstnerens efternavn, så vi har kun resultater fra kunstnere med
 efternavn startende med 'A' og 'B'.
 
-Indsæt grafer over maleriernes ophav.
-
+\begin{figure}[!h]
+    \centering
+    \subfloat[Årstal]{
+    \includegraphics[angle=-90,width=0.42\textwidth]{afsnit/resultater/billeder/year}
+        \label{ud_year}}\hspace{1em}
+    \subfloat[Nationalitet]{
+        \includegraphics[angle=-90,width=0.42\textwidth]{afsnit/resultater/billeder/nation}
+        \label{ud_nation}}
+    \caption[]{Maleriernes årstal og nationalitet.}
+    \label{ud_year_nation}
+\end{figure}
 
 \subsection{Håndtering af systematisk fejl}
 Selvom denne analyse også har brugt den fejlbehæftede metode, til
