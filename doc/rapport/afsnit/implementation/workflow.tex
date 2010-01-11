@@ -1,14 +1,16 @@
 {
 {\sffamily
 For at beskrive integrationen og samspillet mellem en kørsel og
-databasen vil der følge en beskrivelse af de vigtige kald mellem 
-programmet og databasen. 
+databasen vil der følge en beskrivelse af de vigtige kald mellem
+programmet og databasen.
 }
 
+\subsection{Passende overskrift!!}
+Filen \texttt{start.py} er distributør af arbejde til de andre dele af
+programkoden.  Diagram \ref{start_workflow} og kodeboks
+\ref{pseudo_workflow} giver et overblik over hvad der bliver forklaret i
+resten af dette kapitel.
 
-Filen start.py er distributør af arbejde til de andre dele af programkoden.
-Diagram \ref{start_workflow} og pseudokode \ref{pseudo_workflow} giver et overblik over hvad der bliver
-forklaret i resten af dette kapitel. 
 \begin{figure}[h!]
 	\begin{center}
 		\includegraphics[scale=0.5]{afsnit/implementation/billeder/workflow_start_py.png}
@@ -17,8 +19,9 @@ forklaret i resten af dette kapitel.
 	\label{start_workflow}
 	bliver gentaget indtil der ikke er flere billeder at arbejde på}
 \end{figure}
-\begin{lstlisting}[caption={Pseudokode for
-start},frame=tb,label={pseudo_workflow}]
+
+\begin{lstlisting}[caption={Pseudokode for start}, captionpos=b,
+    frame=tb, label={pseudo_workflow}, float=h]
 cuts = experiment.generateCuts()
 experiment.setSettings(settings)
 experiment.setGlobalSettings(globalSettings)
@@ -27,41 +30,49 @@ db.construct(Database)
 run = m.createNewRun(settings)
 paintings = m.Painting.select(m.Painting.q.form=="painting")
 for painting in paintings:
-	paintingContainer = Painting(painting)
-	paintingContainer.setResults(paintingAnalyzer.analyze(paintingContainer,settings))
-	m.saveResults(run.id,paintingContainer)
+    paintingContainer = Painting(painting)
+    paintingContainer.setResults(
+            paintingAnalyzer.analyze(paintingContainer,settings))
+    m.saveResults(run.id,paintingContainer)
 \end{lstlisting}
 \subsection{Eksperimenter}
-Eksperimenter kontrollere hvilke snit og indstillinger en given kørsel
-skal afvikles med.  \ref{pseudo_experiment} er et eksempel
-på hvordan et eksperiment evt. kunne se ud.
-\begin{lstlisting}[caption={Pseudokode for et
-experiment, som checker på $\varPhi$ og $\frac{2}{3}$},frame=tb,label={pseudo_experiment}]
+Eksperimenter angiver hvilke snit og indstillinger en given kørsel skal
+afvikles med. I kodeboks \ref{pseudo_experiment} ses et eksempel på,
+hvordan et eksperiment kan se ud.
+
+\begin{lstlisting}[caption={Pseudokode for et experiment, som checker på
+    $\varPhi$ og $\frac{2}{3}$}, frame=tb, label={pseudo_experiment},
+    captionpos=b, float=h]
 def generateCuts():
-	cuts = [goldenLibrary.PHI,2/3]
+	cuts = [goldenLibrary.PHI, 2.0/3.0]
 	return cuts
+
 def setSettings(settings):
 	settings.setMarginPercentage(0.024)
 	return 0
+
 def setGlobalSettings(globalSettings):
 	return 0
 \end{lstlisting}
-%Settings 
+
+%Settings
 \subsection{Globale indstillinger}
-De globale indstillinger er placeringen på databasen og den
-kommasepareredefil. Dette er indstillinger, som ikke ændre sig fra
+\note{Hvorfor?}
+I de globale indstillinger sættes placeringen på databasen og den
+kommaseparerede fil. Dette er indstillinger, som ikke ændrer sig fra
 kørsel til kørsel, dog er de vitale for hele programmet.
 
 \subsection{Kørselsindstillinger}
-Kørselsindstilinger kan afvige i de forskellige kørsler. De består af
-tærskelværdier for floodfill og kantdetektion, hvilken analysemetode,
-samt størrelsen på margin\ref{terskelverdi} og de snit, som
-skal undersøges. De her variabler betyder meget for resultaterne og derfor er vigtige
-at kunne ændre fra kørsel til kørsel. 
+Kørselsindstilinger kan ændre sig i de forskellige kørsler. De består af
+tærskelværdier for floodfill og kantdetektion, hvilken analysemetode vi
+ønsker at bruge, samt størrelsen på margin og de snit, som skal
+undersøges. De her variabler betyder meget for resultaterne og derfor er
+vigtige at kunne ændre fra kørsel til kørsel.
 
 \subsection{Initialisering af databasen}
-Databasen er konstrueret ved at gennemløbe den kommaseparedefil fra
-wga.hu.
+Databasen er kopieret fra et online kunstarkiv kaldet ``The Web Gallery
+of Art''\cite{wgahu}, forkortet WGA. WGA supplerer en kommasepareret fil, med
+maleriernes metadata, som vi bruger til at populere vores database med.
 Ved at bruge \emph{SQLObject} er det ligetil at konstruere tabeller i
 databasen. Vi har i afsnit \ref{section_database} givet det database
 skema som vi opbygger databasen efter. I kodeboks
@@ -122,25 +133,26 @@ class Result(s.SQLObject):
     numberOfRegions = s.IntCol()
 \end{lstlisting}
 
-Dette sker kun i det tilfælde at databasen ikke findes ved starten af en
-kørsel. Den kommasepareredefil bliver parset før enhver kørsel og bliver
-linje for linje sammenlignet med databasen for at finde evt. mangler.
-Det er værd at bemærke at databasen ikke kan håndtere at blive afbrudt i dette stadie første gang den bliver kørt.
-Grunden til dette er at det er en meget overfladisk sammenligning, kun
-er billedes placering på wga.hu, som bliver sammenlignet, da denne er
-unik.
-Omvendt giver det mulighed for at den kommaseparerede fil kan opdateres uden nogen
-problemer. Billederne automatisk bliver hentet hvis de mangler
-giver det også mulighed for at flytte databasen til en anden
-maskine uden nogen problemer.
-Der er kun to tilfælde databasen kan håndtere udvidelser, hvis den
-kommasepareredefil bliver opdateret og beholder sin nuværende form, og
-hvis en testdatabases \texttt{count} variable bliver sat til en højere
-værdi, dette tilfælde forklares senere.
-Følgende pseudokode forklarer hvad databasen gennemgår hver gang der
-startes en ny kørsel.
+\marker{Dette sker}{Hvad sker?} kun i det tilfælde at databasen ikke
+findes ved starten af en kørsel. Den kommaseparerede fil bliver parset
+før enhver kørsel, og bliver, linje for linje, sammenlignet med
+databasen for at finde evt. mangler.  Bemærk, at databasen ikke kan
+håndtere at blive afbrudt i dette stadie, første gang den bliver kørt,
+fordi det er en meget overfladisk sammenligning, hvor kun billeders
+placering på \url{http://www.wga.hu}, som bliver sammenlignet, da denne
+er unik.  Omvendt giver det mulighed for at den kommaseparerede fil kan
+opdateres uden nogen problemer. Nye billeder bliver automatisk hentet,
+hvilket gør det muligt, at flytte databasen til en anden maskine, uden
+problemer. Der er kun to tilfælde hvor databasen kan håndtere
+udvidelser; hvis den kommasepareredefil bliver opdateret og beholder sin
+nuværende form, og hvis en testdatabases \texttt{count}-variabel bliver
+sat til en højere værdi. Det sidste tilfælde forklares senere.  Følgende
+pseudokode, i kodeboks \ref{pseudo_init_db}, forklarer hvad databasen
+gennemgår, hver gang der startes en ny kørsel.
+
 \begin{lstlisting}[caption={Pseudokode for database
-initialisering},frame=tb,label={pseudo_init_db}]
+    initialisering},frame=tb,label={pseudo_init_db}, captionpos=b,
+    float=h]
 csvfile = open(Settings.csvfilelocation)
 for line in csvfile:
 	line = parser.parse(line)
@@ -149,45 +161,52 @@ for line in csvfile:
 	if database.Painting.select(database.Painting.url==line.url).count() == 0:
 		database.Painting.insert(line)
 \end{lstlisting}
+
 \subsubsection{Parsing af kommasepareret fil}
-I den kommaseparfilen gives endvidere mange oplysninger, om den enkelte artikel samt
-dennes kunstner.  Vi har konstrueret en parser, som trækker disse
-informationer ud fra filen og lægger dem ind i databasen. Da vi primært
-vil beskæftige os med malerier, vil vi nu blot omtale kunstartikler som
-malerier.
+I den kommaseparerede fil gives mange oplysninger, om den enkelte
+artikel samt dennes kunstner.  Vi har konstrueret en parser, som trækker
+disse informationer ud fra filen og lægger dem ind i databasen. Da vi
+primært vil beskæftige os med malerier, vil vi nu blot omtale
+kunstartikler som malerier.
 
 Den konstruerede parser, til den kommaseparerede fil, er dog ret grov,
-da folkene bag hjemmesiden \cite{wgahu} ikke har lagt meget vægt på, at være
-konsistente i deres formulering af en kunstners fødsels- og dødsår eller
-en genstands dimensioner. En følge deraf er, at nogle kunstnere, hvor
-hjemmesiden\cite{wgahu} ikke har en klar indikation af dennes levealder, ikke
-bliver registreret i databasen. Vi kan dog stadig slå kunstneren op ved
-at bruge feltet ``timeline'', som angiver hvilken periode kunstneren
-tilhører. Vi har i enkelte tilfælde, set os nødsaget til at rette i den
-kommaseparerede fil, hvor der er blevet indsat tegn, som helt umuliggør
-korrekt parsing af filen, såsom ekstra komma eller semikolon.
+da folkene bag WGA ikke har lagt meget vægt på, at være konsistente i
+deres formulering af en kunstners fødsels- og dødsår eller en genstands
+dimensioner. En følge deraf er, at nogle kunstnere, hvor WGA ikke har en
+klar indikation af dennes levealder, ikke bliver registreret i
+databasen. Vi kan dog stadig slå kunstneren op ved at bruge feltet
+``timeline'', som angiver hvilken periode kunstneren tilhører. Vi har i
+enkelte tilfælde, set os nødsaget til at rette i den kommaseparerede
+fil, når der er blevet indsat tegn, som helt umuliggør korrekt parsing
+af filen, såsom ekstra komma eller semikolon.
 
 \subsubsection{Testdatabase}\label{test_db}
-For at alle kan arbejde på det samme billeder undervejs i udviklingen er
-det muligt at konstruere en lille testdatabase, dette gøres ved at sætte
-\texttt{testdatabase} variablen til True og 
-\texttt{count} variablen til det antal af billeder der ønskes. En fuld beskrivelse kan findes i \ref{brugervejl_test_db}
-
+For at alle kan arbejde på de samme billeder undervejs i udviklingen, er
+det muligt at konstruere en lille testdatabase. \note{Hvorhenne?} Dette
+gøres ved at sætte variablen \texttt{testdatabase} lig \texttt{True} og
+\texttt{count} til det antal billeder der ønskes. \note{Referencen til
+bilag virker mærkelig, da der står nøjagtig det samme.}
 
 \subsection{Analysen}
-Analysen bliver kørt på alle billeder, som har typen "painting" i den
-kommaseparerede fil. Som beskrevet i linje 8-10 i \ref{pseudo_workflow}
-så bliver billedet sendt igennem Painting klassen, hvor det bliver
-konverteret til et \emph{Opencv} billede. Når det er konverteret sendes
-det til paintingAnalyser, hvis formål er at sende det videre til
-udtrækning af regioner. Efter alle regioner er trukket ud gemmes
-resultaterne i databasen.
+Analysen bliver kørt på alle billeder, som har typen ``painting'' i den
+kommaseparerede fil. Som beskrevet i linje 8--10 i kodeboks
+\ref{pseudo_workflow}, bliver billedet sendt igennem klassen
+\textbf{Painting}, hvor det bliver konverteret til et
+\emph{OpenCV}-billede. Når det er konverteret sendes det til
+\texttt{paintingAnalyzer}, hvis formål er at sende det videre til
+udtrækning af regioner, alt efter hvilken anylysemetode der bruges. Når
+alle regioner er trukket ud, gemmes resultaterne i databasen.
+
+\marker{Brug den pseudokode i \texttt{koersel.tex} i denne
+beskrivelse}{!}
 
 \subsection{Genskabelse af parametre og resultater}
+\note{Jeg tror ikke at det følgende er blevet læst igennem til at passe
+til dette afsnit.}
 At kunne genskabe de fundne resultater fra en analyse har meget stor
 betydning, dels for at kunne udtage stikprøver i udviklingen af hele
 programmet, men også for at kunne fremvise grafiske resultater. Vi har
-allerede været inde på, at man for at kunne genskabe et resultat, skal
+allerede været inde på, at man, for at kunne genskabe et resultat, skal
 vide hvilke parametre der oprindeligt har været brugt. Ovenstående
 databaseskema gør det let at hente disse parametre ud. Hvis vi får et
 resultat med overraskende mange regioner og gerne vil undersøge dette
@@ -253,5 +272,6 @@ tilknyttet et snit vi gerne vil undersøge og traversere gennem den liste
 af regioner vi får tilbage. Hver region er repræsenteret som en klasse
 hvor vi kan trække rektanglet ud og vi bruger da \emph{OpenCV} til at
 tegne rektanglet på det tilknyttede billede.
+
 }
 % vim: set tw=72 spell spelllang=da:
