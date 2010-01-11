@@ -121,10 +121,10 @@ $\pm10\%$ fra et andet og vi kan derfor ikke afvise hypotese
 \begin{table}[H]
     \centering
     \begin{tabular}{r@{\ \ }p{12em}r|r@{.}l}
-            & Regioner i snit 0   &  $41,087$ &  $24$ & $36\%$ \\
-        $+$ & Regioner i snit 1   &  $42,400$ &  $25$ & $14\%$ \\
-        $+$ & Regioner i snit 2   &  $45,038$ &  $26$ & $71\%$ \\
-        $+$ & Regioner i snit 3   &  $40,125$ &  $23$ & $79\%$ \\\hline
+            & Regioner i snit 0   &  $42,884$ &  $24$ & $51\%$ \\
+        $+$ & Regioner i snit 1   &  $44,042$ &  $25$ & $18\%$ \\
+        $+$ & Regioner i snit 2   &  $46,432$ &  $26$ & $54\%$ \\
+        $+$ & Regioner i snit 3   &  $41,547$ &  $23$ & $75\%$ \\\hline
             & Regioner i alt      & $168,650$ & $100$ & $00\%$
     \end{tabular}
     \caption[]{Forholdet mellem de interessante regioner fundet i de
@@ -167,6 +167,25 @@ dette interval. Vi kan således afvise hypotese
     \caption[]{Resultater med dimensioner, hvor disse er et gyldent
     rektangel med en afvigelse på $2.4\%$.}
     \label{tabel_real_dimensions}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|}
+        \hline
+            & Afvist & Ikke afvist  \\\hline
+        1   &            & \checkmark   \\\hline
+        2   &            & \checkmark   \\\hline
+        3   & \checkmark &              \\\hline
+        4   & \checkmark &              \\\hline
+        5   &            & \checkmark   \\\hline
+        6   & \checkmark &              \\\hline
+        7   &            &              \\\hline
+        8   &            &              \\\hline
+        9   &            & \checkmark	\\\hline
+    \end{tabular}
+    \caption[]{Hypoteser i forhold til den naive kørsel.}
+    \label{hypoteser_naiv}
 \end{table}
 
 \subsubsection{Antallet af fundne regioner over alle snit}
@@ -212,25 +231,6 @@ indgår fire gange. Vi ser, at der er et lille antal malerier, hvori der
 bliver fundet rigtig mange regioner. Det tynder dog ud omkring
 $380$ regioner, hvor antallet af malerier, med flere regioner,
 forekommer mindre hyppigt.
-
-\begin{table}[!h]
-    \centering
-    \begin{tabular}{|l|c|c|}
-        \hline
-            & Afvist & Ikke afvist  \\\hline
-        1   &            & \checkmark   \\\hline
-        2   &            & \checkmark   \\\hline
-        3   & \checkmark &              \\\hline
-        4   & \checkmark &              \\\hline
-        5   &            & \checkmark   \\\hline
-        6   & \checkmark &              \\\hline
-        7   &            &              \\\hline
-        8   &            &              \\\hline
-        9   &            & \checkmark	\\\hline
-    \end{tabular}
-    \caption[]{Hypoteser i forhold til den naive kørsel.}
-    \label{hypoteser_naiv}
-\end{table}
 
 }
 % vim: set tw=72 spell spelllang=da:
