@@ -64,16 +64,16 @@ for timeline in timelines:
 	for cut in range(4):
 		for ratio in diffratios:
 			ratio = ratio[0]
-			ratios[ratio]=results.filter(b.AND(m.Result.q.cutRatio==ratio , m.Result.q.cutNo==cut, m.Artist.q.timeline==timeline)).distinct().sum(m.Result.q.numberOfRegions)
+			ratios[ratio]=results.filter(b.AND(m.Result.q.cutRatio==ratio , m.Result.q.cutNo==cut, m.Artist.q.timeline==timeline)).sum(m.Result.q.numberOfRegions)
 		cuts.append(ratios)
 		ratios=dict()
 	picTimeline=paintings.filter(b.AND(m.Artist.q.id == m.Painting.q.artist,m.Artist.q.timeline==timeline)).distinct()
 	for painting in picTimeline:
 		if not (painting.realWidth == None and painting.realHeight == None):
 			if int(painting.realWidth*painting.realHeight) not in area:
-				area[int(painting.realWidth * painting.realHeight)] = results.filter(painting.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions)
+				area[int(painting.realWidth * painting.realHeight)] = results.filter(painting.id == m.Painting.q.id).sum(m.Result.q.numberOfRegions)
 			else:
-				area[int(painting.realWidth*painting.realHeight)] =results.filter(painting.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions) + area[int(painting.realWidth*painting.realHeight)]
+				area[int(painting.realWidth*painting.realHeight)] =results.filter(painting.id == m.Painting.q.id).sum(m.Result.q.numberOfRegions) + area[int(painting.realWidth*painting.realHeight)]
 	picTimeline = picTimeline.count()
 	periodes[timeline] = (cuts,area,picTimeline)
 	area = dict()
@@ -88,8 +88,8 @@ area = dict()
 #This is also used toptengolden and topten images
 #Also a ratio for the size of the paintings
 for picture in paintings.distinct():
-	numbOfRegions = results.filter(picture.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions)
-	numbOfGoldenRegions = goldenpaintings.filter(picture.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions)
+	numbOfRegions = results.filter(picture.id == m.Painting.q.id).sum(m.Result.q.numberOfRegions)
+	numbOfGoldenRegions = goldenpaintings.filter(picture.id == m.Painting.q.id).sum(m.Result.q.numberOfRegions)
 	if numbOfRegions not in topten:
 		topten[numbOfRegions] = [picture.id]
 	else:
@@ -105,9 +105,9 @@ for picture in paintings.distinct():
 	#Size of painting calculations
 	if picture.realHeight != None and picture.realWidth !=None:
 		if int(picture.realWidth*picture.realHeight) not in area:
-			area[int(picture.realWidth * picture.realHeight)] = results.filter(picture.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions)
+			area[int(picture.realWidth * picture.realHeight)] = results.filter(picture.id == m.Painting.q.id).sum(m.Result.q.numberOfRegions)
 		else:
-			area[int(picture.realWidth*picture.realHeight)] = area[int(picture.realWidth*picture.realHeight)] + results.filter(picture.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions)
+			area[int(picture.realWidth*picture.realHeight)] = area[int(picture.realWidth*picture.realHeight)] + results.filter(picture.id == m.Painting.q.id).sum(m.Result.q.numberOfRegions)
 print featPerPicture
 
 #printing the area/feats
@@ -125,7 +125,7 @@ for school in schools:
 	for cut in range(4):
 		for ratio in diffratios:
 			ratio = ratio[0]
-			ratios[ratio]=results.filter(b.AND(m.Result.q.cutRatio==ratio , m.Result.q.cutNo==cut, m.Artist.q.school==school)).distinct().sum(m.Result.q.numberOfRegions)
+			ratios[ratio]=results.filter(b.AND(m.Result.q.cutRatio==ratio , m.Result.q.cutNo==cut, m.Artist.q.school==school)).sum(m.Result.q.numberOfRegions)
 		cuts.append(ratios)
 		ratios = dict()
 	amountOfPaintings = paintings.filter(b.AND(m.Painting.q.artist == m.Artist.q.id, m.Artist.q.school == school)).distinct().count()
@@ -134,9 +134,9 @@ for school in schools:
 	for painting in schoolsPaintings:
 		if painting.realWidth != None and painting.realHeight != None:
 			if int(painting.realWidth * painting.realHeight) not in area:
-				area[int(painting.realWidth * painting.realHeight)] = paintings.filter(painting.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions)
+				area[int(painting.realWidth * painting.realHeight)] = paintings.filter(painting.id == m.Painting.q.id).sum(m.Result.q.numberOfRegions)
 			else:
-				area[int(painting.realWidth * painting.realHeight)] = area[int(painting.realWidth * painting.realHeight)]+paintings.filter(painting.id == m.Painting.q.id).distinct().sum(m.Result.q.numberOfRegions)
+				area[int(painting.realWidth * painting.realHeight)] = area[int(painting.realWidth * painting.realHeight)]+paintings.filter(painting.id == m.Painting.q.id).sum(m.Result.q.numberOfRegions)
 	countries[school] = (cuts,area,amountOfPaintings)
 	area = dict()
 print countries 
