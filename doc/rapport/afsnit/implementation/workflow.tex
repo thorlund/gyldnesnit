@@ -53,52 +53,15 @@ kommasepareredefil. Dette er indstillinger, som ikke ændre sig fra
 kørsel til kørsel, dog er de vitale for hele programmet.
 
 \subsection{Kørselsindstillinger}
-Disse indstilinger kan afvige i forskellige kørsler, det er variable
-hvis indstillinger betyder meget for resultaterne og derfor er vigtige
-at kunne ændre. De består af tærskelværdier for floodfill og
-kantdetektion samt størrelsen på margin\ref{terskelverdi}, de snit, som
-skal undersøges og hvilken metode, der skal benyttes.
+Kørselsindstilinger kan afvige i de forskellige kørsler. De består af
+tærskelværdier for floodfill og kantdetektion, hvilken analysemetode,
+samt størrelsen på margin\ref{terskelverdi} og de snit, som
+skal undersøges. De her variabler betyder meget for resultaterne og derfor er vigtige
+at kunne ændre fra kørsel til kørsel. 
 
-\subsection{Konstruktion af databasen}
-Databasen bliver selvfølgelig ikke rekonstrueret ved enhver kørsel, men
-undtagen i speciel tilfældet at der skal skabes en
-testdatabase; se \ref{test_db}, vil den kommaseparede fil blive gennemløbet.
-Det er værd at bemærke at dette også betyder at databasen ikke kan
-håndtere at blive afbrudt i dette stadie første gang den bliver kørt.
-Omvendt giver det mulighed for at den kommeseparerede fil kan opdateres uden nogen
-problemer. Og da billederne automatisk bliver hentet hvis de mangler
-giver det også mulighed for at flytte databasen over til en anden
-maskine uden nogen problemer. Følgende pseudokode forklare hvordan
-konstruktionen af databasen foregår.
-\begin{lstlisting}[caption={Pseudokode for database
-initialisering},frame=tb,label={pseudo_init_db}]
-csvfile = open(Settings.csvfilelocation)
-for line in csvfile:
-	line = parser.parse(line)
-	if not os.path.isfile(line.path):
-		download(line.url)
-	if database.Painting.select(database.Painting.url==line.url).count() == 0:
-		painting = database.Painting(line)
-\end{lstlisting}
-\subsubsection{Parsing af kommasepareret fil}
-I filen gives endvidere mange oplysninger, om den enkelte artikel samt
-dennes kunstner.  Vi har konstrueret en parser, som trækker disse
-informationer ud fra filen og lægger dem ind i databasen. Da vi primært
-vil beskæftige os med malerier, vil vi nu blot omtale kunstartikler som
-malerier.
-
-Den konstruerede parser, til den kommaseparerede fil, er dog ret grov,
-da folkene bag \cite{wgahu} ikke har lagt meget vægt på, at være
-konsistente i deres formulering af en kunstners fødsels- og dødsår eller
-en genstands dimensioner. En følge deraf er, at nogle kunstnere, hvor
-\cite{wgahu} ikke har en klar indikation af dennes levealder, ikke
-bliver registreret i databasen. Vi kan dog stadig slå kunstneren op ved
-at bruge feltet ``timeline'', som angiver hvilken periode kunstneren
-tilhører. Vi har i enkelte tilfælde, set os nødsaget til at rette i den
-kommaseparerede fil, hvor der er blevet indsat tegn, som helt umuliggør
-korrekt parsing af filen, såsom ekstra komma eller semikolon.
-
-\subsubsection{Databasens opbygning}
+\subsection{Initialisering af databasen}
+Databasen er konstrueret ved at gennemløbe den kommaseparedefil fra
+wga.hu.
 Ved at bruge \emph{SQLObject} er det ligetil at konstruere tabeller i
 databasen. Vi har i afsnit \ref{section_database} givet det database
 skema som vi opbygger databasen efter. I kodeboks
@@ -158,11 +121,57 @@ class Result(s.SQLObject):
     cutNo = s.IntCol()
     numberOfRegions = s.IntCol()
 \end{lstlisting}
+
+Dette sker kun i det tilfælde at databasen ikke findes ved starten af en
+kørsel. Den kommasepareredefil bliver parset før enhver kørsel og bliver
+linje for linje sammenlignet med databasen for at finde evt. mangler.
+Det er værd at bemærke at databasen ikke kan håndtere at blive afbrudt i dette stadie første gang den bliver kørt.
+Grunden til dette er at det er en meget overfladisk sammenligning, kun
+er billedes placering på wga.hu, som bliver sammenlignet, da denne er
+unik.
+Omvendt giver det mulighed for at den kommaseparerede fil kan opdateres uden nogen
+problemer. Billederne automatisk bliver hentet hvis de mangler
+giver det også mulighed for at flytte databasen til en anden
+maskine uden nogen problemer.
+Der er kun to tilfælde databasen kan håndtere udvidelser, hvis den
+kommasepareredefil bliver opdateret og beholder sin nuværende form, og
+hvis en testdatabases \texttt{count} variable bliver sat til en højere
+værdi, dette tilfælde forklares senere.
+Følgende pseudokode forklarer hvad databasen gennemgår hver gang der
+startes en ny kørsel.
+\begin{lstlisting}[caption={Pseudokode for database
+initialisering},frame=tb,label={pseudo_init_db}]
+csvfile = open(Settings.csvfilelocation)
+for line in csvfile:
+	line = parser.parse(line)
+	if not os.path.isfile(line.path):
+		download(line.url)
+	if database.Painting.select(database.Painting.url==line.url).count() == 0:
+		database.Painting.insert(line)
+\end{lstlisting}
+\subsubsection{Parsing af kommasepareret fil}
+I den kommaseparfilen gives endvidere mange oplysninger, om den enkelte artikel samt
+dennes kunstner.  Vi har konstrueret en parser, som trækker disse
+informationer ud fra filen og lægger dem ind i databasen. Da vi primært
+vil beskæftige os med malerier, vil vi nu blot omtale kunstartikler som
+malerier.
+
+Den konstruerede parser, til den kommaseparerede fil, er dog ret grov,
+da folkene bag hjemmesiden \cite{wgahu} ikke har lagt meget vægt på, at være
+konsistente i deres formulering af en kunstners fødsels- og dødsår eller
+en genstands dimensioner. En følge deraf er, at nogle kunstnere, hvor
+hjemmesiden\cite{wgahu} ikke har en klar indikation af dennes levealder, ikke
+bliver registreret i databasen. Vi kan dog stadig slå kunstneren op ved
+at bruge feltet ``timeline'', som angiver hvilken periode kunstneren
+tilhører. Vi har i enkelte tilfælde, set os nødsaget til at rette i den
+kommaseparerede fil, hvor der er blevet indsat tegn, som helt umuliggør
+korrekt parsing af filen, såsom ekstra komma eller semikolon.
+
 \subsubsection{Testdatabase}\label{test_db}
 For at alle kan arbejde på det samme billeder undervejs i udviklingen er
-det muligt at konstruere en lille database, dette gøres ved at sætte
-testdatabase variablen til True. Databasen vil kun vokse til count
-variablen. En fuld beskrivelse kan findes i \ref{brugervejl_test_db}
+det muligt at konstruere en lille testdatabase, dette gøres ved at sætte
+\texttt{testdatabase} variablen til True og 
+\texttt{count} variablen til det antal af billeder der ønskes. En fuld beskrivelse kan findes i \ref{brugervejl_test_db}
 
 
 \subsection{Analysen}
