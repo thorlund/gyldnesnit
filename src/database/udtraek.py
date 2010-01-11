@@ -58,13 +58,16 @@ timelines = conn.queryAll(nameselect)
 ratios=dict()
 periodes=dict()
 area=dict()
+timelinecount = 0
 for timeline in timelines:
 	timeline = timeline[0]
 	cuts = []
 	for cut in range(4):
 		for ratio in diffratios:
 			ratio = ratio[0]
-			ratios[ratio]=results.filter(b.AND(m.Result.q.cutRatio==ratio , m.Result.q.cutNo==cut, m.Artist.q.timeline==timeline)).sum(m.Result.q.numberOfRegions)
+			ratios[ratio]=results.filter(b.AND(m.Result.q.cutRatio==ratio , m.Result.q.cutNo==cut, m.Artist.q.id == m.Painting.q.artist, m.Result.q.painting == m.Painting.q.id, m.Artist.q.timeline==timeline)).sum(m.Result.q.numberOfRegions)
+			if ratios[ratio] != None:
+				timelinecount = timelinecount + ratios[ratio] 
 		cuts.append(ratios)
 		ratios=dict()
 	picTimeline=paintings.filter(b.AND(m.Artist.q.id == m.Painting.q.artist,m.Artist.q.timeline==timeline)).distinct()
@@ -74,11 +77,13 @@ for timeline in timelines:
 				area[int(painting.realWidth * painting.realHeight)] = results.filter(painting.id == m.Painting.q.id).sum(m.Result.q.numberOfRegions)
 			else:
 				area[int(painting.realWidth*painting.realHeight)] =results.filter(painting.id == m.Painting.q.id).sum(m.Result.q.numberOfRegions) + area[int(painting.realWidth*painting.realHeight)]
-	picTimeline = picTimeline.count()
+	picTimeline=paintings.filter(b.AND(m.Artist.q.id == m.Painting.q.artist,m.Artist.q.timeline==timeline)).distinct().count()
 	periodes[timeline] = (cuts,area,picTimeline)
 	area = dict()
 print "This tuple shows how many features are detected in the golden ratio and overall and the amount of pictures in/of a given timeline"
 print periodes
+print "The amount of features found in the dict()"
+print timelinecount
 
 print "The features per paintings dict"
 featPerPicture = dict()
@@ -109,6 +114,11 @@ for picture in paintings.distinct():
 		else:
 			area[int(picture.realWidth*picture.realHeight)] = area[int(picture.realWidth*picture.realHeight)] + results.filter(picture.id == m.Painting.q.id).sum(m.Result.q.numberOfRegions)
 print featPerPicture
+print "amount of features in the featper Picture thingi"
+featscount = 0
+for feats in featPerPicture.keys():
+	featscount = featscount + feats * featPerPicture[feats]
+print featscount
 
 #printing the area/feats
 print "The area combined with how many regions are found"
@@ -119,13 +129,16 @@ schoolsSelect = conn.sqlrepr(b.Select(m.Artist.q.school).distinct())
 schools = conn.queryAll(schoolsSelect)
 countries = dict()
 area = dict()
+featsschool = 0
 for school in schools:
 	cuts = []
 	school = school[0]#dont ask
 	for cut in range(4):
 		for ratio in diffratios:
 			ratio = ratio[0]
-			ratios[ratio]=results.filter(b.AND(m.Result.q.cutRatio==ratio , m.Result.q.cutNo==cut, m.Artist.q.school==school)).sum(m.Result.q.numberOfRegions)
+			ratios[ratio]=results.filter(b.AND(m.Result.q.cutRatio==ratio , m.Result.q.cutNo==cut, m.Result.q.painting==m.Painting.q.id,m.Painting.q.artist == m.Artist.q.id, m.Artist.q.school==school)).sum(m.Result.q.numberOfRegions)
+			if ratios[ratio] != None:
+				featsschool = featsschool + ratios[ratio]
 		cuts.append(ratios)
 		ratios = dict()
 	amountOfPaintings = paintings.filter(b.AND(m.Painting.q.artist == m.Artist.q.id, m.Artist.q.school == school)).distinct().count()
@@ -140,6 +153,8 @@ for school in schools:
 	countries[school] = (cuts,area,amountOfPaintings)
 	area = dict()
 print countries 
+print "antallet af features i schools"
+print featsschool
 
 goldenpictures = paintings.filter(b.AND(m.Result.q.cutRatio < 0.62,m.Result.q.cutRatio > 0.61, m.Result.q.numberOfRegions > 0)).distinct().count()
 print "Antallet af billeder, der har regioner i det gyldne snit, for snit 0-3"
