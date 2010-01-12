@@ -222,7 +222,7 @@ def showPictureInResultId(resultId):
 	painting = p.Painting(Result.select(Result.q.id==resultId)[0].painting)
 	g.showImage(painting.getImage(), "Wee")
 
-def savePictureForResultId(resultId,):
+def savePictureForResultId(resultId,painting):
 	painting = getPaintingInResultId(resultId)
 	title = Result.select(Result.q.id==resultId)[0].painting.title
 	image = painting.getImage()
