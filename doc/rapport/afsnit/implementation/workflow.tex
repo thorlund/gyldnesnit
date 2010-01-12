@@ -193,9 +193,9 @@ kommaseparerede fil. Som beskrevet i linje 8--10 i kodeboks
 \emph{OpenCV}-billede. Når det er konverteret sendes det til
 \texttt{paintingAnalyzer}, hvis formål er at sende det videre til
 udtrækning af regioner, alt efter hvilken analysemetode der bruges,vist
-med pseudokode i \ref{pseudo_naiveMethod}. Alle snittene 
-Når
-alle regioner er trukket ud, gemmes resultaterne i databasen.
+med pseudokode i \ref{pseudo_naiveMethod}. Alle snittene løbes igennem
+for regioner.
+Når alle regioner er trukket ud, gemmes resultaterne i databasen.
 
 \begin{lstlisting}[caption={Pseudokode til analyse af malerier efter
     metode}, captionpos=b, label={pseudo_naiveMethod}, frame=tb,
@@ -247,8 +247,6 @@ def NaiveMethod(image, settings):
     # Return the resulting ImageRegions-dict
     return ImageRegions
 \end{lstlisting}
-\marker{Brug den pseudokode i \texttt{koersel.tex} i denne
-beskrivelse}{!}
 
 \subsection{Genskabelse af parametre og resultater}
 \note{Jeg tror ikke at det følgende er blevet læst igennem til at passe
