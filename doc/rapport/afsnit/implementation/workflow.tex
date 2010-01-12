@@ -55,7 +55,6 @@ def setGlobalSettings(globalSettings):
 	return 0
 \end{lstlisting}
 
-%Settings
 \subsection{Globale indstillinger}
 \note{Hvorfor?}
 I de globale indstillinger sættes placeringen på databasen og den
@@ -133,10 +132,9 @@ class Result(s.SQLObject):
     numberOfRegions = s.IntCol()
 \end{lstlisting}
 
-\marker{Dette sker}{Hvad sker?} kun i det tilfælde at databasen ikke
-findes ved starten af en kørsel. Den kommaseparerede fil bliver parset
-før enhver kørsel, og bliver, linje for linje, sammenlignet med
-databasen for at finde evt. mangler.  Bemærk, at databasen ikke kan
+Den kommaseparerede fil bliver parset før enhver kørsel, og bliver, linje for linje, sammenlignet med
+databasen for at finde evt. mangler. Hvis det er første gang en kørsel
+sættes igang, ville databasen derfor blive bygget op.  Bemærk, at databasen ikke kan
 håndtere at blive afbrudt i dette stadie, første gang den bliver kørt,
 fordi det er en meget overfladisk sammenligning, hvor kun billeders
 placering på \url{http://www.wga.hu}, som bliver sammenlignet, da denne
@@ -194,9 +192,61 @@ kommaseparerede fil. Som beskrevet i linje 8--10 i kodeboks
 \textbf{Painting}, hvor det bliver konverteret til et
 \emph{OpenCV}-billede. Når det er konverteret sendes det til
 \texttt{paintingAnalyzer}, hvis formål er at sende det videre til
-udtrækning af regioner, alt efter hvilken anylysemetode der bruges. Når
+udtrækning af regioner, alt efter hvilken analysemetode der bruges,vist
+med pseudokode i \ref{pseudo_naiveMethod}. Alle snittene 
+Når
 alle regioner er trukket ud, gemmes resultaterne i databasen.
 
+\begin{lstlisting}[caption={Pseudokode til analyse af malerier efter
+    metode}, captionpos=b, label={pseudo_naiveMethod}, frame=tb,
+    breaklines=false, float=h]
+def AnalyzePainting(painting, settings):
+    # Get the method used for the analysis
+    method = settings.method
+
+    # Use the right method
+    if method == 'naive':
+        image = painting.getImage()
+        return NaiveMethod(image, settings)
+    else if method == 'expanded':
+		image = painting.getImage()
+		return ExpandedMethod(image,settings)
+	else:
+        print 'No such method'
+        return None
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Pseudokode for den naive metode},
+    captionpos=b, label={pseudo_naiveMethod}, frame=tb,
+    breaklines=false, float=h]
+def NaiveMethod(image, settings):
+    # Init ImageRegions dict
+    ImageRegions = {}
+
+    # Walk through all the CutRatios
+    for CutRatio in settings:
+        # Init RatioRegions dict
+        RatioRegions = {}
+
+        # Walk through every Cut in the ratio
+        for Cut in CutRatio:
+            # Set up the constraints, extract regions and prune the regions
+            Constraints = new Constraints(image, Cut, settings)
+            CutRegions = NaiveExtraction(image)
+            InterestingRegions = GetInterestingRegions(CutRegions, Constraints)
+            InterestingRegionsInCut =
+                    GetInterestingRegionsInCut(InterestingRegionsInCut, Constraints)
+
+            # Put the resulting instance of CutRegions
+            # in the Regions-dict
+            RatioRegions[Cut] = InterestingRegionsInCut
+
+        # Put the resulting RatioRegions in the ImageRegions-dict
+        ImageRegions[CutRatio] = RatioRegions
+
+    # Return the resulting ImageRegions-dict
+    return ImageRegions
+\end{lstlisting}
 \marker{Brug den pseudokode i \texttt{koersel.tex} i denne
 beskrivelse}{!}
 
