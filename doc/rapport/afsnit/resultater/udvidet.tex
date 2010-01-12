@@ -1,9 +1,10 @@
 {
-{\sffamily Dette afsnit vil præsentere vores resultater fra
+{\sffamily I dette afsnit præsenterer vi vores resultater fra
 eksperimentet, hvor vi har brugt den udvidede metode, til at vurdere
-regionerne. Da eksperimentet blev kørt, har vi sat opløsningen på
-regionernes approksimation med et gitter for højt, hvilket er resulteret
-i, at kørslen ikke er kommet igennem hele vores datasæt.
+regionerne. Da eksperimentet blev kørt, satte vi opløsningen, på
+regionernes approksimation med et gitter, for højt, hvilket resulterede
+i, at kørslen ikke fik analyseret hele vores datasæt på grund af
+tidsmangel.
 }
 
 \subsection{Reduceret datasæt}
@@ -80,22 +81,24 @@ i det gyldne snit, og vi kan derfor ikke afvise hypotese
 \end{table}
 
 Fordelingen af regioner, over de fire gyldne snit i malerierne, ses i
-tabel \ref{ud_tabel_fire_snit}. Intet af de fire snit afviger med
-mere end $10\%$ fra et andet, og vi kan således ikke afvise hypotese
-\ref{hypo_fire_g_snit}.
+tabel \ref{ud_tabel_fire_snit}. Ved at undersøge afvigelsen mellem
+ekstremerne i snit 0 og 2, ser vi at disse afviger med $(499 -
+405)/405 = 0.2320988 = 23.2 \%$ fra hinanden, og vi kan således afvise
+hypotese \ref{hypo_fire_g_snit}.
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{r@{\ \ }p{12em}r|r@{.}l}
-            & Regioner i snit 0   &  $405$ &  $22$ & $29\%$ \\
-        $+$ & Regioner i snit 1   &  $421$ &  $23$ & $17\%$ \\
-        $+$ & Regioner i snit 2   &  $499$ &  $27$ & $46\%$ \\
-        $+$ & Regioner i snit 3   &  $492$ &  $27$ & $08\%$ \\\hline
-            & Regioner i alt      & $1817$ & $100$ & $00\%$
+    \begin{tabular}{r@{\ \ }p{12em}r}
+            & Regioner i $GS$ 0         &  $405$ \\
+        $+$ & Regioner i $GS$ 1         &  $421$ \\
+        $+$ & Regioner i $GS$ 2         &  $499$ \\
+        $+$ & Regioner i $GS$ 3         &  $492$ \\\hline
+            & Regioner i de fire $GS$   & $1817$
     \end{tabular}
     \caption[]{Forholdet mellem de interessante regioner fundet i de
-    fire gyldne snit ved udvidet vurdering. Antallet af fundne regioner
-    i et snit, afviger ikke med mere end $10\%$ fra et andet snit.}
+    fire gyldne snit ved udvidet vurdering. Der er afvigelse, mellem
+    ekstremerne, på $23.2 \%$. Ligesom i den naive kørsel, er det
+    nederste horisontale snit det mest brugte.}
     \label{ud_tabel_fire_snit}
 \end{table}
 
@@ -118,14 +121,14 @@ lavet for det horisontale plan, hvor venstre side af grafen svarer til
 toppen af billedet. I denne graf er det snitratioerne $72$ og $82$ som
 har flest fundne regioner. Fra snitratio $52$ og ned, falder antal
 regioner gradvist. Fra snitratio $52$ og op, svinger antallet af
-regioner lidt op og ned. Kanterne er igen klart de laveste i grafen.
+regioner. Kanterne er igen klart de laveste i grafen.
 
 \begin{figure}[h!]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{afsnit/resultater/billeder/cut2cut3eatsperratioU.png}
 	\end{center}
     \caption{Antal regioner i hvert af de 20 horisontale snit, hvor
-    venstre side af grafen repræsenteree øverste del af malerierne.}
+    venstre side af grafen repræsenterer øverste del af malerierne.}
     \label{antal_regioner_horisontale_cut_udvidet}
 \end{figure}
 
@@ -139,10 +142,9 @@ hvilken ratio, som er dominerende, og vi kan derfor forkaste hypotese
 \ref{hypo_to_tredjedele}.
 
 Figur \ref{G_vs_to_trejedele_udvidet} viser også, at antallet af fundne
-regioner i det gyldne snit og
-snitratioen $\frac{2}{3}$, ligger meget tæt på hinanden, og den største
-forskel ligger ikke på mere end $15\%$. Vi kan derfor ikke afvise
-hypotese \ref{hypo_15p}.
+regioner i det gyldne snit og snitratioen $\frac{2}{3}$, ligger meget
+tæt på hinanden, og den største forskel ligger ikke på mere end $15\%$.
+Vi kan derfor ikke afvise hypotese \ref{hypo_15p}.
 
 \begin{figure}[h!]
 	\begin{center}
@@ -153,30 +155,21 @@ hypotese \ref{hypo_15p}.
 	\label{G_vs_to_trejedele_udvidet}
 \end{figure}
 
-I graferne i figur \ref{udvidet_year},kan man se hvor mange regioner der
-er fundet i gennemsnit per billedet i alle tidsperioder. Tidsperioder,
-hvor ingen malerier er analyseret, er ikke taget med. Det ses at i
-tidsperioden 1401-1450, bliver fundet mange flere en de andre
-tidsperioder, og i visse tilfælde doubel så mange, da double så mange
-regioner er skrapt støre en $10\%$ afvigelse. Kan vi forkaste hypotese
-\ref{hypo_tid}.
+I graferne i figur \ref{udvidet_year}, kan man se hvor mange regioner
+der er fundet i gennemsnit per billedet i alle tidsperioder.
+Tidsperioder, hvor ingen malerier er analyseret, er ikke taget med. Det
+ses at i tidsperioden 1401 -- 1450, findes mange flere end de andre
+tidsperioder, og i visse tilfælde doubbelt så mange. Da doubbelt så
+mange regioner er skarpt større end $10\%$ afvigelse, kan vi forkaste
+hypotese \ref{hypo_tid}.
 
 \begin{figure}[!h]
 	\begin{center}
 		\includegraphics[angle=0,width=0.90\textwidth]{afsnit/resultater/billeder/yearcutU.png}
 	\end{center}
-	\caption{Graf over antal regioner fundet i hver
-     tidsperiode. Hver graf repræsenterer hvert deres snit. Y-aksen er
-       det gemmesnitlige antal fundene regioner i snittet.}
+    \caption{Graf over det gennemsnitlige antal regioner fundet i hver
+    tidsperiode. Hver graf repræsenterer hvert deres snit.}
 	\label{udvidet_year}
-\end{figure}
-
-\begin{figure}[!h]
-	\begin{center}
-		\includegraphics[angle=0,width=0.90\textwidth]{afsnit/resultater/billeder/yearNrImageU.png}
-	\end{center}
-	\caption{}
-	\label{naiv_yearNrImageU}
 \end{figure}
 
 I graferne i figur \ref{udvidet_nation}, ses at det er meget svingene
@@ -188,34 +181,23 @@ fra. Da malerier fra Holland har flere end $10\%$ højre gennemsnitlige
 fundne regioner, end Danmark og Frankrig, holder hypotese
 \ref{hypo_nation} ikke, og kan derfor forkastes.
 
-
 \begin{figure}[!h]
 	\begin{center}
 		\includegraphics[angle=0,width=0.90\textwidth]{afsnit/resultater/billeder/nationcutU.png}
 	\end{center}
-	\caption{Graf over antal fundne regioner fundet hver sin
-       nationalitet. Hver graf repræsenterer hvert deres snit. Y-aksen
-       er det gemmesnitlige antal fundne regioner i snittet.}
+    \caption{Graf over gennemsnitligt antal fundne regioner i det gyldne
+    snit fra hver nationalitet.}
 	\label{udvidet_nation}
 \end{figure}
 
-\begin{figure}[!h]
-	\begin{center}
-		\includegraphics[angle=0,width=0.90\textwidth]{afsnit/resultater/billeder/nationNrImageU.png}
-	\end{center}
-	\caption{}
-	\label{naiv_nationNrImageU}
-\end{figure}
-
-
-\begin{table}[H]
+\begin{table}[!h]
     \centering
     \begin{tabular}{|c|l|c|c|}
         \hline
         \textbf{Hypotese nr.} & \textbf{Beskrivelse} & \textbf{Afvist} &
         \textbf{Ikke afvist}  \\\hline\hline
         1 & Mindst én region i $GS$                     &            & \checkmark   \\\hline
-        2 & Alle fire $GS$ lige meget brugt             &            & \checkmark   \\\hline
+        2 & Alle fire $GS$ lige meget brugt             & \checkmark &              \\\hline
         3 & $1/3$ har lærred med forholdet $1:\varphi $ & \checkmark$^{\textrm{*}}$ &              \\\hline
         4 & Flest regioner i $GS$                       & \checkmark &              \\\hline
         5 & Flere regioner i $GS$ end $\frac{2}{3}$     & \checkmark &              \\\hline
