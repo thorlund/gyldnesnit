@@ -125,8 +125,44 @@ sker i billedet vil står i caption
 \end{figure}
 \clearpage
 
+For at give et bedre indblik på hvor mange regioner vi mener er
+interessante og hvor mange der er falske positiver, har vi optalt dem på
+de samme ni malerier som i tærskelværdi afprøvningen. I tabel
+\ref{naiv_good} kan ses antallet af interessante regioner og i tabel
+\ref{naiv_bad} kan ses antallet af falske positive. Der bliver fundet 12
+interessante regioner og 10 falske positive, det vil sige at der er $20
+\%$ flere interessante region end falske.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|l|l|l|}
+            & Kraftige farver & Medium farver & Svage farver \\\hline
+		Mange detaljer	& 2 & 0 & 7 \\\hline
+        Medium detaljer  & 1 & 0 & 0 \\\hline
+        Få detaljer     & 1 & 0 & 1 \\\hline
+    \end{tabular}
+    \caption[]{Tabel over antal interessant regioner fundene i ni test malerier.}
+    \label{naiv_good}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|l|l|l|}
+            & Kraftige farver & Medium farver & Svage farver \\\hline
+		Mange detaljer	& 3 & 0 & 0 \\\hline
+        Medium detaljer  & 0 & 3 & 0 \\\hline
+        Få detaljer     & 1 & 3 & 0 \\\hline
+    \end{tabular}
+    \caption[]{Tabel over antal falske positiver i ni test malerier.}
+    \label{naiv_bad}
+\end{table}
+
 \subsection{Konklusion}
-Det virker som om den naive løsning virker efter vores entationer dog
-med nogle få falske positive, hvis region detektoren virker på
-malerierne, dog fejler den på malerier hvor region detektoren fejler, og
-kommer med en masse falske positive.
+Det naive løsning virker efter vores enitationer på testbilleder med
+ensfarvet regioner, men i praktisk finder den mange regioner som vi helt
+vil være for uden som f.eks i maleri \ref{naiv_virker_ikke3}. Det er en
+uheldig ting da dette giver et forkert fremstilling. Heldigvis bliver
+der stadig $20 \%$ flere regioner som passer en ikke passer. Det er en
+god ting, da et stor nok datasæt vil få overvægten af regioner som
+passer til at overskygge regioner der ikke passer.
+

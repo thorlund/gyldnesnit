@@ -117,19 +117,51 @@ foregå på samme måde som den naive test.
 	\caption[]{2 regioner som ikke høre nogle steder hende bliver fundet}
 	\label{udvidet_virker_ikke3}
 \end{figure}
+
+
+Ud fra tabelerne \ref{udvidet_good} og \ref{udvidet_bad}, hvor de
+interresante og falske positiver er opstillet, lige som i den naive
+aprøvning. Kan det ses at der blive fundet 7 interessante regioner og 5
+falske positive, det vil sige 40 \% flere interessante region en falske.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|l|l|l|}
+           				& Kraftige farver & Medium farver & Svage farver \\\hline
+		Mange detaljer	& 1 & 0 & 1 \\\hline
+        Medium detaljer & 0 & 1 & 0 \\\hline
+        Få detaljer     & 0 & 0 & 4 \\\hline
+    \end{tabular}
+    \caption[]{Tabel over antal interessant regioner fundene i ni test malerier.}
+    \label{naiv_good}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|l|l|l|}
+            & Kraftige farver & Medium farver & Svage farver \\\hline
+		Mange detaljer	& 0 & 2 & 1 \\\hline
+        Medium detaljer  & 0 & 3 & 0 \\\hline
+        Få detaljer     & 2 & 3 & 0 \\\hline
+    \end{tabular}
+    \caption[]{Tabel over antal falske positiver i ni test malerier.}
+    \label{naiv_bad}
+\end{table}
 \clearpage
 
 \subsection{Konklusion}
-Ud for teste billederne ser det ud til at den udvidet metode virker på
-den måde som vi havde planlangt at den skulle virke. I den praktiske
-brug på malerierne, finder den udvidet løsning mange gode regioner hvis
-regions detektoren virker se figur \ref{udvidet_virker1}, men kommer
-desværre stadig med få regioner som ikke er særlige gode, f.eks i maleri
-\ref{udvidet_virker2}. Der udvidet løsning finder også regioner som den
-naive ikke vil finde se en sammenlining i figur \ref{udvidet_virker3}. I
-de tilfælde hvor regions detektoren ikke virker godt, er den udvide
-løsning god til at sorter regioner væk og kommer derfor ikke med særlige
-mange regioner som ikke skulle være der, se figur
-\ref{udvidet_virker_ikke2} og \ref{udvidet_virker_ikke3}. Dog kommer vi
-stadig ud i problemer, hvor der kun er regioner som er forkerte med,
-se figur \ref{udvidet_virker_ikke1}.
+Den udvidet metode virker som vi havde plandlagt på testbilleder med
+ensfarvet regioner, Men i den praktiske brug på malerierne, finder den
+udvidet løsning mange gode regioner hvis regions detektoren virker se
+figur \ref{udvidet_virker1}, men kommer desværre stadig med få regioner
+som ikke er særlige gode, f.eks i maleri \ref{udvidet_virker2}. Der
+udvidet løsning finder også regioner som den naive ikke vil finde se en
+sammenlining i figur \ref{udvidet_virker3}. I de tilfælde hvor regions
+detektoren ikke virker godt, er den udvide løsning god til at sorter
+regioner væk og kommer derfor ikke med særlige mange regioner som ikke
+skulle være der, se figur \ref{udvidet_virker_ikke2} og
+\ref{udvidet_virker_ikke3}. Dog kommer vi stadig ud i problemer, hvor
+der kun er regioner som er forkerte med, se figur
+\ref{udvidet_virker_ikke1}. Den udvidet løsnign finder 40\% flere
+regioner som passser en ikke passer, det er ret godt, i betraktning af
+at den generelle regions udtrækker ikke virker optimalt.
