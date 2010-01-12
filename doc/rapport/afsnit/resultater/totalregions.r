@@ -34,6 +34,8 @@ print("Middelværdi");
 print(mean(Regioner));
 print("Standardafvigelse");
 print(sd(Regioner));
+print("Median");
+print(median(Regioner));
 t.test(Regioner);
 
 # Plot

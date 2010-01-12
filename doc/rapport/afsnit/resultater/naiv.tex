@@ -7,22 +7,22 @@ beskrive.
 
 \subsection{Systematisk fejl\label{program_bug}}
 I den naive løsning findes en fejl i udtrækningen af regioner, som gør
-at vi finder nogle af regionerne flere gange. Denne fejl nævnt i afsnit
-\ref{section_impBilledbehandling} og gennemgået i bilag
+at vi finder nogle af regionerne flere gange. Denne fejl er nævnt i
+afsnit \ref{section_impBilledbehandling} og gennemgået i bilag
 \ref{appendix_bug}. Det betyder, at de resultater vi fremviser, for
 kørslen af den naive løsning, ikke stemmer overens med det egentlige
 antal. For at give en indblik i, hvor mange regioner der bliver fundet
 flere gange, har vi afprøvet programmet med fejlen på 11 malerier, og
 sammenlignet dem med en kørsel, hvor fejlen er rettet.
 
-De 11 malerier er opstillet i tabel \ref{bug_tabel}, hvor de to første
-kolonner er antal regioner fundet i billedet, uden og med fejl.  Tredje
-kolonne er en procentsats for, hvor mange flere regioner der bliver
-fundet, når den fejlende kode køres. Den procentvise spredning er $[60
-\%,~377 \%]$, så de resultater vi får, kan være op til $377\%$ for høje.
-Gennemsnitligt er der $172 \%$ flere regioner. Vi kan godt antage, at
-antallet af regioner, opgivet i resultaterne for den naive løsning, er
-halvt så store.
+Resultaterne for de 11 malerier er opstillet i tabel \ref{bug_tabel},
+hvor kolonne 2 og 3 er antal regioner fundet i billedet, uden og med
+fejl.  Fjerde kolonne er en procentsats for, hvor mange flere regioner
+der bliver fundet, når den fejlbehæftede kode køres. Den procentvise
+spredning er $[60 \%,~377 \%]$, så de resultater vi får, kan være op til
+$377\%$ for høje.  Gennemsnitligt er der $172 \%$ flere regioner. Vi kan
+godt antage, at antallet af regioner, opgivet i resultaterne for den
+naive løsning, mindst er dobbelt så store.
 
 \begin{table}[!h]
     \centering
@@ -31,7 +31,7 @@ halvt så store.
   Maleri  & Bug løst 		& Bug ikke løst		& Procentvis forskel\\\hline
         1   & 70 			& 112 				& 60 \% \\
         2   & 27 			& 45 				& 67 \% \\
-        3	& 52 			& 98 				& 72 \% \\
+        3	& 52 			& 98 				& 88 \% \\
         4   & 84 			& 145 				& 73 \% \\
         5	& 32 			& 57 				& 78 \% \\
         6   & 88 			& 170 				& 93 \% \\
@@ -40,7 +40,7 @@ halvt så store.
         9   & 164 			& 554 				& 238 \% \\
         10	& 16 			& 75 				& 368 \% \\
         11	& 115 			& 548 				& 377 \% \\\hline
-	Total	& 881			& 2202				& 172 \% \\\hline
+	Total	& 881			& 2202				& 150 \% \\\hline
 	  \end{tabular}
     \caption[]{Tabel for antal fundne regioner i versionen med og uden
     fejlen som duplikerer regioner. Den sidste kolonne er hvor mange
@@ -86,24 +86,24 @@ det gyldne snit. Vi kan derfor ikke afvise hypotese \ref{hypo_binaer}.
     \label{tabel_fordeling}
 \end{table}
 
-Vi vil gerne se på, hvordan fordelingen af fundne interessante regioner i
-de fire gyldne snit ser ud. Fordelingen er vist i tabel
-\ref{tabel_fire_snit}. Vi ser, at ingen af snittene afviger med mere end
-$\pm10\%$ fra et andet og vi kan derfor ikke afvise hypotese
-\ref{hypo_fire_g_snit}.
+Vi vil gerne se på, hvordan fordelingen af fundne interessante regioner
+i de fire gyldne snit ser ud. Fordelingen er vist i tabel
+\ref{tabel_fire_snit}. Ekstremerne findes i snit 2 og 3, og afviger med
+$\frac{(46432-41547)}{41547} = 0.1175777 = 11.8 \%$. Da $11.8 \% > 10 \%$
+kan vi derfor afvise hypotese \ref{hypo_fire_g_snit}.
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{r@{\ \ }p{12em}r|r@{.}l}
-            & Regioner i snit 0   &  $42,884$ &  $24$ & $51\%$ \\
-        $+$ & Regioner i snit 1   &  $44,042$ &  $25$ & $18\%$ \\
-        $+$ & Regioner i snit 2   &  $46,432$ &  $26$ & $54\%$ \\
-        $+$ & Regioner i snit 3   &  $41,547$ &  $23$ & $75\%$ \\\hline
-            & Regioner i alt      & $168,650$ & $100$ & $00\%$
+    \begin{tabular}{r@{\ \ }p{12em}r}
+            & Regioner i $GS$ 0             &  $42,884$ \\
+        $+$ & Regioner i $GS$ 1             &  $44,042$ \\
+        $+$ & Regioner i $GS$ 2             &  $46,432$ \\
+        $+$ & Regioner i $GS$ 3             &  $41,547$ \\\hline
+            & Regioner i de fire $GS$       & $168,650$
     \end{tabular}
     \caption[]{Forholdet mellem de interessante regioner fundet i de
-    fire gyldne snit. Intet snit afviger med mere end $10\%$ fundne
-    regioner, end et andet snit.}
+    fire gyldne snit. Ekstremerne $41,547$ og $46,432$ afviger med
+    $\frac{(46432-41547)}{41547} = 0.1175777 = 11.8 \%$.}
     \label{tabel_fire_snit}
 \end{table}
 
@@ -126,12 +126,13 @@ dimensioner.
     \label{tabel_med_dimensioner}
 \end{table}
 
-Vi ser nu, hvor mange af de $11,965$ malerier, der har, at dets lange
-side, $L$, divideret med dets korte side, $K$, ligger i intervallet $G =
-[1.57920117302, 1.65686680448] = \varphi \pm 2.4\%$. Tabel
-\ref{tabel_real_dimensions} viser, at kun $3.99\%$ falder inden for
-dette interval. Vi kan således afvise hypotese
-\ref{hypo_golden_ractangle}.
+Vi undersøger nu, for hvor mange af de $11,965$ malerier, det gælder at
+dets lange side, $L$, divideret med dets korte side, $K$, ligger i
+intervallet $G = [1.57920117302, 1.65686680448] = \varphi \pm 2.4\%$.
+Tabel \ref{tabel_real_dimensions} viser, at kun $3.99\%$ falder inden
+for dette interval og vi kan således afvise hypotese
+\ref{hypo_golden_ractangle}, da denne kræver at $33.334 \%$ af
+malerierne har $L/K \in G$.
 
 \begin{table}[H]
     \centering
@@ -141,7 +142,7 @@ dette interval. Vi kan således afvise hypotese
             & Resultater med dimensioner   & $11,965$ & $100$ & $00\%$
     \end{tabular}
     \caption[]{Resultater med dimensioner, hvor disse er et gyldent
-    rektangel med en afvigelse på $2.4\%$. Under en tredjedel af
+    rektangel med en afvigelse på højst $2.4\%$. Under en tredjedel af
     malerierne har et lærred konstrueret efter det gyldne rektangel.}
     \label{tabel_real_dimensions}
 \end{table}
@@ -153,14 +154,14 @@ dette interval. Vi kan således afvise hypotese
         \textbf{Hypotese nr.} & \textbf{Beskrivelse} & \textbf{Afvist} &
         \textbf{Ikke afvist}  \\\hline\hline
         1 & Mindst én region i $GS$                     &            & \checkmark   \\\hline
-        2 & Alle fire $GS$ lige meget brugt             &            & \checkmark   \\\hline
+        2 & Alle fire $GS$ lige meget brugt             & \checkmark &              \\\hline
         3 & $1/3$ har lærred med forholdet $1:\varphi $ & \checkmark &              \\\hline
         4 & Flest regioner i $GS$                       & \checkmark &              \\\hline
-        5 & Flere regioner i $GS$ end $\frac{2}{3}$     &            & \checkmark   \\\hline
+        5 & Flere regioner i $GS$ end $2/3$             &            & \checkmark   \\\hline
         6 & Flere regioner i $GS$ end i midten          & \checkmark &              \\\hline
         7 & $GS$ brugt lige meget, uanset tidsperiode   & \checkmark &              \\\hline
         8 & $GS$ brugt lige meget, uanset nationalitet  & \checkmark &              \\\hline
-        9 & $\frac{2}{3}$ brugt som approksimation til $GS$   &            & \checkmark	\\\hline
+        9 & $2/3$ brugt som approksimation til $GS$     &            & \checkmark	\\\hline
     \end{tabular}
     \caption[]{Hypoteser i forhold til den naive kørsel. $GS$ bruges som
     forkortelse for det gyldne snit.}
@@ -206,13 +207,15 @@ at vi har en eksponentialfordeling.
     \label{total_regions_plots}
 \end{figure}
 
-Vi ser, at et maleri typisk har omkring $114$ interessante regioner i
-alle snit. Bemærk, at en region meget vel indgår fire gange, samt at vi
-på grund af fejl i udtrækningen, har duplikater af regionerne.
-Vi ser, at der er et lille antal malerier, hvori der
-bliver fundet rigtig mange regioner. Det tynder dog ud omkring
-$380$ regioner, hvor antallet af malerier, med flere regioner,
-forekommer mindre hyppigt.
+Middelværdien fortæller os at i et arbitrært maleri, kan vi forvente at
+finde $115$ interessante regioner, over alle snit.  Bemærk, at en region
+\emph{altid} vil ligge i fire snit og derfor meget vel kan indgå fire
+gange. Endvidere skal vi huske på, at hver af disse regioner, kan være
+udtrukket flere gange, på grund af den fejlbehæftede metode ti
+udtrækning. Vi ser, at der er et lille antal malerier, hvori der bliver
+fundet rigtig mange regioner. Det tynder dog ud omkring $380$ regioner,
+hvor antallet af malerier, med flere regioner, forekommer mindre
+hyppigt.
 
 }
 
