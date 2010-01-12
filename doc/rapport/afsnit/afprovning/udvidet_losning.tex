@@ -13,7 +13,7 @@ hvor snittet og massemidtpunktet næsten ligge oven i hinanden.
 
 \begin{figure}[h!!]
 	\begin{center}
-		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_hus1_test.png}
+		\includegraphics[angle=0,width=0.9\textwidth]{afsnit/afprovning/billeder/udvidet_losning/udvidet_hus1_test.png}
 	\end{center}
 	\caption[]{Et hus der er symetrisk og der har massemidtpunkt i spisen af taget, massemidtpunktet er inde for margin så huset bliver udvalgt til at ligge i snittet.}
 	\label{hus_virker}
@@ -25,7 +25,7 @@ med af algoritmen.
 
 \begin{figure}[h!!]
 	\begin{center}
-		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_hus2_test.png}
+		\includegraphics[width=0.9\textwidth,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_hus2_test.png}
 	\end{center}
 	\caption[]{Hus hvor masse midtpunktet er flyttet få pixels ud for margin, den udvide løsning vælger ikke at tage huset med.}
 	\label{hus_virker_ikke}
@@ -37,7 +37,7 @@ region, bliver taget med at dens massemidtpunkt ligger inden for margin.
 
 \begin{figure}[h!!]
 	\begin{center}
-		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_blob2_test.png}
+		\includegraphics[width=0.9\textwidth,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_blob2_test.png}
 	\end{center}
 	\caption[]{2 regioner hvor den nederste har et massemidtpunkt inde for margin.}
 	\label{udvidet_blob_test}
@@ -51,7 +51,7 @@ forventningerne.
 
 \begin{figure}[h!!]
 	\begin{center}
-		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_bleksprutte_test.png}
+		\includegraphics[width=0.9\textwidth,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_bleksprutte_test.png}
 	\end{center}
 	\caption[]{Margin er sat meget op, så man kan se at regionen har et massemidtpunkt ind for margin, men da størstedelen af regionens pixels er på højre side, vælger den fra.}
 	\label{bleksprutte_test}
@@ -68,7 +68,7 @@ foregå på samme måde som den naive test.
 
 \begin{figure}[h!!]
 	\begin{center}
-		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_kfarver_sdetaljer.png}
+		\includegraphics[width=0.9\textwidth,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_kfarver_sdetaljer.png}
 	\end{center}
 	\caption[]{2 ud af de 6 region er godtager som ligene i det gyldne snit af den udvidet løsning}
 	\label{udvidet_virker1}
@@ -76,9 +76,9 @@ foregå på samme måde som den naive test.
 
 \begin{figure}[h!!]
 	\begin{center}
-		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_dreng.png}
+		\includegraphics[width=0.9\textwidth,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_dreng.png}
 	\end{center}
-	\caption[]{baggrunden er den nedeste region som bliver godtaget, da den har et massemidtpunkt som liger inde for marginen}
+	\caption[]{Baggrunden er den endeste region som bliver godtaget, da den har et massemidtpunkt som liger inde for marginen, bemærk den grånde kant rundt om helle billedet}
 	\label{udvidet_virker2}
 \end{figure}
 
@@ -96,7 +96,7 @@ foregå på samme måde som den naive test.
 
 \begin{figure}[h!!]
 	\begin{center}
-		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_kfarver_kdetaljer.png}
+		\includegraphics[width=0.9\textwidth,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_kfarver_kdetaljer.png}
 	\end{center}
 	\caption[]{En sko og en flise bliver taget med at algoritmen}
 	\label{udvidet_virker_ikke1}
@@ -104,7 +104,7 @@ foregå på samme måde som den naive test.
 
 \begin{figure}[h!!]
 	\begin{center}
-		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_mfarver_mdetaljer.png}
+		\includegraphics[width=0.9\textwidth,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_mfarver_mdetaljer.png}
 	\end{center}
 	\caption[]{Den udvidet løsning sortere alle regioner væk}
 	\label{udvidet_virker_ikke2}
@@ -112,7 +112,7 @@ foregå på samme måde som den naive test.
 
 \begin{figure}[h!!]
 	\begin{center}
-		\includegraphics[scale=0.3,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_sfarver_mdetaljer.png}
+		\includegraphics[width=0.9\textwidth,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_sfarver_mdetaljer.png}
 	\end{center}
 	\caption[]{2 regioner som ikke høre nogle steder hende bliver fundet}
 	\label{udvidet_virker_ikke3}
