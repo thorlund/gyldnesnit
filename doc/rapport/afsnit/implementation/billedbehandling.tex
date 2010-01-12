@@ -649,12 +649,12 @@ denne situation vist på det præparerede billede fra figur \ref{bathers}.
 Ligeledes kan vi være uheldige at støde på en pixel, som har en farve
 lig med en allerede farvet region. I dette tilfælde vil denne pixel
 blive anset som værende del af en eksisterende region, hvilket
-resulterer i at vi ikke bruger \texttt{cvFloodFill} på denne. Vi kan dog
-håbe, at denne pixel bliver inkluderet i den efterfølgende iteration.
-Vi vælger aldrig, at farve en region med en farve, som allerede er brugt
-til en anden region, men vi kan være uheldige og vælge en farve, som
-ligger inden for floodfill-metodens tilladte afvigelse, således at to
-regioner smeltes sammen.
+resulterer i, at vi ikke bruger \texttt{cvFloodFill} på denne. Vi kan
+dog håbe, at denne pixel bliver inkluderet i den efterfølgende
+iteration.  Metoden vælger aldrig at farve en region med en farve, som
+allerede er brugt til en anden region, men vi kan være uheldige at vælge
+en farve, som ligger inden for floodfill-metodens tilladte afvigelse,
+således at to regioner smeltes sammen.
 
 \begin{figure}[h]
     \setlength\fboxsep{0pt}
@@ -668,7 +668,7 @@ regioner smeltes sammen.
     billedet. Pixels i drengens hår har nu samme farve som kroppen.]{
         \label{colors_2}
         \fbox{\includegraphics[width=0.3\textwidth]{afsnit/implementation/billeder/billedbehandling/pre_floodfill_2}}}\\
-    \subfloat[Når floodfill bruges en ekstra gang, for at være sikker på
+    \subfloat[Når floodfill bruges en ekstra gang for at være sikker på,
     at hele regionen returneres, smeltes drengens krop og hår sammen.]{
         \label{colors_3}
         \fbox{\includegraphics[width=0.3\textwidth]{afsnit/implementation/billeder/billedbehandling/pre_floodfill_3}}}\hspace{1em}
@@ -681,29 +681,29 @@ regioner smeltes sammen.
 \end{figure}
 
 \subsubsection{Ikke-sammenhængende regioner}
-Metoden i kodeboks \ref{pseudo_udtraek_margin}, trækker højest én region
+Metoden i kodeboks \ref{pseudo_udtraek_margin} trækker højst én region
 ud per segment. Dette giver mening, set i lyset af hvad
 udtrækningsmetoden er blevet udviklet til, nemlig udtrækning af
 \emph{sammenhængende regioner} afgrænset ved kantdetektion. I afsnit
 \ref{section_computer_betragter} antog vi, at interessante regioner i et
 billede, er tydeligt afgrænset. En region er ikke tydeligt afgrænset,
-hvis vi faktisk \emph{har} flere regioner indenfor et segment. I figur
+hvis vi faktisk \emph{har} flere regioner inden for et segment. I figur
 \ref{usammenhaengende_region} betragter vi en hypotetisk situation, hvor
-en region ikke har været tydeligt afgrænset. Billedet i figur
-\ref{usammenhaengende_region}, illustrerer et billede, som allerede er
+en region ikke har været tydeligt afgrænset. Figur
+\ref{usammenhaengende_region} illustrerer et billede, som allerede er
 blevet segmenteret ved metoden i kodeboks \ref{pseudo_udtraek_margin}.
-De sorte cirkler markerer dér, hvor vi har fundet kanter, som krydser
-snittet. Vi har altså fem segmenter på snittet. På det længste segment,
+De sorte cirkler markerer, hvor vi har fundet kanter, som krydser
+snittet. Vi har altså fem segmenter på snittet. På det længste segment
 ser vi, at den mørkeblå region er blevet afbrudt af en tidligere fundet
 region. Den mørkeblå region er således ikke sammenhængende. Metoden
-returnerer kun den nederste mørkeblå region, da vi ikke kan forbinde
-de to mørkeblå regioner. Vi mister derfor informationen om at der
-faktisk befinder sig en region i midten af billedet.
+returnerer kun den nederste mørkeblå region, da vi ikke kan forbinde de
+to regioner. Vi mister derfor den information, at der faktisk befinder
+sig en region i midten af billedet.
 
-Denne opførsel, er en konsekvens af vores antagelse, om at interessante
+Denne opførsel er en konsekvens af vores antagelse om, at interessante
 regioner er tydeligt afgrænset. Vi accepterer derfor, at situationen i
 figur \ref{usammenhaengende_region} kan forekomme, og at vi derfor kan
-undlade at trække enkelte regioner ud.
+blive nødt til at undlade at trække enkelte regioner ud.
 
 \begin{figure}[t]
     \setlength\fboxsep{0pt}
@@ -718,40 +718,43 @@ undlade at trække enkelte regioner ud.
 \end{figure}
 
 \subsubsection{Usikkerhed ved fremhævelse af kanter}
-De fremhævede kanter, tegnes i det slørede billede med sort farve, som
+De fremhævede kanter tegnes i det slørede billede med en sort farve, som
 vælges uanset hvilke farver, der er brugt i maleriet i forvejen. Vi kan
-derfor støde på problemer med mørke malerier eller lokalt i mørke
-områder af et billede. Vi kan også være uheldige, at komme til at
-forbinde to regioner, ved at markere kanterne med sort.
+derfor støde på problemer i mørke malerier eller lokalt i mørke områder
+af et billede. Vi kan også være uheldige at komme til at forbinde to
+regioner ved at markere kanterne med sort.
 
-På grund af, at kanterne fremhæves ved at male i billedet, kan vi, ved
-floodfill-metoden, komme til at male kanter, som har samme retning, som
+Eftersom kanterne fremhæves ved at male pixels i billedet, kan vi, ved
+floodfill-metoden, komme til at male kanter, der har samme retning, som
 det snit vi betragter. Dvs, at lodrette kanter kan blive malet ved
 vertikale snit og omvendt kan vandrette kanter risikere at blive malet
-ved horisontale snit.
-
-\subsection{Andre tilgange og forbedringer}
-Dette afsnit vil kort nævne andre fremgangsmåder, vi har prøvet, for at
-trække regioner ud af et billede. Vi har tidligt i udviklingen af
-programmet, eksperimenteret både med Octave og Matlab. Til at starte
-med, har vi brugt disse sprog til at komme problemstillingen nærmere,
-og udvikle naive implementationer af enkelte algoritmer. Vi ser nu på
-hvad der kan gøres for at forbedre udtrækningen af regioner.
-
-\subsubsection{Udtrækning af alle regioner}
-At vi kan have regioner som ikke trækkes ud af billedet, som i figur
-\ref{respect_to_cut}, er beklagelig, men kan løses ved pseudokoden i
-kodeboks \ref{pseudo_fix}.  Her er tanken, at man i stedet for kun at
-trække regioner ud på margin og selve snittet, så gøres det på hver
-pixel mellem margin. På denne måde kan regioner, som den i figur
-\ref{respect_to_cut}, trækkes ud af billedet. Vores implementation gør
-dog ikke dette. Når regioner kun trækkes ud, med hensyn til et snit, kan
-vi ved denne metode heller ikke garantere en fuld segmentering af
+ved horisontale snit. Malede kanter bliver da anset som regioner i
 billedet.
 
-\begin{lstlisting}[caption={Pseudokode til udtrækning af regioner med
-    margin.},captionpos=b,label={pseudo_fix},numbers=left,
-    frame=tb, breaklines=false, float=h]
+\subsection{Andre tilgange og forbedringer}
+Dette afsnit vil kort nævne nogle andre fremgangsmåder mht. udtrækning
+af regioner, vi har prøvet. Vi har tidligt i udviklingen af programmet
+eksperimenteret både med Octave og Matlab. Vi har brugt disse sprog til
+at komme problemstillingen nærmere og udvikle naive implementeringer af
+enkelte algoritmer. Vi ser nu på, hvad der kan gøres for at forbedre
+udtrækningen af regioner.
+
+\subsubsection{Udtrækning af alle regioner}
+At vi kan have regioner, som ikke trækkes ud af billedet (se figur
+\ref{respect_to_cut}), er beklagelig, men kan løses ved pseudokoden i
+kodeboks \ref{pseudo_fix}.  Her er tanken, at man i stedet for kun at
+trække regioner ud, når de ligger på margin og/eller på selve snittet,
+ser på hver pixel mellem marginerne. Derved kan regioner, som den i
+figur \ref{respect_to_cut}, trækkes ud af billedet. Vores implementering
+gør dog ikke dette, og når regioner kun trækkes ud, med hensyn til et
+snit, kan vi ved denne metode heller ikke garantere en fuld segmentering
+af billedet.
+
+\begin{lstlisting}[caption={Pseudokode til udtrækning af regioner, der
+    ligger inden for margin, men uden at krydse hverken nedre margin,
+    øvre margin eller selve snittet.},
+    captionpos=b,label={pseudo_fix},numbers=left, frame=tb,
+    breaklines=false, float=h]
 def FixGetRegions(img, edges, cut):
     # Calculate lowerMargin and upperMargin
     (lowerMargin, upperMargin) = calculateMargins(cut)
@@ -761,56 +764,53 @@ def FixGetRegions(img, edges, cut):
         pass
 \end{lstlisting}
 
-Vi har også eksperimenteret med, først at skalere billedet ned, inden
-man trak regioner ud. Dette gør nemlig, at kanterne forbliver intakte,
-mens farverne, til en vis grad, bliver mere ensartede. Vi stødte dog på
+Vi har også eksperimenteret med at skalere billedet ned, inden vi trak
+regioner ud. Dette gør nemlig, at kanterne forbliver intakte, mens
+farverne, til en vis grad bliver mere ensartede. Vi stødte dog på
 problemer når billedet skulle skaleres op igen, eller rettere, få
-resultaterne skalleret op, så de passede til originalbilledet. Vi mister
-også meget præcision, når vi bruger et nedskaleret billede til at finde
+resultaterne skaleret op, så de passede til originalbilledet. Vi mister
+også megen præcision, når vi bruger et nedskaleret billede til at finde
 regioner i.
 
-
-I præparationen af billedet, vil vi gerne have, at farverne i billedet
-bliver ensartede, men vi ønsker også at bibeholde kanterne. Vi forsøgte
-at bruge en metode i \emph{OpenCV}, der hedder
+I præparationen af billedet vil vi gerne have, at farverne bliver
+ensartede, men vi ønsker også at bibeholde kanterne. Vi forsøgte at
+bruge en metode i \emph{OpenCV}, der hedder
 \texttt{cvPyrMeanShiftFiltering}, som netop segmenterer billedet efter
-hvilke farver der ligner hinanden, men en fejl i biblioteket forsagede
-altid en segmenteringsfejl i det underliggende C-program. Vi blev siden
-gjort opmærksom på en sløringsmetode af Perona og
+hvilke farver, der ligner hinanden, men en fejl i biblioteket
+forårsagede altid en segmenteringsfejl i det underliggende C-program. Vi
+blev siden gjort opmærksom på en sløringsmetode af Perona og
 Malik\cite{perona1990scale}, hvor det grafiske resultat tilnærmer sig
 det ønskede. Kun i Octaves \emph{Image}-pakke er denne implementeret. Vi
 lavede en hurtig afprøvning, hvor resultatet fra denne metode blev
-analyseret, men på basis at det endelige resultat, vurderede vi, at vi
+analyseret, men på basis at det endelige resultat vurderede vi, at vi
 godt kunne nøjes med at fremhæve kanterne i billedet efter en simpel
 sløring.
 
 \subsubsection{Bedre fremhævelse af kanter}
-
-\emph{OpenCV} gør det faktisk muligt, at bruge en maske, så man kan
-kalde \texttt{cvFloodFill} med et kantdetekteret billede, således at man
-ikke maler over de steder i billedet, hvor der er detekteret en kant. I
-praksis viste det sig, at være yderst besværligt at bruge denne
-funktion, da det kantdetekterede billede skal være to pixel større, i
-hver dimension --- det kantdetekterede billede skal have en ramme, på én
-pixel. En meget naiv løsning, hvor pixels kopieres én ad gangen, var
-tidskrævende på store billeder og vi beholdt derfor de sorte kanter.
-Alternativt kunne man beskære det originale billede, men vi besluttede,
-at vi ikke ville manipulere med dimensionerne på vores inddata og bevare
-det originale billede.
+\emph{OpenCV} gør det faktisk muligt at bruge en maske, så man kan kalde
+\texttt{cvFloodFill} med et kantdetekteret billede, uden at male over de
+steder i billedet, hvor der er detekteret en kant. I praksis viste det
+sig at være yderst besværligt at bruge denne funktion, da det
+kantdetekterede billede skal være to pixel større i hver dimension ---
+det skal have en ramme på én pixel. En meget naiv løsning, hvor pixels
+kopieres én ad gangen, var tidskrævende på store billeder, og vi beholdt
+derfor de sorte kanter.  Alternativt kunne man beskære det originale
+billede, men vi besluttede, at vi ikke ville manipulere med
+dimensionerne på vores inddata og bevare det originale billede.
 
 \subsubsection{Optimeringer}
-Et hurtigt kig på arbejdsgangen i figur \ref{graphic_pipeline}, viser
-allerede mindst ét sted, hvor vi kan optimere programmet. Billedet bliver
-nemlig sløret to steder, både i forbindelse med kantdetektion og den
-generelle sløring. Det er derfor oplagt, kun at sløre billedet én gang
-og passere det slørede billede videre, som argument til de metoder, som
-skal bruge det. Dette kan dog kun gøres, hvis vi ønsker at bruge den
-samme sløringsmetode, til de to billeder.
+Et hurtigt kig på arbejdsgangen i figur \ref{graphic_pipeline} viser
+allerede mindst ét sted, hvor vi kan optimere programmet. Billedet
+bliver nemlig sløret to steder, både i forbindelse med kantdetektion og
+den generelle sløring. Det er derfor oplagt kun at sløre billedet én
+gang og siden sende det videre som argument til de metoder, som skal
+bruge det. Dette kan dog kun gøres, hvis vi ønsker at bruge den samme
+sløringsmetode til de to billeder.
 
-Endvidere, kan selve udtrækningen af regioner måske forbedres, ved at bruge
-sløring ved statistisk median. Denne metode har vi dog ikke fået testet
-ordentlig igennem. Ved brug af en anden sløringsmetode, kunne det godt
-tænkes, at fremhævelse af kanter bliver helt overflødig
+Endvidere kan selve udtrækningen af regioner måske forbedres ved at
+bruge sløring ved statistisk median. Denne metode har vi dog ikke fået
+testet ordentlig igennem. Ved brug af en anden sløringsmetode kunne det
+godt tænkes, at fremhævelse af kanter bliver helt overflødig.
 
 }
 
