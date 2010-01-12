@@ -136,6 +136,7 @@ interessante regioner og 10 falske positive, det vil sige at der er $20
 \begin{table}[H]
     \centering
     \begin{tabular}{|c|l|l|l|}
+			\hline
             & Kraftige farver & Medium farver & Svage farver \\\hline
 		Mange detaljer	& 2 & 0 & 7 \\\hline
         Medium detaljer  & 1 & 0 & 0 \\\hline
@@ -148,6 +149,7 @@ interessante regioner og 10 falske positive, det vil sige at der er $20
 \begin{table}[H]
     \centering
     \begin{tabular}{|c|l|l|l|}
+			\hline
             & Kraftige farver & Medium farver & Svage farver \\\hline
 		Mange detaljer	& 3 & 0 & 0 \\\hline
         Medium detaljer  & 0 & 3 & 0 \\\hline
@@ -158,11 +160,11 @@ interessante regioner og 10 falske positive, det vil sige at der er $20
 \end{table}
 
 \subsection{Konklusion}
-Det naive løsning virker efter vores enitationer på testbilleder med
-ensfarvet regioner, men i praktisk finder den mange regioner som vi helt
-vil være for uden som f.eks i maleri \ref{naiv_virker_ikke3}. Det er en
-uheldig ting da dette giver et forkert fremstilling. Heldigvis bliver
-der stadig $20 \%$ flere regioner som passer en ikke passer. Det er en
-god ting, da et stor nok datasæt vil få overvægten af regioner som
-passer til at overskygge regioner der ikke passer.
-
+Det naive løsning virker efter intentionen på testbillederne, men i
+praktisk finder den mange regioner som vi helst
+vil være for uden som f.eks i maleriet \ref{naiv_virker_ikke3}. 
+Ved disse testbilleder findes der altså kun $20\%$ flere interessante
+regioner, som vi finder korrekt detekteret end falske positiver. 
+Denne overvægt betyder at billederne er illustrative for det vi prøver
+at finde, det er sagt med den forudsætning at det fulde billedkorpus
+deler samme egenskaber som de ni testbilleder.
