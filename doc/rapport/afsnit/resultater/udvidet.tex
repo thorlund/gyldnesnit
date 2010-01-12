@@ -166,7 +166,7 @@ regioner er skrapt støre en $10\%$ afvigelse. Kan vi forkaste hypotese
 		\includegraphics[angle=0,width=0.90\textwidth]{afsnit/resultater/billeder/yearcutU.png}
 	\end{center}
 	\caption{Graf over antal regioner fundet i hver
-       tidsperiode. Hver graf repræsenterer hvert deres snit. Y-aksen er
+     tidsperiode. Hver graf repræsenterer hvert deres snit. Y-aksen er
        det gemmesnitlige antal fundene regioner i snittet.}
 	\label{udvidet_year}
 \end{figure}
@@ -192,25 +192,26 @@ fundne regioner, end Danmark og Frankrig, holder hypotese
 \end{figure}
 
 
-\begin{table}[!h]
+\begin{table}[H]
     \centering
-    \begin{tabular}{|l|c|c|}
+    \begin{tabular}{|c|l|c|c|}
         \hline
-            & Afvist & Ikke afvist  \\\hline
-        1   &            & \checkmark   \\\hline
-        2   &            & \checkmark   \\\hline
-        3   & \checkmark$^{\textrm{*}}$ &              \\\hline
-        4   & \checkmark &              \\\hline
-        5   & \checkmark &    	\\\hline
-        6   & \checkmark &              \\\hline
-        7   & \checkmark &              \\\hline
-        8   & \checkmark &              \\\hline
-        9   &            & \checkmark	\\\hline
+        \textbf{Hypotese nr.} & \textbf{Beskrivelse} & \textbf{Afvist} &
+        \textbf{Ikke afvist}  \\\hline\hline
+        1 & Mindst én region i $GS$                     &            & \checkmark   \\\hline
+        2 & Alle fire $GS$ lige meget brugt             &            & \checkmark   \\\hline
+        3 & $1/3$ har lærred med forholdet $1:\varphi $ & \checkmark$^{\textrm{*}}$ &              \\\hline
+        4 & Flest regioner i $GS$                       & \checkmark &              \\\hline
+        5 & Flere regioner i $GS$ end $\frac{2}{3}$     & \checkmark &              \\\hline
+        6 & Flere regioner i $GS$ end i midten          & \checkmark &              \\\hline
+        7 & $GS$ brugt lige meget, uanset tidsperiode   & \checkmark &              \\\hline
+        8 & $GS$ brugt lige meget, uanset nationalitet  & \checkmark &              \\\hline
+        9 & $\frac{2}{3}$ brugt som approksimation til $GS$   &      & \checkmark	\\\hline
     \end{tabular}
-    \caption[]{Hypoteser i forhold til den udvidede kørsel.
-    $^{\textrm{*}}$Jvf. udregning \ref{tabel_real_dimensions}.
-    }
-    \label{hypoteser_udvidet}
+    \caption[]{Hypoteser i forhold til den naive kørsel. $GS$ bruges som
+    forkortelse for det gyldne snit.  $^{\textrm{*}}$Jvf. udregning
+    \ref{tabel_real_dimensions} }
+    \label{hypoteser_naiv}
 \end{table}
 
 \subsubsection{Antallet af fundne regioner over alle snit}

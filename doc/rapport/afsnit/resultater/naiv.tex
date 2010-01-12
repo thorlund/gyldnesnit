@@ -7,14 +7,13 @@ beskrive.
 
 \subsection{Systematisk fejl\label{program_bug}}
 I den naive løsning findes en fejl i udtrækningen af regioner, som gør
-at vi finder nogle af
-regionerne flere gange. Denne fejl nævnt i afsnit
+at vi finder nogle af regionerne flere gange. Denne fejl nævnt i afsnit
 \ref{section_impBilledbehandling} og gennemgået i bilag
-\ref{appendix_bug}. Det betyder, at de resultater vi fremviser for kørslen
-af den naive løsning, ikke helt passer. For at give en indblik i, hvor
-mange regioner der bliver fundet flere gange, har vi afprøvet programmet med
-fejlen på 11 malerier, og sammenlignet dem med en kørsel, hvor fejlen er
-rettet.
+\ref{appendix_bug}. Det betyder, at de resultater vi fremviser, for
+kørslen af den naive løsning, ikke stemmer overens med det egentlige
+antal. For at give en indblik i, hvor mange regioner der bliver fundet
+flere gange, har vi afprøvet programmet med fejlen på 11 malerier, og
+sammenlignet dem med en kørsel, hvor fejlen er rettet.
 
 De 11 malerier er opstillet i tabel \ref{bug_tabel}, hvor de to første
 kolonner er antal regioner fundet i billedet, uden og med fejl.  Tredje
@@ -22,8 +21,8 @@ kolonne er en procentsats for, hvor mange flere regioner der bliver
 fundet, når den fejlende kode køres. Den procentvise spredning er $[60
 \%,~377 \%]$, så de resultater vi får, kan være op til $377\%$ for høje.
 Gennemsnitligt er der $172 \%$ flere regioner. Vi kan godt antage, at
-antallet af regioner opgivet i resultaterne for den naive løsning, er
-halv så store.
+antallet af regioner, opgivet i resultaterne for den naive løsning, er
+halvt så store.
 
 \begin{table}[!h]
     \centering
@@ -52,11 +51,11 @@ halv så store.
 \clearpage
 
 \subsection{Resultater}
-Vi har kørt analyse med naiv vurdering på $17,364$ malerier, men i vores
-resultater sorterer vi $2,989$ af disse fra, da de kun er udsnit af et
-større maleri.  Som vist i tabel \ref{tabel_fjern_detaljer} herunder, er
-dette en nedgang på $17.21$ procent og vi har $14,375$ brugbare
-resultater tilbage.
+Vi har kørt eksperimentet med naiv vurdering på $17,364$ malerier, men i
+vores resultater sorterer vi $2,989$ af disse fra, da de kun er udsnit
+af et større maleri.  Som vist i tabel \ref{tabel_fjern_detaljer}
+herunder, er dette en nedgang på $17.21$ procent og vi har $14,375$
+brugbare resultater tilbage.
 
 \begin{table}[H]
     \centering
@@ -108,12 +107,13 @@ $\pm10\%$ fra et andet og vi kan derfor ikke afvise hypotese
     \label{tabel_fire_snit}
 \end{table}
 
-Vi undersøger nu, hvor mange af de brugbare resultater, som er forsynet
+Vi undersøger nu, hvor mange af de brugbare resultater, der er forsynet
 med dimensioner i databasen, således at vi kan undersøge, hvorvidt
 lærredet er konstrueret som et gyldent rektangel. Udregningen i tabel
 \ref{tabel_med_dimensioner} viser at ud af de brugbare resultater,
 mangler $2,410$ malerier dimensionerne, og vi har da $11,965$ malerier
-tilbage at undersøge, for den gyldne ratio i lærredets dimensioner.
+tilbage, som kan undersøges for den gyldne ratio i lærredets
+dimensioner.
 
 \begin{table}[H]
     \centering
@@ -142,7 +142,7 @@ dette interval. Vi kan således afvise hypotese
     \end{tabular}
     \caption[]{Resultater med dimensioner, hvor disse er et gyldent
     rektangel med en afvigelse på $2.4\%$. Under en tredjedel af
-    malerierne har et lærred med gyldne dimensioner.}
+    malerierne har et lærred konstrueret efter det gyldne rektangel.}
     \label{tabel_real_dimensions}
 \end{table}
 
@@ -171,12 +171,13 @@ dette interval. Vi kan således afvise hypotese
 I alle $14,375$ malerier er der i alt fundet $1,650,082$ interessante
 regioner. Vi har en middelværdi på $114.79$ med standardafvigelse på
 $86.91$. I figur \ref{total_regions_plots} er vist grafer over hvordan
-antallet af fundne regioner fordeler sig i malerierne. I figur
-\ref{graf_total_regions_zoom}, hvor der ses bort fra $298$ malerier,
-hvori der ikke er fundet nogen regioner. Regionerne i malerierne har en
+antallet af fundne regioner fordeler sig i malerierne. Plottet i figur
+\ref{graf_total_regions_zoom} ser bort fra $298$ malerier, hvori der
+ikke er fundet nogen regioner. Regionerne i malerierne, har en
 fordeling, der kunne ligne en eksponentialfordeling, som vist i
 histogrammet i figur \ref{hist_total_regions}. De observerede værdier
-fraviger dog noget fra de teoretiske værdier.
+afviger dog noget fra de teoretiske værdier og vi kan derfor ikke sige
+at vi har en eksponentialfordeling.
 
 \begin{figure}[!h]
     \centering
@@ -195,23 +196,23 @@ fraviger dog noget fra de teoretiske værdier.
     \caption[]{Fordelingen af fundne regioner på malerier.
     \textbf{\ref{graf_total_regions_var}:} Plot som viser hvor mange
     malerier, hvori der er fundet et vist antal interessante regioner
-    over alle snit i maleriet.  \textbf{\ref{graf_total_regions_zoom}:}
-    Samme plot som i figur \ref{graf_total_regions_var}, men hvor antal
-    malerier uden regioner ikke er vist.
+    over alle snit i maleriet.
+    \textbf{\ref{graf_total_regions_zoom}:} Samme plot som i figur
+    \ref{graf_total_regions_var}, men hvor antal malerier uden regioner
+    ikke er vist.
     \textbf{\ref{hist_total_regions}:} Histogram over antal fundne
-    regioner, hvor en eksponentialfordeling med $\lambda = 1/109.82$ er
+    regioner, hvor en eksponentialfordeling med $\lambda = 1/114.79$ er
     indtegnet.}
     \label{total_regions_plots}
 \end{figure}
 
-Vi ser, at et maleri typisk har omkring $110$ interessante regioner i
-alle snit. Her skal man være opmærksom på, at hver region meget vel
-indgår fire gange. Vi ser, at der er et lille antal malerier, hvori der
+Vi ser, at et maleri typisk har omkring $114$ interessante regioner i
+alle snit. Bemærk, at en region meget vel indgår fire gange, samt at vi
+på grund af fejl i udtrækningen, har duplikater af regionerne.
+Vi ser, at der er et lille antal malerier, hvori der
 bliver fundet rigtig mange regioner. Det tynder dog ud omkring
 $380$ regioner, hvor antallet af malerier, med flere regioner,
 forekommer mindre hyppigt.
-
-Vi skal være opmærksomme på, at der kan være duplikater af regionerne.
 
 }
 
