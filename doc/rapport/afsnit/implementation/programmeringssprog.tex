@@ -2,9 +2,9 @@
 {\sffamily Ved valg af programmeringssprog har vi først og fremmest lagt
 vægt på at kunne udarbejde en prototype hurtigt og bruge et sprog, som
 er let at gå til. Det valgte sprog skal også gøre det nemt at udvide den
-endelige implementation. Vi har også gerne villet undgå at skulle
+endelige implementering. Vi har også gerne villet undgå at skulle
 konstruere komplicerede datastrukturer for relativt simple metoder, både
-af hensyn til tidspresset og til implementationens kompleksitet. Af
+af hensyn til tidspresset og til implementeringens kompleksitet. Af
 ovenstående grunde har vi besluttet at udarbejde vores løsning i
 programmeringssproget \textbf{Python}\cite{PythonLanguage}. Vores
 erfaring er, at dette sprog er yderst velegnet at skrive forholdsvis
@@ -23,10 +23,10 @@ egner sig også til brug på enkelte billeder.  \emph{OpenCV} tilbyder
 mange brugbare datastrukturer med hensyn til arbejdet med billeder i
 Python.
 
-Der er også andre biblioteker til billedbehandling i Python. Her kan
-nævnes \emph{PIL} (Python Imaging Library)\cite{PIL} og
-\emph{PythonMagick} (ImageMagick bindings)\cite{PMck}, men de er ikke
-nær så grundige som \emph{OpenCV}.
+Af andre biblioteker til billedbehandling i Python kan nævnes nævnes
+\emph{PIL} (Python Imaging Library)\cite{PIL} og \emph{PythonMagick}
+(ImageMagick bindings)\cite{PMck}, men de er ikke nær så grundige som
+\emph{OpenCV}.
 
 \subsubsection{Andre muligheder}
 Der er to helt oplagte muligheder, med hensyn til programmeringssprog,
@@ -41,10 +41,9 @@ sammenligne resultater og teste alternative metoder med.
 Da \emph{OpenCV} er skrevet i C/C++, ville det også være oplagt at bruge
 et af disse sprog. Vores erfaring er dog, at man let kommer til at bruge
 mere tid på at konstruere de fornødne datastrukturer og hjælpemetoder,
-end på at fokusere på opgavens kerne. En senere implementation, med
-fokus på køretid, kunne med fordel implementeres i C/C++, da man så
-ville have fuld kontrol over, hvilke strukturer der bliver brugt i
-programmet.
+end på at fokusere på opgavens kerne. En senere implementering, med
+fokus på køretid, kunne med fordel laves i C/C++, da man så ville have
+fuld kontrol over, hvilke strukturer, der bliver brugt i programmet.
 
 \subsection{Værktøjer til databasen}
 Vi bruger \textbf{SQLite}\cite{Sqlite} til selve databasen, hovedsagelig
@@ -63,7 +62,7 @@ at tage sikkerhedskopier af databasen uden alt for meget besvær.
 \subsection{Andre værktøjer}
 Vi har gjort brug af statistikprogrammet \textbf{R}\cite{Rlang} til at
 behandle og præsentere vores resultater i kapitel \ref{chap_resultater}.
-Da programmet primært er blevet brugt som hjælpeværktøj, til at
+Da programmet primært er blevet brugt som hjælpeværktøj til at
 producere grafer, vil vi ikke komme nærmere ind på, hvordan disse
 hjælpeprogrammer er blevet udviklet.
 
