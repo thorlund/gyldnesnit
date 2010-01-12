@@ -56,10 +56,10 @@ def setGlobalSettings(globalSettings):
 \end{lstlisting}
 
 \subsection{Globale indstillinger}
-\note{Hvorfor?}
 I de globale indstillinger sættes placeringen på databasen og den
-kommaseparerede fil. Dette er indstillinger, som ikke ændrer sig fra
-kørsel til kørsel, dog er de vitale for hele programmet.
+kommaseparerede fil. Dette er indstillinger, som ikke påvirker en kørsel
+direkte, altså en ændring i disse værdier ville producere præcis
+den samme kørsel, som før ændringerne. 
 
 \subsection{Kørselsindstillinger}
 Kørselsindstilinger kan ændre sig i de forskellige kørsler. De består af
@@ -256,8 +256,7 @@ At kunne genskabe de fundne resultater fra en analyse har meget stor
 betydning, dels for at kunne udtage stikprøver i udviklingen af hele
 programmet, men også for at kunne fremvise grafiske resultater. Vi har
 allerede været inde på, at man, for at kunne genskabe et resultat, skal
-vide hvilke parametre der oprindeligt har været brugt. Ovenstående
-databaseskema gør det let at hente disse parametre ud. Hvis vi får et
+vide hvilke parametre der oprindeligt har været brugt.Hvis vi får et
 resultat med overraskende mange regioner og gerne vil undersøge dette
 tilfælde, har vi metoder til rådighed der giver os lige nøjagtig de
 informationer vi har brug for at vise dette grafisk. Helt konkret har vi
@@ -321,6 +320,5 @@ tilknyttet et snit vi gerne vil undersøge og traversere gennem den liste
 af regioner vi får tilbage. Hver region er repræsenteret som en klasse
 hvor vi kan trække rektanglet ud og vi bruger da \emph{OpenCV} til at
 tegne rektanglet på det tilknyttede billede.
-
 }
 % vim: set tw=72 spell spelllang=da:
