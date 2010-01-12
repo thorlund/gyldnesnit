@@ -38,7 +38,7 @@ t.test(Regioner);
 
 # Plot
 png("billeder/totalregions_var.png");
-plot(d0$interessante.regioner, d0$antal, "h", ylab="Antal malerier", xlab="Antal fundne insteressante regioner");
+plot(d0$interessante.regioner, d0$antal, "l", ylab="Antal malerier", xlab="Antal fundne insteressante regioner");
 dev.off();
 
 
@@ -47,7 +47,7 @@ png("billeder/totalregions.png");
 yval = seq(1,600);
 d0$antal[1] = 0;
 #fval <- sum(d0$antal)*dnorm(yval, mean=mean(Regioner), sd=sd(Regioner));
-plot(d0$interessante.regioner, d0$antal, "h", ylab="Antal malerier", xlab="Antal fundne insteressante regioner");
+plot(d0$interessante.regioner, d0$antal, "l", ylab="Antal malerier", xlab="Antal fundne insteressante regioner");
 #points(yval, fval, type="l");
 dev.off();
 
@@ -62,14 +62,14 @@ fval <- dexp(yval, rate = 1/(mean(Regioner)), log = FALSE)
 points(yval, fval, type="l");
 dev.off();
 
-Regioner <- Regioner[299:length(Regioner)];
+#Regioner <- Regioner[299:length(Regioner)];
 
-png("billeder/qq_totalregions.png");
-qqnorm(Regioner);
-qqline(Regioner);
-dev.off();
+#png("billeder/qq_totalregions.png");
+#qqnorm(Regioner);
+#qqline(Regioner);
+#dev.off();
 
-png("billeder/qq_log_totalregions.png");
-qqnorm(log(Regioner));
-qqline(log(Regioner));
-dev.off();
+#png("billeder/qq_log_totalregions.png");
+#qqnorm(log(Regioner));
+#qqline(log(Regioner));
+#dev.off();

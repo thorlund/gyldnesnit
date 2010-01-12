@@ -103,14 +103,15 @@ $\pm10\%$ fra et andet og vi kan derfor ikke afvise hypotese
             & Regioner i alt      & $168,650$ & $100$ & $00\%$
     \end{tabular}
     \caption[]{Forholdet mellem de interessante regioner fundet i de
-    fire gyldne snit.}
+    fire gyldne snit. Intet snit afviger med mere end $10\%$ fundne
+    regioner, end et andet snit.}
     \label{tabel_fire_snit}
 \end{table}
 
 Vi undersøger nu, hvor mange af de brugbare resultater, som er forsynet
 med dimensioner i databasen, således at vi kan undersøge, hvorvidt
 lærredet er konstrueret som et gyldent rektangel. Udregningen i tabel
-\ref{tabel_med_dimensioner} viser, at ud af de brugbare resultater,
+\ref{tabel_med_dimensioner} viser at ud af de brugbare resultater,
 mangler $2,410$ malerier dimensionerne, og vi har da $11,965$ malerier
 tilbage at undersøge, for den gyldne ratio i lærredets dimensioner.
 
@@ -121,7 +122,7 @@ tilbage at undersøge, for den gyldne ratio i lærredets dimensioner.
         $-$ & Resultater uden dimensioner    &  $2,410$ &  $16$ & $77\%$ \\\hline
             & Resultater med dimensioner     & $11,965$ &  $83$ & $23\%$
     \end{tabular}
-    \caption[]{Brugbare resultater med dimensioner.}
+    \caption[]{Brugbare resultater med dimensioner i databasen.}
     \label{tabel_med_dimensioner}
 \end{table}
 
@@ -140,39 +141,42 @@ dette interval. Vi kan således afvise hypotese
             & Resultater med dimensioner   & $11,965$ & $100$ & $00\%$
     \end{tabular}
     \caption[]{Resultater med dimensioner, hvor disse er et gyldent
-    rektangel med en afvigelse på $2.4\%$.}
+    rektangel med en afvigelse på $2.4\%$. Under en tredjedel af
+    malerierne har et lærred med gyldne dimensioner.}
     \label{tabel_real_dimensions}
 \end{table}
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|l|c|c|}
+    \begin{tabular}{|c|l|c|c|}
         \hline
-            & Afvist & Ikke afvist  \\\hline
-        1   &            & \checkmark   \\\hline
-        2   &            & \checkmark   \\\hline
-        3   & \checkmark &              \\\hline
-        4   & \checkmark &              \\\hline
-        5   &            & \checkmark   \\\hline
-        6   & \checkmark &              \\\hline
-        7   &            &              \\\hline
-        8   &            &              \\\hline
-        9   &            & \checkmark	\\\hline
+        \textbf{Hypotese nr.} & \textbf{Beskrivelse} & \textbf{Afvist} &
+        \textbf{Ikke afvist}  \\\hline\hline
+        1 & Mindst én region i $GS$                     &            & \checkmark   \\\hline
+        2 & Alle fire $GS$ lige meget brugt             &            & \checkmark   \\\hline
+        3 & $1/3$ har lærred med forholdet $1:\varphi $ & \checkmark &              \\\hline
+        4 & Flest regioner i $GS$                       & \checkmark &              \\\hline
+        5 & Flere regioner i $GS$ end $\frac{2}{3}$     &            & \checkmark   \\\hline
+        6 & Flere regioner i $GS$ end i midten          & \checkmark &              \\\hline
+        7 & $GS$ brugt lige meget, uanset tidsperiode   &            &              \\\hline
+        8 & $GS$ brugt lige meget, uanset nationalitet  &            &              \\\hline
+        9 & $\frac{2}{3}$ brugt som approksimation til $GS$   &            & \checkmark	\\\hline
     \end{tabular}
-    \caption[]{Hypoteser i forhold til den naive kørsel.}
+    \caption[]{Hypoteser i forhold til den naive kørsel. $GS$ bruges som
+    forkortelse for det gyldne snit.}
     \label{hypoteser_naiv}
 \end{table}
 
 \subsubsection{Antallet af fundne regioner over alle snit}
-I alle $14,375$ malerier er der i alt fundet $1,578,611$ interessante
-regioner. Vi har en middelværdi på $109.82$ med standardafvigelse på
-$83.21$. I figur \ref{total_regions_plots} er vist nogle plots over
-hvordan antallet af regioner fordeler sig i malerierne.  I figur
-\ref{graf_total_regions_zoom}, hvor der ses bort fra $298$ malerier, som
-ikke har nogen regioner. Regionerne i malerierne har en fordeling, der
-kunne ligne en eksponentialfordeling, som vist i histogrammet i figur
-\ref{hist_total_regions}. De observerede værdier fraviger dog noget fra
-de teoretiske værdier.
+I alle $14,375$ malerier er der i alt fundet $1,650,082$ interessante
+regioner. Vi har en middelværdi på $114.79$ med standardafvigelse på
+$86.91$. I figur \ref{total_regions_plots} er vist grafer over hvordan
+antallet af fundne regioner fordeler sig i malerierne. I figur
+\ref{graf_total_regions_zoom}, hvor der ses bort fra $298$ malerier,
+hvori der ikke er fundet nogen regioner. Regionerne i malerierne har en
+fordeling, der kunne ligne en eksponentialfordeling, som vist i
+histogrammet i figur \ref{hist_total_regions}. De observerede værdier
+fraviger dog noget fra de teoretiske værdier.
 
 \begin{figure}[!h]
     \centering
@@ -207,5 +211,8 @@ bliver fundet rigtig mange regioner. Det tynder dog ud omkring
 $380$ regioner, hvor antallet af malerier, med flere regioner,
 forekommer mindre hyppigt.
 
+Vi skal være opmærksomme på, at der kan være duplikater af regionerne.
+
 }
+
 % vim: set tw=72 spell spelllang=da:
