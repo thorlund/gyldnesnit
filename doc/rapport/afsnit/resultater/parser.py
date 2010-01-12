@@ -1,19 +1,19 @@
 def main():
-	yerfile = open("yers_snits.txt")
+	yerfile = open("nation_snits.txt")
 	lines = yerfile.readlines()[0]
 	#print lines
 	lines = lines.split(")")
 	lines.pop(16)
 	size = len(lines)
-	newfile0 = open('csv/yearcut0.csv' , 'w' )
-	newfile1 = open('csv/yearcut1.csv' , 'w' )
-	newfile2 = open('csv/yearcut2.csv' , 'w' )
-	newfile3 = open('csv/yearcut3.csv' , 'w' )
+	newfile0 = open('csv/nationcut0.csv' , 'w' )
+	newfile1 = open('csv/nationcut1.csv' , 'w' )
+	newfile2 = open('csv/nationcut2.csv' , 'w' )
+	newfile3 = open('csv/nationcut3.csv' , 'w' )
 	newfile0.write("\"ratios\",\"interessante regioner\"\n")
 	newfile1.write("\"ratios\",\"interessante regioner\"\n")
 	newfile2.write("\"ratios\",\"interessante regioner\"\n")
 	newfile3.write("\"ratios\",\"interessante regioner\"\n")
-	nulist = (lines[12],lines[10],lines[3],lines[8],lines[0],lines[6],lines[13],lines[5],lines[15],lines[2],lines[14],lines[7],lines[9],lines[11],lines[1],lines[4])
+	nulist = lines #(lines[12],lines[10],lines[3],lines[8],lines[0],lines[6],lines[13],lines[5],lines[15],lines[2],lines[14],lines[7],lines[9],lines[11],lines[1],lines[4])
 	for line in nulist:
 		number = float(line.rstrip("(").split("}")[5].lstrip(", "))
 		year = line.rstrip("(").lstrip(", ").split(" ")[0].rstrip("\\r\\n':").lstrip("'")
