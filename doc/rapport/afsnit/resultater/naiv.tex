@@ -42,13 +42,11 @@ resultaterne for den naive løsning, mindst er dobbelt så store.
         11	& 115 			& 548 				& 377 \% \\\hline
 	Total	& 881			& 2202				& 150 \% \\\hline
 	  \end{tabular}
-    \caption[]{Tabel for antal fundne regioner i versionen med og uden
-    fejlen som duplikerer regioner. Den sidste kolonne er hvor mange
-    procent flere regioner der bliver fundet.}
+    \caption[]{Tabel for antal fundne regioner over alle snit i
+    versionen med og uden fejlen som duplikerer regioner. Den sidste
+    kolonne er hvor mange procent flere regioner der bliver fundet.}
     \label{bug_tabel}
 \end{table}
-
-\clearpage
 
 \subsection{Resultater}
 Vi har kørt eksperimentet med naiv vurdering på $17,364$ malerier, men i
@@ -64,7 +62,7 @@ brugbare resultater tilbage.
         $-$ & Udsnit af malerier   &  $2,989$ &  $17$ & $21\%$   \\\hline
             & Resultater           & $14,375$ &  $82$ & $79\%$
     \end{tabular}
-    \caption[]{Udregning af brugbare resultater.}
+    \caption[]{Udregning af brugbare resultater for naiv kørsel.}
     \label{tabel_fjern_detaljer}
 \end{table}
 
@@ -80,9 +78,9 @@ det gyldne snit. Vi kan derfor ikke afvise hypotese \ref{hypo_binaer}.
             & Resultater i alt      & $14,375$ & $100$ & $00\%$
     \end{tabular}
     \caption[]{Et positivt resultat beskriver et maleri, hvori der er
-    fundet mindst én region, som ligger i det gyldne snit. Et negativt
-    resultat er et maleri, hvori der ikke findes nogen regioner, som
-    ligger i det gyldne snit.}
+    fundet mindst én region, som ligger i det gyldne snit i den naive
+    kørsel. Et negativt resultat er et maleri, hvori der ikke findes
+    nogen regioner, som ligger i det gyldne snit.}
     \label{tabel_fordeling}
 \end{table}
 
@@ -102,8 +100,9 @@ kan vi derfor afvise hypotese \ref{hypo_fire_g_snit}.
             & Regioner i de fire $GS$       & $168,650$
     \end{tabular}
     \caption[]{Forholdet mellem de interessante regioner fundet i de
-    fire gyldne snit. Ekstremerne $41,547$ og $46,432$ afviger med
-    $11.8 \%$. Det nederste horisontale snit er det mest brugte.}
+    fire gyldne snit ved den naive kørsel. Ekstremerne $41,547$ og
+    $46,432$ afviger med $11.8 \%$. Det nederste horisontale snit er det
+    mest brugte.}
     \label{tabel_fire_snit}
 \end{table}
 
@@ -147,107 +146,107 @@ malerierne har $L/K \in G$.
     \label{tabel_real_dimensions}
 \end{table}
 
-Som det fremgår af \ref{antal_regioner_vertikale_cut} for det vertikale
-plan, koncenterer regionerne sig omkring miden af billederne.
+Grafen i figur \ref{antal_regioner_vertikale_cut} viser antallet af
+interessante regioner fundet i de vertikale snit i vores datasæt. Det
+ses at regionerne koncentrerer sig omkring midten af malerierne.
 
-Graf \ref{antal_regioner_horisontale_cut} viser data for det
-horisontale, plan. Hvor $92$ ligger højest. Fra miden af billedet og op
-af bliver der fundet færre og færre regioner i snittene. Det skyldes at
-billeder med horisont normalt har få regioner over horisonten, og mange
-under, horisonten.
+Figur \ref{antal_regioner_horisontale_cut} viser grafen for antallet af
+interessante regioner fundet i det horisontale plan. Vi ser, at der
+findes flest regioner i snittet med snitratio $0.92$. Fra midten af
+malerierne og op, bliver der fundet færre og færre regioner i snittene.
+Dette kan skyldes at malerier med horisont normalt har få regioner over
+horisonten, og mange under, horisonten.
 
-Graf \ref{antal_regioner_vertikale_cut} vise data for det vertikale,
-plan. Grafen peaker i midden og falder hænd mod kanterne.
-
-Hvis man samler informatioerne for de to grafer, kan man se at
-regionerne samler sig fra den horisontale miden og ned af i billedet med
-peaker i miden af det vertikalle plan. Det mod skrider hypotese
-\ref{hypo_alle_andre_snit} og \ref{hypo_midten} og vi kan derfor
-forkaste dem.
+Hvis man samler informationerne for de to grafer (figur
+\ref{antal_regioner_vertikale_cut} og
+\ref{antal_regioner_horisontale_cut}), kan man se at regionerne samler
+sig fra den horisontale midte og ned af i maleriet, mens vi i det
+vertikale plan, har maksimum i midten af maleriet. Dette strider mod
+hypotese \ref{hypo_alle_andre_snit} og \ref{hypo_midten} og vi kan
+derfor forkaste dem.
 
 \begin{figure}[h!]
-	\begin{center}
-		\includegraphics[width=0.9\textwidth]{afsnit/resultater/billeder/cut2cut3eatsperratio.png}
-	\end{center}
-	\caption{Antal regioner i hvert af de 20 horisontale snit, hvor venstre side af grafen repræsenterer øverst del af malerierne. $G$ står for det gyldne snit}
+	\centering
+	\includegraphics[width=0.9\textwidth]{afsnit/resultater/billeder/cut2cut3eatsperratio.png}
+    \caption{Antal interessante regioner ved naiv kørsel i hvert af de
+    20 horisontale snit, hvor venstre side af grafen repræsenterer
+    øverst del af malerierne. $G$ står for det gyldne snit. Der findes
+    færre interessante regioner i toppen af malerierne.}
 	\label{antal_regioner_horisontale_cut}
 \end{figure}
 
 \begin{figure}[h!]
-	\begin{center}
-		\includegraphics[width=0.9\textwidth]{afsnit/resultater/billeder/cut0cut1eatsperratio.png}
-	\end{center}
-	\caption{Antal regioner i hvert af de 20 vertikale snit. $G$ står for det gyldne snit}
+	\centering
+	\includegraphics[width=0.9\textwidth]{afsnit/resultater/billeder/cut0cut1eatsperratio.png}
+    \caption{Antal interessante regioner ved naiv kørsel i hvert af de
+    20 vertikale snit. $G$ står for det gyldne snit. Vi finder flest
+    regioner i midten af malerierne.}
 	\label{antal_regioner_vertikale_cut}
 \end{figure}
 
-Graf \ref{G_vs_to_trejedele} vise forskellen på det gyldne snit og
-$\frac{2}{3}$ i de fire snit. Som man kan se, er der ikke meget forskel
-på det gyldne snit og $\frac{2}{3}$, og den største procentvise forskel
-ligger på $2.34\%$. Da $2.34 \% < 15\%$, må vi sige at hypotese
-\ref{hypo_15p} ikke, kan afviges.
+Grafen i figur \ref{G_vs_to_trejedele} viser forskellen på det gyldne
+snit og snittet ved $\frac{2}{3}$ i de fire snit. Som man kan se, er der
+ikke meget forskel på det gyldne snit og $\frac{2}{3}$, og den største
+procentvise forskel ligger på $2.34\%$. Da $2.34 \% < 15\%$, kan vi ikke
+afvise hypotese \ref{hypo_15p}.
 
-I graf \ref{G_vs_to_trejedele}, kan man også se, at selv om snittene
-ligger tæt på hinanden, så har det gyldne snit ca 2 procents sat
-flere regioner. Vi kan derfor ikke afvise hypotese
-\ref{hypo_to_tredjedele}
+Figur \ref{G_vs_to_trejedele} viser også, at selv om snittene ligger tæt
+på hinanden, så har det gyldne snit ca. $2 \%$ flere regioner i alle
+fire snit. Vi kan derfor ikke afvise hypotese \ref{hypo_to_tredjedele}.
 
 \begin{figure}[h!]
-	\begin{center}
-		\includegraphics[width=0.6\textwidth]{afsnit/resultater/billeder/G_vs_to_tredjedele.png}
-	\end{center}
-	\caption{Procent vis antal regioner i de fire gyldne snit og deres tilhørende $\frac{2}{3}$ snit.}
+	\centering
+	\includegraphics[width=0.6\textwidth]{afsnit/resultater/billeder/G_vs_to_tredjedele.png}
+    \caption{Procentvis antal interessante regioner i de fire gyldne
+    snit og deres tilhørende $\frac{2}{3}$ snit ved naiv kørsel.}
 	\label{G_vs_to_trejedele}
 \end{figure}
 
-Grafen i figur \ref{naiv_year}, viser hvor mange regioner der
-er fundet i gennemsnit per maleri i alle tidsperioder. Det ses at i
-tidsperioden $(1301-1350)$ bliver der fundet ca 17 regioner per maleri,
-som er klart flest. Tidsperioden (1200-1250) er den tidsperiode hvor der
-bliver fundet færrest regioner, ca 7 i gennemsnit. Faktisk bliver der bliver fundet
-mere en dobbelt så mange regioner i tidsperiode. Det betyder at
-hypotese \ref{hypo_tid} kan forkastes.
+Grafen i figur \ref{naiv_year}, viser hvor mange interessante regioner
+der er fundet i gennemsnit per maleri over alle tidsperioder. Det ses at
+i tidsperioden år 1301--1350 bliver der fundet ca. 17 regioner per
+maleri, som er klart flest. I år 1200--1250 bliver der fundet færrest
+regioner, ca. 7 i gennemsnit. Faktisk bliver der fundet mere en dobbelt
+så mange regioner i år 1301--1350, end i år 1200--1250, hvilket betyder
+at hypotese \ref{hypo_tid} kan forkastes.
 
 \begin{figure}[!h]
-	\begin{center}
-		\includegraphics[angle=0,width=0.90\textwidth]{afsnit/resultater/billeder/yearcut.png}
-	\end{center}
-	\caption{Graf over gennemsnitligt antal regioner fundet for hver
-       tidsperiode. Hver bjælke repræsenterer et land. Y-aksen er
-       det gemmesnitlige antal fundene regioner i snittet.}
+	\centering
+	\includegraphics[angle=0,width=0.90\textwidth]{afsnit/resultater/billeder/yearcut.png}
+    \caption{Graf over gennemsnitligt antal interessante regioner fundet
+    for hver tidsperiode ved naiv kørsel. Hver bjælke repræsenterer et
+    land.}
 	\label{naiv_year}
 \end{figure}
 
 \begin{figure}[!h]
-	\begin{center}
-		\includegraphics[angle=0,width=0.90\textwidth]{afsnit/resultater/billeder/yearNrImage.png}
-	\end{center}
-	\caption{}
+	\centering
+	\includegraphics[angle=0,width=0.90\textwidth]{afsnit/resultater/billeder/yearNrImage.png}
+	\caption{Antal malerier per tidperiode ved naiv kørsel.}
 	\label{naiv_yearNrImage}
 \end{figure}
 
 I graferne i figur \ref{naiv_nation}, vises samme repræsentation som
-\ref{naiv_year}, blot er det her nationer i stedet for år. Nationerne
-Greek, Holland og Catala har har klart flest regioner per billede, hvor
-imod Norge og Skotland ligger i bunden. Forskellen på disse nation
-ligger på ca 12 regioner,hvilket svarer til en forskel på ca $240\%$. Da
-$240 \% > 10 \%$ holder hypotese \ref{hypo_nation} ikke.
+figur \ref{naiv_year}, blot er det her nationer i stedet for år. Nationerne
+Grækenland, Nederlandene og Catalonien har har klart flest interessante
+regioner per maleri, hvorimod Norge og Skotland ligger i bunden.
+Nationerne har en forskel på ca. 12 regioner, hvilket svarer til ca.
+$240\%$. Da $240 \% > 10 \%$, holder hypotese
+\ref{hypo_nation} ikke.
 
 \begin{figure}[!h]
-	\begin{center}
-		\includegraphics[angle=0,width=0.90\textwidth]{afsnit/resultater/billeder/nationcut.png}
-	\end{center}
-	\caption{Graf over gennemsnitligt antal fundne regioner fundet hver sin
-       nationalitet. Hver bjælke repræsenterer et tidsinterval. Y-aksen
-       er det gemmesnitlige antal fundne regioner i snittet.}
+	\centering
+	\includegraphics[angle=0,width=0.90\textwidth]{afsnit/resultater/billeder/nationcut.png}
+    \caption{Graf over gennemsnitligt antal fundne interessante regioner
+    fundet i hver sin nationalitet ved naiv kørsel. Hver bjælke
+    repræsenterer et tidsinterval.}
 	\label{naiv_nation}
 \end{figure}
 
 \begin{figure}[!h]
-	\begin{center}
-		\includegraphics[angle=0,width=0.90\textwidth]{afsnit/resultater/billeder/nationNrImage.png}
-	\end{center}
-	\caption{}
+	\centering
+	\includegraphics[angle=0,width=0.90\textwidth]{afsnit/resultater/billeder/nationNrImage.png}
+	\caption{Antal malerier per nationalitet ved naiv kørsel.}
 	\label{naiv_nationNrImage}
 \end{figure}
 
