@@ -44,7 +44,8 @@ favoriserer denne type malerier.
     \subfloat[Nationalitet]{
         \includegraphics[angle=-90,width=0.42\textwidth]{afsnit/resultater/billeder/nation}
         \label{ud_nation}}
-    \caption[]{Antal malerier ved årstal og nationalitet, fra resultater i det udvidet sæt.}
+    \caption[]{Antal malerier ved årstal og nationalitet, fra resultater
+    ved udvidet kørsel.}
     \label{ud_year_nation}
 \end{figure}
 
@@ -61,9 +62,9 @@ er ikke direkte sammenlignelige med dem fra den naive kørsel.
 
 \subsection{Resultater}
 Udregningen i tabel \ref{ud_tabel_fordeling} redegør for, hvor mange af
-de brugbare resultater, der har mindst en region liggende i det gyldne
-snit. Vi ser at der i $87.02\%$ af malerierne, er blevet fundet regioner
-i det gyldne snit, og vi kan derfor ikke afvise hypotese
+de brugbare resultater, der har mindst en interessant region liggende i
+det gyldne snit. Vi ser at der i $87.02\%$ af malerierne, er blevet
+fundet regioner i det gyldne snit, og vi kan derfor ikke afvise hypotese
 \ref{hypo_binaer}.
 
 \begin{table}[H]
@@ -74,17 +75,17 @@ i det gyldne snit, og vi kan derfor ikke afvise hypotese
             & Resultater i alt      & $524$ & $100$ & $00\%$
     \end{tabular}
     \caption[]{Et positivt resultat beskriver et maleri hvori der er
-    fundet mindst en region i det gyldne snit, ved brug af den udvidede
-    vurdering af regioner. Over halvdelen af malerierne har således
-    mindst en region i det gyldne snit.}
+    fundet mindst en interessant region i det gyldne snit, ved brug af
+    den udvidede vurdering af regioner. Over halvdelen af malerierne har
+    således mindst en region i det gyldne snit.}
     \label{ud_tabel_fordeling}
 \end{table}
 
-Fordelingen af regioner, over de fire gyldne snit i malerierne, ses i
-tabel \ref{ud_tabel_fire_snit}. Ved at undersøge afvigelsen mellem
-ekstremerne i snit 0 og 2, ser vi at disse afviger med $(499 -
-405)/405 = 0.2320988 = 23.2 \%$ fra hinanden, og vi kan således afvise
-hypotese \ref{hypo_fire_g_snit}.
+Fordelingen af interessante regioner, over de fire gyldne snit i
+malerierne, ses i tabel \ref{ud_tabel_fire_snit}. Ved at undersøge
+afvigelsen mellem ekstremerne i snit 0 og 2, ser vi at disse afviger med
+$(499 - 405)/405 = 0.2320988 = 23.2 \%$ fra hinanden, og vi kan således
+afvise hypotese \ref{hypo_fire_g_snit}.
 
 \begin{table}[H]
     \centering
@@ -102,39 +103,40 @@ hypotese \ref{hypo_fire_g_snit}.
     \label{ud_tabel_fire_snit}
 \end{table}
 
-
 I figur \ref{antal_regioner_vertikale_cut_udvidet} er det samlede antal
-fundne regioner, i de 20 vertikale snit, for hele datasættet,
+fundne interessante regioner, i de 20 vertikale snit, for hele datasættet,
 afbilledet. Det ses at der er fundet markant flere regioner, i de to snit som
-ligger tættest på miden, og færrest ud i kanterne.
+ligger tættest på midten, og færrest ud i kanterne.
 
 \begin{figure}[h!]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{afsnit/resultater/billeder/cut0cut1eatsperratioU.png}
 	\end{center}
-	\caption{Antal regioner i hvert af de 20 vertikale snit i den udvidet kørsel}
+	\caption{Antal interessante regioner i hvert af de 20 vertikale snit ved udvidet kørsel}
 	\label{antal_regioner_vertikale_cut_udvidet}
 \end{figure}
 
 I figur \ref{antal_regioner_horisontale_cut_udvidet} er samme afbildning
 lavet for det horisontale plan, hvor venstre side af grafen svarer til
-toppen af billedet. I denne graf er det snitratioerne $72$ og $82$ som
-har flest fundne regioner. Fra snitratio $52$ og ned, falder antal
-regioner gradvist. Fra snitratio $52$ og op, svinger antallet af
+toppen af malerierne. I denne graf er det snitratioerne $0.72$ og $0.82$
+som har flest fundne regioner. Fra snitratio $0.52$ og ned, falder antal
+regioner gradvist. Fra snitratio $0.52$ og op, svinger antallet af
 regioner. Kanterne er igen klart de laveste i grafen.
 
 \begin{figure}[h!]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{afsnit/resultater/billeder/cut2cut3eatsperratioU.png}
 	\end{center}
-    \caption{Antal regioner i hvert af de 20 horisontale snit i den udvidet kørsel, hvor
-    venstre side af grafen repræsenterer øverste del af malerierne. }
+    \caption{Antal interessante regioner i hvert af de 20 horisontale
+    snit ved udvidet kørsel, hvor venstre side af grafen repræsenterer
+    øverste del af malerierne.}
     \label{antal_regioner_horisontale_cut_udvidet}
 \end{figure}
 
 Ud fra disse observationer kan vi konkludere at der ikke er flere
-regioner i det gyldne snit, end i midten af malerierne, og vi kan derfor
-forkaste hypotese \ref{hypo_alle_andre_snit} og \ref{hypo_midten}.
+interessante regioner i det gyldne snit, end i midten af malerierne, og
+vi kan derfor forkaste hypotese \ref{hypo_alle_andre_snit} og
+\ref{hypo_midten}.
 
 I figur \ref{G_vs_to_trejedele_udvidet}, er de fire gyldne snit, samt
 $\frac{2}{3}$ repræsenteret. Det ses at der ikke er nogen entydighed på
@@ -150,43 +152,44 @@ Vi kan derfor ikke afvise hypotese \ref{hypo_15p}.
 	\begin{center}
 		\includegraphics[width=0.6\textwidth]{afsnit/resultater/billeder/G_vs_to_tredjedeleU.png}
 	\end{center}
-	\caption{Antal regioner i de fire gyldne snit og deres
-    tilhørende $\frac{2}{3}$-snit. Data fra den udvidet kørsel}
+    \caption{Antal interessante regioner i de fire gyldne snit og deres
+    tilhørende $\frac{2}{3}$-snit ved udvidet kørsel.}
 	\label{G_vs_to_trejedele_udvidet}
 \end{figure}
 
-I graferne i figur \ref{udvidet_year}, kan man se hvor mange regioner
-der er fundet i gennemsnit per billedet i alle tidsperioder.
-Tidsperioder, hvor ingen malerier er analyseret, er ikke taget med. Det
-ses at i tidsperioden 1401 -- 1450, findes mange flere end de andre
-tidsperioder, og i visse tilfælde doubbelt så mange. Da doubbelt så
-mange regioner er skarpt større end $10\%$ afvigelse, kan vi forkaste
-hypotese \ref{hypo_tid}.
+I graferne i figur \ref{udvidet_year}, kan man se hvor mange
+interessante regioner der er fundet i gennemsnit per maleri i alle
+tidsperioder.  Tidsperioder, hvor ingen malerier er analyseret, er ikke
+taget med. Det ses at i tidsperioden 1401 -- 1450, findes mange flere
+end de andre tidsperioder, og i visse tilfælde doubbelt så mange. Da
+doubbelt så mange regioner er skarpt større end $10\%$ afvigelse, kan vi
+forkaste hypotese \ref{hypo_tid}.
 
 \begin{figure}[!h]
 	\begin{center}
 		\includegraphics[angle=0,width=0.90\textwidth]{afsnit/resultater/billeder/yearcutU.png}
 	\end{center}
-    \caption{Graf over det gennemsnitlige antal regioner fundet i hver
-    tidsperiode. Hver graf repræsenterer hvert deres snit i den udvidet kørsel.}
+    \caption{Graf over det gennemsnitlige antal interessante regioner
+    fundet i hver tidsperiode. Hver graf repræsenterer hvert deres snit
+    i den udvidet kørsel.}
 	\label{udvidet_year}
 \end{figure}
 
-I graferne i figur \ref{udvidet_nation}, ses at det er meget svingene
-fra hvilke nationer, billeder med mange regioner i det gyldne snit,
-kommer fra. Holland ligger sig lidt foran de andre. Danmark har slet
-ikke nogle malerier hvor der er fundet regioner i det gyldne snit. Alle
+I graferne i figur \ref{udvidet_nation}, ses at det er meget svingene,
+hvor malerier med mange interessante regioner i det gyldne snit, kommer
+fra. Nederlandene ligger sig lidt foran de andre. Danmark har slet ikke
+nogle malerier hvor der er fundet regioner i det gyldne snit. Alle
 nationer, hvor analysen ikke har bearbejdet nogle malerier, er sorteret
-fra. Da malerier fra Holland har flere end $10\%$ højre gennemsnitlige
-fundne regioner, end Danmark og Frankrig, holder hypotese
+fra. Da malerier fra Nederlandene har flere end $10\%$ højre
+gennemsnitlige fundne regioner, end Danmark og Frankrig, holder hypotese
 \ref{hypo_nation} ikke, og kan derfor forkastes.
 
 \begin{figure}[!h]
 	\begin{center}
 		\includegraphics[angle=0,width=0.90\textwidth]{afsnit/resultater/billeder/nationcutU.png}
 	\end{center}
-    \caption{Graf over gennemsnitligt antal fundne regioner i det gyldne
-    snit fra hver nationalitet i den udvidet kørsel.}
+    \caption{Graf over gennemsnitligt antal fundne interessante regioner
+    i det gyldne snit fra hver nationalitet ved udvidet kørsel.}
 	\label{udvidet_nation}
 \end{figure}
 
@@ -208,7 +211,7 @@ kan komme frem til et troværdigt konfidensinterval.
 
 Med et større antal fundne regioner, kunne vi meget vel komme tættere på
 en normalfordeling, og vi kunne da udtale os mere sikkert, om det
-forventede antal fundne regioner i et arbitrært billede.
+forventede antal fundne regioner i et arbitrært maleri.
 
 \begin{figure}[!h]
     \centering
@@ -291,7 +294,7 @@ af regioner.
 
 Vi afviser hypotese 4, hvilket fortæller os, at der ikke er blevet
 fundet flere interessante regioner i det gyldne snit, end i alle andre
-snit.  I billeder komponeret efter det gyldne snit, må man forvente at
+snit.  I malerier komponeret efter det gyldne snit, må man forvente at
 de interessante regioner koncentrerer sig om snittet. Vi mener derfor
 ikke at det er retfærdigt at sige, at kunstnere arbejder ud fra det
 gyldne snit, når et maleri komponeres.
