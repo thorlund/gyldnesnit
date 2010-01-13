@@ -222,10 +222,11 @@ def showPictureInResultId(resultId):
 	painting = p.Painting(Result.select(Result.q.id==resultId)[0].painting)
 	g.showImage(painting.getImage(), "Wee")
 
-def savePictureForResultId(resultId,painting):
-	title = Result.select(Result.q.id==resultId)[0].painting.title
+def savePictureForResultId(resultId):
+	painting = getPaintingInResultId(resultId)
 	image = painting.getImage()
 	regions = getRegionsForResultId(resultId)
+	name = str(painting.id) + str(painting.title) + ".png"
 
 	for region in regions:
 		rect = region.getBoundingBox()
@@ -233,7 +234,6 @@ def savePictureForResultId(resultId,painting):
 		p2 = cv.cvPoint(rect.x + rect.width, rect.y + rect.height)
 		cv.cvRectangle(image, p1, p2, color, 2)
 
-	painting = p.Painting(Result.select(Result.q.id==resultId)[0].painting)
 	cv.highgui.cvSaveImage(name,painting)
 
 def getPaintingInResultId(resultId):
