@@ -5,12 +5,12 @@
 
 {\sffamily I dette afsnit vil vi afprøve den generelle metode for udtrækning af
 regioner. Selve metodens fremgangsmåde står beskrevet i afsnit
-\ref{section_udtraek}. Tærskelværdiern er sat til de fundne
+\ref{section_udtraek}. Tærskelværdierne er sat til de fundne
 tærskelværdier i afsnit \ref{terskelverdi}. Første del af afsnittet vil
 omhandle afprøvning af metoden på testbilleder, og anden del afprøvning
 ad metoden på udvalgte billeder fra databasen.}
 
-\subsection{Afprøvning på test billeder}
+\subsection{Afprøvning på testbilleder}
 I dette følgende afprøves metoden på billeder konstrueret med en hvid
 baggrund og sorte regioner. Snittet, som der vil blive kigget på, vil
 blive tegnet med rødt på billederne. Snittes margin vil blive tegnet med blåt.
@@ -33,57 +33,57 @@ der tangere snittet, taget med.
 \end{figure}
 
 I billedet \ref{GRD_test2} er der tre regioner, som
-alle bliver fundet; Baggrunden, den lille region, som ligger inde for
-margin, og den store region, som kun har en lille del af sin masse
+alle bliver fundet; baggrunden, den lille region som ligger indenfor
+marginen, og den store region som kun har en lille del af sin masse
 i snittet. 
 
 \begin{figure}[!h]
     \centering
-    	\subfloat[Det originale malert.]{
+    	\subfloat[Det originale maleri.]{
 	       	\includegraphics[angle=0,width=0.7\textwidth]{afsnit/afprovning/billeder/region_selector/lille_tvers.png}
 	       	\label{GRD_test2_original}}\hspace{1em}
-		\subfloat[På billedet er der fundet en stor og en mindre region]{
+		\subfloat[På billedet er der fundet en stor og en mindre region.]{
         	\includegraphics[angle=0,width=0.7\textwidth]{afsnit/afprovning/billeder/region_selector/blob2_region_section.png}
         	\label{GRD_test2}}\hspace{1em}
         \caption[]{}
      \label{GRD_test2_sammen}
 \end{figure}
 
-I billedet \ref{GRD_test3} er der en hoisont, som ligger oven på
-snittet. Begge sider af hoisontlinien bliver udtrækket som en region.
+I billedet \ref{GRD_test3} er der en horisont, som ligger oven på
+snittet. Begge sider af horisontlinjen bliver udtrukket som en region.
 
 \begin{figure}[!h]
     \centering
-    	\subfloat[Det originale malert.]{
+    	\subfloat[Det originale maleri.]{
 	       	\includegraphics[angle=0,width=0.7\textwidth]{afsnit/afprovning/billeder/region_selector/hoisont.png}
 	       	\label{GRD_test3_original}}\hspace{1em}
-		\subfloat[På billedet er der fundet to store regioner]{
+		\subfloat[På billedet er der fundet to store regioner.]{
         	\includegraphics[angle=0,width=0.7\textwidth]{afsnit/afprovning/billeder/region_selector/hoisont_region_section.png}
         	\label{GRD_test3}}\hspace{1em}
         \caption[]{}
      \label{GRD_test3_sammen}
 \end{figure}
 
-I de tre figur \ref{GRD_test1_sammen}, \ref{GRD_test1_sammen} og
-\ref{GRD_test1_sammen}, afbildes de tre billeder hvorpå metoden afprøves.
-Metoden opføre sig efter de standarder, som vi fremsætte i afsnit \ref{section_naiv}, og
+I de tre figurer \ref{GRD_test1_sammen}, \ref{GRD_test2_sammen} og
+\ref{GRD_test3_sammen} kan ses før og efter metoden er blevet anvendt.
+Metoden opfører sig efter de standarder, som vi fremsatte i afsnit \ref{section_naiv}, og
 virker efter vores forventninger.
 \clearpage
 
 \subsection{Afprøvning på malerier}
 Vi vil afprøve metoden til udtrækning af regioner på seks udvalgte
 malerier. Malerierne skal demonstrere, hvordan metoden på nogle malerier
-fungerer godt, mens den fungerer dårligt på andre
+fungerer godt, mens den fungerer dårligt på andre.
 
 \begin{figure}[!h]
     \centering
-		\subfloat[Maleri med Kraftige farver og få detaljer. Navn: Scenes from the Story of Joseph: The Arrest of His Brethren. År: 1515-16. Af: Bacchiacca.]{
+		\subfloat[Maleri med kraftige farver og få detaljer. Navn: Scenes from the Story of Joseph: The Arrest of His Brethren. År: 1515-16. Af: Bacchiacca.]{
         	\includegraphics[angle=270,width=1.0\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/svage_detalier/floodfill/4-4.png}
         	\label{GRD_virker1}}\hspace{1em}
 		\subfloat[Maleri med middel kraftige farver og medium antal detaljer.]{
         	\includegraphics[angle=0,width=1.0\textwidth]{afsnit/afprovning/billeder/4-4.png}
         	\label{GRD_virker2}}\hspace{1em}
-        \caption[]{2 malerier, hvor den generelle metode virker efter vores ønsker.}
+        \caption[]{To malerier, hvor den generelle metode virker efter vores ønsker.}
      \label{generelde_region_detektor_virker}
 \end{figure}
 
@@ -91,19 +91,20 @@ I figuren \ref{generelde_region_detektor_virker} er der to malerier, hvor
 vores regionsudtrækning virker rigtig godt. 
 
 I det første maleri \ref{GRD_virker1} finder metoden syv store regioner
-samt en dele små. Den skelner mellem de forskellige paneler om kaminen,
+samt en del små. Den skelner mellem de forskellige paneler om kaminen,
 og hvert stykke tøj på personen i maleriet opfattes som en særskilt
 region. De små regioner er samlet, og forstyrre ikke de store regioner.
-man kunne måske have ønsket sig, at metoden ville fylde mere af
+Man kunne måske have ønsket sig, at metoden ville fylde mere af
 personens kappe ud, men bortset fra det er figuren et godt eksempel på,
 hvordan det ser ud, når den generelle metode fungerer.
 
 I maleriet \ref{GRD_virker2} finder vi mange af de samme positive ting:
-Drengen i midten af maleriet er helt udfyldt, en sko, drengens bade
-bukser og et håndklæde er også fundet. Det er dog vigtigt at lægge mærke
+drengen i midten af maleriet er helt udfyldt, en sko, drengens
+badebukser og et håndklæde er også fundet. Det er dog vigtigt at lægge
+mærke
 til, at de andre personer i vandet, flyder i et med baggrunden. Dette
 ville normalt være uheldigt, men eftersom metoden kun ser efter regioner
-i snittet -repræsenteret ad den røde linje- gør det ikke noget i dette
+i snittet -repræsenteret af den røde linje- gør det ikke noget i dette
 tilfælde.
 
 \begin{figure}[!h]
@@ -134,7 +135,7 @@ I figur \ref{generelde_region_detektor_virker_nesten1} og \ref{generelde_region_
 malerier, hvor metoden ikke fungerer optimalt efter hensigten. Dog kan
 vi stadig bruge figurerne til noget
 
-I maleriet \ref{GRD_virker_nesten1} bliver der mest fundet flest små
+I maleriet \ref{GRD_virker_nesten1} bliver der hovedsageligt fundet små
 regioner. En sko, en skulder og en flise trækkes ud, hvor vi hellere
 ville have haft, at personens kappe og arm blev fundet. Dette skyldes
 primært, at tærskelværdierne for dette billede er sat for lavt. 
@@ -143,7 +144,7 @@ primært, at tærskelværdierne for dette billede er sat for lavt.
 Maleriet i den anden figur \ref{GRD_virker_nesten2} rummer nogle af de
 samme problemer: Metoden finder også her en masse små dele af figurer,
 der burde hænge sammen. Det vil også kunne løses ved nogle andre
-tærskelværdier, men som man også kan se på maleriet er væge og loftet -
+tærskelværdier, men som man også kan se på maleriet er vægge og loftet -
 som egentlig er ret ensfarvede -stadig svære at finde for metoden. Det
 kunne tyde på, at en højere grad af sløring ville løse problemet, og få
 algoritmen til at virke i maleriet.
@@ -161,13 +162,15 @@ loftet bliver fundet.
 
 \begin{figure}[!h]
     \centering
-     \subfloat[Det originale billedet. Navn:Vase of Flower. År: ukent. Af: Arellano, Juan de]{
+     \subfloat[Det originale maleri. Navn: Vase of Flower. År: ukent.
+	 Af: Arellano, Juan de.]{
         \includegraphics[angle=0,width=0.46\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/medium_detalier/mDetalier}
         \label{GRD_virker_ikke1_orginal}}
-    \subfloat[Maleri med Kraftige farver og medium detaljer.]{
+    \subfloat[Maleri med kraftige farver og medium detaljer.]{
         \includegraphics[angle=0,width=0.46\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/medium_detalier/floodfill/4-4.png}
         \label{GRD_virker_ikke1}}
-     \caption{Maleri af blomster, hvor den generelde metode ikke virker}
+     \caption{Maleri af blomster, hvor den generelle metode ikke
+	 virker.}
      \label{generelde_region_detektor_virker_ikke}
 \end{figure}
 
@@ -185,12 +188,12 @@ vores generelle metode ikke virker optimalt.
 
 I maleri \ref{GRD_virker_ikke1} er noget af buketten og baggrunden gået
 i et. Desuden er resten af blomsterne i snittet ikke fyldt ud, og selv
-en ændring i tærskelværdierne vil ikke hjælpe, da en øgning af disse
+en ændring i tærskelværdierne vil ikke hjælpe, da en forøgelse af disse
 blot vil resultere i, at flere af blomsterne går i ét med baggrunden. En
 sænkning vil resultere i, at ingen af blomsterne bliver trukket ud. 
 
 Maleriet \ref{GRD_virker_ikke2} repræsenterer en anden problemstilling,
-som vi ikke kan komme udenom: Farverne er så mørke og svage, at en
+som vi ikke kan komme udenom: farverne er så mørke og svage, at en
 ændring i tærskelværdien i floodfill på bare en vil få metoden til at gå
 fra at finde ingen regioner til at finde for store regioner. det kan ses
 i figur \ref{ff_munke}, hvor de 2 malerier, hvor floodfills tærskelværdi
