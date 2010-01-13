@@ -6,23 +6,23 @@ først vil beskrive.
 }
 
 \subsection{Systematisk fejl\label{program_bug}}
-I den naive løsning findes en fejl i udtrækningen af regioner, som gør
+I den naive løsning findes en fejl i udtrækningen af regioner, som gør,
 at vi finder nogle af regionerne flere gange. Denne fejl er nævnt i
 afsnit \ref{section_impBilledbehandling} og gennemgået i bilag
-\ref{appendix_bug}. Det betyder, at de resultater vi fremviser, for
+\ref{appendix_bug}. Det betyder, at de resultater, vi fremviser for
 kørslen af den naive løsning, ikke stemmer overens med det egentlige
-antal. For at give en indblik i, hvor mange regioner der bliver fundet
-flere gange, har vi afprøvet programmet med fejlen på 11 malerier, og
+antal. For at give en indblik i hvor mange regioner, der bliver fundet
+flere gange, har vi afprøvet programmet med fejlen på 11 malerier og
 sammenlignet dem med en kørsel, hvor fejlen er rettet.
 
 Resultaterne for de 11 malerier er opstillet i tabel \ref{bug_tabel},
 hvor kolonne 2 og 3 er antal regioner fundet over alle snit i billedet,
 uden og med fejl.  Fjerde kolonne er en procentsats for, hvor mange
-flere regioner der bliver fundet, når den fejlbehæftede kode køres. Den
-procentvise spredning er $[60 \%,~377 \%]$, så de resultater vi får, kan
-være op til $377\%$ for høje.  Gennemsnitligt er der $172 \%$ flere
+flere regioner, der bliver fundet, når den fejlbehæftede kode køres. Den
+procentvise spredning er $[60 \%,~377 \%]$, så de resultater, vi får,
+kan være op til $377\%$ for høje.  Gennemsnitligt er der $172 \%$ flere
 regioner. Vi kan godt antage, at antallet af regioner, opgivet i
-resultaterne for den naive løsning, mindst er dobbelt så store.
+resultaterne for den naive løsning, er mindst dobbelt så store.
 
 \begin{table}[!h]
     \centering
@@ -42,22 +42,22 @@ resultaterne for den naive løsning, mindst er dobbelt så store.
         11	& 115 			& 548 				& 377 \% \\\hline
 	Total	& 881			& 2202				& 150 \% \\\hline
 	  \end{tabular}
-    \caption[]{Tabel for antal fundne regioner over alle snit i
-    versionen med og uden fejlen som duplikerer regioner. Den sidste
-    kolonne er hvor mange procent flere regioner der bliver fundet.}
+    \caption[]{Tabel for antal fundne regioner i alle snit i versionen
+    med og uden fejlen som duplikerer regioner. Den sidste kolonne
+    viser, hvor mange flere procent regioner der bliver fundet.}
     \label{bug_tabel}
 \end{table}
 
-De 11 malerier der er brugt i tabel \ref{bug_tabel}, er valgt ud fra,
-tilfældig udtrak fra billededatabasen, dog med de kriterier at alle
-forskellige typer af malerier skal være inkluderet, landskabs malerier,
-protratter osv.
+De 11 malerier, der er brugt i tabel \ref{bug_tabel}, er valgt ud fra
+tilfældige udtræk fra billeddatabasen, dog med de kriterier, at alle
+forskellige typer af malerier skal være inkluderet, såsom landskabsmalerier,
+portrætter etc.
 
 \subsection{Resultater}
 Vi har kørt eksperimentet med naiv vurdering på $17,364$ malerier, men i
 vores resultater sorterer vi $2,989$ af disse fra, da de kun er udsnit
 af et større maleri.  Som vist i tabel \ref{tabel_fjern_detaljer}
-herunder, er dette en nedgang på $17.21$ procent og vi har $14,375$
+herunder, er dette en nedgang på $17.21 \%$ og vi har $14,375$
 brugbare resultater tilbage.
 
 \begin{table}[H]
@@ -71,8 +71,8 @@ brugbare resultater tilbage.
     \label{tabel_fjern_detaljer}
 \end{table}
 
-Af de brugbare resultater, ser vi i tabel \ref{tabel_fordeling}, at der
-i $91.43$ procent af malerierne er fundet mindst én region som ligger i
+Af de brugbare resultater ser vi i tabel \ref{tabel_fordeling}, at der
+i $91.43 \%$ af malerierne er fundet mindst én region, som ligger i
 det gyldne snit. Vi kan derfor ikke afvise hypotese \ref{hypo_binaer}.
 
 \begin{table}[H]
@@ -85,14 +85,14 @@ det gyldne snit. Vi kan derfor ikke afvise hypotese \ref{hypo_binaer}.
     \caption[]{Et positivt resultat beskriver et maleri, hvori der er
     fundet mindst én region, som ligger i det gyldne snit i den naive
     kørsel. Et negativt resultat er et maleri, hvori der ikke findes
-    nogen regioner, som ligger i det gyldne snit.}
+    nogen regioner i det gyldne snit.}
     \label{tabel_fordeling}
 \end{table}
 
 Vi vil gerne se på, hvordan fordelingen af fundne interessante regioner
 i de fire gyldne snit ser ud. Fordelingen er vist i tabel
-\ref{tabel_fire_snit}. Ekstremerne findes i snit 2 og 3, og afviger med
-$(46432-41547)/41547 = 0.1175777 = 11.8 \%$. Da $11.8 \% > 10 \%$
+\ref{tabel_fire_snit}. Ekstremerne findes i snit 2 og 3 og afviger med
+$(46432-41547)/41547 = 0.1175777 = 11.8 \%$. Da $11.8 \% > 10 \%$,
 kan vi derfor afvise hypotese \ref{hypo_fire_g_snit}.
 
 \begin{table}[H]
@@ -114,7 +114,7 @@ kan vi derfor afvise hypotese \ref{hypo_fire_g_snit}.
 Vi undersøger nu, hvor mange af de brugbare resultater, der er forsynet
 med dimensioner i databasen, således at vi kan undersøge, hvorvidt
 lærredet er konstrueret som et gyldent rektangel. Udregningen i tabel
-\ref{tabel_med_dimensioner} viser at ud af de brugbare resultater,
+\ref{tabel_med_dimensioner} viser, at ud af de brugbare resultater,
 mangler $2,410$ malerier dimensionerne, og vi har da $11,965$ malerier
 tilbage, som kan undersøges for den gyldne ratio i lærredets
 dimensioner.
@@ -130,12 +130,12 @@ dimensioner.
     \label{tabel_med_dimensioner}
 \end{table}
 
-Vi undersøger nu, for hvor mange af de $11,965$ malerier, det gælder at
+Vi undersøger nu, for hvor mange af de $11,965$ malerier, det gælder, at
 dets lange side, $L$, divideret med dets korte side, $K$, ligger i
 intervallet $G = [1.57920117302, 1.65686680448] = \varphi \pm 2.4\%$.
 Tabel \ref{tabel_real_dimensions} viser, at kun $3.99\%$ falder inden
-for dette interval og vi kan således afvise hypotese
-\ref{hypo_golden_ractangle}, da denne kræver at $33.334 \%$ af
+for dette interval, og vi kan således afvise hypotese
+\ref{hypo_golden_ractangle}, da denne kræver, at $33.334 \%$ af
 malerierne har $L/K \in G$.
 
 \begin{table}[H]
@@ -153,22 +153,22 @@ malerierne har $L/K \in G$.
 
 Grafen i figur \ref{antal_regioner_vertikale_cut} viser antallet af
 interessante regioner fundet i de vertikale snit i vores datasæt. Det
-ses at regionerne koncentrerer sig omkring midten af malerierne.
+ses, at regionerne koncentrerer sig omkring midten af malerierne.
 
 Figur \ref{antal_regioner_horisontale_cut} viser grafen for antallet af
 interessante regioner fundet i det horisontale plan. Vi ser, at der
 findes flest regioner i snittet med snitratio $0.92$. Fra midten af
-malerierne og op, bliver der fundet færre og færre regioner i snittene.
-Dette kan skyldes at malerier med horisont normalt har få regioner over
-horisonten, og mange under, horisonten.
+malerierne og op bliver der fundet færre og færre regioner i snittene.
+Dette kan skyldes at malerier med horisontlinje normalt har få regioner over
+horisonten og mange under horisonten.
 
 Hvis man samler informationerne for de to grafer (figur
 \ref{antal_regioner_vertikale_cut} og
-\ref{antal_regioner_horisontale_cut}), kan man se at regionerne samler
-sig fra den horisontale midte og ned af i maleriet, mens vi i det
-vertikale plan, har maksimum i midten af maleriet. Dette strider mod
-hypotese \ref{hypo_alle_andre_snit} og \ref{hypo_midten} og vi kan
-derfor forkaste dem.
+\ref{antal_regioner_horisontale_cut}), kan man se, at regionerne samler
+sig fra den horisontale midte og ned i maleriet, mens vi i det vertikale
+plan har maksimum i midten af maleriet. Dette strider mod hypotese
+\ref{hypo_alle_andre_snit} og \ref{hypo_midten}, og vi kan derfor
+forkaste dem.
 
 \begin{figure}[h!]
 	\centering
@@ -207,13 +207,13 @@ fire snit. Vi kan derfor ikke afvise hypotese \ref{hypo_to_tredjedele}.
 	\label{G_vs_to_trejedele}
 \end{figure}
 
-Grafen i figur \ref{naiv_year}, viser hvor mange interessante regioner
-der er fundet i gennemsnit per maleri over alle tidsperioder. Det ses at
-i tidsperioden år 1301--1350 bliver der fundet ca. 17 regioner per
-maleri, som er klart flest. I år 1200--1250 bliver der fundet færrest
-regioner, ca. 7 i gennemsnit. Faktisk bliver der fundet mere en dobbelt
-så mange regioner i år 1301--1350, end i år 1200--1250, hvilket betyder
-at hypotese \ref{hypo_tid} kan forkastes.
+Grafen i figur \ref{naiv_year} viser, hvor mange interessante regioner
+der er fundet i gennemsnit per maleri over alle tidsperioder. Det ses,
+at i tidsperioden år 1301--1350 bliver der fundet ca. 17 regioner per
+maleri, hvilket er det klart største antal. I årene 1200--1250 bliver
+der fundet færrest regioner, ca. 7 i gennemsnit. Faktisk bliver der
+fundet mere en dobbelt så mange regioner i årene 1301--1350, end i årene
+1200--1250, hvilket betyder, at hypotese \ref{hypo_tid} kan forkastes.
 
 \begin{figure}[!h]
 	\centering
@@ -232,8 +232,8 @@ at hypotese \ref{hypo_tid} kan forkastes.
 \end{figure}
 
 I graferne i figur \ref{naiv_nation}, vises samme repræsentation som
-figur \ref{naiv_year}, blot er det her nationer i stedet for år. Nationerne
-Grækenland, Nederlandene og Catalonien har har klart flest interessante
+i figur \ref{naiv_year}, blot er det her nationer i stedet for år. Nationerne
+Grækenland, Nederlandene og Catalonien har klart flest interessante
 regioner per maleri, hvorimod Norge og Skotland ligger i bunden.
 Nationerne har en forskel på ca. 12 regioner, hvilket svarer til ca.
 $240\%$. Da $240 \% > 10 \%$, holder hypotese
@@ -258,14 +258,14 @@ $240\%$. Da $240 \% > 10 \%$, holder hypotese
 \subsubsection{Antallet af fundne regioner over alle snit}
 I alle $14,375$ malerier er der i alt fundet $1,650,082$ interessante
 regioner. Vi har en middelværdi på $114.79$ med standardafvigelse på
-$86.91$. I figur \ref{total_regions_plots} er vist grafer over hvordan
+$86.91$. I figur \ref{total_regions_plots} er vist grafer over, hvordan
 antallet af fundne regioner fordeler sig i malerierne. Plottet i figur
 \ref{graf_total_regions_zoom} ser bort fra $298$ malerier, hvori der
-ikke er fundet nogen regioner. Regionerne i malerierne, har en
-fordeling, der kunne ligne en eksponentialfordeling, som vist i
-histogrammet i figur \ref{hist_total_regions}. De observerede værdier
-afviger dog noget fra de teoretiske værdier og vi kan derfor ikke sige
-at vi har en eksponentialfordeling.
+ikke er fundet nogen regioner. Regionerne i malerierne har en fordeling,
+der kunne ligne en eksponentialfordeling, som vist i histogrammet i
+figur \ref{hist_total_regions}. De observerede værdier afviger dog noget
+fra de teoretiske værdier, og vi kan derfor ikke sige, at vi har en
+eksponentialfordeling.
 
 \begin{figure}[!h]
     \centering
@@ -295,22 +295,22 @@ at vi har en eksponentialfordeling.
 \end{figure}
 
 Middelværdien fortæller os at i et arbitrært maleri, kan vi forvente at
-finde $115$ interessante regioner, over alle snit.  Bemærk, at en region
+finde $115$ interessante regioner over alle snit.  Bemærk, at en region
 \emph{altid} vil ligge i fire snit og derfor meget vel kan indgå fire
-gange. Endvidere skal vi huske på, at hver af disse regioner, kan være
-udtrukket flere gange, på grund af den fejlbehæftede metode ti
+gange. Endvidere skal vi huske på, at hver af disse regioner kan være
+udtrukket flere gange, på grund af den fejlbehæftede metode til
 udtrækning. Vi ser, at der er et lille antal malerier, hvori der bliver
 fundet rigtig mange regioner. Det tynder dog ud omkring $380$ regioner,
 hvor antallet af malerier, med flere regioner, forekommer mindre
 hyppigt.
 
 \subsection{Opsamling\label{naiv_opsamling}}
-Vi har i tabel \ref{hypoteser_naiv} givet en oversigt over hvordan de
+Vi har i tabel \ref{hypoteser_naiv} givet en oversigt over, hvordan de
 observerede værdier forholder sig til vores hypoteser. Vi vil give vores
-vurdering af hvad vores data kan fortælle os om brugen af det gyldne
+vurdering af, hvad vores data kan fortælle os om brugen af det gyldne
 snit i malerier. Bemærk, at vi på ingen måde er fagfolk i
 kunstforståelse, og at vores fortolkning kun er begrundet ud fra de
-resultater vi har fra vores eksperiment med naiv vurdering af
+resultater, vi har fra vores eksperiment med naiv vurdering af
 interessante regioner.
 
 \begin{table}[!h]
@@ -334,17 +334,16 @@ interessante regioner.
     \label{hypoteser_naiv}
 \end{table}
 
-Vi kan ikke afvise hypotese 1. Vi mener, at et maleri som er komponeret
+Vi kan ikke afvise hypotese 1. Vi mener, at et maleri, som er komponeret
 efter det gyldne snit, vil have mindst én interessant region i det
-gyldne snit og vi kan derfor ikke afvise, at det gyldne snit bliver
+gyldne snit, og vi kan derfor ikke afvise, at det gyldne snit bliver
 brugt i malerkunsten.
 
-Når vi afviser hypotese 2, betyder det, at der ikke fundet det samme
-antal interessante regioner i de fire gyldne snit. Vi mener, at
-\emph{hvis} det gyldne snit \emph{er} specielt æstetisk tiltalende, så
-findes der en gruppering af de enkelte gyldne snit, som kunstnere
-foretrækker, og at der derfor findes dele af billedet, som bliver
-favoriseret af kunstnere.
+Når vi afviser hypotese 2, betyder det, at der ikke er fundet det samme
+antal interessante regioner i de fire gyldne snit. Vi mener, at hvis man
+antager, at det gyldne snit er specielt æstetisk tiltalende, så må de
+fire gyldne snit være lige tiltalende. Alligevel antyder resultaterne,
+at kunstnere foretrækker nogle gyldne snit fremfor andre.
 
 Vi ser at kunstnere ikke konstruerer lærredet efter det gyldne
 rektangel, da hypotese 3 afvises. Vi mener, at dette sår tvivl om,
