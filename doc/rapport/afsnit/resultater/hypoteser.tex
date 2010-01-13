@@ -157,33 +157,31 @@ Alt det ovenstående vil påvirke resultaterne, ved analyse på vores
 datasæt.
 
 \subsection{Eksperimentsopstilling}
-I \ref{chap_afproevning} er de optimale tærskelværdier fundet.  Idet
-denne hypotese blot kigger på frekvensen for brug af det gyldnesnit mod
-andre snit, hvis eneste restriktion er at de skal have et fælles forhold
-til det gyldnesnit.  Det er også fordelagtigt at maksimere antallet af
-andre snit, da det giver et bedre grundlag for eksperimentet.  Afstanden
-mellem to snit er begrænset af margin defineret til at være
+I afsnit \ref{chap_afproevning} er de optimale tærskelværdier fundet og
+de er sat derefter.
+Det er fordelagtigt at maksimere antallet af andre snit, da det giver et bedre grundlag for eksperimentet.  Afstanden
+mellem to snit er begrænset af en margin defineret til at være
 $2.4\%$, som beskrevet i kapitlet \ref{margin}.  Denne margin skal være tilstede på begge sider af
 et snit, så derfor vil hvert snit fylde $(2.4*2)\%$.  Det maksimale
 antal af snit på et billede må altså være $100/4.8=20.833$.
 Med en margin på $2.4\%$ vil der være en strimmel på $0.1\%$ af
-billedet, som ikke bliver brugt.Og mellem to marginer vil der derfor ligge en
+billedet, som ikke bliver brugt. Og mellem to marginer vil der derfor ligge en
 strimmel på $0.2\%$. 
 
-Den eneste undtagelse findes ved midten, i udregningen
-\ref{label_midt_udregning} ses først hvordan snittet til venstre for
+Den eneste undtagelse findes ved midten. I udregningen
+\ref{resul_midt_udregning} ses først hvordan snittet til venstre for
 midten findes, og derefter hvor lang afstanden er mellem de to snit.
 \begin{equation}\label{resul_midt_udregningen}
     1-0.518 = 0.482
     0.518-0.482 = 0.036
 \end{equation}
-Der er altså en stimmel på $0.048-0.036 = 0.012 = 1.2\%$ af
+Der er altså en strimmel på $0.048-0.036 = 0.012 = 1.2\%$ af
 billedet, hvor interessante regioner potentielt kunne blive talt to gange.
-Dette er illustreret i billede \ref{resultat_fejl_midt}.
+Dette er illustreret i figur \ref{resultat_fejl_midt}.
 \begin{figure}[!h]
 	\centering
 	\includegraphics[scale=0.5]{afsnit/resultater/billeder/midt_strimmel}
-	\caption{Kollision mellem de to midterste snit}
+	\caption{Kollision mellem de to midterste snit.}
 	\label{resultat_fejl_midt}
 \end{figure}
 
