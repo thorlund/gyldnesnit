@@ -134,7 +134,7 @@ positive.
         Medium detaljer & 0 & 1 & 0 \\\hline
         Få detaljer     & 0 & 0 & 4 \\\hline
     \end{tabular}
-    \caption[]{Tabel over antal interessant regioner fundene i ni test malerier.}
+    \caption[]{Tabel over antal interessant regioner i det gyldne snit 0, i ni test malerier.}
     \label{udvidet_good}
 \end{table}
 
@@ -147,44 +147,17 @@ positive.
         Medium detaljer  & 0 & 3 & 0 \\\hline
         Få detaljer     & 2 & 3 & 0 \\\hline
     \end{tabular}
-    \caption[]{Tabel over antal falske positiver i ni test malerier.}
+    \caption[]{Tabel over antal falske positiver i det gyldne snit 0, i ni test malerier.}
     \label{udvidet_bad}
 \end{table}
 \clearpage
 
 \subsection{Konklusion}
-Den udvidet metode virker som vi havde planlagt på de ensfarvet
-regioner i testbillederne. I brug på malerier findes der, hvor den finder
-flere regioner, der med rette kan betragtes som interessante, se billede
-\ref{udvidet_virker1}. 
-
-
-Men der bliver stadig fundet mange falske positiver
-
-Den er bedre end den naive til
-at sortere regioner fra, dette ses i billede \ref{udvidet_virker_ikke2}
-og \ref{udvidet_virker_ikke3}. Rent intuitivt kunne der godt vælges
-nogle regioner ud, der kunne betragtes som interessante. Der findes
-stadig billeder, hvor der kun er ikke interessante regioner med, Et
-eksempel kunne være dette billede \ref{udvidet_virker_ikke1}.
-Og der er også billeder, hvor det er tydeligt at se at teorien fungere,
-men det bestemt ikke defineres burde som interessant, dette er himmelen
-på billede \ref{udvidet_virker1}. 
-Som nævnt tidligere findes der $40\%$ flere interessante regioner end
-falske positiver. Ud fra en betragtning om at udtrækningen af regioner
-ikke fungere optimalt.
-
-%men i den praktiske brug på malerierne, finder den
-%udvidet løsning mange gode regioner hvis regions detektoren virker se
-%figur \ref{udvidet_virker1}, men kommer desværre stadig med få regioner
-%som ikke er særlige gode, f.eks i maleri \ref{udvidet_virker2}. Der
-%udvidet løsning finder også regioner som den naive ikke vil finde se en
-%sammenlining i figur \ref{udvidet_virker3}. I de tilfælde hvor regions
-%detektoren ikke virker godt, er den udvide løsning god til at sorter
-%regioner væk og kommer derfor ikke med særlige mange regioner som ikke
-%skulle være der, se figur \ref{udvidet_virker_ikke2} og
-%\ref{udvidet_virker_ikke3}. Dog kommer vi stadig ud i problemer, hvor
-%der kun er regioner som er forkerte med, se figur
-%\ref{udvidet_virker_ikke1}. Den udvidet løsnign finder 40\% flere
-%regioner som passser en ikke passer, det er ret godt, i betraktning af
-%at den generelle regions udtrækker ikke virker optimalt.
+Den udvidet metode, virker som vi havde planlagt på de ensfarvet
+regioner i testbillederne. I praksis på test malerier er den udvidet
+løsning mere praksis en den naive som man kan se i figur
+\ref{udvidet_virker3} og finder $20 \%$ flere interessante region en
+falske positiver end den naiv løsning. Selv om den udvidet stadig kun
+finder $40\%$ flere interessante region en falske positiver, er det ikke
+helt dårligt, i betretning af at vores regions finder ikke virker
+optimalt. Så alt i alt en ret god løsning.
