@@ -1,6 +1,6 @@
 {
 {\sffamily I dette afsnit præsenterer vi vores resultater fra
-eksperimentet, hvor vi har brugt den udvidede metode, til at vurdere
+eksperimentet, hvor vi har brugt den udvidede metode til at vurdere
 regionerne. Da eksperimentet blev kørt, satte vi opløsningen, på
 regionernes approksimation med et gitter, for højt, hvilket resulterede
 i, at kørslen ikke fik analyseret hele vores datasæt på grund af
@@ -30,8 +30,8 @@ kunstnerens efternavn, så vi har kun resultater fra kunstnere med
 efternavn startende med 'A' og 'B'.
 
 At vi kun har et undersæt af malerierne gør, at vi bliver nødt til at se
-på hvilke tidsperioder og nationaliteter vi har repræsenteret. Graferne
-i figur \ref{ud_year_nation} viser at italienske kunstnere, er kraftigt
+på hvilke tidsperioder og nationaliteter, vi har repræsenteret. Graferne
+i figur \ref{ud_year_nation} viser, at italienske kunstnere er kraftigt
 overrepræsenteret, og at malerierne primært er fra perioden 1401 --
 1650. Dette er ikke overraskende, siden datasættet i forvejen
 favoriserer denne type malerier.
@@ -44,16 +44,16 @@ favoriserer denne type malerier.
     \subfloat[Nationalitet]{
         \includegraphics[angle=-90,width=0.42\textwidth]{afsnit/resultater/billeder/nation}
         \label{ud_nation}}
-    \caption[]{Antal malerier ved årstal og nationalitet, fra resultater
+    \caption[]{Antal malerier ved årstal og skole, fra resultater
     ved udvidet kørsel.}
     \label{ud_year_nation}
 \end{figure}
 
 \subsection{Håndtering af systematisk fejl}
-Selvom denne analyse også har brugt den fejlbehæftede metode, til
+Selvom denne analyse også har brugt den fejlbehæftede metode til
 udtrækning af regioner, så sorteres duplikater fra, når vi approksimerer
-en region. Vi har gemt farven, som en region er blevet tildelt af
-floodfill, og hvis denne farve ikke er at finde i regionens begrænsende
+en region. Vi har gemt den farven, som en region er blevet tildelt af
+floodfill, og hvis denne ikke er at finde i regionens begrænsende
 rektangel, betyder det, at regionen er blevet malet over senere. Vi
 smider derfor denne region væk.
 
@@ -62,8 +62,8 @@ er ikke direkte sammenlignelige med dem fra den naive kørsel.
 
 \subsection{Resultater}
 Udregningen i tabel \ref{ud_tabel_fordeling} redegør for, hvor mange af
-de brugbare resultater, der har mindst en interessant region liggende i
-det gyldne snit. Vi ser at der i $87.02\%$ af malerierne, er blevet
+de brugbare resultater, der har mindst én interessant region liggende i
+det gyldne snit. Vi ser, at der i $87.02\%$ af malerierne er blevet
 fundet regioner i det gyldne snit, og vi kan derfor ikke afvise hypotese
 \ref{hypo_binaer}.
 
@@ -74,16 +74,16 @@ fundet regioner i det gyldne snit, og vi kan derfor ikke afvise hypotese
         $+$ & Negative resultater   &  $68$ &  $12$ & $98\%$ \\\hline
             & Resultater i alt      & $524$ & $100$ & $00\%$
     \end{tabular}
-    \caption[]{Et positivt resultat beskriver et maleri hvori der er
-    fundet mindst en interessant region i det gyldne snit, ved brug af
+    \caption[]{Et positivt resultat beskriver et maleri, hvori der er
+    fundet mindst én interessant region i det gyldne snit ved brug af
     den udvidede vurdering af regioner. Over halvdelen af malerierne har
-    således mindst en region i det gyldne snit.}
+    således mindst én region i det gyldne snit.}
     \label{ud_tabel_fordeling}
 \end{table}
 
 Fordelingen af interessante regioner, over de fire gyldne snit i
 malerierne, ses i tabel \ref{ud_tabel_fire_snit}. Ved at undersøge
-afvigelsen mellem ekstremerne i snit 0 og 2, ser vi at disse afviger med
+afvigelsen mellem ekstremerne i snit 0 og 2, ser vi, at disse afviger med
 $(499 - 405)/405 = 0.2320988 = 23.2 \%$ fra hinanden, og vi kan således
 afvise hypotese \ref{hypo_fire_g_snit}.
 
@@ -97,31 +97,33 @@ afvise hypotese \ref{hypo_fire_g_snit}.
             & Regioner i de fire $GS$   & $1817$
     \end{tabular}
     \caption[]{Forholdet mellem de interessante regioner fundet i de
-    fire gyldne snit ved udvidet vurdering. Der er afvigelse, mellem
-    ekstremerne, på $23.2 \%$. Ligesom i den naive kørsel, er det
+    fire gyldne snit ved udvidet vurdering. Der er afvigelse mellem
+    ekstremerne på $23.2 \%$. Ligesom i den naive kørsel, er det
     nederste horisontale snit det mest brugte.}
     \label{ud_tabel_fire_snit}
 \end{table}
 
 I figur \ref{antal_regioner_vertikale_cut_udvidet} er det samlede antal
-fundne interessante regioner, i de 20 vertikale snit, for hele datasættet,
-afbilledet. Det ses at der er fundet markant flere regioner, i de to snit som
-ligger tættest på midten, og færrest ud i kanterne.
+fundne interessante regioner i de 20 vertikale snit, afbilledet for hele
+datasættet.  Det ses, at der er fundet markant flere regioner i de to
+snit, som ligger tættest på midten, og færrest ud mod kanterne.
 
 \begin{figure}[h!]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{afsnit/resultater/billeder/cut0cut1eatsperratioU.png}
 	\end{center}
-	\caption{Antal interessante regioner i hvert af de 20 vertikale snit ved udvidet kørsel}
+	\caption{Antal interessante regioner i hvert af de 20 vertikale snit
+	ved udvidet kørsel.}
 	\label{antal_regioner_vertikale_cut_udvidet}
 \end{figure}
 
 I figur \ref{antal_regioner_horisontale_cut_udvidet} er samme afbildning
 lavet for det horisontale plan, hvor venstre side af grafen svarer til
 toppen af malerierne. I denne graf er det snitratioerne $0.72$ og $0.82$
-som har flest fundne regioner. Fra snitratio $0.52$ og ned, falder antal
-regioner gradvist. Fra snitratio $0.52$ og op, svinger antallet af
-regioner. Kanterne er igen klart de laveste i grafen.
+som har flest fundne regioner. Fra snitratio $0.52$ og ned falder antal
+regioner gradvist. Fra snitratio $0.52$ og op svinger antallet af
+regioner. Kanterne er igen klart de laveste i grafen, mht. antallet af
+regioner.
 
 \begin{figure}[h!]
 	\begin{center}
@@ -133,18 +135,18 @@ regioner. Kanterne er igen klart de laveste i grafen.
     \label{antal_regioner_horisontale_cut_udvidet}
 \end{figure}
 
-Ud fra disse observationer kan vi konkludere at der ikke er flere
-interessante regioner i det gyldne snit, end i midten af malerierne, og
+Ud fra disse observationer kan vi konkludere, at der ikke er flere
+interessante regioner i det gyldne snit end i midten af malerierne, og
 vi kan derfor forkaste hypotese \ref{hypo_alle_andre_snit} og
 \ref{hypo_midten}.
 
-I figur \ref{G_vs_to_trejedele_udvidet}, er de fire gyldne snit, samt
-$\frac{2}{3}$ repræsenteret. Det ses at der ikke er nogen entydighed på
-hvilken ratio, som er dominerende, og vi kan derfor forkaste hypotese
+I figur \ref{G_vs_to_trejedele_udvidet} er de fire gyldne snit samt
+$\frac{2}{3}$ repræsenteret. Det ses, at der ikke er nogen entydighed
+omkring hvilken ratio, som er dominerende, og vi kan derfor forkaste hypotese
 \ref{hypo_to_tredjedele}.
 
 Figur \ref{G_vs_to_trejedele_udvidet} viser også, at antallet af fundne
-regioner i det gyldne snit og snitratioen $\frac{2}{3}$, ligger meget
+regioner i det gyldne snit og snitratioen $\frac{2}{3}$ ligger meget
 tæt på hinanden, og den største forskel ligger ikke på mere end $15\%$.
 Vi kan derfor ikke afvise hypotese \ref{hypo_15p}.
 
@@ -157,12 +159,12 @@ Vi kan derfor ikke afvise hypotese \ref{hypo_15p}.
 	\label{G_vs_to_trejedele_udvidet}
 \end{figure}
 
-I graferne i figur \ref{udvidet_year}, kan man se hvor mange
+I graferne i figur \ref{udvidet_year} kan man se, hvor mange
 interessante regioner der er fundet i gennemsnit per maleri i alle
 tidsperioder.  Tidsperioder, hvor ingen malerier er analyseret, er ikke
-taget med. Det ses at i tidsperioden 1401 -- 1450, findes mange flere
-end de andre tidsperioder, og i visse tilfælde doubbelt så mange. Da
-doubbelt så mange regioner er skarpt større end $10\%$ afvigelse, kan vi
+taget med. Det ses, at der i perioden 1401 -- 1450 findes mange flere
+end i de andre perioder og i visse tilfælde dobbelt så mange. Da
+dobbelt så mange regioner er skarpt større end $10\%$ afvigelse, kan vi
 forkaste hypotese \ref{hypo_tid}.
 
 \begin{figure}[!h]
@@ -175,42 +177,43 @@ forkaste hypotese \ref{hypo_tid}.
 	\label{udvidet_year}
 \end{figure}
 
-I graferne i figur \ref{udvidet_nation}, ses at det er meget svingene,
-hvor malerier med mange interessante regioner i det gyldne snit, kommer
-fra. Nederlandene ligger sig lidt foran de andre. Danmark har slet ikke
-nogle malerier hvor der er fundet regioner i det gyldne snit. Alle
+I graferne i figur \ref{udvidet_nation} ses, at det er meget svingende,
+hvor malerier, med mange interessante regioner i det gyldne snit, kommer
+fra. Den nederlandske skole ligger lidt foran de andre. Den danske skole har slet ikke
+nogen malerier, hvor der er fundet regioner i det gyldne snit. Alle
 nationer, hvor analysen ikke har bearbejdet nogle malerier, er sorteret
-fra. Da malerier fra Nederlandene har flere end $10\%$ højre
-gennemsnitlige fundne regioner, end Danmark og Frankrig, holder hypotese
+fra. Da malerier fra den nederlandske skole gennemsnitligt har over
+$10\%$ flere fundne regioner end den danske skole og den franske
+skole, holder hypotese
 \ref{hypo_nation} ikke, og kan derfor forkastes.
 
 \begin{figure}[!h]
 	\begin{center}
 		\includegraphics[angle=0,width=0.90\textwidth]{afsnit/resultater/billeder/nationcutU.png}
 	\end{center}
-    \caption{Graf over gennemsnitligt antal fundne interessante regioner
-    i det gyldne snit fra hver nationalitet ved udvidet kørsel.}
+    \caption{Graf over gennemsnitligt antal interessante regioner fundet
+    i det gyldne snit fra hver skole ved udvidet kørsel.}
 	\label{udvidet_nation}
 \end{figure}
 
-\subsubsection{Antallet af fundne regioner over alle snit}
-Analysen har fundet $17,705$ regioner over alle snit i malerierne, med
-middelværdi $\mu = 33.79$ og standardafgivelse $\sigma = 18.58$.
+\subsubsection{Antallet af fundne regioner i alle snit}
+Analysen har fundet $17,705$ regioner i alle snit i malerierne, med
+middelværdi $\mu = 33.79$ og standardafvigelse $\sigma = 18.58$.
 Antallet af fundne regioner i malerierne er illustreret i figur
 \ref{ud_graf_total_regions}. I figur \ref{ud_qq_total_regions} er vist
-et QQ-plot, som viser hvorvidt vores data er normalfordelt. Dette er
+et QQ-plot, som viser, hvorvidt vores data er normalfordelt. Dette er
 tilfældet, hvis punkterne følger diagonalen i grafen. Vi ser, at de
-observerede data følger linjen nogenlunde, men har et udsving nederst
-til venstre, hvilket antyder at fordelingen er lidt skæv. Vi har i figur
+observerede data følger linjen nogenlunde, men at de har et udsving nederst
+til venstre, hvilket antyder, at fordelingen er lidt skæv. Vi har i figur
 \ref{ud_hist_total_regions} sammenlignet et histogram over de
-observerede værdier, med tæthedsfunktionen for normalfordelingen $X \sim
-N(\mu = 33.79, \sigma^2 = 345.22)$. De observerede værdier, følger dog
+observerede værdier med tæthedsfunktionen for normalfordelingen $X \sim
+N(\mu = 33.79, \sigma^2 = 345.22)$. De observerede værdier følger dog
 ikke de teoretiske værdier særlig pænt, og kun få steder falder de
 teoretiske værdier inden for det observerede interval, hvorfor vi ikke
 kan komme frem til et troværdigt konfidensinterval.
 
-Med et større antal fundne regioner, kunne vi meget vel komme tættere på
-en normalfordeling, og vi kunne da udtale os mere sikkert, om det
+Med et større antal fundne regioner kunne vi meget vel komme tættere på
+en normalfordeling, og vi kunne da udtale os mere sikkert om det
 forventede antal fundne regioner i et arbitrært maleri.
 
 \begin{figure}[!h]
@@ -231,10 +234,10 @@ forventede antal fundne regioner i et arbitrært maleri.
     vurdering.
     \textbf{\ref{ud_graf_total_regions}:} Fordelingen af de fundne
     regioner.
-    \textbf{\ref{ud_qq_total_regions}:} QQ-plot, som viser at vi er tæt
+    \textbf{\ref{ud_qq_total_regions}:} QQ-plot som viser, at vi er tæt
     på at have en normalfordeling med den teoretiske fordeling $X \sim N(\mu,
     \sigma^2)$.
-    \textbf{\ref{ud_hist_total_regions}:} Histrogram med
+    \textbf{\ref{ud_hist_total_regions}:} Histogram med
     tæthedsfunktionen for normalfordeling, hvor $\mu = 33.79$ og
     $\sigma^2 = 345.22$.
     }

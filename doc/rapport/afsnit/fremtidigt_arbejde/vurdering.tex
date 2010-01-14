@@ -4,15 +4,15 @@ blevet udviklet.
 }
 
 \subsection{Udtrækning af regioner}
-Vores udtrækning af regioner er på ingen måde perfekt. Det er har dog
-ikke været et mål i sig selv, at lave decideret god udtrækning af
+Vores udtrækning af regioner er på ingen måde perfekt. Det har dog
+ikke været et mål i sig selv at lave decideret god udtrækning af
 regioner, blot noget der virker. Når udtrækningen af regioner ikke er
 særlig sofistikeret, kan vi senere komme til at tage nogle dårlige valg,
-da vores metoder, som vurderer regioner, antager, at den kun modtager
+da vores metoder til vurderinger af regioner antager, at den kun modtager
 interessante regioner i billedet.
 
 \subsection{Vurdering af regioner}
-Det er nævnt helt fra start, at problemet at afgøre, om noget er
+Det er nævnt helt fra start, at det at afgøre, om noget er
 interessant i et billede, er et utroligt følsomt område. Med den
 udtrækning af regioner vi har, kan vi ikke vurdere regionerne på andet
 end deres størrelse og masse. Hvis man begynder at vurdere regionerne på
@@ -20,26 +20,26 @@ andre områder, såsom deres massemidtpunkt eller fordeling, tager vi
 beslutninger som egentlig vedrører, om regionen ligger godt i et givet
 snit.
 
-Vores naive vurdering af regioner, fungerer sådan set fint nok, givet
+Vores naive vurdering af regioner fungerer sådan set fint nok givet
 tilpas simple billeder eller bedre udtrækning af regioner. Metoden
-mangler dog en egenskab, lignende den fra den udvidede vurdering, hvor
+mangler dog en egenskab lignende den fra den udvidede vurdering, hvor
 man også kigger på regionens udstrækning i billedet, således at man ikke
 udvælger regioner, hvor store dele af massen ligger langt væk fra
 snittet. Dette indfører dog et nyt spørgsmål, for hvornår ligger noget
 egentlig langt væk fra snittet?
 
-Den udvidede metode tillader, til en vis grad, mindre fejl i udvælgelsen
-af regioner, end den naive vurdering, da kravene til er mere præcist
-defineret. Man skal dog kraftigt overveje, hvilket størrelse gitter der
-bruges, til at approksimere regionerne, da dette har markant indflydelse
+Den udvidede metode tillader til en vis grad mindre fejl i udvælgelsen
+af regioner end den naive metode, da kravene til udvidede er mere præcist
+defineret. Man skal dog kraftigt overveje hvilket størrelse gitter der
+bruges til at approksimere regionerne, da dette har markant indflydelse
 på køretiden.
 
 De to metoder søger dog at udvælge vidt forskellige former for regioner.
-Den naive finder de der ligger op ad snittet, mens den udvidede finder
+Den naive finder dem der ligger op ad snittet, mens den udvidede finder
 dem som centrerer sig på snittet. Det er derfor oplagt at kombinere
 metoderne, således at vi vælger begge typer regioner. Udvælgelsen af
 regioner er dog stadig binær --- enten godtages en region, eller også
-gør den ikke --- og deri ligger deres største svaghed.
+gør den ikke --- og deri ligger metodernes største svaghed.
 
 Det er ikke helt hensigtsmæssigt, at de to sæt af regioner, som trækkes
 ud af samme billede, men ved to forskellige snit, er helt uafhængige. Vi
@@ -50,34 +50,34 @@ forhold til ét snit og den binære klassifikation.
 
 \subsubsection{Optimeringer}
 Den naive fremgangsmåde er svær at optimere, da den er så enkel i sin
-struktur. I den udvidede metode, kan der dog gøres nogle overvejelser
-mht. regionens approksimation. Da vi i højere grad kigger kigger på
-regionens udstrækning, er det værd at overveje, om approksimationen ved
-brug af et gitter, faktisk er for grundig. Ved store regioner, kan man
+struktur. I den udvidede metode kan der dog gøres nogle overvejelser
+mht. regionens approksimation. Da vi i højere grad kigger på
+regionens udstrækning, er det værd at overveje, om approksimationen, ved
+brug af et gitter, faktisk er for grundig. Ved store regioner kan man
 med fordel bruge et større gitter, men man udelukker da mindre regioner,
 da disse kan falde gennem nettet.
 
 Man kan derfor overveje at implementere en variabel gitterstørelse,
-afhængig af regionens areal, således at regioner blev approksimeret med
+afhængig af regionens areal, således at regioner bliver approksimeret med
 et passende gitter.
 
 Man kunne også bruge en anden approksimation end gitteret. F.eks. virker
 det tiltalende at finde det konvekse hylster for en region. Dette
 gør, at der skal færre punkter til at beskrive regionen, men vi mister
 til gengæld en del information om regionens form. Køretiden på gitteret
-kan som sagt, blive meget krævende, ved store regioner, og det kan
+kan som sagt blive meget krævende ved store regioner, og det kan
 tænkes, at det konvekse hylster kan give en mere tilfredsstillende
-køretid, mod lidt mindre præcision ved fordeling og massemidtpunkt.
+køretid mod lidt mindre præcision ved fordeling og massemidtpunkt.
 
 \subsection{Databaseskema}
-Resultaterne, der gemmes i databasen, er kun de regioner som er blevet
-udvalgt til at ligge i snittet. Dette giver god mening, da det i sandhed
-kun er dem, som vi anser som interessante. Der kastes dog en del
+Resultaterne, der gemmes i databasen, er kun de regioner, som ligger i
+snittet. Dette giver god mening, da det jo 
+kun er dem, som vi anser for interessante. Der kastes dog en del
 information væk angående analysen, da der ikke gemmes noget tal for hvor
-mange regioner der er blevet sorteret fra.
+mange regioner, der er blevet sorteret fra.
 
 \subsection{Datasæt}
-Vores korpus kunne godt være bedre organiseret, selvom vi dog skal være
+Vores korpus kunne godt være bedre organiseret, selvom vi skal være
 glade for overhovedet at have adgang til al den metadata, som vi har
 fået fra wga.hu's kommaseparerede fil.
 
@@ -92,31 +92,31 @@ fået fra wga.hu's kommaseparerede fil.
         \includegraphics[angle=0,width=0.8\textwidth]{afsnit/fremtidigt_arbejde/billeder/fucked_painting.png}
         \label{fucked_up_painting}
     }
-    \caption[]{Problemer der kan opstå ved sammensætning af flere
+    \caption[]{Problemer, der kan opstå ved sammensætning af flere
     billeder. Bemærk, at det sammensatte billede er blevet beskåret,
     hvilket sår tvivl om målingers præcision i billedet.}
     \label{fucked_sammensaetning}
 \end{figure}
 
 En bedre parser kunne måske gøre, at billeder, som er blevet delt op,
-blev samlet til ét billede når vi hentede dette. Opgaven at samle to
-eller flere billeder til et, kan dog også vise sig at være en
+blev samlet til ét billede, når vi hentede dette. Opgaven at samle to
+eller flere billeder til et kan dog også vise sig at være en
 kompliceret opgave, da vi ikke ved, om de enkelte billeder engang har
 været del af det samme digitale billede, som blot er delt op. Hvis
-billederne bare sættes sammen, kan vi have, at det færdige billede
-bliver sat skævt sammen, pga. forskelligt perspektiv i billederne, som
-der er vist et eksempel på i figur \ref{fucked_up_painting}. Der findes
-metoder til at løse problemet i figur \ref{fucked_up_painting}, men man
+billederne bare sættes sammen kan vi have, at det færdige billede
+bliver sat skævt sammen, pga. forskelligt perspektiv i billederne- se
+figur \ref{fucked_up_painting}. I samme figur ses metoder til at løse
+problemet, men man
 vil sikkert komme ud for problemer med beskæring af det sammensatte
 billede.
 
-At afgøre, hvorvidt et billede er et udsnit af et større billede, vil
+At afgøre hvorvidt et billede er et udsnit af et større billede, vil
 enten kræve en meget omfattende parser eller en omstrukturering af data
-i wga.hu's kommaseparerede fil, så det blev klart indikeret, hvor et
+i wga.hu's kommaseparerede fil, så det klart blev indikeret, hvor et
 billede hører til.
 
 \subsection{Overordnet vurdering}
-Vi må indse, at det svageste led, i den udviklede implementation, er
+Vi må indse, at det svageste led, i den udviklede implementering, er
 udtrækningen af regioner kombineret med definitionen på en interessant
 region. Vores søgen efter objekter i malerier er for upræcis, og vi får
 derfor alt for mange falske positiver. At begrænse søgningen i malerier
