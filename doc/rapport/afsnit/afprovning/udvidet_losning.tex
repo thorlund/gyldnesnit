@@ -3,74 +3,75 @@
 %%          med \sffamlily-typen. Denne stil bør også følges her.
 %%
 {\sffamily
-I denne sektion vil vi test den udvidet løsning, om den virker som vi
-hade planlagt på test billeder og om hvordan den virker i praktisk på
-udvalgte malerier.
+I denne sektion vil vi afprøve den udvidede metode for at se, om den
+virker efter hensigten på testbilleder og hvordan den virker i praksis
+på udvalgte malerier.
 }
 \subsection{Afprøvning på testbilleder}
-Vi teste metoden på 4 test billeder. Billedet \ref{hus_virker} er et hus
-hvor snittet og massemidtpunktet næsten ligge oven i hinanden. 
+Vi afprøver metoden på 4 testbilleder. Billedet \ref{hus_virker} er et hus,
+hvor snittet og massemidtpunktet næsten ligger oven i hinanden. 
 
 \begin{figure}[h!!]
 	\begin{center}
 		\includegraphics[angle=0,width=0.9\textwidth]{afsnit/afprovning/billeder/udvidet_losning/udvidet_hus1_test.png}
 	\end{center}
-	\caption[]{Et hus der er symetrisk og der har massemidtpunkt i spisen af taget, massemidtpunktet er inde for margin så huset bliver udvalgt til at ligge i snittet.}
+	\caption[]{Et hus, der er symetrisk og har massemidtpunkt i spisen
+	af taget. Massemidtpunktet er inde for margin, så huset bliver
+	udvalgt til at ligge i snittet.}
 	\label{hus_virker}
 \end{figure}
 
-I det andet billedet \ref{hus_virker_ikke} er huset forskubbet så masse
-midtpunktet lige lige uden for margin, og derved ikke skulle blive tage
-med af algoritmen. 
+I det andet billede, \ref{hus_virker_ikke}, er huset forskuppet, så massemidtpunktet ligger lige uden for margin, og derved skulle det ikke blive tage
+med af metoden. 
 
 \begin{figure}[h!!]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_hus2_test.png}
 	\end{center}
-	\caption[]{Hus hvor masse midtpunktet er flyttet få pixels ud for margin, den udvide løsning vælger ikke at tage huset med.}
+	\caption[]{Hus, hvor massemidtpunktet er flyttet få pixels uden for margin. Den udvidede metode vælger ikke at tage huset med.}
 	\label{hus_virker_ikke}
 \end{figure}
 
-Det tredje billedet \ref{udvidet_blob_test} har en region som er meget lille
-og derfor bliver fra sorteret på grund af den størrelse, den stor
-region, bliver taget med at dens massemidtpunkt ligger inden for margin. 
+Det tredje billedet, \ref{udvidet_blob_test}, har en region, som er
+meget lille og derfor bliver sorteret fra. Den store region bliver taget
+med, da dens massemidtpunkt ligger inden for margin. 
 
 \begin{figure}[h!!]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_blob2_test.png}
 	\end{center}
-	\caption[]{2 regioner hvor den nederste har et massemidtpunkt inde for margin.}
+	\caption[]{To regioner, hvor den nederste har et massemidtpunkt inden for margin.}
 	\label{udvidet_blob_test}
 \end{figure}
 
-Det fjerre billedet \ref{bleksprutte_test} er der en region med som har
-et massemidtpunkt inde i margin, men som har en skæv fordeling af pixels
+I det fjerde billede, \ref{bleksprutte_test} er der en region, som har
+et massemidtpunkt inden for margin, men som har en skæv fordeling af pixels
 i forhold til snittet og derfor bliver sorteret fra. Ud fra de fire
-observationer, virker det som om, den udvidet løsning virker efter
+observationer, virker det som om, den udvidede metode virker efter
 forventningerne.
 
 \begin{figure}[h!!]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_bleksprutte_test.png}
 	\end{center}
-	\caption[]{Margin er sat meget op, så man kan se at regionen har et massemidtpunkt ind for margin, men da størstedelen af regionens pixels er på højre side, vælger den fra.}
+	\caption[]{Margin er sat meget op, så man kan se, at regionen har et massemidtpunkt inden for margin, men da størstedelen af regionens pixels er på højre side, vælges den fra.}
 	\label{bleksprutte_test}
 \end{figure}
 
-Som man kan se af testbillederne vælger den udvidet løsning vid
-forskellige regioner til at ligger i snittet. 
+Som man kan se af testbillederne, vælger den udvidedede løsning vidt
+forskellige regioner til at ligge i snittet. 
 \clearpage
 
 
 \subsection{Afprøvning på malerier}
-Afprøvningen af den udvidet løsning på malerier fra vores database,
-foregå på samme måde som den naive test.
+Afprøvningen af den udvidede metode på malerier fra vores database
+foregår på samme måde som afprøvningen af den naive.
 
 \begin{figure}[h!!]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_kfarver_sdetaljer.png}
+		\includegraphics[width=0.85\textwidth,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_kfarver_sdetaljer.png}
 	\end{center}
-	\caption[]{2 ud af de 6 region er godtager som ligene i det gyldne snit af den udvidet løsning}
+	\caption[]{To ud af de seks regioner er godtager som liggende i det gyldne snit af den udvidede metode.}
 	\label{udvidet_virker1}
 \end{figure}
 
@@ -78,19 +79,19 @@ foregå på samme måde som den naive test.
 	\begin{center}
 		\includegraphics[width=0.9\textwidth,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_dreng.png}
 	\end{center}
-	\caption[]{Baggrunden er den endeste region som bliver godtaget, da den har et massemidtpunkt som liger inde for marginen, bemærk den grånde kant rundt om helle billedet}
+	\caption[]{Baggrunden er den eneste region som bliver godtaget, da den har et massemidtpunkt, som ligger inden for marginen. Bemærk den grønne kant rundt om hele billedet.}
 	\label{udvidet_virker2}
 \end{figure}
 
 \begin{figure}[!h]
     \centering
-    	\subfloat[Udvidet løsning]{
+    	\subfloat[Udvidet metode.]{
         	\includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/udvidet_losning/udvidet_pige.png}
         	\label{udvidet_pige}}\hspace{1em}
-    	\subfloat[naiv løsning]{
+    	\subfloat[naiv metode.]{
         	\includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/udvidet_losning/naiv_pige.png}
         	\label{naiv_pige}}\hspace{1em}        	    			
-        \caption[]{Et maleri hvor resultatet for den udvidet og den naive løsning er protrateret. Der bliver fundet forskellige regioner for vær af algoritmerne. Navn: Angel Announcing. År ca. 1500. Af: Bellini, Giovanni}
+        \caption[]{Et maleri, hvor resultatet for den udvidede og den naive metode er vist. Der bliver fundet forskellige regioner for hver af metode. Navn: Angel Announcing. År ca. 1500. Af: Bellini, Giovanni.}
      \label{udvidet_virker3}
 \end{figure}
 
@@ -98,7 +99,7 @@ foregå på samme måde som den naive test.
 	\begin{center}
 		\includegraphics[width=0.9\textwidth,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_kfarver_kdetaljer.png}
 	\end{center}
-	\caption[]{En sko og en flise bliver taget med at algoritmen}
+	\caption[]{En sko og en flise bliver taget med at den udvidede metode.}
 	\label{udvidet_virker_ikke1}
 \end{figure}
 
@@ -106,7 +107,7 @@ foregå på samme måde som den naive test.
 	\begin{center}
 		\includegraphics[width=0.9\textwidth,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_mfarver_mdetaljer.png}
 	\end{center}
-	\caption[]{Den udvidet løsning sortere alle regioner væk}
+	\caption[]{Den udvidede metode sorterer alle regioner væk.}
 	\label{udvidet_virker_ikke2}
 \end{figure}
 
@@ -114,16 +115,16 @@ foregå på samme måde som den naive test.
 	\begin{center}
 		\includegraphics[width=0.9\textwidth,angle=0]{afsnit/afprovning/billeder/udvidet_losning/udvidet_sfarver_mdetaljer.png}
 	\end{center}
-	\caption[]{2 regioner som ikke høre nogle steder hende bliver fundet}
+	\caption[]{To regioner, som ikke repræsenterer noget i billedet, bliver fundet.}
 	\label{udvidet_virker_ikke3}
 \end{figure}
 
 
-Ud fra tabelerne \ref{udvidet_good} og \ref{udvidet_bad}, hvor de
-interresante og falske positiver er opstillet, lige som i den naive
-aprøvning. Kan det ses at der blive fundet 7 interessante regioner og 5
-falske positive, det vil sige 40 \% flere interessante region en falske
-positive.
+Ud fra tabellerne \ref{udvidet_good} og \ref{udvidet_bad}, hvor de
+interressante og falske positiver er opstillet --- som i den naive
+afprøvning --- kan det ses, at der blive fundet 7 interessante regioner og 5
+falske positiver. Det vil sige 40 \% flere interessante regioner en falske
+positiver.
 
 \begin{table}[H]
     \centering
@@ -134,7 +135,7 @@ positive.
         Medium detaljer & 0 & 1 & 0 \\\hline
         Få detaljer     & 0 & 0 & 4 \\\hline
     \end{tabular}
-    \caption[]{Tabel over antal interessant regioner i det gyldne snit 0, i ni test malerier.}
+    \caption[]{Tabel over antal interessante regioner i det gyldne snit 0 i ni test malerier.}
     \label{udvidet_good}
 \end{table}
 
@@ -147,17 +148,17 @@ positive.
         Medium detaljer  & 0 & 3 & 0 \\\hline
         Få detaljer     & 2 & 3 & 0 \\\hline
     \end{tabular}
-    \caption[]{Tabel over antal falske positiver i det gyldne snit 0, i ni test malerier.}
+    \caption[]{Tabel over antal falske positiver i det gyldne snit 0 i ni test malerier.}
     \label{udvidet_bad}
 \end{table}
 \clearpage
 
 \subsection{Konklusion}
-Den udvidet metode, virker som vi havde planlagt på de ensfarvet
-regioner i testbillederne. I praksis på test malerier er den udvidet
-løsning mere praksis en den naive som man kan se i figur
-\ref{udvidet_virker3} og finder $20 \%$ flere interessante region en
-falske positiver end den naiv løsning. Selv om den udvidet stadig kun
-finder $40\%$ flere interessante region en falske positiver, er det ikke
-helt dårligt, i betretning af at vores regions finder ikke virker
-optimalt. Så alt i alt en ret god løsning.
+Den udvidede metode virker som vi havde planlagt på de ensfarvede
+regioner i testbillederne I praksis er den udvidede metode merer
+effektiv end den naive: Som man kan se i figur{udvidet_virker3} finder
+den 20 \% flerer interessante regioner end falske positiver, end den
+naive metode gør. Selv om den udvidede stadig kun finder $40\%$ flere
+interessante regioner en falske positiver, er det ikke helt dårligt, i
+betratning af, at vores regiondetektor ikke virker optimalt. Alt i alt
+er det alså en god løsning.
