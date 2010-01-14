@@ -3,6 +3,58 @@
 implementering og analyse. Nogle af forslagene kan dog overlappe.
 }
 
+\subsection{Vurdering af regioner}
+\begin{itemize}
+    \item \textbf{Sammensmeltning af naiv og udvidet løsning}\\
+        Udvikling af en kombination af den naive og udvidede vurdering
+        af regioner, således at både regioner, der ligger op ad snittet,
+        og dem, der ligger på snittet udvælges. Man kunne således også
+        få gjort selve den naive vurdering mere sofistikeret ved også at
+        kigge på regionens udstrækning.
+    \item \textbf{Pointscore i stedet for binær klassifikation}\\
+        Dette vil forkaste den binære klassifikation og i stedet give et
+        mere præcist mål for, hvorvidt en region ligger i snittet.  Vi
+        har allerede givet et forslag til en sådan metode, hvor man kan
+        bruge et topografisk kort til at udregne omkostninger for
+        regioner.  Regionen kunne approksimeres ved brug af et gitter
+        eller dennes konvekse hylster.
+    \item \textbf{Bonus for regioner, som ligger i flere gyldne snit}\\
+        Det kunne være interessant at undersøge, om fundne regioner
+        kvalificerer sig til at ligge i mere end ét gyldent snit. Med
+        den nuværende udtrækning \emph{vil} vi have, at hvis en region
+        ligger i to snit, så \emph{vil} denne blive trukket ud to gange.
+        Vi vil derfor have brug for metoder til at undersøge, om to
+        regioner egentlig er den samme. Dette skal løses med en anden
+        metode for udtrækning af regioner. Ved binær klassificering skal
+        det overvejes, hvordan sådanne regioner belønnes. Bruges der i
+        stedet pointscore, vil regionens værdi afspejle dennes specielle
+        placering.
+    \item \textbf{Oplæring med billeder konstrueret efter det gyldne
+        snit}\\
+        Ved brug af maskinlæring kan man oplære programmet i at finde
+        interessante regioner, ved at ``fodre'' det med malerier, hvor
+        det er anerkendt at disse er konstrueret efter det gyldne snit.
+        Denne oplæring kunne med fordel gøres i samarbejde med
+        kunsthistorikere og andre med den fornødne viden til at afgøre
+        dette. Her er det oplagt at udvikle en GUI, hvor brugeren kan
+        markere de områder (eller figurer) i billedet, som er
+        interessante.
+    \item \textbf{Ligger der interessante regioner i ``Eye of God''?}\\
+        Nogle mener, at punktet vist i figur \ref{eye_of_god} er
+        specielt interessant i forbindelse med det gyldne snit. Det
+        kunne derfor være spændende at undersøge, om der er en tendens
+        til at placere interessante regioner omkring dette punkt.
+        Ligeledes kunne man undersøge, om
+        interessante regioner følger bestemte linjer i billedet, f.eks,
+        diagonalerne indtegnet i figur \ref{eye_of_god} eller den gyldne
+        spiral.
+    \item \textbf{Er en fundet region konstrueret efter det gyldne snit?}\\
+        Det kunne være interessant at undersøge de fundne regioner
+        nærmere, for at afgøre, om disse i sig selv er opbygget efter
+        det gyldne snit, ligesom vist i utallige malerier af Mona Lisa i
+        figur \ref{monalisa_fake}.
+\end{itemize}
+
 \subsection{Udtrækning af regioner}
 \begin{itemize}
      \item \textbf{Bedre udtrækning af regioner}\\
@@ -36,50 +88,6 @@ implementering og analyse. Nogle af forslagene kan dog overlappe.
 		Samt ville give bedre resultater.
 \end{itemize}
 
-\subsection{Vurdering af regioner}
-\begin{itemize}
-    \item \textbf{Sammensmeltning af naiv og udvidet løsning}\\
-        Udvikling af en kombination af den naive og udvidede vurdering
-		af regioner, således
-        at både regioner, der ligger op ad snittet, og dem, der ligger på
-        snittet udvælges. Man kunne således også få gjort selve den naive
-        vurdering mere sofistikeret ved også at kigge på regionens
-        udstrækning.
-    \item \textbf{Pointscore i stedet for binær klassifikation}\\
-        Dette vil forkaste den binære klassifikation og i stedet give et
-        mere præcist mål for, hvorvidt en region ligger i snittet.  Vi
-        har allerede givet et forslag til en sådan metode, hvor man kan
-        bruge et topografisk kort til at udregne omkostninger for
-        regioner.  Regionen kunne approksimeres ved brug af et gitter
-        eller dennes konvekse hylster.
-    \item \textbf{Bonus for regioner, som ligger i flere gyldne snit}\\
-        Det kunne være interessant at undersøge, om fundne regioner
-        kvalificerer sig til at ligge i mere end ét gyldent snit. Med
-        den nuværende udtrækning \emph{vil} vi have, at hvis en region
-        ligger i to snit, så \emph{vil} denne blive trukket ud to gange.
-        Vi vil derfor have brug for metoder til at undersøge, om to
-        regioner egentlig er den samme. Dette skal løses med en anden
-        metode for udtrækning af regioner. Ved binær klassificering skal
-        det overvejes, hvordan sådanne regioner belønnes. Bruges der i
-        stedet pointscore, vil regionens værdi afspejle dennes specielle
-        placering.
-    \item \textbf{Ligger der interessante regioner i ``Eye of God''?}\\
-        Nogle mener, at punktet vist i figur \ref{eye_of_god} er
-        specielt interessant i forbindelse med det gyldne snit. Det
-        kunne derfor være spændende at undersøge, om der er en tendens
-        til at placere interessante regioner omkring dette punkt.
-        Ligeledes kunne man undersøge, om
-        interessante regioner følger bestemte linjer i billedet, f.eks,
-        diagonalerne indtegnet i figur \ref{eye_of_god} eller den gyldne
-        spiral.
-    \item \textbf{Er en fundet region konstrueret efter det gyldne snit?}\\
-        Det kunne være interessant at undersøge de fundne regioner
-        nærmere, for at afgøre, om disse i sig selv er opbygget efter
-        det gyldne snit, ligesom vist i utallige malerier af Mona Lisa i
-        figur \ref{monalisa_fake}.
-\end{itemize}
-
-
 \subsection{Generelle forbedringer}
 \begin{itemize}
     \item \textbf{Mere avanceret database}\\
@@ -106,8 +114,14 @@ implementering og analyse. Nogle af forslagene kan dog overlappe.
     \item \textbf{Webservice}\\
         Webservice, hvor klienter kan sende resultater fra kørsel på
         egen maskine, kan udvides til at man selv organiserer billeders
-        metadata, således at man ikke er afhængig af et eksternt
+        metadata, således at man ikke er afhængig af en eksternt
         kilde til billeder.
+    \item \textbf{Grafisk browser/GUI}\\
+        En database browser specifikt udarbejdet til at gennemse
+        resultater fra programmet. I denne kan man opstille
+        eksperimenter, indstille tærskelværdier og igangsætte analyser.
+        Denne kunne med fordel sættes sammen med ovenstående webservice,
+        således at resultater let kunne uploades.
 \end{itemize}
 
 \begin{figure}[!h]
@@ -139,7 +153,28 @@ implementering og analyse. Nogle af forslagene kan dog overlappe.
         Man kunne gøre brug af \emph{eye tracking} til at finde ud af,
         hvor menneskers øjne fokuserer i malerier. En stor undersøgelse
         kunne da give en indikation af, om der findes nogle objekter
-        eller steder i malerier, som øjnene automatisk drages mod.
+        eller steder i malerier, som øjnene automatisk drages mod. Disse
+        data kunne bruges til at oplære et program, der så ville rangere
+        disse koordinater og objekter.
+    \item \textbf{Modifikation af billeder til at opfylde det gyldne
+        snit}\\
+        Givet et digitalt billede af et maleri som ikke er konstrueret
+        efter det gyldne snit, kunne man finde de interessante regioner
+        og flytte dem rundt, så billedet kunne siges at være konstrueret
+        efter det gyldne snit. Dette kræver \emph{virkelig} god
+        detektion af interessante objekter, samt god rekonstruktion af
+        billede, f. eks. ved inpaint.
+    \item \textbf{Hjemmeside}\\
+        Programmet kunne lægges ud som en hjemmeside, hvor brugere kunne
+        uploade billeder til analyse. Brugeren kan da se hvilke regioner
+        der ligger i det gyldne snit i maleriet. Siden kunne have en
+        ``Highscore'', hvor de mest opsigtsvækkende malerier blev
+        listet.
+    \item \textbf{Afprøvning på fotos}\\
+        Det ville være interessant, at afprøve programmet på en database
+        med fotografier. Dels for at se hvordan detektionen af regioner
+        virker i fotografier, men også for at analysere fotografierne
+        for brug af det gyldne snit.
 \end{itemize}
 
 }
