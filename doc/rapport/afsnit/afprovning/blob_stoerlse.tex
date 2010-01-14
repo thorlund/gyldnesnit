@@ -4,10 +4,10 @@
 %%
 {
 Ved udtrækning af regioner sætter vi en værdi for, hvor stor en region skal
-være, for at blive tage i betragtning, i denne sektion vil vi teste, hvor stor
-en regionen skal være for at vi vil tage den med. Problematikken med for små
+være, for at blive tage i betragtning. I dette afsnit vil vi teste, hvor stor
+en region skal være for at vi vil tage den med. Problematikken med for små
 regioner er illustreret i maleriet i figur \ref{alt_med}. Her er alle de grønne
-kasser regioner, som vores naive algoritme mener er interessant, og da
+kasser regioner, som vores naive algoritme mener er interessante, og da
 alle regioner er taget med, bliver 939 regioner vurderet til at ligge i
 snittet.
 
@@ -17,20 +17,21 @@ snittet.
     \begin{center}
         \fbox{\includegraphics[angle=0,width=0.45\textwidth]{afsnit/afprovning/billeder/stoerelse/alt_med.png}}
     \end{center}
-    \caption{Maleri hvor alle størrelse regioner er godtaget, der er fundet $939$ intrasante regioner.}
+    \caption{Maleri, hvor regioner i alle størrelser er godtaget. Der er
+	fundet $939$ interessante regioner.}
 	\label{alt_med}
 \end{figure}
 
-For at teste hvilken størrelse vi bør godtage, er der fremstillet et
+For at teste hvilken størrelse, vi bør godtage, er der fremstillet et
 testbillede i figur \ref{original_stoerelse}, hvor ni regioner er opstillet,
 således at de alle ligger i samme snit. Den øverste region er den mindste, og
 regionernes størrelse stiger gradvist ned langs snittet.
 
 I hver af de andre fem testbilleder i figur \ref{stoerelse_sammenlining}, er
-tærskelværdierne gradvist sat op. De regioner der godtages er repræsenteret med grønne kasser. 
+tærskelværdierne gradvist sat op. De regioner, der godtages, er repræsenteret med grønne kasser. 
 Vi mener, at der bliver taget for mange regioner med i billede \ref{0,0}, \ref{0,005}, \ref{0,001} og
 \ref{0,0015}. I billedet \ref{0,002} vurderer vi, at det kun er regioner
-af en tilstrækkelig størrelse, som er blevet udvalgt, og vi har derfor
+af en vis størrelse, som er blevet udvalgt, og vi har derfor
 valgt at sætte tærskelværdien til $0.002$.
 
 \begin{figure}[!h]

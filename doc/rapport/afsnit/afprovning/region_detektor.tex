@@ -11,13 +11,13 @@ omhandle afprøvning af metoden på testbilleder, og anden del afprøvning
 af metoden på udvalgte billeder fra databasen.}
 
 \subsection{Afprøvning på testbilleder}
-I dette følgende afprøves metoden på billeder konstrueret med en hvid
-baggrund og sorte regioner. Snittet, som der vil blive kigget på, vil
-blive tegnet med rødt på billederne. Snittes margin vil blive tegnet med blåt.
+I det følgende afprøves metoden på billeder konstrueret med en hvid
+baggrund og sorte regioner. Snittet, der vil blive kigget på, vil
+blive tegnet med rødt på billederne. Snittets margin vil blive tegnet med blåt.
 
 I billedet \ref{GRD_test1} er der fem regioner. Tre af dem bliver
-fundet, da de ligger i snittet. De to sidste regioner som ikke er fundet, er
-stadig sorte. Som man kan se, bliver både den, der krydser snittet og den,
+fundet, da de ligger i snittet. De to sidste regioner, som ikke er fundet, er
+stadig sorte. Som man kan se, bliver både den, der krydser snittet, og den,
 der tangere snittet, taget med. 
 
 \begin{figure}[!h]
@@ -33,8 +33,8 @@ der tangere snittet, taget med.
 \end{figure}
 
 I billedet \ref{GRD_test2} er der tre regioner, som
-alle bliver fundet; baggrunden, den lille region som ligger indenfor
-marginen, og den store region som kun har en lille del af sin masse
+alle bliver fundet; baggrunden, den lille region, som ligger inden for
+marginen, og den store region, som kun har en lille del af sin masse
 i snittet. 
 
 \begin{figure}[!h]
@@ -65,7 +65,7 @@ snittet. Begge sider af horisontlinjen bliver udtrukket som en region.
 \end{figure}
 
 I de tre figurer \ref{GRD_test1_sammen}, \ref{GRD_test2_sammen} og
-\ref{GRD_test3_sammen} kan ses før og efter metoden er blevet anvendt.
+\ref{GRD_test3_sammen} ses billedet før og efter metoden er blevet anvendt.
 Metoden opfører sig efter de standarder, som vi fremsatte i afsnit \ref{section_naiv}, og
 virker efter vores forventninger.
 \clearpage
@@ -87,36 +87,38 @@ fungerer godt, mens den fungerer dårligt på andre.
      \label{generelde_region_detektor_virker}
 \end{figure}
 
-I figuren \ref{generelde_region_detektor_virker} er der to malerier, hvor
-vores regionsudtrækning virker rigtig godt. 
+I figuren \ref{generelde_region_detektor_virker} er der to malerier,
+hvor på vores regionsudtrækning virker rigtig godt. 
 
-I det første maleri \ref{GRD_virker1} finder metoden syv store regioner
+I det første maleri, \ref{GRD_virker1}, finder metoden syv store regioner
 samt en del små. Den skelner mellem de forskellige paneler om kaminen,
 og hvert stykke tøj på personen i maleriet opfattes som en særskilt
-region. De små regioner er samlet, og forstyrre ikke de store regioner.
+region. De små regioner er samlet, og forstyrer ikke de store
+regioner.
 Man kunne måske have ønsket sig, at metoden ville fylde mere af
 personens kappe ud, men bortset fra det er figuren et godt eksempel på,
 hvordan det ser ud, når den generelle metode fungerer.
 
 I maleriet \ref{GRD_virker2} finder vi mange af de samme positive ting:
-drengen i midten af maleriet er helt udfyldt, en sko, drengens
+Drengen i midten af maleriet er helt udfyldt, en sko, drengens
 badebukser og et håndklæde er også fundet. Det er dog vigtigt at lægge
 mærke
-til, at de andre personer i vandet, flyder i et med baggrunden. Dette
+til, at de andre personer i vandet flyder i et med baggrunden. Dette
 ville normalt være uheldigt, men eftersom metoden kun ser efter regioner
-i snittet -repræsenteret af den røde linje- gør det ikke noget i dette
+i snittet - repræsenteret af den røde linje - gør det ikke noget i dette
 tilfælde.
 
 \begin{figure}[!h]
     \centering
-	\subfloat[Maleri med kraftige farver og mange detaljer, hvor de tærskelværdierne fundet i afsnit \ref{terskelverdi} er brugt.]{
+	\subfloat[Maleri med kraftige farver og mange detaljer, hvor tærskelværdierne fundet i afsnit \ref{terskelverdi} er brugt.]{
    	 	\includegraphics[angle=270,width=0.90\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/floodfill/4-4.png}
 	    \label{GRD_virker_nesten1}}\hspace{1em}
     \subfloat[Det samme maleri, hvor tærskelværdier er valgt specifikt for det her maleri]{
         \includegraphics[angle=270,width=0.95\textwidth]{afsnit/afprovning/billeder/thressholds/krafitige_farver/krafite_detalier/s7_e200_f5.png}
         \label{GRD_virker_nesten1_super}}\\
-     \caption[]{Et malerier, hvor den generelle metode ikke helt virker
-	 efter vores ønske, men som med nye tærskelværdier vil virker meget bedre.}
+     \caption[]{Et maleri, hvor den generelle metode ikke virker helt 
+	 efter vores ønske. Med nye tærskelværdier passer metoder dog meget
+	 bedre.}
      \label{generelde_region_detektor_virker_nesten1}
 \end{figure}
 
@@ -128,12 +130,13 @@ tilfælde.
 	\subfloat[Det samme maleri, hvor tærskelværdierne er valgt specifikt for maleriet.]{
    	 	\includegraphics[angle=0,width=0.90\textwidth]{afsnit/afprovning/billeder/thressholds/medium_farver/medium_detalier/s5_e90_e200_f4.png}
 	    \label{GRD_virker_nesten2_super}}\hspace{1em}
-     \caption[]{Et maleri, hvor den generelle metode ikke helt virker efter vores ønske, men med nye tærskelværdier vil virker meget bedre.}
+     \caption[]{Et maleri, hvor den generelle metode ikke helt virker.
+	 Nye tærskelværdier vil dog komme maleriet til gode.}
      \label{generelde_region_detektor_virker_nesten2}
 \end{figure}
 
 I figur \ref{generelde_region_detektor_virker_nesten1} og \ref{generelde_region_detektor_virker_nesten2} er der to
-malerier, hvor metoden ikke fungerer optimalt efter hensigten. Dog kan
+malerier, hvor metoden ikke fungerer optimalt. Dog kan
 vi stadig bruge figurerne til noget.
 
 I maleriet \ref{GRD_virker_nesten1} bliver der hovedsageligt fundet små
@@ -142,21 +145,21 @@ ville have haft, at personens kappe og arm blev fundet. Dette skyldes
 primært, at tærskelværdierne for dette billede er sat for lavt. 
 
 
-Maleriet i den anden figur \ref{GRD_virker_nesten2} rummer nogle af de
+Maleriet i den anden figur, \ref{GRD_virker_nesten2}, rummer nogle af de
 samme problemer: metoden finder også her en masse små dele af figurer,
 der burde hænge sammen. Det vil også kunne løses ved nogle andre
 tærskelværdier, men som man også kan se på maleriet er vægge og loft -
 som egentlig er ret ensfarvede -stadig svære at finde for metoden. Det
-kunne tyde på, at en højere grad af sløring ville løse problemet, og få
+kunne tyde på, at en højere grad af sløring ville løse problemet og få
 algoritmen til at virke i maleriet.
 
-Når netop de to figure \ref{GRD_virker_nesten1} og
-\ref{GRD_virker_nesten2} er interessante, er det fordi, at en ændring af
+Når netop de to figurer, \ref{GRD_virker_nesten1} og
+\ref{GRD_virker_nesten2}, er interessante, er det fordi, at en ændring af
 tærskelværdier, samt en højre grad af sløring, ville bevirke, at den
-generelle metode kom til at fungere bedre. I billedet
-\ref{GRD_virker_nesten1_super} og \ref{GRD_virker_nesten1_super} er
-portrætteret de samme malerier, men hvor tærskelværdierne passer bedre til
-maleriet, dette kan f.eks. ses ved at kappen på englen samt det meste af
+generelle metode kom til at fungere bedre. I billederne
+\ref{GRD_virker_nesten1_super} og \ref{GRD_virker_nesten1_super} ses de
+samme malerier, men tærskelværdierne passer her bedre til
+maleriet. Dette kan f.eks. ses, ved at kappen på englen, samt det meste af
 loftet bliver fundet.
 
 \clearpage
@@ -184,7 +187,7 @@ loftet bliver fundet.
 \end{figure}
 
 I figur \ref{generelde_region_detektor_virker_ikke} og
-\ref{GRD_virker_ikke2} er der to malerier hvor
+\ref{GRD_virker_ikke2} er der to malerier, hvor
 vores generelle metode ikke virker optimalt. 
 
 I maleri \ref{GRD_virker_ikke1} er noget af buketten og baggrunden gået
@@ -193,16 +196,16 @@ en ændring i tærskelværdierne vil ikke hjælpe, da en forøgelse af disse
 blot vil resultere i, at flere af blomsterne går i ét med baggrunden. En
 sænkning vil resultere i, at ingen af blomsterne bliver trukket ud. 
 
-Maleriet \ref{GRD_virker_ikke2} repræsenterer en anden problemstilling,
-som vi ikke kan komme udenom: farverne er så mørke og svage, at en
-ændring i tærskelværdien i floodfill på bare en vil få metoden til at gå
-fra at finde ingen regioner til at finde for store regioner. Det kan ses
-i figur \ref{ff_munke}, hvor de to maleriers, floodfillstærskelværdi
-er sat til den lavest og næstlaveste værdi. Som man kan se, finde metoden
-mange små regioner som ikke er særlig interessante i maleri
-\ref{munk_etff}, men i \ref{munk_toff}, bliver der fundet to meget store
-regioner, som er blevet alt for store. Dette er et problem da vi så ikke
-kan have en tærskelværdi som virker.
+Maleriet \ref{GRD_virker_ikke2}, repræsenterer en anden problemstilling,
+som vi ikke kan komme uden om: Farverne er så mørke og svage, at en
+ændring i tærskelværdien i floodfill på bare \'{e}n vil få metoden til at gå
+fra, at finde ingen regioner, til at finde for store regioner. Det kan ses
+i figur \ref{ff_munke}, hvor de to maleriers floodfillstærskelværdi
+er sat til den laveste og næstlaveste værdi. Som man kan se, finder metoden
+mange små regioner, som ikke er særlig interessante i maleri
+\ref{munk_etff}, men i \ref{munk_toff} bliver der fundet to meget store
+regioner, som dog er alt for store. Dette er et problem da vi så ikke
+kan have en tærskelværdi, som virker.
 
 \begin{figure}[!h]
     \centering
@@ -212,14 +215,18 @@ kan have en tærskelværdi som virker.
     \subfloat[Tærskelværdierne for floodfill på maleriet er sat til to.]{
         \includegraphics[angle=0,width=0.46\textwidth]{afsnit/afprovning/billeder/thressholds/svage_farver/svage_detalier/2-2.png}
         \label{munk_toff}}
-     \caption{Et maleri hvor tærskelværdien for floodfill er sat til den laveste værdi den kan have, og et hvor denne næstlaveste tærskelværdi er sat.}
+     \caption{Et maleri, hvor tærskelværdien for floodfill er sat til
+	 den laveste værdi, den kan have, og et, hvor den næstlaveste tærskelværdi er sat.}
      \label{ff_munke}
 \end{figure}
 
 Dette kan også skyldes, at kantdetektionen tilføjer en mørk kant rundt
 om regionerne, men da maleriet er mørkt i forvejen, hjælper
-kandetektionen ikke. i maleri \ref{bla} er kantet tegnet med blåt, dette betyder noget for hvordan floodfill fungere.
-Det ses specielt på ansigtet af en af munkene. Nummer to munk fra venstres kind er blevet floodfillet på maleriet \ref{sort}, men på den blå er hans ansigt velbevaret.
+kandetektionen ikke. i maleri \ref{bla} er kanter tegnet med blåt,
+hvilket betyder noget for, hvordan floodfill fungerer.
+Det ses specielt på ansigtet af en af munkene. Den anden munk fra
+venstres kind er blevet floodfillet på maleriet \ref{sort}, men i maleri
+\ref{bla} er hans ansigt velbevaret.
 %I maleri \ref{bla} er kanten tegnet med blåt og man
 %kan se at munk nummer to fra venstre, ikke får sit skæg med, men hvor han går
 %det i maleriet med sort kant, se maleri \ref{sort}.
