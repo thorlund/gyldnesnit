@@ -30,7 +30,7 @@ kunstnerens efternavn, så vi har kun resultater fra kunstnere med
 efternavn startende med 'A' og 'B'.
 
 At vi kun har et undersæt af malerierne gør, at vi bliver nødt til at se
-på hvilke tidsperioder og nationaliteter, vi har repræsenteret. Graferne
+på hvilke tidsperioder og skoler, vi har repræsenteret. Graferne
 i figur \ref{ud_year_nation} viser, at italienske kunstnere er kraftigt
 overrepræsenteret, og at malerierne primært er fra perioden 1401 --
 1650. Dette er ikke overraskende, siden datasættet i forvejen
@@ -41,7 +41,7 @@ favoriserer denne type malerier.
     \subfloat[Årstal]{
     \includegraphics[angle=-90,width=0.42\textwidth]{afsnit/resultater/billeder/year}
         \label{ud_year}}\hspace{1em}
-    \subfloat[Nationalitet]{
+    \subfloat[Skole]{
         \includegraphics[angle=-90,width=0.42\textwidth]{afsnit/resultater/billeder/nation}
         \label{ud_nation}}
     \caption[]{Antal malerier ved årstal og skole, fra resultater
@@ -52,7 +52,7 @@ favoriserer denne type malerier.
 \subsection{Håndtering af systematisk fejl}
 Selvom denne analyse også har brugt den fejlbehæftede metode til
 udtrækning af regioner, så sorteres duplikater fra, når vi approksimerer
-en region. Vi har gemt den farven, som en region er blevet tildelt af
+en region. Vi har gemt den farve, som en region er blevet tildelt af
 floodfill, og hvis denne ikke er at finde i regionens begrænsende
 rektangel, betyder det, at regionen er blevet malet over senere. Vi
 smider derfor denne region væk.
@@ -194,7 +194,7 @@ I graferne i figur \ref{udvidet_nation} ses, at det er meget svingende,
 hvor malerier, med mange interessante regioner i det gyldne snit, kommer
 fra. Den nederlandske skole ligger lidt foran de andre. Den danske skole har slet ikke
 nogen malerier, hvor der er fundet regioner i det gyldne snit. Alle
-nationer, hvor analysen ikke har bearbejdet nogle malerier, er sorteret
+skoler, hvor analysen ikke har bearbejdet nogle malerier, er sorteret
 fra. Da malerier fra den nederlandske skole gennemsnitligt har over
 $10\%$ flere fundne regioner end den danske skole og den franske
 skole, holder hypotese
@@ -259,12 +259,12 @@ forventede antal fundne regioner i et arbitrært maleri.
 
 \subsection{Opsamling}
 Vi vil nu samle op på de ovenstående resultater for vores eksperiment
-med udvidet vurdering af interessante regioner. Tabel \ref{hypoteser_udvidet} viser
-hvordan vores resultater forholder sig til vores opstillede hypoteser.
-Vi giver vores vurdering af, hvad resultaterne siger om brugen af det
-gyldne snit, men vær opmærksom på, at vi ikke er fagfolk i
-kunstforståelse og vores fortolkninger kun bygger på de observerede
-resultater.
+med udvidet vurdering af interessante regioner. Tabel
+\ref{hypoteser_udvidet} viser, hvordan vores resultater forholder sig
+til vores opstillede hypoteser.  Vi giver her vores vurdering af, hvad
+resultaterne siger om brugen af det gyldne snit, men vær opmærksom på,
+at vi ikke er fagfolk i kunstforståelse, og at vores fortolkninger kun
+bygger på de observerede resultater.
 
 \begin{table}[!h]
     \centering
@@ -279,18 +279,18 @@ resultater.
         5 & Flere regioner i $GS$ end $\frac{2}{3}$     & \checkmark &              \\\hline
         6 & Flere regioner i $GS$ end i midten          & \checkmark &              \\\hline
         7 & $GS$ brugt lige meget, uanset tidsperiode   & \checkmark &              \\\hline
-        8 & $GS$ brugt lige meget, uanset nationalitet  & \checkmark &              \\\hline
+        8 & $GS$ brugt lige meget, uanset skole         & \checkmark &              \\\hline
         9 & $\frac{2}{3}$ brugt som approksimation til $GS$   &      & \checkmark	\\\hline
     \end{tabular}
-    \caption[]{Hypoteser i forhold til den udvidet kørsel. $GS$ bruges som
-    forkortelse for det gyldne snit.  $^{\textrm{*}}$Jvf. udregning
+    \caption[]{Hypoteser i forhold til den udvidede kørsel. $GS$ bruges som
+    forkortelse for det gyldne snit.  $^{\textrm{*}}$Jvf. udregning.
     \ref{tabel_real_dimensions} }
     \label{hypoteser_udvidet}
 \end{table}
 
-Hypotese 1 kan ikke afvises, hvilket betyder at over halvdelen af de
-analyserede malerier, har mindst én interessant region i det gyldne
-snit. Da vi mener at malerier konstrueret efter det gyldne snit, vil
+Hypotese 1 kan ikke afvises, hvilket betyder, at over halvdelen af de
+analyserede malerier har mindst én interessant region i det gyldne
+snit. Da vi mener, at malerier konstrueret efter det gyldne snit vil
 have mindst én interessant region i det gyldne snit, kan vi ikke afvise
 at det gyldne snit bliver brugt af kunstnere i malerier.
 
@@ -308,12 +308,12 @@ bedømmes efter, har vi allerede afvist denne. Nærmere forklaring er
 givet i afsnit \ref{naiv_opsamling} ved eksperimentet med naiv vurdering
 af regioner.
 
-Vi afviser hypotese 4, hvilket fortæller os, at der ikke er blevet
-fundet flere interessante regioner i det gyldne snit, end i alle andre
-snit.  I malerier komponeret efter det gyldne snit, må man forvente at
-de interessante regioner koncentrerer sig om snittet. Vi mener derfor
-ikke at det er retfærdigt at sige, at kunstnere arbejder ud fra det
-gyldne snit, når et maleri komponeres.
+Vi afviser hypotese 4, idet der ikke er blevet fundet flere interessante
+regioner i det gyldne snit end i alle andre snit.  I malerier komponeret
+efter det gyldne snit, må man forvente, at de interessante regioner
+koncentrerer sig om snittet. Vi mener derfor ikke, at det er retfærdigt
+at sige, at kunstneren arbejder ud fra det gyldne snit, når et maleri
+komponeres.
 
 Hypotese 5 afvises, fordi vi ikke kan finde flere interessante regioner
 i det gyldne snit, end i snittet ved $\frac{2}{3}$, i alle fire snit. Vi
@@ -322,28 +322,28 @@ bevidst om, hvor det gyldne snit ligger, hvis han da forsøger at male
 efter dette.
 
 Vi afviser hypotese 6, fordi vi finder flere interessante regioner i
-midten af malerier, end i det gyldne snit. Vi mener derfor at der er
-mere belæg for at vise, at kunstnere opbygger malerier ud fra midten,
-end ud fra det gyldne snit.
+midten af malerier, end i det gyldne snit.  Vi mener derfor, at der er
+mere belæg for at sige, at kunstnere opbygger deres malerier ud fra
+midten end for at tale om speciel anvendelse af det gyldne snit.
 
 Hypotese 7 afvises af grafen i figur \ref{udvidet_year}, fordi det
 gennemsnitlige antal af interessante regioner mellem tidsperioder
 afviger med mere end $10 \%$. Det er interessant at se på antallet af
-regioner fundet i det gyldne omkring de historiske milestene. Det lader
-til, at brugen af det gyldne snit falder efter 1550. I tidperioden 1851
--- 1900 har vi kun to malerier, hvilket kan være forklaringen på det
-drastiske fald i antal fundne regioner.
+regioner fundet i det gyldne snit omkring de historiske milestene. Det
+lader til, at brugen af det gyldne snit falder efter 1550. I tidsperioden
+1851 -- 1900 har vi kun to malerier, hvilket kan være forklaringen på
+det drastiske fald i antal fundne regioner.
 
 Hypotese 8 bliver afvist, da det gennemsnitlige antal af fundne
 interessante regioner i det gyldne snit afviger for meget mellem
-nationaliteter. Vi mener, at dette indikerer at nogle nationer er mere
+skoler. Vi mener, at dette indikerer, at nogle skoler er mere
 fascineret af det gyldne snit end andre.
 
-Vi kan ikke afvise hypotese 9. Det betyder at antallet af interessante
+Vi kan ikke afvise hypotese 9. Det betyder, at antallet af interessante
 regioner fundet i det gyldne snit, ikke afviger med mere end $15 \%$ fra
 antallet fundet i snittet ved $\frac{2}{3}$. Dette kan tyde på, at
 snittet ved $\frac{2}{3}$ bruges som en approksimation til det gyldne
-snit. Dette passer også meget fint sammen med at hypotese 5 er blevet
+snit, hvilket også passer meget fint sammen med at hypotese 5 er blevet
 afvist.
 
 } % Eh eh eh. Nallerne væk!
