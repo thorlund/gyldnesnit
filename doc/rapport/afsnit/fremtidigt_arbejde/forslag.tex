@@ -3,34 +3,35 @@
 implementation og analyse. Nogle af forslagene kan dog overlappe.
 }
 
-\subsection{Generelle forbedringer}
+\subsection{Udtrækning af regioner}
 \begin{itemize}
-    \item \textbf{Køre analyse på et andet datasæt, som havde større diversitet}\\
-        Det kunne være interessant, at sammenligne resultater fra en
-        analyse på et andet datasæt. Dette vil give os en indikation på
-        om vores resultater fra det oprindelige datasæt kan bruges.
-        Ydermere, ville det være interessante, at sammensætte et datasæt
-        af malerier, hvor det er et faktum, at de er opbygget efter det
-        gyldne snit, med det formål at afprøve metoderne på dette.
-    \item \textbf{Implementere programmet i et andet sprog}\\
-        For en hurtigere analyse af malerier, kunne programmet
-        implementeres i $\textrm{C}^{++}$, som \emph{OpenCV} er
-        implementeret i. Programmet kunne med fordel parallelliseres.
-    \item \textbf{Distribueret analyse af billeder}\\
-        Med en distribueret løsning, til analyse af malerier, ville man,
-        ved at lade flere maskiner deles om arbejdet, kunne kunne få
-        hastigheden på analysen op.
-    \item \textbf{Webservice}\\
-        Webservice, hvor klienter kan sende resultater fra kørsel på
-        egen maskine. Kan udvides til at man selv organiserer billeders
-        metadata, således at man ikke er afhængig af et eksternt
-        repository.
-    \item \textbf{Mere avanceret database}\\
-        En mere avanceret database ville være at foretrække. Der har
-        været problemer med SQLite som låser dele af databasen når man
-        arbejder på den. Ligeledes er det værd at overveje en mere
-        sofistikeret pakke til databasekommunikation i Python. Det er
-        oplagt at bruge \emph{SQLAlchemy}\cite{SQLAlchemy}.
+     \item \textbf{Bedre udtrækning af regioner}\\
+        Det er oplagt at implementere bedre udtrækning af regioner.
+     \item \textbf{Automatisk udregning af tærskelværdier}\\
+        Med vores nuværende udtrækning af regioner, ville en
+        autogenerering af optimale tærskelværdier, for hvert billede,
+        være yderst gavnligt for udtrækningen af regioner.
+    \item \textbf{Fuld segmentering af billedet}\\
+        I stedet for kun at finde regioner i forhold til et snit i
+        billedet, kunne man trække alle regioner ud med det samme. Dette
+        vil gøre det lettere, at vurdere regionerne i billedet og man
+        vil således også let kunne afgøre om en region lå i flere snit.
+  \item \textbf{Egen, eller bedre, implementation af floodfill}\\
+        Den floodfill-metode, som er suppleret af \emph{OpenCV}, giver
+        kun areal og afgrænsende rektangel for en farvet region. Vi
+        ønsker imidlertid flere informationer om regionen, således at
+        det ikke var nødvendigt at approksimere regionen med brug af et
+        gitter.
+    \item \textbf{Mere sofistikeret valg af tilfældig farve}\\
+        Valg af tilfældig farve skal tilpasses således, at vi ikke
+        vælger en farve, som ligger indenfor den den tilladte afvigelse.
+        Vi vil også gerne undgå at vælge en farve som er i billedet i
+        forvejen.
+    \item \textbf{Mere målrettet udvælgelse af interessante regioner}\\
+        Det kunne være interessant, kun at klassificere regioner som
+        interessante, hvis de var et ansigt eller en person.
+    \item \textbf{Mere omfattende undersøgelse til fastsættelse af tærskelværdier}\\
+        Vente vente. Teste flere billeder. Simpelthen.
 \end{itemize}
 
 \subsection{Vurdering af regioner}
@@ -75,6 +76,37 @@ implementation og analyse. Nogle af forslagene kan dog overlappe.
         figur \ref{monalisa_fake}.
 \end{itemize}
 
+
+\subsection{Generelle forbedringer}
+\begin{itemize}
+    \item \textbf{Mere avanceret database}\\
+        En mere avanceret database ville være at foretrække. Der har
+        været problemer med SQLite som låser dele af databasen når man
+        arbejder på den. Ligeledes er det værd at overveje en mere
+        sofistikeret pakke til databasekommunikation i Python. Det er
+        oplagt at bruge \emph{SQLAlchemy}\cite{SQLAlchemy}.
+    \item \textbf{Køre analyse på et andet datasæt, som havde større diversitet}\\
+        Det kunne være interessant, at sammenligne resultater fra en
+        analyse på et andet datasæt. Dette vil give os en indikation på
+        om vores resultater fra det oprindelige datasæt kan bruges.
+        Ydermere, ville det være interessante, at sammensætte et datasæt
+        af malerier, hvor det er et faktum, at de er opbygget efter det
+        gyldne snit, med det formål at afprøve metoderne på dette.
+    \item \textbf{Implementere programmet i et andet sprog}\\
+        For en hurtigere analyse af malerier, kunne programmet
+        implementeres i $\textrm{C}^{++}$, som \emph{OpenCV} er
+        implementeret i. Programmet kunne med fordel parallelliseres.
+    \item \textbf{Distribueret analyse af billeder}\\
+        Med en distribueret løsning, til analyse af malerier, ville man,
+        ved at lade flere maskiner deles om arbejdet, kunne kunne få
+        hastigheden på analysen op.
+    \item \textbf{Webservice}\\
+        Webservice, hvor klienter kan sende resultater fra kørsel på
+        egen maskine. Kan udvides til at man selv organiserer billeders
+        metadata, således at man ikke er afhængig af et eksternt
+        repository.
+\end{itemize}
+
 \begin{figure}[!h]
     \centering
     \includegraphics[angle=0,width=0.4\textwidth]{afsnit/fremtidigt_arbejde/billeder/eye_of_god}
@@ -97,36 +129,6 @@ implementation og analyse. Nogle af forslagene kan dog overlappe.
     \label{monalisa_fake}
 \end{figure}
 
-\subsection{Udtrækning af regioner}
-\begin{itemize}
-    \item \textbf{Mere omfattende undersøgelse til fastsættelse af tærskelværdier}\\
-        Vente vente. Teste flere billeder. Simpelthen.
-    \item \textbf{Automatisk udregning af tærskelværdier}\\
-        Med vores nuværende udtrækning af regioner, ville en
-        autogenerering af optimale tærskelværdier, for hvert billede,
-        være yderst gavnligt for udtrækningen af regioner.
-    \item \textbf{Bedre udtrækning af regioner}\\
-        Det er oplagt at implementere bedre udtrækning af regioner.
-    \item \textbf{Egen, eller bedre, implementation af floodfill}\\
-        Den floodfill-metode, som er suppleret af \emph{OpenCV}, giver
-        kun areal og afgrænsende rektangel for en farvet region. Vi
-        ønsker imidlertid flere informationer om regionen, således at
-        det ikke var nødvendigt at approksimere regionen med brug af et
-        gitter.
-    \item \textbf{Mere sofistikeret valg af tilfældig farve}\\
-        Valg af tilfældig farve skal tilpasses således, at vi ikke
-        vælger en farve, som ligger indenfor den den tilladte afvigelse.
-        Vi vil også gerne undgå at vælge en farve som er i billedet i
-        forvejen.
-    \item \textbf{Mere målrettet udvælgelse af interessante regioner}\\
-        Det kunne være interessant, kun at klassificere regioner som
-        interessante, hvis de var et ansigt eller en person.
-    \item \textbf{Fuld segmentering af billedet}\\
-        I stedet for kun at finde regioner i forhold til et snit i
-        billedet, kunne man trække alle regioner ud med det samme. Dette
-        vil gøre det lettere, at vurdere regionerne i billedet og man
-        vil således også let kunne afgøre om en region lå i flere snit.
-\end{itemize}
 
 \subsection{Andre forslag inden for området}
 \begin{itemize}
