@@ -14,26 +14,25 @@ udvalgt for deres illustrative aspekt.
 \subsection{Størrelsen på margin}
 Vi regner marginbredde ud fra en procentstats, kaldet $\Delta$, af
 billedets $B$ og $H$. I defination \ref{margin_min} i afsnit \ref{margin_udregning} definerede vi den
-minimale størrelse på margin til $2.1 \%$. Så $\Delta$ skal være støre en
-$2.1 \%$. 
+minimale størrelse på margin til $2.1 \%$. Så $\Delta$ skal være større end $2.1 \%$. 
 
 Den minimale forskel mellem to snit, som vi regner med at skulle sammenligne, er
-det gyldne snit og $\frac{2}{3}$. I definition \ref{margin_max} er den
-maksimale bredde margin kan have $2.43\%$. For at de to snits margin ikke
-overlapper. Så $\Delta$ skal være mindre end $2.43\%$. 
+det gyldne snit og $\frac{2}{3}$. I definition \ref{margin_max} sættes den
+maksimale bredte af en margin til $2.43\%$. For at de to snits margin ikke
+overlapper, skal $\Delta$ være mindre end $2.43\%$. 
 
 Det vil sige at $\Delta \in [2.1, 2.43]$. Vi har valgt at
 sætte $\Delta = 2.4$, da vi derved kan tage højde for uforudsete
-usikkerhed.
+usikkerheder.
 
 \subsection{Afvigelsen af farver i kantdetektion}
 Formålet med kantdetektion er at indkredse regioner, som vi finder
-interessante. Kantdetektion finder dog også kanter inde i de regioner,
-hvilket er en negativ sideeffekt. Begge egenskaber kan ikke altid opfyldes, men vi kan komme så tæt
-på et krompromis mellem en perfekt kant rundt om region og ingen kanter
-inde i en region som muligt. Dette gøres ved at ændre to tærskelværdier
+interessante. Kantdetektion finder dog også kanter inde i regionerne,
+hvilket er en negativ sideeffekt. Vi skal nå et kompromis mellem 
+perfekte kanter rundt om regionerne og undgå for mange kanter inden i regionerne.
+. Dette gøres ved at ændre to tærskelværdier
 i kantdetektionen. Vi har valgt at dele billederne som vi observerer op
-i ni kategorier, se tabel \ref{thressholdsTabelKant}. Kategoriernr er en
+i ni kategorier, se tabel \ref{thressholdsTabelKant}. Kategorierne er en
 grov opdeling af billederne efter detaljer og farveintensitet, som
 bruges til at give en bedre indblik i billedets opbygning.
 
@@ -42,7 +41,7 @@ Vi har undersøgt på ni malerier og har fundet de tærskelværdier, vi mener
 passer bedst på malerierne. Vi vil illustrere, hvordan vi har fastsat
 tærskelværdierne, på maleriet \ref{kDetalier}.
 
-Maleriet er malet med mange farver og med mange detaljer. Vi ser først
+Maleriet er malet med mange farver og har mange detaljer. Vi ser først
 på tærskelværdierne $(0,0),(100,100).....(600,600),(700,700)$. I
 figurene \ref{allesammen1} og \ref{allesammen2} kan man se hvordan de
 forskellige tærskelværdier påvirker hvad kantdetektoren finde af kanter i
@@ -54,7 +53,7 @@ højest tærskelværdi, som ikke har mistet for mange kanterne rundt om
 regionerne endnu. Vi vurderer at billedet \ref{300-300} passer bedst på
 den beskrivelse, da regionerne som vingerne, hoved og kroppen stadig er
 omkranset af en kant. Så tærskelværdien $(300-300)$ er den værdi som får
-vores kantdetektor til at virke bedst, indtil vidre.
+vores kantdetektor til at virke bedst, indtil videre.
 
 Ved gradvist at øge en af tærskelværdierne lidt op af gangen, kan vi finde en
 bedre tærskelværdi for kantdetektoren. Vi opstiller igen en række
@@ -235,5 +234,5 @@ snebaggrunden, er fyldt næsten helt ud, uden at nogle af menneskerne er farvet 
     \label{thressholdsTabelFF}
 \end{table}
 
-Værdigerne i tabel fluktuere også en del, så vi tager
-gennemsnittet af værdierne uden fed og får en tærskelværdierne på (5,5).
+Værdierne i tabel fluktuere også en del, så vi tager
+gennemsnittet af værdierne, som ikke er markeret med fed og får en tærskelværdierne på (5,5).

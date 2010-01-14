@@ -41,7 +41,7 @@ billedet kan også undersøges. Vi indfører en ny betegnelse, kaldet
 \end{definition}
 
 Det vil sige, hvis en snitratio er på $0.2$ i et billede med $B =
-4000$, vil et snit befinde sig på pixel $4000 \cdot 0.2 = 800$ fra højre side af
+4000$ pixel, vil et snit befinde sig på pixel $4000 \cdot 0.2 = 800$ fra højre side af
 billedet. Endvidere vil det samme antal pixel, fra venstre side, også være et snit.
 Samme metode kan bruges på $H$ for at få to snit mere. Dette leder til
 den følgende definition.
@@ -141,9 +141,10 @@ antal pixels, ved at afrunde resultatet $2472.13595 \approx 2472$.
     \label{afrundning}
 \end{equation}
 
-Ifølge udregningen i \eqref{afrundning2} betyder det, at vi mister
+Ifølge udregningen i \eqref{afrundning} betyder det, at vi mister
 $0.13595$ pixels i præcision, hvilket svarer til en misvisning af
-punktet på $0.00339875\%$ i forholdt til $H$.
+punktet på $0.00339875\%$ i forholdt til $H$, hvilket er vist i
+\ref{afrunding2}.
 
 \begin{equation}
     0.13595/4000 \cdot 100 = 0.00339875
@@ -160,7 +161,7 @@ adderet til fejlsatsen ovenfor, og giver en samlet afvigelse på $2.1\%$.
 \subsection{Heltal ved udregning af margin}\label{margin_udregning}
 Når vi vil sammenligne regioner fra to snitratioer,  som
 ligger meget tæt på hinanden --- f. eks.  $\varPhi$ og $\frac{2}{3}$ ---
-er det vigtigt, at disse to snits margin ikke overlapper.
+er det vigtigt, at de to snits marginer ikke overlapper.
 
 Hvis margin overlapper, vil det betyde, at den samme region kan blive
 fundet i begge snit. Dette vil give et skævt billedet af regionerne i de
@@ -197,7 +198,7 @@ værdien som vist i udregning \ref{marginstoerlse}.
 \end{equation}
 
 Den maksimale værdi af $\Delta$, når vi sammenligner det gyldne snit og
-$\frac{2}{3}$, er altså $2.4316$. Det betyder også, at vi ikke kan
+$\frac{2}{3}$, er altså $2.4316\%$. Det betyder også, at vi ikke kan
 sammenligne snit, som ligger særlig meget tættere på hinanden, da
 $2.1\%$ er den minimale værdi for $\Delta$.
 
@@ -234,7 +235,7 @@ Ved 4000 pixels giver får vi
 	 \delta = \left\lfloor 4000(0.024316)\right\rfloor = 97
 \end{equation}
 
-Ovenstående er også er god nok, da $4000 \cdot 0.021 = 84$ pixels.
+Ovenstående er også er godt nok, idet $4000 \cdot 0.021 = 84$ pixels.
 
 \clearpage
 }
