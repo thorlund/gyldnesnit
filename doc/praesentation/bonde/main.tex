@@ -1,4 +1,4 @@
-\documentclass{beamer}
+\documentclass[xcolor=table]{beamer}
 
 % Get settings
 \usepackage{mybeamer}
@@ -122,7 +122,10 @@
 
     \end{block}
 
-    \visible<2>{ \centering\vspace{3em}\textbf{Passer det?}}
+    \visible<2>{
+        \centering\vspace{1em}
+        \textbf{Vi vil gerne undersøge om der fines noget \emph{interessant} i det gyldne snit i malerier.}
+    }
 
 \end{frame}
 
@@ -133,7 +136,8 @@
 
     \frametitle{Findes det gyldne snit i malerkunsten?}
 
-    Vi vil gerne undersøge om der fines noget \emph{interessant} i det gyldne snit i malerier.
+    At undersøge om der findes noget interessant i det gyldne snit,
+    rejser nogle vigtige spørgsmål.
 
     \hspace{8em}
 
@@ -168,13 +172,28 @@
 
 \end{frame}
 
+\begin{frame}
+
+    \frametitle{Hvad er interessant her?}
+
+    \begin{center}
+        \includegraphics[width=1.00\textwidth]{billeder/10calumn.jpg}
+    \end{center}
+
+\end{frame}
+
 \subsection*{}
 \begin{frame}
 
     \frametitle{Interessante regioner}
 
-    Vi har meget forskelige malerier og det er meget svært at fastsætte noget globalt mål for
+    Vi har meget forskelige malerier, og det er meget svært, at fastsætte noget globalt mål, for
     hvad der er interessant i disse.
+
+    \begin{definition}
+        En \textbf{region} er en sammenhængende, ensfarvet gruppe pixels i
+        et billede.
+    \end{definition}
 
     \begin{definition}
         For at en region kan betegnes som \textbf{interessant}, skal den
@@ -191,20 +210,20 @@
 \subsection*{}
 \begin{frame}
 
-    \frametitle{Interessante regioner}
+    \frametitle{Opdeling efter det gyldne snit}
 
-    Vi har meget forskelige malerier og det er meget svært at fastsætte noget globalt mål for
-    hvad der er interessant i disse.
+    \includegraphics[width=\textwidth]{billeder/scan_direction}
 
-    \begin{definition}
-        For at en region kan betegnes som \textbf{interessant}, skal den
-        \begin{itemize}
-            \item have et areal større end en tærskelværdi, der sættes i
-                forhold til billedets størrelse
-            \item have en masse større end en tærskelværdi, der ligeledes,
-                sættes i forhold til billedets størrelse,
-        \end{itemize}
-    \end{definition}
+\end{frame}
+
+\subsection*{}
+\begin{frame}
+
+    \frametitle{Udtrækning af regioner}
+
+    \only<1>{\includegraphics[width=\textwidth]{billeder/scan_direction_down}}
+    \only<2>{\includegraphics[width=\textwidth]{billeder/scan_direction_right}}
+    \only<3>{\includegraphics[width=\textwidth]{billeder/scan_direction_right_margin}}
 
 \end{frame}
 
@@ -213,16 +232,16 @@
 
     \frametitle{Objekter liggende i det gyldne snit}
 
-    \begin{columns}[t]
-        \column{0.48\textwidth}
-        \begin{exampleblock}{Positiv}
-            \includegraphics[width=0.95\textwidth]{pnaiv_nudvidet}
-        \end{exampleblock}
-        \column{0.48\textwidth}
-        \begin{exampleblock}{Negativ}
-            \includegraphics[width=0.95\textwidth]{pudvidet_nnaiv}
-        \end{exampleblock}
-    \end{columns}
+    To forskellige måder, at betragte en region liggende i et snit på:
+
+    \begin{center}
+        \rowcolors[]{1}{blue!20}{blue!10}
+        \begin{tabular}{l|cc}
+            & Positiv & Negativ\\\hline
+            Naiv    & \includegraphics[width=0.18\textwidth]{pnaiv_nudvidet} & \includegraphics[width=0.18\textwidth]{pudvidet_nnaiv}\\
+            Udvidet & \includegraphics[width=0.18\textwidth]{pudvidet_nnaiv} & \includegraphics[width=0.18\textwidth]{pnaiv_nudvidet}
+        \end{tabular}
+    \end{center}
 
 \end{frame}
 
@@ -238,6 +257,12 @@
         \item \emph{Calumny of Apelles} -- Sandro Botticelli -- 1494--95
     \end{itemize}
 
+
+\end{frame}
+
+\begin{frame}
+
+    \frametitle{Tak}
 
 \end{frame}
 
