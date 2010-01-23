@@ -21,9 +21,9 @@
     \frametitle{\ }
 
     \begin{itemize}
-        \item Kort introduktion til det gyldne snit
-        \item Kan vi finde brug af det gyldne snit i malerkunsten?
-        \item Resultater
+        \item Kort introduktion til det gyldne snit.
+        \item To metoder til at afgøre brug af det gyldne snit i malerier.
+        \item Resultater fra stor analyse.
     \end{itemize}
 
 \end{frame}
@@ -37,11 +37,12 @@
 
     \frametitle{Division in Extreme and Mean Ratios}
 
+    \only<1>{
     \begin{quote}
         ``A straight line is said to have been cut in extreme
         and mean ratio when, as the whole line is to the greater
         segment, so is the greater to the less.'' - Euklid
-    \end{quote}
+    \end{quote}}
 
     \begin{figure}[!h]
         \centering
@@ -62,6 +63,16 @@
             \put(3, 0){\line(1, 0){233}}
         \end{picture}
     \end{figure}
+
+    \only<2>{
+    \[
+        \varphi = \frac{A\ C}{C\ B} = \frac{A\ B}{A\ C}
+    \]
+    \[
+        \varphi = \frac{\varphi + 1}{\varphi}
+    \]
+    }
+
 
     \begin{block}{Historie}
 
@@ -104,6 +115,8 @@
 
 \end{frame}
 
+% 3
+
 \subsection*{}
 \begin{frame}
 
@@ -124,13 +137,14 @@
 
     \visible<2>{
         \centering\vspace{1em}
-        \textbf{Vi vil gerne undersøge om der fines noget \emph{interessant} i det gyldne snit i malerier.}
+        \textbf{Vi vil gerne undersøge, om der findes noget \emph{interessant} i det gyldne snit i malerier.}
     }
 
 \end{frame}
 
 \section{Det gyldne snit i malerkunsten}
 
+% 4
 \subsection*{}
 \begin{frame}
 
@@ -245,7 +259,48 @@
 
 \end{frame}
 
-\section{Malerier}
+\subsection*{}
+\begin{frame}
+
+    \frametitle{Repræsentation af regioner}
+
+    To måder at repræsentere regioner på.
+
+    \begin{columns}[t]
+        \column{0.4\textwidth}
+        \begin{exampleblock}{Begrænsende rektangel}
+            \centering
+            \includegraphics[width=0.6\textwidth]{billeder/blob_bbox}
+
+            Bruges ved naiv bedømmelse
+        \end{exampleblock}
+
+        \column{0.4\textwidth}
+        \begin{exampleblock}{Gitter}
+            \centering
+            \includegraphics[width=0.6\textwidth]{billeder/blob_grid}
+
+            Bruges ved udvidet bedømmelse
+        \end{exampleblock}
+    \end{columns}
+
+\end{frame}
+
+\section{Analyse på datasæt}
+\subsection*{}
+\begin{frame}
+
+    \frametitle{Datasæt}
+
+    \begin{itemize}
+        \item Primært renæssancemalerier af italienske kunstnere.
+        \item Malerier kan være beskåret.
+        \item Opdelte malerier.
+    \end{itemize}
+
+\end{frame}
+
+\section{Atfermath}
 \subsection*{}
 \begin{frame}
 
