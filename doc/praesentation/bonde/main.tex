@@ -86,35 +86,6 @@
 
 \end{frame}
 
-% 2
-
-\subsection*{}
-\begin{frame}
-
-    \frametitle{Matematisk definition}
-
-    Fra Euklids beskrivelse får vi
-
-    \[
-        \varphi = \frac{A\ C}{C\ B} = \frac{A\ B}{A\ C}
-    \]
-    \[
-        \varphi = \frac{\varphi + 1}{\varphi}
-    \]
-    hvilket kan omskrives til en andengradsligning. Løsningen er det vi kalder det gyldne snit.
-
-    \[
-        \varphi^2 - \varphi -1 = 0
-    \]
-    \[
-        \varPhi = \frac{\sqrt{5} - 1}{2}, \varphi = \frac{\sqrt{5} + 1}{2}
-    \]
-    \[
-        \varPhi = 0,6180~3398~\ldots, \varphi = 1,6180~3398~\ldots
-    \]
-
-\end{frame}
-
 % 3
 
 \subsection*{}
@@ -233,17 +204,6 @@
 \subsection*{}
 \begin{frame}
 
-    \frametitle{Udtrækning af regioner}
-
-    \only<1>{\includegraphics[width=\textwidth]{billeder/scan_direction_down}}
-    \only<2>{\includegraphics[width=\textwidth]{billeder/scan_direction_right}}
-    \only<3>{\includegraphics[width=\textwidth]{billeder/scan_direction_right_margin}}
-
-\end{frame}
-
-\subsection*{}
-\begin{frame}
-
     \frametitle{Objekter liggende i det gyldne snit}
 
     To forskellige måder, at betragte en region liggende i et snit på:
@@ -328,11 +288,20 @@
 
     \frametitle{Resultater fra analyser}
 
-    \begin{itemize}
-        \item 87,02 -- 91,43 \% af malerierne har mindst én region i det gyldne snit.
-        \item Antallet af regioner i hvert af de fire gyldne snit, afviger med 11,8 og 23,2 \% for hhv. naiv og udvidet kørsel.
-        \item Kun 4 \% af malerierne har et lærred opbygget efter det gyldne rektangel.
-    \end{itemize}
+    \begin{block}{Resultat for hypotese 1}
+        87,02 -- 91,43 \% af malerierne har mindst én region i det gyldne snit.
+        \alert{Ikke afvist.}
+    \end{block}
+
+    \begin{block}{Resultat for hypotese 2}
+        Antallet af regioner i hvert af de fire gyldne snit, afviger med 11,8 og 23,2 \% for hhv. naiv og udvidet kørsel.
+        \alert{Afvist.}
+    \end{block}
+
+    \begin{block}{Resultat for hypotese 3}
+        Kun 4 \% af malerierne har et lærred opbygget efter det gyldne rektangel.
+        \alert{Afvist.}
+    \end{block}
 
 \end{frame}
 
@@ -342,6 +311,37 @@
     \frametitle{Troværdige resultater}
 
     Kan vi stole på resultaterne fra den naive analyse?
+
+    \begin{columns}[t]
+        \column{0.50\textwidth}
+            \centering
+            \includegraphics[width=0.98\textwidth]{billeder/totalregions_var}
+
+            Fordeling af regioner med duplikater
+
+        \column{0.50\textwidth}
+            \centering
+            \includegraphics[width=0.98\textwidth]{billeder/totalregions_var_ny}
+
+            Fordeling af regioner uden duplikater
+    \end{columns}
+
+\end{frame}
+
+\subsection*{}
+\begin{frame}
+
+    \frametitle{Nye resultater}
+
+    \begin{block}{Nyt resultat for hypotese 1}
+        91,51 \% af malerierne har mindst én region i det gyldne snit.\\
+        \alert{Ikke afvist.}
+    \end{block}
+
+    \begin{block}{Nyt resultat for hypotese 2}
+        Antallet af regioner i hvert af de fire gyldne snit, afviger med \\12,76 \%.
+        \alert{Afvist.}
+    \end{block}
 
 \end{frame}
 
@@ -357,6 +357,17 @@
         \item \emph{Calumny of Apelles} -- Sandro Botticelli -- 1494--95
     \end{itemize}
 
+
+\end{frame}
+
+\subsection*{}
+\begin{frame}
+
+    \frametitle{Udtrækning af regioner}
+
+    \only<1>{\includegraphics[width=\textwidth]{billeder/scan_direction_down}}
+    \only<2>{\includegraphics[width=\textwidth]{billeder/scan_direction_right}}
+    \only<3>{\includegraphics[width=\textwidth]{billeder/scan_direction_right_margin}}
 
 \end{frame}
 
