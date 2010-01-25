@@ -252,29 +252,6 @@
 \subsection*{}
 \begin{frame}
 
-    \frametitle{Hypoteser}
-
-    \begin{block}{Hypotese 1}
-        Mere end \alert{$50\%$} af de analyserede malerier, har én eller flere
-        interessante regioner i det gyldne snit.
-    \end{block}
-
-    \begin{block}{Hypotese 2}
-        Antallet af interessante regioner, fundet i hvert af de fire snit
-        tilknyttet snitratioen $\varPhi$, afviger ikke mere end \alert{$10\%$} fra
-        hinanden.
-    \end{block}
-
-    \begin{block}{Hypotese 3}
-        Mere end \alert{en tredjedel} malerierne har et lærred, hvis
-        dimensioner er lig $\varphi\pm2,4\%$.
-    \end{block}
-
-\end{frame}
-
-\subsection*{}
-\begin{frame}
-
     \frametitle{Kørsler -- 40 snit undersøges}
 
     \begin{block}{Naiv kørsel}
@@ -291,6 +268,40 @@
             \item Kørt på 608 malerier.
             \item \alert{524 brugbare resultater.}
         \end{itemize}
+    \end{block}
+
+\end{frame}
+
+\subsection*{}
+\begin{frame}
+
+    \frametitle{40 snit}
+
+    \begin{center}
+        \includegraphics[width=1.00\textwidth]{billeder/koersel_snit}
+    \end{center}
+
+\end{frame}
+
+\subsection*{}
+\begin{frame}
+
+    \frametitle{Hypoteser}
+
+    \begin{block}{Hypotese 1}
+        Mere end \alert{$50\%$} af de analyserede malerier, har én eller flere
+        interessante regioner i det gyldne snit.
+    \end{block}
+
+    \begin{block}{Hypotese 2}
+        Antallet af interessante regioner, fundet i hvert af de fire snit
+        tilknyttet snitratioen $\varPhi$, afviger ikke mere end \alert{$10\%$} fra
+        hinanden.
+    \end{block}
+
+    \begin{block}{Hypotese 3}
+        Mere end \alert{en tredjedel} malerierne har et lærred, hvis
+        dimensioner er lig $\varphi\pm2,4\%$.
     \end{block}
 
 \end{frame}
@@ -352,6 +363,7 @@
 
 \end{frame}
 
+\section{Afslutning}
 \subsection*{}
 \begin{frame}
 
@@ -376,13 +388,13 @@
 
 \end{frame}
 
-\section{Spørgsmål}
 \subsection*{}
 \begin{frame}
 
     \only<1>{\frametitle{Tak}
 
     Spørgsmål
+
     }
 
     \only<2-4>{\frametitle{Udtrækning af regioner}}
@@ -401,8 +413,45 @@
     \begin{itemize}
         \item Primært renæssancemalerier af italienske kunstnere.
         \item Malerier kan være forkert beskåret eller opdelt.
-        \item Undersøger 40 snit i billedet.
     \end{itemize}
+    }
+    \only<7>{
+    \frametitle{Regioner i de gyldne snit}
+
+    \rowcolors[]{1}{gray!20}{gray!10}
+    \begin{columns}[c]
+        \column{0.5\textwidth}
+        \begin{exampleblock}{Naiv \alert{med duplikater}}
+            \begin{tabular}{r@{\ \ }p{7em}r}
+                & Regioner i $GS$ 0             &  $42.884$ \\
+                $+$ & Regioner i $GS$ 1             &  $44.042$ \\
+                $+$ & Regioner i \alert{$GS$ 2}             &  \alert{$46.432$} \\
+                $+$ & Regioner i $GS$ 3             &  $41.547$ \\\hline
+                & Alle $GS$       & $168.650$
+            \end{tabular}
+        \end{exampleblock}
+        \column{0.5\textwidth}
+        \begin{exampleblock}{Naiv uden duplikater}
+            \begin{tabular}{r@{\ \ }p{7em}r}
+                & Regioner i $GS$ 0             &  $20.946$ \\
+                $+$ & Regioner i $GS$ 1             &  $21.576$ \\
+                $+$ & Regioner i \alert{$GS$ 2}             &  \alert{$23.357$} \\
+                $+$ & Regioner i $GS$ 3             &  $20.713$ \\\hline
+                & Alle $GS$       & $86.592$
+            \end{tabular}
+        \end{exampleblock}
+    \end{columns}
+    \begin{exampleblock}{Udvidet (ingen duplikater)}
+        \centering
+        \rowcolors[]{1}{gray!20}{gray!10}
+        \begin{tabular}{r@{\ \ }p{12em}r}
+            & Regioner i $GS$ 0         &  $405$ \\
+            $+$ & Regioner i $GS$ 1         &  $421$ \\
+            $+$ & Regioner i \alert{$GS$ 2}         &  \alert{$499$} \\
+            $+$ & Regioner i $GS$ 3         &  $492$ \\\hline
+            & Alle $GS$   & $1.817$
+        \end{tabular}
+    \end{exampleblock}
     }
 
 \end{frame}
