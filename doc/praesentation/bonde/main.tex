@@ -15,34 +15,12 @@
     \titlepage
 \end{frame}
 
-\section[Oversigt]{}
-\begin{frame}
-
-    \frametitle{\ }
-
-    \begin{itemize}
-        \item Kort introduktion til det gyldne snit.
-        \item To metoder til at afgøre brug af det gyldne snit i malerier.
-        \item Resultater fra stor analyse.
-    \end{itemize}
-
-\end{frame}
-
-% Begin actual slides
-% 1
 \section{Det gyldne snit}
 \subsection*{}
 
 \begin{frame}
 
     \frametitle{Division in Extreme and Mean Ratios}
-
-    \only<1>{
-    \begin{quote}
-        ``A straight line is said to have been cut in extreme
-        and mean ratio when, as the whole line is to the greater
-        segment, so is the greater to the less.'' - Euklid
-    \end{quote}}
 
     \begin{figure}[!h]
         \centering
@@ -64,15 +42,12 @@
         \end{picture}
     \end{figure}
 
-    \only<2>{
     \[
         \varphi = \frac{A\ C}{C\ B} = \frac{A\ B}{A\ C}
     \]
     \[
         \varphi = \frac{\varphi + 1}{\varphi}
     \]
-    }
-
 
     \begin{block}{Historie}
 
@@ -93,7 +68,7 @@
 
     \frametitle{Hvor findes det gyldne snit?}
 
-    \begin{block}{Hypoteser}
+    \begin{block}{Generelle hypoteser}
 
         Det gyldne snit er:
 
@@ -113,9 +88,9 @@
 
 \end{frame}
 
+
 \section{Det gyldne snit i malerkunsten}
 
-% 4
 \subsection*{}
 \begin{frame}
 
@@ -129,8 +104,8 @@
     \begin{block}{Spørgsmål}
 
         \begin{itemize}
-            \item Hvad er \emph{interessant} i maleriet?
             \item Hvor \emph{er} det gyldne snit i et maleri?
+            \item Hvad er \emph{interessant} i maleriet?
             \item Hvornår \emph{findes} noget i det gyldne snit?
         \end{itemize}
 
@@ -141,47 +116,39 @@
 \subsection*{}
 \begin{frame}
 
-    \frametitle{Interessante regioner}
+    \frametitle{Det gyldne snit i et maleri}
 
-    \begin{block}{Hvad er en interessant region?}
-        \begin{itemize}
-            \item Meget svært at afgøre generelt.
-            \item Afhænger af konteksten.
-            \item Subjektivt.
-        \end{itemize}
-    \end{block}
-
-    \begin{center}
-        \includegraphics[width=0.67\textwidth]{billeder/10calumn.jpg}
-    \end{center}
-
-\end{frame}
-
-\begin{frame}
-
-    \frametitle{Hvad er interessant her?}
-
+    \only<1>{
     \begin{center}
         \includegraphics[width=1.00\textwidth]{billeder/10calumn.jpg}
     \end{center}
+    }
+    \only<2>{
+    \begin{center}
+        \includegraphics[width=1.00\textwidth]{billeder/10calumn_cut.jpg}
+    \end{center}
+    }
 
 \end{frame}
 
 \subsection*{}
 \begin{frame}
 
-    \frametitle{Interessante regioner}
+    \frametitle{Hvad er interessant?}
 
-    Vi har meget forskelige malerier, og det er meget svært, at fastsætte noget globalt mål, for
-    hvad der er interessant i disse.
-
+    \only<1>{
+    \begin{center}
+        \includegraphics[width=1.00\textwidth]{billeder/10calumn.jpg}
+    \end{center}
+    }
+    \only<2>{
     \begin{definition}
-        En \textbf{region} er en sammenhængende, ensfarvet gruppe pixels i
+        En \textbf{\alert{region}} er en sammenhængende, ensfarvet gruppe pixels i
         et billede.
     \end{definition}
 
     \begin{definition}
-        For at en region kan betegnes som \textbf{interessant}, skal den
+        For at en region kan betegnes som \textbf{\alert{interessant}}, skal den
         \begin{itemize}
             \item have et areal større end en tærskelværdi, der sættes i
                 forhold til billedets størrelse
@@ -189,27 +156,24 @@
                 sættes i forhold til billedets størrelse,
         \end{itemize}
     \end{definition}
+    }
+    \only<3>{
+    \begin{center}
+        \includegraphics[width=1.00\textwidth]{billeder/10calumn_blobs}
+    \end{center}
+    }
 
 \end{frame}
 
 \subsection*{}
 \begin{frame}
 
-    \frametitle{Opdeling efter det gyldne snit}
-
-    \includegraphics[width=\textwidth]{billeder/scan_direction}
-
-\end{frame}
-
-\subsection*{}
-\begin{frame}
-
-    \frametitle{Objekter liggende i det gyldne snit}
+    \frametitle{Regioner i det gyldne snit}
 
     To forskellige måder, at betragte en region liggende i et snit på:
 
     \begin{center}
-        \rowcolors[]{1}{blue!20}{blue!10}
+        \rowcolors[]{1}{gray!20}{gray!10}
         \begin{tabular}{l|cc}
             & Positiv & Negativ\\\hline
             Naiv    & \includegraphics[width=0.18\textwidth]{billeder/pnaiv_nudvidet} & \includegraphics[width=0.18\textwidth]{billeder/pudvidet_nnaiv}\\
@@ -246,39 +210,87 @@
 
 \end{frame}
 
-\section{Analyse på datasæt}
 \subsection*{}
 \begin{frame}
 
-    \frametitle{Datasæt}
+    \frametitle{Bedømmelse i praksis}
 
-    \begin{itemize}
-        \item Primært renæssancemalerier af italienske kunstnere.
-        \item Malerier kan være beskåret.
-        \item Opdelte malerier.
-    \end{itemize}
+    \only<1>{
+    Resultat fra de to metoder.
+
+    \begin{columns}[t]
+        \column{0.5\textwidth}
+        \begin{exampleblock}{Naiv}
+            \centering
+            \includegraphics[width=1.0\textwidth]{billeder/10calumn_box_naive}
+        \end{exampleblock}
+
+        \column{0.5\textwidth}
+        \begin{exampleblock}{Udvidet}
+            \centering
+            \includegraphics[width=1.0\textwidth]{billeder/10calumn_box_expanded}
+        \end{exampleblock}
+    \end{columns}
+    }
+
+    \only<2>{
+        \begin{exampleblock}{Naiv}
+            \centering
+            \includegraphics[width=0.85\textwidth]{billeder/10calumn_box_naive}
+        \end{exampleblock}
+    }
+    \only<3>{
+        \begin{exampleblock}{Udvidet}
+            \centering
+            \includegraphics[width=0.85\textwidth]{billeder/10calumn_box_expanded}
+        \end{exampleblock}
+    }
 
 \end{frame}
 
+\section{Analyse på datasæt}
 \subsection*{}
 \begin{frame}
 
     \frametitle{Hypoteser}
 
     \begin{block}{Hypotese 1}
-        Mere end $50\%$ af de analyserede malerier, har én eller flere
+        Mere end \alert{$50\%$} af de analyserede malerier, har én eller flere
         interessante regioner i det gyldne snit.
     \end{block}
 
     \begin{block}{Hypotese 2}
         Antallet af interessante regioner, fundet i hvert af de fire snit
-        tilknyttet snitratioen $\varPhi$, afviger ikke mere end $10\%$ fra
+        tilknyttet snitratioen $\varPhi$, afviger ikke mere end \alert{$10\%$} fra
         hinanden.
     \end{block}
 
     \begin{block}{Hypotese 3}
-        Mere end en tredjedel malerierne har et lærred, hvis
+        Mere end \alert{en tredjedel} malerierne har et lærred, hvis
         dimensioner er lig $\varphi\pm2,4\%$.
+    \end{block}
+
+\end{frame}
+
+\subsection*{}
+\begin{frame}
+
+    \frametitle{Kørsler -- 40 snit undersøges}
+
+    \begin{block}{Naiv kørsel}
+        \begin{itemize}
+            \item Kørt på 17.364 malerier.
+            \item 14.375 brugbare resultater.
+            \item \alert{Har duplikater af regioner.}
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{Udvidet kørsel}
+        \begin{itemize}
+            \item Ingen duplikater.
+            \item Kørt på 608 malerier.
+            \item \alert{524 brugbare resultater.}
+        \end{itemize}
     \end{block}
 
 \end{frame}
@@ -288,19 +300,16 @@
 
     \frametitle{Resultater fra analyser}
 
-    \begin{block}{Resultat for hypotese 1}
+    \begin{block}{Resultat for hypotese 1\hspace{14em}\pos{Ikke afvist}}
         87,02 -- 91,43 \% af malerierne har mindst én region i det gyldne snit.
-        \alert{Ikke afvist.}
     \end{block}
 
-    \begin{block}{Resultat for hypotese 2}
+    \begin{block}{Resultat for hypotese 2\hspace{16em}\neg{Afvist}}
         Antallet af regioner i hvert af de fire gyldne snit, afviger med 11,8 og 23,2 \% for hhv. naiv og udvidet kørsel.
-        \alert{Afvist.}
     \end{block}
 
-    \begin{block}{Resultat for hypotese 3}
+    \begin{block}{Resultat for hypotese 3\hspace{16em}\neg{Afvist}}
         Kun 4 \% af malerierne har et lærred opbygget efter det gyldne rektangel.
-        \alert{Afvist.}
     \end{block}
 
 \end{frame}
@@ -333,47 +342,68 @@
 
     \frametitle{Nye resultater}
 
-    \begin{block}{Nyt resultat for hypotese 1}
+    \begin{block}{Nyt resultat for hypotese 1\hspace{12em}\pos{Ikke afvist}}
         91,51 \% af malerierne har mindst én region i det gyldne snit.\\
-        \alert{Ikke afvist.}
     \end{block}
 
-    \begin{block}{Nyt resultat for hypotese 2}
+    \begin{block}{Nyt resultat for hypotese 2\hspace{14em}\neg{Afvist}}
         Antallet af regioner i hvert af de fire gyldne snit, afviger med \\12,76 \%.
-        \alert{Afvist.}
     \end{block}
 
 \end{frame}
 
-\section{Atfermath}
 \subsection*{}
 \begin{frame}
 
-    \frametitle{Malerier}
+    \frametitle{Fortolkning}
 
-    Malerier, sorteret efter rækkefølge i præsentationen
+    \begin{block}{Hvad har vi set?}
+        \begin{itemize}
+            \item Kunstnere foretrækker ikke at bruge et lærred med dimensioner som det gyldne rektangel.
+            \item Det gyldne snit bruges ikke mere end andre snit. Specielt findes flere regioner i midten af maleriet.
+            \item Antallet af regioner i det gyldne snit afhænger af kultur og stilperiode.
+            \item Nogle gyldne snit foretrækkes frem for andre.
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{Mulige forbedringer}
+        \begin{itemize}
+            \item Bedre udtrækning af regioner.
+            \item Mere målrettet definition på interessante regioner.
+            \item Omkostning for regioner.
+        \end{itemize}
+    \end{block}
+
+\end{frame}
+
+\section{Spørgsmål}
+\subsection*{}
+\begin{frame}
+
+    \only<1>{\frametitle{Tak}
+
+    Spørgsmål
+    }
+
+    \only<2-4>{\frametitle{Udtrækning af regioner}}
+
+    \only<2>{\includegraphics[width=\textwidth]{billeder/scan_direction_down}}
+    \only<3>{\includegraphics[width=\textwidth]{billeder/scan_direction_right}}
+    \only<4>{\includegraphics[width=\textwidth]{billeder/scan_direction_right_margin}}
+    \only<5>{
+        \setlength\fboxsep{0pt}
+        \setlength\fboxrule{0.5pt}
+        \fbox{\includegraphics[width=\textwidth]{billeder/topographic_times}}
+    }
+    \only<6>{
+    \frametitle{Datasæt}
 
     \begin{itemize}
-        \item \emph{Calumny of Apelles} -- Sandro Botticelli -- 1494--95
+        \item Primært renæssancemalerier af italienske kunstnere.
+        \item Malerier kan være forkert beskåret eller opdelt.
+        \item Undersøger 40 snit i billedet.
     \end{itemize}
-
-
-\end{frame}
-
-\subsection*{}
-\begin{frame}
-
-    \frametitle{Udtrækning af regioner}
-
-    \only<1>{\includegraphics[width=\textwidth]{billeder/scan_direction_down}}
-    \only<2>{\includegraphics[width=\textwidth]{billeder/scan_direction_right}}
-    \only<3>{\includegraphics[width=\textwidth]{billeder/scan_direction_right_margin}}
-
-\end{frame}
-
-\begin{frame}
-
-    \frametitle{Tak}
+    }
 
 \end{frame}
 
