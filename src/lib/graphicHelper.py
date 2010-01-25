@@ -17,6 +17,7 @@ from src.settings import Settings
 
 # Import available methods
 import naiveMethod
+import expandedMethod
 import src.lib.marginCalculator as marginCalculator
 
 ### Methods for showing images
@@ -72,6 +73,8 @@ def blobResult(original, settings, cutNo):
 	method = settings.method
 	if method == 'naive':
 		return naiveMethod.getBlobImage(original, settings, cutNo)
+	elif method == "expanded":
+		return expandedMethod.getBlobImage(original, settings, cutNo)
 	else:
 		raise StandardError("No method named %s" % method)
 
@@ -86,6 +89,8 @@ def boundingBoxResult(original, settings, cutNo, thickness=1, color=None):
 	method = settings.method
 	if method == 'naive':
 		return naiveMethod.getBoundingBoxImage(original, settings, cutNo, thickness, color)
+	elif method == "expanded":
+		return expandedMethod.getBoundingBoxImage(original, settings, cutNo, thickness, color)
 	else:
 		raise StandardError("No method named %s" % method)
 
@@ -104,14 +109,15 @@ def main():
 	filename = sys.argv[1]
 	image = highgui.cvLoadImage (filename)
 
-	#cutRatios = [lib.PHI]
-	cutRatios = [0.75]
+	cutRatios = [lib.PHI]
+	#cutRatios = [0.618]
 	settings = Settings(cutRatios)
 	image = highgui.cvLoadImage (filename)
 	thickness = 4
 	settings.setMarginPercentage(0.025)
+	settings.setMethod(sys.argv[3])
 	cut = int(sys.argv[2])
-	winname = sys.argv[3]+".png"
+	winname = sys.argv[1]
 	#settings.setThresholds(100,150)
 	# Set the color for the boxes
 	#color = lib.COL_BLACK
@@ -136,8 +142,8 @@ def main():
 	else:
 		cv.cvLine(boxxImg, cv.cvPoint(cutt.getPoints()[0].x, cutPixel), cv.cvPoint(cutt.getPoints()[1].x, cutPixel), lib.COL_RED)
 	# Save images
-	highgui.cvSaveImage('floodfillbilledet.png', blobImg)
-	highgui.cvSaveImage(winname, boxxImg)
+	highgui.cvSaveImage('floodfillbilledet.png', boxxImg)
+#	highgui.cvSaveImage(winname, boxxImg)
 
 	# Show images
 	compareImages(blobImg, boxxImg, "blob", winname)
