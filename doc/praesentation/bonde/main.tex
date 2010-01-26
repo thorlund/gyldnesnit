@@ -49,7 +49,7 @@
         \varphi = \frac{\varphi + 1}{\varphi}
     \]
 
-    \begin{block}{Historie}
+    \begin{block}{Milestene}
 
         \begin{itemize}
             \item Kendt af Euklid ca. 300 f. Kr. som \emph{DEMR}.
@@ -175,11 +175,13 @@
     \begin{center}
         \rowcolors[]{1}{gray!20}{gray!10}
         \begin{tabular}{l|cc}
-            & Positiv & Negativ\\\hline
+            & \pos{Positiv} & \neg{Negativ}\\\hline
             Naiv    & \includegraphics[width=0.18\textwidth]{billeder/pnaiv_nudvidet} & \includegraphics[width=0.18\textwidth]{billeder/pudvidet_nnaiv}\\
             Udvidet & \includegraphics[width=0.18\textwidth]{billeder/pudvidet_nnaiv} & \includegraphics[width=0.18\textwidth]{billeder/pnaiv_nudvidet}
         \end{tabular}
     \end{center}
+
+    Binær klassifikation: En interessant region enten {\pos{ligger}} eller {\neg{ligger ikke}} i snittet.
 
 \end{frame}
 
@@ -275,17 +277,6 @@
 \subsection*{}
 \begin{frame}
 
-    \frametitle{40 snit}
-
-    \begin{center}
-        \includegraphics[width=1.00\textwidth]{billeder/koersel_snit}
-    \end{center}
-
-\end{frame}
-
-\subsection*{}
-\begin{frame}
-
     \frametitle{Hypoteser}
 
     \begin{block}{Hypotese 1}
@@ -328,22 +319,25 @@
 \subsection*{}
 \begin{frame}
 
-    \frametitle{Troværdige resultater}
+    \frametitle{Troværdige resultater?}
 
     Kan vi stole på resultaterne fra den naive analyse?
 
     \begin{columns}[t]
         \column{0.50\textwidth}
+        \begin{block}{\neg{Bug}}
             \centering
             \includegraphics[width=0.98\textwidth]{billeder/totalregions_var}
+        \end{block}
 
-            Fordeling af regioner med duplikater
 
         \column{0.50\textwidth}
+        \centering
+        \begin{block}{\pos{Fix}}
             \centering
             \includegraphics[width=0.98\textwidth]{billeder/totalregions_var_ny}
+        \end{block}
 
-            Fordeling af regioner uden duplikater
     \end{columns}
 
 \end{frame}
@@ -360,6 +354,8 @@
     \begin{block}{Nyt resultat for hypotese 2\hspace{14em}\neg{Afvist}}
         Antallet af regioner i hvert af de fire gyldne snit, afviger med \\12,76 \%.
     \end{block}
+
+    De nye resultater ændrer ikke på vores konklusioner.
 
 \end{frame}
 
@@ -423,7 +419,7 @@
         \column{0.5\textwidth}
         \begin{exampleblock}{Naiv \alert{med duplikater}}
             \begin{tabular}{r@{\ \ }p{7em}r}
-                & Regioner i $GS$ 0             &  $42.884$ \\
+                    & Regioner i $GS$ 0             &  $42.884$ \\
                 $+$ & Regioner i $GS$ 1             &  $44.042$ \\
                 $+$ & Regioner i \alert{$GS$ 2}             &  \alert{$46.432$} \\
                 $+$ & Regioner i $GS$ 3             &  $41.547$ \\\hline
@@ -433,7 +429,7 @@
         \column{0.5\textwidth}
         \begin{exampleblock}{Naiv uden duplikater}
             \begin{tabular}{r@{\ \ }p{7em}r}
-                & Regioner i $GS$ 0             &  $20.946$ \\
+                    & Regioner i $GS$ 0             &  $20.946$ \\
                 $+$ & Regioner i $GS$ 1             &  $21.576$ \\
                 $+$ & Regioner i \alert{$GS$ 2}             &  \alert{$23.357$} \\
                 $+$ & Regioner i $GS$ 3             &  $20.713$ \\\hline
@@ -441,17 +437,40 @@
             \end{tabular}
         \end{exampleblock}
     \end{columns}
-    \begin{exampleblock}{Udvidet (ingen duplikater)}
+    \begin{exampleblock}{Udvidet}
         \centering
         \rowcolors[]{1}{gray!20}{gray!10}
         \begin{tabular}{r@{\ \ }p{12em}r}
-            & Regioner i $GS$ 0         &  $405$ \\
+                & Regioner i $GS$ 0         &  $405$ \\
             $+$ & Regioner i $GS$ 1         &  $421$ \\
             $+$ & Regioner i \alert{$GS$ 2}         &  \alert{$499$} \\
             $+$ & Regioner i $GS$ 3         &  $492$ \\\hline
             & Alle $GS$   & $1.817$
         \end{tabular}
     \end{exampleblock}
+    }
+
+    \only<8>{
+    \frametitle{Antal billeder mod antal regioner -- \alert{Bug}}
+
+    \centering
+    \includegraphics[width=0.65\textwidth]{billeder/totalregions_var}
+    }
+
+    \only<9>{
+    \frametitle{Antal billeder mod antal regioner -- \pos{Fix}}
+
+    \centering
+    \includegraphics[width=0.65\textwidth]{billeder/totalregions_var_ny}
+    }
+
+    \only<10>{
+
+    \frametitle{40 snit i maleriet}
+
+    \begin{center}
+        \includegraphics[width=1.00\textwidth]{billeder/koersel_snit}
+    \end{center}
     }
 
 \end{frame}

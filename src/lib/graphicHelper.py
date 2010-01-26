@@ -142,8 +142,8 @@ def main():
 	else:
 		cv.cvLine(boxxImg, cv.cvPoint(cutt.getPoints()[0].x, cutPixel), cv.cvPoint(cutt.getPoints()[1].x, cutPixel), lib.COL_RED)
 	# Save images
-	highgui.cvSaveImage('floodfillbilledet.png', boxxImg)
-#	highgui.cvSaveImage(winname, boxxImg)
+	highgui.cvSaveImage('flood_cut_%s.png' % cut, boxxImg)
+	highgui.cvSaveImage('blobs_cut_%s.png' % cut, blobImg)
 
 	# Show images
 	compareImages(blobImg, boxxImg, "blob", winname)
