@@ -141,7 +141,14 @@
         \includegraphics[width=1.00\textwidth]{billeder/10calumn.jpg}
     \end{center}
     }
+
     \only<2>{
+    \begin{center}
+        \includegraphics[width=1.00\textwidth]{billeder/10calumn_blobs}
+    \end{center}
+    }
+
+    \only<3>{
     \begin{definition}
         En \textbf{\alert{region}} er en sammenhængende, ensfarvet gruppe pixels i
         et billede.
@@ -156,11 +163,6 @@
                 sættes i forhold til billedets størrelse,
         \end{itemize}
     \end{definition}
-    }
-    \only<3>{
-    \begin{center}
-        \includegraphics[width=1.00\textwidth]{billeder/10calumn_blobs}
-    \end{center}
     }
 
 \end{frame}
@@ -321,24 +323,66 @@
 
     \frametitle{Troværdige resultater?}
 
+    \only<1>{
     Kan vi stole på resultaterne fra den naive analyse?
 
     \begin{columns}[t]
         \column{0.50\textwidth}
         \begin{block}{\neg{Bug}}
             \centering
-            \includegraphics[width=0.98\textwidth]{billeder/totalregions_var}
+            \includegraphics[width=0.80\textwidth]{billeder/cut0cut1eatsperratio}\\
+            \includegraphics[width=0.80\textwidth]{billeder/cut2cut3eatsperratio}
         \end{block}
 
 
-        \column{0.50\textwidth}
+       \column{0.50\textwidth}
         \centering
         \begin{block}{\pos{Fix}}
             \centering
-            \includegraphics[width=0.98\textwidth]{billeder/totalregions_var_ny}
+            \includegraphics[width=0.80\textwidth]{billeder/cut0cut1eatsperrationNoBug}\\
+            \includegraphics[width=0.80\textwidth]{billeder/cut2cut3eatsperrationNoBug}
         \end{block}
 
     \end{columns}
+    }
+
+    %\only<1>{
+    %\begin{block}{Vertikale snit - \neg{Bug}}
+    %    \centering
+    %    \includegraphics[width=0.8\textwidth]{billeder/cut0cut1eatsperratio}
+    %\end{block}
+    %}
+
+    %\only<2>{
+    %\begin{block}{Vertikale snit - \pos{Fix}}
+    %    \centering
+    %    \includegraphics[width=0.8\textwidth]{billeder/cut0cut1eatsperrationNoBug}
+    %\end{block}
+    %}
+
+    %\only<3>{
+    %\begin{block}{Horisontale snit - \neg{Bug}}
+    %    \centering
+    %    \includegraphics[width=0.8\textwidth]{billeder/cut2cut3eatsperratio}
+    %\end{block}
+    %}
+
+    %\only<4>{
+    %\begin{block}{Horisontale snit - \pos{Fix}}
+    %    \centering
+    %    \includegraphics[width=0.8\textwidth]{billeder/cut2cut3eatsperrationNoBug}
+    %\end{block}
+    %}
+
+    \only<2>{
+    \begin{block}{Vurdering}
+        \begin{itemize}
+            \item Omkring en halvering i antal.
+            \item Tendenserne viser samme mønster.
+            \item Tendenserne er mere klare.
+        \end{itemize}
+    \end{block}
+    }
 
 \end{frame}
 
@@ -352,7 +396,7 @@
     \end{block}
 
     \begin{block}{Nyt resultat for hypotese 2\hspace{14em}\neg{Afvist}}
-        Antallet af regioner i hvert af de fire gyldne snit, afviger med \\12,76 \%.
+        Maksimal afvigelse i antallet af regioner, i de fire gyldne snit, er 12,76 \%.
     \end{block}
 
     De nye resultater ændrer ikke på vores konklusioner.
@@ -367,10 +411,10 @@
 
     \begin{block}{Hvad har vi set?}
         \begin{itemize}
-            \item Kunstnere foretrækker ikke at bruge et lærred med dimensioner som det gyldne rektangel.
-            \item Det gyldne snit bruges ikke mere end andre snit. Specielt findes flere regioner i midten af maleriet.
-            \item Antallet af regioner i det gyldne snit afhænger af kultur og stilperiode.
-            \item Nogle gyldne snit foretrækkes frem for andre.
+            \item<1-> Kunstnere foretrækker ikke at bruge et lærred med dimensioner som det gyldne rektangel.
+            \item<2-> Det gyldne snit bruges ikke mere end andre snit. Specielt findes flere regioner i midten af maleriet.
+            \item<3-> Antallet af regioner i det gyldne snit afhænger af kultur og stilperiode.
+            \item<4-> Nogle gyldne snit foretrækkes frem for andre.
         \end{itemize}
     \end{block}
 

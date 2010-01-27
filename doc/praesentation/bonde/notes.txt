@@ -1,0 +1,95 @@
+ Mit navn er Ulrik Bonde og jeg vil her give
+en meget kort præsentation af det bachelorprojekt jeg
+har været en del af: "Detektion af det gyldne snit i digitaliserede
+malerier."
+
+ Det gyldne snit er først blevet nævnt af Euklid 300 år f. Kr. som
+Division in Extreme and Mean Ratios. Det beskriver en måde at opdele
+et linjestykke på. Givet et linjestykke kan dette deles, således at
+forholdet mellem hele linjestykket og det længere stykke er lig forholdet
+mellem det længere og det mindre linjestykke.
+ Samme fænomæn tages op af Luca Pacioli i 1500-tallet og han kalder
+det for De Devina Propertione (Det Guddommelige Forhold). I vores tilfælde er
+det interessante her, at han var Leonardo Da Vincis matematiklærer og 
+Da Vinvi illustrede det guddommelige forhold til hans bog.
+ Først i 1835 får det navnet det gyldne snit af tyskeren Martin Ohm. Det er
+blevet den gænge betegnelse.
+
+ Der er mange hypoteser omhandlende det gyldne snit, hvor blot et udsnit
+af disse er at det kan findes i naturen, at det er specielt æstetisk
+tiltalende og derfor bliver brugt i arkitektur og billedkunst. Vi vil
+gerne undersøge hvorvidt der findes noget interessant i det gyldne snit i
+malerier, da der endnu ikke er blevet lavet sådanne automatiserede
+undersøgelser.
+
+ Når vi vil undersøge om der ligger noget interessant i det gyldne snit, er
+der nogle spørgsmål der kommer frem. Hvor ER det gyldne snit i et maleri, hvad
+er INTERESSANT i et maleri og hvornår kan vi sige at noget FINDES i det gyldne
+snit?
+
+ Hvis vi betragter et maleri, kan vi finde det gyldne snit på samme måde som
+Euklids beskrivelse brugt på maleriets bredde. Snittet er symmetrisk omkring
+midten og kan ligeledes findes i højden af billedet. Vi vil nu se om der
+befinder sig noget interessant i nærheden af disse linjer.
+
+ Hvis vi igen betragter maleriet og overvejer hvad der er interessant, ser vi
+at det ikke er nogen triviel opgave at afgøre. Det er faktisk meget svært, da
+det afhænger af konteksten og kan være meget subjektivt. Billedet forestiller
+faktisk en ung mand, som er blevet falskt anklaget for et komplot mod kongen.
+Kongen bliver fortalt løgne i hans lange æselører. Yderst til venstre står den
+nøgne sandhed.
+ Vi har ingen forventninger om at få computeren til at forstå dette. Vi må
+derfor lave nogle meget simple definitioner på hvad vi leder efter i billedet.
+Vi siger, at en region er sammenhængende, ensfarvet gruppe pixels i billedet.
+En sådan region er interessant, hvis den har en vis størrelse og er massiv
+nok.
+ Vi finder alle regioner som rører snittet, ved at male disse. Dette gøres på
+et præpareret billede. Kun de større regioner vil blive taget i senere
+betragtning.
+
+ Vi vil nu afgøre hvorvidt de interessante regioner ligger i det gyldne snit.
+Dette er igen meget subjektivt og der er flere tilgange. Vi præsenterer to
+stk. Den naive metode søger at udvælge regioner som tangerer snittet. Her skal
+man dog være opmærksom på, at en region altid vil tangere fire snit, og vi kan
+ikke hvide hvilket denne egentlig er placeret i.
+ Den udvidede metode søger, modsat den naive, at udvælge regioner som er
+centreret på snittet.
+ Der bruges en binær klassifikation af regioner. Enten bliver en region
+klassificeret som liggende i snittet eller også gør den ikke.
+
+ De to metoder bruger forskellige repræsentationer af regionen. Deraf navnene.
+Den naive metode bruger kun en regions begrænsende rektangel til at bedømme om
+regionen ligger i snittet. Den udvidede metode bruger en approksimation af
+region ved et gitter som afspejler regionens udstrækning i maleriet.
+ Vi ser her et eksempel for forskellen mellem de regioner der udvælges fra de
+to metoder. Bemærk at de naive har en kant inden for margin, de udvidede er
+centreret om snittet.
+
+ Vi har kørt to analyser: En med naiv vurdering af regioner og en med udvidet
+vurdering af regioner. Vi undersøger 40 snit i maleriet, heriblandt det gyldne
+snit, således at vi dækker hele maleriet.
+ Ved kørsel af den naive metode, havde vi en fejl i udtrækningen af regioner,
+som gjorde at vi havde duplikater af regionerne.
+ Den udvidede kørsel sorterer selv diplikaterne fra, men er langt mere
+krævende køretidsmæssigt og har derfor ikke fået analyseret hele datasættet.
+
+ Vi må forvente, hvis kunstere komponerer malerier efter det gyldne snit, at
+over halvdelen af de analyserede malerier vil have en eller flere interessante
+regioner i det gyldne snit. Vi må også forvente, at de fire gyldne snit, et
+billede kan deles efter, alle er lige brugt. Endeligt må vi også have at en
+stor det af malerierne har at lærredet har samme dimensioner som et gyldent
+rektangel.
+
+Resultater til hypoteser.
+
+ Vi skal dog se på hvorvidt vi egentlig kan regne med vores resultater, når vi
+har en fejl i den naive metode. Vi har derfor senere rettet fejlen og kørt
+analysen igen. Vi ser at regioner fordeler sig på samme måde over snittene i
+malerierne og vi kan derfor godt bruge resultaterne med duplikater, da vi blot
+kigger på forholdet mellem snit.
+
+ Vi ser også at de nye resultater ikke ændrer på vores konklussioner.
+
+Recap resulater. Fremtid.
+
+Tak.
